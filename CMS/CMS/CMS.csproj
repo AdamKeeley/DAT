@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{6D509CC5-4E8F-40B6-B441-7057FFA03BA7}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CMS</RootNamespace>
     <AssemblyName>CMS</AssemblyName>
@@ -33,9 +33,14 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,6 +49,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frm_Project.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_Project.Designer.cs">
+      <DependentUpon>frm_Project.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_ProjectAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_ProjectAdd.Designer.cs">
+      <DependentUpon>frm_ProjectAdd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -51,6 +68,19 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Properties\DataSources\frm_Project.datasource" />
+    <None Include="Properties\DataSources\Program.datasource" />
+    <None Include="Properties\DataSources\Project.datasource" />
+    <None Include="Properties\DataSources\ProjectDetails.datasource" />
+    <None Include="Properties\DataSources\SQL_Stuff.datasource" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="frm_Project.resx">
+      <DependentUpon>frm_Project.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_ProjectAdd.resx">
+      <DependentUpon>frm_ProjectAdd.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
+using System.Windows.Forms;
 
 namespace CMS
 {
@@ -53,7 +54,7 @@ namespace CMS
                     //add tblProjectNotes DataTable to DataSet (ds_prj)
                     //DataRelation not needed, can just query DataTable directly using same pNumber parameter
                     SqlCommand qryGetNotes = new SqlCommand();
-                    qryGetNotes.CommandText = $"select * from [dbo].[tblProjectNotes]";
+                    qryGetNotes.CommandText = $"select * from [dbo].[tblProjectNotes] order by [pNumber], [Created] desc";
                     qryGetNotes.Connection = connection;
                     da_Project.SelectCommand = qryGetNotes;
                     da_Project.Fill(ds_prj, "tblProjectNotes");
@@ -282,8 +283,7 @@ namespace CMS
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Failed to add new note");
-                Console.WriteLine(ex);
+                MessageBox.Show("Failed to add new note" + Environment.NewLine + ex);
                 throw;
             }
         }
@@ -320,11 +320,101 @@ namespace CMS
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Failed to generate new Project Number");
-                Console.WriteLine(ex);
+                MessageBox.Show("Failed to generate new Project Number" + Environment.NewLine + Environment.NewLine + ex);
                 throw;
             }
             return pNumber;
+        }
+
+        //method to get largest pNumber from current pNumbers
+        public string getLastProjectNumber()
+        {
+            int pNumInt;
+            string pNumZeroes = new string('0', 4); //repeated 0 four times
+            string pNumber;
+            try
+            {
+                SQL_Stuff conString = new SQL_Stuff();
+                using (SqlConnection connection = new SqlConnection(conString.getString()))
+                {
+                    //create new SQL query
+                    SqlCommand qryGetNewProjectNumber = new SqlCommand();
+                    qryGetNewProjectNumber.Connection = connection;
+                    //SQL query to select largest number used in current project numbers and add one
+                    //could just replace(pNumber, 'P', '') or take right(pNumber,4) but wanted to future proof as best I could:
+                    //https://stackoverflow.com/questions/18625548/select-query-to-remove-non-numeric-characters
+                    qryGetNewProjectNumber.CommandText =
+                        "SELECT max(cast(LEFT(SUBSTRING(pNumber, PATINDEX('%[0-9.-]%', pNumber), 8000) "
+                        + ",PATINDEX('%[^0-9.-]%',	SUBSTRING(pNumber, PATINDEX('%[0-9.-]%', pNumber), 8000) + 'X') -1) as int)) "
+                        + "from [dbo].[tblProject]";
+                    //open connection and execute query, returing result in variable pNumInt
+                    connection.Open();
+                    pNumInt = (int)qryGetNewProjectNumber.ExecuteScalar();
+                }
+                //construct pNumber from returned result
+                //a 'P' and rightermost 4 characters from repeated zeroes with largest int from above query appended
+                pNumber = pNumZeroes + pNumInt.ToString();
+                pNumber = "P" + pNumber.Substring(pNumber.Length - 4);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to fetch new Project Number" + Environment.NewLine + Environment.NewLine + ex);
+                throw;
+            }
+            return pNumber;
+        }
+
+        //method to populate list that feeds into frm_Project controls
+        public List<string> getProjectToList(string pNumber)
+        {
+            string pName;
+            string pStage = string.Empty;
+            string pPI;
+            string pStartDate;
+            string pEndDate;
+            List<string> lst_Project = new List<string>();
+
+            //if no records found, try will fail at "DataRow pRow = pRows[i];" and go to catch
+            try
+            {
+                DataRow[] pRows = ds_Project.Tables["tblProjects"].Select($"pNumber = '{pNumber}'");
+
+                //there's always a small a chance a project might have multiple records where ValidTo is null
+                //DataSet (ds_prj) is populated ordered by pNumber and then pID so largest (last added) pID for each project is last
+                //feed back to user if more than one 'current' project record
+                if (pRows.Count() > 1)
+                {
+                    MessageBox.Show("More than one current record found for this project, showing last only");
+                }
+
+                //active row (pRow) filled with last row from pRows
+                int i = pRows.Count() - 1;
+                DataRow pRow = pRows[i];
+                
+                //populate DataRow to output with values from pRow
+                pName = pRow["pName"].ToString();
+                //use DataRelation (Project_Stage) to return string description of stage, not int stored value
+                foreach (DataRow sRow in pRow.GetParentRows("Project_Stage"))
+                {
+                    pStage = sRow["pStageDescription"].ToString();
+                }
+                pPI = pRow["pPI"].ToString();
+                pStartDate = pRow["pStartDate"].ToString();
+                pEndDate = pRow["pEndDate"].ToString();
+
+                lst_Project.Add(pNumber);
+                lst_Project.Add(pName);
+                lst_Project.Add(pStage);
+                lst_Project.Add(pPI);
+                lst_Project.Add(pStartDate);
+                lst_Project.Add(pEndDate);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to load project details" + Environment.NewLine + ex);
+                throw;
+            }
+            return lst_Project;
         }
     }
 }        

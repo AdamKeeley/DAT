@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
+using System.Windows.Forms;
 
 namespace CMS
 {
@@ -36,7 +37,7 @@ namespace CMS
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine("Connection to database could not be established");
+                    MessageBox.Show("Connection to database could not be established");
                     throw;
                 }
             }
