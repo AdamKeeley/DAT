@@ -14,7 +14,13 @@ namespace CMS
         //constructor
         public SQL_Stuff()
         {
-            conString = "Data Source=GHOST\\SQLEXPRESS;Initial Catalog=DST_CMS;Integrated Security=True";
+            ////home
+            //conString = "Data Source=GHOST\\SQLEXPRESS;Initial Catalog=DST_CMS;Integrated Security=True";
+
+            //azure
+            conString = "Data Source=lida.database.windows.net;Initial Catalog=DAT_CMS;Integrated Security=False; "
+            + "Persist Security Info=False;User ID=uitake;Password=Rollthedice1#;";
+
         }
 
         //members
