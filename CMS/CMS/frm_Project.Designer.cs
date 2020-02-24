@@ -49,7 +49,11 @@ namespace CMS
             this.btn_ProjectOK = new System.Windows.Forms.Button();
             this.btn_ProjectApply = new System.Windows.Forms.Button();
             this.btn_NewProject = new System.Windows.Forms.Button();
+            this.chkb_IRC = new System.Windows.Forms.CheckBox();
+            this.chkb_SEED = new System.Windows.Forms.CheckBox();
+            this.gb_Platform = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_pNotes)).BeginInit();
+            this.gb_Platform.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbl_pNumber
@@ -74,7 +78,7 @@ namespace CMS
             // 
             this.tb_pNameValue.Location = new System.Drawing.Point(158, 42);
             this.tb_pNameValue.Name = "tb_pNameValue";
-            this.tb_pNameValue.Size = new System.Drawing.Size(500, 22);
+            this.tb_pNameValue.Size = new System.Drawing.Size(515, 22);
             this.tb_pNameValue.TabIndex = 3;
             // 
             // lbl_pStage
@@ -88,6 +92,8 @@ namespace CMS
             // 
             // cb_pStage
             // 
+            this.cb_pStage.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.cb_pStage.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cb_pStage.FormattingEnabled = true;
             this.cb_pStage.Location = new System.Drawing.Point(158, 98);
             this.cb_pStage.Name = "cb_pStage";
@@ -137,7 +143,7 @@ namespace CMS
             this.dgv_pNotes.Name = "dgv_pNotes";
             this.dgv_pNotes.ReadOnly = true;
             this.dgv_pNotes.RowTemplate.Height = 24;
-            this.dgv_pNotes.Size = new System.Drawing.Size(643, 222);
+            this.dgv_pNotes.Size = new System.Drawing.Size(658, 222);
             this.dgv_pNotes.TabIndex = 12;
             this.dgv_pNotes.TabStop = false;
             // 
@@ -170,7 +176,7 @@ namespace CMS
             // 
             // btn_InsertProjectNote
             // 
-            this.btn_InsertProjectNote.Location = new System.Drawing.Point(583, 134);
+            this.btn_InsertProjectNote.Location = new System.Drawing.Point(589, 159);
             this.btn_InsertProjectNote.Name = "btn_InsertProjectNote";
             this.btn_InsertProjectNote.Size = new System.Drawing.Size(75, 25);
             this.btn_InsertProjectNote.TabIndex = 11;
@@ -190,7 +196,7 @@ namespace CMS
             // 
             // btn_ProjectCancel
             // 
-            this.btn_ProjectCancel.Location = new System.Drawing.Point(583, 418);
+            this.btn_ProjectCancel.Location = new System.Drawing.Point(598, 418);
             this.btn_ProjectCancel.Name = "btn_ProjectCancel";
             this.btn_ProjectCancel.Size = new System.Drawing.Size(75, 30);
             this.btn_ProjectCancel.TabIndex = 15;
@@ -200,7 +206,7 @@ namespace CMS
             // 
             // btn_ProjectOK
             // 
-            this.btn_ProjectOK.Location = new System.Drawing.Point(502, 418);
+            this.btn_ProjectOK.Location = new System.Drawing.Point(517, 418);
             this.btn_ProjectOK.Name = "btn_ProjectOK";
             this.btn_ProjectOK.Size = new System.Drawing.Size(75, 30);
             this.btn_ProjectOK.TabIndex = 14;
@@ -210,7 +216,7 @@ namespace CMS
             // 
             // btn_ProjectApply
             // 
-            this.btn_ProjectApply.Location = new System.Drawing.Point(421, 418);
+            this.btn_ProjectApply.Location = new System.Drawing.Point(436, 418);
             this.btn_ProjectApply.Name = "btn_ProjectApply";
             this.btn_ProjectApply.Size = new System.Drawing.Size(75, 30);
             this.btn_ProjectApply.TabIndex = 13;
@@ -228,11 +234,45 @@ namespace CMS
             this.btn_NewProject.UseVisualStyleBackColor = true;
             this.btn_NewProject.Click += new System.EventHandler(this.btn_NewProject_Click);
             // 
+            // chkb_IRC
+            // 
+            this.chkb_IRC.AutoSize = true;
+            this.chkb_IRC.Location = new System.Drawing.Point(6, 21);
+            this.chkb_IRC.Name = "chkb_IRC";
+            this.chkb_IRC.Size = new System.Drawing.Size(52, 21);
+            this.chkb_IRC.TabIndex = 17;
+            this.chkb_IRC.Text = "IRC";
+            this.chkb_IRC.UseVisualStyleBackColor = true;
+            this.chkb_IRC.CheckedChanged += new System.EventHandler(this.chkb_IRC_CheckedChanged);
+            // 
+            // chkb_SEED
+            // 
+            this.chkb_SEED.AutoSize = true;
+            this.chkb_SEED.Location = new System.Drawing.Point(6, 47);
+            this.chkb_SEED.Name = "chkb_SEED";
+            this.chkb_SEED.Size = new System.Drawing.Size(67, 21);
+            this.chkb_SEED.TabIndex = 18;
+            this.chkb_SEED.Text = "SEED";
+            this.chkb_SEED.UseVisualStyleBackColor = true;
+            this.chkb_SEED.CheckedChanged += new System.EventHandler(this.chkb_SEED_CheckedChanged);
+            // 
+            // gb_Platform
+            // 
+            this.gb_Platform.Controls.Add(this.chkb_IRC);
+            this.gb_Platform.Controls.Add(this.chkb_SEED);
+            this.gb_Platform.Location = new System.Drawing.Point(583, 70);
+            this.gb_Platform.Name = "gb_Platform";
+            this.gb_Platform.Size = new System.Drawing.Size(90, 76);
+            this.gb_Platform.TabIndex = 19;
+            this.gb_Platform.TabStop = false;
+            this.gb_Platform.Text = "Platform";
+            // 
             // frm_Project
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(682, 453);
+            this.ClientSize = new System.Drawing.Size(690, 453);
+            this.Controls.Add(this.gb_Platform);
             this.Controls.Add(this.btn_NewProject);
             this.Controls.Add(this.btn_ProjectApply);
             this.Controls.Add(this.btn_ProjectOK);
@@ -255,6 +295,8 @@ namespace CMS
             this.Name = "frm_Project";
             this.Text = "Project Details";
             ((System.ComponentModel.ISupportInitialize)(this.dgv_pNotes)).EndInit();
+            this.gb_Platform.ResumeLayout(false);
+            this.gb_Platform.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -281,5 +323,8 @@ namespace CMS
         private System.Windows.Forms.Button btn_ProjectOK;
         private System.Windows.Forms.Button btn_ProjectApply;
         private System.Windows.Forms.Button btn_NewProject;
+        private System.Windows.Forms.CheckBox chkb_IRC;
+        private System.Windows.Forms.CheckBox chkb_SEED;
+        private System.Windows.Forms.GroupBox gb_Platform;
     }
 }

@@ -35,7 +35,7 @@ namespace CMS
              * call methods from form.cs constructor, after 'initialise form'
              */
 
-            string pNumber = "P0006";
+            string pNumber = "P0001";
             //string pName = "Third project with auto generated pNumber";
             //int pStage = 3;
             //string pPI = "Baron Remove Non-Numeric";

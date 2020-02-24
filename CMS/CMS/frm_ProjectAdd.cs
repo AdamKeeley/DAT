@@ -37,7 +37,7 @@ namespace CMS
 
         private void insertNewProject()
         {
-            bool datecheck = true;
+            bool dateCheck = true;
             //instantiate new Project type object that contains project methods
             var Projects = new Project();
 
@@ -52,28 +52,28 @@ namespace CMS
                 try
                 {
                     pStartDate = Convert.ToDateTime(mtb_pStartDateValue.Text);
-                    datecheck = true;
+                    dateCheck = true;
                 }
                 catch (Exception)
                 {
                     MessageBox.Show("Please enter valid Start Date");
-                    datecheck = false;
+                    dateCheck = false;
                 }
             if (mtb_pEndDateValue.Text != "" & mtb_pEndDateValue.Text != "  /  /")
                 try
                 {
                     pStartDate = Convert.ToDateTime(mtb_pEndDateValue.Text);
-                    datecheck = true;
+                    dateCheck = true;
                 }
                 catch (Exception)
                 {
                     MessageBox.Show("Please enter valid End Date");
-                    datecheck = false;
+                    dateCheck = false;
                 }
 
-            if (datecheck == true)
+            if (dateCheck == true)
             {
-                Projects.insertProject(pNumber, pName, pStage, pPI, pStartDate, pEndDate);
+                Projects.insertProject(pNumber, pName, pStage, pPI, pStartDate, pEndDate, false, false);
                 MessageBox.Show($"New project added to registry, project number = {pNumber}");
                 this.Close();
             }

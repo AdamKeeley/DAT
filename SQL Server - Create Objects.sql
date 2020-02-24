@@ -12,6 +12,8 @@ CREATE TABLE [dbo].[tblProject](
 	[pPI] [varchar](60) NULL,
 	[pStartDate] [datetime] NULL,
 	[pEndDate] [datetime] NULL,
+	IRC bit default 0,
+	SEED bit default 0,
 	[ValidFrom] [datetime] NULL DEFAULT (getdate()),
 	[ValidTo] [datetime] NULL,
 	[CreatedBy] [varchar](50) NULL DEFAULT (suser_sname()),
