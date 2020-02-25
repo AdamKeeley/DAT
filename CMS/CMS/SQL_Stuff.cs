@@ -17,10 +17,12 @@ namespace CMS
             ////home
             //conString = "Data Source=GHOST\\SQLEXPRESS;Initial Catalog=DST_CMS;Integrated Security=True";
 
-            //azure
-            conString = "Data Source=lida.database.windows.net;Initial Catalog=DAT_CMS;Integrated Security=False; "
-            + "Persist Security Info=False;User ID=uitake;Password=Rollthedice1#;";
+            ////azure
+            //conString = "Data Source=lida.database.windows.net;Initial Catalog=DAT_CMS;Integrated Security=False; "
+            //+ "Persist Security Info=False;User ID=uitake;Password=Rollthedice1#;";
 
+            //LIDA Desktop
+            conString = "Data Source=IRC-PC010;Initial Catalog=DAT_CMS;Integrated Security=True";
         }
 
         //members
@@ -44,7 +46,6 @@ namespace CMS
                 catch (Exception)
                 {
                     MessageBox.Show("Connection to database could not be established");
-                    throw;
                 }
             }
         }

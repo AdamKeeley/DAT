@@ -17,14 +17,13 @@ namespace CMS
              * single project details read done
              * need to read all projects to new form
              * drill down into single project 
-             * create add new project, update project (and delete project?)
              * 
              * normalise PI?
              * add users? if i add users then deffo normalise PI. 
              *     create new Users class
              * final needs pNumber to be read only
              * allow changes to pName? yes
-             * refresh DataSet before every display change?
+             * refresh DataSet before every display change
              */
             
             /*
@@ -51,37 +50,6 @@ namespace CMS
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new frm_Project(pNumber));
             
-
-
-            //instantiate new Project type object that contains details of all projects
-            //var Projects = new Project();
-
-            //Console.WriteLine(Projects.getNewProjectNumber());
-
-            ////call member method to add a note to a project
-            //Projects.insertProjectNote(pNumber, pNote);
-
-            ////refresh the DataSet
-            //Projects.ds_Project = Projects.getProjectsDataSet();
-            ////call member method to display single project and another to display all notes for that project
-            //Console.WriteLine(Projects.getProjectToString(pNumber));
-            //Console.WriteLine();
-            //Console.WriteLine(Projects.getProjectNotesToString(pNumber));
-
-            //call member method to display projects
-            //Console.WriteLine(Projects.getProjectsToString());
-
-            ////add a new project
-            //Projects.insertProject(Projects.getNewProjectNumber(), pName, pStage, pPI, pStartDate, pEndDate);
-
-            ////update existing project - first perform logical delete then insert new record
-            //Projects.deleteProject(pNumber);
-            //Projects.insertProject(pNumber, pName, pStage, pPI, pStartDate, pEndDate);
-
-            ////refresh the DataSet
-            //Projects.ds_Project = Projects.getProjectsDataSet();
-            ////print to console
-            //Console.WriteLine(Projects.getProjectsToString());
         }
     }                                                        
 }
