@@ -35,7 +35,6 @@ namespace CMS
             this.tb_pNameValue = new System.Windows.Forms.TextBox();
             this.lbl_pStage = new System.Windows.Forms.Label();
             this.cb_pStage = new System.Windows.Forms.ComboBox();
-            this.tb_pPIValue = new System.Windows.Forms.TextBox();
             this.lbl_pPI = new System.Windows.Forms.Label();
             this.lbl_pStartDate = new System.Windows.Forms.Label();
             this.lbl_pEndDate = new System.Windows.Forms.Label();
@@ -71,9 +70,12 @@ namespace CMS
             this.panel1 = new System.Windows.Forms.Panel();
             this.btn_Platform = new System.Windows.Forms.Button();
             this.lbl_LeadApplicant = new System.Windows.Forms.Label();
-            this.tb_pLeadApplicantValue = new System.Windows.Forms.TextBox();
             this.mtb_ProjectedStartDateValue = new System.Windows.Forms.MaskedTextBox();
             this.lbl_ProjectedStartDate = new System.Windows.Forms.Label();
+            this.cb_LeadApplicant = new System.Windows.Forms.ComboBox();
+            this.lbl_LeadApplicant_NewUser = new System.Windows.Forms.Label();
+            this.cb_PI = new System.Windows.Forms.ComboBox();
+            this.lbl_PI_NewUser = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_pNotes)).BeginInit();
             this.gb_Platform.SuspendLayout();
             this.gb_Governance.SuspendLayout();
@@ -128,14 +130,6 @@ namespace CMS
             this.cb_pStage.Name = "cb_pStage";
             this.cb_pStage.Size = new System.Drawing.Size(124, 21);
             this.cb_pStage.TabIndex = 5;
-            // 
-            // tb_pPIValue
-            // 
-            this.tb_pPIValue.Location = new System.Drawing.Point(447, 173);
-            this.tb_pPIValue.Margin = new System.Windows.Forms.Padding(2);
-            this.tb_pPIValue.Name = "tb_pPIValue";
-            this.tb_pPIValue.Size = new System.Drawing.Size(173, 20);
-            this.tb_pPIValue.TabIndex = 5;
             // 
             // lbl_pPI
             // 
@@ -503,14 +497,6 @@ namespace CMS
             this.lbl_LeadApplicant.TabIndex = 33;
             this.lbl_LeadApplicant.Text = "Lead Applicant";
             // 
-            // tb_pLeadApplicantValue
-            // 
-            this.tb_pLeadApplicantValue.Location = new System.Drawing.Point(447, 149);
-            this.tb_pLeadApplicantValue.Margin = new System.Windows.Forms.Padding(2);
-            this.tb_pLeadApplicantValue.Name = "tb_pLeadApplicantValue";
-            this.tb_pLeadApplicantValue.Size = new System.Drawing.Size(173, 20);
-            this.tb_pLeadApplicantValue.TabIndex = 34;
-            // 
             // mtb_ProjectedStartDateValue
             // 
             this.mtb_ProjectedStartDateValue.Location = new System.Drawing.Point(402, 75);
@@ -531,15 +517,56 @@ namespace CMS
             this.lbl_ProjectedStartDate.TabIndex = 35;
             this.lbl_ProjectedStartDate.Text = "Projected \r\nStart Date";
             // 
+            // cb_LeadApplicant
+            // 
+            this.cb_LeadApplicant.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.cb_LeadApplicant.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cb_LeadApplicant.FormattingEnabled = true;
+            this.cb_LeadApplicant.Location = new System.Drawing.Point(447, 149);
+            this.cb_LeadApplicant.Name = "cb_LeadApplicant";
+            this.cb_LeadApplicant.Size = new System.Drawing.Size(173, 21);
+            this.cb_LeadApplicant.TabIndex = 37;
+            // 
+            // lbl_LeadApplicant_NewUser
+            // 
+            this.lbl_LeadApplicant_NewUser.AutoSize = true;
+            this.lbl_LeadApplicant_NewUser.Location = new System.Drawing.Point(626, 152);
+            this.lbl_LeadApplicant_NewUser.Name = "lbl_LeadApplicant_NewUser";
+            this.lbl_LeadApplicant_NewUser.Size = new System.Drawing.Size(36, 13);
+            this.lbl_LeadApplicant_NewUser.TabIndex = 38;
+            this.lbl_LeadApplicant_NewUser.Text = "new...";
+            // 
+            // cb_PI
+            // 
+            this.cb_PI.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.cb_PI.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cb_PI.FormattingEnabled = true;
+            this.cb_PI.Location = new System.Drawing.Point(447, 173);
+            this.cb_PI.Name = "cb_PI";
+            this.cb_PI.Size = new System.Drawing.Size(173, 21);
+            this.cb_PI.TabIndex = 39;
+            // 
+            // lbl_PI_NewUser
+            // 
+            this.lbl_PI_NewUser.AutoSize = true;
+            this.lbl_PI_NewUser.Location = new System.Drawing.Point(626, 176);
+            this.lbl_PI_NewUser.Name = "lbl_PI_NewUser";
+            this.lbl_PI_NewUser.Size = new System.Drawing.Size(36, 13);
+            this.lbl_PI_NewUser.TabIndex = 40;
+            this.lbl_PI_NewUser.Text = "new...";
+            // 
             // frm_Project
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(634, 471);
+            this.ClientSize = new System.Drawing.Size(667, 471);
+            this.Controls.Add(this.lbl_PI_NewUser);
+            this.Controls.Add(this.cb_PI);
+            this.Controls.Add(this.lbl_LeadApplicant_NewUser);
+            this.Controls.Add(this.cb_LeadApplicant);
             this.Controls.Add(this.mtb_ProjectedStartDateValue);
             this.Controls.Add(this.lbl_ProjectedStartDate);
             this.Controls.Add(this.lbl_LeadApplicant);
-            this.Controls.Add(this.tb_pLeadApplicantValue);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btn_Refresh);
             this.Controls.Add(this.gb_Governance);
@@ -565,7 +592,6 @@ namespace CMS
             this.Controls.Add(this.lbl_pEndDate);
             this.Controls.Add(this.lbl_pStartDate);
             this.Controls.Add(this.lbl_pPI);
-            this.Controls.Add(this.tb_pPIValue);
             this.Controls.Add(this.cb_pStage);
             this.Controls.Add(this.lbl_pStage);
             this.Controls.Add(this.tb_pNameValue);
@@ -592,7 +618,6 @@ namespace CMS
         private System.Windows.Forms.TextBox tb_pNameValue;
         private System.Windows.Forms.Label lbl_pStage;
         private System.Windows.Forms.ComboBox cb_pStage;
-        private System.Windows.Forms.TextBox tb_pPIValue;
         private System.Windows.Forms.Label lbl_pPI;
         private System.Windows.Forms.Label lbl_pStartDate;
         private System.Windows.Forms.Label lbl_pEndDate;
@@ -627,9 +652,12 @@ namespace CMS
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.CheckBox chkb_Azure;
         private System.Windows.Forms.Label lbl_LeadApplicant;
-        private System.Windows.Forms.TextBox tb_pLeadApplicantValue;
         private System.Windows.Forms.MaskedTextBox mtb_ProjectedStartDateValue;
         private System.Windows.Forms.Label lbl_ProjectedStartDate;
         private System.Windows.Forms.Button btn_Platform;
+        private System.Windows.Forms.ComboBox cb_LeadApplicant;
+        private System.Windows.Forms.Label lbl_LeadApplicant_NewUser;
+        private System.Windows.Forms.ComboBox cb_PI;
+        private System.Windows.Forms.Label lbl_PI_NewUser;
     }
 }

@@ -52,6 +52,14 @@ namespace CMS
             cb_pClassification.ValueMember = "classificationID";
             cb_pClassification.DisplayMember = "classificationDescription";
             cb_pClassification.SelectedIndex = -1;
+            cb_LeadApplicant.DataSource = ds_Project.Tables["tlkLeadApplicant"];
+            cb_LeadApplicant.ValueMember = "UserID";
+            cb_LeadApplicant.DisplayMember = "FullName";
+            cb_LeadApplicant.SelectedIndex = -1;
+            cb_PI.DataSource = ds_Project.Tables["tlkPI"];
+            cb_PI.ValueMember = "UserID";
+            cb_PI.DisplayMember = "FullName";
+            cb_PI.SelectedIndex = -1;           
             cb_Faculty.DataSource = ds_Project.Tables["tlkFaculty"];
             cb_Faculty.ValueMember = "facultyID";
             cb_Faculty.DisplayMember = "facultyDescription";
@@ -75,8 +83,8 @@ namespace CMS
             DateTime?   pProjectedEndDate   = null;
             DateTime?   pStartDate          = null;
             DateTime?   pEndDate            = null;
-            string      pPI                 = tb_pPIValue.Text;
-            string      pLeadApplicant      = tb_pLeadApplicantValue.Text;
+            int?        pPI                 = null;
+            int?        pLeadApplicant      = null;
             int?        pFaculty            = null;
             bool        pDSPT               = chkb_DSPT.Checked;
             bool        pISO                = chkb_ISO27001.Checked;
@@ -90,17 +98,20 @@ namespace CMS
                 pClassification = int.Parse(cb_pClassification.SelectedValue.ToString());
             if (cb_DATRAG.SelectedIndex > -1)
                 pDATRAG = int.Parse(cb_DATRAG.SelectedValue.ToString());
+            if (cb_LeadApplicant.SelectedIndex > -1)
+                pLeadApplicant = int.Parse(cb_LeadApplicant.SelectedValue.ToString());
+            if (cb_PI.SelectedIndex > -1)
+                pPI = int.Parse(cb_PI.SelectedValue.ToString());
             if (cb_Faculty.SelectedIndex > -1)
                 pFaculty = int.Parse(cb_Faculty.SelectedValue.ToString());
 
             //dates are fuckey
             bool dateCheck = true;
-            if (mtb_ProjectedStartDateValue.Text != "" & mtb_ProjectedStartDateValue.Text != "  /  /")
+            if (dateCheck == true & mtb_ProjectedStartDateValue.Text != "" & mtb_ProjectedStartDateValue.Text != "  /  /")
             {
                 try
                 {
                     pProjectedStartDate = Convert.ToDateTime(mtb_ProjectedStartDateValue.Text);
-                    dateCheck = true;
                 }
                 catch (Exception)
                 {
@@ -108,12 +119,11 @@ namespace CMS
                     dateCheck = false;
                 }
             }
-            if (mtb_ProjectedEndDateValue.Text != "" & mtb_ProjectedEndDateValue.Text != "  /  /")
+            if (dateCheck == true & mtb_ProjectedEndDateValue.Text != "" & mtb_ProjectedEndDateValue.Text != "  /  /")
             {
                 try
                 {
                     pProjectedEndDate = Convert.ToDateTime(mtb_ProjectedEndDateValue.Text);
-                    dateCheck = true;
                 }
                 catch (Exception)
                 {
@@ -121,12 +131,11 @@ namespace CMS
                     dateCheck = false;
                 }
             }
-            if (mtb_pStartDateValue.Text != "" & mtb_pStartDateValue.Text != "  /  /")
+            if (dateCheck == true & mtb_pStartDateValue.Text != "" & mtb_pStartDateValue.Text != "  /  /")
             {
                 try
                 {
                     pStartDate = Convert.ToDateTime(mtb_pStartDateValue.Text);
-                    dateCheck = true;
                 }
                 catch (Exception)
                 {
@@ -134,12 +143,11 @@ namespace CMS
                     dateCheck = false;
                 }
             }
-            if (mtb_pEndDateValue.Text != "" & mtb_pEndDateValue.Text != "  /  /")
+            if (dateCheck == true & mtb_pEndDateValue.Text != "" & mtb_pEndDateValue.Text != "  /  /")
             {
                 try
                 {
                     pEndDate = Convert.ToDateTime(mtb_pEndDateValue.Text);
-                    dateCheck = true;
                 }
                 catch (Exception)
                 {
@@ -157,7 +165,8 @@ namespace CMS
                 Projects.insertProject(pNumber, pName, pStage, pClassification, pDATRAG
                     , pProjectedStartDate, pProjectedEndDate, pStartDate, pEndDate, pPI
                     , pLeadApplicant, pFaculty, pDSPT, pISO, pAzure, IRC, SEED);
-                MessageBox.Show($"Project details created for {pNumber}");
+
+                this.Close();
             }
         }
 
@@ -169,7 +178,6 @@ namespace CMS
         private void btn_Create_Click(object sender, EventArgs e)
         {
             insertNewProject();
-            this.Close();
         }
     }
 }

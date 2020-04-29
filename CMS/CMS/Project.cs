@@ -85,7 +85,7 @@ namespace CMS
                     //create a DataRelation (Project_Faculty) to join tlkFaculty to tblProjects
                     ds_prj.Relations.Add("Project_Faculty"
                         , ds_prj.Tables["tlkFaculty"].Columns["facultyID"]          //parent
-                        , ds_prj.Tables["tblProjects"].Columns["Faculty"]);  //child
+                        , ds_prj.Tables["tblProjects"].Columns["Faculty"]);         //child
 
                     //add tblProjectNotes DataTable to DataSet (ds_prj)
                     //DataRelation not needed, can just query DataTable directly using same pNumber parameter
@@ -94,6 +94,30 @@ namespace CMS
                     qryGetNotes.Connection = connection;
                     da_Project.SelectCommand = qryGetNotes;
                     da_Project.Fill(ds_prj, "tblProjectNotes");
+
+                    //add tblUser DataTable to DataSet (ds_prj)
+                    //qryGetUser adds a calculated field, FullName
+                    SqlCommand qryGetLeadApplicant = new SqlCommand();
+                    qryGetLeadApplicant.CommandText = $"select UserID, LastName + ', ' + FirstName as FullName from [dbo].[tblUser] where [ValidTo] is null order by LastName";
+                    qryGetLeadApplicant.Connection = connection;
+                    da_Project.SelectCommand = qryGetLeadApplicant;
+                    da_Project.Fill(ds_prj, "tlkLeadApplicant");
+                    //create a DataRelation (Project_LeadApplicant) to join tblUser to tblProjects.LeadApplicant
+                    ds_prj.Relations.Add("Project_LeadApplicant"
+                        , ds_prj.Tables["tlkLeadApplicant"].Columns["userID"]                //parent
+                        , ds_prj.Tables["tblProjects"].Columns["LeadApplicant"]);   //child
+
+                    //add tblUser DataTable to DataSet (ds_prj)
+                    //qryGetUser adds a calculated field, FullName
+                    SqlCommand qryGetPI = new SqlCommand();
+                    qryGetPI.CommandText = $"select UserID, LastName + ', ' + FirstName as FullName from [dbo].[tblUser] where [ValidTo] is null order by LastName";
+                    qryGetPI.Connection = connection;
+                    da_Project.SelectCommand = qryGetPI;
+                    da_Project.Fill(ds_prj, "tlkPI");
+                    //create a DataRelation (Project_User) to join tblUser to tblProjects.PI
+                    ds_prj.Relations.Add("Project_PI"
+                        , ds_prj.Tables["tlkPI"].Columns["userID"]            //parent
+                        , ds_prj.Tables["tblProjects"].Columns["PI"]);          //child
                 }
             }
             catch (Exception ex)
@@ -127,8 +151,8 @@ namespace CMS
             DateTime? pProjectedEndDate = null;
             DateTime? pStartDate = null;
             DateTime? pEndDate = null;
-            string pPI;
-            string pLeadApplicant;
+            int? pPI = null;
+            int? pLeadApplicant = null;
             int? pFaculty = null;
             bool pDSPT;
             bool pISO;
@@ -158,19 +182,12 @@ namespace CMS
                 //populate DataRow to output with values from pRow
                 pID = (int)pRow["pID"];
                 pName = pRow["ProjectName"].ToString();
-                //use DataRelation (Project_Stage) to return string description of stage, not int stored value
-                foreach (DataRow sRow in pRow.GetParentRows("Project_Stage"))
-                {
-                    pStage = (int?)sRow["StageID"];
-                }
-                foreach (DataRow sRow in pRow.GetParentRows("Project_Classification"))
-                {
-                    pClassification = (int?)sRow["classificationID"];
-                }
-                foreach (DataRow sRow in pRow.GetParentRows("Project_DATRAG"))
-                {
-                    pDATRAG = (int?)sRow["ragID"];
-                }
+                if (pRow["Stage"].ToString().Length > 0)
+                    pStage = (int?)pRow["Stage"];
+                if (pRow["Classification"].ToString().Length > 0)
+                    pClassification = (int?)pRow["Classification"];
+                if (pRow["DATRAG"].ToString().Length > 0)
+                    pDATRAG = (int?)pRow["DATRAG"];
                 if (pRow["ProjectedStartDate"].ToString().Length > 0)
                     pProjectedStartDate = (DateTime)pRow["ProjectedStartDate"];
                 if (pRow["ProjectedEndDate"].ToString().Length > 0)
@@ -179,12 +196,12 @@ namespace CMS
                     pStartDate = (DateTime)pRow["StartDate"];
                 if (pRow["EndDate"].ToString().Length > 0)
                     pEndDate = (DateTime)pRow["EndDate"];
-                pPI = pRow["PI"].ToString();
-                pLeadApplicant = pRow["LeadApplicant"].ToString();
-                foreach (DataRow sRow in pRow.GetParentRows("Project_Faculty"))
-                {
-                    pFaculty = (int?)sRow["facultyID"];
-                }
+                if (pRow["PI"].ToString().Length > 0)
+                    pPI = (int?)pRow["PI"];
+                if (pRow["LeadApplicant"].ToString().Length > 0)
+                    pLeadApplicant = (int?)pRow["LeadApplicant"];
+                if (pRow["Faculty"].ToString().Length > 0)
+                    pFaculty = (int?)pRow["Faculty"];
                 pDSPT = (bool)pRow["DSPT"];
                 pISO = (bool)pRow["ISO27001"];
                 pAzure = (bool)pRow["Azure"];
@@ -309,7 +326,7 @@ namespace CMS
         /// <param name="SEED"></param>
         public void insertProject(string Number, string Name, int? Stage, int? Classification, int? DATRAG
             , DateTime? ProjectedStartDate, DateTime? ProjectedEndDate, DateTime? StartDate, DateTime? EndDate
-            , string PI, string LeadApplicant, int? Faculty, bool DSPT, bool ISO27001, bool Azure, bool IRC, bool SEED)
+            , int? PI, int? LeadApplicant, int? Faculty, bool DSPT, bool ISO27001, bool Azure, bool IRC, bool SEED)
         {
             try
             {
@@ -351,8 +368,15 @@ namespace CMS
                     SqlParameter param_EndDate = new SqlParameter("@EndDate", EndDate == null ? (object)DBNull.Value : EndDate);
                     param_EndDate.IsNullable = true;
                     qryInsertProject.Parameters.Add(param_EndDate);
-                    qryInsertProject.Parameters.Add("@PI", SqlDbType.VarChar, 60).Value = PI;
-                    qryInsertProject.Parameters.Add("@LeadApplicant", SqlDbType.VarChar, 60).Value = LeadApplicant;
+
+                    SqlParameter param_LeadApplicant = new SqlParameter("@LeadApplicant", LeadApplicant == null ? (object)DBNull.Value : LeadApplicant);
+                    param_LeadApplicant.IsNullable = true;
+                    qryInsertProject.Parameters.Add(param_LeadApplicant);
+
+                    SqlParameter param_PI = new SqlParameter("@PI", PI == null ? (object)DBNull.Value : PI);
+                    param_PI.IsNullable = true;
+                    qryInsertProject.Parameters.Add(param_PI);
+
                     SqlParameter param_Faculty = new SqlParameter("@Faculty", Faculty == null ? (object)DBNull.Value : Faculty);
                     param_Faculty.IsNullable = true;
                     qryInsertProject.Parameters.Add(param_Faculty);
@@ -365,6 +389,7 @@ namespace CMS
                     //open connection to database, run query and close connection
                     connection.Open();
                     qryInsertProject.ExecuteNonQuery();
+                    MessageBox.Show($"Project details updated for {Number}");
                 }
             }
             catch (Exception ex)
