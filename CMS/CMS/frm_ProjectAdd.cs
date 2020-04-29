@@ -40,18 +40,22 @@ namespace CMS
             lbl_NewProjectNumber.Text = pNumber;
 
             //bind DataSource to comboboxes
-            this.cb_DATRAG.DataSource = ds_Project.Tables["tlkRAG"];
-            this.cb_DATRAG.ValueMember = "ragID";
-            this.cb_DATRAG.DisplayMember = "ragDescription";
-            this.cb_pStage.DataSource = ds_Project.Tables["tlkStage"];
-            this.cb_pStage.ValueMember = "StageID";
-            this.cb_pStage.DisplayMember = "pStageDescription";
-            this.cb_pClassification.DataSource = ds_Project.Tables["tlkClassification"];
-            this.cb_pClassification.ValueMember = "classificationID";
-            this.cb_pClassification.DisplayMember = "classificationDescription";
-            this.cb_Faculty.DataSource = ds_Project.Tables["tlkFaculty"];
-            this.cb_Faculty.ValueMember = "facultyID";
-            this.cb_Faculty.DisplayMember = "facultyDescription";
+            cb_DATRAG.DataSource = ds_Project.Tables["tlkRAG"];
+            cb_DATRAG.ValueMember = "ragID";
+            cb_DATRAG.DisplayMember = "ragDescription";
+            cb_DATRAG.SelectedIndex = -1;
+            cb_pStage.DataSource = ds_Project.Tables["tlkStage"];
+            cb_pStage.ValueMember = "StageID";
+            cb_pStage.DisplayMember = "pStageDescription";
+            cb_pStage.SelectedIndex = -1;
+            cb_pClassification.DataSource = ds_Project.Tables["tlkClassification"];
+            cb_pClassification.ValueMember = "classificationID";
+            cb_pClassification.DisplayMember = "classificationDescription";
+            cb_pClassification.SelectedIndex = -1;
+            cb_Faculty.DataSource = ds_Project.Tables["tlkFaculty"];
+            cb_Faculty.ValueMember = "facultyID";
+            cb_Faculty.DisplayMember = "facultyDescription";
+            cb_Faculty.SelectedIndex = -1;
         }
 
         /// <summary>
@@ -61,24 +65,33 @@ namespace CMS
         /// </summary>
         private void insertNewProject()
         {
-            //populate variables with values held in form controls to compare to current project values
+            //populate variables with values held in form controls
             string      pNumber             = lbl_NewProjectNumber.Text;
             string      pName               = tb_pNameValue.Text;
-            int         pStage              = int.Parse(cb_pStage.SelectedValue.ToString());
-            int         pClassification     = int.Parse(cb_pClassification.SelectedValue.ToString());
-            int         pDATRAG             = int.Parse(cb_DATRAG.SelectedValue.ToString());
+            int?        pStage              = null;
+            int?        pClassification     = null;
+            int?        pDATRAG             = null;
             DateTime?   pProjectedStartDate = null;
             DateTime?   pProjectedEndDate   = null;
             DateTime?   pStartDate          = null;
             DateTime?   pEndDate            = null;
             string      pPI                 = tb_pPIValue.Text;
             string      pLeadApplicant      = tb_pLeadApplicantValue.Text;
-            int         pFaculty            = int.Parse(cb_Faculty.SelectedValue.ToString());
+            int?        pFaculty            = null;
             bool        pDSPT               = chkb_DSPT.Checked;
             bool        pISO                = chkb_ISO27001.Checked;
             bool        pAzure              = chkb_Azure.Checked;
             bool        IRC                 = chkb_IRC.Checked;
             bool        SEED                = chkb_SEED.Checked;
+
+            if (cb_pStage.SelectedIndex > -1)
+                pStage = int.Parse(cb_pStage.SelectedValue.ToString());
+            if (cb_pClassification.SelectedIndex > -1)
+                pClassification = int.Parse(cb_pClassification.SelectedValue.ToString());
+            if (cb_DATRAG.SelectedIndex > -1)
+                pDATRAG = int.Parse(cb_DATRAG.SelectedValue.ToString());
+            if (cb_Faculty.SelectedIndex > -1)
+                pFaculty = int.Parse(cb_Faculty.SelectedValue.ToString());
 
             //dates are fuckey
             bool dateCheck = true;
@@ -144,7 +157,7 @@ namespace CMS
                 Projects.insertProject(pNumber, pName, pStage, pClassification, pDATRAG
                     , pProjectedStartDate, pProjectedEndDate, pStartDate, pEndDate, pPI
                     , pLeadApplicant, pFaculty, pDSPT, pISO, pAzure, IRC, SEED);
-                MessageBox.Show($"Project details updated for {pNumber}");
+                MessageBox.Show($"Project details created for {pNumber}");
             }
         }
 

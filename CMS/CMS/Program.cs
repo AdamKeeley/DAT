@@ -25,9 +25,7 @@ namespace CMS
 
 
             /* TO DO
-             * Create All Projects form
-             *  - select project from list
-             *  - search for project
+             * 
              * Create Users form
              * 	- Determine items that need to be recorded on User Log
              * 	- Normalise Users to seperate SQL table
@@ -37,9 +35,19 @@ namespace CMS
              * 	Create Platform form
              * 	    - tabs for various platforms?
              * 	    - or all on one screen?
+             * 	Combine all into single form with sub forms or create navigation form?
+             * 	    
              */
 
-            string pNumber = "P0001";
+            /* DONE
+             * 
+             * Nulls are handled better, allowing updates with empty fields
+             * 
+             * Create All Projects form
+             *  - select project from list
+             *  - search for project
+             * 
+             */
 
             //test connection to database
             SQL_Stuff testCon = new SQL_Stuff();
@@ -48,7 +56,7 @@ namespace CMS
             //initialise form
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frm_Project(pNumber));
+            Application.Run(new frm_ProjectAll());
         }
     }                                                 
 }

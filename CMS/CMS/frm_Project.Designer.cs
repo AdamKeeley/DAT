@@ -69,11 +69,11 @@ namespace CMS
             this.btn_documents = new System.Windows.Forms.Button();
             this.btn_Refresh = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btn_Platform = new System.Windows.Forms.Button();
             this.lbl_LeadApplicant = new System.Windows.Forms.Label();
             this.tb_pLeadApplicantValue = new System.Windows.Forms.TextBox();
             this.mtb_ProjectedStartDateValue = new System.Windows.Forms.MaskedTextBox();
             this.lbl_ProjectedStartDate = new System.Windows.Forms.Label();
-            this.btn_Platform = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_pNotes)).BeginInit();
             this.gb_Platform.SuspendLayout();
             this.gb_Governance.SuspendLayout();
@@ -484,6 +484,15 @@ namespace CMS
             this.panel1.Size = new System.Drawing.Size(81, 139);
             this.panel1.TabIndex = 32;
             // 
+            // btn_Platform
+            // 
+            this.btn_Platform.Location = new System.Drawing.Point(3, 108);
+            this.btn_Platform.Name = "btn_Platform";
+            this.btn_Platform.Size = new System.Drawing.Size(75, 23);
+            this.btn_Platform.TabIndex = 31;
+            this.btn_Platform.Text = "Platform";
+            this.btn_Platform.UseVisualStyleBackColor = true;
+            // 
             // lbl_LeadApplicant
             // 
             this.lbl_LeadApplicant.AutoSize = true;
@@ -521,15 +530,6 @@ namespace CMS
             this.lbl_ProjectedStartDate.Size = new System.Drawing.Size(55, 26);
             this.lbl_ProjectedStartDate.TabIndex = 35;
             this.lbl_ProjectedStartDate.Text = "Projected \r\nStart Date";
-            // 
-            // btn_Platform
-            // 
-            this.btn_Platform.Location = new System.Drawing.Point(3, 108);
-            this.btn_Platform.Name = "btn_Platform";
-            this.btn_Platform.Size = new System.Drawing.Size(75, 23);
-            this.btn_Platform.TabIndex = 31;
-            this.btn_Platform.Text = "Platform";
-            this.btn_Platform.UseVisualStyleBackColor = true;
             // 
             // frm_Project
             // 

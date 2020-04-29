@@ -25,6 +25,7 @@ namespace CMS
             fillCurrentProjectVariables(pNumber);
             setProjectDetails(pNumber);
             setProjectNotes(pNumber);
+            setTabIndex();
         }
 
         /// <summary>
@@ -44,16 +45,16 @@ namespace CMS
         int         current_pID;
         string      current_pNumber;
         string      current_pName;
-        int         current_pStage;
-        int         current_pClassification;
-        int         current_pDATRAG;
+        int?        current_pStage;
+        int?        current_pClassification;
+        int?        current_pDATRAG;
         DateTime?   current_pProjectedStartDate;
         DateTime?   current_pProjectedEndDate;
         DateTime?   current_pStartDate;
         DateTime?   current_pEndDate;
         string      current_pPI;
         string      current_pLeadApplicant;
-        int         current_pFaculty;
+        int?        current_pFaculty;
         bool        current_pDSPT;
         bool        current_pISO;
         bool        current_pAzure;
@@ -92,16 +93,16 @@ namespace CMS
                 current_pID                 = (int)lst_ProjectDetails[0];
                 current_pNumber             = (string)lst_ProjectDetails[1];
                 current_pName               = (string)lst_ProjectDetails[2];
-                current_pStage              = (int)lst_ProjectDetails[3];
-                current_pClassification     = (int)lst_ProjectDetails[4];
-                current_pDATRAG             = (int)lst_ProjectDetails[5];
+                current_pStage              = (int?)lst_ProjectDetails[3];
+                current_pClassification     = (int?)lst_ProjectDetails[4];
+                current_pDATRAG             = (int?)lst_ProjectDetails[5];
                 current_pProjectedStartDate = (DateTime?)lst_ProjectDetails[6];
                 current_pProjectedEndDate   = (DateTime?)lst_ProjectDetails[7];
                 current_pStartDate          = (DateTime?)lst_ProjectDetails[8];
                 current_pEndDate            = (DateTime?)lst_ProjectDetails[9];
                 current_pPI                 = (string)lst_ProjectDetails[10];
                 current_pLeadApplicant      = (string)lst_ProjectDetails[11];
-                current_pFaculty            = (int)lst_ProjectDetails[12];
+                current_pFaculty            = (int?)lst_ProjectDetails[12];
                 current_pDSPT               = (bool)lst_ProjectDetails[13];
                 current_pISO                = (bool)lst_ProjectDetails[14];
                 current_pAzure              = (bool)lst_ProjectDetails[15];
@@ -126,38 +127,50 @@ namespace CMS
             try
             {
                 //set controls values
-                this.cb_pNumberValue.DataSource         = ds_Project.Tables["tblProjects"];
-                this.cb_pNumberValue.ValueMember        = "pID";
-                this.cb_pNumberValue.DisplayMember      = "ProjectNumber";
-                this.cb_pNumberValue.Text               = current_pNumber;
-                this.tb_pNameValue.Text                 = current_pName;
-                this.cb_pStage.DataSource               = ds_Project.Tables["tlkStage"];
-                this.cb_pStage.ValueMember              = "StageID";
-                this.cb_pStage.DisplayMember            = "pStageDescription";
-                this.cb_pStage.SelectedValue            = current_pStage;
-                this.cb_pClassification.DataSource      = ds_Project.Tables["tlkClassification"];
-                this.cb_pClassification.ValueMember     = "classificationID";
-                this.cb_pClassification.DisplayMember   = "classificationDescription";
-                this.cb_pClassification.SelectedValue   = current_pClassification;
-                this.cb_DATRAG.DataSource               = ds_Project.Tables["tlkRAG"];
-                this.cb_DATRAG.ValueMember              = "ragID";
-                this.cb_DATRAG.DisplayMember            = "ragDescription";
-                this.cb_DATRAG.SelectedValue            = current_pDATRAG;
-                this.mtb_ProjectedStartDateValue.Text   = current_pProjectedStartDate.ToString();
-                this.mtb_ProjectedEndDateValue.Text     = current_pProjectedEndDate.ToString();
-                this.mtb_pStartDateValue.Text           = current_pStartDate.ToString();
-                this.mtb_pEndDateValue.Text             = current_pEndDate.ToString();
-                this.tb_pPIValue.Text                   = current_pPI;
-                this.tb_pLeadApplicantValue.Text        = current_pLeadApplicant;
-                this.cb_Faculty.DataSource              = ds_Project.Tables["tlkFaculty"];
-                this.cb_Faculty.ValueMember             = "facultyID";
-                this.cb_Faculty.DisplayMember           = "facultyDescription";
-                this.cb_Faculty.SelectedValue           = current_pFaculty;
-                this.chkb_ISO27001.Checked              = current_pISO;
-                this.chkb_DSPT.Checked                  = current_pDSPT;
-                this.chkb_Azure.Checked                 = current_pAzure;
-                this.chkb_IRC.Checked                   = current_IRC;
-                this.chkb_SEED.Checked                  = current_SEED;
+                cb_pNumberValue.DataSource              = ds_Project.Tables["tblProjects"];
+                cb_pNumberValue.ValueMember             = "pID";
+                cb_pNumberValue.DisplayMember           = "ProjectNumber";
+                cb_pNumberValue.Text                    = current_pNumber;
+                tb_pNameValue.Text                      = current_pName;
+                cb_pStage.DataSource                    = ds_Project.Tables["tlkStage"];
+                cb_pStage.ValueMember                   = "StageID";
+                cb_pStage.DisplayMember                 = "pStageDescription";
+                if (current_pStage == null)
+                    cb_pStage.SelectedIndex = -1;
+                else
+                    cb_pStage.SelectedValue             = current_pStage;
+                cb_pClassification.DataSource           = ds_Project.Tables["tlkClassification"];
+                cb_pClassification.ValueMember          = "classificationID";
+                cb_pClassification.DisplayMember        = "classificationDescription";
+                if (current_pClassification == null)
+                    cb_pClassification.SelectedIndex = -1;
+                else
+                    cb_pClassification.SelectedValue    = current_pClassification;
+                cb_DATRAG.DataSource                    = ds_Project.Tables["tlkRAG"];
+                cb_DATRAG.ValueMember                   = "ragID";
+                cb_DATRAG.DisplayMember                 = "ragDescription";
+                if (current_pDATRAG == null)
+                    cb_DATRAG.SelectedIndex = -1;
+                else
+                    cb_DATRAG.SelectedValue             = current_pDATRAG;
+                mtb_ProjectedStartDateValue.Text        = current_pProjectedStartDate.ToString();
+                mtb_ProjectedEndDateValue.Text          = current_pProjectedEndDate.ToString();
+                mtb_pStartDateValue.Text                = current_pStartDate.ToString();
+                mtb_pEndDateValue.Text                  = current_pEndDate.ToString();
+                tb_pPIValue.Text                        = current_pPI;
+                tb_pLeadApplicantValue.Text             = current_pLeadApplicant;
+                cb_Faculty.DataSource                   = ds_Project.Tables["tlkFaculty"];
+                cb_Faculty.ValueMember                  = "facultyID";
+                cb_Faculty.DisplayMember                = "facultyDescription";
+                if (current_pFaculty == null)
+                    cb_Faculty.SelectedIndex = -1;
+                else
+                    cb_Faculty.SelectedValue            = current_pFaculty;
+                chkb_ISO27001.Checked                   = current_pISO;
+                chkb_DSPT.Checked                       = current_pDSPT;
+                chkb_Azure.Checked                      = current_pAzure;
+                chkb_IRC.Checked                        = current_IRC;
+                chkb_SEED.Checked                       = current_SEED;
                 
                 //setPlatformGroupBoxColour(chkb_IRC.Checked, chkb_SEED.Checked);
             }
@@ -181,7 +194,7 @@ namespace CMS
             //create new DataTable (dt_dgv_pNotes) that just contains columns of interest
             DataTable dt_dgv_pNotes = new DataTable();
             dt_dgv_pNotes.Columns.Add("Note");
-            dt_dgv_pNotes.Columns.Add("Created");
+            dt_dgv_pNotes.Columns.Add("Created Date");
             dt_dgv_pNotes.Columns.Add("Created By");
             //iterate through each project note in source DataTable and add to newly created DataTable
             DataRow row;
@@ -189,7 +202,7 @@ namespace CMS
             {
                 row = dt_dgv_pNotes.NewRow();
                 row["Note"] = nRow["pNote"];
-                row["Created"] = nRow["Created"];
+                row["Created Date"] = nRow["Created"];
                 row["Created By"] = nRow["CreatedBy"];
                 dt_dgv_pNotes.Rows.Add(row);
             }
@@ -197,10 +210,50 @@ namespace CMS
 
             //format DataGridView (dgv_pNotes) column widths etc.
             dgv_pNotes.Columns["Note"].Width = 290;
-            dgv_pNotes.Columns["Created"].Width = 80;
+            dgv_pNotes.Columns["Created Date"].Width = 80;
             dgv_pNotes.Columns["Created By"].Width = 80;
             dgv_pNotes.Columns["Note"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             dgv_pNotes.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+        }
+
+        private void setTabIndex()
+        {
+            int x = 999;
+            foreach (Control c in this.Controls)
+            {
+                c.TabIndex = x;
+            }
+
+            cb_pNumberValue.TabIndex = 0;
+            cb_DATRAG.TabIndex = 1;
+            tb_pNameValue.TabIndex = 2;
+            gb_Platform.TabIndex = 3;
+            chkb_Azure.TabIndex = 4;
+            chkb_IRC.TabIndex = 5;
+            chkb_SEED.TabIndex = 6;
+            gb_Governance.TabIndex = 7;
+            chkb_ISO27001.TabIndex = 8;
+            chkb_DSPT.TabIndex = 9;
+            mtb_ProjectedStartDateValue.TabIndex = 10;
+            mtb_ProjectedEndDateValue.TabIndex = 11;
+            mtb_pStartDateValue.TabIndex = 12;
+            mtb_pEndDateValue.TabIndex = 13;
+            cb_pStage.TabIndex = 14;
+            cb_pClassification.TabIndex = 15;
+            tb_pLeadApplicantValue.TabIndex = 16;
+            tb_pPIValue.TabIndex = 17;
+            cb_Faculty.TabIndex = 18;
+            tb_NewProjectNote.TabIndex = 19;
+            btn_InsertProjectNote.TabIndex = 20;
+            btn_Refresh.TabIndex = 21;
+            btn_ProjectApply.TabIndex = 22;
+            btn_ProjectOK.TabIndex = 23;
+            btn_ProjectCancel.TabIndex = 24;
+            btn_NewProject.TabIndex = 25;
+            btn_Projects.TabIndex = 26;
+            btn_Users.TabIndex = 27;
+            btn_documents.TabIndex = 28;
+            btn_Platform.TabIndex = 29;
         }
 
         /// <summary>
@@ -245,21 +298,30 @@ namespace CMS
         {
             //populate variables with values held in form controls to compare to current project values
             string      new_pName               = tb_pNameValue.Text;
-            int         new_pStage              = int.Parse(cb_pStage.SelectedValue.ToString());
-            int         new_pClassification     = int.Parse(cb_pClassification.SelectedValue.ToString());
-            int         new_pDATRAG             = int.Parse(cb_DATRAG.SelectedValue.ToString());
+            int?        new_pStage              = null;
+            int?        new_pClassification     = null;
+            int?        new_pDATRAG             = null;
             DateTime?   new_pProjectedStartDate = null;
             DateTime?   new_pProjectedEndDate   = null;
             DateTime?   new_pStartDate          = null;
             DateTime?   new_pEndDate            = null;
             string      new_pPI                 = tb_pPIValue.Text;
             string      new_pLeadApplicant      = tb_pLeadApplicantValue.Text;
-            int         new_pFaculty            = int.Parse(cb_Faculty.SelectedValue.ToString());
+            int?        new_pFaculty            = null;
             bool        new_pDSPT               = chkb_DSPT.Checked;
             bool        new_pISO                = chkb_ISO27001.Checked; 
             bool        new_pAzure              = chkb_Azure.Checked;
             bool        new_IRC                 = chkb_IRC.Checked;
             bool        new_SEED                = chkb_SEED.Checked;
+
+            if (cb_pStage.SelectedIndex > -1)
+                new_pStage                      = int.Parse(cb_pStage.SelectedValue.ToString());
+            if (cb_pClassification.SelectedIndex > -1)
+                new_pClassification             = int.Parse(cb_pClassification.SelectedValue.ToString());
+            if (cb_DATRAG.SelectedIndex > -1)
+                new_pDATRAG                     = int.Parse(cb_DATRAG.SelectedValue.ToString());
+            if (cb_Faculty.SelectedIndex > -1)
+                new_pFaculty                    = int.Parse(cb_Faculty.SelectedValue.ToString());
             
             //dates are fuckey
             bool dateCheck = true;
@@ -413,7 +475,6 @@ namespace CMS
                 }
             }
         }
-
 
 
         private void btn_InsertProjectNote_Click(object sender, EventArgs e)

@@ -34,7 +34,7 @@ namespace CMS
                 SQL_Stuff conString = new SQL_Stuff();
                 using (SqlConnection connection = new SqlConnection(conString.getString()))
                 {
-                    //use a DataAdapter (da_Project) to add a DataTable (tblProjects) to a DataSet (ds_Project) 
+                    //use a DataAdapter (da_Project) to add a DataTable (tblProjects) to a DataSet (ds_prj) 
                     //from a SQL Server query (qryGetProject)
                     SqlDataAdapter da_Project = new SqlDataAdapter();
                     SqlCommand qryGetProject = new SqlCommand();
@@ -98,7 +98,7 @@ namespace CMS
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Failed to populate DataSet" + Environment.NewLine + Environment.NewLine + ex);
+                MessageBox.Show("Failed to populate ds_prj DataSet" + Environment.NewLine + Environment.NewLine + ex);
             }
                 //return DataSet (ds_prj) as the output of this method
                 return ds_prj;
@@ -120,16 +120,16 @@ namespace CMS
         {
             int pID;
             string pName;
-            int pStage = 1;
-            int pClassification = 1;
-            int pDATRAG = 1;
+            int? pStage = null;
+            int? pClassification = null;
+            int? pDATRAG = null;
             DateTime? pProjectedStartDate = null;
             DateTime? pProjectedEndDate = null;
             DateTime? pStartDate = null;
             DateTime? pEndDate = null;
             string pPI;
             string pLeadApplicant;
-            int pFaculty = 1;
+            int? pFaculty = null;
             bool pDSPT;
             bool pISO;
             bool pAzure;
@@ -161,15 +161,15 @@ namespace CMS
                 //use DataRelation (Project_Stage) to return string description of stage, not int stored value
                 foreach (DataRow sRow in pRow.GetParentRows("Project_Stage"))
                 {
-                    pStage = (int)sRow["StageID"];
+                    pStage = (int?)sRow["StageID"];
                 }
                 foreach (DataRow sRow in pRow.GetParentRows("Project_Classification"))
                 {
-                    pClassification = (int)sRow["classificationID"];
+                    pClassification = (int?)sRow["classificationID"];
                 }
                 foreach (DataRow sRow in pRow.GetParentRows("Project_DATRAG"))
                 {
-                    pDATRAG = (int)sRow["ragID"];
+                    pDATRAG = (int?)sRow["ragID"];
                 }
                 if (pRow["ProjectedStartDate"].ToString().Length > 0)
                     pProjectedStartDate = (DateTime)pRow["ProjectedStartDate"];
@@ -183,7 +183,7 @@ namespace CMS
                 pLeadApplicant = pRow["LeadApplicant"].ToString();
                 foreach (DataRow sRow in pRow.GetParentRows("Project_Faculty"))
                 {
-                    pFaculty = (int)sRow["facultyID"];
+                    pFaculty = (int?)sRow["facultyID"];
                 }
                 pDSPT = (bool)pRow["DSPT"];
                 pISO = (bool)pRow["ISO27001"];
@@ -307,9 +307,9 @@ namespace CMS
         /// <param name="Azure"></param>
         /// <param name="IRC"></param>
         /// <param name="SEED"></param>
-        public void insertProject(string Number, string Name, int Stage, int Classification, int DATRAG
+        public void insertProject(string Number, string Name, int? Stage, int? Classification, int? DATRAG
             , DateTime? ProjectedStartDate, DateTime? ProjectedEndDate, DateTime? StartDate, DateTime? EndDate
-            , string PI, string LeadApplicant, int Faculty, bool DSPT, bool ISO27001, bool Azure, bool IRC, bool SEED)
+            , string PI, string LeadApplicant, int? Faculty, bool DSPT, bool ISO27001, bool Azure, bool IRC, bool SEED)
         {
             try
             {
@@ -330,11 +330,15 @@ namespace CMS
                     //assign the parameter values
                     qryInsertProject.Parameters.Add("@ProjectNumber", SqlDbType.VarChar, 5).Value = Number;
                     qryInsertProject.Parameters.Add("@ProjectName", SqlDbType.VarChar, 100).Value = Name;
-                    qryInsertProject.Parameters.Add("@Stage", SqlDbType.Int).Value = Stage;
-                    qryInsertProject.Parameters.Add("@Classification", SqlDbType.Int).Value = Classification;
-                    qryInsertProject.Parameters.Add("@DATRAG", SqlDbType.Int).Value = DATRAG;
-                    //dates are fuckey
-                    //while i'm not fussed about empty strings i want to avoid 1900-01-01 and use NULL for missing values
+                    SqlParameter param_Stage = new SqlParameter("@Stage", Stage == null ? (object)DBNull.Value : Stage);
+                    param_Stage.IsNullable = true;
+                    qryInsertProject.Parameters.Add(param_Stage);
+                    SqlParameter param_Classification = new SqlParameter("@Classification", Classification == null ? (object)DBNull.Value : Classification);
+                    param_Classification.IsNullable = true;
+                    qryInsertProject.Parameters.Add(param_Classification);
+                    SqlParameter param_DATRAG = new SqlParameter("@DATRAG", DATRAG == null ? (object)DBNull.Value : DATRAG);
+                    param_DATRAG.IsNullable = true;
+                    qryInsertProject.Parameters.Add(param_DATRAG);
                     SqlParameter param_ProjectedStartDate = new SqlParameter("@ProjectedStartDate", ProjectedStartDate == null ? (object)DBNull.Value : ProjectedStartDate);
                     param_ProjectedStartDate.IsNullable = true;
                     qryInsertProject.Parameters.Add(param_ProjectedStartDate);
@@ -349,7 +353,9 @@ namespace CMS
                     qryInsertProject.Parameters.Add(param_EndDate);
                     qryInsertProject.Parameters.Add("@PI", SqlDbType.VarChar, 60).Value = PI;
                     qryInsertProject.Parameters.Add("@LeadApplicant", SqlDbType.VarChar, 60).Value = LeadApplicant;
-                    qryInsertProject.Parameters.Add("@Faculty", SqlDbType.Int).Value = Faculty;
+                    SqlParameter param_Faculty = new SqlParameter("@Faculty", Faculty == null ? (object)DBNull.Value : Faculty);
+                    param_Faculty.IsNullable = true;
+                    qryInsertProject.Parameters.Add(param_Faculty);
                     qryInsertProject.Parameters.Add("@DSPT", SqlDbType.Bit).Value = DSPT;
                     qryInsertProject.Parameters.Add("@ISO27001", SqlDbType.Bit).Value = ISO27001;
                     qryInsertProject.Parameters.Add("@Azure", SqlDbType.Bit).Value = Azure;
@@ -449,7 +455,7 @@ namespace CMS
             string pNumZeroes = new string('0', 4); //repeated 0 four times
             string pNumber;
             pNumber = pNumZeroes + pNumInt.ToString();
-            pNumber = "L" + pNumber.Substring(pNumber.Length - 4);
+            pNumber = "P" + pNumber.Substring(pNumber.Length - 4);
 
             return pNumber;
         }
