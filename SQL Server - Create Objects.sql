@@ -120,59 +120,49 @@ INSERT INTO dbo.tlkFaculty
 
 -- Data tracking tables schema
 
-CREATE TABLE dbo.tblImportRequests(
-	ImportID			INT IDENTITY(1,1) NOT NULL,
+CREATE TABLE dbo.tblTransferRequests(
+	TransferID			INT IDENTITY(1,1) NOT NULL,
 	Project				INT NOT NULL,
 	-- Include VRE ID foreign key?
-	DateImported		DATETIME NULL DEFAULT (getdate()),
-	ImportedBy			VARCHAR(50) NULL DEFAULT (suser_sname()),
+	TransferType		INT NOT NULL,
+	TransferDate		DATETIME NULL DEFAULT (getdate()),
+	TransferredBy		VARCHAR(50) NULL DEFAULT (suser_sname()),
 	RequestedBy			VARCHAR(50) NULL, -- Needs to reference user ID once Users table has been created
 	RequestersNotes		VARCHAR(MAX) NULL, -- Researchers communication explaining data/etc. Or a link to same text elsewhere?
-	ImportersResponse	VARCHAR(MAX) NULL, -- Response communication from DAT to confirm import status?
-	CONSTRAINT PK_ImportRequests PRIMARY KEY (ImportID),
-	CONSTRAINT FK_ImportsRefsProjects FOREIGN KEY (Project) REFERENCES dbo.tblProject (pID)
+	TransfererResponse	VARCHAR(MAX) NULL, -- Response communication from DAT to confirm import status?
+	CONSTRAINT PK_TransferRequests PRIMARY KEY (TransferID),
+	CONSTRAINT FK_TransferRequests_Projects FOREIGN KEY (Project) REFERENCES dbo.tblProject (pID)
 );
 
-CREATE TABLE dbo.tblImportedAssets(
+CREATE TABLE dbo.tblAssetRegister(
 	AssetID			INT IDENTITY(1,1) NOT NULL, -- Might be better if this was a sha2 checksum?
-	Import			INT NOT NULL,
+	TransferID		INT NOT NULL,
 	AssetName		VARCHAR(100) NOT NULL,
 	AssetSha256sum	CHAR(64) NULL, -- This could become the primary key instead?
 	-- Include data provider id column? Would need to reference a separate DataProviders tbl ... do we need one?
+	DSA				INT NOT NULL, -- Make this a foreign key to link with DSA table
+	-- Asset-DSA will be many-to-many, so may need to link with junction table here
 	VreFilePath		VARCHAR(200) NULL, -- Path to file in VRE
 	FileAccepted	BIT NULL DEFAULT 1, -- 0 = File transfer was rejected by importer
 	RejectionNotes	VARCHAR(MAX) NULL, -- Importer's reasons for rejecting the file (e.g. not meeting requirements)
 	-- Add column showing if file is still in VRE? Default=exists, but create Destructions tbl and cascade on update its new status?
-	CONSTRAINT PK_ImportedAssets PRIMARY KEY (AssetID),
-	CONSTRAINT FK_InAssetsRefsInRequests FOREIGN KEY (Import) REFERENCES dbo.tblImportRequests (ImportID)
+	CONSTRAINT PK_AssetRegister PRIMARY KEY (AssetID),
+	CONSTRAINT FK_Asset_Transfer FOREIGN KEY (TransferID) REFERENCES dbo.tblTransferRequests (TransferID)
 );
 
-CREATE TABLE dbo.tblExportRequests(
-	ExportID			INT IDENTITY(1,1) NOT NULL,
-	Project				INT NOT NULL,
-	-- Include VRE ID foreign key?
-	DateExported		DATETIME NULL DEFAULT (getdate()),
-	ExportedBy			VARCHAR(50) NULL DEFAULT (suser_sname()),
-	RequestedBy			VARCHAR(50) NULL, -- Needs to reference user ID once Users table has been created
-	RequestersNotes		VARCHAR(MAX) NULL, -- Researchers communication explaining data/etc. Or a link to same text elsewhere?
-	ExportersResponse	VARCHAR(MAX) NULL, -- Response communication from DAT to confirm export status?
-	CONSTRAINT PK_ExportRequests PRIMARY KEY (ExportID),
-	CONSTRAINT FK_ExportsRefsProjects FOREIGN KEY (Project) REFERENCES dbo.tblProject (pID)
+CREATE TABLE dbo.tlkTransferTypes (
+	TransferTypeID INT IDENTITY(1,1) NOT NULL,
+	TransferTypeLabel VARCHAR(25) NULL,
+	CONSTRAINT PK_TransferType PRIMARY KEY (TransferTypeID)
 );
 
-CREATE TABLE dbo.tblExportedAssets(
-	AssetID			INT IDENTITY(1,1) NOT NULL, -- Might be better if this was a sha2 checksum?
-	Export			INT NOT NULL,
-	AssetName		VARCHAR(100) NOT NULL,
-	AssetSha256sum	CHAR(64) NULL, -- This could become the primary key instead?
-	-- Include data provider id column? Would need to reference a separate DataProviders tbl ... do we need one?
-	VreFilePath		VARCHAR(200) NULL, -- Path to file in VRE
-	FileAccepted	BIT NULL DEFAULT 1, -- 0 = File transfer was rejected by exporter
-	RejectionNotes	VARCHAR(MAX) NULL, -- Exporter's reasons for rejecting the file (e.g. not meeting requirements)
-	-- Add column showing if file is still in VRE? Default=exists, but create Destructions tbl and cascade on update its new status?
-	CONSTRAINT PK_ExportedAssets PRIMARY KEY (AssetID),
-	CONSTRAINT FK_OutAssetsRefsOutRequests FOREIGN KEY (Export) REFERENCES dbo.tblExportRequests (ExportID)
-);
+ALTER TABLE dbo.tblTransferRequests
+	ADD CONSTRAINT FK_TransferRequests_TransferType FOREIGN KEY (TransferType) REFERENCES dbo.tlkTransferTypes (TransferTypeID)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE;
+
+INSERT INTO dbo.tlkTransferTypes (TransferTypeLabel)
+     VALUES (''), ('Import'), ('Export');
 
 /*
 Do we need to log data destructions?
