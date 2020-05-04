@@ -155,7 +155,6 @@ CREATE TABLE dbo.tlkTransferTypes (
 	TransferTypeLabel VARCHAR(25) NULL,
 	CONSTRAINT PK_TransferType PRIMARY KEY (TransferTypeID)
 );
-
 ALTER TABLE dbo.tblTransferRequests
 	ADD CONSTRAINT FK_TransferRequests_TransferType FOREIGN KEY (TransferType) REFERENCES dbo.tlkTransferTypes (TransferTypeID)
 		ON DELETE CASCADE
