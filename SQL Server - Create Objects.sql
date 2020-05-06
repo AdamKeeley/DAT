@@ -117,58 +117,65 @@ INSERT INTO dbo.tlkFaculty
      VALUES
            (''), ('Arts Humanities and Cultures'), ('Biological Sciences'), ('Business'), ('Social Sciences'), ('Engineering and Physical Sciences'), ('Environment'), ('Medicine and Health'), ('Interdisciplinary')
 
+/*
+Data tracking tables schema
+*/
 
--- Data tracking tables schema
-
-CREATE TABLE dbo.tblTransferRequests(
-	TransferID			INT IDENTITY(1,1) NOT NULL,
+CREATE TABLE dbo.tblDataIORequests(
+	RequestID			INT IDENTITY(1,1) NOT NULL,
 	Project				INT NOT NULL,
 	-- Include VRE ID foreign key?
-	TransferType		INT NOT NULL,
-	TransferDate		DATETIME NULL DEFAULT (getdate()),
-	TransferredBy		VARCHAR(50) NULL DEFAULT (suser_sname()),
+	ChangeType			INT NOT NULL,
+	ChangeDate			DATETIME NULL DEFAULT (getdate()),
+	ChangedBy			VARCHAR(50) NULL DEFAULT (suser_sname()),
 	RequestedBy			VARCHAR(50) NULL, -- Needs to reference user ID once Users table has been created
-	RequestersNotes		VARCHAR(MAX) NULL, -- Researchers communication explaining data/etc. Or a link to same text elsewhere?
-	TransfererResponse	VARCHAR(MAX) NULL, -- Response communication from DAT to confirm import status?
-	CONSTRAINT PK_TransferRequests PRIMARY KEY (TransferID),
-	CONSTRAINT FK_TransferRequests_Projects FOREIGN KEY (Project) REFERENCES dbo.tblProject (pID)
+	RequesterNotes		VARCHAR(MAX) NULL, -- Researchers communication explaining data/etc. Or a link to same text elsewhere?
+	ChangerResponse		VARCHAR(MAX) NULL, -- Response communication from DAT to confirm import status?
+	-- In future, we could include here a ConversationID, linking to DAT-user interactions and remove RequesterNotes and ChangerResponse here
+	CONSTRAINT PK_DataIORequests PRIMARY KEY (RequestID),
+	CONSTRAINT FK_DataIORequests_Projects FOREIGN KEY (Project) REFERENCES dbo.tblProject (pID)
 );
 
-CREATE TABLE dbo.tblAssetRegister(
-	AssetID			INT IDENTITY(1,1) NOT NULL, -- Might be better if this was a sha2 checksum?
-	TransferID		INT NOT NULL,
-	AssetName		VARCHAR(100) NOT NULL,
-	AssetSha256sum	CHAR(64) NULL, -- This could become the primary key instead?
-	-- Include data provider id column? Would need to reference a separate DataProviders tbl ... do we need one?
-	DSA				INT NOT NULL, -- Make this a foreign key to link with DSA table
-	-- Asset-DSA will be many-to-many, so may need to link with junction table here
-	VreFilePath		VARCHAR(200) NULL, -- Path to file in VRE
-	FileAccepted	BIT NULL DEFAULT 1, -- 0 = File transfer was rejected by importer
-	RejectionNotes	VARCHAR(MAX) NULL, -- Importer's reasons for rejecting the file (e.g. not meeting requirements)
-	-- Add column showing if file is still in VRE? Default=exists, but create Destructions tbl and cascade on update its new status?
-	CONSTRAINT PK_AssetRegister PRIMARY KEY (AssetID),
-	CONSTRAINT FK_Asset_Transfer FOREIGN KEY (TransferID) REFERENCES dbo.tblTransferRequests (TransferID)
+CREATE TABLE dbo.tlkAssetsChangeType (
+	ChangeTypeID		INT IDENTITY(1,1) NOT NULL,
+	ChangeTypeLabel		VARCHAR(25) NULL,
+	CONSTRAINT PK_AssetsChangeType PRIMARY KEY (ChangeTypeID)
 );
-
-CREATE TABLE dbo.tlkTransferTypes (
-	TransferTypeID INT IDENTITY(1,1) NOT NULL,
-	TransferTypeLabel VARCHAR(25) NULL,
-	CONSTRAINT PK_TransferType PRIMARY KEY (TransferTypeID)
-);
-ALTER TABLE dbo.tblTransferRequests
-	ADD CONSTRAINT FK_TransferRequests_TransferType FOREIGN KEY (TransferType) REFERENCES dbo.tlkTransferTypes (TransferTypeID)
+ALTER TABLE dbo.tblDataIORequests
+	ADD CONSTRAINT FK_DataIORequests_ChangeType FOREIGN KEY (ChangeType) REFERENCES dbo.tlkAssetsChangeTypes (ChangeTypeID)
 		ON DELETE CASCADE
 		ON UPDATE CASCADE;
+INSERT INTO dbo.tlkAssetsChangeType (ChangeTypeLabel)
+     VALUES (''), ('Import'), ('Export'), ('Delete');
 
-INSERT INTO dbo.tlkTransferTypes (TransferTypeLabel)
-     VALUES (''), ('Import'), ('Export');
+CREATE TABLE dbo.tblAssetsRegister(
+	AssetID			INT IDENTITY(1,1) NOT NULL, -- Might be better if this was a sha2 checksum?
+	Project			INT NOT NULL,
+	AssetName		VARCHAR(100) NOT NULL,
+	AssetSha256sum	CHAR(64) NULL, -- This could become the primary key instead?
+	-- Asset-DSA will be many-to-many so will probably need intermediary table
+	VreFilePath		VARCHAR(200) NULL, -- Path to file in VRE
+	CONSTRAINT PK_AssetsRegister PRIMARY KEY (AssetID),
+	CONSTRAINT FK_AssetsRegister_Projects FOREIGN KEY (Project) REFERENCES dbo.tblProject (pID),
+	CONSTRAINT FK_AssetsRegister_DataIORequest FOREIGN KEY (ImportID) REFERENCES dbo.tblDataIORequest (RequestID)
+);
+
+-- Intermediary table between dbo.tblDataIORequest
+CREATE TABLE dbo.tblAssetsChangeLog(
+	ChangeID		INT IDENTITY(1,1) NOT NULL,
+	RequestID		INT NOT NULL,
+	AssetID			INT NOT NULL,
+	ChangeAccepted	BIT NULL DEFAULT 1, -- 0 = File transfer was rejected
+	RejectionNotes	VARCHAR(MAX) NULL, -- Reasons for rejecting change (e.g. not meeting import requirements)
+	CONSTRAINT PK_AssetsChangeLog PRIMARY KEY (ChangeID),
+	CONSTRAINT FK_AssetsChangeLog_DataIORequest FOREIGN KEY (RequestID) REFERENCES dbo.tblDataIORequest (RequestID),
+	CONSTRAINT FK_AssetsChangeLog_AssetsRegister FOREIGN KEY (AssetID) REFERENCES dbo.tblAssetsRegister (AssetID)
+);
+
+
 
 /*
-Do we need to log data destructions?
+TO DO NEXT:
+Add DSA table and AssetRegister_DSA intermediary table.
 
-If so, we'd want to have a way to keeping a log of current assets
-and updated that log when an asset gets destroyed.
-
-A data destructions table could include any communications
-and signed confirmations regarding the permanent destruction.
 */
