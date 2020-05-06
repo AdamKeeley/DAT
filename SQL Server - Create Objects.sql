@@ -136,16 +136,16 @@ CREATE TABLE dbo.tblDataIORequests(
 	CONSTRAINT FK_DataIORequests_Projects FOREIGN KEY (Project) REFERENCES dbo.tblProject (pID)
 );
 
-CREATE TABLE dbo.tlkAssetsChangeType (
+CREATE TABLE dbo.tlkAssetChangeTypes (
 	ChangeTypeID		INT IDENTITY(1,1) NOT NULL,
 	ChangeTypeLabel		VARCHAR(25) NULL,
-	CONSTRAINT PK_AssetsChangeType PRIMARY KEY (ChangeTypeID)
+	CONSTRAINT PK_AssetChangeTypes PRIMARY KEY (ChangeTypeID)
 );
 ALTER TABLE dbo.tblDataIORequests
-	ADD CONSTRAINT FK_DataIORequests_ChangeType FOREIGN KEY (ChangeType) REFERENCES dbo.tlkAssetsChangeTypes (ChangeTypeID)
+	ADD CONSTRAINT FK_DataIORequests_ChangeType FOREIGN KEY (ChangeType) REFERENCES dbo.tlkAssetChangeTypes (ChangeTypeID)
 		ON DELETE CASCADE
 		ON UPDATE CASCADE;
-INSERT INTO dbo.tlkAssetsChangeType (ChangeTypeLabel)
+INSERT INTO dbo.tlkAssetChangeTypes (ChangeTypeLabel)
      VALUES (''), ('Import'), ('Export'), ('Delete');
 
 CREATE TABLE dbo.tblAssetsRegister(
@@ -156,8 +156,7 @@ CREATE TABLE dbo.tblAssetsRegister(
 	-- Asset-DSA will be many-to-many so will probably need intermediary table
 	VreFilePath		VARCHAR(200) NULL, -- Path to file in VRE
 	CONSTRAINT PK_AssetsRegister PRIMARY KEY (AssetID),
-	CONSTRAINT FK_AssetsRegister_Projects FOREIGN KEY (Project) REFERENCES dbo.tblProject (pID),
-	CONSTRAINT FK_AssetsRegister_DataIORequest FOREIGN KEY (ImportID) REFERENCES dbo.tblDataIORequest (RequestID)
+	CONSTRAINT FK_AssetsRegister_Projects FOREIGN KEY (Project) REFERENCES dbo.tblProject (pID)
 );
 
 -- Intermediary table between dbo.tblDataIORequest
@@ -168,7 +167,7 @@ CREATE TABLE dbo.tblAssetsChangeLog(
 	ChangeAccepted	BIT NULL DEFAULT 1, -- 0 = File transfer was rejected
 	RejectionNotes	VARCHAR(MAX) NULL, -- Reasons for rejecting change (e.g. not meeting import requirements)
 	CONSTRAINT PK_AssetsChangeLog PRIMARY KEY (ChangeID),
-	CONSTRAINT FK_AssetsChangeLog_DataIORequest FOREIGN KEY (RequestID) REFERENCES dbo.tblDataIORequest (RequestID),
+	CONSTRAINT FK_AssetsChangeLog_DataIORequests FOREIGN KEY (RequestID) REFERENCES dbo.tblDataIORequests (RequestID),
 	CONSTRAINT FK_AssetsChangeLog_AssetsRegister FOREIGN KEY (AssetID) REFERENCES dbo.tblAssetsRegister (AssetID)
 );
 
