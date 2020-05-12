@@ -73,13 +73,22 @@ namespace CMS
             this.mtb_ProjectedStartDateValue = new System.Windows.Forms.MaskedTextBox();
             this.lbl_ProjectedStartDate = new System.Windows.Forms.Label();
             this.cb_LeadApplicant = new System.Windows.Forms.ComboBox();
-            this.lbl_LeadApplicant_NewUser = new System.Windows.Forms.Label();
             this.cb_PI = new System.Windows.Forms.ComboBox();
-            this.lbl_PI_NewUser = new System.Windows.Forms.Label();
+            this.dgv_ProjectUsers = new System.Windows.Forms.DataGridView();
+            this.btn_ProjectUserAdd = new System.Windows.Forms.Button();
+            this.btn_ProjectUserRemove = new System.Windows.Forms.Button();
+            this.gb_ProjectUsers = new System.Windows.Forms.GroupBox();
+            this.gb_ProjectNotes = new System.Windows.Forms.GroupBox();
+            this.gb_KeyDates = new System.Windows.Forms.GroupBox();
+            this.gb_ProjectDocuments = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_pNotes)).BeginInit();
             this.gb_Platform.SuspendLayout();
             this.gb_Governance.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_ProjectUsers)).BeginInit();
+            this.gb_ProjectUsers.SuspendLayout();
+            this.gb_ProjectNotes.SuspendLayout();
+            this.gb_KeyDates.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbl_pNumber
@@ -106,6 +115,7 @@ namespace CMS
             // 
             this.tb_pNameValue.Location = new System.Drawing.Point(233, 31);
             this.tb_pNameValue.Margin = new System.Windows.Forms.Padding(2);
+            this.tb_pNameValue.MaxLength = 100;
             this.tb_pNameValue.Name = "tb_pNameValue";
             this.tb_pNameValue.Size = new System.Drawing.Size(387, 20);
             this.tb_pNameValue.TabIndex = 3;
@@ -144,7 +154,7 @@ namespace CMS
             // lbl_pStartDate
             // 
             this.lbl_pStartDate.AutoSize = true;
-            this.lbl_pStartDate.Location = new System.Drawing.Point(484, 78);
+            this.lbl_pStartDate.Location = new System.Drawing.Point(145, 21);
             this.lbl_pStartDate.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_pStartDate.Name = "lbl_pStartDate";
             this.lbl_pStartDate.Size = new System.Drawing.Size(55, 13);
@@ -154,7 +164,7 @@ namespace CMS
             // lbl_pEndDate
             // 
             this.lbl_pEndDate.AutoSize = true;
-            this.lbl_pEndDate.Location = new System.Drawing.Point(487, 106);
+            this.lbl_pEndDate.Location = new System.Drawing.Point(148, 49);
             this.lbl_pEndDate.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_pEndDate.Name = "lbl_pEndDate";
             this.lbl_pEndDate.Size = new System.Drawing.Size(52, 13);
@@ -166,10 +176,11 @@ namespace CMS
             this.dgv_pNotes.AllowUserToAddRows = false;
             this.dgv_pNotes.AllowUserToDeleteRows = false;
             this.dgv_pNotes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_pNotes.Location = new System.Drawing.Point(126, 284);
+            this.dgv_pNotes.Location = new System.Drawing.Point(5, 62);
             this.dgv_pNotes.Margin = new System.Windows.Forms.Padding(2);
             this.dgv_pNotes.Name = "dgv_pNotes";
             this.dgv_pNotes.ReadOnly = true;
+            this.dgv_pNotes.RowHeadersVisible = false;
             this.dgv_pNotes.RowTemplate.Height = 24;
             this.dgv_pNotes.Size = new System.Drawing.Size(494, 150);
             this.dgv_pNotes.TabIndex = 12;
@@ -177,7 +188,7 @@ namespace CMS
             // 
             // mtb_pEndDateValue
             // 
-            this.mtb_pEndDateValue.Location = new System.Drawing.Point(543, 103);
+            this.mtb_pEndDateValue.Location = new System.Drawing.Point(204, 46);
             this.mtb_pEndDateValue.Margin = new System.Windows.Forms.Padding(2);
             this.mtb_pEndDateValue.Mask = "00/00/0000";
             this.mtb_pEndDateValue.Name = "mtb_pEndDateValue";
@@ -187,7 +198,7 @@ namespace CMS
             // 
             // mtb_pStartDateValue
             // 
-            this.mtb_pStartDateValue.Location = new System.Drawing.Point(543, 75);
+            this.mtb_pStartDateValue.Location = new System.Drawing.Point(204, 18);
             this.mtb_pStartDateValue.Margin = new System.Windows.Forms.Padding(2);
             this.mtb_pStartDateValue.Mask = "00/00/0000";
             this.mtb_pStartDateValue.Name = "mtb_pStartDateValue";
@@ -197,7 +208,7 @@ namespace CMS
             // 
             // tb_NewProjectNote
             // 
-            this.tb_NewProjectNote.Location = new System.Drawing.Point(126, 240);
+            this.tb_NewProjectNote.Location = new System.Drawing.Point(5, 18);
             this.tb_NewProjectNote.Margin = new System.Windows.Forms.Padding(2);
             this.tb_NewProjectNote.MaxLength = 8000;
             this.tb_NewProjectNote.Multiline = true;
@@ -207,7 +218,7 @@ namespace CMS
             // 
             // btn_InsertProjectNote
             // 
-            this.btn_InsertProjectNote.Location = new System.Drawing.Point(564, 240);
+            this.btn_InsertProjectNote.Location = new System.Drawing.Point(443, 18);
             this.btn_InsertProjectNote.Margin = new System.Windows.Forms.Padding(2);
             this.btn_InsertProjectNote.Name = "btn_InsertProjectNote";
             this.btn_InsertProjectNote.Size = new System.Drawing.Size(55, 40);
@@ -229,7 +240,7 @@ namespace CMS
             // 
             // btn_ProjectCancel
             // 
-            this.btn_ProjectCancel.Location = new System.Drawing.Point(564, 438);
+            this.btn_ProjectCancel.Location = new System.Drawing.Point(763, 448);
             this.btn_ProjectCancel.Margin = new System.Windows.Forms.Padding(2);
             this.btn_ProjectCancel.Name = "btn_ProjectCancel";
             this.btn_ProjectCancel.Size = new System.Drawing.Size(56, 24);
@@ -240,7 +251,7 @@ namespace CMS
             // 
             // btn_ProjectOK
             // 
-            this.btn_ProjectOK.Location = new System.Drawing.Point(504, 438);
+            this.btn_ProjectOK.Location = new System.Drawing.Point(703, 448);
             this.btn_ProjectOK.Margin = new System.Windows.Forms.Padding(2);
             this.btn_ProjectOK.Name = "btn_ProjectOK";
             this.btn_ProjectOK.Size = new System.Drawing.Size(56, 24);
@@ -251,7 +262,7 @@ namespace CMS
             // 
             // btn_ProjectApply
             // 
-            this.btn_ProjectApply.Location = new System.Drawing.Point(443, 438);
+            this.btn_ProjectApply.Location = new System.Drawing.Point(642, 448);
             this.btn_ProjectApply.Margin = new System.Windows.Forms.Padding(2);
             this.btn_ProjectApply.Name = "btn_ProjectApply";
             this.btn_ProjectApply.Size = new System.Drawing.Size(56, 24);
@@ -262,7 +273,7 @@ namespace CMS
             // 
             // btn_NewProject
             // 
-            this.btn_NewProject.Location = new System.Drawing.Point(128, 438);
+            this.btn_NewProject.Location = new System.Drawing.Point(132, 448);
             this.btn_NewProject.Margin = new System.Windows.Forms.Padding(2);
             this.btn_NewProject.Name = "btn_NewProject";
             this.btn_NewProject.Size = new System.Drawing.Size(90, 24);
@@ -298,7 +309,7 @@ namespace CMS
             this.gb_Platform.Controls.Add(this.chkb_Azure);
             this.gb_Platform.Controls.Add(this.chkb_IRC);
             this.gb_Platform.Controls.Add(this.chkb_SEED);
-            this.gb_Platform.Location = new System.Drawing.Point(136, 72);
+            this.gb_Platform.Location = new System.Drawing.Point(136, 67);
             this.gb_Platform.Margin = new System.Windows.Forms.Padding(2);
             this.gb_Platform.Name = "gb_Platform";
             this.gb_Platform.Padding = new System.Windows.Forms.Padding(2);
@@ -358,7 +369,7 @@ namespace CMS
             // 
             // mtb_ProjectedEndDateValue
             // 
-            this.mtb_ProjectedEndDateValue.Location = new System.Drawing.Point(402, 103);
+            this.mtb_ProjectedEndDateValue.Location = new System.Drawing.Point(63, 46);
             this.mtb_ProjectedEndDateValue.Margin = new System.Windows.Forms.Padding(2);
             this.mtb_ProjectedEndDateValue.Mask = "00/00/0000";
             this.mtb_ProjectedEndDateValue.Name = "mtb_ProjectedEndDateValue";
@@ -369,7 +380,7 @@ namespace CMS
             // lbl_ProjectedEndDate
             // 
             this.lbl_ProjectedEndDate.AutoSize = true;
-            this.lbl_ProjectedEndDate.Location = new System.Drawing.Point(343, 100);
+            this.lbl_ProjectedEndDate.Location = new System.Drawing.Point(4, 43);
             this.lbl_ProjectedEndDate.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_ProjectedEndDate.Name = "lbl_ProjectedEndDate";
             this.lbl_ProjectedEndDate.Size = new System.Drawing.Size(55, 26);
@@ -399,7 +410,7 @@ namespace CMS
             // 
             this.gb_Governance.Controls.Add(this.chkb_ISO27001);
             this.gb_Governance.Controls.Add(this.chkb_DSPT);
-            this.gb_Governance.Location = new System.Drawing.Point(233, 72);
+            this.gb_Governance.Location = new System.Drawing.Point(233, 67);
             this.gb_Governance.Margin = new System.Windows.Forms.Padding(2);
             this.gb_Governance.Name = "gb_Governance";
             this.gb_Governance.Padding = new System.Windows.Forms.Padding(2);
@@ -459,7 +470,7 @@ namespace CMS
             // 
             // btn_Refresh
             // 
-            this.btn_Refresh.Location = new System.Drawing.Point(363, 439);
+            this.btn_Refresh.Location = new System.Drawing.Point(562, 449);
             this.btn_Refresh.Name = "btn_Refresh";
             this.btn_Refresh.Size = new System.Drawing.Size(75, 23);
             this.btn_Refresh.TabIndex = 31;
@@ -499,7 +510,7 @@ namespace CMS
             // 
             // mtb_ProjectedStartDateValue
             // 
-            this.mtb_ProjectedStartDateValue.Location = new System.Drawing.Point(402, 75);
+            this.mtb_ProjectedStartDateValue.Location = new System.Drawing.Point(63, 18);
             this.mtb_ProjectedStartDateValue.Margin = new System.Windows.Forms.Padding(2);
             this.mtb_ProjectedStartDateValue.Mask = "00/00/0000";
             this.mtb_ProjectedStartDateValue.Name = "mtb_ProjectedStartDateValue";
@@ -510,7 +521,7 @@ namespace CMS
             // lbl_ProjectedStartDate
             // 
             this.lbl_ProjectedStartDate.AutoSize = true;
-            this.lbl_ProjectedStartDate.Location = new System.Drawing.Point(343, 72);
+            this.lbl_ProjectedStartDate.Location = new System.Drawing.Point(4, 15);
             this.lbl_ProjectedStartDate.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_ProjectedStartDate.Name = "lbl_ProjectedStartDate";
             this.lbl_ProjectedStartDate.Size = new System.Drawing.Size(55, 26);
@@ -527,15 +538,6 @@ namespace CMS
             this.cb_LeadApplicant.Size = new System.Drawing.Size(173, 21);
             this.cb_LeadApplicant.TabIndex = 37;
             // 
-            // lbl_LeadApplicant_NewUser
-            // 
-            this.lbl_LeadApplicant_NewUser.AutoSize = true;
-            this.lbl_LeadApplicant_NewUser.Location = new System.Drawing.Point(626, 152);
-            this.lbl_LeadApplicant_NewUser.Name = "lbl_LeadApplicant_NewUser";
-            this.lbl_LeadApplicant_NewUser.Size = new System.Drawing.Size(36, 13);
-            this.lbl_LeadApplicant_NewUser.TabIndex = 38;
-            this.lbl_LeadApplicant_NewUser.Text = "new...";
-            // 
             // cb_PI
             // 
             this.cb_PI.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
@@ -546,34 +548,105 @@ namespace CMS
             this.cb_PI.Size = new System.Drawing.Size(173, 21);
             this.cb_PI.TabIndex = 39;
             // 
-            // lbl_PI_NewUser
+            // dgv_ProjectUsers
             // 
-            this.lbl_PI_NewUser.AutoSize = true;
-            this.lbl_PI_NewUser.Location = new System.Drawing.Point(626, 176);
-            this.lbl_PI_NewUser.Name = "lbl_PI_NewUser";
-            this.lbl_PI_NewUser.Size = new System.Drawing.Size(36, 13);
-            this.lbl_PI_NewUser.TabIndex = 40;
-            this.lbl_PI_NewUser.Text = "new...";
+            this.dgv_ProjectUsers.AllowUserToAddRows = false;
+            this.dgv_ProjectUsers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_ProjectUsers.ColumnHeadersVisible = false;
+            this.dgv_ProjectUsers.Location = new System.Drawing.Point(16, 19);
+            this.dgv_ProjectUsers.Name = "dgv_ProjectUsers";
+            this.dgv_ProjectUsers.ReadOnly = true;
+            this.dgv_ProjectUsers.RowHeadersVisible = false;
+            this.dgv_ProjectUsers.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.dgv_ProjectUsers.Size = new System.Drawing.Size(155, 160);
+            this.dgv_ProjectUsers.TabIndex = 41;
+            this.dgv_ProjectUsers.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_ProjectUsers_CellDoubleClick);
+            // 
+            // btn_ProjectUserAdd
+            // 
+            this.btn_ProjectUserAdd.Location = new System.Drawing.Point(16, 185);
+            this.btn_ProjectUserAdd.Name = "btn_ProjectUserAdd";
+            this.btn_ProjectUserAdd.Size = new System.Drawing.Size(75, 23);
+            this.btn_ProjectUserAdd.TabIndex = 42;
+            this.btn_ProjectUserAdd.Text = "Add";
+            this.btn_ProjectUserAdd.UseVisualStyleBackColor = true;
+            // 
+            // btn_ProjectUserRemove
+            // 
+            this.btn_ProjectUserRemove.Location = new System.Drawing.Point(96, 185);
+            this.btn_ProjectUserRemove.Name = "btn_ProjectUserRemove";
+            this.btn_ProjectUserRemove.Size = new System.Drawing.Size(75, 23);
+            this.btn_ProjectUserRemove.TabIndex = 43;
+            this.btn_ProjectUserRemove.Text = "Remove";
+            this.btn_ProjectUserRemove.UseVisualStyleBackColor = true;
+            // 
+            // gb_ProjectUsers
+            // 
+            this.gb_ProjectUsers.Controls.Add(this.dgv_ProjectUsers);
+            this.gb_ProjectUsers.Controls.Add(this.btn_ProjectUserRemove);
+            this.gb_ProjectUsers.Controls.Add(this.btn_ProjectUserAdd);
+            this.gb_ProjectUsers.Location = new System.Drawing.Point(634, 5);
+            this.gb_ProjectUsers.Name = "gb_ProjectUsers";
+            this.gb_ProjectUsers.Size = new System.Drawing.Size(185, 214);
+            this.gb_ProjectUsers.TabIndex = 45;
+            this.gb_ProjectUsers.TabStop = false;
+            this.gb_ProjectUsers.Text = "Research Team";
+            // 
+            // gb_ProjectNotes
+            // 
+            this.gb_ProjectNotes.Controls.Add(this.tb_NewProjectNote);
+            this.gb_ProjectNotes.Controls.Add(this.dgv_pNotes);
+            this.gb_ProjectNotes.Controls.Add(this.btn_InsertProjectNote);
+            this.gb_ProjectNotes.Location = new System.Drawing.Point(127, 225);
+            this.gb_ProjectNotes.Name = "gb_ProjectNotes";
+            this.gb_ProjectNotes.Size = new System.Drawing.Size(506, 218);
+            this.gb_ProjectNotes.TabIndex = 46;
+            this.gb_ProjectNotes.TabStop = false;
+            this.gb_ProjectNotes.Text = "Notes";
+            // 
+            // gb_KeyDates
+            // 
+            this.gb_KeyDates.Controls.Add(this.lbl_ProjectedStartDate);
+            this.gb_KeyDates.Controls.Add(this.lbl_pStartDate);
+            this.gb_KeyDates.Controls.Add(this.lbl_pEndDate);
+            this.gb_KeyDates.Controls.Add(this.mtb_pEndDateValue);
+            this.gb_KeyDates.Controls.Add(this.mtb_pStartDateValue);
+            this.gb_KeyDates.Controls.Add(this.lbl_ProjectedEndDate);
+            this.gb_KeyDates.Controls.Add(this.mtb_ProjectedEndDateValue);
+            this.gb_KeyDates.Controls.Add(this.mtb_ProjectedStartDateValue);
+            this.gb_KeyDates.Location = new System.Drawing.Point(341, 56);
+            this.gb_KeyDates.Name = "gb_KeyDates";
+            this.gb_KeyDates.Size = new System.Drawing.Size(287, 73);
+            this.gb_KeyDates.TabIndex = 47;
+            this.gb_KeyDates.TabStop = false;
+            this.gb_KeyDates.Text = "Key Dates";
+            // 
+            // gb_ProjectDocuments
+            // 
+            this.gb_ProjectDocuments.Location = new System.Drawing.Point(639, 225);
+            this.gb_ProjectDocuments.Name = "gb_ProjectDocuments";
+            this.gb_ProjectDocuments.Size = new System.Drawing.Size(180, 218);
+            this.gb_ProjectDocuments.TabIndex = 48;
+            this.gb_ProjectDocuments.TabStop = false;
+            this.gb_ProjectDocuments.Text = "Project Documents";
             // 
             // frm_Project
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(667, 471);
-            this.Controls.Add(this.lbl_PI_NewUser);
+            this.ClientSize = new System.Drawing.Size(828, 480);
+            this.Controls.Add(this.gb_ProjectDocuments);
+            this.Controls.Add(this.gb_KeyDates);
+            this.Controls.Add(this.gb_ProjectNotes);
+            this.Controls.Add(this.gb_ProjectUsers);
             this.Controls.Add(this.cb_PI);
-            this.Controls.Add(this.lbl_LeadApplicant_NewUser);
             this.Controls.Add(this.cb_LeadApplicant);
-            this.Controls.Add(this.mtb_ProjectedStartDateValue);
-            this.Controls.Add(this.lbl_ProjectedStartDate);
             this.Controls.Add(this.lbl_LeadApplicant);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btn_Refresh);
             this.Controls.Add(this.gb_Governance);
             this.Controls.Add(this.cb_Faculty);
             this.Controls.Add(this.lbl_Faculty);
-            this.Controls.Add(this.mtb_ProjectedEndDateValue);
-            this.Controls.Add(this.lbl_ProjectedEndDate);
             this.Controls.Add(this.cb_DATRAG);
             this.Controls.Add(this.lbl_DATRAG);
             this.Controls.Add(this.lbl_pClassification);
@@ -584,13 +657,6 @@ namespace CMS
             this.Controls.Add(this.btn_ProjectOK);
             this.Controls.Add(this.btn_ProjectCancel);
             this.Controls.Add(this.cb_pNumberValue);
-            this.Controls.Add(this.btn_InsertProjectNote);
-            this.Controls.Add(this.tb_NewProjectNote);
-            this.Controls.Add(this.mtb_pStartDateValue);
-            this.Controls.Add(this.mtb_pEndDateValue);
-            this.Controls.Add(this.dgv_pNotes);
-            this.Controls.Add(this.lbl_pEndDate);
-            this.Controls.Add(this.lbl_pStartDate);
             this.Controls.Add(this.lbl_pPI);
             this.Controls.Add(this.cb_pStage);
             this.Controls.Add(this.lbl_pStage);
@@ -606,6 +672,12 @@ namespace CMS
             this.gb_Governance.ResumeLayout(false);
             this.gb_Governance.PerformLayout();
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_ProjectUsers)).EndInit();
+            this.gb_ProjectUsers.ResumeLayout(false);
+            this.gb_ProjectNotes.ResumeLayout(false);
+            this.gb_ProjectNotes.PerformLayout();
+            this.gb_KeyDates.ResumeLayout(false);
+            this.gb_KeyDates.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -656,8 +728,13 @@ namespace CMS
         private System.Windows.Forms.Label lbl_ProjectedStartDate;
         private System.Windows.Forms.Button btn_Platform;
         private System.Windows.Forms.ComboBox cb_LeadApplicant;
-        private System.Windows.Forms.Label lbl_LeadApplicant_NewUser;
         private System.Windows.Forms.ComboBox cb_PI;
-        private System.Windows.Forms.Label lbl_PI_NewUser;
+        private System.Windows.Forms.DataGridView dgv_ProjectUsers;
+        private System.Windows.Forms.Button btn_ProjectUserAdd;
+        private System.Windows.Forms.Button btn_ProjectUserRemove;
+        private System.Windows.Forms.GroupBox gb_ProjectUsers;
+        private System.Windows.Forms.GroupBox gb_ProjectNotes;
+        private System.Windows.Forms.GroupBox gb_KeyDates;
+        private System.Windows.Forms.GroupBox gb_ProjectDocuments;
     }
 }

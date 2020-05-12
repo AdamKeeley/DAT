@@ -149,6 +149,7 @@
             this.dgv_ProjectList.Margin = new System.Windows.Forms.Padding(2);
             this.dgv_ProjectList.Name = "dgv_ProjectList";
             this.dgv_ProjectList.ReadOnly = true;
+            this.dgv_ProjectList.RowHeadersVisible = false;
             this.dgv_ProjectList.RowTemplate.Height = 24;
             this.dgv_ProjectList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_ProjectList.Size = new System.Drawing.Size(972, 419);

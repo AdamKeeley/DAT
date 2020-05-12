@@ -26,19 +26,30 @@ namespace CMS
 
             /* TO DO
              * 
-             * Create Users form
-             * Create Add User form
-             * Create Documents form
+             * Create User 
+             * Search User
+             * Add User to Project 
+             * Add Project to User 
+             * 
+             * Documents 
              *     - incorporate some sort of 'timeline' of submitted documents?
-             * Create Platform form
+             * Platform 
              *     - tabs for various platforms?
              *     - or all on one screen?
-             * Combine all into single form with sub forms or create navigation form?
+             *     
+             * Combine everything into single form with sub forms or create navigation form?
              * 	    
              */
 
             /* DONE
              * 
+             * Added Research Team DGV to frm_Project show users assigned to project, can drill down into 
+             * Users form that can update details and add notes, shows all projects user is member of and can drill down into them.
+             * Logical deletes only occur if inserts are successful
+             * ----------------------------------------
+             * Only researchers listed as LeadApplicants or PI listed in frm_ProjectAll comboboxes
+             *  - sorted and distinct 
+             * ----------------------------------------
              * Normalised Users to seperate SQL table
              * Updated frm_ProjectAll, frm_Project and frm_ProjectAdd to handle normalised user table
              * 
@@ -46,7 +57,7 @@ namespace CMS
              * 
              * Created Users Class
              *  - Method to fill User DataSet
-             * 
+             * ----------------------------------------
              * Nulls are handled better, allowing updates with empty fields
              * 
              * Created All Projects form

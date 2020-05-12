@@ -98,26 +98,45 @@ namespace CMS
                     //add tblUser DataTable to DataSet (ds_prj)
                     //qryGetUser adds a calculated field, FullName
                     SqlCommand qryGetLeadApplicant = new SqlCommand();
-                    qryGetLeadApplicant.CommandText = $"select UserID, LastName + ', ' + FirstName as FullName from [dbo].[tblUser] where [ValidTo] is null order by LastName";
+                    qryGetLeadApplicant.CommandText = $"select UserNumber, LastName + ', ' + FirstName as FullName from [dbo].[tblUser] where [ValidTo] is null order by LastName";
                     qryGetLeadApplicant.Connection = connection;
                     da_Project.SelectCommand = qryGetLeadApplicant;
                     da_Project.Fill(ds_prj, "tlkLeadApplicant");
                     //create a DataRelation (Project_LeadApplicant) to join tblUser to tblProjects.LeadApplicant
                     ds_prj.Relations.Add("Project_LeadApplicant"
-                        , ds_prj.Tables["tlkLeadApplicant"].Columns["userID"]                //parent
+                        , ds_prj.Tables["tlkLeadApplicant"].Columns["UserNumber"]                //parent
                         , ds_prj.Tables["tblProjects"].Columns["LeadApplicant"]);   //child
 
                     //add tblUser DataTable to DataSet (ds_prj)
                     //qryGetUser adds a calculated field, FullName
                     SqlCommand qryGetPI = new SqlCommand();
-                    qryGetPI.CommandText = $"select UserID, LastName + ', ' + FirstName as FullName from [dbo].[tblUser] where [ValidTo] is null order by LastName";
+                    qryGetPI.CommandText = $"select UserNumber, LastName + ', ' + FirstName as FullName from [dbo].[tblUser] where [ValidTo] is null order by LastName";
                     qryGetPI.Connection = connection;
                     da_Project.SelectCommand = qryGetPI;
                     da_Project.Fill(ds_prj, "tlkPI");
                     //create a DataRelation (Project_User) to join tblUser to tblProjects.PI
                     ds_prj.Relations.Add("Project_PI"
-                        , ds_prj.Tables["tlkPI"].Columns["userID"]            //parent
+                        , ds_prj.Tables["tlkPI"].Columns["UserNumber"]            //parent
                         , ds_prj.Tables["tblProjects"].Columns["PI"]);          //child
+
+                    //add tblUserProject DataTable to DataSet (ds_usr)
+                    //DataRelation not needed, can just query DataTable directly using same ProjectNumber parameter
+                    SqlCommand qryGetUserProject = new SqlCommand();
+                    qryGetUserProject.CommandText = $"select * from [dbo].[tblUserProject] where [ValidTo] is null";
+                    qryGetUserProject.Connection = connection;
+                    da_Project.SelectCommand = qryGetUserProject;
+                    da_Project.Fill(ds_prj, "tblUserProject");
+                    //add tblUser DataTable to DataSet (ds_prj)
+                    SqlCommand qryGetUser = new SqlCommand();
+                    qryGetUser.CommandText = $"select *, [LastName] + ', ' + [FirstName] as FullName from [dbo].[tblUser] where [ValidTo] is null order by [LastName], [FirstName], [UserID]";
+                    qryGetUser.Connection = connection;
+                    da_Project.SelectCommand = qryGetUser;
+                    da_Project.Fill(ds_prj, "tblUser");
+                    //datarelation
+                    ds_prj.Relations.Add("UserProject_User"
+                        , ds_prj.Tables["tblUser"].Columns["UserNumber"]                //Parent
+                        , ds_prj.Tables["tblUserProject"].Columns["UserNumber"]);       //Child
+
                 }
             }
             catch (Exception ex)
@@ -142,23 +161,23 @@ namespace CMS
         /// <returns></returns>
         public List<object> getProjectToList(string pNumber, DataSet ds_Project)
         {
-            int pID;
-            string pName;
-            int? pStage = null;
-            int? pClassification = null;
-            int? pDATRAG = null;
-            DateTime? pProjectedStartDate = null;
-            DateTime? pProjectedEndDate = null;
-            DateTime? pStartDate = null;
-            DateTime? pEndDate = null;
-            int? pPI = null;
-            int? pLeadApplicant = null;
-            int? pFaculty = null;
-            bool pDSPT;
-            bool pISO;
-            bool pAzure;
-            bool pIRC;
-            bool pSEED;
+            int         pID;
+            string      pName;
+            int?        pStage              = null;
+            int?        pClassification     = null;
+            int?        pDATRAG             = null;
+            DateTime?   pProjectedStartDate = null;
+            DateTime?   pProjectedEndDate   = null;
+            DateTime?   pStartDate          = null;
+            DateTime?   pEndDate            = null;
+            int?        pPI                 = null;
+            int?        pLeadApplicant      = null;
+            int?        pFaculty            = null;
+            bool        pDSPT;
+            bool        pISO;
+            bool        pAzure;
+            bool        pIRC;
+            bool        pSEED;
 
             List<object> lst_Project = new List<object>();
 
@@ -306,6 +325,7 @@ namespace CMS
         /// <summary>
         /// Method to insert a new project record into dbo.tblProject.
         /// Takes all field values as parameters, adds them to a SQL query string as parameters then executes an insert.
+        /// Returns a boolean true on success, defaults to false
         /// </summary>
         /// <param name="Number"></param>
         /// <param name="Name"></param>
@@ -324,10 +344,12 @@ namespace CMS
         /// <param name="Azure"></param>
         /// <param name="IRC"></param>
         /// <param name="SEED"></param>
-        public void insertProject(string Number, string Name, int? Stage, int? Classification, int? DATRAG
+        public bool insertProject(string Number, string Name, int? Stage, int? Classification, int? DATRAG
             , DateTime? ProjectedStartDate, DateTime? ProjectedEndDate, DateTime? StartDate, DateTime? EndDate
             , int? PI, int? LeadApplicant, int? Faculty, bool DSPT, bool ISO27001, bool Azure, bool IRC, bool SEED)
         {
+            bool success = false;
+
             try
             {
                 SQL_Stuff conString = new SQL_Stuff();
@@ -390,6 +412,8 @@ namespace CMS
                     connection.Open();
                     qryInsertProject.ExecuteNonQuery();
                     MessageBox.Show($"Project details updated for {Number}");
+
+                    success = true;
                 }
             }
             catch (Exception ex)
@@ -397,6 +421,7 @@ namespace CMS
                 MessageBox.Show("Failed to insert new project record" + Environment.NewLine + ex);
                 //throw;
             }
+            return success;
         }
 
         /// <summary>
@@ -470,7 +495,7 @@ namespace CMS
         }
 
         /// <summary>
-        /// Method to add a "L" and leading zeroes to an integer.
+        /// Method to add a "P" and leading zeroes to an integer.
         /// Used to generate new project numbers.
         /// </summary>
         /// <param name="pNumInt"></param>

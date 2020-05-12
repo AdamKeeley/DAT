@@ -67,6 +67,12 @@
     <Compile Include="frm_ProjectAll.Designer.cs">
       <DependentUpon>frm_ProjectAll.cs</DependentUpon>
     </Compile>
+    <Compile Include="frm_User.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_User.Designer.cs">
+      <DependentUpon>frm_User.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -90,6 +96,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frm_ProjectAll.resx">
       <DependentUpon>frm_ProjectAll.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_User.resx">
+      <DependentUpon>frm_User.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

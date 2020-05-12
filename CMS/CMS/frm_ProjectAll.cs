@@ -39,7 +39,41 @@ namespace CMS
                 //Setting DataSource and SelectedIndex triggers the TextChanged event, which is set to run 
                 //searchItemAdded method. This boolean flag prevents the method from running fillDataGridView 12 times
                 textChanged = false;
-                
+
+                //Only display names that are present in the LeadApplicant column of the Project table
+                DataTable dt_LeadApplicants = new DataTable();
+                dt_LeadApplicants.Columns.Add("UserID");
+                dt_LeadApplicants.Columns.Add("FullName");
+                dt_LeadApplicants.DefaultView.Sort = "FullName";
+                DataRow lRow;
+                foreach (DataRow pRow in ds_Project.Tables["tblProjects"].Select("[LeadApplicant] is not null"))
+                {
+                    lRow = dt_LeadApplicants.NewRow();
+                    lRow["UserID"] = pRow["LeadApplicant"];
+                    foreach (DataRow r in pRow.GetParentRows("Project_LeadApplicant"))
+                    {
+                        lRow["FullName"] = r["FullName"];
+                    }
+                    dt_LeadApplicants.Rows.Add(lRow);
+                }
+
+                //Only display names that are present in the PI column of the Project table
+                DataTable dt_PIs = new DataTable();
+                dt_PIs.Columns.Add("UserID");
+                dt_PIs.Columns.Add("FullName");
+                dt_PIs.DefaultView.Sort = "FullName";
+                DataRow piRow;
+                foreach (DataRow pRow in ds_Project.Tables["tblProjects"].Select("[PI] is not null"))
+                {
+                    piRow = dt_PIs.NewRow();
+                    piRow["UserID"] = pRow["PI"];
+                    foreach (DataRow r in pRow.GetParentRows("Project_PI"))
+                    {
+                        piRow["FullName"] = r["FullName"];
+                    }
+                    dt_PIs.Rows.Add(piRow);
+                }
+
                 //set controls values
                 cb_DATRAG.DataSource = ds_Project.Tables["tlkRAG"];
                 cb_DATRAG.ValueMember = "ragID";
@@ -53,11 +87,11 @@ namespace CMS
                 cb_pClassification.ValueMember = "classificationID";
                 cb_pClassification.DisplayMember = "classificationDescription";
                 cb_pClassification.SelectedIndex = -1;
-                cb_LeadApplicant.DataSource = ds_Project.Tables["tlkLeadApplicant"];
+                cb_LeadApplicant.DataSource = dt_LeadApplicants.DefaultView.ToTable(true, "UserID", "FullName"); 
                 cb_LeadApplicant.ValueMember = "UserID";
                 cb_LeadApplicant.DisplayMember = "FullName";
                 cb_LeadApplicant.SelectedIndex = -1;
-                cb_PI.DataSource = ds_Project.Tables["tlkPI"];
+                cb_PI.DataSource = dt_PIs.DefaultView.ToTable(true, "UserID", "FullName"); 
                 cb_PI.ValueMember = "UserID";
                 cb_PI.DisplayMember = "FullName";
                 cb_PI.SelectedIndex = -1;
@@ -176,7 +210,7 @@ namespace CMS
             dgv_ProjectList.Sort(dgv_ProjectList.Columns["Project Number"], ListSortDirection.Descending);
 
             dgv_ProjectList.Columns["Project Number"].Width = 50;
-            dgv_ProjectList.Columns["Project Name"].Width = 240;
+            dgv_ProjectList.Columns["Project Name"].Width = 260;
             dgv_ProjectList.Columns["Stage"].Width = 70;
             dgv_ProjectList.Columns["Classification"].Width = 90;
             dgv_ProjectList.Columns["DATRAG"].Width = 60;

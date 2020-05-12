@@ -24,6 +24,7 @@ namespace CMS
             fillProjectsDataSet();
             fillCurrentProjectVariables(pNumber);
             setProjectDetails(pNumber);
+            setProjectUsers(pNumber);
             setProjectNotes(pNumber);
             setTabIndex();
         }
@@ -60,6 +61,7 @@ namespace CMS
         bool        current_pAzure;
         bool        current_IRC;
         bool        current_SEED;
+
 
         /// <summary>
         /// Creates a new class object from Project class and calls method getProjectsDataSet() to populate DataSet in this class (ds_Project).
@@ -119,7 +121,6 @@ namespace CMS
         /// <summary>
         /// Method to get project details from class DataSet (ds_Project) and assign values to form controls.
         /// Combo boxes are assigned DataSources, Value & Display members to populate drop down options.
-        /// Finally uses method from this class (setPlatformGroupBoxColour) to set colour of platform indicator.
         /// </summary>
         /// <param name="pNumber"></param>
         private void setProjectDetails(string pNumber)
@@ -158,13 +159,13 @@ namespace CMS
                 mtb_pStartDateValue.Text                = current_pStartDate.ToString();
                 mtb_pEndDateValue.Text                  = current_pEndDate.ToString();
                 cb_LeadApplicant.DataSource             = ds_Project.Tables["tlkLeadApplicant"];
-                cb_LeadApplicant.ValueMember            = "UserID";
+                cb_LeadApplicant.ValueMember            = "UserNumber";
                 cb_LeadApplicant.DisplayMember          = "FullName";
                 if (current_pLeadApplicant == null)
                     cb_LeadApplicant.SelectedIndex = -1;
                 else cb_LeadApplicant.SelectedValue     = current_pLeadApplicant;
                 cb_PI.DataSource = ds_Project.Tables["tlkPI"];
-                cb_PI.ValueMember = "UserID";
+                cb_PI.ValueMember = "UserNumber";
                 cb_PI.DisplayMember = "FullName";
                 if (current_pPI == null)
                     cb_PI.SelectedIndex = -1;
@@ -186,7 +187,7 @@ namespace CMS
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Method setProjectDetails of class frm_Projects has failed" + Environment.NewLine + ex);
+                MessageBox.Show("Method setProjectDetails of class frm_Project has failed" + Environment.NewLine + ex);
                 //throw;
             }
         }
@@ -219,11 +220,38 @@ namespace CMS
             dgv_pNotes.DataSource = dt_dgv_pNotes;
 
             //format DataGridView (dgv_pNotes) column widths etc.
-            dgv_pNotes.Columns["Note"].Width = 290;
+            dgv_pNotes.Columns["Note"].Width = 330;
             dgv_pNotes.Columns["Created Date"].Width = 80;
             dgv_pNotes.Columns["Created By"].Width = 80;
             dgv_pNotes.Columns["Note"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             dgv_pNotes.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dgv_pNotes.Sort(dgv_pNotes.Columns["Created Date"], ListSortDirection.Descending);
+        }
+
+        private void setProjectUsers(string pNumber)
+        {
+            //populate DataGridView (dgv_ProjectUsers) from DataTable (ds_Project.Tables["tblProjectNotes"])
+            //create new DataTable (dt_dgv_pUsers) that just contains columns of interest
+            DataTable dt_dgv_pUsers = new DataTable();
+            dt_dgv_pUsers.Columns.Add("Full Name");
+            dt_dgv_pUsers.Columns.Add("User Number");
+
+            //iterate through each user in source DataTable and add to newly created DataTable
+            DataRow row;
+            foreach (DataRow uRow in ds_Project.Tables["tblUserProject"].Select($"ProjectNumber = '{pNumber}'"))
+            {
+                row = dt_dgv_pUsers.NewRow();
+                foreach (DataRow u in uRow.GetParentRows("UserProject_User"))
+                {
+                    row["Full Name"] = (string)u["FullName"];
+                    row["User Number"] = (int)u["UserNumber"];
+                }
+                dt_dgv_pUsers.Rows.Add(row);
+            }
+            dgv_ProjectUsers.DataSource = dt_dgv_pUsers;
+            dgv_ProjectUsers.Sort(dgv_ProjectUsers.Columns["Full Name"], ListSortDirection.Ascending);
+            dgv_ProjectUsers.Columns["User Number"].Visible = false;
+            dgv_ProjectUsers.Columns["Full Name"].Width = 155;
         }
 
         private void setTabIndex()
@@ -433,16 +461,20 @@ namespace CMS
                 //check that record currently displayed is current record in database before updating anything
                 if (Projects.checkCurrentRecord(pNumber, current_pID) == true)
                 {
-                    //update existing project - first perform logical delete then insert new record
-                    Projects.deleteProject(current_pID);
-                    Projects.insertProject(pNumber, new_pName, new_pStage, new_pClassification, new_pDATRAG
+                    //update existing project - first perform insert new record, if success returned = true then logical delete
+                    if (Projects.insertProject(pNumber, new_pName, new_pStage, new_pClassification, new_pDATRAG
                         , new_pProjectedStartDate, new_pProjectedEndDate, new_pStartDate, new_pEndDate, new_pPI
-                        , new_pLeadApplicant, new_pFaculty, new_pDSPT, new_pISO, new_pAzure, new_IRC, new_SEED);
+                        , new_pLeadApplicant, new_pFaculty, new_pDSPT, new_pISO, new_pAzure, new_IRC, new_SEED))
+                    {
+                        Projects.deleteProject(current_pID);
+                    }
+                    
                     //refresh dataset (ds_Projects) and form variable and control values
                     fillProjectsDataSet();
                     fillCurrentProjectVariables(pNumber);
                     setProjectDetails(pNumber);
                     setProjectNotes(pNumber);
+                    setProjectUsers(pNumber);
                 }
             }
         }
@@ -498,6 +530,7 @@ namespace CMS
             fillCurrentProjectVariables(pNumber);
             setProjectDetails(pNumber);
             setProjectNotes(pNumber);
+            setProjectUsers(pNumber);
         }
 
         private void btn_ProjectCancel_Click(object sender, EventArgs e)
@@ -557,5 +590,25 @@ namespace CMS
             setProjectDetails(pNumber);
             setProjectNotes(pNumber);
         }
+
+        private void dgv_ProjectUsers_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int r = e.RowIndex;
+
+            if (r > -1)
+            {
+                try
+                {
+                    int UserNumber = Convert.ToInt32(dgv_ProjectUsers.Rows[r].Cells["User Number"].Value);
+                    frm_User User = new frm_User(UserNumber);
+                    User.Show();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Please double click on a data row to see user details." + Environment.NewLine + ex);
+                }
+            }
+        }
+
     }
 }
