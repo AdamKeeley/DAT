@@ -517,6 +517,35 @@ namespace CMS
             }
         }
 
+        private void removeProjectUser()
+        {
+            int rowCount = dgv_ProjectUsers.Rows.GetRowCount(DataGridViewElementStates.Selected);
+
+            if (rowCount > 0)
+            {
+                List<int> removedUsers = new List<int>();
+                for (int i = 0; i < rowCount; i++)
+                {
+                    int rowIndex = dgv_ProjectUsers.SelectedRows[i].Index;
+                    int UserNumber = Convert.ToInt32(dgv_ProjectUsers.Rows[rowIndex].Cells["User Number"].Value);
+                    string FullName = dgv_ProjectUsers.Rows[rowIndex].Cells["Full Name"].Value.ToString();
+
+                    User Users = new User();
+                    DialogResult removeProject = MessageBox.Show($"Remove {FullName} from project record?", "", MessageBoxButtons.YesNo);
+                    if (removeProject == DialogResult.Yes)
+                    {
+                        Users.deleteUserProject(UserNumber, current_pNumber);
+                        removedUsers.Add(rowIndex);
+                    }
+                }
+                foreach (int rowIndex in removedUsers)
+                {
+                    dgv_ProjectUsers.Rows.RemoveAt(rowIndex);
+                }
+            }
+        }
+
+
 
         private void btn_InsertProjectNote_Click(object sender, EventArgs e)
         {
@@ -561,6 +590,11 @@ namespace CMS
             frm_ProjectAdd ProjectAdd = new frm_ProjectAdd(ds_Project);
             ProjectAdd.FormClosing += new FormClosingEventHandler(this.ProjectAdd_FormClosing);
             ProjectAdd.Show();
+        }
+
+        private void btn_ProjectUserRemove_Click(object sender, EventArgs e)
+        {
+            removeProjectUser();
         }
 
         /// <summary>
@@ -609,6 +643,23 @@ namespace CMS
                 }
             }
         }
+
+        private void btn_ProjectUserAdd_Click(object sender, EventArgs e)
+        {
+            frm_ProjectUserAdd ProjectUserAdd = new frm_ProjectUserAdd(current_pNumber, ds_Project);
+            ProjectUserAdd.FormClosing += new FormClosingEventHandler(this.ProjectUserAdd_FormClosing);
+            ProjectUserAdd.Show();
+        }
+
+        private void ProjectUserAdd_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            fillProjectsDataSet();
+            fillCurrentProjectVariables(current_pNumber);
+            setProjectDetails(current_pNumber);
+            setProjectUsers(current_pNumber);
+            setProjectNotes(current_pNumber);
+        }
+
 
     }
 }

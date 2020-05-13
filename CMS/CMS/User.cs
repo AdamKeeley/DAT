@@ -280,7 +280,7 @@ namespace CMS
         {
             try
             {
-                //update ValidUntil field of current record of project (perform 'logical' delete)
+                //update ValidUntil field of current record of user (perform 'logical' delete)
                 SQL_Stuff conString = new SQL_Stuff();
                 using (SqlConnection connection = new SqlConnection(conString.getString()))
                 {
@@ -400,6 +400,80 @@ namespace CMS
                 MessageBox.Show("Failed to insert new project record" + Environment.NewLine + Environment.NewLine + ex);
             }
             return success;
+        }
+
+        public void deleteUserProject(int UserNumber, string ProjectNumber)
+        {
+            try
+            {
+                //update ValidUntil field of current record of UserProject (perform 'logical' delete)
+                SQL_Stuff conString = new SQL_Stuff();
+                using (SqlConnection connection = new SqlConnection(conString.getString()))
+                {
+                    SqlCommand qryRemoveUserProject = new SqlCommand();
+                    qryRemoveUserProject.Connection = connection;
+                    qryRemoveUserProject.CommandText = "update [dbo].[tblUserProject] set [ValidTo] = getdate() where [UserNumber] = @UserNumber and [ProjectNumber] = @ProjectNumber";
+                    qryRemoveUserProject.Parameters.Add("@UserNumber", SqlDbType.Int).Value = UserNumber;
+                    qryRemoveUserProject.Parameters.Add("@ProjectNumber", SqlDbType.VarChar,5).Value = ProjectNumber;
+                    connection.Open();
+                    qryRemoveUserProject.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to delete record" + Environment.NewLine + Environment.NewLine + ex);
+            }
+        }
+
+        public bool checkUserProject(int UserNumber, string ProjectNumber)
+        {
+            bool PK_NotPresent = true;
+
+            SQL_Stuff conString = new SQL_Stuff();
+            using (SqlConnection connection = new SqlConnection(conString.getString()))
+            {
+                SqlCommand qryUserProjectExists = new SqlCommand();
+                qryUserProjectExists.Connection = connection;
+                qryUserProjectExists.CommandText = "select count(*) from [dbo].[tblUserProject] "
+                    + "where [UserNumber] = @UserNumber and [ProjectNumber] = @ProjectNumber "
+                    + "and [ValidTo] is null";
+                qryUserProjectExists.Parameters.Add("@UserNumber", SqlDbType.Int).Value = UserNumber;
+                qryUserProjectExists.Parameters.Add("@ProjectNumber", SqlDbType.VarChar, 5).Value = ProjectNumber;
+                connection.Open();
+                int i = (int)qryUserProjectExists.ExecuteScalar();
+
+                if (i > 0)
+                {
+                    PK_NotPresent = false;
+                    MessageBox.Show("User already present on project.");
+                }
+            }
+
+            return PK_NotPresent;
+        }
+
+
+        public void insertUserProject(int UserNumber, string ProjectNumber)
+        {
+            try
+            {
+                //update ValidUntil field of current record of UserProject (perform 'logical' delete)
+                SQL_Stuff conString = new SQL_Stuff();
+                using (SqlConnection connection = new SqlConnection(conString.getString()))
+                {
+                    SqlCommand qryInsertUserProject = new SqlCommand();
+                    qryInsertUserProject.Connection = connection;
+                    qryInsertUserProject.CommandText = "insert into [dbo].[tblUserProject] ([UserNumber], [ProjectNumber]) values (@UserNumber, @ProjectNumber)";
+                    qryInsertUserProject.Parameters.Add("@UserNumber", SqlDbType.Int).Value = UserNumber;
+                    qryInsertUserProject.Parameters.Add("@ProjectNumber", SqlDbType.VarChar, 5).Value = ProjectNumber;
+                    connection.Open();
+                    qryInsertUserProject.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to add record" + Environment.NewLine + Environment.NewLine + ex);
+            }
         }
 
     }

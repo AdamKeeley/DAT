@@ -182,6 +182,7 @@ namespace CMS
             this.dgv_pNotes.ReadOnly = true;
             this.dgv_pNotes.RowHeadersVisible = false;
             this.dgv_pNotes.RowTemplate.Height = 24;
+            this.dgv_pNotes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_pNotes.Size = new System.Drawing.Size(494, 150);
             this.dgv_pNotes.TabIndex = 12;
             this.dgv_pNotes.TabStop = false;
@@ -558,6 +559,7 @@ namespace CMS
             this.dgv_ProjectUsers.ReadOnly = true;
             this.dgv_ProjectUsers.RowHeadersVisible = false;
             this.dgv_ProjectUsers.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.dgv_ProjectUsers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_ProjectUsers.Size = new System.Drawing.Size(155, 160);
             this.dgv_ProjectUsers.TabIndex = 41;
             this.dgv_ProjectUsers.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_ProjectUsers_CellDoubleClick);
@@ -570,6 +572,7 @@ namespace CMS
             this.btn_ProjectUserAdd.TabIndex = 42;
             this.btn_ProjectUserAdd.Text = "Add";
             this.btn_ProjectUserAdd.UseVisualStyleBackColor = true;
+            this.btn_ProjectUserAdd.Click += new System.EventHandler(this.btn_ProjectUserAdd_Click);
             // 
             // btn_ProjectUserRemove
             // 
@@ -579,6 +582,7 @@ namespace CMS
             this.btn_ProjectUserRemove.TabIndex = 43;
             this.btn_ProjectUserRemove.Text = "Remove";
             this.btn_ProjectUserRemove.UseVisualStyleBackColor = true;
+            this.btn_ProjectUserRemove.Click += new System.EventHandler(this.btn_ProjectUserRemove_Click);
             // 
             // gb_ProjectUsers
             // 

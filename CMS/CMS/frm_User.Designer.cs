@@ -443,6 +443,7 @@
             this.dgv_UserNotes.ReadOnly = true;
             this.dgv_UserNotes.RowHeadersVisible = false;
             this.dgv_UserNotes.RowTemplate.Height = 24;
+            this.dgv_UserNotes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_UserNotes.Size = new System.Drawing.Size(494, 150);
             this.dgv_UserNotes.TabIndex = 60;
             this.dgv_UserNotes.TabStop = false;
@@ -468,6 +469,7 @@
             this.dgv_UserProjects.Name = "dgv_UserProjects";
             this.dgv_UserProjects.ReadOnly = true;
             this.dgv_UserProjects.RowHeadersVisible = false;
+            this.dgv_UserProjects.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_UserProjects.Size = new System.Drawing.Size(170, 115);
             this.dgv_UserProjects.TabIndex = 41;
             this.dgv_UserProjects.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_UserProjects_CellDoubleClick);
@@ -480,6 +482,7 @@
             this.btn_ProjectUserRemove.TabIndex = 43;
             this.btn_ProjectUserRemove.Text = "Remove";
             this.btn_ProjectUserRemove.UseVisualStyleBackColor = true;
+            this.btn_ProjectUserRemove.Click += new System.EventHandler(this.btn_ProjectUserRemove_Click);
             // 
             // btn_ProjectUserAdd
             // 
@@ -489,6 +492,7 @@
             this.btn_ProjectUserAdd.TabIndex = 42;
             this.btn_ProjectUserAdd.Text = "Add";
             this.btn_ProjectUserAdd.UseVisualStyleBackColor = true;
+            this.btn_ProjectUserAdd.Click += new System.EventHandler(this.btn_ProjectUserAdd_Click);
             // 
             // btn_UserRefresh
             // 

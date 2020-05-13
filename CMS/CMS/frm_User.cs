@@ -508,6 +508,33 @@ namespace CMS
             }
         }
 
+        private void removeUserProject()
+        {
+            int rowCount = dgv_UserProjects.Rows.GetRowCount(DataGridViewElementStates.Selected);
+
+            if (rowCount > 0)
+            {
+                List<int> removedProjects = new List<int>();
+                for (int i = 0; i < rowCount; i++)
+                {
+                    int rowIndex            = dgv_UserProjects.SelectedRows[i].Index;
+                    string ProjectNumber    = dgv_UserProjects.Rows[rowIndex].Cells["Project Number"].Value.ToString();
+
+                    User Users = new User();
+                    DialogResult removeProject = MessageBox.Show($"Remove project {ProjectNumber} from user record?", "", MessageBoxButtons.YesNo);
+                    if (removeProject == DialogResult.Yes)
+                    {
+                        Users.deleteUserProject(current_UserNumber, ProjectNumber);
+                        removedProjects.Add(rowIndex);
+                    }
+                }
+                foreach (int rowIndex in removedProjects)
+                {
+                    dgv_UserProjects.Rows.RemoveAt(rowIndex);
+                }
+            }
+        }
+
 
         private void btn_InsertUserNote_Click(object sender, EventArgs e)
         {
@@ -541,6 +568,11 @@ namespace CMS
             this.Close();
         }
 
+        private void btn_ProjectUserRemove_Click(object sender, EventArgs e)
+        {
+            removeUserProject();
+        }
+
         private void dgv_UserProjects_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             int r = e.RowIndex;
@@ -558,6 +590,21 @@ namespace CMS
                     MessageBox.Show("Please double click on a data row to see project details.");
                 }
             }
+        }
+
+        private void btn_ProjectUserAdd_Click(object sender, EventArgs e)
+        {
+            frm_UserProjectAdd UserProjectAdd = new frm_UserProjectAdd(current_UserNumber, ds_User);
+            UserProjectAdd.FormClosing += new FormClosingEventHandler(this.UserProjectAdd_FormClosing);
+            UserProjectAdd.Show();
+        }
+
+        private void UserProjectAdd_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+            fillUsersDataSet();
+            setUserProjects(current_UserNumber);
+
         }
 
     }
