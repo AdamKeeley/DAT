@@ -85,7 +85,7 @@ namespace CMS
                     //create a DataRelation (Project_Faculty) to join tlkFaculty to tblProjects
                     ds_prj.Relations.Add("Project_Faculty"
                         , ds_prj.Tables["tlkFaculty"].Columns["facultyID"]          //parent
-                        , ds_prj.Tables["tblProjects"].Columns["Faculty"]);  //child
+                        , ds_prj.Tables["tblProjects"].Columns["Faculty"]);         //child
 
                     //add tblProjectNotes DataTable to DataSet (ds_prj)
                     //DataRelation not needed, can just query DataTable directly using same pNumber parameter
@@ -94,6 +94,49 @@ namespace CMS
                     qryGetNotes.Connection = connection;
                     da_Project.SelectCommand = qryGetNotes;
                     da_Project.Fill(ds_prj, "tblProjectNotes");
+
+                    //add tblUser DataTable to DataSet (ds_prj)
+                    //qryGetUser adds a calculated field, FullName
+                    SqlCommand qryGetLeadApplicant = new SqlCommand();
+                    qryGetLeadApplicant.CommandText = $"select UserNumber, LastName + ', ' + FirstName as FullName from [dbo].[tblUser] where [ValidTo] is null order by LastName";
+                    qryGetLeadApplicant.Connection = connection;
+                    da_Project.SelectCommand = qryGetLeadApplicant;
+                    da_Project.Fill(ds_prj, "tlkLeadApplicant");
+                    //create a DataRelation (Project_LeadApplicant) to join tblUser to tblProjects.LeadApplicant
+                    ds_prj.Relations.Add("Project_LeadApplicant"
+                        , ds_prj.Tables["tlkLeadApplicant"].Columns["UserNumber"]                //parent
+                        , ds_prj.Tables["tblProjects"].Columns["LeadApplicant"]);   //child
+
+                    //add tblUser DataTable to DataSet (ds_prj)
+                    //qryGetUser adds a calculated field, FullName
+                    SqlCommand qryGetPI = new SqlCommand();
+                    qryGetPI.CommandText = $"select UserNumber, LastName + ', ' + FirstName as FullName from [dbo].[tblUser] where [ValidTo] is null order by LastName";
+                    qryGetPI.Connection = connection;
+                    da_Project.SelectCommand = qryGetPI;
+                    da_Project.Fill(ds_prj, "tlkPI");
+                    //create a DataRelation (Project_User) to join tblUser to tblProjects.PI
+                    ds_prj.Relations.Add("Project_PI"
+                        , ds_prj.Tables["tlkPI"].Columns["UserNumber"]            //parent
+                        , ds_prj.Tables["tblProjects"].Columns["PI"]);          //child
+
+                    //add tblUserProject DataTable to DataSet (ds_usr)
+                    //DataRelation not needed, can just query DataTable directly using same ProjectNumber parameter
+                    SqlCommand qryGetUserProject = new SqlCommand();
+                    qryGetUserProject.CommandText = $"select * from [dbo].[tblUserProject] where [ValidTo] is null";
+                    qryGetUserProject.Connection = connection;
+                    da_Project.SelectCommand = qryGetUserProject;
+                    da_Project.Fill(ds_prj, "tblUserProject");
+                    //add tblUser DataTable to DataSet (ds_prj)
+                    SqlCommand qryGetUser = new SqlCommand();
+                    qryGetUser.CommandText = $"select *, [LastName] + ', ' + [FirstName] as FullName from [dbo].[tblUser] where [ValidTo] is null order by [LastName], [FirstName], [UserID]";
+                    qryGetUser.Connection = connection;
+                    da_Project.SelectCommand = qryGetUser;
+                    da_Project.Fill(ds_prj, "tblUser");
+                    //datarelation
+                    ds_prj.Relations.Add("UserProject_User"
+                        , ds_prj.Tables["tblUser"].Columns["UserNumber"]                //Parent
+                        , ds_prj.Tables["tblUserProject"].Columns["UserNumber"]);       //Child
+
                 }
             }
             catch (Exception ex)
@@ -118,23 +161,23 @@ namespace CMS
         /// <returns></returns>
         public List<object> getProjectToList(string pNumber, DataSet ds_Project)
         {
-            int pID;
-            string pName;
-            int? pStage = null;
-            int? pClassification = null;
-            int? pDATRAG = null;
-            DateTime? pProjectedStartDate = null;
-            DateTime? pProjectedEndDate = null;
-            DateTime? pStartDate = null;
-            DateTime? pEndDate = null;
-            string pPI;
-            string pLeadApplicant;
-            int? pFaculty = null;
-            bool pDSPT;
-            bool pISO;
-            bool pAzure;
-            bool pIRC;
-            bool pSEED;
+            int         pID;
+            string      pName;
+            int?        pStage              = null;
+            int?        pClassification     = null;
+            int?        pDATRAG             = null;
+            DateTime?   pProjectedStartDate = null;
+            DateTime?   pProjectedEndDate   = null;
+            DateTime?   pStartDate          = null;
+            DateTime?   pEndDate            = null;
+            int?        pPI                 = null;
+            int?        pLeadApplicant      = null;
+            int?        pFaculty            = null;
+            bool        pDSPT;
+            bool        pISO;
+            bool        pAzure;
+            bool        pIRC;
+            bool        pSEED;
 
             List<object> lst_Project = new List<object>();
 
@@ -158,19 +201,12 @@ namespace CMS
                 //populate DataRow to output with values from pRow
                 pID = (int)pRow["pID"];
                 pName = pRow["ProjectName"].ToString();
-                //use DataRelation (Project_Stage) to return string description of stage, not int stored value
-                foreach (DataRow sRow in pRow.GetParentRows("Project_Stage"))
-                {
-                    pStage = (int?)sRow["StageID"];
-                }
-                foreach (DataRow sRow in pRow.GetParentRows("Project_Classification"))
-                {
-                    pClassification = (int?)sRow["classificationID"];
-                }
-                foreach (DataRow sRow in pRow.GetParentRows("Project_DATRAG"))
-                {
-                    pDATRAG = (int?)sRow["ragID"];
-                }
+                if (pRow["Stage"].ToString().Length > 0)
+                    pStage = (int?)pRow["Stage"];
+                if (pRow["Classification"].ToString().Length > 0)
+                    pClassification = (int?)pRow["Classification"];
+                if (pRow["DATRAG"].ToString().Length > 0)
+                    pDATRAG = (int?)pRow["DATRAG"];
                 if (pRow["ProjectedStartDate"].ToString().Length > 0)
                     pProjectedStartDate = (DateTime)pRow["ProjectedStartDate"];
                 if (pRow["ProjectedEndDate"].ToString().Length > 0)
@@ -179,12 +215,12 @@ namespace CMS
                     pStartDate = (DateTime)pRow["StartDate"];
                 if (pRow["EndDate"].ToString().Length > 0)
                     pEndDate = (DateTime)pRow["EndDate"];
-                pPI = pRow["PI"].ToString();
-                pLeadApplicant = pRow["LeadApplicant"].ToString();
-                foreach (DataRow sRow in pRow.GetParentRows("Project_Faculty"))
-                {
-                    pFaculty = (int?)sRow["facultyID"];
-                }
+                if (pRow["PI"].ToString().Length > 0)
+                    pPI = (int?)pRow["PI"];
+                if (pRow["LeadApplicant"].ToString().Length > 0)
+                    pLeadApplicant = (int?)pRow["LeadApplicant"];
+                if (pRow["Faculty"].ToString().Length > 0)
+                    pFaculty = (int?)pRow["Faculty"];
                 pDSPT = (bool)pRow["DSPT"];
                 pISO = (bool)pRow["ISO27001"];
                 pAzure = (bool)pRow["Azure"];
@@ -289,6 +325,7 @@ namespace CMS
         /// <summary>
         /// Method to insert a new project record into dbo.tblProject.
         /// Takes all field values as parameters, adds them to a SQL query string as parameters then executes an insert.
+        /// Returns a boolean true on success, defaults to false
         /// </summary>
         /// <param name="Number"></param>
         /// <param name="Name"></param>
@@ -307,10 +344,12 @@ namespace CMS
         /// <param name="Azure"></param>
         /// <param name="IRC"></param>
         /// <param name="SEED"></param>
-        public void insertProject(string Number, string Name, int? Stage, int? Classification, int? DATRAG
+        public bool insertProject(string Number, string Name, int? Stage, int? Classification, int? DATRAG
             , DateTime? ProjectedStartDate, DateTime? ProjectedEndDate, DateTime? StartDate, DateTime? EndDate
-            , string PI, string LeadApplicant, int? Faculty, bool DSPT, bool ISO27001, bool Azure, bool IRC, bool SEED)
+            , int? PI, int? LeadApplicant, int? Faculty, bool DSPT, bool ISO27001, bool Azure, bool IRC, bool SEED)
         {
+            bool success = false;
+
             try
             {
                 SQL_Stuff conString = new SQL_Stuff();
@@ -351,8 +390,15 @@ namespace CMS
                     SqlParameter param_EndDate = new SqlParameter("@EndDate", EndDate == null ? (object)DBNull.Value : EndDate);
                     param_EndDate.IsNullable = true;
                     qryInsertProject.Parameters.Add(param_EndDate);
-                    qryInsertProject.Parameters.Add("@PI", SqlDbType.VarChar, 60).Value = PI;
-                    qryInsertProject.Parameters.Add("@LeadApplicant", SqlDbType.VarChar, 60).Value = LeadApplicant;
+
+                    SqlParameter param_LeadApplicant = new SqlParameter("@LeadApplicant", LeadApplicant == null ? (object)DBNull.Value : LeadApplicant);
+                    param_LeadApplicant.IsNullable = true;
+                    qryInsertProject.Parameters.Add(param_LeadApplicant);
+
+                    SqlParameter param_PI = new SqlParameter("@PI", PI == null ? (object)DBNull.Value : PI);
+                    param_PI.IsNullable = true;
+                    qryInsertProject.Parameters.Add(param_PI);
+
                     SqlParameter param_Faculty = new SqlParameter("@Faculty", Faculty == null ? (object)DBNull.Value : Faculty);
                     param_Faculty.IsNullable = true;
                     qryInsertProject.Parameters.Add(param_Faculty);
@@ -365,6 +411,9 @@ namespace CMS
                     //open connection to database, run query and close connection
                     connection.Open();
                     qryInsertProject.ExecuteNonQuery();
+                    MessageBox.Show($"Project details updated for {Number}");
+
+                    success = true;
                 }
             }
             catch (Exception ex)
@@ -372,6 +421,7 @@ namespace CMS
                 MessageBox.Show("Failed to insert new project record" + Environment.NewLine + ex);
                 //throw;
             }
+            return success;
         }
 
         /// <summary>
@@ -445,7 +495,7 @@ namespace CMS
         }
 
         /// <summary>
-        /// Method to add a "L" and leading zeroes to an integer.
+        /// Method to add a "P" and leading zeroes to an integer.
         /// Used to generate new project numbers.
         /// </summary>
         /// <param name="pNumInt"></param>

@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.lbl_LeadApplicant = new System.Windows.Forms.Label();
-            this.tb_pLeadApplicantValue = new System.Windows.Forms.TextBox();
             this.btn_ClearSearch = new System.Windows.Forms.Button();
             this.cb_Faculty = new System.Windows.Forms.ComboBox();
             this.lbl_Faculty = new System.Windows.Forms.Label();
@@ -40,12 +39,13 @@
             this.btn_NewProject = new System.Windows.Forms.Button();
             this.dgv_ProjectList = new System.Windows.Forms.DataGridView();
             this.lbl_pPI = new System.Windows.Forms.Label();
-            this.tb_pPIValue = new System.Windows.Forms.TextBox();
             this.cb_pStage = new System.Windows.Forms.ComboBox();
             this.lbl_pStage = new System.Windows.Forms.Label();
             this.tb_pNameValue = new System.Windows.Forms.TextBox();
             this.lbl_pName = new System.Windows.Forms.Label();
             this.btn_Refresh = new System.Windows.Forms.Button();
+            this.cb_LeadApplicant = new System.Windows.Forms.ComboBox();
+            this.cb_PI = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ProjectList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,15 +58,6 @@
             this.lbl_LeadApplicant.Size = new System.Drawing.Size(78, 13);
             this.lbl_LeadApplicant.TabIndex = 67;
             this.lbl_LeadApplicant.Text = "Lead Applicant";
-            // 
-            // tb_pLeadApplicantValue
-            // 
-            this.tb_pLeadApplicantValue.Location = new System.Drawing.Point(518, 56);
-            this.tb_pLeadApplicantValue.Margin = new System.Windows.Forms.Padding(2);
-            this.tb_pLeadApplicantValue.Name = "tb_pLeadApplicantValue";
-            this.tb_pLeadApplicantValue.Size = new System.Drawing.Size(173, 20);
-            this.tb_pLeadApplicantValue.TabIndex = 68;
-            this.tb_pLeadApplicantValue.TextChanged += new System.EventHandler(this.searchItemAdded);
             // 
             // btn_ClearSearch
             // 
@@ -87,7 +78,7 @@
             this.cb_Faculty.Name = "cb_Faculty";
             this.cb_Faculty.Size = new System.Drawing.Size(173, 21);
             this.cb_Faculty.TabIndex = 65;
-            this.cb_Faculty.SelectionChangeCommitted += new System.EventHandler(this.searchItemAdded);
+            this.cb_Faculty.TextChanged += new System.EventHandler(this.searchItemAdded);
             // 
             // lbl_Faculty
             // 
@@ -107,7 +98,7 @@
             this.cb_DATRAG.Name = "cb_DATRAG";
             this.cb_DATRAG.Size = new System.Drawing.Size(76, 21);
             this.cb_DATRAG.TabIndex = 61;
-            this.cb_DATRAG.SelectionChangeCommitted += new System.EventHandler(this.searchItemAdded);
+            this.cb_DATRAG.TextChanged += new System.EventHandler(this.searchItemAdded);
             // 
             // lbl_DATRAG
             // 
@@ -136,7 +127,7 @@
             this.cb_pClassification.Name = "cb_pClassification";
             this.cb_pClassification.Size = new System.Drawing.Size(124, 21);
             this.cb_pClassification.TabIndex = 57;
-            this.cb_pClassification.SelectionChangeCommitted += new System.EventHandler(this.searchItemAdded);
+            this.cb_pClassification.TextChanged += new System.EventHandler(this.searchItemAdded);
             // 
             // btn_NewProject
             // 
@@ -158,6 +149,7 @@
             this.dgv_ProjectList.Margin = new System.Windows.Forms.Padding(2);
             this.dgv_ProjectList.Name = "dgv_ProjectList";
             this.dgv_ProjectList.ReadOnly = true;
+            this.dgv_ProjectList.RowHeadersVisible = false;
             this.dgv_ProjectList.RowTemplate.Height = 24;
             this.dgv_ProjectList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_ProjectList.Size = new System.Drawing.Size(972, 419);
@@ -175,15 +167,6 @@
             this.lbl_pPI.TabIndex = 42;
             this.lbl_pPI.Text = "Principal Investigator";
             // 
-            // tb_pPIValue
-            // 
-            this.tb_pPIValue.Location = new System.Drawing.Point(518, 80);
-            this.tb_pPIValue.Margin = new System.Windows.Forms.Padding(2);
-            this.tb_pPIValue.Name = "tb_pPIValue";
-            this.tb_pPIValue.Size = new System.Drawing.Size(173, 20);
-            this.tb_pPIValue.TabIndex = 44;
-            this.tb_pPIValue.TextChanged += new System.EventHandler(this.searchItemAdded);
-            // 
             // cb_pStage
             // 
             this.cb_pStage.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
@@ -194,7 +177,7 @@
             this.cb_pStage.Name = "cb_pStage";
             this.cb_pStage.Size = new System.Drawing.Size(124, 21);
             this.cb_pStage.TabIndex = 43;
-            this.cb_pStage.SelectionChangeCommitted += new System.EventHandler(this.searchItemAdded);
+            this.cb_pStage.TextChanged += new System.EventHandler(this.searchItemAdded);
             // 
             // lbl_pStage
             // 
@@ -235,14 +218,37 @@
             this.btn_Refresh.UseVisualStyleBackColor = true;
             this.btn_Refresh.Click += new System.EventHandler(this.refreshPage);
             // 
+            // cb_LeadApplicant
+            // 
+            this.cb_LeadApplicant.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.cb_LeadApplicant.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cb_LeadApplicant.FormattingEnabled = true;
+            this.cb_LeadApplicant.Location = new System.Drawing.Point(518, 56);
+            this.cb_LeadApplicant.Name = "cb_LeadApplicant";
+            this.cb_LeadApplicant.Size = new System.Drawing.Size(173, 21);
+            this.cb_LeadApplicant.TabIndex = 70;
+            this.cb_LeadApplicant.TextChanged += new System.EventHandler(this.searchItemAdded);
+            // 
+            // cb_PI
+            // 
+            this.cb_PI.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.cb_PI.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cb_PI.FormattingEnabled = true;
+            this.cb_PI.Location = new System.Drawing.Point(519, 80);
+            this.cb_PI.Name = "cb_PI";
+            this.cb_PI.Size = new System.Drawing.Size(173, 21);
+            this.cb_PI.TabIndex = 71;
+            this.cb_PI.TextChanged += new System.EventHandler(this.searchItemAdded);
+            // 
             // frm_ProjectAll
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(994, 561);
+            this.Controls.Add(this.cb_PI);
+            this.Controls.Add(this.cb_LeadApplicant);
             this.Controls.Add(this.btn_Refresh);
             this.Controls.Add(this.lbl_LeadApplicant);
-            this.Controls.Add(this.tb_pLeadApplicantValue);
             this.Controls.Add(this.btn_ClearSearch);
             this.Controls.Add(this.cb_Faculty);
             this.Controls.Add(this.lbl_Faculty);
@@ -253,13 +259,12 @@
             this.Controls.Add(this.btn_NewProject);
             this.Controls.Add(this.dgv_ProjectList);
             this.Controls.Add(this.lbl_pPI);
-            this.Controls.Add(this.tb_pPIValue);
             this.Controls.Add(this.cb_pStage);
             this.Controls.Add(this.lbl_pStage);
             this.Controls.Add(this.tb_pNameValue);
             this.Controls.Add(this.lbl_pName);
             this.Name = "frm_ProjectAll";
-            this.Text = "frm_ProjectAll";
+            this.Text = "LIDA Projects";
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ProjectList)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -268,7 +273,6 @@
 
         #endregion
         private System.Windows.Forms.Label lbl_LeadApplicant;
-        private System.Windows.Forms.TextBox tb_pLeadApplicantValue;
         private System.Windows.Forms.Button btn_ClearSearch;
         private System.Windows.Forms.ComboBox cb_Faculty;
         private System.Windows.Forms.Label lbl_Faculty;
@@ -279,11 +283,12 @@
         private System.Windows.Forms.Button btn_NewProject;
         private System.Windows.Forms.DataGridView dgv_ProjectList;
         private System.Windows.Forms.Label lbl_pPI;
-        private System.Windows.Forms.TextBox tb_pPIValue;
         private System.Windows.Forms.ComboBox cb_pStage;
         private System.Windows.Forms.Label lbl_pStage;
         private System.Windows.Forms.TextBox tb_pNameValue;
         private System.Windows.Forms.Label lbl_pName;
         private System.Windows.Forms.Button btn_Refresh;
+        private System.Windows.Forms.ComboBox cb_LeadApplicant;
+        private System.Windows.Forms.ComboBox cb_PI;
     }
 }

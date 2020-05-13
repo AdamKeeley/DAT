@@ -21,6 +21,7 @@ namespace CMS
         }
 
         DataSet ds_Project;
+        bool textChanged = true;
 
         /// <summary>
         /// Creates a new class object from Project class and calls method getProjectsDataSet() to populate DataSet in this class (ds_Project).
@@ -35,7 +36,49 @@ namespace CMS
         {
             try
             {
+                //Setting DataSource and SelectedIndex triggers the TextChanged event, which is set to run 
+                //searchItemAdded method. This boolean flag prevents the method from running fillDataGridView 12 times
+                textChanged = false;
+
+                //Only display names that are present in the LeadApplicant column of the Project table
+                DataTable dt_LeadApplicants = new DataTable();
+                dt_LeadApplicants.Columns.Add("UserID");
+                dt_LeadApplicants.Columns.Add("FullName");
+                dt_LeadApplicants.DefaultView.Sort = "FullName";
+                DataRow lRow;
+                foreach (DataRow pRow in ds_Project.Tables["tblProjects"].Select("[LeadApplicant] is not null"))
+                {
+                    lRow = dt_LeadApplicants.NewRow();
+                    lRow["UserID"] = pRow["LeadApplicant"];
+                    foreach (DataRow r in pRow.GetParentRows("Project_LeadApplicant"))
+                    {
+                        lRow["FullName"] = r["FullName"];
+                    }
+                    dt_LeadApplicants.Rows.Add(lRow);
+                }
+
+                //Only display names that are present in the PI column of the Project table
+                DataTable dt_PIs = new DataTable();
+                dt_PIs.Columns.Add("UserID");
+                dt_PIs.Columns.Add("FullName");
+                dt_PIs.DefaultView.Sort = "FullName";
+                DataRow piRow;
+                foreach (DataRow pRow in ds_Project.Tables["tblProjects"].Select("[PI] is not null"))
+                {
+                    piRow = dt_PIs.NewRow();
+                    piRow["UserID"] = pRow["PI"];
+                    foreach (DataRow r in pRow.GetParentRows("Project_PI"))
+                    {
+                        piRow["FullName"] = r["FullName"];
+                    }
+                    dt_PIs.Rows.Add(piRow);
+                }
+
                 //set controls values
+                cb_DATRAG.DataSource = ds_Project.Tables["tlkRAG"];
+                cb_DATRAG.ValueMember = "ragID";
+                cb_DATRAG.DisplayMember = "ragDescription";
+                cb_DATRAG.SelectedIndex = -1;
                 cb_pStage.DataSource = ds_Project.Tables["tlkStage"];
                 cb_pStage.ValueMember = "StageID";
                 cb_pStage.DisplayMember = "pStageDescription";
@@ -44,14 +87,19 @@ namespace CMS
                 cb_pClassification.ValueMember = "classificationID";
                 cb_pClassification.DisplayMember = "classificationDescription";
                 cb_pClassification.SelectedIndex = -1;
-                cb_DATRAG.DataSource = ds_Project.Tables["tlkRAG"];
-                cb_DATRAG.ValueMember = "ragID";
-                cb_DATRAG.DisplayMember = "ragDescription";
-                cb_DATRAG.SelectedIndex = -1;
+                cb_LeadApplicant.DataSource = dt_LeadApplicants.DefaultView.ToTable(true, "UserID", "FullName"); 
+                cb_LeadApplicant.ValueMember = "UserID";
+                cb_LeadApplicant.DisplayMember = "FullName";
+                cb_LeadApplicant.SelectedIndex = -1;
+                cb_PI.DataSource = dt_PIs.DefaultView.ToTable(true, "UserID", "FullName"); 
+                cb_PI.ValueMember = "UserID";
+                cb_PI.DisplayMember = "FullName";
+                cb_PI.SelectedIndex = -1;
                 cb_Faculty.DataSource = ds_Project.Tables["tlkFaculty"];
                 cb_Faculty.ValueMember = "facultyID";
                 cb_Faculty.DisplayMember = "facultyDescription";
                 cb_Faculty.SelectedIndex = -1;
+                textChanged = true;
             }
             catch (Exception ex)
             {
@@ -63,12 +111,12 @@ namespace CMS
         private void fillDataGridView()
         {
             string filterProjectName        = $"ProjectName like '%{tb_pNameValue.Text}%'";
-            string filterStage              = $"Stage = {cb_pStage.SelectedValue}";
-            string filterClassification     = $"Classification = {cb_pClassification.SelectedValue}";
-            string filterDATRAG             = $"DATRAG = {cb_DATRAG.SelectedValue}";
-            string filterLeadApplicant      = $"LeadApplicant like '%{tb_pLeadApplicantValue.Text}%'";
-            string filterPI                 = $"PI like '%{tb_pPIValue.Text}%'";
-            string filterFaculty            = $"Faculty = {cb_Faculty.SelectedValue}";
+            string filterStage              = $"Stage = '{cb_pStage.Text}'";
+            string filterClassification     = $"Classification = '{cb_pClassification.Text}'";
+            string filterDATRAG             = $"DATRAG = '{cb_DATRAG.Text}'";
+            string filterLeadApplicant      = $"LeadApplicant like '%{cb_LeadApplicant.Text}%'";
+            string filterPI                 = $"PI like '%{cb_PI.Text}%'";
+            string filterFaculty            = $"Faculty = '{cb_Faculty.Text}'";
             string filterAll                = "ProjectNumber like '%'";
 
             if (tb_pNameValue.Text != "")
@@ -79,13 +127,59 @@ namespace CMS
                 filterAll = filterAll + " AND " + filterClassification;
             if (cb_DATRAG.SelectedIndex > -1)
                 filterAll = filterAll + " AND " + filterDATRAG;
-            if (tb_pLeadApplicantValue.Text != "")
+            if (cb_LeadApplicant.SelectedIndex > -1)
                 filterAll = filterAll + " AND " + filterLeadApplicant;
-            if (tb_pPIValue.Text != "")
+            if (cb_PI.SelectedIndex > -1)
                 filterAll = filterAll + " AND " + filterPI;
             if (cb_Faculty.SelectedIndex > -1)
                 filterAll = filterAll + " AND " + filterFaculty;
 
+            //DataTable to fill with de-normalised text values of all projects
+            DataTable dt_ProjectList = new DataTable();
+            dt_ProjectList.Columns.Add("ProjectNumber");
+            dt_ProjectList.Columns.Add("ProjectName");
+            dt_ProjectList.Columns.Add("Stage");
+            dt_ProjectList.Columns.Add("Classification");
+            dt_ProjectList.Columns.Add("DATRAG");
+            dt_ProjectList.Columns.Add("LeadApplicant");
+            dt_ProjectList.Columns.Add("PI");
+            dt_ProjectList.Columns.Add("Faculty");
+
+            DataRow a_row;
+            foreach (DataRow pRow in ds_Project.Tables["tblProjects"].Rows)
+            {
+                a_row = dt_ProjectList.NewRow();
+                a_row["ProjectNumber"] = pRow["ProjectNumber"];
+                a_row["ProjectName"] = pRow["ProjectName"];
+                foreach (DataRow sRow in pRow.GetParentRows("Project_Stage"))
+                {
+                    a_row["Stage"] = sRow["pStageDescription"];
+                }
+                foreach (DataRow cRow in pRow.GetParentRows("Project_Classification"))
+                {
+                    a_row["Classification"] = cRow["classificationDescription"];
+                }
+                foreach (DataRow dRow in pRow.GetParentRows("Project_DATRAG"))
+                {
+                    a_row["DATRAG"] = dRow["ragDescription"];
+                }
+                foreach (DataRow lRow in pRow.GetParentRows("Project_LeadApplicant"))
+                {
+                    a_row["LeadApplicant"] = lRow["FullName"];
+                }
+                foreach (DataRow piRow in pRow.GetParentRows("Project_PI"))
+                {
+                    a_row["PI"] = piRow["FullName"];
+                }
+                foreach (DataRow fRow in pRow.GetParentRows("Project_Faculty"))
+                {
+                    a_row["Faculty"] = fRow["facultyDescription"];
+                }
+
+                dt_ProjectList.Rows.Add(a_row);
+            }
+
+            //DataTable to fill with filtered project list and display in DataGridView
             DataTable dt_dgv_ProjectList = new DataTable();
             dt_dgv_ProjectList.Columns.Add("Project Number");
             dt_dgv_ProjectList.Columns.Add("Project Name");
@@ -96,39 +190,27 @@ namespace CMS
             dt_dgv_ProjectList.Columns.Add("PI");
             dt_dgv_ProjectList.Columns.Add("Faculty");
 
-            DataRow row;
-            foreach (DataRow pRow in ds_Project.Tables["tblProjects"].Select(filterAll))
+            DataRow f_row;
+            foreach (DataRow pRow in dt_ProjectList.Select(filterAll))
             {
-                row = dt_dgv_ProjectList.NewRow();
-                row["Project Number"] = pRow["ProjectNumber"];
-                row["Project Name"] = pRow["ProjectName"];
-                foreach (DataRow sRow in pRow.GetParentRows("Project_Stage"))
-                {
-                    row["Stage"] = sRow["pStageDescription"];
-                }
-                foreach (DataRow cRow in pRow.GetParentRows("Project_Classification"))
-                {
-                    row["Classification"] = cRow["classificationDescription"];
-                }
-                foreach (DataRow dRow in pRow.GetParentRows("Project_DATRAG"))
-                {
-                    row["DATRAG"] = dRow["ragDescription"];
-                }
-                row["Lead Applicant"] = pRow["LeadApplicant"];
-                row["PI"] = pRow["PI"];
-                foreach (DataRow fRow in pRow.GetParentRows("Project_Faculty"))
-                {
-                    row["Faculty"] = fRow["facultyDescription"];
-                }
+                f_row = dt_dgv_ProjectList.NewRow();
+                f_row["Project Number"] = pRow["ProjectNumber"];
+                f_row["Project Name"] = pRow["ProjectName"];
+                f_row["Stage"] = pRow["Stage"];
+                f_row["Classification"] = pRow["Classification"];
+                f_row["DATRAG"] = pRow["DATRAG"];
+                f_row["Lead Applicant"] = pRow["LeadApplicant"];
+                f_row["PI"] = pRow["PI"];
+                f_row["Faculty"] = pRow["Faculty"];
 
-                dt_dgv_ProjectList.Rows.Add(row);
+                dt_dgv_ProjectList.Rows.Add(f_row);
             }
 
             dgv_ProjectList.DataSource = dt_dgv_ProjectList;
             dgv_ProjectList.Sort(dgv_ProjectList.Columns["Project Number"], ListSortDirection.Descending);
 
             dgv_ProjectList.Columns["Project Number"].Width = 50;
-            dgv_ProjectList.Columns["Project Name"].Width = 240;
+            dgv_ProjectList.Columns["Project Name"].Width = 260;
             dgv_ProjectList.Columns["Stage"].Width = 70;
             dgv_ProjectList.Columns["Classification"].Width = 90;
             dgv_ProjectList.Columns["DATRAG"].Width = 60;
@@ -158,6 +240,7 @@ namespace CMS
 
         private void searchItemAdded(object sender, EventArgs e)
         {
+            if (textChanged == true)
             fillDataGridView();
         }
 
@@ -168,8 +251,8 @@ namespace CMS
             cb_pStage.SelectedIndex = -1;
             cb_pClassification.SelectedIndex = -1;
             cb_DATRAG.SelectedIndex = -1;
-            tb_pLeadApplicantValue.Clear();
-            tb_pPIValue.Clear();
+            cb_LeadApplicant.SelectedIndex = -1;
+            cb_PI.SelectedIndex = -1;
             cb_Faculty.SelectedIndex = -1;
 
             fillDataGridView();
