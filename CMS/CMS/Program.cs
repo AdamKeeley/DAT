@@ -73,7 +73,7 @@ namespace CMS
             //initialise form
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frm_ProjectAll());
+            Application.Run(new frm_DataIO());
         }
     }                                                 
 }
