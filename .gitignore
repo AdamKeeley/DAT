@@ -300,3 +300,7 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+# SQL files not needed to build/publish DB
+# ========================================
+sql/insert_DataTrackingTestData.sql
