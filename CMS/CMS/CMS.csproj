@@ -56,6 +56,12 @@
     <Compile Include="frm_DataIO.Designer.cs">
       <DependentUpon>frm_DataIO.cs</DependentUpon>
     </Compile>
+    <Compile Include="frm_HomePage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_HomePage.Designer.cs">
+      <DependentUpon>frm_HomePage.cs</DependentUpon>
+    </Compile>
     <Compile Include="frm_Project.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,6 +103,9 @@
   <ItemGroup>
     <EmbeddedResource Include="frm_DataIO.resx">
       <DependentUpon>frm_DataIO.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_HomePage.resx">
+      <DependentUpon>frm_HomePage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_Project.resx">
       <DependentUpon>frm_Project.cs</DependentUpon>
