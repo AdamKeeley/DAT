@@ -304,3 +304,4 @@ $RECYCLE.BIN/
 # SQL files not needed to build/publish DB
 # ========================================
 sql/insert_DataTrackingTestData.sql
+sql/drop_AllTables.sql
