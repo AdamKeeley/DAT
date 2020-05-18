@@ -47,7 +47,6 @@
             this.dtp_DateFromFilter = new System.Windows.Forms.DateTimePicker();
             this.btn_NewDataIORequest = new System.Windows.Forms.Button();
             this.btn_RefreshAssetsHistoryView = new System.Windows.Forms.Button();
-            this.btn_ExportAssetsHistoryView = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_DataIOHistory)).BeginInit();
             this.gb_DataIOHistoryFilterOptions.SuspendLayout();
             this.gb_ChangeTypeFilter.SuspendLayout();
@@ -154,7 +153,7 @@
             this.dtp_DateToFilter.Name = "dtp_DateToFilter";
             this.dtp_DateToFilter.Size = new System.Drawing.Size(190, 27);
             this.dtp_DateToFilter.TabIndex = 11;
-            this.dtp_DateToFilter.Value = new System.DateTime(2020, 5, 13, 0, 0, 0, 0);
+            this.dtp_DateToFilter.Value = new System.DateTime(2050, 12, 31, 0, 0, 0, 0);
             // 
             // label1
             // 
@@ -188,6 +187,7 @@
             this.chkb_ChangeAccepted0.Name = "chkb_ChangeAccepted0";
             this.chkb_ChangeAccepted0.Size = new System.Drawing.Size(97, 24);
             this.chkb_ChangeAccepted0.TabIndex = 1;
+            this.chkb_ChangeAccepted0.Tag = "0";
             this.chkb_ChangeAccepted0.Text = "Rejected";
             this.chkb_ChangeAccepted0.UseVisualStyleBackColor = true;
             // 
@@ -200,6 +200,7 @@
             this.chkb_ChangeAccepted1.Name = "chkb_ChangeAccepted1";
             this.chkb_ChangeAccepted1.Size = new System.Drawing.Size(101, 24);
             this.chkb_ChangeAccepted1.TabIndex = 0;
+            this.chkb_ChangeAccepted1.Tag = "1";
             this.chkb_ChangeAccepted1.Text = "Approved";
             this.chkb_ChangeAccepted1.UseVisualStyleBackColor = true;
             // 
@@ -271,21 +272,11 @@
             this.btn_RefreshAssetsHistoryView.UseVisualStyleBackColor = true;
             this.btn_RefreshAssetsHistoryView.Click += new System.EventHandler(this.btn_RefreshAssetsHistoryView_Click);
             // 
-            // btn_ExportAssetsHistoryView
-            // 
-            this.btn_ExportAssetsHistoryView.Location = new System.Drawing.Point(897, 68);
-            this.btn_ExportAssetsHistoryView.Name = "btn_ExportAssetsHistoryView";
-            this.btn_ExportAssetsHistoryView.Size = new System.Drawing.Size(153, 40);
-            this.btn_ExportAssetsHistoryView.TabIndex = 6;
-            this.btn_ExportAssetsHistoryView.Text = "Export search";
-            this.btn_ExportAssetsHistoryView.UseVisualStyleBackColor = true;
-            // 
             // frm_DataIO
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1062, 562);
-            this.Controls.Add(this.btn_ExportAssetsHistoryView);
             this.Controls.Add(this.btn_RefreshAssetsHistoryView);
             this.Controls.Add(this.btn_NewDataIORequest);
             this.Controls.Add(this.gb_DataIOHistoryFilterOptions);
@@ -318,7 +309,6 @@
         private System.Windows.Forms.GroupBox gb_ChangeAcceptedFilter;
         private System.Windows.Forms.Button btn_NewDataIORequest;
         private System.Windows.Forms.Button btn_RefreshAssetsHistoryView;
-        private System.Windows.Forms.Button btn_ExportAssetsHistoryView;
         private System.Windows.Forms.DateTimePicker dtp_DateToFilter;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox gb_ChangeTypeFilter;
