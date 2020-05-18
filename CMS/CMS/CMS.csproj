@@ -112,9 +112,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\InputControlsLibrary\DataControlsLibrary.csproj">
-      <Project>{bfb4a517-fce9-4276-8692-36640c6d987f}</Project>
-      <Name>DataControlsLibrary</Name>
+    <ProjectReference Include="..\DataControlsLib\DataControlsLib.csproj">
+      <Project>{6a75f9c8-bf87-4043-9df6-7cb6b4cf1698}</Project>
+      <Name>DataControlsLib</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
