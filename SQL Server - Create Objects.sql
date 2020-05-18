@@ -123,7 +123,7 @@ Data tracking tables schema
 
 CREATE TABLE dbo.tblDataIORequests(
 	RequestID			INT IDENTITY(1,1) NOT NULL,
-	Project				INT NOT NULL,
+	Project				VARCHAR(5) NULL,
 	-- Include VRE ID foreign key?
 	ChangeType			INT NOT NULL,
 	ChangeDate			DATETIME NULL DEFAULT (getdate()),
@@ -132,8 +132,7 @@ CREATE TABLE dbo.tblDataIORequests(
 	RequesterNotes		VARCHAR(MAX) NULL, -- Researchers communication explaining data/etc. Or a link to same text elsewhere?
 	ChangerResponse		VARCHAR(MAX) NULL, -- Response communication from DAT to confirm import status?
 	-- In future, we could include here a ConversationID, linking to DAT-user interactions and remove RequesterNotes and ChangerResponse here
-	CONSTRAINT PK_DataIORequests PRIMARY KEY (RequestID),
-	CONSTRAINT FK_DataIORequests_Projects FOREIGN KEY (Project) REFERENCES dbo.tblProject (pID)
+	CONSTRAINT PK_DataIORequests PRIMARY KEY (RequestID)
 );
 
 CREATE TABLE dbo.tlkAssetChangeTypes (
@@ -150,13 +149,12 @@ INSERT INTO dbo.tlkAssetChangeTypes (ChangeTypeLabel)
 
 CREATE TABLE dbo.tblAssetsRegister(
 	AssetID			INT IDENTITY(1,1) NOT NULL, -- Might be better if this was a sha2 checksum?
-	Project			INT NOT NULL,
+	Project			VARCHAR(5) NULL,
 	AssetName		VARCHAR(100) NOT NULL,
 	AssetSha256sum	CHAR(64) NULL, -- This could become the primary key instead?
 	-- Asset-DSA will be many-to-many so will probably need intermediary table
 	VreFilePath		VARCHAR(200) NULL, -- Path to file in VRE
-	CONSTRAINT PK_AssetsRegister PRIMARY KEY (AssetID),
-	CONSTRAINT FK_AssetsRegister_Projects FOREIGN KEY (Project) REFERENCES dbo.tblProject (pID)
+	CONSTRAINT PK_AssetsRegister PRIMARY KEY (AssetID)
 );
 
 -- Intermediary table between dbo.tblDataIORequest
