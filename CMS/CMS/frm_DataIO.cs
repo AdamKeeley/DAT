@@ -138,5 +138,12 @@ namespace CMS
             UpdateApprovalsWanted();
             UpdateDataViewBinding();
         }
+
+        /*private void btn_NewImportRequest_Click(object sender, EventArgs e)
+        {
+            frm_DataIO_ImportRequest NewImport = new frm_DataIO_ImportRequest();
+            //NewImport.FormClosing += new FormClosingEventHandler(this.refreshPage);
+            NewImport.Show();
+        }*/
     }
 }

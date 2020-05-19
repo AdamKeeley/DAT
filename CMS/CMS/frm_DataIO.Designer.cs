@@ -45,7 +45,7 @@
             this.lbl_ProjectFilter = new System.Windows.Forms.Label();
             this.cb_ProjectFilter = new System.Windows.Forms.ComboBox();
             this.dtp_DateFromFilter = new System.Windows.Forms.DateTimePicker();
-            this.btn_NewDataIORequest = new System.Windows.Forms.Button();
+            this.btn_NewImportRequest = new System.Windows.Forms.Button();
             this.btn_RefreshAssetsHistoryView = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_DataIOHistory)).BeginInit();
             this.gb_DataIOHistoryFilterOptions.SuspendLayout();
@@ -253,14 +253,15 @@
             this.dtp_DateFromFilter.TabIndex = 3;
             this.dtp_DateFromFilter.Value = new System.DateTime(2017, 1, 1, 0, 0, 0, 0);
             // 
-            // btn_NewDataIORequest
+            // btn_NewImportRequest
             // 
-            this.btn_NewDataIORequest.Location = new System.Drawing.Point(897, 22);
-            this.btn_NewDataIORequest.Name = "btn_NewDataIORequest";
-            this.btn_NewDataIORequest.Size = new System.Drawing.Size(153, 40);
-            this.btn_NewDataIORequest.TabIndex = 4;
-            this.btn_NewDataIORequest.Text = "New I/O request";
-            this.btn_NewDataIORequest.UseVisualStyleBackColor = true;
+            this.btn_NewImportRequest.Location = new System.Drawing.Point(897, 22);
+            this.btn_NewImportRequest.Name = "btn_NewImportRequest";
+            this.btn_NewImportRequest.Size = new System.Drawing.Size(153, 40);
+            this.btn_NewImportRequest.TabIndex = 4;
+            this.btn_NewImportRequest.Text = "New Import";
+            this.btn_NewImportRequest.UseVisualStyleBackColor = true;
+            //this.btn_NewImportRequest.Click += new System.EventHandler(this.btn_NewImportRequest_Click);
             // 
             // btn_RefreshAssetsHistoryView
             // 
@@ -278,7 +279,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1062, 562);
             this.Controls.Add(this.btn_RefreshAssetsHistoryView);
-            this.Controls.Add(this.btn_NewDataIORequest);
+            this.Controls.Add(this.btn_NewImportRequest);
             this.Controls.Add(this.gb_DataIOHistoryFilterOptions);
             this.Controls.Add(this.dgv_DataIOHistory);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -307,7 +308,7 @@
         private System.Windows.Forms.ComboBox cb_ProjectFilter;
         private System.Windows.Forms.DateTimePicker dtp_DateFromFilter;
         private System.Windows.Forms.GroupBox gb_ChangeAcceptedFilter;
-        private System.Windows.Forms.Button btn_NewDataIORequest;
+        private System.Windows.Forms.Button btn_NewImportRequest;
         private System.Windows.Forms.Button btn_RefreshAssetsHistoryView;
         private System.Windows.Forms.DateTimePicker dtp_DateToFilter;
         private System.Windows.Forms.Label label1;
