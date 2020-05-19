@@ -25,10 +25,10 @@ namespace CMS
             //conString = "Data Source=IRC-PC010;Initial Catalog=DAT_CMS;Integrated Security=True";
 
             //Laptop
-            conString = "Data Source=LIDA-LT-040704\\SQLEXPRESS;Initial Catalog=DAT_CMS;Integrated Security=True";
+            //conString = "Data Source=LIDA-LT-040704\\SQLEXPRESS;Initial Catalog=DAT_CMS;Integrated Security=True";
 
             // Sean's laptop
-            //conString = "Data Source=SEAN-LAPTOP\\SQLEXPRESS;Initial Catalog=DAT_CMS;Integrated Security=True";
+            conString = "Data Source=SEAN-LAPTOP\\SQLEXPRESS;Initial Catalog=DAT_CMS;Integrated Security=True";
         }
 
         //members
