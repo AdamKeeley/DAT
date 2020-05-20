@@ -31,18 +31,16 @@ namespace CMS
                 GetDB.GetDataTable(connection, ds_io, "tblProject",
                     "SELECT * FROM dbo.tblProject WHERE ValidTo IS NULL");
 
+                // Relations not needed due to LINQ joins, but at least they help enforce the schema
                 ds_io.Relations.Add("DataIORequests_AssetChangeTypes", 
                     parentColumn: ds_io.Tables["tlkAssetChangeTypes"].Columns["ChangeTypeID"],
-                    childColumn: ds_io.Tables["tblDataIORequests"].Columns["ChangeType"]
-                );
+                    childColumn: ds_io.Tables["tblDataIORequests"].Columns["ChangeType"]);
                 ds_io.Relations.Add("AssetsChangeLog_DataIORequests",
                     parentColumn: ds_io.Tables["tblDataIORequests"].Columns["RequestID"],
-                    childColumn: ds_io.Tables["tblAssetsChangeLog"].Columns["RequestID"]
-                );
+                    childColumn: ds_io.Tables["tblAssetsChangeLog"].Columns["RequestID"]);
                 ds_io.Relations.Add("AssetsChangeLog_AssetsRegister",
                     parentColumn: ds_io.Tables["tblAssetsRegister"].Columns["AssetID"],
-                    childColumn: ds_io.Tables["tblAssetsChangeLog"].Columns["AssetID"]
-                );
+                    childColumn: ds_io.Tables["tblAssetsChangeLog"].Columns["AssetID"]);
             }
             return ds_io;
         }
