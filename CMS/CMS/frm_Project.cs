@@ -39,7 +39,34 @@ namespace CMS
             this.cb_pNumberValue.ValueMember = "pID";
             this.cb_pNumberValue.DisplayMember = "pNumber";
             this.cb_pNumberValue.Text = lst_ProjectDetails[0];
+            if (lst_ProjectDetails[6] == "True")
+                this.chkb_IRC.Checked = true;
+            else this.chkb_IRC.Checked = false;
+            if (lst_ProjectDetails[7] == "True")
+                this.chkb_SEED.Checked = true;
+            else this.chkb_SEED.Checked = false;
+
+            setPlatformGroupBoxColour(chkb_IRC.Checked, chkb_SEED.Checked);
+
         }
+
+        //set colour of platform group box (gb_Platform)
+        private void setPlatformGroupBoxColour(bool IRC, bool SEED)
+        {
+            if (IRC == true & SEED == true)
+            {
+                this.gb_Platform.BackColor = System.Drawing.Color.MediumPurple;
+            }
+            else if (IRC == true & SEED == false)
+            {
+                this.gb_Platform.BackColor = System.Drawing.Color.Salmon;
+            }
+            else if (IRC == false & SEED == true)
+            {
+                this.gb_Platform.BackColor = System.Drawing.Color.PaleTurquoise;
+            }
+            else this.gb_Platform.BackColor = System.Drawing.Color.Transparent;
+        }    
 
         //method to get project notes from data bucket and assign to DataGridView
         private void setProjectNotes(string pNumber)
@@ -113,69 +140,94 @@ namespace CMS
         //method to update project details; gets values from form, logically deletes current record and inserts new
         private void updateProject(string pNumber)
         {
-            //dates are fuckey
-            bool dateValidity = validateEnteredDateValues();
+            string new_pName = tb_pNameValue.Text;
+            int new_pStage = int.Parse(cb_pStage.SelectedValue.ToString());
+            string new_pPI = tb_pPIValue.Text;
+            DateTime? new_pStartDate = null;
+            DateTime? new_pEndDate = null;
+            bool new_IRC = chkb_IRC.Checked;
+            bool new_SEED = chkb_SEED.Checked;
 
-            if (dateValidity == true)
+            //dates are fuckey
+            bool dateCheck = true;
+
+            if (mtb_pStartDateValue.Text != "" & mtb_pStartDateValue.Text != "  /  /")
             {
-                string new_pName = tb_pNameValue.Text;
-                int new_pStage = int.Parse(cb_pStage.SelectedValue.ToString());
-                string new_pPI = tb_pPIValue.Text;
-                DateTime? new_pStartDate = null;
-                DateTime? new_pEndDate = null;
-                if (mtb_pStartDateValue.Text != "" & mtb_pStartDateValue.Text != "  /  /")
+                try
                 {
                     new_pStartDate = Convert.ToDateTime(mtb_pStartDateValue.Text);
+                    dateCheck = true;
                 }
-                if (mtb_pEndDateValue.Text != "" & mtb_pEndDateValue.Text != "  /  /")
+                catch (Exception)
+                {
+                    MessageBox.Show("Please enter valid Start Date");
+                    dateCheck = false;
+                }
+                    
+            }
+            if (mtb_pEndDateValue.Text != "" & mtb_pEndDateValue.Text != "  /  /")
+            {
+                try
                 {
                     new_pEndDate = Convert.ToDateTime(mtb_pEndDateValue.Text);
+                    dateCheck = true;
                 }
-
-                //instantiate new Project type object that contains details of all projects and methods to update db
-                var Projects = new Project();
-
-                DataRow[] dr_CurrentProject;
-                dr_CurrentProject = Projects.ds_Project.Tables["tblProjects"].Select($"pNumber = '{pNumber}' and ValidTo is null");
-
-                string current_pName = dr_CurrentProject[0]["pName"].ToString();
-                int current_pStage = (int)dr_CurrentProject[0]["pStage"];
-                string current_pPI = dr_CurrentProject[0]["pPI"].ToString();
-                //dates are fuckey
-                DateTime? current_pStartDate = null;
-                if (dr_CurrentProject[0]["pStartDate"].ToString() != "")
-                    current_pStartDate = Convert.ToDateTime(dr_CurrentProject[0]["pStartDate"]);
-                DateTime? current_pEndDate = null;
-                if (dr_CurrentProject[0]["pEndDate"].ToString() != "")
-                    current_pEndDate = Convert.ToDateTime(dr_CurrentProject[0]["pEndDate"]);
-
-                //check to see if any changes have been made, no need to update if none
-                bool changesMade;
-                if (current_pName != new_pName)
-                    changesMade = true;
-                else if (current_pStage != new_pStage)
-                    changesMade = true;
-                else if (current_pPI != new_pPI)
-                    changesMade = true;
-                else if (current_pStartDate != new_pStartDate)
-                    changesMade = true;
-                else if (current_pEndDate != new_pEndDate)
-                    changesMade = true;
-                else
-                    changesMade = false;
-
-                if (changesMade == true)
+                catch (Exception)
                 {
-                    //update existing project - first perform logical delete then insert new record
-                    Projects.deleteProject(pNumber);
-                    Projects.insertProject(pNumber, new_pName, new_pStage, new_pPI, new_pStartDate, new_pEndDate);
-
-                    MessageBox.Show($"Project details updated for {pNumber}");
+                    MessageBox.Show("Please enter valid End Date");
+                    dateCheck = false;
                 }
+            }
+
+            //instantiate new Project type object that contains details of all projects and methods to update db
+            var Projects = new Project();
+
+            DataRow[] dr_CurrentProject;
+            dr_CurrentProject = Projects.ds_Project.Tables["tblProjects"].Select($"pNumber = '{pNumber}' and ValidTo is null");
+
+            string current_pName = dr_CurrentProject[0]["pName"].ToString();
+            int current_pStage = (int)dr_CurrentProject[0]["pStage"];
+            string current_pPI = dr_CurrentProject[0]["pPI"].ToString();
+            //dates are fuckey
+            DateTime? current_pStartDate = null;
+            if (dr_CurrentProject[0]["pStartDate"].ToString() != "")
+                current_pStartDate = Convert.ToDateTime(dr_CurrentProject[0]["pStartDate"]);
+            DateTime? current_pEndDate = null;
+            if (dr_CurrentProject[0]["pEndDate"].ToString() != "")
+                current_pEndDate = Convert.ToDateTime(dr_CurrentProject[0]["pEndDate"]);
+            bool current_IRC = Convert.ToBoolean(dr_CurrentProject[0]["IRC"]);
+            bool current_SEED = Convert.ToBoolean(dr_CurrentProject[0]["SEED"]);
+
+            //check to see if any changes have been made, no need to update if none
+            bool changesMade;
+            if (current_pName != new_pName)
+                changesMade = true;
+            else if (current_pStage != new_pStage)
+                changesMade = true;
+            else if (current_pPI != new_pPI)
+                changesMade = true;
+            else if (current_pStartDate != new_pStartDate)
+                changesMade = true;
+            else if (current_pEndDate != new_pEndDate)
+                changesMade = true;
+            else if (current_IRC != new_IRC)
+                changesMade = true;
+            else if (current_SEED != new_SEED)
+                changesMade = true;
+            else
+                changesMade = false;
+
+            if (changesMade == true & dateCheck == true)
+            {
+                //update existing project - first perform logical delete then insert new record
+                Projects.deleteProject(pNumber);
+                Projects.insertProject(pNumber, new_pName, new_pStage, new_pPI, new_pStartDate, new_pEndDate, new_IRC, new_SEED);
+
+                MessageBox.Show($"Project details updated for {pNumber}");
             }
         }
 
-        //clear form
+        //clear form, not actually used...
         private void clearForm()
         {
             //clear values from form
@@ -289,6 +341,16 @@ namespace CMS
 
             setProjectDetails(pNumber);
             setProjectNotes(pNumber);
+        }
+
+        private void chkb_IRC_CheckedChanged(object sender, EventArgs e)
+        {
+            setPlatformGroupBoxColour(chkb_IRC.Checked, chkb_SEED.Checked);
+        }
+
+        private void chkb_SEED_CheckedChanged(object sender, EventArgs e)
+        {
+            setPlatformGroupBoxColour(chkb_IRC.Checked, chkb_SEED.Checked);
         }
     }
 }

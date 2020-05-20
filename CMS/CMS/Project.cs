@@ -136,7 +136,7 @@ namespace CMS
         }
     
         //method to insert project record
-        public void insertProject (string pNumber, string pName, int pStage, string pPI, DateTime? pStartDate, DateTime? pEndDate)
+        public void insertProject (string pNumber, string pName, int pStage, string pPI, DateTime? pStartDate, DateTime? pEndDate, bool IRC, bool SEED)
         {
             try
             {
@@ -146,8 +146,8 @@ namespace CMS
                     //generate the parameterised SQL query to insert new record
                     SqlCommand qryInsertProject = new SqlCommand();
                     qryInsertProject.Connection = connection;
-                    qryInsertProject.CommandText = "insert into [dbo].[tblProject] ([pNumber],[pName],[pStage],[pPI],[pStartDate],[pEndDate]) values "
-                        + "(@pNumber, @pName, @pStage, @pPI, @pStartDate, @pEndDate)";
+                    qryInsertProject.CommandText = "insert into [dbo].[tblProject] ([pNumber],[pName],[pStage],[pPI],[pStartDate],[pEndDate],[IRC],[SEED]) values "
+                        + "(@pNumber, @pName, @pStage, @pPI, @pStartDate, @pEndDate, @IRC, @SEED)";
 
                     //assign the parameter values
                     qryInsertProject.Parameters.Add("@pNumber", SqlDbType.VarChar, 5).Value = pNumber;
@@ -162,6 +162,9 @@ namespace CMS
                     SqlParameter param_pEndDate = new SqlParameter("@pEndDate", pEndDate == null ? (object)DBNull.Value : pEndDate);
                     param_pEndDate.IsNullable = true;
                     qryInsertProject.Parameters.Add(param_pEndDate);
+                    qryInsertProject.Parameters.Add("@IRC", SqlDbType.Bit).Value = IRC;
+                    qryInsertProject.Parameters.Add("@SEED", SqlDbType.Bit).Value = SEED;
+
                     //open connection to database, run query and close connection
                     connection.Open();
                     qryInsertProject.ExecuteNonQuery();
@@ -344,7 +347,7 @@ namespace CMS
                     //could just replace(pNumber, 'P', '') or take right(pNumber,4) but wanted to future proof as best I could:
                     //https://stackoverflow.com/questions/18625548/select-query-to-remove-non-numeric-characters
                     qryGetNewProjectNumber.CommandText =
-                        "SELECT max(cast(LEFT(SUBSTRING(pNumber, PATINDEX('%[0-9.-]%', pNumber), 8000) "
+                        "SELECT min(cast(LEFT(SUBSTRING(pNumber, PATINDEX('%[0-9.-]%', pNumber), 8000) "
                         + ",PATINDEX('%[^0-9.-]%',	SUBSTRING(pNumber, PATINDEX('%[0-9.-]%', pNumber), 8000) + 'X') -1) as int)) "
                         + "from [dbo].[tblProject]";
                     //open connection and execute query, returing result in variable pNumInt
@@ -372,6 +375,8 @@ namespace CMS
             string pPI;
             string pStartDate;
             string pEndDate;
+            string pIRC;
+            string pSEED;
             List<string> lst_Project = new List<string>();
 
             //if no records found, try will fail at "DataRow pRow = pRows[i];" and go to catch
@@ -401,6 +406,8 @@ namespace CMS
                 pPI = pRow["pPI"].ToString();
                 pStartDate = pRow["pStartDate"].ToString();
                 pEndDate = pRow["pEndDate"].ToString();
+                pIRC = pRow["IRC"].ToString();
+                pSEED = pRow["SEED"].ToString();
 
                 lst_Project.Add(pNumber);
                 lst_Project.Add(pName);
@@ -408,11 +415,12 @@ namespace CMS
                 lst_Project.Add(pPI);
                 lst_Project.Add(pStartDate);
                 lst_Project.Add(pEndDate);
+                lst_Project.Add(pIRC);
+                lst_Project.Add(pSEED);
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Failed to load project details" + Environment.NewLine + ex);
-                throw;
             }
             return lst_Project;
         }
