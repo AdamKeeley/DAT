@@ -49,6 +49,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataIO.cs" />
+    <Compile Include="frm_DataIO.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_DataIO.Designer.cs">
+      <DependentUpon>frm_DataIO.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_HomePage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_HomePage.Designer.cs">
+      <DependentUpon>frm_HomePage.cs</DependentUpon>
+    </Compile>
     <Compile Include="frm_Project.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,6 +113,12 @@
     <None Include="Properties\DataSources\SQL_Stuff.datasource" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="frm_DataIO.resx">
+      <DependentUpon>frm_DataIO.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_HomePage.resx">
+      <DependentUpon>frm_HomePage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frm_Project.resx">
       <DependentUpon>frm_Project.cs</DependentUpon>
     </EmbeddedResource>
@@ -118,6 +137,12 @@
     <EmbeddedResource Include="frm_UserProjectAdd.resx">
       <DependentUpon>frm_UserProjectAdd.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataControlsLib\DataControlsLib.csproj">
+      <Project>{6a75f9c8-bf87-4043-9df6-7cb6b4cf1698}</Project>
+      <Name>DataControlsLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
