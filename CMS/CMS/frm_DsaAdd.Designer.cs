@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.lbl_ExistingDataOwner = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cb_ExistingDataOwner = new System.Windows.Forms.ComboBox();
             this.gb_DataOwner = new System.Windows.Forms.GroupBox();
             this.btn_NewDataOwner = new System.Windows.Forms.Button();
             this.gb_DsaFileDetails = new System.Windows.Forms.GroupBox();
@@ -42,7 +42,7 @@
             this.lbl_StartDate = new System.Windows.Forms.Label();
             this.lbl_ExpiryDate = new System.Windows.Forms.Label();
             this.gb_AmendmentOf = new System.Windows.Forms.GroupBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgv_AmendmentOf = new System.Windows.Forms.DataGridView();
             this.lbl_AmendmentHelp = new System.Windows.Forms.Label();
             this.gb_GovernanceReq = new System.Windows.Forms.GroupBox();
             this.chkb_DSPT = new System.Windows.Forms.CheckBox();
@@ -50,7 +50,7 @@
             this.gb_Notes = new System.Windows.Forms.GroupBox();
             this.tb_AddNote = new System.Windows.Forms.TextBox();
             this.btn_AddNote = new System.Windows.Forms.Button();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.dgv_AddNote = new System.Windows.Forms.DataGridView();
             this.gb_Project = new System.Windows.Forms.GroupBox();
             this.lbx_ProjectsList = new System.Windows.Forms.ListBox();
             this.btn_OK = new System.Windows.Forms.Button();
@@ -58,10 +58,10 @@
             this.gb_DataOwner.SuspendLayout();
             this.gb_DsaFileDetails.SuspendLayout();
             this.gb_AmendmentOf.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_AmendmentOf)).BeginInit();
             this.gb_GovernanceReq.SuspendLayout();
             this.gb_Notes.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_AddNote)).BeginInit();
             this.gb_Project.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -75,18 +75,18 @@
             this.lbl_ExistingDataOwner.TabIndex = 0;
             this.lbl_ExistingDataOwner.Text = "Existing";
             // 
-            // comboBox1
+            // cb_ExistingDataOwner
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(80, 34);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(175, 28);
-            this.comboBox1.TabIndex = 1;
+            this.cb_ExistingDataOwner.FormattingEnabled = true;
+            this.cb_ExistingDataOwner.Location = new System.Drawing.Point(80, 34);
+            this.cb_ExistingDataOwner.Name = "cb_ExistingDataOwner";
+            this.cb_ExistingDataOwner.Size = new System.Drawing.Size(175, 28);
+            this.cb_ExistingDataOwner.TabIndex = 1;
             // 
             // gb_DataOwner
             // 
             this.gb_DataOwner.Controls.Add(this.btn_NewDataOwner);
-            this.gb_DataOwner.Controls.Add(this.comboBox1);
+            this.gb_DataOwner.Controls.Add(this.cb_ExistingDataOwner);
             this.gb_DataOwner.Controls.Add(this.lbl_ExistingDataOwner);
             this.gb_DataOwner.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gb_DataOwner.Location = new System.Drawing.Point(12, 12);
@@ -198,7 +198,7 @@
             // gb_AmendmentOf
             // 
             this.gb_AmendmentOf.Controls.Add(this.lbl_AmendmentHelp);
-            this.gb_AmendmentOf.Controls.Add(this.dataGridView1);
+            this.gb_AmendmentOf.Controls.Add(this.dgv_AmendmentOf);
             this.gb_AmendmentOf.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gb_AmendmentOf.Location = new System.Drawing.Point(12, 167);
             this.gb_AmendmentOf.Name = "gb_AmendmentOf";
@@ -207,18 +207,18 @@
             this.gb_AmendmentOf.TabStop = false;
             this.gb_AmendmentOf.Text = "Amendment of Previous DSA";
             // 
-            // dataGridView1
+            // dgv_AmendmentOf
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(6, 38);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(763, 120);
-            this.dataGridView1.TabIndex = 0;
+            this.dgv_AmendmentOf.AllowUserToAddRows = false;
+            this.dgv_AmendmentOf.AllowUserToDeleteRows = false;
+            this.dgv_AmendmentOf.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_AmendmentOf.Location = new System.Drawing.Point(6, 38);
+            this.dgv_AmendmentOf.Name = "dgv_AmendmentOf";
+            this.dgv_AmendmentOf.ReadOnly = true;
+            this.dgv_AmendmentOf.RowHeadersWidth = 51;
+            this.dgv_AmendmentOf.RowTemplate.Height = 24;
+            this.dgv_AmendmentOf.Size = new System.Drawing.Size(763, 120);
+            this.dgv_AmendmentOf.TabIndex = 0;
             // 
             // lbl_AmendmentHelp
             // 
@@ -265,7 +265,7 @@
             // 
             // gb_Notes
             // 
-            this.gb_Notes.Controls.Add(this.dataGridView2);
+            this.gb_Notes.Controls.Add(this.dgv_AddNote);
             this.gb_Notes.Controls.Add(this.btn_AddNote);
             this.gb_Notes.Controls.Add(this.tb_AddNote);
             this.gb_Notes.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -293,15 +293,15 @@
             this.btn_AddNote.Text = "Add Note";
             this.btn_AddNote.UseVisualStyleBackColor = true;
             // 
-            // dataGridView2
+            // dgv_AddNote
             // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(7, 108);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.RowHeadersWidth = 51;
-            this.dataGridView2.RowTemplate.Height = 24;
-            this.dataGridView2.Size = new System.Drawing.Size(534, 108);
-            this.dataGridView2.TabIndex = 2;
+            this.dgv_AddNote.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_AddNote.Location = new System.Drawing.Point(7, 108);
+            this.dgv_AddNote.Name = "dgv_AddNote";
+            this.dgv_AddNote.RowHeadersWidth = 51;
+            this.dgv_AddNote.RowTemplate.Height = 24;
+            this.dgv_AddNote.Size = new System.Drawing.Size(534, 108);
+            this.dgv_AddNote.TabIndex = 2;
             // 
             // gb_Project
             // 
@@ -368,12 +368,12 @@
             this.gb_DsaFileDetails.PerformLayout();
             this.gb_AmendmentOf.ResumeLayout(false);
             this.gb_AmendmentOf.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_AmendmentOf)).EndInit();
             this.gb_GovernanceReq.ResumeLayout(false);
             this.gb_GovernanceReq.PerformLayout();
             this.gb_Notes.ResumeLayout(false);
             this.gb_Notes.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_AddNote)).EndInit();
             this.gb_Project.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -383,7 +383,7 @@
         #endregion
 
         private System.Windows.Forms.Label lbl_ExistingDataOwner;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cb_ExistingDataOwner;
         private System.Windows.Forms.GroupBox gb_DataOwner;
         private System.Windows.Forms.Button btn_NewDataOwner;
         private System.Windows.Forms.GroupBox gb_DsaFileDetails;
@@ -397,12 +397,12 @@
         private System.Windows.Forms.Label lbl_ExpiryDate;
         private System.Windows.Forms.GroupBox gb_AmendmentOf;
         private System.Windows.Forms.Label lbl_AmendmentHelp;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgv_AmendmentOf;
         private System.Windows.Forms.GroupBox gb_GovernanceReq;
         private System.Windows.Forms.CheckBox chkb_ISO27001;
         private System.Windows.Forms.CheckBox chkb_DSPT;
         private System.Windows.Forms.GroupBox gb_Notes;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridView dgv_AddNote;
         private System.Windows.Forms.Button btn_AddNote;
         private System.Windows.Forms.TextBox tb_AddNote;
         private System.Windows.Forms.GroupBox gb_Project;
