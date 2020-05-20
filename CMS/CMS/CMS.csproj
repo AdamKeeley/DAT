@@ -61,10 +61,35 @@
     <Compile Include="frm_ProjectAdd.Designer.cs">
       <DependentUpon>frm_ProjectAdd.cs</DependentUpon>
     </Compile>
+    <Compile Include="frm_ProjectAll.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_ProjectAll.Designer.cs">
+      <DependentUpon>frm_ProjectAll.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_ProjectUserAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_ProjectUserAdd.Designer.cs">
+      <DependentUpon>frm_ProjectUserAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_User.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_User.Designer.cs">
+      <DependentUpon>frm_User.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_UserProjectAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_UserProjectAdd.Designer.cs">
+      <DependentUpon>frm_UserProjectAdd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQL_Stuff.cs" />
+    <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -80,6 +105,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frm_ProjectAdd.resx">
       <DependentUpon>frm_ProjectAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_ProjectAll.resx">
+      <DependentUpon>frm_ProjectAll.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_ProjectUserAdd.resx">
+      <DependentUpon>frm_ProjectUserAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_User.resx">
+      <DependentUpon>frm_User.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_UserProjectAdd.resx">
+      <DependentUpon>frm_UserProjectAdd.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -34,8 +34,7 @@ CREATE TABLE [dbo].[tblProject](
  CONSTRAINT [PK_Project] PRIMARY KEY NONCLUSTERED 
 (
 	[pID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
+)) ON [PRIMARY]
 GO
 
 ALTER TABLE [dbo].[tblProject] ADD  DEFAULT ((0)) FOR [LIDA]
@@ -71,7 +70,7 @@ CREATE TABLE [dbo].[tblProjectNotes](
  CONSTRAINT [PK_ProjectNotes] PRIMARY KEY NONCLUSTERED 
 (
 	[pnID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
 
@@ -89,7 +88,7 @@ CREATE TABLE [dbo].[tlkClassification](
  CONSTRAINT [PK_Classification] PRIMARY KEY NONCLUSTERED 
 (
 	[classificationID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
 
@@ -104,7 +103,7 @@ CREATE TABLE [dbo].[tlkFaculty](
  CONSTRAINT [PK_Faculty] PRIMARY KEY NONCLUSTERED 
 (
 	[facultyID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
 
@@ -119,7 +118,7 @@ CREATE TABLE [dbo].[tlkRAG](
  CONSTRAINT [PK_RAG] PRIMARY KEY NONCLUSTERED 
 (
 	[ragID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
 
@@ -134,7 +133,7 @@ CREATE TABLE [dbo].[tlkStage](
  CONSTRAINT [PK_Stage] PRIMARY KEY NONCLUSTERED 
 (
 	[StageID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
 
@@ -178,10 +177,6 @@ GO
 ALTER TABLE [dbo].[tblProject] CHECK CONSTRAINT [FK_Project_Stage]
 GO
 
-INSERT INTO [dbo].[tlkStage]
-           ([pStageDescription])
-     VALUES
-           ('Setup'), ('Active'), ('Closed')
 
 /************************************************************
 *	User stuff 
@@ -216,7 +211,7 @@ create table dbo.tblUser (
 
 create table dbo.tblUserNotes (
 	unID int identity(1,1)
-	, UserID int
+	, UserNumber int
 	, uNote varchar(max)
 	, Created datetime default getdate()
 	, CreatedBy varchar(50) default suser_name()
@@ -259,10 +254,41 @@ add constraint FK_User_Title foreign key ([Title])
 	on update cascade
 	on delete cascade
 
+
+/************************************************************
+*	Lookup stuff 
+************************************************************/
+
+--INSERT INTO dbo.tblProject
+--           (ProjectNumber, ProjectName)
+--     VALUES
+--           ('P0001', 'Seeder project')
+
+insert into dbo.tblUser (UserNumber, Title, FirstName, LastName)
+values (1, 1, 'Flint', 'Sparkoff')
+
+INSERT INTO dbo.tlkStage
+           (pStageDescription)
+     VALUES
+		('Pre-Approval'), ('Setup'), ('Active'), ('Frozen'), ('Closed')
+
+INSERT INTO dbo.tlkClassification
+           (classificationDescription)
+     VALUES
+		('IRC_Unclassified'), ('IRC_Protect'), ('IRC_Confidential'), ('IRC_Secure')
+
+INSERT INTO dbo.tlkRAG
+           (ragDescription)
+     VALUES
+			('Green'), ('Amber'), ('Red')
+
+INSERT INTO dbo.tlkFaculty
+           (facultyDescription)
+     VALUES
+			('Arts Humanities and Cultures'), ('Biological Sciences'), ('Business'), ('Social Sciences'), ('Engineering and Physical Sciences'), ('Environment'), ('Medicine and Health'), ('Interdisciplinary')
+
 insert into dbo.tlkTitle (TitleDescription) values 
 	('Mr'), ('Mrs'), ('Ms'), ('Miss'), ('Dr'), ('Prof'), ('Sir')
 
  insert into dbo.tlkUserStatus (StatusDescription) values
 	('Enabled'), ('Disabled')
-
-

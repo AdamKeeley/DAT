@@ -19,10 +19,13 @@ namespace CMS
 
             ////azure
             //conString = "Data Source=lida.database.windows.net;Initial Catalog=DAT_CMS;Integrated Security=False; "
-            //+ "Persist Security Info=False;User ID=uitake;Password=Rollthedice1#;";
+            //+ "Persist Security Info=False;User ID=uitake;Password=##############;";
 
-            //LIDA Desktop
-            conString = "Data Source=IRC-PC010;Initial Catalog=DAT_CMS;Integrated Security=True";
+            ////LIDA Desktop
+            //conString = "Data Source=IRC-PC010;Initial Catalog=DAT_CMS;Integrated Security=True";
+
+            //Laptop
+            conString = "Data Source=LIDA-LT-040704\\SQLEXPRESS;Initial Catalog=DAT_CMS;Integrated Security=True";
         }
 
         //members
