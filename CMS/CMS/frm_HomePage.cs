@@ -28,5 +28,11 @@ namespace CMS
             frm_DataIO DataIOForm = new frm_DataIO();
             DataIOForm.Show();
         }
+
+        private void btn_DSAs_Click(object sender, EventArgs e)
+        {
+            frm_DsaAdd DsaForm = new frm_DsaAdd();
+            DsaForm.Show();
+        }
     }
 }

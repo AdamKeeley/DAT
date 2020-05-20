@@ -30,6 +30,7 @@
         {
             this.btn_GoToDataIO = new System.Windows.Forms.Button();
             this.btn_GoToProjects = new System.Windows.Forms.Button();
+            this.btn_DSAs = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_GoToDataIO
@@ -54,11 +55,23 @@
             this.btn_GoToProjects.UseVisualStyleBackColor = true;
             this.btn_GoToProjects.Click += new System.EventHandler(this.btn_GoToProjects_Click);
             // 
+            // btn_DSAs
+            // 
+            this.btn_DSAs.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_DSAs.Location = new System.Drawing.Point(472, 281);
+            this.btn_DSAs.Name = "btn_DSAs";
+            this.btn_DSAs.Size = new System.Drawing.Size(145, 63);
+            this.btn_DSAs.TabIndex = 2;
+            this.btn_DSAs.Text = "Add DSA";
+            this.btn_DSAs.UseVisualStyleBackColor = true;
+            this.btn_DSAs.Click += new System.EventHandler(this.btn_DSAs_Click);
+            // 
             // frm_HomePage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btn_DSAs);
             this.Controls.Add(this.btn_GoToProjects);
             this.Controls.Add(this.btn_GoToDataIO);
             this.Name = "frm_HomePage";
@@ -71,5 +84,6 @@
 
         private System.Windows.Forms.Button btn_GoToDataIO;
         private System.Windows.Forms.Button btn_GoToProjects;
+        private System.Windows.Forms.Button btn_DSAs;
     }
 }
