@@ -141,7 +141,7 @@ namespace CMS
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Failed to populate ds_prj DataSet" + Environment.NewLine + Environment.NewLine + ex);
+                MessageBox.Show("Failed to populate ds_prj DataSet" + Environment.NewLine + Environment.NewLine + ex.Message);
             }
                 //return DataSet (ds_prj) as the output of this method
                 return ds_prj;
@@ -248,7 +248,7 @@ namespace CMS
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Failed to load project details" + Environment.NewLine + Environment.NewLine + ex);
+                MessageBox.Show("Failed to load project details" + Environment.NewLine + Environment.NewLine + ex.Message);
             }
             return lst_Project;
         }
@@ -284,7 +284,7 @@ namespace CMS
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Failed to find current record" + Environment.NewLine + Environment.NewLine + ex);
+                MessageBox.Show("Failed to find current record" + Environment.NewLine + Environment.NewLine + ex.Message);
             }
 
             if (current_pID == pID)
@@ -318,7 +318,7 @@ namespace CMS
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Failed to delete record" + Environment.NewLine + Environment.NewLine + ex);
+                MessageBox.Show("Failed to delete record" + Environment.NewLine + Environment.NewLine + ex.Message);
             }
         }
 
@@ -418,7 +418,7 @@ namespace CMS
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Failed to insert new project record" + Environment.NewLine + ex);
+                MessageBox.Show("Failed to insert new project record" + Environment.NewLine + ex.Message);
                 //throw;
             }
             return success;
@@ -453,7 +453,7 @@ namespace CMS
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Failed to add new note" + Environment.NewLine + ex);
+                MessageBox.Show("Failed to add new note" + Environment.NewLine + ex.Message);
                 throw;
             }
         }
@@ -489,7 +489,7 @@ namespace CMS
             {
                 //if no project numbers start at zero.
                 pNumInt = 0;
-                MessageBox.Show("Failed to fetch largest Project Number, starting from zero" + Environment.NewLine + Environment.NewLine + ex);
+                MessageBox.Show("Failed to fetch largest Project Number, starting from zero" + Environment.NewLine + Environment.NewLine + ex.Message);
             }
             return pNumInt;
         }

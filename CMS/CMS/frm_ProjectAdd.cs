@@ -53,11 +53,11 @@ namespace CMS
             cb_pClassification.DisplayMember = "classificationDescription";
             cb_pClassification.SelectedIndex = -1;
             cb_LeadApplicant.DataSource = ds_Project.Tables["tlkLeadApplicant"];
-            cb_LeadApplicant.ValueMember = "UserID";
+            cb_LeadApplicant.ValueMember = "UserNumber";
             cb_LeadApplicant.DisplayMember = "FullName";
             cb_LeadApplicant.SelectedIndex = -1;
             cb_PI.DataSource = ds_Project.Tables["tlkPI"];
-            cb_PI.ValueMember = "UserID";
+            cb_PI.ValueMember = "UserNumber";
             cb_PI.DisplayMember = "FullName";
             cb_PI.SelectedIndex = -1;           
             cb_Faculty.DataSource = ds_Project.Tables["tlkFaculty"];

@@ -301,6 +301,12 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# =========================
+# Adam's sample data files
+# =========================
+Sample Project Data.xlsx
+Sample User Data.xlsx
+
 # SQL files not needed to build/publish DB
 # ========================================
 sql/insert_DataTrackingTestData.sql

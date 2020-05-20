@@ -52,7 +52,6 @@ namespace CMS
                 catch (Exception)
                 {
                     MessageBox.Show("Connection to database could not be established");
-                    throw;
                 }
             }
         }
