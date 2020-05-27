@@ -264,9 +264,6 @@ add constraint FK_User_Title foreign key ([Title])
 --     VALUES
 --           ('P0001', 'Seeder project')
 
-insert into dbo.tblUser (UserNumber, Title, FirstName, LastName)
-values (1, 1, 'Flint', 'Sparkoff')
-
 INSERT INTO dbo.tlkStage
            (pStageDescription)
      VALUES
@@ -292,6 +289,9 @@ insert into dbo.tlkTitle (TitleDescription) values
 
  insert into dbo.tlkUserStatus (StatusDescription) values
 	('Enabled'), ('Disabled')
+
+insert into dbo.tblUser (UserNumber, Title, FirstName, LastName)
+values (1, 1, 'Flint', 'Sparkoff')
  
 /*
 Data tracking tables schema
