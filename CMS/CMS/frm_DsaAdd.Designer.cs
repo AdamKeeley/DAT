@@ -42,19 +42,20 @@
             this.lbl_StartDate = new System.Windows.Forms.Label();
             this.lbl_ExpiryDate = new System.Windows.Forms.Label();
             this.gb_AmendmentOf = new System.Windows.Forms.GroupBox();
-            this.dgv_AmendmentOf = new System.Windows.Forms.DataGridView();
             this.lbl_AmendmentHelp = new System.Windows.Forms.Label();
+            this.dgv_AmendmentOf = new System.Windows.Forms.DataGridView();
             this.gb_GovernanceReq = new System.Windows.Forms.GroupBox();
-            this.chkb_DSPT = new System.Windows.Forms.CheckBox();
             this.chkb_ISO27001 = new System.Windows.Forms.CheckBox();
+            this.chkb_DSPT = new System.Windows.Forms.CheckBox();
             this.gb_Notes = new System.Windows.Forms.GroupBox();
-            this.tb_AddNote = new System.Windows.Forms.TextBox();
-            this.btn_AddNote = new System.Windows.Forms.Button();
             this.dgv_AddNote = new System.Windows.Forms.DataGridView();
+            this.btn_AddNote = new System.Windows.Forms.Button();
+            this.tb_AddNote = new System.Windows.Forms.TextBox();
             this.gb_Project = new System.Windows.Forms.GroupBox();
             this.lbx_ProjectsList = new System.Windows.Forms.ListBox();
             this.btn_OK = new System.Windows.Forms.Button();
             this.btn_Cancel = new System.Windows.Forms.Button();
+            this.gb_Dates = new System.Windows.Forms.GroupBox();
             this.gb_DataOwner.SuspendLayout();
             this.gb_DsaFileDetails.SuspendLayout();
             this.gb_AmendmentOf.SuspendLayout();
@@ -63,13 +64,14 @@
             this.gb_Notes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_AddNote)).BeginInit();
             this.gb_Project.SuspendLayout();
+            this.gb_Dates.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbl_ExistingDataOwner
             // 
             this.lbl_ExistingDataOwner.AutoSize = true;
             this.lbl_ExistingDataOwner.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_ExistingDataOwner.Location = new System.Drawing.Point(6, 37);
+            this.lbl_ExistingDataOwner.Location = new System.Drawing.Point(6, 29);
             this.lbl_ExistingDataOwner.Name = "lbl_ExistingDataOwner";
             this.lbl_ExistingDataOwner.Size = new System.Drawing.Size(68, 20);
             this.lbl_ExistingDataOwner.TabIndex = 0;
@@ -78,9 +80,9 @@
             // cb_ExistingDataOwner
             // 
             this.cb_ExistingDataOwner.FormattingEnabled = true;
-            this.cb_ExistingDataOwner.Location = new System.Drawing.Point(80, 34);
+            this.cb_ExistingDataOwner.Location = new System.Drawing.Point(118, 26);
             this.cb_ExistingDataOwner.Name = "cb_ExistingDataOwner";
-            this.cb_ExistingDataOwner.Size = new System.Drawing.Size(175, 28);
+            this.cb_ExistingDataOwner.Size = new System.Drawing.Size(260, 28);
             this.cb_ExistingDataOwner.TabIndex = 1;
             // 
             // gb_DataOwner
@@ -91,14 +93,14 @@
             this.gb_DataOwner.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gb_DataOwner.Location = new System.Drawing.Point(12, 12);
             this.gb_DataOwner.Name = "gb_DataOwner";
-            this.gb_DataOwner.Size = new System.Drawing.Size(261, 114);
+            this.gb_DataOwner.Size = new System.Drawing.Size(384, 104);
             this.gb_DataOwner.TabIndex = 2;
             this.gb_DataOwner.TabStop = false;
             this.gb_DataOwner.Text = "Data Owner";
             // 
             // btn_NewDataOwner
             // 
-            this.btn_NewDataOwner.Location = new System.Drawing.Point(41, 68);
+            this.btn_NewDataOwner.Location = new System.Drawing.Point(100, 60);
             this.btn_NewDataOwner.Name = "btn_NewDataOwner";
             this.btn_NewDataOwner.Size = new System.Drawing.Size(167, 37);
             this.btn_NewDataOwner.TabIndex = 2;
@@ -112,18 +114,18 @@
             this.gb_DsaFileDetails.Controls.Add(this.tb_FileName);
             this.gb_DsaFileDetails.Controls.Add(this.lbl_FileName);
             this.gb_DsaFileDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gb_DsaFileDetails.Location = new System.Drawing.Point(302, 12);
+            this.gb_DsaFileDetails.Location = new System.Drawing.Point(431, 12);
             this.gb_DsaFileDetails.Name = "gb_DsaFileDetails";
-            this.gb_DsaFileDetails.Size = new System.Drawing.Size(486, 114);
+            this.gb_DsaFileDetails.Size = new System.Drawing.Size(561, 104);
             this.gb_DsaFileDetails.TabIndex = 3;
             this.gb_DsaFileDetails.TabStop = false;
             this.gb_DsaFileDetails.Text = "File Details";
             // 
             // tb_FilePath
             // 
-            this.tb_FilePath.Location = new System.Drawing.Point(109, 65);
+            this.tb_FilePath.Location = new System.Drawing.Point(145, 65);
             this.tb_FilePath.Name = "tb_FilePath";
-            this.tb_FilePath.Size = new System.Drawing.Size(371, 27);
+            this.tb_FilePath.Size = new System.Drawing.Size(405, 27);
             this.tb_FilePath.TabIndex = 3;
             // 
             // lbl_FilePath
@@ -137,9 +139,9 @@
             // 
             // tb_FileName
             // 
-            this.tb_FileName.Location = new System.Drawing.Point(109, 24);
+            this.tb_FileName.Location = new System.Drawing.Point(145, 24);
             this.tb_FileName.Name = "tb_FileName";
-            this.tb_FileName.Size = new System.Drawing.Size(371, 27);
+            this.tb_FileName.Size = new System.Drawing.Size(405, 27);
             this.tb_FileName.TabIndex = 1;
             // 
             // lbl_FileName
@@ -155,7 +157,7 @@
             // 
             this.dtp_StartDate.Checked = false;
             this.dtp_StartDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtp_StartDate.Location = new System.Drawing.Point(130, 135);
+            this.dtp_StartDate.Location = new System.Drawing.Point(194, 19);
             this.dtp_StartDate.MaxDate = new System.DateTime(2099, 12, 31, 0, 0, 0, 0);
             this.dtp_StartDate.MinDate = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
             this.dtp_StartDate.Name = "dtp_StartDate";
@@ -167,7 +169,7 @@
             // 
             this.dtp_ExpiryDate.Checked = false;
             this.dtp_ExpiryDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtp_ExpiryDate.Location = new System.Drawing.Point(529, 135);
+            this.dtp_ExpiryDate.Location = new System.Drawing.Point(686, 19);
             this.dtp_ExpiryDate.MaxDate = new System.DateTime(2099, 12, 31, 0, 0, 0, 0);
             this.dtp_ExpiryDate.MinDate = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
             this.dtp_ExpiryDate.Name = "dtp_ExpiryDate";
@@ -179,7 +181,7 @@
             // 
             this.lbl_StartDate.AutoSize = true;
             this.lbl_StartDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_StartDate.Location = new System.Drawing.Point(38, 140);
+            this.lbl_StartDate.Location = new System.Drawing.Point(77, 23);
             this.lbl_StartDate.Name = "lbl_StartDate";
             this.lbl_StartDate.Size = new System.Drawing.Size(86, 20);
             this.lbl_StartDate.TabIndex = 6;
@@ -189,7 +191,7 @@
             // 
             this.lbl_ExpiryDate.AutoSize = true;
             this.lbl_ExpiryDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_ExpiryDate.Location = new System.Drawing.Point(427, 140);
+            this.lbl_ExpiryDate.Location = new System.Drawing.Point(560, 25);
             this.lbl_ExpiryDate.Name = "lbl_ExpiryDate";
             this.lbl_ExpiryDate.Size = new System.Drawing.Size(96, 20);
             this.lbl_ExpiryDate.TabIndex = 7;
@@ -200,25 +202,12 @@
             this.gb_AmendmentOf.Controls.Add(this.lbl_AmendmentHelp);
             this.gb_AmendmentOf.Controls.Add(this.dgv_AmendmentOf);
             this.gb_AmendmentOf.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gb_AmendmentOf.Location = new System.Drawing.Point(12, 167);
+            this.gb_AmendmentOf.Location = new System.Drawing.Point(12, 175);
             this.gb_AmendmentOf.Name = "gb_AmendmentOf";
-            this.gb_AmendmentOf.Size = new System.Drawing.Size(776, 164);
+            this.gb_AmendmentOf.Size = new System.Drawing.Size(980, 246);
             this.gb_AmendmentOf.TabIndex = 8;
             this.gb_AmendmentOf.TabStop = false;
             this.gb_AmendmentOf.Text = "Amendment of Previous DSA";
-            // 
-            // dgv_AmendmentOf
-            // 
-            this.dgv_AmendmentOf.AllowUserToAddRows = false;
-            this.dgv_AmendmentOf.AllowUserToDeleteRows = false;
-            this.dgv_AmendmentOf.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_AmendmentOf.Location = new System.Drawing.Point(6, 38);
-            this.dgv_AmendmentOf.Name = "dgv_AmendmentOf";
-            this.dgv_AmendmentOf.ReadOnly = true;
-            this.dgv_AmendmentOf.RowHeadersWidth = 51;
-            this.dgv_AmendmentOf.RowTemplate.Height = 24;
-            this.dgv_AmendmentOf.Size = new System.Drawing.Size(763, 120);
-            this.dgv_AmendmentOf.TabIndex = 0;
             // 
             // lbl_AmendmentHelp
             // 
@@ -231,27 +220,30 @@
             this.lbl_AmendmentHelp.Text = "If this DSA amends an original agreement, select the row below containing the ori" +
     "ginal:";
             // 
+            // dgv_AmendmentOf
+            // 
+            this.dgv_AmendmentOf.AllowUserToAddRows = false;
+            this.dgv_AmendmentOf.AllowUserToDeleteRows = false;
+            this.dgv_AmendmentOf.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_AmendmentOf.Location = new System.Drawing.Point(6, 38);
+            this.dgv_AmendmentOf.Name = "dgv_AmendmentOf";
+            this.dgv_AmendmentOf.ReadOnly = true;
+            this.dgv_AmendmentOf.RowHeadersWidth = 51;
+            this.dgv_AmendmentOf.RowTemplate.Height = 24;
+            this.dgv_AmendmentOf.Size = new System.Drawing.Size(968, 201);
+            this.dgv_AmendmentOf.TabIndex = 0;
+            // 
             // gb_GovernanceReq
             // 
             this.gb_GovernanceReq.Controls.Add(this.chkb_ISO27001);
             this.gb_GovernanceReq.Controls.Add(this.chkb_DSPT);
             this.gb_GovernanceReq.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gb_GovernanceReq.Location = new System.Drawing.Point(12, 334);
+            this.gb_GovernanceReq.Location = new System.Drawing.Point(12, 426);
             this.gb_GovernanceReq.Name = "gb_GovernanceReq";
-            this.gb_GovernanceReq.Size = new System.Drawing.Size(223, 82);
+            this.gb_GovernanceReq.Size = new System.Drawing.Size(322, 80);
             this.gb_GovernanceReq.TabIndex = 9;
             this.gb_GovernanceReq.TabStop = false;
             this.gb_GovernanceReq.Text = "Governance Requirements";
-            // 
-            // chkb_DSPT
-            // 
-            this.chkb_DSPT.AutoSize = true;
-            this.chkb_DSPT.Location = new System.Drawing.Point(30, 24);
-            this.chkb_DSPT.Name = "chkb_DSPT";
-            this.chkb_DSPT.Size = new System.Drawing.Size(76, 24);
-            this.chkb_DSPT.TabIndex = 0;
-            this.chkb_DSPT.Text = "DSPT";
-            this.chkb_DSPT.UseVisualStyleBackColor = true;
             // 
             // chkb_ISO27001
             // 
@@ -263,53 +255,64 @@
             this.chkb_ISO27001.Text = "ISO27001";
             this.chkb_ISO27001.UseVisualStyleBackColor = true;
             // 
+            // chkb_DSPT
+            // 
+            this.chkb_DSPT.AutoSize = true;
+            this.chkb_DSPT.Location = new System.Drawing.Point(30, 24);
+            this.chkb_DSPT.Name = "chkb_DSPT";
+            this.chkb_DSPT.Size = new System.Drawing.Size(76, 24);
+            this.chkb_DSPT.TabIndex = 0;
+            this.chkb_DSPT.Text = "DSPT";
+            this.chkb_DSPT.UseVisualStyleBackColor = true;
+            // 
             // gb_Notes
             // 
             this.gb_Notes.Controls.Add(this.dgv_AddNote);
             this.gb_Notes.Controls.Add(this.btn_AddNote);
             this.gb_Notes.Controls.Add(this.tb_AddNote);
             this.gb_Notes.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gb_Notes.Location = new System.Drawing.Point(241, 334);
+            this.gb_Notes.Location = new System.Drawing.Point(356, 426);
             this.gb_Notes.Name = "gb_Notes";
-            this.gb_Notes.Size = new System.Drawing.Size(547, 221);
+            this.gb_Notes.Size = new System.Drawing.Size(636, 242);
             this.gb_Notes.TabIndex = 10;
             this.gb_Notes.TabStop = false;
             this.gb_Notes.Text = "Notes";
             // 
-            // tb_AddNote
+            // dgv_AddNote
             // 
-            this.tb_AddNote.Location = new System.Drawing.Point(6, 26);
-            this.tb_AddNote.Multiline = true;
-            this.tb_AddNote.Name = "tb_AddNote";
-            this.tb_AddNote.Size = new System.Drawing.Size(448, 76);
-            this.tb_AddNote.TabIndex = 0;
+            this.dgv_AddNote.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_AddNote.Location = new System.Drawing.Point(13, 122);
+            this.dgv_AddNote.Name = "dgv_AddNote";
+            this.dgv_AddNote.RowHeadersWidth = 51;
+            this.dgv_AddNote.RowTemplate.Height = 24;
+            this.dgv_AddNote.Size = new System.Drawing.Size(609, 108);
+            this.dgv_AddNote.TabIndex = 2;
             // 
             // btn_AddNote
             // 
-            this.btn_AddNote.Location = new System.Drawing.Point(460, 26);
+            this.btn_AddNote.Location = new System.Drawing.Point(543, 26);
             this.btn_AddNote.Name = "btn_AddNote";
             this.btn_AddNote.Size = new System.Drawing.Size(79, 76);
             this.btn_AddNote.TabIndex = 1;
             this.btn_AddNote.Text = "Add Note";
             this.btn_AddNote.UseVisualStyleBackColor = true;
+            this.btn_AddNote.Click += new System.EventHandler(this.btn_AddNote_Click);
             // 
-            // dgv_AddNote
+            // tb_AddNote
             // 
-            this.dgv_AddNote.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_AddNote.Location = new System.Drawing.Point(7, 108);
-            this.dgv_AddNote.Name = "dgv_AddNote";
-            this.dgv_AddNote.RowHeadersWidth = 51;
-            this.dgv_AddNote.RowTemplate.Height = 24;
-            this.dgv_AddNote.Size = new System.Drawing.Size(534, 108);
-            this.dgv_AddNote.TabIndex = 2;
+            this.tb_AddNote.Location = new System.Drawing.Point(13, 26);
+            this.tb_AddNote.Multiline = true;
+            this.tb_AddNote.Name = "tb_AddNote";
+            this.tb_AddNote.Size = new System.Drawing.Size(513, 76);
+            this.tb_AddNote.TabIndex = 0;
             // 
             // gb_Project
             // 
             this.gb_Project.Controls.Add(this.lbx_ProjectsList);
             this.gb_Project.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gb_Project.Location = new System.Drawing.Point(12, 419);
+            this.gb_Project.Location = new System.Drawing.Point(12, 526);
             this.gb_Project.Name = "gb_Project";
-            this.gb_Project.Size = new System.Drawing.Size(223, 136);
+            this.gb_Project.Size = new System.Drawing.Size(322, 142);
             this.gb_Project.TabIndex = 11;
             this.gb_Project.TabStop = false;
             this.gb_Project.Text = "Link With Project";
@@ -320,13 +323,14 @@
             this.lbx_ProjectsList.ItemHeight = 20;
             this.lbx_ProjectsList.Location = new System.Drawing.Point(10, 27);
             this.lbx_ProjectsList.Name = "lbx_ProjectsList";
-            this.lbx_ProjectsList.Size = new System.Drawing.Size(207, 104);
+            this.lbx_ProjectsList.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.lbx_ProjectsList.Size = new System.Drawing.Size(306, 104);
             this.lbx_ProjectsList.TabIndex = 0;
             // 
             // btn_OK
             // 
             this.btn_OK.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_OK.Location = new System.Drawing.Point(685, 561);
+            this.btn_OK.Location = new System.Drawing.Point(888, 675);
             this.btn_OK.Name = "btn_OK";
             this.btn_OK.Size = new System.Drawing.Size(103, 34);
             this.btn_OK.TabIndex = 12;
@@ -336,28 +340,39 @@
             // btn_Cancel
             // 
             this.btn_Cancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Cancel.Location = new System.Drawing.Point(576, 561);
+            this.btn_Cancel.Location = new System.Drawing.Point(779, 675);
             this.btn_Cancel.Name = "btn_Cancel";
             this.btn_Cancel.Size = new System.Drawing.Size(103, 34);
             this.btn_Cancel.TabIndex = 13;
             this.btn_Cancel.Text = "Cancel";
             this.btn_Cancel.UseVisualStyleBackColor = true;
             // 
+            // gb_Dates
+            // 
+            this.gb_Dates.Controls.Add(this.dtp_StartDate);
+            this.gb_Dates.Controls.Add(this.lbl_StartDate);
+            this.gb_Dates.Controls.Add(this.lbl_ExpiryDate);
+            this.gb_Dates.Controls.Add(this.dtp_ExpiryDate);
+            this.gb_Dates.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gb_Dates.Location = new System.Drawing.Point(12, 118);
+            this.gb_Dates.Name = "gb_Dates";
+            this.gb_Dates.Size = new System.Drawing.Size(980, 53);
+            this.gb_Dates.TabIndex = 14;
+            this.gb_Dates.TabStop = false;
+            this.gb_Dates.Text = "Dates";
+            // 
             // frm_DsaAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 602);
+            this.ClientSize = new System.Drawing.Size(1004, 717);
+            this.Controls.Add(this.gb_Dates);
             this.Controls.Add(this.btn_Cancel);
             this.Controls.Add(this.btn_OK);
             this.Controls.Add(this.gb_Project);
             this.Controls.Add(this.gb_Notes);
             this.Controls.Add(this.gb_GovernanceReq);
             this.Controls.Add(this.gb_AmendmentOf);
-            this.Controls.Add(this.lbl_ExpiryDate);
-            this.Controls.Add(this.lbl_StartDate);
-            this.Controls.Add(this.dtp_ExpiryDate);
-            this.Controls.Add(this.dtp_StartDate);
             this.Controls.Add(this.gb_DsaFileDetails);
             this.Controls.Add(this.gb_DataOwner);
             this.Name = "frm_DsaAdd";
@@ -375,8 +390,9 @@
             this.gb_Notes.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_AddNote)).EndInit();
             this.gb_Project.ResumeLayout(false);
+            this.gb_Dates.ResumeLayout(false);
+            this.gb_Dates.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -409,5 +425,6 @@
         private System.Windows.Forms.ListBox lbx_ProjectsList;
         private System.Windows.Forms.Button btn_OK;
         private System.Windows.Forms.Button btn_Cancel;
+        private System.Windows.Forms.GroupBox gb_Dates;
     }
 }

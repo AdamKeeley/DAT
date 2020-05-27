@@ -22,6 +22,7 @@ namespace CMS
         }
 
         private DataSet ds;
+        DataTable dsaNotes = new DataTable();
 
         public void PopulateDsaDataset()
         {
@@ -52,10 +53,12 @@ namespace CMS
             projNumbers.Insert(0, "");
             lbx_ProjectsList.DataSource = projNumbers;
 
+            // Create view of DSAs. Needs DSA table to left outer join with itself to get name of previous DSA versions.
             IEnumerable<DsaBasicsViewModel> dsaQuery =
                 from dsa in ds.Tables["tblDsas"].AsEnumerable()
                 join own in ds.Tables["tblDsaDataOwners"].AsEnumerable() on dsa.Field<int>("DataOwner") equals own.Field<int>("doID")
-                join dsa2 in ds.Tables["tblDsas"].AsEnumerable() on dsa.Field<int>("DsaID") equals dsa2.Field<int?>("AmendmentOf")
+                join dsa2 in ds.Tables["tblDsas"].AsEnumerable() on dsa.Field<int?>("AmendmentOf") equals dsa2.Field<int>("DsaID") into dsa2tmp
+                from dsa2 in dsa2tmp.DefaultIfEmpty()
                 select new DsaBasicsViewModel
                 {
                     DataOwner = own.Field<string>("DataOwnerName"),
@@ -63,11 +66,19 @@ namespace CMS
                     ExpiryDate = dsa.Field<DateTime?>("ExpiryDate"),
                     DsaName = dsa.Field<string>("DsaName"),
                     FilePath = dsa.Field<string>("DsaFileLoc"),
-                    AmendmentOf = dsa2.Field<string>("DsaName"),
+                    AmendmentOf = (dsa2 == null) ? null : dsa2.Field<string>("DsaName"),
                     DSPT = dsa.Field<bool>("DSPT"),
                     ISO27001 = dsa.Field<bool>("ISO27001")
                 };
             dgv_AmendmentOf.DataSource = dsaQuery.ToList();
+
+            dgv_AmendmentOf.Columns["DataOwner"].Width = 120;
+            dgv_AmendmentOf.Columns["StartDate"].Width = 85;
+            dgv_AmendmentOf.Columns["ExpiryDate"].Width = 85;
+            dgv_AmendmentOf.Columns["DsaName"].Width = 140;
+            dgv_AmendmentOf.Columns["AmendmentOf"].Width = 140;
+            dgv_AmendmentOf.Columns["DSPT"].Width = 75;
+            dgv_AmendmentOf.Columns["ISO27001"].Width = 75;
 
             // Data owners list, first removing old rebranded names to avoid continued use of multiple names
             List<int> rebrands = ds.Tables["tblDsaDataOwners"].AsEnumerable()
@@ -81,12 +92,24 @@ namespace CMS
                 .ToList();
             dataOwners.Insert(0, "");
             cb_ExistingDataOwner.DataSource = dataOwners;
+
+            dsaNotes.Columns.Add("Notes", typeof(string));
+            dgv_AddNote.DataSource = dsaNotes;
+            dgv_AddNote.Columns["Notes"].Width = 400;
         }
 
         public void CollectInputs()
         {
             // Put control selections into data model objects ready for passing to DB put method
             throw new NotImplementedException();
+        }
+
+        private void btn_AddNote_Click(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrWhiteSpace(tb_AddNote.Text))
+            {
+                dsaNotes.Rows.Add(tb_AddNote.Text);
+            }
         }
     }
 }
