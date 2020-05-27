@@ -80,7 +80,7 @@ namespace CMS
                 .Select(p => p.Field<string>("ProjectNumber"))
                 .ToList();
             dataOwners.Insert(0, "");
-            lbx_ProjectsList.DataSource = dataOwners;
+            cb_ExistingDataOwner.DataSource = dataOwners;
         }
 
         public void CollectInputs()
