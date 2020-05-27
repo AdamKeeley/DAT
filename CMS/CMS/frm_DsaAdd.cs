@@ -38,7 +38,6 @@ namespace CMS
                                 Environment.NewLine +
                                 ex.StackTrace);
             }
-
         }
 
         public void SetInitialControls()
@@ -81,6 +80,15 @@ namespace CMS
             dgv_AmendmentOf.Columns["ISO27001"].Width = 75;
 
             // Data owners list, first removing old rebranded names to avoid continued use of multiple names
+            FillDataOwnersList();
+
+            dsaNotes.Columns.Add("Notes", typeof(string));
+            dgv_AddNote.DataSource = dsaNotes;
+            dgv_AddNote.Columns["Notes"].Width = 400;
+        }
+
+        private void FillDataOwnersList()
+        {
             List<int> rebrands = ds.Tables["tblDsaDataOwners"].AsEnumerable()
                 .Where(t => t.Field<int?>("RebrandOf") != null)
                 .Select(t => new List<int> { t.Field<int?>("RebrandOf").GetValueOrDefault() })
@@ -92,10 +100,6 @@ namespace CMS
                 .ToList();
             dataOwners.Insert(0, "");
             cb_ExistingDataOwner.DataSource = dataOwners;
-
-            dsaNotes.Columns.Add("Notes", typeof(string));
-            dgv_AddNote.DataSource = dsaNotes;
-            dgv_AddNote.Columns["Notes"].Width = 400;
         }
 
         public void CollectInputs()
@@ -110,6 +114,19 @@ namespace CMS
             {
                 dsaNotes.Rows.Add(tb_AddNote.Text);
             }
+        }
+
+        private void btn_NewDataOwner_Click(object sender, EventArgs e)
+        {
+            frm_DsaDataOwnerAdd DataOwnerAdd = new frm_DsaDataOwnerAdd();
+            DataOwnerAdd.FormClosing += new FormClosingEventHandler(this.UpdateDataOwnerControls);
+            DataOwnerAdd.Show();
+        }
+
+        private void UpdateDataOwnerControls(object sender, EventArgs e)
+        {
+            PopulateDsaDataset();
+            FillDataOwnersList();
         }
     }
 }

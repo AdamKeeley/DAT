@@ -106,6 +106,7 @@
             this.btn_NewDataOwner.TabIndex = 2;
             this.btn_NewDataOwner.Text = "New Data Owner";
             this.btn_NewDataOwner.UseVisualStyleBackColor = true;
+            this.btn_NewDataOwner.Click += new System.EventHandler(this.btn_NewDataOwner_Click);
             // 
             // gb_DsaFileDetails
             // 
@@ -315,7 +316,7 @@
             this.gb_Project.Size = new System.Drawing.Size(322, 142);
             this.gb_Project.TabIndex = 11;
             this.gb_Project.TabStop = false;
-            this.gb_Project.Text = "Link With Project";
+            this.gb_Project.Text = "Link With Project(s)";
             // 
             // lbx_ProjectsList
             // 
