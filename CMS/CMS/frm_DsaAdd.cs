@@ -55,7 +55,7 @@ namespace CMS
             IEnumerable<DsaBasicsViewModel> dsaQuery =
                 from dsa in ds.Tables["tblDsas"].AsEnumerable()
                 join own in ds.Tables["tblDsaDataOwners"].AsEnumerable() on dsa.Field<int>("DataOwner") equals own.Field<int>("doID")
-                join dsa2 in ds.Tables["tblDsas"].AsEnumerable() on dsa.Field<int>("DsaID") equals dsa2.Field<int>("AmendmentOf")
+                join dsa2 in ds.Tables["tblDsas"].AsEnumerable() on dsa.Field<int>("DsaID") equals dsa2.Field<int?>("AmendmentOf")
                 select new DsaBasicsViewModel
                 {
                     DataOwner = own.Field<string>("DataOwnerName"),
@@ -76,8 +76,8 @@ namespace CMS
                 .Distinct().SelectMany(x => x).ToList();
             List<string> dataOwners = ds.Tables["tblDsaDataOwners"].AsEnumerable()
                 .Where(t => !rebrands.Contains(t.Field<int>("doID")))
-                .OrderBy(p => p.Field<string>("ProjectNumber"))
-                .Select(p => p.Field<string>("ProjectNumber"))
+                .OrderBy(p => p.Field<string>("DataOwnerName"))
+                .Select(p => p.Field<string>("DataOwnerName"))
                 .ToList();
             dataOwners.Insert(0, "");
             cb_ExistingDataOwner.DataSource = dataOwners;
