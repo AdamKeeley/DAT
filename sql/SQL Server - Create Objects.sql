@@ -1,5 +1,5 @@
-create database DAT_CMS
-go
+--create database DAT_CMS
+--go
 
 use [DAT_CMS]
 go
