@@ -403,11 +403,6 @@ namespace CMS
                     MessageBox.Show("Please enter valid Start Date");
                     dateCheck = false;
                 }
-                catch (Exception)
-                {
-                    MessageBox.Show("Please enter valid Start Date");
-                    dateCheck = false;
-                }
             }
             if (dateCheck == true & mtb_pEndDateValue.Text != "" & mtb_pEndDateValue.Text != "  /  /")
             {
