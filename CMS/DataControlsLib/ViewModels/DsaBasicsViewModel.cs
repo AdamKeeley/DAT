@@ -15,6 +15,6 @@ namespace DataControlsLib.ViewModels
         public string FilePath { get; set; }
         public string AmendmentOf { get; set; }
         public bool DSPT { get; set; }
-        public bool ISO270001 { get; set; }
+        public bool ISO27001 { get; set; }
     }
 }

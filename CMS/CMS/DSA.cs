@@ -19,7 +19,7 @@ namespace CMS
             using (SqlConnection connection = new SqlConnection(conString.getString()))
             {
                 GetDB.GetDataTable(connection, ds, "tblDsas",
-                    "SELECT DsaID, DataOwner, AmendmentOf, DsaName, DsaFileLoc, StartDate, ExpiryDate, DSPT, ISO270001, DateAdded, LastUpdated FROM dbo.tblDsas");
+                    "SELECT DsaID, DataOwner, AmendmentOf, DsaName, DsaFileLoc, StartDate, ExpiryDate, DSPT, ISO27001, DateAdded, LastUpdated FROM dbo.tblDsas");
                 GetDB.GetDataTable(connection, ds, "tblDsaNotes",
                     "SELECT dnID, Dsa, Note, Created, CreatedBy FROM dbo.tblDsaNotes");
                 GetDB.GetDataTable(connection, ds, "tblDsasProjects",

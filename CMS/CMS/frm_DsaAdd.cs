@@ -65,7 +65,7 @@ namespace CMS
                     FilePath = dsa.Field<string>("DsaFileLoc"),
                     AmendmentOf = dsa2.Field<string>("DsaName"),
                     DSPT = dsa.Field<bool>("DSPT"),
-                    ISO270001 = dsa.Field<bool>("ISO270001")
+                    ISO27001 = dsa.Field<bool>("ISO27001")
                 };
             dgv_AmendmentOf.DataSource = dsaQuery.ToList();
 
