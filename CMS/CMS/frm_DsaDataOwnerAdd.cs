@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DataControlsLib;
 using DataControlsLib.ViewModels;
 
 namespace CMS
@@ -17,6 +18,7 @@ namespace CMS
         {
             InitializeComponent();
             PopulateDsaDataset();
+            SetExistingDataOwnersList();
             FillDataOwnerGridView();
         }
 
@@ -38,13 +40,31 @@ namespace CMS
             }
         }
 
+        public void SetExistingDataOwnersList()
+        {
+            List<string> dataOwners = ds.Tables["tblDsaDataOwners"].AsEnumerable()
+                .OrderBy(p => p.Field<string>("DataOwnerName"))
+                .Select(p => p.Field<string>("DataOwnerName"))
+                .ToList();
+            dataOwners.Insert(0, "");
+            cb_RebrandingOfOldName.DataSource = dataOwners;
+        }
+
         public void FillDataOwnerGridView()
         {
+            string searchTxt = tb_Search.Text.ToLower().NullIfEmpty();
+            
             List<DataOwnersViewModel> doList = (
                 from do1 in ds.Tables["tblDsaDataOwners"].AsEnumerable()
                 join do2 in ds.Tables["tblDsaDataOwners"].AsEnumerable() on do1.Field<int?>("RebrandOf") equals do2.Field<int>("doID") into do2tmp
                 orderby do1.Field<string>("DataOwnerName")
                 from do2 in do2tmp.DefaultIfEmpty()
+                where 
+                (
+                    searchTxt == null
+                        || ((do1 == null) ? false : do1.Field<string>("DataOwnerName").ToLower().Contains(searchTxt))
+                        || ((do2 == null) ? false : do2.Field<string>("DataOwnerName").ToLower().Contains(searchTxt))
+                )
                 select new DataOwnersViewModel
                 {
                     DataOwner = do1.Field<string>("DataOwnerName"),
@@ -53,8 +73,13 @@ namespace CMS
                 .ToList();
 
             dgv_DataOwners.DataSource = doList;
-            dgv_DataOwners.Columns["DataOwner"].Width = 150;
-            dgv_DataOwners.Columns["RebrandingOf"].Width = 150;
+            dgv_DataOwners.Columns["DataOwner"].Width = 230;
+            dgv_DataOwners.Columns["RebrandingOf"].Width = 230;
+        }
+
+        private void btn_Search_Click(object sender, EventArgs e)
+        {
+            FillDataOwnerGridView();
         }
     }
 }

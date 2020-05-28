@@ -31,13 +31,13 @@
             this.tb_NewDataOwnerName = new System.Windows.Forms.TextBox();
             this.btn_NewDataOwner = new System.Windows.Forms.Button();
             this.gb_DataOwners = new System.Windows.Forms.GroupBox();
-            this.dgv_DataOwners = new System.Windows.Forms.DataGridView();
             this.btn_Search = new System.Windows.Forms.Button();
+            this.dgv_DataOwners = new System.Windows.Forms.DataGridView();
             this.tb_Search = new System.Windows.Forms.TextBox();
             this.gb_AddDataOwner = new System.Windows.Forms.GroupBox();
-            this.lbl_NewDataOwnerName = new System.Windows.Forms.Label();
-            this.lbl_RebrandingOfOldName = new System.Windows.Forms.Label();
             this.cb_RebrandingOfOldName = new System.Windows.Forms.ComboBox();
+            this.lbl_RebrandingOfOldName = new System.Windows.Forms.Label();
+            this.lbl_NewDataOwnerName = new System.Windows.Forms.Label();
             this.gb_DataOwners.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_DataOwners)).BeginInit();
             this.gb_AddDataOwner.SuspendLayout();
@@ -54,9 +54,9 @@
             // btn_NewDataOwner
             // 
             this.btn_NewDataOwner.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_NewDataOwner.Location = new System.Drawing.Point(452, 117);
+            this.btn_NewDataOwner.Location = new System.Drawing.Point(482, 106);
             this.btn_NewDataOwner.Name = "btn_NewDataOwner";
-            this.btn_NewDataOwner.Size = new System.Drawing.Size(199, 27);
+            this.btn_NewDataOwner.Size = new System.Drawing.Size(199, 33);
             this.btn_NewDataOwner.TabIndex = 1;
             this.btn_NewDataOwner.Text = "Add Data Owner";
             this.btn_NewDataOwner.UseVisualStyleBackColor = true;
@@ -74,6 +74,17 @@
             this.gb_DataOwners.TabStop = false;
             this.gb_DataOwners.Text = "List of Existing Data Owners";
             // 
+            // btn_Search
+            // 
+            this.btn_Search.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Search.Location = new System.Drawing.Point(482, 26);
+            this.btn_Search.Name = "btn_Search";
+            this.btn_Search.Size = new System.Drawing.Size(199, 32);
+            this.btn_Search.TabIndex = 4;
+            this.btn_Search.Text = "Search";
+            this.btn_Search.UseVisualStyleBackColor = true;
+            this.btn_Search.Click += new System.EventHandler(this.btn_Search_Click);
+            // 
             // dgv_DataOwners
             // 
             this.dgv_DataOwners.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -84,20 +95,10 @@
             this.dgv_DataOwners.Size = new System.Drawing.Size(711, 261);
             this.dgv_DataOwners.TabIndex = 0;
             // 
-            // btn_Search
-            // 
-            this.btn_Search.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Search.Location = new System.Drawing.Point(452, 30);
-            this.btn_Search.Name = "btn_Search";
-            this.btn_Search.Size = new System.Drawing.Size(199, 27);
-            this.btn_Search.TabIndex = 4;
-            this.btn_Search.Text = "Search";
-            this.btn_Search.UseVisualStyleBackColor = true;
-            // 
             // tb_Search
             // 
             this.tb_Search.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_Search.Location = new System.Drawing.Point(59, 30);
+            this.tb_Search.Location = new System.Drawing.Point(59, 29);
             this.tb_Search.Name = "tb_Search";
             this.tb_Search.Size = new System.Drawing.Size(367, 27);
             this.tb_Search.TabIndex = 3;
@@ -117,14 +118,13 @@
             this.gb_AddDataOwner.TabStop = false;
             this.gb_AddDataOwner.Text = "New Data Owner";
             // 
-            // lbl_NewDataOwnerName
+            // cb_RebrandingOfOldName
             // 
-            this.lbl_NewDataOwnerName.AutoSize = true;
-            this.lbl_NewDataOwnerName.Location = new System.Drawing.Point(19, 24);
-            this.lbl_NewDataOwnerName.Name = "lbl_NewDataOwnerName";
-            this.lbl_NewDataOwnerName.Size = new System.Drawing.Size(148, 20);
-            this.lbl_NewDataOwnerName.TabIndex = 2;
-            this.lbl_NewDataOwnerName.Text = "Data Owner Name";
+            this.cb_RebrandingOfOldName.FormattingEnabled = true;
+            this.cb_RebrandingOfOldName.Location = new System.Drawing.Point(231, 71);
+            this.cb_RebrandingOfOldName.Name = "cb_RebrandingOfOldName";
+            this.cb_RebrandingOfOldName.Size = new System.Drawing.Size(222, 28);
+            this.cb_RebrandingOfOldName.TabIndex = 4;
             // 
             // lbl_RebrandingOfOldName
             // 
@@ -135,13 +135,14 @@
             this.lbl_RebrandingOfOldName.TabIndex = 3;
             this.lbl_RebrandingOfOldName.Text = "Rebranding of Old\r\nData Owner Name?";
             // 
-            // cb_RebrandingOfOldName
+            // lbl_NewDataOwnerName
             // 
-            this.cb_RebrandingOfOldName.FormattingEnabled = true;
-            this.cb_RebrandingOfOldName.Location = new System.Drawing.Point(231, 71);
-            this.cb_RebrandingOfOldName.Name = "cb_RebrandingOfOldName";
-            this.cb_RebrandingOfOldName.Size = new System.Drawing.Size(222, 28);
-            this.cb_RebrandingOfOldName.TabIndex = 4;
+            this.lbl_NewDataOwnerName.AutoSize = true;
+            this.lbl_NewDataOwnerName.Location = new System.Drawing.Point(19, 24);
+            this.lbl_NewDataOwnerName.Name = "lbl_NewDataOwnerName";
+            this.lbl_NewDataOwnerName.Size = new System.Drawing.Size(148, 20);
+            this.lbl_NewDataOwnerName.TabIndex = 2;
+            this.lbl_NewDataOwnerName.Text = "Data Owner Name";
             // 
             // frm_DsaDataOwnerAdd
             // 
