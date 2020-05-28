@@ -86,7 +86,7 @@
             this.gb_DataIOHistoryFilterOptions.Controls.Add(this.cb_ProjectFilter);
             this.gb_DataIOHistoryFilterOptions.Controls.Add(this.dtp_DateFromFilter);
             this.gb_DataIOHistoryFilterOptions.Controls.Add(this.lbl_ChangeDateFilter);
-            this.gb_DataIOHistoryFilterOptions.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gb_DataIOHistoryFilterOptions.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gb_DataIOHistoryFilterOptions.Location = new System.Drawing.Point(12, 12);
             this.gb_DataIOHistoryFilterOptions.Name = "gb_DataIOHistoryFilterOptions";
             this.gb_DataIOHistoryFilterOptions.Size = new System.Drawing.Size(879, 141);
@@ -208,7 +208,7 @@
             // 
             this.lbl_FilePathFilter.AutoSize = true;
             this.lbl_FilePathFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_FilePathFilter.Location = new System.Drawing.Point(6, 76);
+            this.lbl_FilePathFilter.Location = new System.Drawing.Point(6, 82);
             this.lbl_FilePathFilter.Name = "lbl_FilePathFilter";
             this.lbl_FilePathFilter.Size = new System.Drawing.Size(115, 40);
             this.lbl_FilePathFilter.TabIndex = 7;
@@ -226,7 +226,7 @@
             // 
             this.lbl_ProjectFilter.AutoSize = true;
             this.lbl_ProjectFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_ProjectFilter.Location = new System.Drawing.Point(6, 27);
+            this.lbl_ProjectFilter.Location = new System.Drawing.Point(6, 32);
             this.lbl_ProjectFilter.Name = "lbl_ProjectFilter";
             this.lbl_ProjectFilter.Size = new System.Drawing.Size(65, 40);
             this.lbl_ProjectFilter.TabIndex = 5;
@@ -235,6 +235,7 @@
             // 
             // cb_ProjectFilter
             // 
+            this.cb_ProjectFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cb_ProjectFilter.FormattingEnabled = true;
             this.cb_ProjectFilter.Location = new System.Drawing.Point(77, 39);
             this.cb_ProjectFilter.Name = "cb_ProjectFilter";
@@ -261,7 +262,6 @@
             this.btn_NewImportRequest.TabIndex = 4;
             this.btn_NewImportRequest.Text = "New Import";
             this.btn_NewImportRequest.UseVisualStyleBackColor = true;
-            //this.btn_NewImportRequest.Click += new System.EventHandler(this.btn_NewImportRequest_Click);
             // 
             // btn_RefreshAssetsHistoryView
             // 

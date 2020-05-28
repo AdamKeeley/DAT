@@ -68,7 +68,7 @@ namespace CMS
                 select new DataOwnersViewModel
                 {
                     DataOwner = do1.Field<string>("DataOwnerName"),
-                    RebrandingOf = (do2 == null) ? null : do2.Field<string>("DataOwnerName")
+                    RebrandingOf = do2?.Field<string>("DataOwnerName")
                 })
                 .ToList();
 

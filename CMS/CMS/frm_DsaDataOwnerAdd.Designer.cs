@@ -77,7 +77,7 @@
             // btn_Search
             // 
             this.btn_Search.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Search.Location = new System.Drawing.Point(482, 26);
+            this.btn_Search.Location = new System.Drawing.Point(482, 27);
             this.btn_Search.Name = "btn_Search";
             this.btn_Search.Size = new System.Drawing.Size(199, 32);
             this.btn_Search.TabIndex = 4;
@@ -120,6 +120,7 @@
             // 
             // cb_RebrandingOfOldName
             // 
+            this.cb_RebrandingOfOldName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cb_RebrandingOfOldName.FormattingEnabled = true;
             this.cb_RebrandingOfOldName.Location = new System.Drawing.Point(231, 71);
             this.cb_RebrandingOfOldName.Name = "cb_RebrandingOfOldName";
@@ -129,7 +130,7 @@
             // lbl_RebrandingOfOldName
             // 
             this.lbl_RebrandingOfOldName.AutoSize = true;
-            this.lbl_RebrandingOfOldName.Location = new System.Drawing.Point(19, 71);
+            this.lbl_RebrandingOfOldName.Location = new System.Drawing.Point(19, 64);
             this.lbl_RebrandingOfOldName.Name = "lbl_RebrandingOfOldName";
             this.lbl_RebrandingOfOldName.Size = new System.Drawing.Size(157, 40);
             this.lbl_RebrandingOfOldName.TabIndex = 3;

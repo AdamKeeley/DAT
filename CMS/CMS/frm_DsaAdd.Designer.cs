@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lbl_ExistingDataOwner = new System.Windows.Forms.Label();
             this.cb_ExistingDataOwner = new System.Windows.Forms.ComboBox();
             this.gb_DataOwner = new System.Windows.Forms.GroupBox();
             this.btn_NewDataOwner = new System.Windows.Forms.Button();
@@ -67,29 +66,19 @@
             this.gb_Dates.SuspendLayout();
             this.SuspendLayout();
             // 
-            // lbl_ExistingDataOwner
-            // 
-            this.lbl_ExistingDataOwner.AutoSize = true;
-            this.lbl_ExistingDataOwner.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_ExistingDataOwner.Location = new System.Drawing.Point(6, 29);
-            this.lbl_ExistingDataOwner.Name = "lbl_ExistingDataOwner";
-            this.lbl_ExistingDataOwner.Size = new System.Drawing.Size(68, 20);
-            this.lbl_ExistingDataOwner.TabIndex = 0;
-            this.lbl_ExistingDataOwner.Text = "Existing";
-            // 
             // cb_ExistingDataOwner
             // 
+            this.cb_ExistingDataOwner.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cb_ExistingDataOwner.FormattingEnabled = true;
-            this.cb_ExistingDataOwner.Location = new System.Drawing.Point(118, 26);
+            this.cb_ExistingDataOwner.Location = new System.Drawing.Point(10, 26);
             this.cb_ExistingDataOwner.Name = "cb_ExistingDataOwner";
-            this.cb_ExistingDataOwner.Size = new System.Drawing.Size(260, 28);
+            this.cb_ExistingDataOwner.Size = new System.Drawing.Size(368, 28);
             this.cb_ExistingDataOwner.TabIndex = 1;
             // 
             // gb_DataOwner
             // 
             this.gb_DataOwner.Controls.Add(this.btn_NewDataOwner);
             this.gb_DataOwner.Controls.Add(this.cb_ExistingDataOwner);
-            this.gb_DataOwner.Controls.Add(this.lbl_ExistingDataOwner);
             this.gb_DataOwner.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gb_DataOwner.Location = new System.Drawing.Point(12, 12);
             this.gb_DataOwner.Name = "gb_DataOwner";
@@ -100,11 +89,11 @@
             // 
             // btn_NewDataOwner
             // 
-            this.btn_NewDataOwner.Location = new System.Drawing.Point(100, 60);
+            this.btn_NewDataOwner.Location = new System.Drawing.Point(56, 60);
             this.btn_NewDataOwner.Name = "btn_NewDataOwner";
-            this.btn_NewDataOwner.Size = new System.Drawing.Size(167, 37);
+            this.btn_NewDataOwner.Size = new System.Drawing.Size(266, 37);
             this.btn_NewDataOwner.TabIndex = 2;
-            this.btn_NewDataOwner.Text = "New Data Owner";
+            this.btn_NewDataOwner.Text = "Add New Data Owner to List";
             this.btn_NewDataOwner.UseVisualStyleBackColor = true;
             this.btn_NewDataOwner.Click += new System.EventHandler(this.btn_NewDataOwner_Click);
             // 
@@ -379,7 +368,6 @@
             this.Name = "frm_DsaAdd";
             this.Text = "Add a New DSA";
             this.gb_DataOwner.ResumeLayout(false);
-            this.gb_DataOwner.PerformLayout();
             this.gb_DsaFileDetails.ResumeLayout(false);
             this.gb_DsaFileDetails.PerformLayout();
             this.gb_AmendmentOf.ResumeLayout(false);
@@ -398,8 +386,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Label lbl_ExistingDataOwner;
         private System.Windows.Forms.ComboBox cb_ExistingDataOwner;
         private System.Windows.Forms.GroupBox gb_DataOwner;
         private System.Windows.Forms.Button btn_NewDataOwner;
