@@ -10,7 +10,7 @@ namespace DataControlsLib
     {
         public static string NullIfEmpty(this string value)
         {
-            if (String.IsNullOrEmpty(value))
+            if (String.IsNullOrWhiteSpace(value))
             {
                 return null;
             }
