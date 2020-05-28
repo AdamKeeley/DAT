@@ -47,5 +47,10 @@ namespace CMS
 
             return ds;
         }
+
+        internal DataSet PutDataOwnerData()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

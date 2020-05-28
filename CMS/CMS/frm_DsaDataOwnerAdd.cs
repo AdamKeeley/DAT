@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DataControlsLib;
+using DataControlsLib.DataModels;
 using DataControlsLib.ViewModels;
 
 namespace CMS
@@ -80,6 +81,62 @@ namespace CMS
         private void btn_Search_Click(object sender, EventArgs e)
         {
             FillDataOwnerGridView();
+        }
+
+        private void btn_NewDataOwner_Click(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrWhiteSpace(tb_NewDataOwnerName.Text))
+            {
+                // DB schema enforces data owner names to be unique. But not sure yet how that will behave
+                // might need method to catch duplications and throw a meaningful error. TBC
+                //ValidateDataOwnerInputs();
+
+                DialogResult confirmation = MessageBox.Show(
+                    "You're about to create a new data owner record in the database with the name:\n\n" + 
+                    $"{tb_NewDataOwnerName.Text}\n" + 
+                    $"{(cb_RebrandingOfOldName.SelectedItem.ToString().NullIfEmpty() == null ? null : $"a rebrand of {cb_RebrandingOfOldName.SelectedItem}\n")}\n" + 
+                    "Are you sure?",    
+                    caption: "New data owner confirmation",
+                    buttons: MessageBoxButtons.OKCancel
+                );
+
+                if (confirmation == DialogResult.OK)
+                {
+                    int? rebrandedIndex = null;
+                    if (!String.IsNullOrWhiteSpace(cb_RebrandingOfOldName.SelectedItem.ToString()))
+                    {
+                        rebrandedIndex = ds.Tables["tblDsaDataOwners"].AsEnumerable()
+                            .Where(tbl => tbl.Field<string>("DataOwnerName") == cb_RebrandingOfOldName.SelectedItem.ToString())
+                            .Select(tbl => tbl?.Field<int>("doID"))
+                            .ToList()
+                            .First();
+                    }
+
+                    DsaDataOwnerModel doInput = new DsaDataOwnerModel
+                    {
+                        DateOwnerName = tb_NewDataOwnerName.Text,
+                        RebrandOf = rebrandedIndex
+                    };
+
+                    try
+                    {
+                        DSA dsa = new DSA();
+                        ds = dsa.PutDataOwnerData();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Failed to add new data owner record to the database." + Environment.NewLine +
+                                        ex.Message + Environment.NewLine +
+                                        Environment.NewLine +
+                                        ex.StackTrace);
+                    }
+                }
+            }
+        }
+
+        private void ValidateDataOwnerInputs()
+        {
+            throw new NotImplementedException();
         }
     }
 }

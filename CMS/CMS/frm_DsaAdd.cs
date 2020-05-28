@@ -65,7 +65,7 @@ namespace CMS
                     ExpiryDate = dsa.Field<DateTime?>("ExpiryDate"),
                     DsaName = dsa.Field<string>("DsaName"),
                     FilePath = dsa.Field<string>("DsaFileLoc"),
-                    AmendmentOf = (dsa2 == null) ? null : dsa2.Field<string>("DsaName"),
+                    AmendmentOf = dsa2?.Field<string>("DsaName"),
                     DSPT = dsa.Field<bool>("DSPT"),
                     ISO27001 = dsa.Field<bool>("ISO27001")
                 };

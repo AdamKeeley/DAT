@@ -60,6 +60,7 @@
             this.btn_NewDataOwner.TabIndex = 1;
             this.btn_NewDataOwner.Text = "Add Data Owner";
             this.btn_NewDataOwner.UseVisualStyleBackColor = true;
+            this.btn_NewDataOwner.Click += new System.EventHandler(this.btn_NewDataOwner_Click);
             // 
             // gb_DataOwners
             // 
