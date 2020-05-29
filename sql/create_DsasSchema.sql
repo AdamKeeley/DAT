@@ -37,8 +37,8 @@ CREATE TABLE dbo.tblDsasProjects(
 
 CREATE TABLE dbo.tblDsaDataOwners(
 	doID			INT IDENTITY(1,1) NOT NULL,
-	RebrandOf		INT NULL, -- References primary key to link brands when they change their name
 	DataOwnerName	VARCHAR(50) NOT NULL UNIQUE,
+	RebrandOf		INT NULL, -- References primary key to link brands when they change their name
 	CONSTRAINT PK_DataOwners PRIMARY KEY (doID),
 	CONSTRAINT FK_RebrandOf_doID FOREIGN KEY (RebrandOf) REFERENCES dbo.tblDsaDataOwners (doID)
 )
