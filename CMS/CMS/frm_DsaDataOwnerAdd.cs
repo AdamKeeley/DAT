@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -18,12 +19,19 @@ namespace CMS
         public frm_DsaDataOwnerAdd()
         {
             InitializeComponent();
-            PopulateDsaDataset();
-            SetExistingDataOwnersList();
-            FillDataOwnerGridView();
+            UpdateDataOwnerControls();
         }
 
         private DataSet ds;
+
+        private void UpdateDataOwnerControls()
+        {
+            PopulateDsaDataset();
+            SetExistingDataOwnersList();
+
+            tb_Search.Text = "";
+            FillDataOwnerGridView();
+        }
 
         public void PopulateDsaDataset()
         {
@@ -87,9 +95,12 @@ namespace CMS
         {
             if (!String.IsNullOrWhiteSpace(tb_NewDataOwnerName.Text))
             {
-                // DB schema enforces data owner names to be unique. But not sure yet how that will behave
-                // might need method to catch duplications and throw a meaningful error. TBC
-                //ValidateDataOwnerInputs();
+                bool valid = ValidateDataOwnerInputs();
+
+                if (!valid)
+                {
+                    return;
+                }
 
                 DialogResult confirmation = MessageBox.Show(
                     "You're about to create a new data owner record in the database with the name:\n\n" + 
@@ -100,43 +111,74 @@ namespace CMS
                     buttons: MessageBoxButtons.OKCancel
                 );
 
-                if (confirmation == DialogResult.OK)
+                if (confirmation == DialogResult.Cancel)
                 {
-                    int? rebrandedIndex = null;
-                    if (!String.IsNullOrWhiteSpace(cb_RebrandingOfOldName.SelectedItem.ToString()))
-                    {
-                        rebrandedIndex = ds.Tables["tblDsaDataOwners"].AsEnumerable()
-                            .Where(tbl => tbl.Field<string>("DataOwnerName") == cb_RebrandingOfOldName.SelectedItem.ToString())
-                            .Select(tbl => tbl?.Field<int>("doID"))
-                            .ToList()
-                            .First();
-                    }
-
-                    DsaDataOwnerModel doInput = new DsaDataOwnerModel
-                    {
-                        DateOwnerName = tb_NewDataOwnerName.Text,
-                        RebrandOf = rebrandedIndex
-                    };
-
-                    try
-                    {
-                        DSA dsa = new DSA();
-                        dsa.PutDataOwnerData(doInput);
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Failed to add new data owner record to the database." + Environment.NewLine +
-                                        ex.Message + Environment.NewLine +
-                                        Environment.NewLine +
-                                        ex.StackTrace);
-                    }
+                    return;
                 }
+
+                int? rebrandedIndex = ds.Tables["tblDsaDataOwners"].AsEnumerable()
+                        .Where(tbl => tbl.Field<string>("DataOwnerName") == cb_RebrandingOfOldName.SelectedItem.ToString())
+                        .Select(tbl => tbl?.Field<int>("doID"))
+                        .ToList()
+                        .FirstOrDefault();
+
+                DsaDataOwnerModel doInput = new DsaDataOwnerModel
+                {
+                    DateOwnerName = tb_NewDataOwnerName.Text,
+                    RebrandOf = rebrandedIndex
+                };
+
+                try
+                {
+                    DSA dsa = new DSA();
+                    int rowsAffected = dsa.PutDataOwnerData(doInput);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Failed to add new data owner record to the database." + Environment.NewLine +
+                                    ex.Message + Environment.NewLine +
+                                    Environment.NewLine +
+                                    ex.StackTrace);
+                }
+
+                UpdateDataOwnerControls();
             }
         }
 
-        private void ValidateDataOwnerInputs()
+        private bool ValidateDataOwnerInputs()
         {
-            throw new NotImplementedException();
+            List<string> existingNames = ds.Tables["tblDsaDataOwners"].AsEnumerable().Select(x => x.Field<string>("DataOwnerName")).ToList();
+
+            if (existingNames.Contains(tb_NewDataOwnerName.Text))
+            {
+                // Stuff to tell user
+                string resp = $"{tb_NewDataOwnerName.Text} already exists in the record of data owners. Please use the existing record instead.\n";
+
+                string rebrandedName = (
+                        from do1 in ds.Tables["tblDsaDataOwners"].AsEnumerable()
+                        join do2 in ds.Tables["tblDsaDataOwners"].AsEnumerable() on do1.Field<int?>("RebrandOf") equals do2.Field<int>("doID") into do2tmp
+                        from do2 in do2tmp.DefaultIfEmpty()
+                        where do2?.Field<string>("DataOwnerName") == tb_NewDataOwnerName.Text
+                        select do1.Field<string>("DataOwnerName")
+                    ).FirstOrDefault();
+
+                resp += (rebrandedName == null) ? null : $"However, this data owner has been rebranded to {rebrandedName}. Consider using this newer name instead.\n";
+
+                MessageBox.Show(text: resp, caption: "Duplicate of existing name", buttons: MessageBoxButtons.OK);
+
+                return false;
+            }
+
+            if (tb_NewDataOwnerName.Text.Length > 50)
+            {
+                MessageBox.Show(
+                    text: $"Data owner name can be a maximum of 50 characters.\n{tb_NewDataOwnerName.Text} is {tb_NewDataOwnerName.Text.Length} characters.\n", 
+                    caption: "Name too long", buttons: MessageBoxButtons.OK
+                );
+                return false;
+            }
+
+            return true;
         }
     }
 }
