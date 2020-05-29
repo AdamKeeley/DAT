@@ -1,11 +1,14 @@
-﻿using DataControlsLib;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
+using DataControlsLib;
+using DataControlsLib.DataModels;
 
 namespace CMS
 {
@@ -48,9 +51,25 @@ namespace CMS
             return ds;
         }
 
-        internal DataSet PutDataOwnerData()
+        internal int PutDataOwnerData(DsaDataOwnerModel insertData)
         {
-            throw new NotImplementedException();
+            string query = "INSERT INTO dbo.tblDsaDataOwners (DataOwnerName, RebrandOf) VALUES (@Name, @OldNameID)";
+
+            int nrows = 0;
+            SQL_Stuff conString = new SQL_Stuff();
+
+            using (SqlConnection connection = new SqlConnection(conString.getString()))
+            using (SqlCommand cmd = new SqlCommand(query, connection))
+            {
+                cmd.Parameters.Add("@Name", SqlDbType.VarChar, 50).Value = insertData.DateOwnerName;
+                cmd.Parameters.Add("@OldNameID", SqlDbType.Int).Value = insertData.RebrandOf.HasValue ? insertData.RebrandOf : (object)DBNull.Value;
+
+                connection.Open();
+                nrows = cmd.ExecuteNonQuery();
+                connection.Close();
+            }
+
+            return nrows;
         }
     }
 }
