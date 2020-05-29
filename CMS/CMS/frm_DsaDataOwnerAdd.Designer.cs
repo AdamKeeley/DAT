@@ -88,9 +88,12 @@
             // 
             // dgv_DataOwners
             // 
+            this.dgv_DataOwners.AllowUserToAddRows = false;
+            this.dgv_DataOwners.AllowUserToDeleteRows = false;
             this.dgv_DataOwners.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_DataOwners.Location = new System.Drawing.Point(6, 68);
             this.dgv_DataOwners.Name = "dgv_DataOwners";
+            this.dgv_DataOwners.ReadOnly = true;
             this.dgv_DataOwners.RowHeadersWidth = 51;
             this.dgv_DataOwners.RowTemplate.Height = 24;
             this.dgv_DataOwners.Size = new System.Drawing.Size(711, 261);

@@ -121,7 +121,7 @@ namespace CMS
                     try
                     {
                         DSA dsa = new DSA();
-                        ds = dsa.PutDataOwnerData();
+                        dsa.PutDataOwnerData(doInput);
                     }
                     catch (Exception ex)
                     {
