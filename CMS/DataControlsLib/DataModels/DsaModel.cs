@@ -17,6 +17,8 @@ namespace DataControlsLib.DataModels
         public DateTime? ExpiryDate { get; set; }
         public bool DSPT { get; set; }
         public bool ISO27001 { get; set; }
+        public bool RequiresEncryption { get; set; }
+        public bool NoRemoteAccess { get; set; }
         public DateTime? DateAdded { get; set; }
         public DateTime? LastUpdated { get; set; }
     }

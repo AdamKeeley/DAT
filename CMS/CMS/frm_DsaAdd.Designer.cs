@@ -44,6 +44,8 @@
             this.lbl_AmendmentHelp = new System.Windows.Forms.Label();
             this.dgv_AmendmentOf = new System.Windows.Forms.DataGridView();
             this.gb_GovernanceReq = new System.Windows.Forms.GroupBox();
+            this.chkb_NoRemoteAccess = new System.Windows.Forms.CheckBox();
+            this.chkb_Encryption = new System.Windows.Forms.CheckBox();
             this.chkb_ISO27001 = new System.Windows.Forms.CheckBox();
             this.chkb_DSPT = new System.Windows.Forms.CheckBox();
             this.gb_Notes = new System.Windows.Forms.GroupBox();
@@ -55,6 +57,7 @@
             this.btn_OK = new System.Windows.Forms.Button();
             this.btn_Cancel = new System.Windows.Forms.Button();
             this.gb_Dates = new System.Windows.Forms.GroupBox();
+            this.chkb_IsAmendment = new System.Windows.Forms.CheckBox();
             this.gb_DataOwner.SuspendLayout();
             this.gb_DsaFileDetails.SuspendLayout();
             this.gb_AmendmentOf.SuspendLayout();
@@ -189,6 +192,7 @@
             // 
             // gb_AmendmentOf
             // 
+            this.gb_AmendmentOf.Controls.Add(this.chkb_IsAmendment);
             this.gb_AmendmentOf.Controls.Add(this.lbl_AmendmentHelp);
             this.gb_AmendmentOf.Controls.Add(this.dgv_AmendmentOf);
             this.gb_AmendmentOf.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -203,7 +207,7 @@
             // 
             this.lbl_AmendmentHelp.AutoSize = true;
             this.lbl_AmendmentHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_AmendmentHelp.Location = new System.Drawing.Point(7, 18);
+            this.lbl_AmendmentHelp.Location = new System.Drawing.Point(7, 45);
             this.lbl_AmendmentHelp.Name = "lbl_AmendmentHelp";
             this.lbl_AmendmentHelp.Size = new System.Drawing.Size(551, 17);
             this.lbl_AmendmentHelp.TabIndex = 1;
@@ -215,30 +219,54 @@
             this.dgv_AmendmentOf.AllowUserToAddRows = false;
             this.dgv_AmendmentOf.AllowUserToDeleteRows = false;
             this.dgv_AmendmentOf.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_AmendmentOf.Location = new System.Drawing.Point(6, 38);
+            this.dgv_AmendmentOf.Location = new System.Drawing.Point(6, 65);
+            this.dgv_AmendmentOf.MultiSelect = false;
             this.dgv_AmendmentOf.Name = "dgv_AmendmentOf";
             this.dgv_AmendmentOf.ReadOnly = true;
             this.dgv_AmendmentOf.RowHeadersWidth = 51;
             this.dgv_AmendmentOf.RowTemplate.Height = 24;
-            this.dgv_AmendmentOf.Size = new System.Drawing.Size(968, 201);
+            this.dgv_AmendmentOf.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgv_AmendmentOf.Size = new System.Drawing.Size(968, 174);
             this.dgv_AmendmentOf.TabIndex = 0;
             // 
             // gb_GovernanceReq
             // 
+            this.gb_GovernanceReq.Controls.Add(this.chkb_NoRemoteAccess);
+            this.gb_GovernanceReq.Controls.Add(this.chkb_Encryption);
             this.gb_GovernanceReq.Controls.Add(this.chkb_ISO27001);
             this.gb_GovernanceReq.Controls.Add(this.chkb_DSPT);
             this.gb_GovernanceReq.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gb_GovernanceReq.Location = new System.Drawing.Point(12, 426);
             this.gb_GovernanceReq.Name = "gb_GovernanceReq";
-            this.gb_GovernanceReq.Size = new System.Drawing.Size(322, 80);
+            this.gb_GovernanceReq.Size = new System.Drawing.Size(338, 80);
             this.gb_GovernanceReq.TabIndex = 9;
             this.gb_GovernanceReq.TabStop = false;
             this.gb_GovernanceReq.Text = "Governance Requirements";
             // 
+            // chkb_NoRemoteAccess
+            // 
+            this.chkb_NoRemoteAccess.AutoSize = true;
+            this.chkb_NoRemoteAccess.Location = new System.Drawing.Point(136, 49);
+            this.chkb_NoRemoteAccess.Name = "chkb_NoRemoteAccess";
+            this.chkb_NoRemoteAccess.Size = new System.Drawing.Size(168, 24);
+            this.chkb_NoRemoteAccess.TabIndex = 3;
+            this.chkb_NoRemoteAccess.Text = "No remote access";
+            this.chkb_NoRemoteAccess.UseVisualStyleBackColor = true;
+            // 
+            // chkb_Encryption
+            // 
+            this.chkb_Encryption.AutoSize = true;
+            this.chkb_Encryption.Location = new System.Drawing.Point(136, 24);
+            this.chkb_Encryption.Name = "chkb_Encryption";
+            this.chkb_Encryption.Size = new System.Drawing.Size(176, 24);
+            this.chkb_Encryption.TabIndex = 2;
+            this.chkb_Encryption.Text = "Encryption required";
+            this.chkb_Encryption.UseVisualStyleBackColor = true;
+            // 
             // chkb_ISO27001
             // 
             this.chkb_ISO27001.AutoSize = true;
-            this.chkb_ISO27001.Location = new System.Drawing.Point(30, 49);
+            this.chkb_ISO27001.Location = new System.Drawing.Point(8, 49);
             this.chkb_ISO27001.Name = "chkb_ISO27001";
             this.chkb_ISO27001.Size = new System.Drawing.Size(104, 24);
             this.chkb_ISO27001.TabIndex = 1;
@@ -248,7 +276,7 @@
             // chkb_DSPT
             // 
             this.chkb_DSPT.AutoSize = true;
-            this.chkb_DSPT.Location = new System.Drawing.Point(30, 24);
+            this.chkb_DSPT.Location = new System.Drawing.Point(8, 24);
             this.chkb_DSPT.Name = "chkb_DSPT";
             this.chkb_DSPT.Size = new System.Drawing.Size(76, 24);
             this.chkb_DSPT.TabIndex = 0;
@@ -302,7 +330,7 @@
             this.gb_Project.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gb_Project.Location = new System.Drawing.Point(12, 526);
             this.gb_Project.Name = "gb_Project";
-            this.gb_Project.Size = new System.Drawing.Size(322, 142);
+            this.gb_Project.Size = new System.Drawing.Size(338, 142);
             this.gb_Project.TabIndex = 11;
             this.gb_Project.TabStop = false;
             this.gb_Project.Text = "Link With Project(s)";
@@ -314,7 +342,7 @@
             this.lbx_ProjectsList.Location = new System.Drawing.Point(10, 27);
             this.lbx_ProjectsList.Name = "lbx_ProjectsList";
             this.lbx_ProjectsList.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lbx_ProjectsList.Size = new System.Drawing.Size(306, 104);
+            this.lbx_ProjectsList.Size = new System.Drawing.Size(322, 104);
             this.lbx_ProjectsList.TabIndex = 0;
             // 
             // btn_OK
@@ -326,6 +354,7 @@
             this.btn_OK.TabIndex = 12;
             this.btn_OK.Text = "OK";
             this.btn_OK.UseVisualStyleBackColor = true;
+            this.btn_OK.Click += new System.EventHandler(this.btn_OK_Click);
             // 
             // btn_Cancel
             // 
@@ -350,6 +379,17 @@
             this.gb_Dates.TabIndex = 14;
             this.gb_Dates.TabStop = false;
             this.gb_Dates.Text = "Dates";
+            // 
+            // chkb_IsAmendment
+            // 
+            this.chkb_IsAmendment.AutoSize = true;
+            this.chkb_IsAmendment.Location = new System.Drawing.Point(10, 21);
+            this.chkb_IsAmendment.Name = "chkb_IsAmendment";
+            this.chkb_IsAmendment.Size = new System.Drawing.Size(120, 24);
+            this.chkb_IsAmendment.TabIndex = 2;
+            this.chkb_IsAmendment.Text = "Amendment";
+            this.chkb_IsAmendment.UseVisualStyleBackColor = true;
+            this.chkb_IsAmendment.CheckedChanged += new System.EventHandler(this.chkb_IsAmendment_CheckedChanged);
             // 
             // frm_DsaAdd
             // 
@@ -413,5 +453,8 @@
         private System.Windows.Forms.Button btn_OK;
         private System.Windows.Forms.Button btn_Cancel;
         private System.Windows.Forms.GroupBox gb_Dates;
+        private System.Windows.Forms.CheckBox chkb_NoRemoteAccess;
+        private System.Windows.Forms.CheckBox chkb_Encryption;
+        private System.Windows.Forms.CheckBox chkb_IsAmendment;
     }
 }
