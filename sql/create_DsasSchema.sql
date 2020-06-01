@@ -2,17 +2,19 @@ use DAT_CMS
 go
 
 CREATE TABLE dbo.tblDsas(
-	DsaID		INT IDENTITY(1,1) NOT NULL,
-	DataOwner	INT NOT NULL,
-	AmendmentOf	INT NULL, -- References primary key to link amendments with original agreement
-	DsaName		VARCHAR(100) NULL,
-	DsaFileLoc	VARCHAR(200) NULL,
-	StartDate	DATETIME NULL,
-	ExpiryDate	DATETIME NULL,
-	DSPT		BIT NOT NULL,
-	ISO27001	BIT NOT NULL,
-	DateAdded	DATETIME NULL DEFAULT (getdate()),
-	LastUpdated	DATETIME NULL,
+	DsaID				INT IDENTITY(1,1) NOT NULL,
+	DataOwner			INT NOT NULL,
+	AmendmentOf			INT NULL, -- References primary key to link amendments with original agreement
+	DsaName				VARCHAR(100) NULL,
+	DsaFileLoc			VARCHAR(200) NULL,
+	StartDate			DATETIME NULL,
+	ExpiryDate			DATETIME NULL,
+	DSPT				BIT NOT NULL,
+	ISO27001			BIT NOT NULL,
+	RequiresEncryption	BIT NOT NULL,
+	NoRemoteAccess		BIT NOT NULL,
+	DateAdded			DATETIME NULL DEFAULT (getdate()),
+	LastUpdated			DATETIME NULL,
 	CONSTRAINT PK_Dsas PRIMARY KEY (DsaID),
 	CONSTRAINT FK_AmendmentOf_DsaID FOREIGN KEY (AmendmentOf) REFERENCES dbo.tblDsas (DsaID)
 )
