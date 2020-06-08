@@ -1,4 +1,4 @@
-﻿namespace CMS
+﻿namespace CMS.DSAs
 {
     partial class frm_DsaDataOwnerAdd
     {

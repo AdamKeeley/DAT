@@ -1,4 +1,4 @@
-﻿namespace CMS
+﻿namespace CMS.DSAs
 {
     partial class frm_DsaAdd
     {
@@ -41,6 +41,7 @@
             this.lbl_StartDate = new System.Windows.Forms.Label();
             this.lbl_ExpiryDate = new System.Windows.Forms.Label();
             this.gb_AmendmentOf = new System.Windows.Forms.GroupBox();
+            this.chkb_IsAmendment = new System.Windows.Forms.CheckBox();
             this.lbl_AmendmentHelp = new System.Windows.Forms.Label();
             this.dgv_AmendmentOf = new System.Windows.Forms.DataGridView();
             this.gb_GovernanceReq = new System.Windows.Forms.GroupBox();
@@ -57,7 +58,6 @@
             this.btn_OK = new System.Windows.Forms.Button();
             this.btn_Cancel = new System.Windows.Forms.Button();
             this.gb_Dates = new System.Windows.Forms.GroupBox();
-            this.chkb_IsAmendment = new System.Windows.Forms.CheckBox();
             this.gb_DataOwner.SuspendLayout();
             this.gb_DsaFileDetails.SuspendLayout();
             this.gb_AmendmentOf.SuspendLayout();
@@ -203,6 +203,17 @@
             this.gb_AmendmentOf.TabStop = false;
             this.gb_AmendmentOf.Text = "Amendment of Previous DSA";
             // 
+            // chkb_IsAmendment
+            // 
+            this.chkb_IsAmendment.AutoSize = true;
+            this.chkb_IsAmendment.Location = new System.Drawing.Point(10, 21);
+            this.chkb_IsAmendment.Name = "chkb_IsAmendment";
+            this.chkb_IsAmendment.Size = new System.Drawing.Size(120, 24);
+            this.chkb_IsAmendment.TabIndex = 2;
+            this.chkb_IsAmendment.Text = "Amendment";
+            this.chkb_IsAmendment.UseVisualStyleBackColor = true;
+            this.chkb_IsAmendment.CheckedChanged += new System.EventHandler(this.chkb_IsAmendment_CheckedChanged);
+            // 
             // lbl_AmendmentHelp
             // 
             this.lbl_AmendmentHelp.AutoSize = true;
@@ -298,6 +309,7 @@
             // 
             // dgv_AddNote
             // 
+            this.dgv_AddNote.AllowUserToAddRows = false;
             this.dgv_AddNote.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_AddNote.Location = new System.Drawing.Point(13, 122);
             this.dgv_AddNote.Name = "dgv_AddNote";
@@ -365,6 +377,7 @@
             this.btn_Cancel.TabIndex = 13;
             this.btn_Cancel.Text = "Cancel";
             this.btn_Cancel.UseVisualStyleBackColor = true;
+            this.btn_Cancel.Click += new System.EventHandler(this.btn_Cancel_Click);
             // 
             // gb_Dates
             // 
@@ -379,17 +392,6 @@
             this.gb_Dates.TabIndex = 14;
             this.gb_Dates.TabStop = false;
             this.gb_Dates.Text = "Dates";
-            // 
-            // chkb_IsAmendment
-            // 
-            this.chkb_IsAmendment.AutoSize = true;
-            this.chkb_IsAmendment.Location = new System.Drawing.Point(10, 21);
-            this.chkb_IsAmendment.Name = "chkb_IsAmendment";
-            this.chkb_IsAmendment.Size = new System.Drawing.Size(120, 24);
-            this.chkb_IsAmendment.TabIndex = 2;
-            this.chkb_IsAmendment.Text = "Amendment";
-            this.chkb_IsAmendment.UseVisualStyleBackColor = true;
-            this.chkb_IsAmendment.CheckedChanged += new System.EventHandler(this.chkb_IsAmendment_CheckedChanged);
             // 
             // frm_DsaAdd
             // 
