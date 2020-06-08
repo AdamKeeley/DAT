@@ -11,7 +11,7 @@ using DataControlsLib;
 using DataControlsLib.DataModels;
 using DataControlsLib.ViewModels;
 
-namespace CMS
+namespace CMS.DataTracking
 {
     public partial class frm_DataIO : Form
     {

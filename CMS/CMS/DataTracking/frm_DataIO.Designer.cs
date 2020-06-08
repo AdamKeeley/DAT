@@ -1,4 +1,4 @@
-﻿namespace CMS
+﻿namespace CMS.DataTracking
 {
     partial class frm_DataIO
     {
