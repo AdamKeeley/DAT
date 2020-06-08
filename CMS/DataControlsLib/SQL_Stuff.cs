@@ -7,7 +7,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 
-namespace CMS
+namespace DataControlsLib
 {
     public class SQL_Stuff
     {
