@@ -8,7 +8,7 @@ namespace DataControlsLib.DataModels
 {
     public class DsaModel
     {
-        public int DsaId { get; set; }
+        public int DsaID { get; set; }
         public int DataOwner { get; set; }
         public int? AmendmentOf { get; set; }
         public string DsaName { get; set; }
