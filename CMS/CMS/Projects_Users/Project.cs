@@ -35,109 +35,65 @@ namespace CMS
                 SQL_Stuff conString = new SQL_Stuff();
                 using (SqlConnection connection = new SqlConnection(conString.getString()))
                 {
-                    //use a DataAdapter (da_Project) to add a DataTable (tblProjects) to a DataSet (ds_prj) 
-                    //from a SQL Server query (qryGetProject)
-                    SqlDataAdapter da_Project = new SqlDataAdapter();
-                    SqlCommand qryGetProject = new SqlCommand();
-                    qryGetProject.CommandText = $"select * from [dbo].[tblProject] where [ValidTo] is null order by [ProjectNumber], [pID]";
-                    qryGetProject.Connection = connection;
-                    da_Project.SelectCommand = qryGetProject;
-                    da_Project.Fill(ds_prj, "tblProjects");
+                    GetDB.GetDataTable(connection, ds_prj, "tblProjects",
+                        $"select * from [dbo].[tblProject] " +
+                        $"where [ValidTo] is null " +
+                        $"order by [ProjectNumber], [pID]");
+                    GetDB.GetDataTable(connection, ds_prj, "tlkStage",
+                        $"select * from [dbo].[tlkStage] " +
+                        $"where [ValidTo] is null");
+                    GetDB.GetDataTable(connection, ds_prj, "tlkClassification",
+                        $"select * from [dbo].[tlkClassification] " +
+                        $"where [ValidTo] is null");
+                    GetDB.GetDataTable(connection, ds_prj, "tlkRAG",
+                        $"select * from [dbo].[tlkRAG] " +
+                        $"where [ValidTo] is null");
+                    GetDB.GetDataTable(connection, ds_prj, "tlkFaculty",
+                        $"select * from [dbo].[tlkFaculty] " +
+                        $"where [ValidTo] is null");
+                    GetDB.GetDataTable(connection, ds_prj, "tblProjectNotes",
+                        $"select * from [dbo].[tblProjectNotes] " +
+                        $"order by [ProjectNumber], [Created] desc");
+                    GetDB.GetDataTable(connection, ds_prj, "tblUserProject",
+                        $"select * from [dbo].[tblUserProject] " +
+                        $"where [ValidTo] is null");
+                    GetDB.GetDataTable(connection, ds_prj, "tlkLeadApplicant",
+                        $"select UserNumber, LastName + ', ' + FirstName as FullName " +
+                        $"from [dbo].[tblUser] " +
+                        $"where [ValidTo] is null " +
+                        $"order by LastName");
+                    GetDB.GetDataTable(connection, ds_prj, "tlkPI",
+                        $"select UserNumber, LastName + ', ' + FirstName as FullName " +
+                        $"from [dbo].[tblUser] " +
+                        $"where [ValidTo] is null " +
+                        $"order by LastName");
+                    GetDB.GetDataTable(connection, ds_prj, "tblUser",
+                        $"select *, [LastName] + ', ' + [FirstName] as FullName " +
+                        $"from [dbo].[tblUser] " +
+                        $"where [ValidTo] is null " +
+                        $"order by [LastName], [FirstName], [UserID]");
 
-                    //add tlkStage DataTable to DataSet (ds_prj)
-                    SqlCommand qryGetStage = new SqlCommand();
-                    qryGetStage.CommandText = $"select * from [dbo].[tlkStage] where [ValidTo] is null";
-                    qryGetStage.Connection = connection;
-                    da_Project.SelectCommand = qryGetStage;
-                    da_Project.Fill(ds_prj, "tlkStage");
-                    //create a DataRelation (Project_Stage) to join tlkStage to tblProjects
                     ds_prj.Relations.Add("Project_Stage"
                         , ds_prj.Tables["tlkStage"].Columns["StageID"]      //parent
                         , ds_prj.Tables["tblProjects"].Columns["Stage"]);   //child
-
-                    //add tlkClassification DataTable to DataSet (ds_prj)
-                    SqlCommand qryGetClassification = new SqlCommand();
-                    qryGetStage.CommandText = $"select * from [dbo].[tlkClassification] where [ValidTo] is null";
-                    qryGetStage.Connection = connection;
-                    da_Project.SelectCommand = qryGetStage;
-                    da_Project.Fill(ds_prj, "tlkClassification");
-                    //create a DataRelation (Project_Classification) to join tlkClassification to tblProjects
                     ds_prj.Relations.Add("Project_Classification"
-                        , ds_prj.Tables["tlkClassification"].Columns["classificationID"]    //parent
-                        , ds_prj.Tables["tblProjects"].Columns["Classification"]);          //child
-
-                    //add tlkRAG DataTable to DataSet (ds_prj)
-                    SqlCommand qryGetRAG = new SqlCommand();
-                    qryGetStage.CommandText = $"select * from [dbo].[tlkRAG] where [ValidTo] is null";
-                    qryGetStage.Connection = connection;
-                    da_Project.SelectCommand = qryGetStage;
-                    da_Project.Fill(ds_prj, "tlkRAG");
-                    //create a DataRelation (Project_DATRAG) to join tlkRAG to tblProjects
+                        , ds_prj.Tables["tlkClassification"].Columns["classificationID"]
+                        , ds_prj.Tables["tblProjects"].Columns["Classification"]);
                     ds_prj.Relations.Add("Project_DATRAG"
-                        , ds_prj.Tables["tlkRAG"].Columns["ragID"]          //parent
-                        , ds_prj.Tables["tblProjects"].Columns["DATRAG"]);  //child
-
-                    //add tlkFaculty DataTable to DataSet (ds_prj)
-                    SqlCommand qryGetFaculty = new SqlCommand();
-                    qryGetStage.CommandText = $"select * from [dbo].[tlkFaculty] where [ValidTo] is null";
-                    qryGetStage.Connection = connection;
-                    da_Project.SelectCommand = qryGetStage;
-                    da_Project.Fill(ds_prj, "tlkFaculty");
-                    //create a DataRelation (Project_Faculty) to join tlkFaculty to tblProjects
+                        , ds_prj.Tables["tlkRAG"].Columns["ragID"]         
+                        , ds_prj.Tables["tblProjects"].Columns["DATRAG"]);
                     ds_prj.Relations.Add("Project_Faculty"
-                        , ds_prj.Tables["tlkFaculty"].Columns["facultyID"]          //parent
-                        , ds_prj.Tables["tblProjects"].Columns["Faculty"]);         //child
-
-                    //add tblProjectNotes DataTable to DataSet (ds_prj)
-                    //DataRelation not needed, can just query DataTable directly using same pNumber parameter
-                    SqlCommand qryGetNotes = new SqlCommand();
-                    qryGetNotes.CommandText = $"select * from [dbo].[tblProjectNotes] order by [ProjectNumber], [Created] desc";
-                    qryGetNotes.Connection = connection;
-                    da_Project.SelectCommand = qryGetNotes;
-                    da_Project.Fill(ds_prj, "tblProjectNotes");
-
-                    //add tblUser DataTable to DataSet (ds_prj)
-                    //qryGetUser adds a calculated field, FullName
-                    SqlCommand qryGetLeadApplicant = new SqlCommand();
-                    qryGetLeadApplicant.CommandText = $"select UserNumber, LastName + ', ' + FirstName as FullName from [dbo].[tblUser] where [ValidTo] is null order by LastName";
-                    qryGetLeadApplicant.Connection = connection;
-                    da_Project.SelectCommand = qryGetLeadApplicant;
-                    da_Project.Fill(ds_prj, "tlkLeadApplicant");
-                    //create a DataRelation (Project_LeadApplicant) to join tblUser to tblProjects.LeadApplicant
+                        , ds_prj.Tables["tlkFaculty"].Columns["facultyID"]
+                        , ds_prj.Tables["tblProjects"].Columns["Faculty"]);
                     ds_prj.Relations.Add("Project_LeadApplicant"
-                        , ds_prj.Tables["tlkLeadApplicant"].Columns["UserNumber"]                //parent
-                        , ds_prj.Tables["tblProjects"].Columns["LeadApplicant"]);   //child
-
-                    //add tblUser DataTable to DataSet (ds_prj)
-                    //qryGetUser adds a calculated field, FullName
-                    SqlCommand qryGetPI = new SqlCommand();
-                    qryGetPI.CommandText = $"select UserNumber, LastName + ', ' + FirstName as FullName from [dbo].[tblUser] where [ValidTo] is null order by LastName";
-                    qryGetPI.Connection = connection;
-                    da_Project.SelectCommand = qryGetPI;
-                    da_Project.Fill(ds_prj, "tlkPI");
-                    //create a DataRelation (Project_User) to join tblUser to tblProjects.PI
+                        , ds_prj.Tables["tlkLeadApplicant"].Columns["UserNumber"]
+                        , ds_prj.Tables["tblProjects"].Columns["LeadApplicant"]);
                     ds_prj.Relations.Add("Project_PI"
-                        , ds_prj.Tables["tlkPI"].Columns["UserNumber"]            //parent
-                        , ds_prj.Tables["tblProjects"].Columns["PI"]);          //child
-
-                    //add tblUserProject DataTable to DataSet (ds_usr)
-                    //DataRelation not needed, can just query DataTable directly using same ProjectNumber parameter
-                    SqlCommand qryGetUserProject = new SqlCommand();
-                    qryGetUserProject.CommandText = $"select * from [dbo].[tblUserProject] where [ValidTo] is null";
-                    qryGetUserProject.Connection = connection;
-                    da_Project.SelectCommand = qryGetUserProject;
-                    da_Project.Fill(ds_prj, "tblUserProject");
-                    //add tblUser DataTable to DataSet (ds_prj)
-                    SqlCommand qryGetUser = new SqlCommand();
-                    qryGetUser.CommandText = $"select *, [LastName] + ', ' + [FirstName] as FullName from [dbo].[tblUser] where [ValidTo] is null order by [LastName], [FirstName], [UserID]";
-                    qryGetUser.Connection = connection;
-                    da_Project.SelectCommand = qryGetUser;
-                    da_Project.Fill(ds_prj, "tblUser");
-                    //datarelation
+                        , ds_prj.Tables["tlkPI"].Columns["UserNumber"]
+                        , ds_prj.Tables["tblProjects"].Columns["PI"]);
                     ds_prj.Relations.Add("UserProject_User"
-                        , ds_prj.Tables["tblUser"].Columns["UserNumber"]                //Parent
-                        , ds_prj.Tables["tblUserProject"].Columns["UserNumber"]);       //Child
-
+                        , ds_prj.Tables["tblUser"].Columns["UserNumber"]
+                        , ds_prj.Tables["tblUserProject"].Columns["UserNumber"]);
                 }
             }
             catch (Exception ex)
