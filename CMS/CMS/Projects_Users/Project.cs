@@ -57,21 +57,17 @@ namespace CMS
                     GetDB.GetDataTable(connection, ds_prj, "tblUserProject",
                         $"select * from [dbo].[tblUserProject] " +
                         $"where [ValidTo] is null");
-                    GetDB.GetDataTable(connection, ds_prj, "tlkLeadApplicant",
-                        $"select UserNumber, LastName + ', ' + FirstName as FullName " +
-                        $"from [dbo].[tblUser] " +
-                        $"where [ValidTo] is null " +
-                        $"order by LastName");
-                    GetDB.GetDataTable(connection, ds_prj, "tlkPI",
-                        $"select UserNumber, LastName + ', ' + FirstName as FullName " +
-                        $"from [dbo].[tblUser] " +
-                        $"where [ValidTo] is null " +
-                        $"order by LastName");
                     GetDB.GetDataTable(connection, ds_prj, "tblUser",
                         $"select *, [LastName] + ', ' + [FirstName] as FullName " +
                         $"from [dbo].[tblUser] " +
                         $"where [ValidTo] is null " +
                         $"order by [LastName], [FirstName], [UserID]");
+                    DataTable leadApp = ds_prj.Tables["tblUser"].Copy();
+                    leadApp.TableName = "tlkLeadApplicant";
+                    ds_prj.Tables.Add(leadApp);
+                    DataTable PI = ds_prj.Tables["tblUser"].Copy();
+                    PI.TableName = "tlkPI";
+                    ds_prj.Tables.Add(PI);
 
                     ds_prj.Relations.Add("Project_Stage"
                         , ds_prj.Tables["tlkStage"].Columns["StageID"]      //parent
