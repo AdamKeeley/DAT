@@ -75,10 +75,10 @@
     <Compile Include="frm_HomePage.Designer.cs">
       <DependentUpon>frm_HomePage.cs</DependentUpon>
     </Compile>
-    <Compile Include="frm_Project.cs">
+    <Compile Include="Projects\frm_Project.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frm_Project.Designer.cs">
+    <Compile Include="Projects\frm_Project.Designer.cs">
       <DependentUpon>frm_Project.cs</DependentUpon>
     </Compile>
     <Compile Include="frm_ProjectAdd.cs">
@@ -137,7 +137,7 @@
     <EmbeddedResource Include="frm_HomePage.resx">
       <DependentUpon>frm_HomePage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frm_Project.resx">
+    <EmbeddedResource Include="Projects\frm_Project.resx">
       <DependentUpon>frm_Project.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_ProjectAdd.resx">

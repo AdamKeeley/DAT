@@ -14,21 +14,21 @@ namespace DataControlsLib
         //constructor
         public SQL_Stuff()
         {
-            ////home
+            ////Adam's home
             //conString = "Data Source=GHOST\\SQLEXPRESS;Initial Catalog=DST_CMS;Integrated Security=True";
 
             ////azure
             //conString = "Data Source=lida.database.windows.net;Initial Catalog=DAT_CMS;Integrated Security=False; "
             //+ "Persist Security Info=False;User ID=uitake;Password=##############;";
 
-            ////LIDA Desktop
+            ////Adam's LIDA desktop
             //conString = "Data Source=IRC-PC010;Initial Catalog=DAT_CMS;Integrated Security=True";
 
-            //Laptop
-            //conString = "Data Source=LIDA-LT-040704\\SQLEXPRESS;Initial Catalog=DAT_CMS;Integrated Security=True";
+            //Adam's laptop
+            conString = "Data Source=LIDA-LT-040704\\SQLEXPRESS;Initial Catalog=DAT_CMS;Integrated Security=True";
 
-            // Sean's laptop
-            conString = "Data Source=SEAN-LAPTOP\\SQLEXPRESS;Initial Catalog=DAT_CMS;Integrated Security=True";
+            //// Sean's laptop
+            //conString = "Data Source=SEAN-LAPTOP\\SQLEXPRESS;Initial Catalog=DAT_CMS;Integrated Security=True";
         }
 
         //members
