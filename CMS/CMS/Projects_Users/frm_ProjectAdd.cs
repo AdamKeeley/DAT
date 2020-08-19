@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DataControlsLib.DataModels;
 
 namespace CMS
 {
@@ -73,37 +74,40 @@ namespace CMS
         /// </summary>
         private void insertNewProject()
         {
+
+            ProjectModel mdl_Project = new ProjectModel();
+
             //populate variables with values held in form controls
-            string      pNumber             = lbl_NewProjectNumber.Text;
-            string      pName               = tb_pNameValue.Text;
-            int?        pStage              = null;
-            int?        pClassification     = null;
-            int?        pDATRAG             = null;
-            DateTime?   pProjectedStartDate = null;
-            DateTime?   pProjectedEndDate   = null;
-            DateTime?   pStartDate          = null;
-            DateTime?   pEndDate            = null;
-            int?        pPI                 = null;
-            int?        pLeadApplicant      = null;
-            int?        pFaculty            = null;
-            bool        pDSPT               = chkb_DSPT.Checked;
-            bool        pISO                = chkb_ISO27001.Checked;
-            bool        pAzure              = chkb_Azure.Checked;
-            bool        IRC                 = chkb_IRC.Checked;
-            bool        SEED                = chkb_SEED.Checked;
+            mdl_Project.ProjectNumber      = lbl_NewProjectNumber.Text;
+            mdl_Project.ProjectName        = tb_pNameValue.Text;
+            //mdl_Project.Stage              = null;
+            //mdl_Project.Classification     = null;
+            //mdl_Project.DATRAG             = null;
+            //mdl_Project.ProjectedStartDate = null;
+            //mdl_Project.ProjectedEndDate   = null;
+            //mdl_Project.StartDate          = null;
+            //mdl_Project.EndDate            = null;
+            //mdl_Project.PI                 = null;
+            //mdl_Project.LeadApplicant      = null;
+            //mdl_Project.Faculty            = null;
+            mdl_Project.DSPT               = chkb_DSPT.Checked;
+            mdl_Project.ISO27001           = chkb_ISO27001.Checked;
+            mdl_Project.Azure              = chkb_Azure.Checked;
+            mdl_Project.IRC                = chkb_IRC.Checked;
+            mdl_Project.SEED               = chkb_SEED.Checked;
 
             if (cb_pStage.SelectedIndex > -1)
-                pStage = int.Parse(cb_pStage.SelectedValue.ToString());
+                mdl_Project.Stage = int.Parse(cb_pStage.SelectedValue.ToString());
             if (cb_pClassification.SelectedIndex > -1)
-                pClassification = int.Parse(cb_pClassification.SelectedValue.ToString());
+                mdl_Project.Classification = int.Parse(cb_pClassification.SelectedValue.ToString());
             if (cb_DATRAG.SelectedIndex > -1)
-                pDATRAG = int.Parse(cb_DATRAG.SelectedValue.ToString());
+                mdl_Project.DATRAG = int.Parse(cb_DATRAG.SelectedValue.ToString());
             if (cb_LeadApplicant.SelectedIndex > -1)
-                pLeadApplicant = int.Parse(cb_LeadApplicant.SelectedValue.ToString());
+                mdl_Project.LeadApplicant = int.Parse(cb_LeadApplicant.SelectedValue.ToString());
             if (cb_PI.SelectedIndex > -1)
-                pPI = int.Parse(cb_PI.SelectedValue.ToString());
+                mdl_Project.PI = int.Parse(cb_PI.SelectedValue.ToString());
             if (cb_Faculty.SelectedIndex > -1)
-                pFaculty = int.Parse(cb_Faculty.SelectedValue.ToString());
+                mdl_Project.Faculty = int.Parse(cb_Faculty.SelectedValue.ToString());
 
             //dates are fuckey
             bool dateCheck = true;
@@ -111,7 +115,7 @@ namespace CMS
             {
                 try
                 {
-                    pProjectedStartDate = Convert.ToDateTime(mtb_ProjectedStartDateValue.Text);
+                    mdl_Project.ProjectedStartDate = Convert.ToDateTime(mtb_ProjectedStartDateValue.Text);
                 }
                 catch (Exception)
                 {
@@ -123,7 +127,7 @@ namespace CMS
             {
                 try
                 {
-                    pProjectedEndDate = Convert.ToDateTime(mtb_ProjectedEndDateValue.Text);
+                    mdl_Project.ProjectedEndDate = Convert.ToDateTime(mtb_ProjectedEndDateValue.Text);
                 }
                 catch (Exception)
                 {
@@ -135,7 +139,7 @@ namespace CMS
             {
                 try
                 {
-                    pStartDate = Convert.ToDateTime(mtb_pStartDateValue.Text);
+                    mdl_Project.StartDate = Convert.ToDateTime(mtb_pStartDateValue.Text);
                 }
                 catch (Exception)
                 {
@@ -147,7 +151,7 @@ namespace CMS
             {
                 try
                 {
-                    pEndDate = Convert.ToDateTime(mtb_pEndDateValue.Text);
+                    mdl_Project.EndDate = Convert.ToDateTime(mtb_pEndDateValue.Text);
                 }
                 catch (Exception)
                 {
@@ -162,9 +166,7 @@ namespace CMS
                 var Projects = new Project();
 
                 //insert new record
-                Projects.insertProject(pNumber, pName, pStage, pClassification, pDATRAG
-                    , pProjectedStartDate, pProjectedEndDate, pStartDate, pEndDate, pPI
-                    , pLeadApplicant, pFaculty, pDSPT, pISO, pAzure, IRC, SEED);
+                Projects.insertProject(mdl_Project);
 
                 this.Close();
             }

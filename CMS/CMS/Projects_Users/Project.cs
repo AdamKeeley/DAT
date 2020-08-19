@@ -7,6 +7,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 using DataControlsLib;
+using DataControlsLib.DataModels;
 
 namespace CMS
 {
@@ -21,8 +22,8 @@ namespace CMS
         }
 
         /// <summary>
-        /// Method to return a DataSet (ds_prj) with content of SQL table dbo.tblProjects, dbo.tblProjectNotes 
-        /// and other related lookup tables. 
+        /// Method to return a DataSet (ds_prj) with content of SQL table dbo.tblProjects, dbo.tblProjectNotes, 
+        /// dbo.tblUsers and other related lookup tables. 
         /// Creates DataRelations so that dimension tables can be linked to values in the measures table.
         /// </summary>
         /// <returns></returns>
@@ -62,6 +63,8 @@ namespace CMS
                         $"from [dbo].[tblUser] " +
                         $"where [ValidTo] is null " +
                         $"order by [LastName], [FirstName], [UserID]");
+                    // Copies made of tblUser so that the can be referenced by 
+                    // LeadApplicant and PI fields of tblProjects via DataRelations
                     DataTable leadApp = ds_prj.Tables["tblUser"].Copy();
                     leadApp.TableName = "tlkLeadApplicant";
                     ds_prj.Tables.Add(leadApp);
@@ -100,6 +103,7 @@ namespace CMS
                 return ds_prj;
         }
 
+
         /// <summary>
         /// Method to populate list that feeds into frm_Project controls.
         /// Uses parameter pNumber to query DataSet (passed as parameter ds_Project), assigns values to variables and 
@@ -112,28 +116,10 @@ namespace CMS
         /// <param name="pNumber"></param>
         /// <param name="ds_Project"></param>
         /// <returns></returns>
-        public List<object> getProjectToList(string pNumber, DataSet ds_Project)
+        public ProjectModel getProject(string pNumber, DataSet ds_Project)
         {
-            int         pID;
-            string      pName;
-            int?        pStage              = null;
-            int?        pClassification     = null;
-            int?        pDATRAG             = null;
-            DateTime?   pProjectedStartDate = null;
-            DateTime?   pProjectedEndDate   = null;
-            DateTime?   pStartDate          = null;
-            DateTime?   pEndDate            = null;
-            int?        pPI                 = null;
-            int?        pLeadApplicant      = null;
-            int?        pFaculty            = null;
-            bool        pDSPT;
-            bool        pISO;
-            bool        pAzure;
-            bool        pIRC;
-            bool        pSEED;
-
-            List<object> lst_Project = new List<object>();
-
+            ProjectModel mdl_Project = new ProjectModel();
+            
             //if no records found, try will fail at "DataRow pRow = pRows[i];" and go to catch
             try
             {
@@ -152,58 +138,40 @@ namespace CMS
                 DataRow pRow = pRows[i];
 
                 //populate DataRow to output with values from pRow
-                pID = (int)pRow["pID"];
-                pName = pRow["ProjectName"].ToString();
+                mdl_Project.pID         = (int)pRow["pID"];
+                mdl_Project.ProjectNumber = pRow["ProjectNumber"].ToString();
+                mdl_Project.ProjectName = pRow["ProjectName"].ToString();
                 if (pRow["Stage"].ToString().Length > 0)
-                    pStage = (int?)pRow["Stage"];
+                    mdl_Project.Stage = (int?)pRow["Stage"];
                 if (pRow["Classification"].ToString().Length > 0)
-                    pClassification = (int?)pRow["Classification"];
+                    mdl_Project.Classification = (int?)pRow["Classification"];
                 if (pRow["DATRAG"].ToString().Length > 0)
-                    pDATRAG = (int?)pRow["DATRAG"];
+                    mdl_Project.DATRAG = (int?)pRow["DATRAG"];
                 if (pRow["ProjectedStartDate"].ToString().Length > 0)
-                    pProjectedStartDate = (DateTime)pRow["ProjectedStartDate"];
+                    mdl_Project.ProjectedStartDate = (DateTime)pRow["ProjectedStartDate"];
                 if (pRow["ProjectedEndDate"].ToString().Length > 0)
-                    pProjectedEndDate = (DateTime)pRow["ProjectedEndDate"];
+                    mdl_Project.ProjectedEndDate = (DateTime)pRow["ProjectedEndDate"];
                 if (pRow["StartDate"].ToString().Length > 0)
-                    pStartDate = (DateTime)pRow["StartDate"];
+                    mdl_Project.StartDate = (DateTime)pRow["StartDate"];
                 if (pRow["EndDate"].ToString().Length > 0)
-                    pEndDate = (DateTime)pRow["EndDate"];
+                    mdl_Project.EndDate = (DateTime)pRow["EndDate"];
                 if (pRow["PI"].ToString().Length > 0)
-                    pPI = (int?)pRow["PI"];
+                    mdl_Project.PI = (int?)pRow["PI"];
                 if (pRow["LeadApplicant"].ToString().Length > 0)
-                    pLeadApplicant = (int?)pRow["LeadApplicant"];
+                    mdl_Project.LeadApplicant = (int?)pRow["LeadApplicant"];
                 if (pRow["Faculty"].ToString().Length > 0)
-                    pFaculty = (int?)pRow["Faculty"];
-                pDSPT = (bool)pRow["DSPT"];
-                pISO = (bool)pRow["ISO27001"];
-                pAzure = (bool)pRow["Azure"];
-                pIRC = (bool)pRow["IRC"];
-                pSEED = (bool)pRow["SEED"];
-
-                lst_Project.Add(pID);
-                lst_Project.Add(pNumber);
-                lst_Project.Add(pName);
-                lst_Project.Add(pStage);
-                lst_Project.Add(pClassification);
-                lst_Project.Add(pDATRAG);
-                lst_Project.Add(pProjectedStartDate);
-                lst_Project.Add(pProjectedEndDate);
-                lst_Project.Add(pStartDate);
-                lst_Project.Add(pEndDate);
-                lst_Project.Add(pPI);
-                lst_Project.Add(pLeadApplicant);
-                lst_Project.Add(pFaculty);
-                lst_Project.Add(pDSPT);
-                lst_Project.Add(pISO);
-                lst_Project.Add(pAzure);
-                lst_Project.Add(pIRC);
-                lst_Project.Add(pSEED);
+                    mdl_Project.Faculty = (int?)pRow["Faculty"];
+                mdl_Project.DSPT = (bool)pRow["DSPT"];
+                mdl_Project.ISO27001 = (bool)pRow["ISO27001"];
+                mdl_Project.Azure = (bool)pRow["Azure"];
+                mdl_Project.IRC = (bool)pRow["IRC"];
+                mdl_Project.SEED = (bool)pRow["SEED"];
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Failed to load project details" + Environment.NewLine + Environment.NewLine + ex.Message);
             }
-            return lst_Project;
+            return mdl_Project;
         }
 
         /// <summary>
@@ -222,7 +190,6 @@ namespace CMS
             bool recordCurrent = false;
             try
             {
-                //update ValidUntil field of current record of project (perform 'logical' delete)
                 SQL_Stuff conString = new SQL_Stuff();
 
                 using (SqlConnection connection = new SqlConnection(conString.getString()))
@@ -277,29 +244,12 @@ namespace CMS
 
         /// <summary>
         /// Method to insert a new project record into dbo.tblProject.
-        /// Takes all field values as parameters, adds them to a SQL query string as parameters then executes an insert.
+        /// Takes field values as parameter, adds them to a SQL query string as parameters then executes an insert.
         /// Returns a boolean true on success, defaults to false
         /// </summary>
-        /// <param name="Number"></param>
-        /// <param name="Name"></param>
-        /// <param name="Stage"></param>
-        /// <param name="Classification"></param>
-        /// <param name="DATRAG"></param>
-        /// <param name="ProjectedStartDate"></param>
-        /// <param name="ProjectedEndDate"></param>
-        /// <param name="StartDate"></param>
-        /// <param name="EndDate"></param>
-        /// <param name="PI"></param>
-        /// <param name="LeadApplicant"></param>
-        /// <param name="Faculty"></param>
-        /// <param name="DSPT"></param>
-        /// <param name="ISO"></param>
-        /// <param name="Azure"></param>
-        /// <param name="IRC"></param>
-        /// <param name="SEED"></param>
-        public bool insertProject(string Number, string Name, int? Stage, int? Classification, int? DATRAG
-            , DateTime? ProjectedStartDate, DateTime? ProjectedEndDate, DateTime? StartDate, DateTime? EndDate
-            , int? PI, int? LeadApplicant, int? Faculty, bool DSPT, bool ISO27001, bool Azure, bool IRC, bool SEED)
+        /// <param name="mdl_Project"></param>
+        /// <returns></returns>
+        public bool insertProject(ProjectModel mdl_Project)
         {
             bool success = false;
 
@@ -320,51 +270,48 @@ namespace CMS
                         + ", @ISO27001, @Azure, @IRC, @SEED) ";
 
                     //assign the parameter values
-                    qryInsertProject.Parameters.Add("@ProjectNumber", SqlDbType.VarChar, 5).Value = Number;
-                    qryInsertProject.Parameters.Add("@ProjectName", SqlDbType.VarChar, 100).Value = Name;
-                    SqlParameter param_Stage = new SqlParameter("@Stage", Stage == null ? (object)DBNull.Value : Stage);
+                    qryInsertProject.Parameters.Add("@ProjectNumber", SqlDbType.VarChar, 5).Value = mdl_Project.ProjectNumber;
+                    qryInsertProject.Parameters.Add("@ProjectName", SqlDbType.VarChar, 100).Value = mdl_Project.ProjectName;
+                    SqlParameter param_Stage = new SqlParameter("@Stage", mdl_Project.Stage == null ? (object)DBNull.Value : mdl_Project.Stage);
                     param_Stage.IsNullable = true;
                     qryInsertProject.Parameters.Add(param_Stage);
-                    SqlParameter param_Classification = new SqlParameter("@Classification", Classification == null ? (object)DBNull.Value : Classification);
+                    SqlParameter param_Classification = new SqlParameter("@Classification", mdl_Project.Classification == null ? (object)DBNull.Value : mdl_Project.Classification);
                     param_Classification.IsNullable = true;
                     qryInsertProject.Parameters.Add(param_Classification);
-                    SqlParameter param_DATRAG = new SqlParameter("@DATRAG", DATRAG == null ? (object)DBNull.Value : DATRAG);
+                    SqlParameter param_DATRAG = new SqlParameter("@DATRAG", mdl_Project.DATRAG == null ? (object)DBNull.Value : mdl_Project.DATRAG);
                     param_DATRAG.IsNullable = true;
                     qryInsertProject.Parameters.Add(param_DATRAG);
-                    SqlParameter param_ProjectedStartDate = new SqlParameter("@ProjectedStartDate", ProjectedStartDate == null ? (object)DBNull.Value : ProjectedStartDate);
+                    SqlParameter param_ProjectedStartDate = new SqlParameter("@ProjectedStartDate", mdl_Project.ProjectedStartDate == null ? (object)DBNull.Value : mdl_Project.ProjectedStartDate);
                     param_ProjectedStartDate.IsNullable = true;
                     qryInsertProject.Parameters.Add(param_ProjectedStartDate);
-                    SqlParameter param_ProjectedEndDate = new SqlParameter("@ProjectedEndDate", ProjectedEndDate == null ? (object)DBNull.Value : ProjectedEndDate);
+                    SqlParameter param_ProjectedEndDate = new SqlParameter("@ProjectedEndDate", mdl_Project.ProjectedEndDate == null ? (object)DBNull.Value : mdl_Project.ProjectedEndDate);
                     param_ProjectedEndDate.IsNullable = true;
                     qryInsertProject.Parameters.Add(param_ProjectedEndDate);
-                    SqlParameter param_StartDate = new SqlParameter("@StartDate", StartDate == null ? (object)DBNull.Value : StartDate);
+                    SqlParameter param_StartDate = new SqlParameter("@StartDate", mdl_Project.StartDate == null ? (object)DBNull.Value : mdl_Project.StartDate);
                     param_StartDate.IsNullable = true;
                     qryInsertProject.Parameters.Add(param_StartDate);
-                    SqlParameter param_EndDate = new SqlParameter("@EndDate", EndDate == null ? (object)DBNull.Value : EndDate);
+                    SqlParameter param_EndDate = new SqlParameter("@EndDate", mdl_Project.EndDate == null ? (object)DBNull.Value : mdl_Project.EndDate);
                     param_EndDate.IsNullable = true;
                     qryInsertProject.Parameters.Add(param_EndDate);
-
-                    SqlParameter param_LeadApplicant = new SqlParameter("@LeadApplicant", LeadApplicant == null ? (object)DBNull.Value : LeadApplicant);
+                    SqlParameter param_LeadApplicant = new SqlParameter("@LeadApplicant", mdl_Project.LeadApplicant == null ? (object)DBNull.Value : mdl_Project.LeadApplicant);
                     param_LeadApplicant.IsNullable = true;
                     qryInsertProject.Parameters.Add(param_LeadApplicant);
-
-                    SqlParameter param_PI = new SqlParameter("@PI", PI == null ? (object)DBNull.Value : PI);
+                    SqlParameter param_PI = new SqlParameter("@PI", mdl_Project.PI == null ? (object)DBNull.Value : mdl_Project.PI);
                     param_PI.IsNullable = true;
                     qryInsertProject.Parameters.Add(param_PI);
-
-                    SqlParameter param_Faculty = new SqlParameter("@Faculty", Faculty == null ? (object)DBNull.Value : Faculty);
+                    SqlParameter param_Faculty = new SqlParameter("@Faculty", mdl_Project.Faculty == null ? (object)DBNull.Value : mdl_Project.Faculty);
                     param_Faculty.IsNullable = true;
                     qryInsertProject.Parameters.Add(param_Faculty);
-                    qryInsertProject.Parameters.Add("@DSPT", SqlDbType.Bit).Value = DSPT;
-                    qryInsertProject.Parameters.Add("@ISO27001", SqlDbType.Bit).Value = ISO27001;
-                    qryInsertProject.Parameters.Add("@Azure", SqlDbType.Bit).Value = Azure;
-                    qryInsertProject.Parameters.Add("@IRC", SqlDbType.Bit).Value = IRC;
-                    qryInsertProject.Parameters.Add("@SEED", SqlDbType.Bit).Value = SEED;
+                    qryInsertProject.Parameters.Add("@DSPT", SqlDbType.Bit).Value = mdl_Project.DSPT;
+                    qryInsertProject.Parameters.Add("@ISO27001", SqlDbType.Bit).Value = mdl_Project.ISO27001;
+                    qryInsertProject.Parameters.Add("@Azure", SqlDbType.Bit).Value = mdl_Project.Azure;
+                    qryInsertProject.Parameters.Add("@IRC", SqlDbType.Bit).Value = mdl_Project.IRC;
+                    qryInsertProject.Parameters.Add("@SEED", SqlDbType.Bit).Value = mdl_Project.SEED;
                     
                     //open connection to database, run query and close connection
                     connection.Open();
                     qryInsertProject.ExecuteNonQuery();
-                    MessageBox.Show($"Project details updated for {Number}");
+                    MessageBox.Show($"Project details updated for {mdl_Project.ProjectNumber}");
 
                     success = true;
                 }
@@ -465,5 +412,3 @@ namespace CMS
 
     }
 }        
-
-

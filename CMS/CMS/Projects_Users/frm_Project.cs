@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DataControlsLib.DataModels;
 
 namespace CMS
 {
@@ -36,32 +37,7 @@ namespace CMS
         /// Populated when form loads and refreshed when project updated.
         /// </summary>
         DataSet ds_Project;
-
-        /*
-         * Class variables to hold current project details.
-         * Populated by fillCurrentProjectVariables() in this class, which calls getProjectToList(pNumber, ds_Project) from Projects class.
-         * Values obtained from in memory dataset (ds_Project).
-         * Populated when form loads and refreshed when project updated or selected project changed
-         */
-        int         current_pID;
-        string      current_pNumber;
-        string      current_pName;
-        int?        current_pStage;
-        int?        current_pClassification;
-        int?        current_pDATRAG;
-        DateTime?   current_pProjectedStartDate;
-        DateTime?   current_pProjectedEndDate;
-        DateTime?   current_pStartDate;
-        DateTime?   current_pEndDate;
-        int?        current_pPI;
-        int?        current_pLeadApplicant;
-        int?        current_pFaculty;
-        bool        current_pDSPT;
-        bool        current_pISO;
-        bool        current_pAzure;
-        bool        current_IRC;
-        bool        current_SEED;
-
+        ProjectModel mdl_CurrentProject;
 
         /// <summary>
         /// Creates a new class object from Project class and calls method getProjectsDataSet() to populate DataSet in this class (ds_Project).
@@ -89,27 +65,7 @@ namespace CMS
                 //instantiate new Project type object that contains project methods
                 var Projects = new Project();
                 //populate list of project details
-                List<object> lst_ProjectDetails = Projects.getProjectToList(pNumber, ds_Project);
-
-                //put project details into form variable members for use by this and other methods
-                current_pID                 = (int)lst_ProjectDetails[0];
-                current_pNumber             = (string)lst_ProjectDetails[1];
-                current_pName               = (string)lst_ProjectDetails[2];
-                current_pStage              = (int?)lst_ProjectDetails[3];
-                current_pClassification     = (int?)lst_ProjectDetails[4];
-                current_pDATRAG             = (int?)lst_ProjectDetails[5];
-                current_pProjectedStartDate = (DateTime?)lst_ProjectDetails[6];
-                current_pProjectedEndDate   = (DateTime?)lst_ProjectDetails[7];
-                current_pStartDate          = (DateTime?)lst_ProjectDetails[8];
-                current_pEndDate            = (DateTime?)lst_ProjectDetails[9];
-                current_pPI                 = (int?)lst_ProjectDetails[10];
-                current_pLeadApplicant      = (int?)lst_ProjectDetails[11];
-                current_pFaculty            = (int?)lst_ProjectDetails[12];
-                current_pDSPT               = (bool)lst_ProjectDetails[13];
-                current_pISO                = (bool)lst_ProjectDetails[14];
-                current_pAzure              = (bool)lst_ProjectDetails[15];
-                current_IRC                 = (bool)lst_ProjectDetails[16];
-                current_SEED                = (bool)lst_ProjectDetails[17];
+                mdl_CurrentProject = Projects.getProject(pNumber, ds_Project);
             }
             catch (Exception ex)
             {
@@ -131,57 +87,57 @@ namespace CMS
                 cb_pNumberValue.DataSource              = ds_Project.Tables["tblProjects"];
                 cb_pNumberValue.ValueMember             = "pID";
                 cb_pNumberValue.DisplayMember           = "ProjectNumber";
-                cb_pNumberValue.Text                    = current_pNumber;
-                tb_pNameValue.Text                      = current_pName;
+                cb_pNumberValue.Text                    = pNumber;
+                tb_pNameValue.Text                      = mdl_CurrentProject.ProjectName;
                 cb_pStage.DataSource                    = ds_Project.Tables["tlkStage"];
                 cb_pStage.ValueMember                   = "StageID";
                 cb_pStage.DisplayMember                 = "pStageDescription";
-                if (current_pStage == null)
+                if (mdl_CurrentProject.Stage == null)
                     cb_pStage.SelectedIndex = -1;
                 else
-                    cb_pStage.SelectedValue             = current_pStage;
+                    cb_pStage.SelectedValue             = mdl_CurrentProject.Stage;
                 cb_pClassification.DataSource           = ds_Project.Tables["tlkClassification"];
                 cb_pClassification.ValueMember          = "classificationID";
                 cb_pClassification.DisplayMember        = "classificationDescription";
-                if (current_pClassification == null)
+                if (mdl_CurrentProject.Classification == null)
                     cb_pClassification.SelectedIndex = -1;
                 else
-                    cb_pClassification.SelectedValue    = current_pClassification;
+                    cb_pClassification.SelectedValue    = mdl_CurrentProject.Classification;
                 cb_DATRAG.DataSource                    = ds_Project.Tables["tlkRAG"];
                 cb_DATRAG.ValueMember                   = "ragID";
                 cb_DATRAG.DisplayMember                 = "ragDescription";
-                if (current_pDATRAG == null)
+                if (mdl_CurrentProject.DATRAG == null)
                     cb_DATRAG.SelectedIndex = -1;
                 else
-                    cb_DATRAG.SelectedValue             = current_pDATRAG;
-                mtb_ProjectedStartDateValue.Text        = current_pProjectedStartDate.ToString();
-                mtb_ProjectedEndDateValue.Text          = current_pProjectedEndDate.ToString();
-                mtb_pStartDateValue.Text                = current_pStartDate.ToString();
-                mtb_pEndDateValue.Text                  = current_pEndDate.ToString();
+                    cb_DATRAG.SelectedValue             = mdl_CurrentProject.DATRAG;
+                mtb_ProjectedStartDateValue.Text        = mdl_CurrentProject.ProjectedStartDate.ToString();
+                mtb_ProjectedEndDateValue.Text          = mdl_CurrentProject.ProjectedEndDate.ToString();
+                mtb_pStartDateValue.Text                = mdl_CurrentProject.StartDate.ToString();
+                mtb_pEndDateValue.Text                  = mdl_CurrentProject.EndDate.ToString();
                 cb_LeadApplicant.DataSource             = ds_Project.Tables["tlkLeadApplicant"];
                 cb_LeadApplicant.ValueMember            = "UserNumber";
                 cb_LeadApplicant.DisplayMember          = "FullName";
-                if (current_pLeadApplicant == null)
+                if (mdl_CurrentProject.LeadApplicant == null)
                     cb_LeadApplicant.SelectedIndex = -1;
-                else cb_LeadApplicant.SelectedValue     = current_pLeadApplicant;
+                else cb_LeadApplicant.SelectedValue     = mdl_CurrentProject.LeadApplicant;
                 cb_PI.DataSource = ds_Project.Tables["tlkPI"];
                 cb_PI.ValueMember = "UserNumber";
                 cb_PI.DisplayMember = "FullName";
-                if (current_pPI == null)
+                if (mdl_CurrentProject.PI == null)
                     cb_PI.SelectedIndex = -1;
-                else cb_PI.SelectedValue = current_pPI;
+                else cb_PI.SelectedValue = mdl_CurrentProject.PI;
                 cb_Faculty.DataSource                   = ds_Project.Tables["tlkFaculty"];
                 cb_Faculty.ValueMember                  = "facultyID";
                 cb_Faculty.DisplayMember                = "facultyDescription";
-                if (current_pFaculty == null)
+                if (mdl_CurrentProject.Faculty == null)
                     cb_Faculty.SelectedIndex = -1;
                 else
-                    cb_Faculty.SelectedValue            = current_pFaculty;
-                chkb_ISO27001.Checked                   = current_pISO;
-                chkb_DSPT.Checked                       = current_pDSPT;
-                chkb_Azure.Checked                      = current_pAzure;
-                chkb_IRC.Checked                        = current_IRC;
-                chkb_SEED.Checked                       = current_SEED;
+                    cb_Faculty.SelectedValue            = mdl_CurrentProject.Faculty;
+                chkb_ISO27001.Checked                   = mdl_CurrentProject.ISO27001;
+                chkb_DSPT.Checked                       = mdl_CurrentProject.DSPT;
+                chkb_Azure.Checked                      = mdl_CurrentProject.Azure;
+                chkb_IRC.Checked                        = mdl_CurrentProject.IRC;
+                chkb_SEED.Checked                       = mdl_CurrentProject.SEED;
                 
                 //setPlatformGroupBoxColour(chkb_IRC.Checked, chkb_SEED.Checked);
             }
@@ -334,36 +290,28 @@ namespace CMS
         /// <param name="pNumber"></param>
         private void updateProject(string pNumber)
         {
-            //populate variables with values held in form controls to compare to current project values
-            string      new_pName               = tb_pNameValue.Text;
-            int?        new_pStage              = null;
-            int?        new_pClassification     = null;
-            int?        new_pDATRAG             = null;
-            DateTime?   new_pProjectedStartDate = null;
-            DateTime?   new_pProjectedEndDate   = null;
-            DateTime?   new_pStartDate          = null;
-            DateTime?   new_pEndDate            = null;
-            int?        new_pPI                 = null;
-            int?        new_pLeadApplicant      = null;
-            int?        new_pFaculty            = null;
-            bool        new_pDSPT               = chkb_DSPT.Checked;
-            bool        new_pISO                = chkb_ISO27001.Checked; 
-            bool        new_pAzure              = chkb_Azure.Checked;
-            bool        new_IRC                 = chkb_IRC.Checked;
-            bool        new_SEED                = chkb_SEED.Checked;
+            ProjectModel mdl_NewProject = new ProjectModel();
+
+            mdl_NewProject.ProjectNumber        = pNumber;
+            mdl_NewProject.ProjectName          = tb_pNameValue.Text;
+            mdl_NewProject.DSPT                 = chkb_DSPT.Checked;
+            mdl_NewProject.ISO27001             = chkb_ISO27001.Checked;
+            mdl_NewProject.Azure                = chkb_Azure.Checked;
+            mdl_NewProject.IRC                  = chkb_IRC.Checked;
+            mdl_NewProject.SEED                 = chkb_SEED.Checked;
 
             if (cb_pStage.SelectedIndex > -1)
-                new_pStage                      = int.Parse(cb_pStage.SelectedValue.ToString());
+                mdl_NewProject.Stage            = int.Parse(cb_pStage.SelectedValue.ToString());
             if (cb_pClassification.SelectedIndex > -1)
-                new_pClassification             = int.Parse(cb_pClassification.SelectedValue.ToString());
+                mdl_NewProject.Classification   = int.Parse(cb_pClassification.SelectedValue.ToString());
             if (cb_DATRAG.SelectedIndex > -1)
-                new_pDATRAG                     = int.Parse(cb_DATRAG.SelectedValue.ToString());
+                mdl_NewProject.DATRAG           = int.Parse(cb_DATRAG.SelectedValue.ToString());
             if (cb_Faculty.SelectedIndex > -1)
-                new_pFaculty                    = int.Parse(cb_Faculty.SelectedValue.ToString());
+                mdl_NewProject.Faculty          = int.Parse(cb_Faculty.SelectedValue.ToString());
             if (cb_LeadApplicant.SelectedIndex > -1)
-                new_pLeadApplicant              = int.Parse(cb_LeadApplicant.SelectedValue.ToString());
+                mdl_NewProject.LeadApplicant    = int.Parse(cb_LeadApplicant.SelectedValue.ToString());
             if (cb_PI.SelectedIndex > -1)
-                new_pPI = int.Parse(cb_PI.SelectedValue.ToString());
+                mdl_NewProject.PI               = int.Parse(cb_PI.SelectedValue.ToString());
 
             //dates are fuckey
             bool dateCheck = true;
@@ -371,7 +319,7 @@ namespace CMS
             {
                 try
                 {
-                    new_pProjectedStartDate = Convert.ToDateTime(mtb_ProjectedStartDateValue.Text);
+                    mdl_NewProject.ProjectedStartDate = Convert.ToDateTime(mtb_ProjectedStartDateValue.Text);
                 }
                 catch (Exception)
                 {
@@ -383,7 +331,7 @@ namespace CMS
             {
                 try
                 {
-                    new_pProjectedEndDate = Convert.ToDateTime(mtb_ProjectedEndDateValue.Text);
+                    mdl_NewProject.ProjectedEndDate = Convert.ToDateTime(mtb_ProjectedEndDateValue.Text);
                 }
                 catch (Exception)
                 {
@@ -395,7 +343,7 @@ namespace CMS
             {
                 try
                 {
-                    new_pStartDate = Convert.ToDateTime(mtb_pStartDateValue.Text);
+                    mdl_NewProject.StartDate = Convert.ToDateTime(mtb_pStartDateValue.Text);
                     dateCheck = true;
                 }
                 catch (Exception)
@@ -408,7 +356,7 @@ namespace CMS
             {
                 try
                 {
-                    new_pEndDate = Convert.ToDateTime(mtb_pEndDateValue.Text);
+                    mdl_NewProject.EndDate = Convert.ToDateTime(mtb_pEndDateValue.Text);
                 }
                 catch (Exception)
                 {
@@ -419,57 +367,21 @@ namespace CMS
 
             //check to see if any changes have been made, no need to update if none.
             //if changes are made then update local variables with change and set changesMade flag to true
-            bool changesMade;
-            if (current_pName != new_pName)
-                changesMade = true; 
-            else if (current_pStage != new_pStage)
-                changesMade = true; 
-            else if (current_pClassification != new_pClassification)
-                changesMade = true; 
-            else if (current_pDATRAG != new_pDATRAG)
-                changesMade = true; 
-            else if (current_pProjectedStartDate != new_pProjectedStartDate)
-                changesMade = true; 
-            else if (current_pProjectedEndDate != new_pProjectedEndDate)
-                changesMade = true; 
-            else if (current_pStartDate != new_pStartDate)
-                changesMade = true; 
-            else if (current_pEndDate != new_pEndDate)
-                changesMade = true; 
-            else if (current_pPI != new_pPI)
-                changesMade = true; 
-            else if (current_pLeadApplicant != new_pLeadApplicant)
-                changesMade = true; 
-            else if (current_pFaculty != new_pFaculty)
-                changesMade = true; 
-            else if (current_pDSPT != new_pDSPT)
-                changesMade = true; 
-            else if (current_pISO != new_pISO)
-                changesMade = true; 
-            else if (current_pAzure != new_pAzure)
-                changesMade = true; 
-            else if (current_IRC != new_IRC)
-                changesMade = true; 
-            else if (current_SEED != new_SEED)
-                changesMade = true; 
-            else
-                changesMade = false;
-
+            bool changesMade = mdl_NewProject != mdl_CurrentProject;
+            
             if (changesMade == true & dateCheck == true)
             {
                 //instantiate new Project type object that contains methods to update db
                 var Projects = new Project();
                 //check that record currently displayed is current record in database before updating anything
-                if (Projects.checkCurrentRecord(pNumber, current_pID) == true)
+                if (Projects.checkCurrentRecord(pNumber, mdl_CurrentProject.pID) == true)
                 {
                     //update existing project - first perform insert new record, if success returned = true then logical delete
-                    if (Projects.insertProject(pNumber, new_pName, new_pStage, new_pClassification, new_pDATRAG
-                        , new_pProjectedStartDate, new_pProjectedEndDate, new_pStartDate, new_pEndDate, new_pPI
-                        , new_pLeadApplicant, new_pFaculty, new_pDSPT, new_pISO, new_pAzure, new_IRC, new_SEED))
+                    if (Projects.insertProject(mdl_NewProject))
                     {
-                        Projects.deleteProject(current_pID);
+                        Projects.deleteProject(mdl_CurrentProject.pID);
                     }
-                    
+
                     //refresh dataset (ds_Projects) and form variable and control values
                     fillProjectsDataSet();
                     fillCurrentProjectVariables(pNumber);
@@ -535,7 +447,7 @@ namespace CMS
                     DialogResult removeProject = MessageBox.Show($"Remove {FullName} from project record?", "", MessageBoxButtons.YesNo);
                     if (removeProject == DialogResult.Yes)
                     {
-                        Users.deleteUserProject(UserNumber, current_pNumber);
+                        Users.deleteUserProject(UserNumber, mdl_CurrentProject.ProjectNumber);
                         removedUsers.Add(rowIndex);
                     }
                 }
@@ -647,7 +559,7 @@ namespace CMS
 
         private void btn_ProjectUserAdd_Click(object sender, EventArgs e)
         {
-            frm_ProjectUserAdd ProjectUserAdd = new frm_ProjectUserAdd(current_pNumber, ds_Project);
+            frm_ProjectUserAdd ProjectUserAdd = new frm_ProjectUserAdd(mdl_CurrentProject.ProjectNumber, ds_Project);
             ProjectUserAdd.FormClosing += new FormClosingEventHandler(this.ProjectUserAdd_FormClosing);
             ProjectUserAdd.Show();
         }
@@ -655,10 +567,10 @@ namespace CMS
         private void ProjectUserAdd_FormClosing(object sender, FormClosingEventArgs e)
         {
             fillProjectsDataSet();
-            fillCurrentProjectVariables(current_pNumber);
-            setProjectDetails(current_pNumber);
-            setProjectUsers(current_pNumber);
-            setProjectNotes(current_pNumber);
+            fillCurrentProjectVariables(mdl_CurrentProject.ProjectNumber);
+            setProjectDetails(mdl_CurrentProject.ProjectNumber);
+            setProjectUsers(mdl_CurrentProject.ProjectNumber);
+            setProjectNotes(mdl_CurrentProject.ProjectNumber);
         }
 
 
