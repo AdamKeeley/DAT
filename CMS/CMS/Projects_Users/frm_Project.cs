@@ -535,6 +535,7 @@ namespace CMS
             fillProjectsDataSet();
             fillCurrentProjectVariables(pNumber);
             setProjectDetails(pNumber);
+            setProjectUsers(pNumber);
             setProjectNotes(pNumber);
         }
 
