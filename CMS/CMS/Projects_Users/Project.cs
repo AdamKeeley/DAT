@@ -63,8 +63,8 @@ namespace CMS
                         $"from [dbo].[tblUser] " +
                         $"where [ValidTo] is null " +
                         $"order by [LastName], [FirstName], [UserID]");
-                    // Copies made of tblUser so that the can be referenced by 
-                    // LeadApplicant and PI fields of tblProjects via DataRelations
+                    // Copies made of tblUser so that the can be referenced by LeadApplicant and 
+                    // PI fields of tblProjects via DataRelations without additional SQL Server hits
                     DataTable leadApp = ds_prj.Tables["tblUser"].Copy();
                     leadApp.TableName = "tlkLeadApplicant";
                     ds_prj.Tables.Add(leadApp);
@@ -103,15 +103,10 @@ namespace CMS
                 return ds_prj;
         }
 
-
         /// <summary>
-        /// Method to populate list that feeds into frm_Project controls.
-        /// Uses parameter pNumber to query DataSet (passed as parameter ds_Project), assigns values to variables and 
-        /// adds them to a list.
-        /// Different data types so I've used an Object type list, each member item can be cast to appropriate data 
-        /// type as it's read from the list.
-        /// Look up fields initialse = 1; should relate to an empty string in the SQL db. If value present in record it
-        /// will be assigned to variable but if null then keep 1 for empty string.
+        /// Method to populate ProjectModel with latest single record.
+        /// Uses parameter pNumber to query Project DataSet (passed as parameter ds_Project), assigns 
+        /// values to the returned ProjectModel class variables.
         /// </summary>
         /// <param name="pNumber"></param>
         /// <param name="ds_Project"></param>
@@ -244,7 +239,8 @@ namespace CMS
 
         /// <summary>
         /// Method to insert a new project record into dbo.tblProject.
-        /// Takes field values as parameter, adds them to a SQL query string as parameters then executes an insert.
+        /// Takes ProjectModel as parameter, adds class variables it contains to a SQL query string as 
+        /// parameters then executes an insert.
         /// Returns a boolean true on success, defaults to false
         /// </summary>
         /// <param name="mdl_Project"></param>

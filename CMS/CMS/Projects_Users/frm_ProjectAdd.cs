@@ -69,7 +69,8 @@ namespace CMS
 
         /// <summary>
         /// Method to create a new project record using values entered in form.
-        /// Assigns control values to variables, checks dates are dates and passes them as parameters to 
+        /// Assigns control values to ProjectModel class variables, 
+        /// checks dates are dates and passes them as parameters to 
         /// the insertProject(...) method of the Projects class.
         /// </summary>
         private void insertNewProject()
@@ -77,19 +78,9 @@ namespace CMS
 
             ProjectModel mdl_Project = new ProjectModel();
 
-            //populate variables with values held in form controls
+            //populate ProjectModel class variables with values held in form controls
             mdl_Project.ProjectNumber      = lbl_NewProjectNumber.Text;
             mdl_Project.ProjectName        = tb_pNameValue.Text;
-            //mdl_Project.Stage              = null;
-            //mdl_Project.Classification     = null;
-            //mdl_Project.DATRAG             = null;
-            //mdl_Project.ProjectedStartDate = null;
-            //mdl_Project.ProjectedEndDate   = null;
-            //mdl_Project.StartDate          = null;
-            //mdl_Project.EndDate            = null;
-            //mdl_Project.PI                 = null;
-            //mdl_Project.LeadApplicant      = null;
-            //mdl_Project.Faculty            = null;
             mdl_Project.DSPT               = chkb_DSPT.Checked;
             mdl_Project.ISO27001           = chkb_ISO27001.Checked;
             mdl_Project.Azure              = chkb_Azure.Checked;

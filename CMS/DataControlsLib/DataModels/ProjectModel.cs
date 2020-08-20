@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace DataControlsLib.DataModels
 {
+    /// <summary>
+    /// Data model containing class variables that describe a single project.
+    /// </summary>
     public class ProjectModel
     {
         public int pID { get; set; }
@@ -29,8 +32,8 @@ namespace DataControlsLib.DataModels
         public bool SEED { get; set; }
 
         /// <summary>
-        /// Here's an Equals override so that the values contained in two instances of this class 
-        /// can be compared all at once. Followed by a pair of Operator overrides that call this.
+        /// Equals override so that the values contained in two instances of this class 
+        /// can be compared all at once.
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
@@ -64,11 +67,25 @@ namespace DataControlsLib.DataModels
             return true;
         }
 
+        /// <summary>
+        /// Operator override for == that calls Equals override for this class so that the values contained 
+        /// in two instances of this class can be compared all at once.
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
         public static bool operator ==(ProjectModel x, ProjectModel y)
         {
             return x.Equals(y);
         }
 
+        /// <summary>
+        ///Operator override for != that calls Equals override for this class so that the values contained 
+        /// in two instances of this class can be compared all at once.
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
         public static bool operator !=(ProjectModel x, ProjectModel y)
         {
             return !(x==y);

@@ -15,8 +15,9 @@ namespace CMS
     {
         /// <summary>
         /// Constructor - Runs each time form is loaded.
-        /// Fills the DataSet (ds_Project), populates the project detail variables and sets the form control values.
-        /// Currently gets the parameter pNumber from Program Main, eventually will get from parent form.
+        /// Fills the DataSet (ds_Project), populates the ProjectModel class variables and sets the form 
+        /// control values.
+        /// Parameter pNumber passed from parent form.
         /// </summary>
         /// <param name="pNumber"></param>
         public frm_Project(string pNumber)
@@ -34,9 +35,12 @@ namespace CMS
         /// The dataset that stores all project details and related tables.
         /// Populated by fillProjectsDataSet() in this class, which calls method getProjectsDataSet() from Project class.
         /// Values obtained from SQL Server.
-        /// Populated when form loads and refreshed when project updated.
         /// </summary>
         DataSet ds_Project;
+
+        /// <summary>
+        /// Class instance containing variables that describe a single project.
+        /// </summary>
         ProjectModel mdl_CurrentProject;
 
         /// <summary>
@@ -49,13 +53,9 @@ namespace CMS
         }
 
         /// <summary>
-        /// Method to assign values to class variables that hold current project details.
+        /// Method to assign current project values to project data model (mdl_CurrentProject).
         /// Creates new Project class object and uses parameter pNumber with class DataSet (ds_Project) to 
-        /// populate a new list using method from Project class: getProjectToList(pNumber, ds_Project).
-        /// Values taken from this list and assigned to class variables.
-        /// !
-        /// Uses index referencing so be careful with ordering!
-        /// !
+        /// populate using method from Project class: getProject(pNumber, ds_Project).
         /// </summary>
         /// <param name="pNumber"></param>
         private void fillCurrentProjectVariables(string pNumber)
@@ -75,8 +75,9 @@ namespace CMS
         }
 
         /// <summary>
-        /// Method to get project details from class DataSet (ds_Project) and assign values to form controls.
-        /// Combo boxes are assigned DataSources, Value & Display members to populate drop down options.
+        /// Method to assign values to form controls from mdl_CurrentProject.
+        /// Combo boxes are assigned DataSources, Value & Display members to populate drop down 
+        /// options from class DataSet (ds_Project)
         /// </summary>
         /// <param name="pNumber"></param>
         private void setProjectDetails(string pNumber)
@@ -184,6 +185,13 @@ namespace CMS
             dgv_pNotes.Sort(dgv_pNotes.Columns["Created Date"], ListSortDirection.Descending);
         }
 
+        /// <summary>
+        /// Method to get project users from class DataSet (ds_Project) and assign to DataGridView on form 
+        /// (dgv_ProjectUsers). Creates a new DataTable (dt_dgv_pNotes), adds records to it row by row from 
+        /// DataSet using parameter pNumber and DataRelation (UserProject_User) and then fills the DataGridView.
+        /// Sizes columns to fit expected data length, not actual.
+        /// </summary>
+        /// <param name="pNumber"></param>
         private void setProjectUsers(string pNumber)
         {
             //populate DataGridView (dgv_ProjectUsers) from DataTable (ds_Project.Tables["tblProjectNotes"])
@@ -210,6 +218,10 @@ namespace CMS
             dgv_ProjectUsers.Columns["Full Name"].Width = 155;
         }
 
+        /// <summary>
+        /// Each control on form assigned a tab index.
+        /// If any controls are added/removed it's easier to change here than on actual form!
+        /// </summary>
         private void setTabIndex()
         {
             int x = 999;
@@ -275,17 +287,17 @@ namespace CMS
 
         /// <summary>
         /// Method to update project details in SQL Server database.
-        /// Gets values from form, assigns them to variables (new_xxxx) and checks if they're different to those 
-        /// in class variables (current_xxxx) and that dates are valid.
+        /// Gets values from form, assigns them to project data model (mdl_NewProject) class variables, 
+        /// checks dates are valid before comparing new data model with current data model.
         /// If no difference then no action, if invalid dates then no action and MessageBox feedback. 
         /// Creates new Project class object and first checks if record loaded to form is latest project record 
         /// in database, using parameter pNumber and class variable current_pID.
         /// If not latest record then no action and MessageBox feedback (asking to refresh form and try again).
-        /// Logically deletes current record in database using deleteProject method from Project class.
-        /// Inserts new record to database using insertProject method from Project class and values assigned to 
-        /// new_xxxx variables.
-        /// Refreshes the class DataSet (ds_Project), assigns new values to class variables (current_xxxx) and 
-        /// resets form controls in the same manner as at form load.
+        /// Inserts new record to database using insertProject method from Project class and values 
+        /// contained in mdl_NewProject.
+        /// On insert success logically deletes current record in database using deleteProject method from Project class.
+        /// Refreshes the class DataSet (ds_Project), assigns new values to current project data model 
+        /// (mdl_CurrentProject) and resets form controls in the same manner as at form load.
         /// </summary>
         /// <param name="pNumber"></param>
         private void updateProject(string pNumber)
@@ -366,7 +378,6 @@ namespace CMS
             }
 
             //check to see if any changes have been made, no need to update if none.
-            //if changes are made then update local variables with change and set changesMade flag to true
             bool changesMade = mdl_NewProject != mdl_CurrentProject;
             
             if (changesMade == true & dateCheck == true)
@@ -430,6 +441,11 @@ namespace CMS
             }
         }
 
+        /// <summary>
+        /// Passes each selected UserNumber in the Research Team DataGridView (dgv_ProjectUsers) and the current 
+        /// ProjectNumber through to the deleteUserProject method of the Users class. 
+        /// Removes them from the DataGridView rather than refreshing whole DataSet/Form.
+        /// </summary>
         private void removeProjectUser()
         {
             int rowCount = dgv_ProjectUsers.Rows.GetRowCount(DataGridViewElementStates.Selected);

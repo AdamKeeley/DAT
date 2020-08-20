@@ -403,6 +403,11 @@ namespace CMS
             return success;
         }
 
+        /// <summary>
+        /// Performs a logical delete on the tblUserProject table, removing an active association between user and project.
+        /// </summary>
+        /// <param name="UserNumber"></param>
+        /// <param name="ProjectNumber"></param>
         public void deleteUserProject(int UserNumber, string ProjectNumber)
         {
             try

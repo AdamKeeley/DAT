@@ -21,6 +21,12 @@ namespace CMS
         string ProjectNumber;
         DataSet ds_Project;
 
+        /// <summary>
+        /// Method to generate set DataSource to the ComboBox.
+        /// Uses DataSet parameter (ds_Project) that contains ComboBox DataSource for drop down options
+        /// </summary>
+        /// <param name="pNumber"></param>
+        /// <param name="ds_prj"></param>
         private void setVariablesAndControl(string pNumber, DataSet ds_prj)
         {
             try
@@ -41,6 +47,10 @@ namespace CMS
             }
         }
 
+        /// <summary>
+        /// Calls method from Users class to check active record doesn't already exist in tblUserProject.
+        /// Inserts new record if not.
+        /// </summary>
         private void addProjectUser()
         {
             int UserNumber = (int)cb_Researcher.SelectedValue;
