@@ -16,9 +16,7 @@ namespace CMS
             /* TO DO
              * 
              * Create User 
-             * Search User
-             * Add User to Project 
-             * Add Project to User 
+             * Search/All User
              * 
              * Documents 
              *     - incorporate some sort of 'timeline' of submitted documents?

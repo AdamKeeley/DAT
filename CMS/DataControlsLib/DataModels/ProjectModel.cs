@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 namespace DataControlsLib.DataModels
 {
     /// <summary>
-    /// Data model containing class variables that describe a single project.
+    /// Data model containing class variables that describe a single project. Includes Equals (and operator) 
+    /// override to compare values of class variables in two instances of this class.
     /// </summary>
     public class ProjectModel
     {

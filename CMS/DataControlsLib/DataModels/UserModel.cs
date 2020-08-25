@@ -6,9 +6,14 @@ using System.Threading.Tasks;
 
 namespace DataControlsLib.DataModels
 {
-    class UserModel
+    /// <summary>
+    /// Data model containing class variables that describe a single user. Includes Equals (and operator) 
+    /// override to compare values of class variables in two instances of this class.
+    /// </summary>
+    public class UserModel
     {
         public int          UserID          { get; set; }
+        public int          UserNumber      { get; set; }
         public int?         Status          { get; set; }
         public int?         Title           { get; set; }
         public string       FirstName       { get; set; }
@@ -28,6 +33,12 @@ namespace DataControlsLib.DataModels
         public DateTime?    TokenIssued     { get; set; }
         public DateTime?    TokenReturned   { get; set; }
 
+        /// <summary>
+        /// Equals override so that the values contained in two instances of this class 
+        /// can be compared all at once.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public override bool Equals(object obj)
         {
             if (!(obj is UserModel))
@@ -35,7 +46,7 @@ namespace DataControlsLib.DataModels
 
             var other = obj as UserModel;
 
-            if (UserID           != other.UserID       
+            if (UserNumber          != other.UserNumber       
                 || Status           != other.Status       
                 || Title            != other.Title        
                 || FirstName        != other.FirstName    

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DataControlsLib;
+using DataControlsLib.DataModels;
 
 namespace CMS
 {
@@ -78,29 +79,17 @@ namespace CMS
             return ds_usr;
         }
 
-        public List<object> getUserToList(int UserNumber, DataSet ds_User)
+        /// <summary>
+        /// Method to populate UserModel with latest single record.
+        /// Uses parameter UserNumber to query User DataSet (passed as parameter ds_User), assigns 
+        /// values to the returned UserModel class variables.
+        /// </summary>
+        /// <param name="UserNumber"></param>
+        /// <param name="ds_User"></param>
+        /// <returns></returns>
+        public UserModel getUser(int UserNumber, DataSet ds_User)
         {
-            int         UserID;
-            int?        Status          = null;
-            int?        Title           = null;
-            string      FirstName;
-            string      LastName;
-            string      Email;
-            string      Phone;
-            string      UserName;
-            string      Organisation;
-            DateTime?   StartDate       = null;
-            DateTime?   EndDate         = null;
-            bool        Priviledged;
-            DateTime?   IRCAgreement    = null;
-            DateTime?   ISET            = null;
-            DateTime?   ISAT            = null;
-            DateTime?   SAFE            = null;
-            long?       TokenSerial     = null;
-            DateTime?   TokenIssued     = null;
-            DateTime?   TokenReturned   = null;
-
-            List<object> lst_User = new List<object>();
+            UserModel mdl_User = new UserModel();
 
             //if no records found, try will fail at "DataRow uRow = uRows[i];" and go to catch
             try
@@ -119,57 +108,37 @@ namespace CMS
                 DataRow uRow = uRows[i];
 
                 //populate DataRow to output with values from uRow
-                UserID = (int)uRow["UserID"];
+                mdl_User.UserID = (int)uRow["UserID"];
+                mdl_User.UserNumber = (int)uRow["UserNumber"];
                 if (uRow["Status"].ToString().Length > 0)
-                    Status = (int?)uRow["Status"];
+                    mdl_User.Status = (int?)uRow["Status"];
                 if (uRow["Title"].ToString().Length > 0)
-                    Title = (int?)uRow["Title"];
-                FirstName = uRow["FirstName"].ToString();
-                LastName = uRow["LastName"].ToString();
-                Email = uRow["Email"].ToString();
-                Phone = uRow["Phone"].ToString();
-                UserName = uRow["UserName"].ToString();
-                Organisation = uRow["Organisation"].ToString();
+                    mdl_User.Title = (int?)uRow["Title"];
+                mdl_User.FirstName = uRow["FirstName"].ToString();
+                mdl_User.LastName = uRow["LastName"].ToString();
+                mdl_User.Email = uRow["Email"].ToString();
+                mdl_User.Phone = uRow["Phone"].ToString();
+                mdl_User.UserName = uRow["UserName"].ToString();
+                mdl_User.Organisation = uRow["Organisation"].ToString();
                 if (uRow["StartDate"].ToString().Length > 0)
-                    StartDate = (DateTime?)uRow["StartDate"];
+                    mdl_User.StartDate = (DateTime?)uRow["StartDate"];
                 if (uRow["EndDate"].ToString().Length > 0)
-                    EndDate = (DateTime?)uRow["EndDate"];
-                Priviledged = (bool)uRow["Priviledged"];
+                    mdl_User.EndDate = (DateTime?)uRow["EndDate"];
+                mdl_User.Priviledged = (bool)uRow["Priviledged"];
                 if (uRow["IRCAgreement"].ToString().Length > 0)
-                    IRCAgreement = (DateTime?)uRow["IRCAgreement"];
+                    mdl_User.IRCAgreement = (DateTime?)uRow["IRCAgreement"];
                 if (uRow["ISET"].ToString().Length > 0)
-                    ISET = (DateTime?)uRow["ISET"];
+                    mdl_User.ISET = (DateTime?)uRow["ISET"];
                 if (uRow["ISAT"].ToString().Length > 0)
-                    ISAT = (DateTime?)uRow["ISAT"];
+                    mdl_User.ISAT = (DateTime?)uRow["ISAT"];
                 if (uRow["SAFE"].ToString().Length > 0)
-                    SAFE = (DateTime?)uRow["SAFE"];
+                    mdl_User.SAFE = (DateTime?)uRow["SAFE"];
                 if (uRow["TokenSerial"].ToString().Length > 0)
-                    TokenSerial = (long?)uRow["TokenSerial"];
+                    mdl_User.TokenSerial = (long?)uRow["TokenSerial"];
                 if (uRow["TokenIssued"].ToString().Length > 0)
-                    TokenIssued = (DateTime?)uRow["TokenIssued"];
+                    mdl_User.TokenIssued = (DateTime?)uRow["TokenIssued"];
                 if (uRow["TokenReturned"].ToString().Length > 0)
-                    TokenReturned = (DateTime?)uRow["TokenReturned"];
-
-                lst_User.Add(UserID);
-                lst_User.Add(UserNumber);
-                lst_User.Add(Status);
-                lst_User.Add(Title);
-                lst_User.Add(FirstName);
-                lst_User.Add(LastName);
-                lst_User.Add(Email);
-                lst_User.Add(Phone);
-                lst_User.Add(UserName);
-                lst_User.Add(Organisation);
-                lst_User.Add(StartDate);
-                lst_User.Add(EndDate);
-                lst_User.Add(Priviledged);
-                lst_User.Add(IRCAgreement);
-                lst_User.Add(ISET);
-                lst_User.Add(ISAT);
-                lst_User.Add(SAFE);
-                lst_User.Add(TokenSerial);
-                lst_User.Add(TokenIssued);
-                lst_User.Add(TokenReturned);
+                    mdl_User.TokenReturned = (DateTime?)uRow["TokenReturned"];
             }
             catch (Exception ex)
             {
@@ -177,9 +146,16 @@ namespace CMS
                 throw;
             }
 
-            return lst_User;
+            return mdl_User;
         }
 
+        /// <summary>
+        /// Method to leave a user note.
+        /// Takes parameter UserNumber to link to project and uNote as the note content.
+        /// Adds them both to the SQL query as parameters and executes an insert on dbo.tblUserNotes.
+        /// </summary>
+        /// <param name="UserNumber"></param>
+        /// <param name="uNote"></param>
         public void insertUserNote(int UserNumber, string uNote)
         {
             try
@@ -211,7 +187,7 @@ namespace CMS
         /// Method to check whether the primary key of the record currently being read is the same as the primary 
         /// key of the latest record for that project.
         /// Takes parameter UserNumber and queries the database with it, returning the UserID for the latest record.
-        /// Returns 'true' if returned UserID matches paramter current_UserID, 'false' if not.
+        /// Returns 'true' if returned UserID matches parameter current_UserID, 'false' if not.
         /// Defaults to false in case of error, better to not update if something's wrong.
         /// </summary>
         /// <param name="UserNumber"></param>
@@ -276,30 +252,14 @@ namespace CMS
         }
 
         /// <summary>
-        /// Method to insert a new project record into dbo.tblProject.
-        /// Takes all field values as parameters, adds them to a SQL query string as parameters then executes an insert.
+        /// Method to insert a new user record into dbo.tblUser.
+        /// Takes UserModel class as parameter, adds class member variables to a SQL query string 
+        /// as parameters then executes an insert.
         /// Returns a boolean true on success, defaults to false
         /// </summary>
-        /// <param name="Number"></param>
-        /// <param name="Name"></param>
-        /// <param name="Stage"></param>
-        /// <param name="Classification"></param>
-        /// <param name="DATRAG"></param>
-        /// <param name="ProjectedStartDate"></param>
-        /// <param name="ProjectedEndDate"></param>
-        /// <param name="StartDate"></param>
-        /// <param name="EndDate"></param>
-        /// <param name="PI"></param>
-        /// <param name="LeadApplicant"></param>
-        /// <param name="Faculty"></param>
-        /// <param name="DSPT"></param>
-        /// <param name="ISO"></param>
-        /// <param name="Azure"></param>
-        /// <param name="IRC"></param>
-        /// <param name="SEED"></param>
-        public bool insertUser(int UserNumber, int? Status, int? Title, string FirstName, string LastName, string Email
-            , string Phone, string UserName, string Organisation, DateTime? StartDate, DateTime? EndDate, DateTime? IRCAgreement
-            , DateTime? ISET, DateTime? ISAT, DateTime? SAFE, long? TokenSerial, DateTime? TokenIssued, DateTime? TokenReturned)
+        /// <param name="mdl_User"></param>
+        /// <returns></returns>
+        public bool insertUser(UserModel mdl_User)
         {
             bool success = false;
 
@@ -321,44 +281,44 @@ namespace CMS
                         + ", @TokenSerial, @TokenIssued, @TokenReturned)";
 
                     //assign the parameter values
-                    qryInsertUser.Parameters.Add("@UserNumber", SqlDbType.Int).Value = UserNumber;
-                    SqlParameter param_Status = new SqlParameter("@Status", Status == null ? (object)DBNull.Value : Status);
+                    qryInsertUser.Parameters.Add("@UserNumber", SqlDbType.Int).Value = mdl_User.UserNumber;
+                    SqlParameter param_Status = new SqlParameter("@Status", mdl_User.Status == null ? (object)DBNull.Value : mdl_User.Status);
                     param_Status.IsNullable = true;
                     qryInsertUser.Parameters.Add(param_Status);
-                    SqlParameter param_Title = new SqlParameter("@Title", Title == null ? (object)DBNull.Value : Title);
+                    SqlParameter param_Title = new SqlParameter("@Title", mdl_User.Title == null ? (object)DBNull.Value : mdl_User.Title);
                     param_Title.IsNullable = true;
                     qryInsertUser.Parameters.Add(param_Title);
-                    qryInsertUser.Parameters.Add("@FirstName", SqlDbType.VarChar, 50).Value = FirstName;
-                    qryInsertUser.Parameters.Add("@LastName", SqlDbType.VarChar, 50).Value = LastName;
-                    qryInsertUser.Parameters.Add("@Email", SqlDbType.VarChar, 255).Value = Email;
-                    qryInsertUser.Parameters.Add("@Phone", SqlDbType.VarChar, 15).Value = Phone;
-                    qryInsertUser.Parameters.Add("@UserName", SqlDbType.VarChar, 12).Value = UserName;
-                    qryInsertUser.Parameters.Add("@Organisation", SqlDbType.VarChar, 255).Value = Organisation;
-                    SqlParameter param_StartDate = new SqlParameter("@StartDate", StartDate == null ? (object)DBNull.Value : StartDate);
+                    qryInsertUser.Parameters.Add("@FirstName", SqlDbType.VarChar, 50).Value = mdl_User.FirstName;
+                    qryInsertUser.Parameters.Add("@LastName", SqlDbType.VarChar, 50).Value = mdl_User.LastName;
+                    qryInsertUser.Parameters.Add("@Email", SqlDbType.VarChar, 255).Value = mdl_User.Email;
+                    qryInsertUser.Parameters.Add("@Phone", SqlDbType.VarChar, 15).Value = mdl_User.Phone;
+                    qryInsertUser.Parameters.Add("@UserName", SqlDbType.VarChar, 12).Value = mdl_User.UserName;
+                    qryInsertUser.Parameters.Add("@Organisation", SqlDbType.VarChar, 255).Value = mdl_User.Organisation;
+                    SqlParameter param_StartDate = new SqlParameter("@StartDate", mdl_User.StartDate == null ? (object)DBNull.Value : mdl_User.StartDate);
                     param_StartDate.IsNullable = true;
                     qryInsertUser.Parameters.Add(param_StartDate);
-                    SqlParameter param_EndDate = new SqlParameter("@EndDate", EndDate == null ? (object)DBNull.Value : EndDate);
+                    SqlParameter param_EndDate = new SqlParameter("@EndDate", mdl_User.EndDate == null ? (object)DBNull.Value : mdl_User.EndDate);
                     param_EndDate.IsNullable = true;
                     qryInsertUser.Parameters.Add(param_EndDate);
-                    SqlParameter param_IRCAgreement = new SqlParameter("@IRCAgreement", IRCAgreement == null ? (object)DBNull.Value : IRCAgreement);
+                    SqlParameter param_IRCAgreement = new SqlParameter("@IRCAgreement", mdl_User.IRCAgreement == null ? (object)DBNull.Value : mdl_User.IRCAgreement);
                     param_IRCAgreement.IsNullable = true;
                     qryInsertUser.Parameters.Add(param_IRCAgreement);
-                    SqlParameter param_ISET = new SqlParameter("@ISET", ISET == null ? (object)DBNull.Value : ISET);
+                    SqlParameter param_ISET = new SqlParameter("@ISET", mdl_User.ISET == null ? (object)DBNull.Value : mdl_User.ISET);
                     param_ISET.IsNullable = true;
                     qryInsertUser.Parameters.Add(param_ISET);
-                    SqlParameter param_ISAT = new SqlParameter("@ISAT", ISAT == null ? (object)DBNull.Value : ISAT);
+                    SqlParameter param_ISAT = new SqlParameter("@ISAT", mdl_User.ISAT == null ? (object)DBNull.Value : mdl_User.ISAT);
                     param_ISAT.IsNullable = true;
                     qryInsertUser.Parameters.Add(param_ISAT);
-                    SqlParameter param_SAFE = new SqlParameter("@SAFE", SAFE == null ? (object)DBNull.Value : SAFE);
+                    SqlParameter param_SAFE = new SqlParameter("@SAFE", mdl_User.SAFE == null ? (object)DBNull.Value : mdl_User.SAFE);
                     param_SAFE.IsNullable = true;
                     qryInsertUser.Parameters.Add(param_SAFE);
-                    SqlParameter param_TokenSerial = new SqlParameter("@TokenSerial", TokenSerial == null ? (object)DBNull.Value : TokenSerial);
+                    SqlParameter param_TokenSerial = new SqlParameter("@TokenSerial", mdl_User.TokenSerial == null ? (object)DBNull.Value : mdl_User.TokenSerial);
                     param_TokenSerial.IsNullable = true;
                     qryInsertUser.Parameters.Add(param_TokenSerial);
-                    SqlParameter param_TokenIssued = new SqlParameter("@TokenIssued", TokenIssued == null ? (object)DBNull.Value : TokenIssued);
+                    SqlParameter param_TokenIssued = new SqlParameter("@TokenIssued", mdl_User.TokenIssued == null ? (object)DBNull.Value : mdl_User.TokenIssued);
                     param_TokenIssued.IsNullable = true;
                     qryInsertUser.Parameters.Add(param_TokenIssued);
-                    SqlParameter param_TokenReturned = new SqlParameter("@TokenReturned", TokenReturned == null ? (object)DBNull.Value : TokenReturned);
+                    SqlParameter param_TokenReturned = new SqlParameter("@TokenReturned", mdl_User.TokenReturned == null ? (object)DBNull.Value : mdl_User.TokenReturned);
                     param_TokenReturned.IsNullable = true;
                     qryInsertUser.Parameters.Add(param_TokenReturned);
 
@@ -366,7 +326,7 @@ namespace CMS
                     connection.Open();
                     qryInsertUser.ExecuteNonQuery();
 
-                    MessageBox.Show($"Project details updated for {LastName}, {FirstName}");
+                    MessageBox.Show($"Project details updated for {mdl_User.LastName}, {mdl_User.FirstName}");
 
                     success = true;
                 }
@@ -406,6 +366,13 @@ namespace CMS
             }
         }
 
+        /// <summary>
+        /// Checks if a valid record containing UserNumber and ProjectNumber already exists. 
+        /// Returns true if parametised values can be added.
+        /// </summary>
+        /// <param name="UserNumber"></param>
+        /// <param name="ProjectNumber"></param>
+        /// <returns></returns>
         public bool checkUserProject(int UserNumber, string ProjectNumber)
         {
             bool PK_NotPresent = true;
@@ -433,7 +400,12 @@ namespace CMS
             return PK_NotPresent;
         }
 
-
+        /// <summary>
+        /// Inserts a new record into tblUserProject, thereby creating a relationship between a user 
+        /// and a project. 
+        /// </summary>
+        /// <param name="UserNumber"></param>
+        /// <param name="ProjectNumber"></param>
         public void insertUserProject(int UserNumber, string ProjectNumber)
         {
             try
