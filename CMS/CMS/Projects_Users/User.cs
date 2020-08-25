@@ -35,68 +35,43 @@ namespace CMS
                 SQL_Stuff conString = new SQL_Stuff();
                 using (SqlConnection connection = new SqlConnection(conString.getString()))
                 {
-                    //use a DataAdapter (da_User) to add a DataTable (tblUser) to a DataSet (ds_usr) 
-                    //from a SQL Server query (qryGetUser)
-                    SqlDataAdapter da_User = new SqlDataAdapter();
-                    SqlCommand qryGetUser = new SqlCommand();
-                    qryGetUser.CommandText = $"select *, [LastName] + ', ' + [FirstName] as FullName from [dbo].[tblUser] where [ValidTo] is null order by [LastName], [FirstName], [UserID]";
-                    qryGetUser.Connection = connection;
-                    da_User.SelectCommand = qryGetUser;
-                    da_User.Fill(ds_usr, "tblUser");
-
-                    //add tlkUserStatus DataTable to DataSet (ds_usr)
-                    SqlCommand qryGetUserStatus = new SqlCommand();
-                    qryGetUserStatus.CommandText = $"select * from [dbo].[tlkUserStatus] where [ValidTo] is null";
-                    qryGetUserStatus.Connection = connection;
-                    da_User.SelectCommand = qryGetUserStatus;
-                    da_User.Fill(ds_usr, "tlkUserStatus");
-                    //create a DataRelation (User_UserStatus) to join tlkUserStatus to tblUser
+                    //use method from GetDB to create, fill and add DataTables to class DataSet
+                    GetDB.GetDataTable(connection, ds_usr, "tblUser",
+                        $"select *, [LastName] + ', ' + [FirstName] as FullName " +
+                        $"from [dbo].[tblUser] " +
+                        $"where [ValidTo] is null " +
+                        $"order by [LastName], [FirstName], [UserID]");
+                    GetDB.GetDataTable(connection, ds_usr, "tlkUserStatus",
+                        $"select * from [dbo].[tlkUserStatus] " +
+                        $"where [ValidTo] is null");
+                    GetDB.GetDataTable(connection, ds_usr, "tlkTitle",
+                        $"select * from [dbo].[tlkTitle] " +
+                        $"where [ValidTo] is null");
+                    GetDB.GetDataTable(connection, ds_usr, "tblUserNotes",
+                        $"select * from [dbo].[tblUserNotes]");
+                    GetDB.GetDataTable(connection, ds_usr, "tblUserProject",
+                        $"select * from [dbo].[tblUserProject] " +
+                        $"where [ValidTo] is null");
+                    GetDB.GetDataTable(connection, ds_usr, "tblProjects",
+                        $"select * from [dbo].[tblProject] " +
+                        $"where [ValidTo] is null " +
+                        $"order by [ProjectNumber], [pID]");
+                    //create a DataRelations to join dimensions to measures
                     ds_usr.Relations.Add("User_UserStatus"
                         , ds_usr.Tables["tlkUserStatus"].Columns["StatusID"]    //parent
                         , ds_usr.Tables["tblUser"].Columns["Status"]);          //child
-
-                    //add tlkTitle DataTable to DataSet (ds_usr)
-                    SqlCommand qryGetTitle = new SqlCommand();
-                    qryGetTitle.CommandText = $"select * from [dbo].[tlkTitle] where [ValidTo] is null";
-                    qryGetTitle.Connection = connection;
-                    da_User.SelectCommand = qryGetTitle;
-                    da_User.Fill(ds_usr, "tlkTitle");
-                    //create a DataRelation (User_UserStatus) to join tlkUserStatus to tblUser
                     ds_usr.Relations.Add("User_Title"
-                        , ds_usr.Tables["tlkTitle"].Columns["TitleID"]      //parent
-                        , ds_usr.Tables["tblUser"].Columns["Title"]);       //child
-
-                    //add tblUserNotes DataTable to DataSet (ds_usr)
-                    //DataRelation not needed, can just query DataTable directly using same UserID parameter
-                    SqlCommand qryGetUserNotes = new SqlCommand();
-                    qryGetUserNotes.CommandText = $"select * from [dbo].[tblUserNotes]";
-                    qryGetUserNotes.Connection = connection;
-                    da_User.SelectCommand = qryGetUserNotes;
-                    da_User.Fill(ds_usr, "tblUserNotes");
-                    
-                    //add tblUserProject DataTable to DataSet (ds_usr)
-                    //DataRelation not needed, can just query DataTable directly using same UserID parameter
-                    SqlCommand qryGetUserProject = new SqlCommand();
-                    qryGetUserProject.CommandText = $"select * from [dbo].[tblUserProject] where [ValidTo] is null";
-                    qryGetUserProject.Connection = connection;
-                    da_User.SelectCommand = qryGetUserProject;
-                    da_User.Fill(ds_usr, "tblUserProject");
-                    //add tblProject DataTable to DataSet (ds_usr)
-                    SqlCommand qryGetProject = new SqlCommand();
-                    qryGetProject.CommandText = $"select * from [dbo].[tblProject] where [ValidTo] is null order by [ProjectNumber], [pID]";
-                    qryGetProject.Connection = connection;
-                    da_User.SelectCommand = qryGetProject;
-                    da_User.Fill(ds_usr, "tblProjects");
-                    //datarelation
+                        , ds_usr.Tables["tlkTitle"].Columns["TitleID"]
+                        , ds_usr.Tables["tblUser"].Columns["Title"]);                                                            //datarelation
                     ds_usr.Relations.Add("UserProject_Project"
-                        , ds_usr.Tables["tblProjects"].Columns["ProjectNumber"]                //Parent
-                        , ds_usr.Tables["tblUserProject"].Columns["ProjectNumber"]);           //Child
+                        , ds_usr.Tables["tblProjects"].Columns["ProjectNumber"]     
+                        , ds_usr.Tables["tblUserProject"].Columns["ProjectNumber"]);
                 }
             }
             catch (Exception e)
             {
                 MessageBox.Show("Failed to populate ds_usr DataSet" + Environment.NewLine + Environment.NewLine + e);
-                throw;
+                //throw;
             }
 
             //return DataSet (ds_usr) as the output of this method
