@@ -46,9 +46,8 @@ namespace CMS
 
         private void btn_AddUser_Click(object sender, EventArgs e)
         {
-            // Must pass user number int to form constructor, which depends on project?
-            //frm_User UserForm = new frm_User();
-            //UserForm.Show();
+            frm_UserAdd UserAdd = new frm_UserAdd();
+            UserAdd.Show();
         }
 
         private void btn_DataOwnerAdd_Click(object sender, EventArgs e)

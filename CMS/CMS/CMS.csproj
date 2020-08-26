@@ -99,6 +99,12 @@
     <Compile Include="Projects_Users\frm_ProjectUserAdd.Designer.cs">
       <DependentUpon>frm_ProjectUserAdd.cs</DependentUpon>
     </Compile>
+    <Compile Include="Projects_Users\frm_UserAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Projects_Users\frm_UserAdd.Designer.cs">
+      <DependentUpon>frm_UserAdd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Projects_Users\frm_User.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -148,6 +154,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Projects_Users\frm_ProjectUserAdd.resx">
       <DependentUpon>frm_ProjectUserAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Projects_Users\frm_UserAdd.resx">
+      <DependentUpon>frm_UserAdd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Projects_Users\frm_User.resx">
       <DependentUpon>frm_User.cs</DependentUpon>

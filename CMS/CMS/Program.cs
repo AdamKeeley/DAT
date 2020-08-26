@@ -15,7 +15,6 @@ namespace CMS
         {
             /* TO DO
              * 
-             * Create User 
              * Search/All User
              * 
              * Documents 

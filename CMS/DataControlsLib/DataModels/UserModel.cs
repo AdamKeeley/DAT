@@ -15,7 +15,9 @@ namespace DataControlsLib.DataModels
         public int          UserID          { get; set; }
         public int          UserNumber      { get; set; }
         public int?         Status          { get; set; }
+        public string       Status_Desc     { get; set; }
         public int?         Title           { get; set; }
+        public string       Title_Desc      { get; set; }
         public string       FirstName       { get; set; }
         public string       LastName        { get; set; }
         public string       Email           { get; set; }

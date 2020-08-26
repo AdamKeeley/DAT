@@ -1,6 +1,6 @@
 ﻿namespace CMS
 {
-    partial class frm_User
+    partial class frm_UserAdd
     {
         /// <summary>
         /// Required designer variable.
@@ -61,16 +61,6 @@
             this.mtb_TokenReturned = new System.Windows.Forms.MaskedTextBox();
             this.lbl_TokenReturned = new System.Windows.Forms.Label();
             this.lbl_TokenIssued = new System.Windows.Forms.Label();
-            this.btn_InsertUserNote = new System.Windows.Forms.Button();
-            this.tb_NewUserNote = new System.Windows.Forms.TextBox();
-            this.dgv_UserNotes = new System.Windows.Forms.DataGridView();
-            this.gb_UserProjects = new System.Windows.Forms.GroupBox();
-            this.dgv_UserProjects = new System.Windows.Forms.DataGridView();
-            this.btn_ProjectUserRemove = new System.Windows.Forms.Button();
-            this.btn_ProjectUserAdd = new System.Windows.Forms.Button();
-            this.btn_UserRefresh = new System.Windows.Forms.Button();
-            this.btn_NewUser = new System.Windows.Forms.Button();
-            this.btn_UserApply = new System.Windows.Forms.Button();
             this.btn_UserOK = new System.Windows.Forms.Button();
             this.btn_UserCancel = new System.Windows.Forms.Button();
             this.gb_MFA = new System.Windows.Forms.GroupBox();
@@ -78,15 +68,10 @@
             this.gb_Training = new System.Windows.Forms.GroupBox();
             this.gb_UserDetail = new System.Windows.Forms.GroupBox();
             this.lbl_FullName = new System.Windows.Forms.Label();
-            this.gb_UserNotes = new System.Windows.Forms.GroupBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_UserNotes)).BeginInit();
-            this.gb_UserProjects.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_UserProjects)).BeginInit();
             this.gb_MFA.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_TokenSerial)).BeginInit();
             this.gb_Training.SuspendLayout();
             this.gb_UserDetail.SuspendLayout();
-            this.gb_UserNotes.SuspendLayout();
             this.SuspendLayout();
             // 
             // cb_UserStatus
@@ -250,6 +235,8 @@
             this.mtb_UserStartDate.Size = new System.Drawing.Size(76, 20);
             this.mtb_UserStartDate.TabIndex = 41;
             this.mtb_UserStartDate.ValidatingType = typeof(System.DateTime);
+            this.mtb_UserStartDate.Click += new System.EventHandler(this.enter_TextBox);
+            this.mtb_UserStartDate.Enter += new System.EventHandler(this.enter_TextBox);
             // 
             // mtb_UserEndDate
             // 
@@ -260,6 +247,7 @@
             this.mtb_UserEndDate.Size = new System.Drawing.Size(76, 20);
             this.mtb_UserEndDate.TabIndex = 43;
             this.mtb_UserEndDate.ValidatingType = typeof(System.DateTime);
+            this.mtb_UserEndDate.Click += new System.EventHandler(this.enter_TextBox);
             // 
             // lbl_EndDate
             // 
@@ -290,6 +278,7 @@
             this.mtb_IRCAgreement.Size = new System.Drawing.Size(76, 20);
             this.mtb_IRCAgreement.TabIndex = 45;
             this.mtb_IRCAgreement.ValidatingType = typeof(System.DateTime);
+            this.mtb_IRCAgreement.Click += new System.EventHandler(this.enter_TextBox);
             // 
             // mtb_ISET
             // 
@@ -300,6 +289,7 @@
             this.mtb_ISET.Size = new System.Drawing.Size(76, 20);
             this.mtb_ISET.TabIndex = 47;
             this.mtb_ISET.ValidatingType = typeof(System.DateTime);
+            this.mtb_ISET.Click += new System.EventHandler(this.enter_TextBox);
             // 
             // lbl_ISET
             // 
@@ -330,6 +320,7 @@
             this.mtb_ISAT.Size = new System.Drawing.Size(76, 20);
             this.mtb_ISAT.TabIndex = 49;
             this.mtb_ISAT.ValidatingType = typeof(System.DateTime);
+            this.mtb_ISAT.Click += new System.EventHandler(this.enter_TextBox);
             // 
             // mtb_SAFE
             // 
@@ -340,6 +331,7 @@
             this.mtb_SAFE.Size = new System.Drawing.Size(76, 20);
             this.mtb_SAFE.TabIndex = 51;
             this.mtb_SAFE.ValidatingType = typeof(System.DateTime);
+            this.mtb_SAFE.Click += new System.EventHandler(this.enter_TextBox);
             // 
             // lbl_SAFE
             // 
@@ -380,6 +372,7 @@
             this.mtb_TokenIssued.Size = new System.Drawing.Size(76, 20);
             this.mtb_TokenIssued.TabIndex = 55;
             this.mtb_TokenIssued.ValidatingType = typeof(System.DateTime);
+            this.mtb_TokenIssued.Click += new System.EventHandler(this.enter_TextBox);
             // 
             // mtb_TokenReturned
             // 
@@ -390,6 +383,7 @@
             this.mtb_TokenReturned.Size = new System.Drawing.Size(76, 20);
             this.mtb_TokenReturned.TabIndex = 57;
             this.mtb_TokenReturned.ValidatingType = typeof(System.DateTime);
+            this.mtb_TokenReturned.Click += new System.EventHandler(this.enter_TextBox);
             // 
             // lbl_TokenReturned
             // 
@@ -411,124 +405,9 @@
             this.lbl_TokenIssued.TabIndex = 54;
             this.lbl_TokenIssued.Text = "Token Issued";
             // 
-            // btn_InsertUserNote
-            // 
-            this.btn_InsertUserNote.Location = new System.Drawing.Point(443, 18);
-            this.btn_InsertUserNote.Margin = new System.Windows.Forms.Padding(2);
-            this.btn_InsertUserNote.Name = "btn_InsertUserNote";
-            this.btn_InsertUserNote.Size = new System.Drawing.Size(55, 40);
-            this.btn_InsertUserNote.TabIndex = 59;
-            this.btn_InsertUserNote.Text = "Add Note";
-            this.btn_InsertUserNote.UseVisualStyleBackColor = true;
-            this.btn_InsertUserNote.Click += new System.EventHandler(this.btn_InsertUserNote_Click);
-            // 
-            // tb_NewUserNote
-            // 
-            this.tb_NewUserNote.Location = new System.Drawing.Point(5, 18);
-            this.tb_NewUserNote.Margin = new System.Windows.Forms.Padding(2);
-            this.tb_NewUserNote.MaxLength = 8000;
-            this.tb_NewUserNote.Multiline = true;
-            this.tb_NewUserNote.Name = "tb_NewUserNote";
-            this.tb_NewUserNote.Size = new System.Drawing.Size(433, 40);
-            this.tb_NewUserNote.TabIndex = 58;
-            // 
-            // dgv_UserNotes
-            // 
-            this.dgv_UserNotes.AllowUserToAddRows = false;
-            this.dgv_UserNotes.AllowUserToDeleteRows = false;
-            this.dgv_UserNotes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_UserNotes.Location = new System.Drawing.Point(5, 62);
-            this.dgv_UserNotes.Margin = new System.Windows.Forms.Padding(2);
-            this.dgv_UserNotes.Name = "dgv_UserNotes";
-            this.dgv_UserNotes.ReadOnly = true;
-            this.dgv_UserNotes.RowHeadersVisible = false;
-            this.dgv_UserNotes.RowTemplate.Height = 24;
-            this.dgv_UserNotes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_UserNotes.Size = new System.Drawing.Size(494, 150);
-            this.dgv_UserNotes.TabIndex = 60;
-            this.dgv_UserNotes.TabStop = false;
-            // 
-            // gb_UserProjects
-            // 
-            this.gb_UserProjects.Controls.Add(this.dgv_UserProjects);
-            this.gb_UserProjects.Controls.Add(this.btn_ProjectUserRemove);
-            this.gb_UserProjects.Controls.Add(this.btn_ProjectUserAdd);
-            this.gb_UserProjects.Location = new System.Drawing.Point(517, 12);
-            this.gb_UserProjects.Name = "gb_UserProjects";
-            this.gb_UserProjects.Size = new System.Drawing.Size(191, 174);
-            this.gb_UserProjects.TabIndex = 0;
-            this.gb_UserProjects.TabStop = false;
-            this.gb_UserProjects.Text = "Projects";
-            // 
-            // dgv_UserProjects
-            // 
-            this.dgv_UserProjects.AllowUserToAddRows = false;
-            this.dgv_UserProjects.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_UserProjects.ColumnHeadersVisible = false;
-            this.dgv_UserProjects.Location = new System.Drawing.Point(8, 19);
-            this.dgv_UserProjects.Name = "dgv_UserProjects";
-            this.dgv_UserProjects.ReadOnly = true;
-            this.dgv_UserProjects.RowHeadersVisible = false;
-            this.dgv_UserProjects.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_UserProjects.Size = new System.Drawing.Size(170, 115);
-            this.dgv_UserProjects.TabIndex = 41;
-            this.dgv_UserProjects.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_UserProjects_CellDoubleClick);
-            // 
-            // btn_ProjectUserRemove
-            // 
-            this.btn_ProjectUserRemove.Location = new System.Drawing.Point(96, 140);
-            this.btn_ProjectUserRemove.Name = "btn_ProjectUserRemove";
-            this.btn_ProjectUserRemove.Size = new System.Drawing.Size(75, 23);
-            this.btn_ProjectUserRemove.TabIndex = 43;
-            this.btn_ProjectUserRemove.Text = "Remove";
-            this.btn_ProjectUserRemove.UseVisualStyleBackColor = true;
-            this.btn_ProjectUserRemove.Click += new System.EventHandler(this.btn_ProjectUserRemove_Click);
-            // 
-            // btn_ProjectUserAdd
-            // 
-            this.btn_ProjectUserAdd.Location = new System.Drawing.Point(16, 140);
-            this.btn_ProjectUserAdd.Name = "btn_ProjectUserAdd";
-            this.btn_ProjectUserAdd.Size = new System.Drawing.Size(75, 23);
-            this.btn_ProjectUserAdd.TabIndex = 42;
-            this.btn_ProjectUserAdd.Text = "Add";
-            this.btn_ProjectUserAdd.UseVisualStyleBackColor = true;
-            this.btn_ProjectUserAdd.Click += new System.EventHandler(this.btn_ProjectUserAdd_Click);
-            // 
-            // btn_UserRefresh
-            // 
-            this.btn_UserRefresh.Location = new System.Drawing.Point(451, 422);
-            this.btn_UserRefresh.Name = "btn_UserRefresh";
-            this.btn_UserRefresh.Size = new System.Drawing.Size(75, 23);
-            this.btn_UserRefresh.TabIndex = 66;
-            this.btn_UserRefresh.Text = "Refresh";
-            this.btn_UserRefresh.UseVisualStyleBackColor = true;
-            this.btn_UserRefresh.Click += new System.EventHandler(this.btn_UserRefresh_Click);
-            // 
-            // btn_NewUser
-            // 
-            this.btn_NewUser.Location = new System.Drawing.Point(206, 422);
-            this.btn_NewUser.Margin = new System.Windows.Forms.Padding(2);
-            this.btn_NewUser.Name = "btn_NewUser";
-            this.btn_NewUser.Size = new System.Drawing.Size(90, 24);
-            this.btn_NewUser.TabIndex = 65;
-            this.btn_NewUser.Text = "Create User";
-            this.btn_NewUser.UseVisualStyleBackColor = true;
-            this.btn_NewUser.Click += new System.EventHandler(this.btn_UserAdd_Click);
-            // 
-            // btn_UserApply
-            // 
-            this.btn_UserApply.Location = new System.Drawing.Point(531, 421);
-            this.btn_UserApply.Margin = new System.Windows.Forms.Padding(2);
-            this.btn_UserApply.Name = "btn_UserApply";
-            this.btn_UserApply.Size = new System.Drawing.Size(56, 24);
-            this.btn_UserApply.TabIndex = 62;
-            this.btn_UserApply.Text = "Apply";
-            this.btn_UserApply.UseVisualStyleBackColor = true;
-            this.btn_UserApply.Click += new System.EventHandler(this.btn_UserApply_Click);
-            // 
             // btn_UserOK
             // 
-            this.btn_UserOK.Location = new System.Drawing.Point(592, 421);
+            this.btn_UserOK.Location = new System.Drawing.Point(395, 288);
             this.btn_UserOK.Margin = new System.Windows.Forms.Padding(2);
             this.btn_UserOK.Name = "btn_UserOK";
             this.btn_UserOK.Size = new System.Drawing.Size(56, 24);
@@ -539,7 +418,7 @@
             // 
             // btn_UserCancel
             // 
-            this.btn_UserCancel.Location = new System.Drawing.Point(652, 421);
+            this.btn_UserCancel.Location = new System.Drawing.Point(455, 288);
             this.btn_UserCancel.Margin = new System.Windows.Forms.Padding(2);
             this.btn_UserCancel.Name = "btn_UserCancel";
             this.btn_UserCancel.Size = new System.Drawing.Size(56, 24);
@@ -556,7 +435,7 @@
             this.gb_MFA.Controls.Add(this.lbl_TokenReturned);
             this.gb_MFA.Controls.Add(this.mtb_TokenIssued);
             this.gb_MFA.Controls.Add(this.mtb_TokenReturned);
-            this.gb_MFA.Location = new System.Drawing.Point(12, 318);
+            this.gb_MFA.Location = new System.Drawing.Point(201, 192);
             this.gb_MFA.Name = "gb_MFA";
             this.gb_MFA.Size = new System.Drawing.Size(183, 98);
             this.gb_MFA.TabIndex = 0;
@@ -631,42 +510,22 @@
             this.lbl_FullName.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lbl_FullName.Size = new System.Drawing.Size(327, 20);
             this.lbl_FullName.TabIndex = 32;
-            this.lbl_FullName.Text = "Title LastName, FirstName";
+            this.lbl_FullName.Text = "Add new user";
             this.lbl_FullName.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // gb_UserNotes
-            // 
-            this.gb_UserNotes.Controls.Add(this.tb_NewUserNote);
-            this.gb_UserNotes.Controls.Add(this.dgv_UserNotes);
-            this.gb_UserNotes.Controls.Add(this.btn_InsertUserNote);
-            this.gb_UserNotes.Location = new System.Drawing.Point(201, 192);
-            this.gb_UserNotes.Name = "gb_UserNotes";
-            this.gb_UserNotes.Size = new System.Drawing.Size(507, 224);
-            this.gb_UserNotes.TabIndex = 0;
-            this.gb_UserNotes.TabStop = false;
-            this.gb_UserNotes.Text = "Notes";
-            // 
-            // frm_User
+            // frm_UserAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(723, 456);
-            this.Controls.Add(this.gb_UserNotes);
+            this.ClientSize = new System.Drawing.Size(524, 322);
             this.Controls.Add(this.gb_UserDetail);
             this.Controls.Add(this.gb_Training);
             this.Controls.Add(this.gb_MFA);
-            this.Controls.Add(this.btn_UserRefresh);
-            this.Controls.Add(this.btn_NewUser);
-            this.Controls.Add(this.btn_UserApply);
             this.Controls.Add(this.btn_UserOK);
             this.Controls.Add(this.btn_UserCancel);
-            this.Controls.Add(this.gb_UserProjects);
-            this.Name = "frm_User";
+            this.Name = "frm_UserAdd";
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Text = "User";
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_UserNotes)).EndInit();
-            this.gb_UserProjects.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_UserProjects)).EndInit();
+            this.Text = "New User";
             this.gb_MFA.ResumeLayout(false);
             this.gb_MFA.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_TokenSerial)).EndInit();
@@ -674,8 +533,6 @@
             this.gb_Training.PerformLayout();
             this.gb_UserDetail.ResumeLayout(false);
             this.gb_UserDetail.PerformLayout();
-            this.gb_UserNotes.ResumeLayout(false);
-            this.gb_UserNotes.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -715,23 +572,12 @@
         private System.Windows.Forms.MaskedTextBox mtb_TokenReturned;
         private System.Windows.Forms.Label lbl_TokenReturned;
         private System.Windows.Forms.Label lbl_TokenIssued;
-        private System.Windows.Forms.Button btn_InsertUserNote;
-        private System.Windows.Forms.TextBox tb_NewUserNote;
-        private System.Windows.Forms.DataGridView dgv_UserNotes;
-        private System.Windows.Forms.GroupBox gb_UserProjects;
-        private System.Windows.Forms.DataGridView dgv_UserProjects;
-        private System.Windows.Forms.Button btn_ProjectUserRemove;
-        private System.Windows.Forms.Button btn_ProjectUserAdd;
-        private System.Windows.Forms.Button btn_UserRefresh;
-        private System.Windows.Forms.Button btn_NewUser;
-        private System.Windows.Forms.Button btn_UserApply;
         private System.Windows.Forms.Button btn_UserOK;
         private System.Windows.Forms.Button btn_UserCancel;
         private System.Windows.Forms.GroupBox gb_MFA;
         private System.Windows.Forms.GroupBox gb_Training;
         private System.Windows.Forms.GroupBox gb_UserDetail;
         private System.Windows.Forms.Label lbl_FullName;
-        private System.Windows.Forms.GroupBox gb_UserNotes;
         private System.Windows.Forms.NumericUpDown nud_TokenSerial;
     }
 }

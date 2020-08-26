@@ -21,7 +21,7 @@ namespace CMS
         public frm_ProjectAdd(DataSet ds_Project)
         {
             InitializeComponent();
-            set_frmProjectAdd(ds_Project);
+            set_ProjectAdd(ds_Project);
         }
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace CMS
         /// Uses DataSet parameter (ds_Project) that contains ComboBox DataSources for drop down options
         /// </summary>
         /// <param name="ds_Project"></param>
-        private void set_frmProjectAdd(DataSet ds_Project)
+        private void set_ProjectAdd(DataSet ds_Project)
         {
             //instantiate new Project type object that contains project methods
             var Projects = new Project();
@@ -158,7 +158,6 @@ namespace CMS
 
                 //insert new record
                 Projects.insertProject(mdl_Project);
-
                 this.Close();
             }
         }

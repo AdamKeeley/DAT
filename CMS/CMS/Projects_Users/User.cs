@@ -326,7 +326,7 @@ namespace CMS
                     connection.Open();
                     qryInsertUser.ExecuteNonQuery();
 
-                    MessageBox.Show($"Project details updated for {mdl_User.LastName}, {mdl_User.FirstName}");
+                    MessageBox.Show($"User details updated for {mdl_User.LastName}, {mdl_User.FirstName}");
 
                     success = true;
                 }
@@ -427,6 +427,40 @@ namespace CMS
             {
                 MessageBox.Show("Failed to add record" + Environment.NewLine + Environment.NewLine + ex);
             }
+        }
+
+        /// <summary>
+        /// Queries SQL database tblUser table for largest UserNumber value. 
+        /// </summary>
+        /// <returns></returns>
+        public int getLastUserNumber()
+        {
+            int UserNumber;
+
+            try
+            {
+                SQL_Stuff conString = new SQL_Stuff();
+                using (SqlConnection connection = new SqlConnection(conString.getString()))
+                {
+                    //create new SQL query
+                    SqlCommand qryGetNewProjectNumber = new SqlCommand();
+                    qryGetNewProjectNumber.Connection = connection;
+                    qryGetNewProjectNumber.CommandText =
+                        $"select max([UserNumber]) " +
+                        $"from [dbo].[tblUser]";
+                    //open connection and execute query, returing result in variable pNumInt
+                    connection.Open();
+                    UserNumber = (int)qryGetNewProjectNumber.ExecuteScalar();
+                }
+            }
+            catch (Exception ex)
+            {
+                //if no project numbers start at zero.
+                UserNumber = 0;
+                MessageBox.Show("Failed to fetch largest User Number, starting from zero" + Environment.NewLine + Environment.NewLine + ex.Message);
+            }
+
+            return UserNumber;
         }
 
     }
