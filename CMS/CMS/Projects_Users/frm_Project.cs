@@ -2,10 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using DataControlsLib.DataModels;
 
@@ -63,7 +59,7 @@ namespace CMS
             try
             {
                 //instantiate new Project type object that contains project methods
-                var Projects = new Project();
+                Project Projects = new Project();
                 //populate list of project details
                 mdl_CurrentProject = Projects.getProject(pNumber, ds_Project);
             }
@@ -139,8 +135,6 @@ namespace CMS
                 chkb_Azure.Checked                      = mdl_CurrentProject.Azure;
                 chkb_IRC.Checked                        = mdl_CurrentProject.IRC;
                 chkb_SEED.Checked                       = mdl_CurrentProject.SEED;
-                
-                //setPlatformGroupBoxColour(chkb_IRC.Checked, chkb_SEED.Checked);
             }
             catch (Exception ex)
             {
@@ -303,6 +297,19 @@ namespace CMS
         private void updateProject(string pNumber)
         {
             ProjectModel mdl_NewProject = new ProjectModel();
+            bool requiredFields = true;
+
+            //Check required fields have an entry
+            if (string.IsNullOrWhiteSpace(tb_pNameValue.Text))
+            {
+                MessageBox.Show("Please enter a Project Title.");
+                requiredFields = false;
+            }
+            if (cb_LeadApplicant.SelectedIndex > -1)
+            {
+                MessageBox.Show("Please select a Lead Applicant.");
+                requiredFields = false;
+            }
 
             mdl_NewProject.ProjectNumber        = pNumber;
             mdl_NewProject.ProjectName          = tb_pNameValue.Text;
@@ -380,7 +387,7 @@ namespace CMS
             //check to see if any changes have been made, no need to update if none.
             bool changesMade = mdl_NewProject != mdl_CurrentProject;
             
-            if (changesMade == true & dateCheck == true)
+            if (requiredFields == true & changesMade == true & dateCheck == true)
             {
                 //instantiate new Project type object that contains methods to update db
                 var Projects = new Project();

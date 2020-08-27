@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using DataControlsLib.DataModels;
 
@@ -60,6 +55,46 @@ namespace CMS
         }
 
         /// <summary>
+        /// Checks first & last name against ds_User to see if it already exists. 
+        /// Presents dialog asking to confirm if duplicate, returns true on yes false on no.
+        /// </summary>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
+        /// <returns></returns>
+        private bool userExists(string firstName, string lastName)
+        {
+            bool userExists = false;
+
+            var existingUser = from row in ds_User.Tables["tblUser"].AsEnumerable()
+                               where row.Field<string>("FirstName").ToLower() == firstName.ToLower()
+                                       && row.Field<string>("LastName").ToLower() == lastName.ToLower()
+                               select row;
+
+            if (existingUser.Count() > 0)
+            {
+                string existingMessage = $"Is this a duplicate of an existing user?" + Environment.NewLine + Environment.NewLine;
+                foreach (DataRow user in existingUser)
+                {
+                    existingMessage += $"{user.Field<string>("FirstName")} " +
+                        $"{user.Field<string>("LastName")}, " +
+                        $"{user.Field<string>("Email")}" + Environment.NewLine;
+                }
+
+                DialogResult confirm = MessageBox.Show(
+                    text: existingMessage
+                    , caption: "Existing user?"
+                    , buttons: MessageBoxButtons.YesNo);
+
+                if (confirm == DialogResult.Yes)
+                {
+                    userExists = true;
+                }
+            }
+
+            return userExists;
+        }
+
+        /// <summary>
         /// Takes values from form controls, checks dates are dates, calls confirmationBox 
         /// to present them for review and inserts into SQL database if confirmed.
         /// </summary>
@@ -67,12 +102,17 @@ namespace CMS
         {
             User Users = new User();
             UserModel mdl_User = new UserModel();
-            bool requiredFields = true;
 
-            if (string.IsNullOrWhiteSpace(tb_FirstName.Text) || string.IsNullOrWhiteSpace(tb_LastName.Text))
+            //Check required fields have an entry
+            if (Users.requiredFields(tb_FirstName.Text, tb_LastName.Text) == false)
             {
-                MessageBox.Show("Please enter a First & Last Name.");
-                requiredFields = false;
+                return;
+            }
+
+            //Check if user already exists
+            if (userExists(tb_FirstName.Text, tb_LastName.Text) == true)
+            {
+                return;
             }
 
             mdl_User.UserNumber     = Users.getLastUserNumber() + 1;
@@ -195,7 +235,7 @@ namespace CMS
                 }
             }
 
-            if (dateCheck == true & requiredFields == true)
+            if (dateCheck == true)
             {
                 if (confirmationBox(mdl_User) == DialogResult.OK)
                 {

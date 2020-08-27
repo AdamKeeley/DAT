@@ -463,5 +463,24 @@ namespace CMS
             return UserNumber;
         }
 
+        public bool requiredFields(string firstName, string lastName)
+        {
+            bool requiredFields = true;
+
+            //Check required fields have an entry
+            if (requiredFields == true & string.IsNullOrWhiteSpace(firstName))
+            {
+                MessageBox.Show("Please enter a First Name.");
+                requiredFields = false;
+            }
+            if (requiredFields == true & string.IsNullOrWhiteSpace(lastName))
+            {
+                MessageBox.Show("Please enter a Last Name.");
+                requiredFields = false;
+            }
+
+            return requiredFields;
+        }
+
     }
 }
