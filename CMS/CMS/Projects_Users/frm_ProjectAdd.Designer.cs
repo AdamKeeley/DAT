@@ -37,10 +37,8 @@
             this.lbl_pStage = new System.Windows.Forms.Label();
             this.tb_pNameValue = new System.Windows.Forms.TextBox();
             this.lbl_pName = new System.Windows.Forms.Label();
-            this.lbl_pNumber = new System.Windows.Forms.Label();
             this.btn_Cancel = new System.Windows.Forms.Button();
             this.btn_Create = new System.Windows.Forms.Button();
-            this.lbl_NewProjectNumber = new System.Windows.Forms.Label();
             this.mtb_ProjectedStartDateValue = new System.Windows.Forms.MaskedTextBox();
             this.lbl_ProjectedStartDate = new System.Windows.Forms.Label();
             this.lbl_LeadApplicant = new System.Windows.Forms.Label();
@@ -154,16 +152,6 @@
             this.lbl_pName.TabIndex = 12;
             this.lbl_pName.Text = "Project Title";
             // 
-            // lbl_pNumber
-            // 
-            this.lbl_pNumber.AutoSize = true;
-            this.lbl_pNumber.Location = new System.Drawing.Point(9, 7);
-            this.lbl_pNumber.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lbl_pNumber.Name = "lbl_pNumber";
-            this.lbl_pNumber.Size = new System.Drawing.Size(80, 13);
-            this.lbl_pNumber.TabIndex = 10;
-            this.lbl_pNumber.Text = "Project Number";
-            // 
             // btn_Cancel
             // 
             this.btn_Cancel.Location = new System.Drawing.Point(441, 225);
@@ -185,16 +173,6 @@
             this.btn_Create.Text = "Create";
             this.btn_Create.UseVisualStyleBackColor = true;
             this.btn_Create.Click += new System.EventHandler(this.btn_Create_Click);
-            // 
-            // lbl_NewProjectNumber
-            // 
-            this.lbl_NewProjectNumber.AutoSize = true;
-            this.lbl_NewProjectNumber.Location = new System.Drawing.Point(116, 7);
-            this.lbl_NewProjectNumber.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lbl_NewProjectNumber.Name = "lbl_NewProjectNumber";
-            this.lbl_NewProjectNumber.Size = new System.Drawing.Size(105, 13);
-            this.lbl_NewProjectNumber.TabIndex = 24;
-            this.lbl_NewProjectNumber.Text = "New Project Number";
             // 
             // mtb_ProjectedStartDateValue
             // 
@@ -445,7 +423,6 @@
             this.Controls.Add(this.lbl_pClassification);
             this.Controls.Add(this.cb_pClassification);
             this.Controls.Add(this.gb_Platform);
-            this.Controls.Add(this.lbl_NewProjectNumber);
             this.Controls.Add(this.btn_Create);
             this.Controls.Add(this.btn_Cancel);
             this.Controls.Add(this.mtb_pStartDateValue);
@@ -457,7 +434,6 @@
             this.Controls.Add(this.lbl_pStage);
             this.Controls.Add(this.tb_pNameValue);
             this.Controls.Add(this.lbl_pName);
-            this.Controls.Add(this.lbl_pNumber);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frm_ProjectAdd";
             this.Text = "Create New Project";
@@ -480,10 +456,8 @@
         private System.Windows.Forms.Label lbl_pStage;
         private System.Windows.Forms.TextBox tb_pNameValue;
         private System.Windows.Forms.Label lbl_pName;
-        private System.Windows.Forms.Label lbl_pNumber;
         private System.Windows.Forms.Button btn_Cancel;
         private System.Windows.Forms.Button btn_Create;
-        private System.Windows.Forms.Label lbl_NewProjectNumber;
         private System.Windows.Forms.MaskedTextBox mtb_ProjectedStartDateValue;
         private System.Windows.Forms.Label lbl_ProjectedStartDate;
         private System.Windows.Forms.Label lbl_LeadApplicant;

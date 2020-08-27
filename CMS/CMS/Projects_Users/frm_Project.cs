@@ -516,33 +516,24 @@ namespace CMS
 
         private void btn_NewProject_Click(object sender, EventArgs e)
         {
-            frm_ProjectAdd ProjectAdd = new frm_ProjectAdd(ds_Project);
-            ProjectAdd.FormClosing += new FormClosingEventHandler(this.ProjectAdd_FormClosing);
-            ProjectAdd.Show();
+            using (frm_ProjectAdd ProjectAdd = new frm_ProjectAdd(ds_Project))
+            {
+                ProjectAdd.ShowDialog();
+                string ProjectNumber = ProjectAdd.pNumber;
+
+                if (string.IsNullOrWhiteSpace(ProjectNumber) == false)
+                {
+                    fillProjectsDataSet();
+                    fillCurrentProjectVariables(ProjectNumber);
+                    setProjectDetails(ProjectNumber);
+                    setProjectNotes(ProjectNumber);
+                }
+            }
         }
 
         private void btn_ProjectUserRemove_Click(object sender, EventArgs e)
         {
             removeProjectUser();
-        }
-
-        /// <summary>
-        /// Populate this form with largest ProjectNumber details after frm_ProjectAdd closes, whether a new project was created or not.
-        /// Relies on frm_ProjectAdd opening with the following code to add a form closing event that calls this method:
-        /// "ProjectAdd.FormClosing += new FormClosingEventHandler(this.ProjectAdd_FormClosing);"
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ProjectAdd_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            var Projects = new Project();
-            int pNumInt = Projects.getLastProjectNumber();
-            string pNumber = Projects.getNewProjectNumber(pNumInt);
-
-            fillProjectsDataSet();
-            fillCurrentProjectVariables(pNumber);
-            setProjectDetails(pNumber);
-            setProjectNotes(pNumber);
         }
 
         private void btn_Refresh_Click(object sender, EventArgs e)

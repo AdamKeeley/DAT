@@ -18,27 +18,37 @@ namespace CMS
         /// on to a method that generates a new project number and sets the ComboBox DataSources
         /// </summary>
         /// <param name="ds_Project"></param>
-        public frm_ProjectAdd(DataSet ds_Project)
+        public frm_ProjectAdd()
         {
             InitializeComponent();
-            set_ProjectAdd(ds_Project);
+            set_ProjectAdd();
+        }
+
+        DataSet ds_Project;
+        public string pNumber;
+
+        /// <summary>
+        /// Uses methods in Project class to query SQL tblProjects for largest integer component of ProjectNumber 
+        /// and increment it by 1 with a 'P' and leading zero prefix.
+        /// </summary>
+        /// <returns></returns>
+        public string getNewProjectNumber()
+        {
+            Project Projects = new Project();
+            int pNumInt = Projects.getLastProjectNumber() + 1;
+            pNumber = Projects.getNewProjectNumber(pNumInt);
+            return pNumber;
         }
 
         /// <summary>
-        /// Method to generate new project number and set DataSources to the ComboBoxes.
-        /// Uses DataSet parameter (ds_Project) that contains ComboBox DataSources for drop down options
+        /// Method to fill class member DataSet (ds_Project) and assign the tables it contains to form controls
         /// </summary>
-        /// <param name="ds_Project"></param>
-        private void set_ProjectAdd(DataSet ds_Project)
+        private void set_ProjectAdd()
         {
             //instantiate new Project type object that contains project methods
-            var Projects = new Project();
+            Project Projects = new Project();
 
-            //generate new pNumber and put it into a variable
-            int pNumInt = Projects.getLastProjectNumber() + 1;
-            string pNumber = Projects.getNewProjectNumber(pNumInt);
-            //populate pNumber
-            lbl_NewProjectNumber.Text = pNumber;
+            ds_Project = Projects.getProjectsDataSet();
 
             //bind DataSource to comboboxes
             cb_DATRAG.DataSource = ds_Project.Tables["tlkRAG"];
@@ -75,11 +85,13 @@ namespace CMS
         /// </summary>
         private void insertNewProject()
         {
-
+            //generate new pNumber and put it into class variable, can be used within 
+            //this method/class but also to feed back to parent form.
+            pNumber = getNewProjectNumber();
             ProjectModel mdl_Project = new ProjectModel();
 
             //populate ProjectModel class variables with values held in form controls
-            mdl_Project.ProjectNumber      = lbl_NewProjectNumber.Text;
+            mdl_Project.ProjectNumber      = pNumber;
             mdl_Project.ProjectName        = tb_pNameValue.Text;
             mdl_Project.DSPT               = chkb_DSPT.Checked;
             mdl_Project.ISO27001           = chkb_ISO27001.Checked;
@@ -161,6 +173,7 @@ namespace CMS
                 this.Close();
             }
         }
+
 
         private void btn_Cancel_Click(object sender, EventArgs e)
         {
