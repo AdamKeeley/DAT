@@ -260,9 +260,16 @@ namespace CMS
 
         private void open_frm_ProjectAdd(object sender, EventArgs e)
         {
-            frm_ProjectAdd ProjectAdd = new frm_ProjectAdd(ds_Project);
-            ProjectAdd.FormClosing += new FormClosingEventHandler(this.refreshPage);
-            ProjectAdd.Show();
+            using (frm_ProjectAdd ProjectAdd = new frm_ProjectAdd())
+            {
+                ProjectAdd.ShowDialog();
+                string ProjectNumber = ProjectAdd.pNumber;
+
+                if (string.IsNullOrWhiteSpace(ProjectNumber) == false)
+                {
+                    refreshPage(ProjectAdd, e);
+                }
+            }
         }
 
         private void refreshPage(object sender, EventArgs e)

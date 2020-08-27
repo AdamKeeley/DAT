@@ -516,7 +516,7 @@ namespace CMS
 
         private void btn_NewProject_Click(object sender, EventArgs e)
         {
-            using (frm_ProjectAdd ProjectAdd = new frm_ProjectAdd(ds_Project))
+            using (frm_ProjectAdd ProjectAdd = new frm_ProjectAdd())
             {
                 ProjectAdd.ShowDialog();
                 string ProjectNumber = ProjectAdd.pNumber;

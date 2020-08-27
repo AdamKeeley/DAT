@@ -67,7 +67,7 @@
             this.nud_TokenSerial = new System.Windows.Forms.NumericUpDown();
             this.gb_Training = new System.Windows.Forms.GroupBox();
             this.gb_UserDetail = new System.Windows.Forms.GroupBox();
-            this.lbl_FullName = new System.Windows.Forms.Label();
+            this.lbl_UserAdd = new System.Windows.Forms.Label();
             this.gb_MFA.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_TokenSerial)).BeginInit();
             this.gb_Training.SuspendLayout();
@@ -474,7 +474,7 @@
             // 
             // gb_UserDetail
             // 
-            this.gb_UserDetail.Controls.Add(this.lbl_FullName);
+            this.gb_UserDetail.Controls.Add(this.lbl_UserAdd);
             this.gb_UserDetail.Controls.Add(this.cb_UserStatus);
             this.gb_UserDetail.Controls.Add(this.lbl_UserTitle);
             this.gb_UserDetail.Controls.Add(this.lbl_UserStatus);
@@ -502,16 +502,16 @@
             this.gb_UserDetail.TabStop = false;
             this.gb_UserDetail.Text = "User Detail";
             // 
-            // lbl_FullName
+            // lbl_UserAdd
             // 
-            this.lbl_FullName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_FullName.Location = new System.Drawing.Point(159, 15);
-            this.lbl_FullName.Name = "lbl_FullName";
-            this.lbl_FullName.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lbl_FullName.Size = new System.Drawing.Size(327, 20);
-            this.lbl_FullName.TabIndex = 32;
-            this.lbl_FullName.Text = "Add new user";
-            this.lbl_FullName.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lbl_UserAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_UserAdd.Location = new System.Drawing.Point(159, 15);
+            this.lbl_UserAdd.Name = "lbl_UserAdd";
+            this.lbl_UserAdd.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lbl_UserAdd.Size = new System.Drawing.Size(327, 20);
+            this.lbl_UserAdd.TabIndex = 32;
+            this.lbl_UserAdd.Text = "Add new user";
+            this.lbl_UserAdd.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // frm_UserAdd
             // 
@@ -577,7 +577,7 @@
         private System.Windows.Forms.GroupBox gb_MFA;
         private System.Windows.Forms.GroupBox gb_Training;
         private System.Windows.Forms.GroupBox gb_UserDetail;
-        private System.Windows.Forms.Label lbl_FullName;
+        private System.Windows.Forms.Label lbl_UserAdd;
         private System.Windows.Forms.NumericUpDown nud_TokenSerial;
     }
 }

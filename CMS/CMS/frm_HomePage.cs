@@ -39,8 +39,7 @@ namespace CMS
 
         private void btn_AddProject_Click(object sender, EventArgs e)
         {
-            var Projects = new Project();
-            frm_ProjectAdd ProjectAddForm = new frm_ProjectAdd(Projects.getProjectsDataSet());
+            frm_ProjectAdd ProjectAddForm = new frm_ProjectAdd();
             ProjectAddForm.Show();
         }
 

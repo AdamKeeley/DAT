@@ -61,6 +61,7 @@
             this.lbl_LeadApplicant_NewUser = new System.Windows.Forms.Label();
             this.cb_PI = new System.Windows.Forms.ComboBox();
             this.cb_LeadApplicant = new System.Windows.Forms.ComboBox();
+            this.lbl_ProjectAdd = new System.Windows.Forms.Label();
             this.gb_Governance.SuspendLayout();
             this.gb_Platform.SuspendLayout();
             this.SuspendLayout();
@@ -401,11 +402,23 @@
             this.cb_LeadApplicant.Size = new System.Drawing.Size(173, 21);
             this.cb_LeadApplicant.TabIndex = 65;
             // 
+            // lbl_ProjectAdd
+            // 
+            this.lbl_ProjectAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_ProjectAdd.Location = new System.Drawing.Point(12, 6);
+            this.lbl_ProjectAdd.Name = "lbl_ProjectAdd";
+            this.lbl_ProjectAdd.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lbl_ProjectAdd.Size = new System.Drawing.Size(327, 20);
+            this.lbl_ProjectAdd.TabIndex = 67;
+            this.lbl_ProjectAdd.Text = "Add new project";
+            this.lbl_ProjectAdd.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // frm_ProjectAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(540, 255);
+            this.Controls.Add(this.lbl_ProjectAdd);
             this.Controls.Add(this.cb_PI);
             this.Controls.Add(this.cb_LeadApplicant);
             this.Controls.Add(this.lbl_LeadApplicant_NewUser);
@@ -480,5 +493,6 @@
         private System.Windows.Forms.Label lbl_LeadApplicant_NewUser;
         private System.Windows.Forms.ComboBox cb_PI;
         private System.Windows.Forms.ComboBox cb_LeadApplicant;
+        private System.Windows.Forms.Label lbl_ProjectAdd;
     }
 }
