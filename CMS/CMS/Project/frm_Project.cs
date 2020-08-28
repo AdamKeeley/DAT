@@ -295,17 +295,10 @@ namespace CMS
 
         /// <summary>
         /// Method to update project details in SQL Server database.
-        /// Gets values from form, assigns them to project data model (mdl_NewProject) class variables, 
-        /// checks dates are valid before comparing new data model with current data model.
-        /// If no difference then no action, if invalid dates then no action and MessageBox feedback. 
-        /// Creates new Project class object and first checks if record loaded to form is latest project record 
-        /// in database, using parameter pNumber and class variable current_pID.
-        /// If not latest record then no action and MessageBox feedback (asking to refresh form and try again).
-        /// Inserts new record to database using insertProject method from Project class and values 
-        /// contained in mdl_NewProject.
-        /// On insert success logically deletes current record in database using deleteProject method from Project class.
-        /// Refreshes the class DataSet (ds_Project), assigns new values to current project data model 
-        /// (mdl_CurrentProject) and resets form controls in the same manner as at form load.
+        /// Form control values assigned to ProjectModel while checking dates are valid, checks for 
+        /// mandatory fields, compares with current record values (no change no update) and primary 
+        /// key (not latest record no update).
+        /// Updates record via insert & logical delete before refreshing DataSet and form controls.
         /// </summary>
         /// <param name="pNumber"></param>
         private void updateProject(string pNumber)
@@ -406,17 +399,17 @@ namespace CMS
                 if (Projects.checkCurrentRecord(pNumber, mdl_CurrentProject.pID) == true)
                 {
                     //update existing project - first perform insert new record, if success returned = true then logical delete
-                    if (Projects.insertProject(mdl_NewProject))
+                    if (Projects.insertProject(mdl_NewProject) == true)
                     {
                         Projects.deleteProject(mdl_CurrentProject.pID);
-                    }
 
-                    //refresh dataset (ds_Projects) and form variable and control values
-                    fillProjectsDataSet();
-                    fillCurrentProjectVariables(pNumber);
-                    setProjectDetails(pNumber);
-                    setProjectNotes(pNumber);
-                    setProjectUsers(pNumber);
+                        //refresh dataset (ds_Projects) and form variable and control values
+                        fillProjectsDataSet();
+                        fillCurrentProjectVariables(pNumber);
+                        setProjectDetails(pNumber);
+                        setProjectNotes(pNumber);
+                        setProjectUsers(pNumber);
+                    }
                 }
             }
         }
@@ -556,6 +549,7 @@ namespace CMS
                 ProjectAdd.ShowDialog();
                 string ProjectNumber = ProjectAdd.pNumber;
 
+                // Refreshes this form if new project number is generated (at project creation)
                 if (string.IsNullOrWhiteSpace(ProjectNumber) == false)
                 {
                     fillProjectsDataSet();
@@ -602,20 +596,16 @@ namespace CMS
 
         private void btn_ProjectUserAdd_Click(object sender, EventArgs e)
         {
-            frm_ProjectUserAdd ProjectUserAdd = new frm_ProjectUserAdd(mdl_CurrentProject.ProjectNumber, ds_Project);
-            ProjectUserAdd.FormClosing += new FormClosingEventHandler(this.ProjectUserAdd_FormClosing);
-            ProjectUserAdd.Show();
+            using (frm_ProjectUserAdd ProjectUserAdd = new frm_ProjectUserAdd(mdl_CurrentProject.ProjectNumber, ds_Project))
+            {
+                ProjectUserAdd.ShowDialog();
+
+                fillProjectsDataSet();
+                fillCurrentProjectVariables(mdl_CurrentProject.ProjectNumber);
+                setProjectDetails(mdl_CurrentProject.ProjectNumber);
+                setProjectUsers(mdl_CurrentProject.ProjectNumber);
+                setProjectNotes(mdl_CurrentProject.ProjectNumber);
+            }
         }
-
-        private void ProjectUserAdd_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            fillProjectsDataSet();
-            fillCurrentProjectVariables(mdl_CurrentProject.ProjectNumber);
-            setProjectDetails(mdl_CurrentProject.ProjectNumber);
-            setProjectUsers(mdl_CurrentProject.ProjectNumber);
-            setProjectNotes(mdl_CurrentProject.ProjectNumber);
-        }
-
-
     }
 }

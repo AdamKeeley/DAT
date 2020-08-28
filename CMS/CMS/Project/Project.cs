@@ -26,7 +26,9 @@ namespace CMS
         /// dbo.tblUsers and other related lookup tables. 
         /// Creates DataRelations so that dimension tables can be linked to values in the measures table.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>
+        /// Full DataSet containing tables of all currently valid project records and asociated user/lookup tables.
+        /// </returns>
         public DataSet getProjectsDataSet()
         {
             DataSet ds_prj = new DataSet("Projects");
@@ -110,7 +112,9 @@ namespace CMS
         /// </summary>
         /// <param name="pNumber"></param>
         /// <param name="ds_Project"></param>
-        /// <returns></returns>
+        /// <returns>
+        /// Populated ProjectModel 
+        /// </returns>
         public ProjectModel getProject(string pNumber, DataSet ds_Project)
         {
             ProjectModel mdl_Project = new ProjectModel();
@@ -166,6 +170,7 @@ namespace CMS
             {
                 MessageBox.Show("Failed to load project details" + Environment.NewLine + Environment.NewLine + ex.Message);
             }
+            
             return mdl_Project;
         }
 
@@ -173,12 +178,13 @@ namespace CMS
         /// Method to check whether the primary key of the record currently being read is the same as the primary 
         /// key of the latest record for that project.
         /// Takes parameter pNumber and queries the database with it, returning the pID for the latest record.
-        /// Returns 'true' if returned pID matches paramter pID, 'false' if not.
-        /// Defaults to false in case of error, better to not update if something's wrong.
         /// </summary>
         /// <param name="pNumber"></param>
         /// <param name="current_pID"></param>
-        /// <returns></returns>
+        /// <returns>
+        /// 'true' if returned pID matches parameter pID, 'false' and messagebox if not.
+        /// Defaults to false in case of error, better to not update if something's wrong.
+        /// </returns>
         public bool checkCurrentRecord(string pNumber, int current_pID)
         {
             int? pID = null;
@@ -245,10 +251,11 @@ namespace CMS
         /// Method to insert a new project record into dbo.tblProject.
         /// Takes ProjectModel as parameter, adds class variables it contains to a SQL query string as 
         /// parameters then executes an insert.
-        /// Returns a boolean true on success, defaults to false
         /// </summary>
         /// <param name="mdl_Project"></param>
-        /// <returns></returns>
+        /// <returns>
+        /// true on success, defaults to false
+        /// </returns>
         public bool insertProject(ProjectModel mdl_Project)
         {
             bool success = false;
@@ -362,9 +369,11 @@ namespace CMS
         /// Method to get largest pNumber from current pNumbers.
         /// Runs a SQL query to select largest number used in current project numbers and return it as an int type.
         /// Could just replace(pNumber, 'P', '') or take right(pNumber,4) but wanted to future proof as best I could:
-        /// https://stackoverflow.com/questions/18625548/select-query-to-remove-non-numeric-characters
         /// </summary>
         /// <returns></returns>
+        /// <remarks>
+        /// https://stackoverflow.com/questions/18625548/select-query-to-remove-non-numeric-characters
+        /// </remarks>
         public int getLastProjectNumber()
         {
             int pNumInt;
@@ -399,7 +408,9 @@ namespace CMS
         /// Used to generate new project numbers.
         /// </summary>
         /// <param name="pNumInt"></param>
-        /// <returns></returns>
+        /// <returns>
+        /// New project number in the style "P0000"
+        /// </returns>
         public string getNewProjectNumber(int pNumInt)
         {
             string pNumZeroes = new string('0', 4); //repeated 0 four times
@@ -411,10 +422,12 @@ namespace CMS
         }
 
         /// <summary>
-        /// Checks if mandatory fields have an entry. Returns false and feedback via messagebox in case of absence.
+        /// Checks if mandatory fields have an entry.
         /// </summary>
         /// <param name="mdl_Project"></param>
-        /// <returns></returns>
+        /// <returns> 
+        /// 'true' if all fields are populated, 'false' and mesaagebox feedback if any are missing.
+        /// </returns>
         public bool requiredFields(ProjectModel mdl_Project)
         {
             bool requiredFields = true;
@@ -424,7 +437,7 @@ namespace CMS
                 MessageBox.Show("Please enter a Project Title.");
                 requiredFields = false;
             }
-            if (mdl_Project.LeadApplicant < 0)
+            if (mdl_Project.LeadApplicant == null || mdl_Project.LeadApplicant < 0)
             {
                 MessageBox.Show("Please select a Lead Applicant.");
                 requiredFields = false;

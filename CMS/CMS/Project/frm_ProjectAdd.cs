@@ -169,8 +169,8 @@ namespace CMS
             if (dateCheck == true)
             {
                 //insert new record
-                Projects.insertProject(mdl_Project);
-                this.Close();
+                if (Projects.insertProject(mdl_Project) == true);
+                    this.Close();
             }
         }
 

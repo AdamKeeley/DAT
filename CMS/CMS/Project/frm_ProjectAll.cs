@@ -99,6 +99,7 @@ namespace CMS
                 cb_Faculty.ValueMember = "facultyID";
                 cb_Faculty.DisplayMember = "facultyDescription";
                 cb_Faculty.SelectedIndex = -1;
+                
                 textChanged = true;
             }
             catch (Exception ex)
@@ -120,19 +121,19 @@ namespace CMS
             string filterAll                = "ProjectNumber like '%'";
 
             if (tb_pNameValue.Text != "")
-                filterAll = filterAll + " AND " + filterProjectName;
+                filterAll += " AND " + filterProjectName;
             if (cb_pStage.SelectedIndex > -1)
-                filterAll = filterAll + " AND " + filterStage;
+                filterAll += " AND " + filterStage;
             if (cb_pClassification.SelectedIndex > -1)
-                filterAll = filterAll + " AND " + filterClassification;
+                filterAll += " AND " + filterClassification;
             if (cb_DATRAG.SelectedIndex > -1)
-                filterAll = filterAll + " AND " + filterDATRAG;
+                filterAll += " AND " + filterDATRAG;
             if (cb_LeadApplicant.SelectedIndex > -1)
-                filterAll = filterAll + " AND " + filterLeadApplicant;
+                filterAll += " AND " + filterLeadApplicant;
             if (cb_PI.SelectedIndex > -1)
-                filterAll = filterAll + " AND " + filterPI;
+                filterAll += " AND " + filterPI;
             if (cb_Faculty.SelectedIndex > -1)
-                filterAll = filterAll + " AND " + filterFaculty;
+                filterAll += " AND " + filterFaculty;
 
             //DataTable to fill with de-normalised text values of all projects
             DataTable dt_ProjectList = new DataTable();
