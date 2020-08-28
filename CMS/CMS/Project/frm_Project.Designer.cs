@@ -65,7 +65,7 @@ namespace CMS
             this.chkb_DSPT = new System.Windows.Forms.CheckBox();
             this.btn_Users = new System.Windows.Forms.Button();
             this.btn_Projects = new System.Windows.Forms.Button();
-            this.btn_documents = new System.Windows.Forms.Button();
+            this.btn_Documents = new System.Windows.Forms.Button();
             this.btn_Refresh = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btn_Platform = new System.Windows.Forms.Button();
@@ -463,14 +463,14 @@ namespace CMS
             this.btn_Projects.Text = "All Projects";
             this.btn_Projects.UseVisualStyleBackColor = true;
             // 
-            // btn_documents
+            // btn_Documents
             // 
-            this.btn_documents.Location = new System.Drawing.Point(3, 78);
-            this.btn_documents.Name = "btn_documents";
-            this.btn_documents.Size = new System.Drawing.Size(75, 23);
-            this.btn_documents.TabIndex = 30;
-            this.btn_documents.Text = "Documents";
-            this.btn_documents.UseVisualStyleBackColor = true;
+            this.btn_Documents.Location = new System.Drawing.Point(3, 78);
+            this.btn_Documents.Name = "btn_Documents";
+            this.btn_Documents.Size = new System.Drawing.Size(75, 23);
+            this.btn_Documents.TabIndex = 30;
+            this.btn_Documents.Text = "Documents";
+            this.btn_Documents.UseVisualStyleBackColor = true;
             // 
             // btn_Refresh
             // 
@@ -487,7 +487,7 @@ namespace CMS
             this.panel1.Controls.Add(this.btn_Platform);
             this.panel1.Controls.Add(this.btn_Projects);
             this.panel1.Controls.Add(this.btn_Users);
-            this.panel1.Controls.Add(this.btn_documents);
+            this.panel1.Controls.Add(this.btn_Documents);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(81, 139);
@@ -566,6 +566,7 @@ namespace CMS
             this.dgv_ProjectUsers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_ProjectUsers.Size = new System.Drawing.Size(155, 160);
             this.dgv_ProjectUsers.TabIndex = 41;
+            this.dgv_ProjectUsers.TabStop = false;
             this.dgv_ProjectUsers.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_ProjectUsers_CellDoubleClick);
             // 
             // btn_ProjectUserAdd
@@ -727,7 +728,7 @@ namespace CMS
         private System.Windows.Forms.CheckBox chkb_DSPT;
         private System.Windows.Forms.Button btn_Users;
         private System.Windows.Forms.Button btn_Projects;
-        private System.Windows.Forms.Button btn_documents;
+        private System.Windows.Forms.Button btn_Documents;
         private System.Windows.Forms.Button btn_Refresh;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.CheckBox chkb_Azure;

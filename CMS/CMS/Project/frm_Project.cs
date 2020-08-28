@@ -227,33 +227,47 @@ namespace CMS
             cb_pNumberValue.TabIndex = 0;
             cb_DATRAG.TabIndex = 1;
             tb_pNameValue.TabIndex = 2;
+            
             gb_Platform.TabIndex = 3;
             chkb_Azure.TabIndex = 4;
             chkb_IRC.TabIndex = 5;
             chkb_SEED.TabIndex = 6;
+            
             gb_Governance.TabIndex = 7;
             chkb_ISO27001.TabIndex = 8;
             chkb_DSPT.TabIndex = 9;
-            mtb_ProjectedStartDateValue.TabIndex = 10;
-            mtb_ProjectedEndDateValue.TabIndex = 11;
-            mtb_pStartDateValue.TabIndex = 12;
-            mtb_pEndDateValue.TabIndex = 13;
-            cb_pStage.TabIndex = 14;
-            cb_pClassification.TabIndex = 15;
-            cb_LeadApplicant.TabIndex = 16;
-            cb_PI.TabIndex = 17;
-            cb_Faculty.TabIndex = 18;
-            tb_NewProjectNote.TabIndex = 19;
-            btn_InsertProjectNote.TabIndex = 20;
-            btn_Refresh.TabIndex = 21;
-            btn_ProjectApply.TabIndex = 22;
-            btn_ProjectOK.TabIndex = 23;
-            btn_ProjectCancel.TabIndex = 24;
-            btn_NewProject.TabIndex = 25;
-            btn_Projects.TabIndex = 26;
-            btn_Users.TabIndex = 27;
-            btn_documents.TabIndex = 28;
-            btn_Platform.TabIndex = 29;
+
+            gb_KeyDates.TabIndex = 10;
+            mtb_ProjectedStartDateValue.TabIndex = 11;
+            mtb_ProjectedEndDateValue.TabIndex = 12;
+            mtb_pStartDateValue.TabIndex = 13;
+            mtb_pEndDateValue.TabIndex = 14;
+            
+            cb_pStage.TabIndex = 15;
+            cb_pClassification.TabIndex = 16;
+            cb_LeadApplicant.TabIndex = 17;
+            cb_PI.TabIndex = 18;
+            cb_Faculty.TabIndex = 19;
+
+            gb_ProjectNotes.TabIndex = 20;
+            tb_NewProjectNote.TabIndex = 21;
+            btn_InsertProjectNote.TabIndex = 22;
+
+            gb_ProjectUsers.TabIndex = 23;
+            btn_ProjectUserAdd.TabIndex = 24;
+            btn_ProjectUserRemove.TabIndex = 25;
+
+            btn_NewProject.TabIndex = 26;
+            btn_Refresh.TabIndex = 27;
+            btn_ProjectApply.TabIndex = 28;
+            btn_ProjectOK.TabIndex = 29;
+            btn_ProjectCancel.TabIndex = 30;
+
+            panel1.TabIndex = 31;
+            btn_Projects.TabIndex = 32;
+            btn_Users.TabIndex = 33;
+            btn_Documents.TabIndex = 34;
+            btn_Platform.TabIndex = 35;
         }
 
         /// <summary>
