@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using DataControlsLib;
 
@@ -16,7 +12,6 @@ namespace CMS
             /* TO DO
              * 
              * Search/All User
-             * Tidy Project forms
              * 
              * Documents 
              *     - incorporate some sort of 'timeline' of submitted documents?
