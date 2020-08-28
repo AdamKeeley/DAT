@@ -157,11 +157,17 @@ namespace CMS
                 }
             }
 
+            //instantiate new Project type object that contains methods to update db
+            Project Projects = new Project();
+
+            //Check required fields have an entry
+            if (Projects.requiredFields(mdl_Project) == false)
+            {
+                return;
+            }
+
             if (dateCheck == true)
             {
-                //instantiate new Project type object that contains methods to update db
-                var Projects = new Project();
-
                 //insert new record
                 Projects.insertProject(mdl_Project);
                 this.Close();

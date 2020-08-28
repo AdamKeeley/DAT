@@ -311,19 +311,6 @@ namespace CMS
         private void updateProject(string pNumber)
         {
             ProjectModel mdl_NewProject = new ProjectModel();
-            bool requiredFields = true;
-
-            //Check required fields have an entry
-            if (string.IsNullOrWhiteSpace(tb_pNameValue.Text))
-            {
-                MessageBox.Show("Please enter a Project Title.");
-                requiredFields = false;
-            }
-            if (cb_LeadApplicant.SelectedIndex > -1)
-            {
-                MessageBox.Show("Please select a Lead Applicant.");
-                requiredFields = false;
-            }
 
             mdl_NewProject.ProjectNumber        = pNumber;
             mdl_NewProject.ProjectName          = tb_pNameValue.Text;
@@ -398,13 +385,23 @@ namespace CMS
                 }
             }
 
-            //check to see if any changes have been made, no need to update if none.
-            bool changesMade = mdl_NewProject != mdl_CurrentProject;
-            
-            if (requiredFields == true & changesMade == true & dateCheck == true)
+            //instantiate new Project type object that contains methods to update db
+            Project Projects = new Project();
+
+            //Check required fields have an entry
+            if (Projects.requiredFields(mdl_NewProject) == false)
             {
-                //instantiate new Project type object that contains methods to update db
-                var Projects = new Project();
+                return;
+            }
+
+            //check to see if any changes have been made, no need to update if none.
+            if (mdl_NewProject == mdl_CurrentProject)
+            {
+                return;
+            }
+
+            if (dateCheck == true)
+            {
                 //check that record currently displayed is current record in database before updating anything
                 if (Projects.checkCurrentRecord(pNumber, mdl_CurrentProject.pID) == true)
                 {

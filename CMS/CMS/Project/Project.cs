@@ -406,5 +406,23 @@ namespace CMS
             return pNumber;
         }
 
+        public bool requiredFields(ProjectModel mdl_Project)
+        {
+            bool requiredFields = true;
+
+            if (string.IsNullOrWhiteSpace(mdl_Project.ProjectName))
+            {
+                MessageBox.Show("Please enter a Project Title.");
+                requiredFields = false;
+            }
+            if (mdl_Project.LeadApplicant < 0)
+            {
+                MessageBox.Show("Please select a Lead Applicant.");
+                requiredFields = false;
+            }
+
+            return requiredFields;
+        }
+
     }
 }        

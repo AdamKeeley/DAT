@@ -359,17 +359,23 @@ namespace CMS
                 }
             }
 
-            //check to see if any changes have been made, no need to update if none.
-            //if changes are made then update local variables with change and set changesMade flag to true
-            bool changesMade = false;
+            //instantiate new User type object that contains methods to update db
+            User Users = new User();
 
-            if (mdl_CurrentUser != mdl_NewUser)
-                changesMade = true;
-
-            if (changesMade == true & dateCheck == true)
+            //Check required fields have an entry
+            if (Users.requiredFields(mdl_NewUser) == false)
             {
-                //instantiate new User type object that contains methods to update db
-                var Users = new User();
+                return;
+            }
+
+            //check to see if any changes have been made, no need to update if none.
+            if (mdl_CurrentUser == mdl_NewUser)
+            {
+                return;
+            }
+
+            if (dateCheck == true)
+            {
                 //check that record currently displayed is current record in database before updating anything
                 if (Users.checkCurrentRecord(UserNumber, mdl_CurrentUser.UserID) == true)
                 {

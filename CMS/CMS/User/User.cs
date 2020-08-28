@@ -199,7 +199,6 @@ namespace CMS
             bool recordCurrent = false;
             try
             {
-                //update ValidUntil field of current record of project (perform 'logical' delete)
                 SQL_Stuff conString = new SQL_Stuff();
 
                 using (SqlConnection connection = new SqlConnection(conString.getString()))
