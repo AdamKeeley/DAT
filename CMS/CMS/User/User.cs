@@ -463,23 +463,68 @@ namespace CMS
             return UserNumber;
         }
 
-        public bool requiredFields(string firstName, string lastName)
+        public bool requiredFields(UserModel mdl_User)
         {
             bool requiredFields = true;
 
             //Check required fields have an entry
-            if (requiredFields == true & string.IsNullOrWhiteSpace(firstName))
+            if (requiredFields == true & string.IsNullOrWhiteSpace(mdl_User.FirstName))
             {
                 MessageBox.Show("Please enter a First Name.");
                 requiredFields = false;
             }
-            if (requiredFields == true & string.IsNullOrWhiteSpace(lastName))
+            if (requiredFields == true & string.IsNullOrWhiteSpace(mdl_User.LastName))
             {
                 MessageBox.Show("Please enter a Last Name.");
                 requiredFields = false;
             }
+            if (requiredFields == true & string.IsNullOrWhiteSpace(mdl_User.Email))
+            {
+                MessageBox.Show("Please enter a Email Address.");
+                requiredFields = false;
+            }
 
             return requiredFields;
+        }
+
+        /// <summary>
+        /// Checks first & last name against ds_User to see if it already exists. 
+        /// Presents dialog asking to confirm if duplicate, returns true on yes false on no.
+        /// </summary>
+        /// <param name="mdl_User"></param>
+        /// <param name="tbl_User"></param>
+        /// <returns></returns>
+        public bool userExists(UserModel mdl_User, DataTable tbl_User)
+        {
+            bool userExists = false;
+
+            var existingUser = from row in tbl_User.AsEnumerable()
+                               where row.Field<string>("FirstName").ToLower() == mdl_User.FirstName.ToLower()
+                                       && row.Field<string>("LastName").ToLower() == mdl_User.LastName.ToLower()
+                               select row;
+
+            if (existingUser.Count() > 0)
+            {
+                string existingMessage = $"Is this a duplicate of an existing user?" + Environment.NewLine + Environment.NewLine;
+                foreach (DataRow user in existingUser)
+                {
+                    existingMessage += $"{user.Field<string>("FirstName")} " +
+                        $"{user.Field<string>("LastName")}, " +
+                        $"{user.Field<string>("Email")}" + Environment.NewLine;
+                }
+
+                DialogResult confirm = MessageBox.Show(
+                    text: existingMessage
+                    , caption: "Existing user?"
+                    , buttons: MessageBoxButtons.YesNo);
+
+                if (confirm == DialogResult.Yes)
+                {
+                    userExists = true;
+                }
+            }
+
+            return userExists;
         }
 
     }

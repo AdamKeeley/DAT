@@ -75,6 +75,7 @@
             this.mtb_pStartDateValue.Size = new System.Drawing.Size(76, 20);
             this.mtb_pStartDateValue.TabIndex = 19;
             this.mtb_pStartDateValue.ValidatingType = typeof(System.DateTime);
+            this.mtb_pStartDateValue.Click += new System.EventHandler(this.enter_TextBox);
             // 
             // mtb_pEndDateValue
             // 
@@ -85,6 +86,7 @@
             this.mtb_pEndDateValue.Size = new System.Drawing.Size(76, 20);
             this.mtb_pEndDateValue.TabIndex = 21;
             this.mtb_pEndDateValue.ValidatingType = typeof(System.DateTime);
+            this.mtb_pEndDateValue.Click += new System.EventHandler(this.enter_TextBox);
             // 
             // lbl_pEndDate
             // 
@@ -184,6 +186,7 @@
             this.mtb_ProjectedStartDateValue.Size = new System.Drawing.Size(76, 20);
             this.mtb_ProjectedStartDateValue.TabIndex = 62;
             this.mtb_ProjectedStartDateValue.ValidatingType = typeof(System.DateTime);
+            this.mtb_ProjectedStartDateValue.Click += new System.EventHandler(this.enter_TextBox);
             // 
             // lbl_ProjectedStartDate
             // 
@@ -268,6 +271,7 @@
             this.mtb_ProjectedEndDateValue.Size = new System.Drawing.Size(76, 20);
             this.mtb_ProjectedEndDateValue.TabIndex = 56;
             this.mtb_ProjectedEndDateValue.ValidatingType = typeof(System.DateTime);
+            this.mtb_ProjectedEndDateValue.Click += new System.EventHandler(this.enter_TextBox);
             // 
             // lbl_ProjectedEndDate
             // 

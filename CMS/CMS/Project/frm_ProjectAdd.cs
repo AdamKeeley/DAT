@@ -168,6 +168,23 @@ namespace CMS
             }
         }
 
+        /// <summary>
+        /// Prevent the cursor from being positioned in the middle of a masked textbox when 
+        /// the user clicks in it. Needs to be called by the OnClick event of the control.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void enter_TextBox(object sender, EventArgs e)
+        {
+            MaskedTextBox textBox = sender as MaskedTextBox;
+            if (textBox.Text == "  /  /")
+            {
+                this.BeginInvoke((MethodInvoker)delegate ()
+                {
+                    textBox.Select(0, 0);
+                });
+            }
+        }
 
         private void btn_Cancel_Click(object sender, EventArgs e)
         {

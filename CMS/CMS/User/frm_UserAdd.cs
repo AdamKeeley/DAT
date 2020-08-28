@@ -55,46 +55,6 @@ namespace CMS
         }
 
         /// <summary>
-        /// Checks first & last name against ds_User to see if it already exists. 
-        /// Presents dialog asking to confirm if duplicate, returns true on yes false on no.
-        /// </summary>
-        /// <param name="firstName"></param>
-        /// <param name="lastName"></param>
-        /// <returns></returns>
-        private bool userExists(string firstName, string lastName)
-        {
-            bool userExists = false;
-
-            var existingUser = from row in ds_User.Tables["tblUser"].AsEnumerable()
-                               where row.Field<string>("FirstName").ToLower() == firstName.ToLower()
-                                       && row.Field<string>("LastName").ToLower() == lastName.ToLower()
-                               select row;
-
-            if (existingUser.Count() > 0)
-            {
-                string existingMessage = $"Is this a duplicate of an existing user?" + Environment.NewLine + Environment.NewLine;
-                foreach (DataRow user in existingUser)
-                {
-                    existingMessage += $"{user.Field<string>("FirstName")} " +
-                        $"{user.Field<string>("LastName")}, " +
-                        $"{user.Field<string>("Email")}" + Environment.NewLine;
-                }
-
-                DialogResult confirm = MessageBox.Show(
-                    text: existingMessage
-                    , caption: "Existing user?"
-                    , buttons: MessageBoxButtons.YesNo);
-
-                if (confirm == DialogResult.Yes)
-                {
-                    userExists = true;
-                }
-            }
-
-            return userExists;
-        }
-
-        /// <summary>
         /// Takes values from form controls, checks dates are dates, calls confirmationBox 
         /// to present them for review and inserts into SQL database if confirmed.
         /// </summary>
@@ -103,18 +63,7 @@ namespace CMS
             User Users = new User();
             UserModel mdl_User = new UserModel();
 
-            //Check required fields have an entry
-            if (Users.requiredFields(tb_FirstName.Text, tb_LastName.Text) == false)
-            {
-                return;
-            }
-
-            //Check if user already exists
-            if (userExists(tb_FirstName.Text, tb_LastName.Text) == true)
-            {
-                return;
-            }
-
+            //put control values into UserModel
             mdl_User.UserNumber     = Users.getLastUserNumber() + 1;
             if (cb_UserStatus.SelectedIndex > -1)
             {
@@ -235,6 +184,18 @@ namespace CMS
                 }
             }
 
+            //Check required fields have an entry
+            if (Users.requiredFields(mdl_User) == false)
+            {
+                return;
+            }
+
+            //Check if user already exists
+            if (Users.userExists(mdl_User, ds_User.Tables["tblUser"]) == true)
+            {
+                return;
+            }
+
             if (dateCheck == true)
             {
                 if (confirmationBox(mdl_User) == DialogResult.OK)
@@ -329,7 +290,6 @@ namespace CMS
         private void enter_TextBox(object sender, EventArgs e)
         {
             MaskedTextBox textBox = sender as MaskedTextBox;
-
             if (textBox.Text == "  /  /")
             {
                 this.BeginInvoke((MethodInvoker)delegate ()
@@ -338,7 +298,6 @@ namespace CMS
                 });
             }
         }
-
 
         private void btn_UserCancel_Click(object sender, EventArgs e)
         {
