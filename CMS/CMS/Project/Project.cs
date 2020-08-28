@@ -202,8 +202,12 @@ namespace CMS
                 MessageBox.Show("Failed to find current record" + Environment.NewLine + Environment.NewLine + ex.Message);
             }
 
+            if (current_pID != pID)
+                MessageBox.Show("Project previously updated, please refresh & try again.");
+
             if (current_pID == pID)
                 recordCurrent = true;
+            
             return recordCurrent;
         }
 
@@ -406,6 +410,11 @@ namespace CMS
             return pNumber;
         }
 
+        /// <summary>
+        /// Checks if mandatory fields have an entry. Returns false and feedback via messagebox in case of absence.
+        /// </summary>
+        /// <param name="mdl_Project"></param>
+        /// <returns></returns>
         public bool requiredFields(ProjectModel mdl_Project)
         {
             bool requiredFields = true;

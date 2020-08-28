@@ -216,8 +216,12 @@ namespace CMS
                 MessageBox.Show("Failed to find current record" + Environment.NewLine + Environment.NewLine + ex);
             }
 
+            if (current_UserID != UserID)
+                MessageBox.Show("User previously updated, please refresh & try again.");
+
             if (current_UserID == UserID)
                 recordCurrent = true;
+
             return recordCurrent;
         }
 
@@ -462,6 +466,11 @@ namespace CMS
             return UserNumber;
         }
 
+        /// <summary>
+        /// Checks if mandatory fields have an entry. Returns false and feedback via messagebox in case of absence.
+        /// </summary>
+        /// <param name="mdl_User"></param>
+        /// <returns></returns>
         public bool requiredFields(UserModel mdl_User)
         {
             bool requiredFields = true;
