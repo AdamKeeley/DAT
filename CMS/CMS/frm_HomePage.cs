@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using CMS.DataTracking;
 using CMS.DSAs;
@@ -41,6 +34,12 @@ namespace CMS
         {
             frm_ProjectAdd ProjectAddForm = new frm_ProjectAdd();
             ProjectAddForm.Show();
+        }
+
+        private void btn_GoToUser_Click(object sender, EventArgs e)
+        {
+            frm_UserAll UserAll = new frm_UserAll();
+            UserAll.Show();
         }
 
         private void btn_AddUser_Click(object sender, EventArgs e)

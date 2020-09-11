@@ -111,6 +111,12 @@
     <Compile Include="User\frm_User.Designer.cs">
       <DependentUpon>frm_User.cs</DependentUpon>
     </Compile>
+    <Compile Include="User\frm_UserAll.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="User\frm_UserAll.Designer.cs">
+      <DependentUpon>frm_UserAll.cs</DependentUpon>
+    </Compile>
     <Compile Include="User\frm_UserProjectAdd.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -160,6 +166,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="User\frm_User.resx">
       <DependentUpon>frm_User.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User\frm_UserAll.resx">
+      <DependentUpon>frm_UserAll.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="User\frm_UserProjectAdd.resx">
       <DependentUpon>frm_UserProjectAdd.cs</DependentUpon>
