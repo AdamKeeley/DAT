@@ -238,8 +238,9 @@ namespace CMS
         /// resets form controls in the same manner as at form load.
         /// </summary>
         /// <param name="UserNumber"></param>
-        private void updateUser(int UserNumber)
+        private bool updateUser(int UserNumber)
         {
+            bool success = false;
             UserModel mdl_NewUser = new UserModel();
 
             mdl_NewUser.UserNumber = UserNumber;
@@ -361,13 +362,13 @@ namespace CMS
             //Check required fields have an entry
             if (Users.requiredFields(mdl_NewUser) == false)
             {
-                return;
+                return success;
             }
 
             //check to see if any changes have been made, no need to update if none.
             if (mdl_CurrentUser == mdl_NewUser)
             {
-                return;
+                return success;
             }
 
             if (dateCheck == true)
@@ -387,8 +388,11 @@ namespace CMS
                     setUserDetails(UserNumber);
                     setUserNotes(UserNumber);
                     setUserProjects(UserNumber);
+
+                    success = true;
                 }
             }
+            return success;
         }
 
         /// <summary>
@@ -490,8 +494,8 @@ namespace CMS
         private void btn_UserOK_Click(object sender, EventArgs e)
         {
             //update user details
-            updateUser(mdl_CurrentUser.UserNumber);
-            this.Close();
+            if (updateUser(mdl_CurrentUser.UserNumber) == true)
+                this.Close();
         }
 
         private void btn_ProjectUserRemove_Click(object sender, EventArgs e)

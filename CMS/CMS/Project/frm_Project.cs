@@ -301,8 +301,9 @@ namespace CMS
         /// Updates record via insert & logical delete before refreshing DataSet and form controls.
         /// </summary>
         /// <param name="pNumber"></param>
-        private void updateProject(string pNumber)
+        private bool updateProject(string pNumber)
         {
+            bool success = false;
             ProjectModel mdl_NewProject = new ProjectModel();
 
             mdl_NewProject.ProjectNumber        = pNumber;
@@ -384,13 +385,13 @@ namespace CMS
             //Check required fields have an entry
             if (Projects.requiredFields(mdl_NewProject) == false)
             {
-                return;
+                return success;
             }
 
             //check to see if any changes have been made, no need to update if none.
             if (mdl_NewProject == mdl_CurrentProject)
             {
-                return;
+                return success;
             }
 
             if (dateCheck == true)
@@ -409,9 +410,12 @@ namespace CMS
                         setProjectDetails(pNumber);
                         setProjectNotes(pNumber);
                         setProjectUsers(pNumber);
+
+                        success = true;
                     }
                 }
             }
+            return success;
         }
 
         /// <summary>
@@ -537,9 +541,8 @@ namespace CMS
             //get project number
             string pNumber = cb_pNumberValue.Text;
             //update project details
-            updateProject(pNumber);
-
-            this.Close();
+            if (updateProject(pNumber) == true)
+                this.Close();
         }
 
         private void btn_NewProject_Click(object sender, EventArgs e)
