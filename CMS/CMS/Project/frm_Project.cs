@@ -385,13 +385,13 @@ namespace CMS
             //Check required fields have an entry
             if (Projects.requiredFields(mdl_NewProject) == false)
             {
-                return success;
+                return success = false;
             }
 
             //check to see if any changes have been made, no need to update if none.
             if (mdl_NewProject == mdl_CurrentProject)
             {
-                return success;
+                return success = true;
             }
 
             if (dateCheck == true)

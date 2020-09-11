@@ -362,13 +362,13 @@ namespace CMS
             //Check required fields have an entry
             if (Users.requiredFields(mdl_NewUser) == false)
             {
-                return success;
+                return success = false;
             }
 
             //check to see if any changes have been made, no need to update if none.
             if (mdl_CurrentUser == mdl_NewUser)
             {
-                return success;
+                return success = true;
             }
 
             if (dateCheck == true)

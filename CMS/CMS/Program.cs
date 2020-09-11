@@ -11,8 +11,6 @@ namespace CMS
         {
             /* TO DO
              * 
-             * Search/All User
-             * 
              * Documents 
              *     - incorporate some sort of 'timeline' of submitted documents?
              * Platform 

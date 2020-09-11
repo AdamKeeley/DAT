@@ -192,6 +192,12 @@ namespace CMS
             }
         }
 
+        private void btn_UserAdd_Click(object sender, EventArgs e)
+        {
+            frm_UserAdd UserAdd = new frm_UserAdd();
+            UserAdd.Show();
+        }
+
         private void btn_Cancel_Click(object sender, EventArgs e)
         {
             this.Close();

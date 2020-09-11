@@ -376,6 +376,7 @@
             this.lbl_PI_NewUser.Size = new System.Drawing.Size(36, 13);
             this.lbl_PI_NewUser.TabIndex = 63;
             this.lbl_PI_NewUser.Text = "new...";
+            this.lbl_PI_NewUser.Click += new System.EventHandler(this.btn_UserAdd_Click);
             // 
             // lbl_LeadApplicant_NewUser
             // 
@@ -385,6 +386,7 @@
             this.lbl_LeadApplicant_NewUser.Size = new System.Drawing.Size(36, 13);
             this.lbl_LeadApplicant_NewUser.TabIndex = 64;
             this.lbl_LeadApplicant_NewUser.Text = "new...";
+            this.lbl_LeadApplicant_NewUser.Click += new System.EventHandler(this.btn_UserAdd_Click);
             // 
             // cb_PI
             // 
