@@ -46,6 +46,7 @@
             this.btn_Refresh = new System.Windows.Forms.Button();
             this.cb_LeadApplicant = new System.Windows.Forms.ComboBox();
             this.cb_PI = new System.Windows.Forms.ComboBox();
+            this.lbl_recordCount = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ProjectList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -240,11 +241,21 @@
             this.cb_PI.TabIndex = 71;
             this.cb_PI.TextChanged += new System.EventHandler(this.searchItemAdded);
             // 
+            // lbl_recordCount
+            // 
+            this.lbl_recordCount.Location = new System.Drawing.Point(882, 552);
+            this.lbl_recordCount.Name = "lbl_recordCount";
+            this.lbl_recordCount.Size = new System.Drawing.Size(100, 23);
+            this.lbl_recordCount.TabIndex = 72;
+            this.lbl_recordCount.Text = "# records";
+            this.lbl_recordCount.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // frm_ProjectAll
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(994, 561);
+            this.ClientSize = new System.Drawing.Size(994, 581);
+            this.Controls.Add(this.lbl_recordCount);
             this.Controls.Add(this.cb_PI);
             this.Controls.Add(this.cb_LeadApplicant);
             this.Controls.Add(this.btn_Refresh);
@@ -290,5 +301,6 @@
         private System.Windows.Forms.Button btn_Refresh;
         private System.Windows.Forms.ComboBox cb_LeadApplicant;
         private System.Windows.Forms.ComboBox cb_PI;
+        private System.Windows.Forms.Label lbl_recordCount;
     }
 }

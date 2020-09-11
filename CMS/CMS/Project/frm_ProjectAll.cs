@@ -100,12 +100,13 @@ namespace CMS
             catch (Exception ex)
             {
                 MessageBox.Show("Method setControlDataSource of class frm_ProjectAll has failed" + Environment.NewLine + Environment.NewLine + ex);
-                throw;
+                //throw;
             }
         }
 
         private void fillDataGridView()
         {
+            string filterAll                = "ProjectNumber like '%'";
             string filterProjectName        = $"ProjectName like '%{tb_pNameValue.Text}%'";
             string filterStage              = $"Stage = '{cb_pStage.Text}'";
             string filterClassification     = $"Classification = '{cb_pClassification.Text}'";
@@ -113,7 +114,6 @@ namespace CMS
             string filterLeadApplicant      = $"LeadApplicant like '%{cb_LeadApplicant.Text}%'";
             string filterPI                 = $"PI like '%{cb_PI.Text}%'";
             string filterFaculty            = $"Faculty = '{cb_Faculty.Text}'";
-            string filterAll                = "ProjectNumber like '%'";
 
             if (tb_pNameValue.Text != "")
                 filterAll += " AND " + filterProjectName;
@@ -213,6 +213,8 @@ namespace CMS
             dgv_ProjectList.Columns["Lead Applicant"].Width = 120;
             dgv_ProjectList.Columns["PI"].Width = 120;
             dgv_ProjectList.Columns["Faculty"].Width = 180;
+
+            lbl_recordCount.Text = dt_dgv_ProjectList.Rows.Count.ToString() + " records";
         }
 
         private void dgv_ProjectList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
