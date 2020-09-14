@@ -36,11 +36,19 @@ namespace CMS
             dt_dgv_DocumentHistory.Columns.Add("Accepted");
 
             string qry;
-
             if (docType == 0)
+            {
                 qry = $"ProjectNumber = '{pNumber}'";
+                this.Text = $"All Document History";
+            }
             else
+            { 
                 qry = $"ProjectNumber = '{pNumber}' AND DocumentType = {docType}";
+                foreach (DataRow r in ds_prj.Tables["tlkDocuments"].Select($"DocumentID = {docType}"))
+                {
+                    this.Text = r["DocumentDescription"] + $" Document History";
+                }
+            }
 
             DataRow row;
             foreach (DataRow hRow in ds_prj.Tables["tblProjectDocument"].Select(qry))
