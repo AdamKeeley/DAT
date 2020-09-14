@@ -80,6 +80,20 @@ GO
 ALTER TABLE [dbo].[tblProjectNotes] ADD  DEFAULT (suser_sname()) FOR [CreatedBy]
 GO
 
+create table dbo.tblProjectDocument (
+	pdID int identity(1,1)
+	, ProjectNumber varchar(5)
+	, DocumentType int
+	, VersionNumber decimal(5,2)
+	, Submitted datetime
+	, Accepted datetime
+	, ValidFrom datetime default getdate()
+	, ValidTo datetime
+	, CreatedBy varchar(50) default suser_name()
+	constraint PK_tblProjectDocument primary key nonclustered (pdID)
+	)
+
+
 CREATE TABLE [dbo].[tlkClassification](
 	[classificationID] [int] IDENTITY(1,1) NOT NULL,
 	[classificationDescription] [varchar](25) NULL,
@@ -140,6 +154,13 @@ GO
 ALTER TABLE [dbo].[tlkStage] ADD  DEFAULT (getdate()) FOR [ValidFrom]
 GO
 
+create table dbo.tlkDocuments (
+	DocumentID int identity(1,1)
+	, DocumentDescription varchar(50)
+	, ValidFrom datetime default getdate()
+	, ValidTo datetime
+	constraint PK_Documents primary key nonclustered (documentID)
+	)
 
 ALTER TABLE [dbo].[tblProject]  WITH CHECK ADD  CONSTRAINT [FK_Project_Classification] FOREIGN KEY([Classification])
 REFERENCES [dbo].[tlkClassification] ([classificationID])
@@ -176,6 +197,12 @@ GO
 
 ALTER TABLE [dbo].[tblProject] CHECK CONSTRAINT [FK_Project_Stage]
 GO
+
+alter table dbo.tblProjectDocument
+add constraint FK_ProjectDocument_Documents foreign key (DocumentType)
+	references dbo.tlkDocuments (DocumentID)
+	on delete cascade
+	on update cascade
 
 
 /************************************************************
@@ -292,6 +319,9 @@ insert into dbo.tlkTitle (TitleDescription) values
 
 insert into dbo.tblUser (UserNumber, Title, FirstName, LastName)
 values (1, 1, 'Flint', 'Sparkoff')
+
+insert into dbo.tlkDocuments (documentDescription) values
+	('Project Proposal'), ('Data Management Plan'), ('Risk Assessment')
  
 /*
 Data tracking tables schema

@@ -57,6 +57,11 @@ namespace CMS
                     GetDB.GetDataTable(connection, ds_prj, "tblUserProject",
                         $"select * from [dbo].[tblUserProject] " +
                         $"where [ValidTo] is null");
+                    GetDB.GetDataTable(connection, ds_prj, "tblProjectDocument",
+                        $"select * from [dbo].[tblProjectDocument]");
+                    GetDB.GetDataTable(connection, ds_prj, "tlkDocuments",
+                        $"select * from [dbo].[tlkDocuments]" +
+                        $"where [ValidTo] is null");
                     GetDB.GetDataTable(connection, ds_prj, "tblUser",
                         $"select *, [LastName] + ', ' + [FirstName] as FullName " +
                         $"from [dbo].[tblUser] " +
@@ -92,6 +97,9 @@ namespace CMS
                     ds_prj.Relations.Add("UserProject_User"
                         , ds_prj.Tables["tblUser"].Columns["UserNumber"]
                         , ds_prj.Tables["tblUserProject"].Columns["UserNumber"]);
+                    ds_prj.Relations.Add("ProjectDocument_Document"
+                        , ds_prj.Tables["tlkDocuments"].Columns["DocumentID"]
+                        , ds_prj.Tables["tblProjectDocument"].Columns["DocumentType"]);
                 }
             }
             catch (Exception ex)

@@ -81,6 +81,10 @@ namespace CMS
             this.gb_ProjectNotes = new System.Windows.Forms.GroupBox();
             this.gb_KeyDates = new System.Windows.Forms.GroupBox();
             this.gb_ProjectDocuments = new System.Windows.Forms.GroupBox();
+            this.btn_AllDocs = new System.Windows.Forms.Button();
+            this.btn_RA = new System.Windows.Forms.Button();
+            this.btn_DMP = new System.Windows.Forms.Button();
+            this.btn_Proposal = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_pNotes)).BeginInit();
             this.gb_Platform.SuspendLayout();
             this.gb_Governance.SuspendLayout();
@@ -89,6 +93,7 @@ namespace CMS
             this.gb_ProjectUsers.SuspendLayout();
             this.gb_ProjectNotes.SuspendLayout();
             this.gb_KeyDates.SuspendLayout();
+            this.gb_ProjectDocuments.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbl_pNumber
@@ -632,12 +637,61 @@ namespace CMS
             // 
             // gb_ProjectDocuments
             // 
+            this.gb_ProjectDocuments.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.gb_ProjectDocuments.Controls.Add(this.btn_AllDocs);
+            this.gb_ProjectDocuments.Controls.Add(this.btn_RA);
+            this.gb_ProjectDocuments.Controls.Add(this.btn_DMP);
+            this.gb_ProjectDocuments.Controls.Add(this.btn_Proposal);
+            this.gb_ProjectDocuments.ForeColor = System.Drawing.SystemColors.ControlText;
             this.gb_ProjectDocuments.Location = new System.Drawing.Point(639, 225);
             this.gb_ProjectDocuments.Name = "gb_ProjectDocuments";
             this.gb_ProjectDocuments.Size = new System.Drawing.Size(180, 218);
             this.gb_ProjectDocuments.TabIndex = 48;
             this.gb_ProjectDocuments.TabStop = false;
             this.gb_ProjectDocuments.Text = "Project Documents";
+            // 
+            // btn_AllDocs
+            // 
+            this.btn_AllDocs.Location = new System.Drawing.Point(99, 135);
+            this.btn_AllDocs.Name = "btn_AllDocs";
+            this.btn_AllDocs.Size = new System.Drawing.Size(75, 23);
+            this.btn_AllDocs.TabIndex = 49;
+            this.btn_AllDocs.Text = "All Docs";
+            this.btn_AllDocs.UseVisualStyleBackColor = true;
+            this.btn_AllDocs.Click += new System.EventHandler(this.btn_AllDocs_Click);
+            // 
+            // btn_RA
+            // 
+            this.btn_RA.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.btn_RA.Location = new System.Drawing.Point(4, 77);
+            this.btn_RA.Name = "btn_RA";
+            this.btn_RA.Size = new System.Drawing.Size(170, 23);
+            this.btn_RA.TabIndex = 2;
+            this.btn_RA.Text = "Risk Assessment";
+            this.btn_RA.UseVisualStyleBackColor = false;
+            this.btn_RA.Click += new System.EventHandler(this.btn_RA_Click);
+            // 
+            // btn_DMP
+            // 
+            this.btn_DMP.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.btn_DMP.Location = new System.Drawing.Point(6, 48);
+            this.btn_DMP.Name = "btn_DMP";
+            this.btn_DMP.Size = new System.Drawing.Size(170, 23);
+            this.btn_DMP.TabIndex = 1;
+            this.btn_DMP.Text = "DMP";
+            this.btn_DMP.UseVisualStyleBackColor = false;
+            this.btn_DMP.Click += new System.EventHandler(this.btn_DMP_Click);
+            // 
+            // btn_Proposal
+            // 
+            this.btn_Proposal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btn_Proposal.Location = new System.Drawing.Point(6, 19);
+            this.btn_Proposal.Name = "btn_Proposal";
+            this.btn_Proposal.Size = new System.Drawing.Size(170, 23);
+            this.btn_Proposal.TabIndex = 0;
+            this.btn_Proposal.Text = "IRC Proposal";
+            this.btn_Proposal.UseVisualStyleBackColor = false;
+            this.btn_Proposal.Click += new System.EventHandler(this.btn_Proposal_Click);
             // 
             // frm_Project
             // 
@@ -687,6 +741,7 @@ namespace CMS
             this.gb_ProjectNotes.PerformLayout();
             this.gb_KeyDates.ResumeLayout(false);
             this.gb_KeyDates.PerformLayout();
+            this.gb_ProjectDocuments.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -745,5 +800,9 @@ namespace CMS
         private System.Windows.Forms.GroupBox gb_ProjectNotes;
         private System.Windows.Forms.GroupBox gb_KeyDates;
         private System.Windows.Forms.GroupBox gb_ProjectDocuments;
+        private System.Windows.Forms.Button btn_RA;
+        private System.Windows.Forms.Button btn_DMP;
+        private System.Windows.Forms.Button btn_Proposal;
+        private System.Windows.Forms.Button btn_AllDocs;
     }
 }

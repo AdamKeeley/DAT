@@ -257,17 +257,23 @@ namespace CMS
             btn_ProjectUserAdd.TabIndex = 24;
             btn_ProjectUserRemove.TabIndex = 25;
 
-            btn_NewProject.TabIndex = 26;
-            btn_Refresh.TabIndex = 27;
-            btn_ProjectApply.TabIndex = 28;
-            btn_ProjectOK.TabIndex = 29;
-            btn_ProjectCancel.TabIndex = 30;
+            gb_ProjectDocuments.TabIndex = 26;
+            btn_Proposal.TabIndex = 27;
+            btn_DMP.TabIndex = 28;
+            btn_RA.TabIndex = 29;
+            btn_AllDocs.TabIndex = 30;
 
-            panel1.TabIndex = 31;
-            btn_Projects.TabIndex = 32;
-            btn_Users.TabIndex = 33;
-            btn_Documents.TabIndex = 34;
-            btn_Platform.TabIndex = 35;
+            btn_NewProject.TabIndex = 31;
+            btn_Refresh.TabIndex = 32;
+            btn_ProjectApply.TabIndex = 33;
+            btn_ProjectOK.TabIndex = 34;
+            btn_ProjectCancel.TabIndex = 35;
+
+            panel1.TabIndex = 36;
+            btn_Projects.TabIndex = 37;
+            btn_Users.TabIndex = 38;
+            btn_Documents.TabIndex = 39;
+            btn_Platform.TabIndex = 40;
         }
 
         /// <summary>
@@ -609,6 +615,37 @@ namespace CMS
                 setProjectUsers(mdl_CurrentProject.ProjectNumber);
                 setProjectNotes(mdl_CurrentProject.ProjectNumber);
             }
+        }
+
+        private void openProjectDocHistory(int docType)
+        {
+            using (frm_ProjectDocHistory ProjectDocHistory = new frm_ProjectDocHistory(mdl_CurrentProject.ProjectNumber, ds_Project, docType))
+            {
+                ProjectDocHistory.ShowDialog();
+
+                fillProjectsDataSet();
+                fillCurrentProjectVariables(mdl_CurrentProject.ProjectNumber);
+                setProjectDetails(mdl_CurrentProject.ProjectNumber);
+                setProjectUsers(mdl_CurrentProject.ProjectNumber);
+                setProjectNotes(mdl_CurrentProject.ProjectNumber);
+            }
+        }
+
+        private void btn_AllDocs_Click(object sender, EventArgs e)
+        {
+            openProjectDocHistory(0);
+        }
+        private void btn_Proposal_Click(object sender, EventArgs e)
+        {
+            openProjectDocHistory(1);
+        }
+        private void btn_DMP_Click(object sender, EventArgs e)
+        {
+            openProjectDocHistory(2);
+        }
+        private void btn_RA_Click(object sender, EventArgs e)
+        {
+            openProjectDocHistory(3);
         }
     }
 }
