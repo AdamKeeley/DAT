@@ -370,6 +370,38 @@ namespace CMS
             }
         }
 
+        public bool acceptProjectDocument(int pdID)
+        {
+            bool success = false;
+            try
+            {
+                SQL_Stuff conString = new SQL_Stuff();
+                using (SqlConnection connection = new SqlConnection(conString.getString()))
+                {
+                    //create parameterised SQL query to insert a new record to tblProjectNotes
+                    SqlCommand qryUpdateProjectDoc = new SqlCommand();
+                    qryUpdateProjectDoc.Connection = connection;
+                    qryUpdateProjectDoc.CommandText = $"update [dbo].[tblProjectDocument] " +
+                        $"set[Accepted] = getdate() " +
+                        $"where[pdID] = @pdID";
+                    qryUpdateProjectDoc.Parameters.Add("@pdID", SqlDbType.Int).Value = pdID;
+
+                    //open connection and execute insert
+                    connection.Open();
+                    qryUpdateProjectDoc.ExecuteNonQuery();
+                    
+                    success = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to add new note" + Environment.NewLine + ex.Message);
+                //throw;
+            }
+            
+            return success;
+        }
+
         /// <summary>
         /// Method to get largest pNumber from current pNumbers.
         /// Runs a SQL query to select largest number used in current project numbers and return it as an int type.

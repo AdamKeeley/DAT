@@ -42,7 +42,7 @@
             this.lbl_ProjectNumber.Location = new System.Drawing.Point(12, 9);
             this.lbl_ProjectNumber.Name = "lbl_ProjectNumber";
             this.lbl_ProjectNumber.Size = new System.Drawing.Size(75, 55);
-            this.lbl_ProjectNumber.TabIndex = 0;
+            this.lbl_ProjectNumber.TabIndex = 4;
             this.lbl_ProjectNumber.Text = "Project Number";
             // 
             // lbl_ProjectName
@@ -51,7 +51,7 @@
             this.lbl_ProjectName.Location = new System.Drawing.Point(93, 9);
             this.lbl_ProjectName.Name = "lbl_ProjectName";
             this.lbl_ProjectName.Size = new System.Drawing.Size(211, 55);
-            this.lbl_ProjectName.TabIndex = 1;
+            this.lbl_ProjectName.TabIndex = 5;
             this.lbl_ProjectName.Text = "Project Name";
             // 
             // btn_ProjectDocAdd
@@ -71,17 +71,19 @@
             this.dgv_ProjectDocHistory.Location = new System.Drawing.Point(12, 67);
             this.dgv_ProjectDocHistory.Name = "dgv_ProjectDocHistory";
             this.dgv_ProjectDocHistory.ReadOnly = true;
+            this.dgv_ProjectDocHistory.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_ProjectDocHistory.Size = new System.Drawing.Size(373, 150);
-            this.dgv_ProjectDocHistory.TabIndex = 3;
+            this.dgv_ProjectDocHistory.TabIndex = 1;
             // 
             // btn_ProjectDocAccept
             // 
             this.btn_ProjectDocAccept.Location = new System.Drawing.Point(310, 38);
             this.btn_ProjectDocAccept.Name = "btn_ProjectDocAccept";
             this.btn_ProjectDocAccept.Size = new System.Drawing.Size(75, 23);
-            this.btn_ProjectDocAccept.TabIndex = 4;
+            this.btn_ProjectDocAccept.TabIndex = 3;
             this.btn_ProjectDocAccept.Text = "Accept Document";
             this.btn_ProjectDocAccept.UseVisualStyleBackColor = true;
+            this.btn_ProjectDocAccept.Click += new System.EventHandler(this.btn_ProjectDocAccept_click);
             // 
             // frm_ProjectDocHistory
             // 
