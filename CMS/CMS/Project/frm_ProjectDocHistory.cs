@@ -71,10 +71,10 @@ namespace CMS
             dgv_ProjectDocHistory.DataSource = dt_dgv_DocumentHistory;
             dgv_ProjectDocHistory.Sort(dgv_ProjectDocHistory.Columns["Submitted"], ListSortDirection.Descending);
             dgv_ProjectDocHistory.Columns["pdID"].Visible = false;
-            dgv_ProjectDocHistory.Columns["Document Type"].Width = 120;
-            dgv_ProjectDocHistory.Columns["Version"].Width = 60;
-            dgv_ProjectDocHistory.Columns["Submitted"].Width = 75;
-            dgv_ProjectDocHistory.Columns["Accepted"].Width = 75;
+            dgv_ProjectDocHistory.Columns["Document Type"].Width = 140;
+            dgv_ProjectDocHistory.Columns["Version"].Width = 70;
+            dgv_ProjectDocHistory.Columns["Submitted"].Width = 80;
+            dgv_ProjectDocHistory.Columns["Accepted"].Width = 80;
         }
 
         //accept document

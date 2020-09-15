@@ -71,6 +71,7 @@
             this.dgv_ProjectDocHistory.Location = new System.Drawing.Point(12, 67);
             this.dgv_ProjectDocHistory.Name = "dgv_ProjectDocHistory";
             this.dgv_ProjectDocHistory.ReadOnly = true;
+            this.dgv_ProjectDocHistory.RowHeadersVisible = false;
             this.dgv_ProjectDocHistory.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_ProjectDocHistory.Size = new System.Drawing.Size(373, 150);
             this.dgv_ProjectDocHistory.TabIndex = 1;
