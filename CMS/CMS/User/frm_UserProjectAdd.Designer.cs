@@ -79,6 +79,7 @@
             // 
             // btn_UserProjectAdd_Cancel
             // 
+            this.btn_UserProjectAdd_Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_UserProjectAdd_Cancel.Location = new System.Drawing.Point(432, 56);
             this.btn_UserProjectAdd_Cancel.Name = "btn_UserProjectAdd_Cancel";
             this.btn_UserProjectAdd_Cancel.Size = new System.Drawing.Size(75, 23);
@@ -99,8 +100,10 @@
             // 
             // frm_UserProjectAdd
             // 
+            this.AcceptButton = this.btn_UserProjectAdd_Add;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btn_UserProjectAdd_Cancel;
             this.ClientSize = new System.Drawing.Size(517, 89);
             this.Controls.Add(this.btn_UserProjectAdd_Add);
             this.Controls.Add(this.btn_UserProjectAdd_Cancel);

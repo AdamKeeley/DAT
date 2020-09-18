@@ -418,6 +418,7 @@
             // 
             // btn_UserCancel
             // 
+            this.btn_UserCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_UserCancel.Location = new System.Drawing.Point(455, 288);
             this.btn_UserCancel.Margin = new System.Windows.Forms.Padding(2);
             this.btn_UserCancel.Name = "btn_UserCancel";
@@ -515,8 +516,10 @@
             // 
             // frm_UserAdd
             // 
+            this.AcceptButton = this.btn_UserOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btn_UserCancel;
             this.ClientSize = new System.Drawing.Size(524, 322);
             this.Controls.Add(this.gb_UserDetail);
             this.Controls.Add(this.gb_Training);

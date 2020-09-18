@@ -78,6 +78,7 @@
             // 
             // btn_ProjectDocAccept
             // 
+            this.btn_ProjectDocAccept.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_ProjectDocAccept.Location = new System.Drawing.Point(310, 38);
             this.btn_ProjectDocAccept.Name = "btn_ProjectDocAccept";
             this.btn_ProjectDocAccept.Size = new System.Drawing.Size(75, 23);

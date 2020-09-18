@@ -248,6 +248,7 @@ namespace CMS
             // 
             // btn_ProjectCancel
             // 
+            this.btn_ProjectCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_ProjectCancel.Location = new System.Drawing.Point(763, 448);
             this.btn_ProjectCancel.Margin = new System.Windows.Forms.Padding(2);
             this.btn_ProjectCancel.Name = "btn_ProjectCancel";
@@ -697,6 +698,7 @@ namespace CMS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btn_ProjectCancel;
             this.ClientSize = new System.Drawing.Size(828, 480);
             this.Controls.Add(this.gb_ProjectDocuments);
             this.Controls.Add(this.gb_KeyDates);
