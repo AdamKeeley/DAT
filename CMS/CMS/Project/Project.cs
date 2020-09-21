@@ -404,7 +404,7 @@ namespace CMS
                     //generate the parameterised SQL query to insert new record
                     SqlCommand qry_getNextDocVersion = new SqlCommand();
                     qry_getNextDocVersion.Connection = connection;
-                    qry_getNextDocVersion.CommandText = $"select max(floor([VersionNumber])) + 1 " +
+                    qry_getNextDocVersion.CommandText = $"select isnull(max(floor([VersionNumber])) + 1, 1) " +
                         $"from[dbo].[tblProjectDocument] " +
                         $"where[ValidTo] is null " +
                         $"and [ProjectNumber] = @ProjectNumber " +

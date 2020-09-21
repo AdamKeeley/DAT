@@ -20,10 +20,7 @@ namespace CMS
         {
             InitializeComponent();
             fillProjectsDataSet();
-            fillCurrentProjectVariables(pNumber);
-            setProjectDetails(pNumber);
-            setProjectUsers(pNumber);
-            setProjectNotes(pNumber);
+            refreshProjectForm(pNumber);
             setTabIndex();
         }
 
@@ -46,6 +43,20 @@ namespace CMS
         {
             var Projects = new Project();
             ds_Project = Projects.getProjectsDataSet();
+        }
+
+        /// <summary>
+        /// Runs through methods to populate form controls with project details.
+        /// Does not refresh DataSet.
+        /// </summary>
+        /// <param name="pNumber"></param>
+        private void refreshProjectForm(string pNumber)
+        {
+            fillCurrentProjectVariables(pNumber);
+            setProjectDetails(pNumber);
+            setProjectNotes(pNumber);
+            setProjectUsers(pNumber);
+            changeDocButtonColour(pNumber);
         }
 
         /// <summary>
@@ -210,6 +221,42 @@ namespace CMS
             dgv_ProjectUsers.Sort(dgv_ProjectUsers.Columns["Full Name"], ListSortDirection.Ascending);
             dgv_ProjectUsers.Columns["User Number"].Visible = false;
             dgv_ProjectUsers.Columns["Full Name"].Width = 155;
+        }
+
+        /// <summary>
+        /// Changes colour of 'specific' Project Document buttons depending on whether that document type 
+        /// has been submitted or accepted; basic RAG.
+        /// </summary>
+        /// <param name="pNumber"></param>
+        private void changeDocButtonColour(string pNumber)
+        {
+            btn_Proposal.BackColor = System.Drawing.Color.LightSalmon;
+            btn_DMP.BackColor = System.Drawing.Color.LightSalmon;
+            btn_RA.BackColor = System.Drawing.Color.LightSalmon;
+
+            foreach (DataRow dRow in ds_Project.Tables["tblDocsAccepted"].Select($"ProjectNumber = '{pNumber}' "))
+            {
+                DateTime? acceptedDate = dRow["maxAccepted"] == DBNull.Value ? null : (DateTime?)dRow["maxAccepted"];
+
+                if (int.Parse(dRow["DocumentID"].ToString()) == 1)
+                {
+                    if (acceptedDate != null)
+                        btn_Proposal.BackColor = System.Drawing.Color.PaleGreen;
+                    else btn_Proposal.BackColor = System.Drawing.Color.Khaki;
+                }
+                if (int.Parse(dRow["DocumentID"].ToString()) == 2)
+                {
+                    if (acceptedDate != null)
+                        btn_DMP.BackColor = System.Drawing.Color.PaleGreen;
+                    else btn_DMP.BackColor = System.Drawing.Color.Khaki;
+                }
+                if (int.Parse(dRow["DocumentID"].ToString()) == 3)
+                {
+                    if (acceptedDate != null)
+                        btn_RA.BackColor = System.Drawing.Color.PaleGreen;
+                    else btn_RA.BackColor = System.Drawing.Color.Khaki;
+                }
+            }
         }
 
         /// <summary>
@@ -412,10 +459,7 @@ namespace CMS
 
                         //refresh dataset (ds_Projects) and form variable and control values
                         fillProjectsDataSet();
-                        fillCurrentProjectVariables(pNumber);
-                        setProjectDetails(pNumber);
-                        setProjectNotes(pNumber);
-                        setProjectUsers(pNumber);
+                        refreshProjectForm(pNumber);
 
                         success = true;
                     }
@@ -495,11 +539,6 @@ namespace CMS
             }
         }
 
-        private void changeDocButtonColour()
-        {
-
-        }
-
         private void openProjectDocHistory(int docType)
         {
             using (frm_ProjectDocHistory ProjectDocHistory = new frm_ProjectDocHistory(mdl_CurrentProject.ProjectNumber, ds_Project, docType))
@@ -507,10 +546,7 @@ namespace CMS
                 ProjectDocHistory.ShowDialog();
 
                 fillProjectsDataSet();
-                fillCurrentProjectVariables(mdl_CurrentProject.ProjectNumber);
-                setProjectDetails(mdl_CurrentProject.ProjectNumber);
-                setProjectUsers(mdl_CurrentProject.ProjectNumber);
-                setProjectNotes(mdl_CurrentProject.ProjectNumber);
+                refreshProjectForm(mdl_CurrentProject.ProjectNumber);
             }
         }
 
@@ -541,10 +577,7 @@ namespace CMS
         private void cb_pNumberValue_SelectionChanged(object sender, EventArgs e)
         {
             string pNumber = cb_pNumberValue.Text;
-            fillCurrentProjectVariables(pNumber);
-            setProjectDetails(pNumber);
-            setProjectNotes(pNumber);
-            setProjectUsers(pNumber);
+            refreshProjectForm(pNumber);
         }
 
         private void btn_ProjectCancel_Click(object sender, EventArgs e)
@@ -580,9 +613,7 @@ namespace CMS
                 if (string.IsNullOrWhiteSpace(ProjectNumber) == false)
                 {
                     fillProjectsDataSet();
-                    fillCurrentProjectVariables(ProjectNumber);
-                    setProjectDetails(ProjectNumber);
-                    setProjectNotes(ProjectNumber);
+                    refreshProjectForm(ProjectNumber);
                 }
             }
         }
@@ -596,10 +627,7 @@ namespace CMS
         {
             string pNumber = cb_pNumberValue.Text;
             fillProjectsDataSet();
-            fillCurrentProjectVariables(pNumber);
-            setProjectDetails(pNumber);
-            setProjectUsers(pNumber);
-            setProjectNotes(pNumber);
+            refreshProjectForm(pNumber);
         }
 
         private void dgv_ProjectUsers_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -626,12 +654,8 @@ namespace CMS
             using (frm_ProjectUserAdd ProjectUserAdd = new frm_ProjectUserAdd(mdl_CurrentProject.ProjectNumber, ds_Project))
             {
                 ProjectUserAdd.ShowDialog();
-
                 fillProjectsDataSet();
-                fillCurrentProjectVariables(mdl_CurrentProject.ProjectNumber);
-                setProjectDetails(mdl_CurrentProject.ProjectNumber);
-                setProjectUsers(mdl_CurrentProject.ProjectNumber);
-                setProjectNotes(mdl_CurrentProject.ProjectNumber);
+                refreshProjectForm(mdl_CurrentProject.ProjectNumber);
             }
         }
 

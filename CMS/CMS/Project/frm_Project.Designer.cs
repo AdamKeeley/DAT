@@ -663,7 +663,7 @@ namespace CMS
             // 
             // btn_RA
             // 
-            this.btn_RA.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.btn_RA.BackColor = System.Drawing.SystemColors.ControlLight;
             this.btn_RA.Location = new System.Drawing.Point(4, 77);
             this.btn_RA.Name = "btn_RA";
             this.btn_RA.Size = new System.Drawing.Size(170, 23);
@@ -674,7 +674,7 @@ namespace CMS
             // 
             // btn_DMP
             // 
-            this.btn_DMP.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.btn_DMP.BackColor = System.Drawing.SystemColors.ControlLight;
             this.btn_DMP.Location = new System.Drawing.Point(6, 48);
             this.btn_DMP.Name = "btn_DMP";
             this.btn_DMP.Size = new System.Drawing.Size(170, 23);
@@ -685,7 +685,7 @@ namespace CMS
             // 
             // btn_Proposal
             // 
-            this.btn_Proposal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btn_Proposal.BackColor = System.Drawing.SystemColors.ControlLight;
             this.btn_Proposal.Location = new System.Drawing.Point(6, 19);
             this.btn_Proposal.Name = "btn_Proposal";
             this.btn_Proposal.Size = new System.Drawing.Size(170, 23);

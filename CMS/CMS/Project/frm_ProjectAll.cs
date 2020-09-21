@@ -229,9 +229,9 @@ namespace CMS
                     frm_Project Project = new frm_Project(pNumber);
                     Project.Show();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Please double click on a data row to see project details.");
+                    MessageBox.Show("Please double click on a data row to see project details." + Environment.NewLine + ex);
                 }
             }
         }

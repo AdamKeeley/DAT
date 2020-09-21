@@ -95,6 +95,11 @@
             this.nud_DocVersion.Name = "nud_DocVersion";
             this.nud_DocVersion.Size = new System.Drawing.Size(120, 20);
             this.nud_DocVersion.TabIndex = 11;
+            this.nud_DocVersion.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // lbl_DocSubmitted
             // 
