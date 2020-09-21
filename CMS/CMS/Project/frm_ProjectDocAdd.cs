@@ -1,12 +1,6 @@
 ﻿using DataControlsLib.DataModels;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CMS
@@ -51,12 +45,14 @@ namespace CMS
 
         private bool fillProjectDocModel()
         {
-            if (cb_DocType.SelectedIndex > -1)
+            if (cb_DocType.Text != "")
                 mdl_ProjectDoc.DocumentType = int.Parse(cb_DocType.SelectedValue.ToString());
+            else mdl_ProjectDoc.DocumentType = null;
+
             mdl_ProjectDoc.VersionNumber = nud_DocVersion.Value;
+            
             //dates are fuckey
-            bool dateCheck = true;
-            if (dateCheck == true & mtb_DocSubmitted.Text != "" & mtb_DocSubmitted.Text != "  /  /")
+            if (mtb_DocSubmitted.Text != "" & mtb_DocSubmitted.Text != "  /  /")
             {
                 try
                 {
@@ -65,10 +61,10 @@ namespace CMS
                 catch (Exception)
                 {
                     MessageBox.Show("Please enter valid Submitted Date");
-                    dateCheck = false;
+                    return false;
                 }
             }
-            if (dateCheck == true & mtb_DocAccepted.Text != "" & mtb_DocAccepted.Text != "  /  /")
+            if (mtb_DocAccepted.Text != "" & mtb_DocAccepted.Text != "  /  /")
             {
                 try
                 {
@@ -77,10 +73,10 @@ namespace CMS
                 catch (Exception)
                 {
                     MessageBox.Show("Please enter valid Accepted Date");
-                    dateCheck = false;
+                    return false;
                 }
             }
-            return dateCheck;
+            return true;
         }
 
         private void setNextVersion()
@@ -94,17 +90,20 @@ namespace CMS
 
         private void insertNewProjectDoc()
         {
-            //Check required fields have an entry
             Project Projects = new Project();
-            if (Projects.requiredDocFields(mdl_ProjectDoc) == false)
-            {
-                return;
-            }
 
+            //Check fields have valid entries and fill project document model
             if (fillProjectDocModel() == true)
             {
-                if (Projects.insertNewDoc(mdl_ProjectDoc) == true)
-                    this.Close();
+                //Check required fields have an entry
+                if (Projects.requiredDocFields(mdl_ProjectDoc) == true)
+                {
+                    //Add record to SQL db, close form on success
+                    if (Projects.insertNewDoc(mdl_ProjectDoc) == true)
+                    { 
+                        this.Close(); 
+                    }
+                }
             }
             
         }
@@ -143,5 +142,6 @@ namespace CMS
         {
             this.Close();
         }
+
     }
 }

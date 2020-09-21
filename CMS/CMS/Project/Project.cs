@@ -69,6 +69,20 @@ namespace CMS
                         $"from [dbo].[tblUser] " +
                         $"where [ValidTo] is null " +
                         $"order by [LastName], [FirstName], [UserID]");
+                    GetDB.GetDataTable(connection, ds_prj, "tblDocsAccepted",
+                        $"select tbl.ProjectNumber " +
+                        $"    , tlk.DocumentID " +
+                        $"    , tlk.DocumentDescription " +
+                        $"    , max(tbl.Accepted) as maxAccepted " +
+                        $"from[dbo].[tlkDocuments] tlk " +
+                        $"    left join[dbo].[tblProjectDocument] tbl " +
+                        $"        on tlk.DocumentID = tbl.DocumentType " +
+                        $"where tlk.ValidTo is null and tbl.ValidTo is null " +
+                        $"    and tbl.ProjectNumber is not null " +
+                        $"group by tbl.ProjectNumber " +
+                        $"    , tlk.DocumentID " +
+                        $"    , tlk.DocumentDescription " +
+                        $"order by tbl.ProjectNumber, tlk.DocumentID");
                     // Copies made of tblUser so that the can be referenced by LeadApplicant and 
                     // PI fields of tblProjects via DataRelations without additional SQL Server hits
                     DataTable leadApp = ds_prj.Tables["tblUser"].Copy();
@@ -414,8 +428,6 @@ namespace CMS
 
         public bool insertNewDoc(ProjectDocModel mdl_ProjectDoc)
         {
-            bool success = false;
-
             try
             {
                 SQL_Stuff conString = new SQL_Stuff();
@@ -435,15 +447,14 @@ namespace CMS
 
                     connection.Open();
                     qry_insertNewDoc.ExecuteNonQuery();
-
-                    success = true;
                 }
+                return true;
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Failed to insert new document." + Environment.NewLine + ex.Message);
+                return false;
             }
-            return success;
         }
 
         public bool acceptProjectDocument(int pdID)
@@ -568,20 +579,18 @@ namespace CMS
         /// </returns>
         public bool requiredDocFields(ProjectDocModel mdl_ProjectDoc)
         {
-            bool requiredFields = true;
-
-            if (mdl_ProjectDoc.DocumentType < 1)
+            if (mdl_ProjectDoc.DocumentType < 1 || mdl_ProjectDoc.DocumentType == null)
             {
                 MessageBox.Show("Please choose a Document Type.");
-                requiredFields = false;
+                return false;
             }
             if (mdl_ProjectDoc.Submitted == null)
             {
                 MessageBox.Show("Please enter a Submitted Date.");
-                requiredFields = false;
+                return false;
             }
 
-            return requiredFields;
+            return true;
         }
 
     }

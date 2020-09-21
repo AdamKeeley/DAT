@@ -495,6 +495,25 @@ namespace CMS
             }
         }
 
+        private void changeDocButtonColour()
+        {
+
+        }
+
+        private void openProjectDocHistory(int docType)
+        {
+            using (frm_ProjectDocHistory ProjectDocHistory = new frm_ProjectDocHistory(mdl_CurrentProject.ProjectNumber, ds_Project, docType))
+            {
+                ProjectDocHistory.ShowDialog();
+
+                fillProjectsDataSet();
+                fillCurrentProjectVariables(mdl_CurrentProject.ProjectNumber);
+                setProjectDetails(mdl_CurrentProject.ProjectNumber);
+                setProjectUsers(mdl_CurrentProject.ProjectNumber);
+                setProjectNotes(mdl_CurrentProject.ProjectNumber);
+            }
+        }
+
         /// <summary>
         /// Prevent the cursor from being positioned in the middle of a masked textbox when 
         /// the user clicks in it. Needs to be called by the OnClick event of the control.
@@ -512,7 +531,6 @@ namespace CMS
                 });
             }
         }
-
 
         private void btn_InsertProjectNote_Click(object sender, EventArgs e)
         {
@@ -617,34 +635,24 @@ namespace CMS
             }
         }
 
-        private void openProjectDocHistory(int docType)
-        {
-            using (frm_ProjectDocHistory ProjectDocHistory = new frm_ProjectDocHistory(mdl_CurrentProject.ProjectNumber, ds_Project, docType))
-            {
-                ProjectDocHistory.ShowDialog();
-
-                fillProjectsDataSet();
-                fillCurrentProjectVariables(mdl_CurrentProject.ProjectNumber);
-                setProjectDetails(mdl_CurrentProject.ProjectNumber);
-                setProjectUsers(mdl_CurrentProject.ProjectNumber);
-                setProjectNotes(mdl_CurrentProject.ProjectNumber);
-            }
-        }
-
         private void btn_AllDocs_Click(object sender, EventArgs e)
         {
+            //Passing through DocumentID = 0; does not represent any DocType in SQL db will be treated as wildcard
             openProjectDocHistory(0);
         }
         private void btn_Proposal_Click(object sender, EventArgs e)
         {
+            //Passing through DocumentID = 1; corresponds to Project Proposal in SQL db
             openProjectDocHistory(1);
         }
         private void btn_DMP_Click(object sender, EventArgs e)
         {
+            //Passing through DocumentID = 2; corresponds to DMP in SQL db
             openProjectDocHistory(2);
         }
         private void btn_RA_Click(object sender, EventArgs e)
         {
+            //Passing through DocumentID = 3; corresponds to Risk Assessment in SQL db
             openProjectDocHistory(3);
         }
     }

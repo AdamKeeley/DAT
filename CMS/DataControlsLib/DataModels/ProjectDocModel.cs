@@ -12,10 +12,10 @@ namespace DataControlsLib.DataModels
     /// </summary>
     public class ProjectDocModel
     {
-        public int          pdID            { get; set; }
+        public int?         pdID            { get; set; }
         public string       ProjectNumber   { get; set; }
-        public int          DocumentType    { get; set; }
-        public decimal      VersionNumber   { get; set; }
+        public int?         DocumentType    { get; set; }
+        public decimal?     VersionNumber   { get; set; }
         public DateTime?    Submitted       { get; set; }
         public DateTime?    Accepted        { get; set; }
 

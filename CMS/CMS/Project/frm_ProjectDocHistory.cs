@@ -1,14 +1,7 @@
 ﻿using DataControlsLib;
-using DataControlsLib.DataModels;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CMS
@@ -18,14 +11,14 @@ namespace CMS
         public frm_ProjectDocHistory(string pNumber, DataSet ds_prj, int docType)
         {
             InitializeComponent();
-            setMembersAndControls(pNumber, ds_prj, docType);
+            setProjectDocHistory(pNumber, ds_prj, docType);
         }
 
         string projectNumber;
         DataSet ds_Projects;
         int documentType;
 
-        private void setMembersAndControls(string pNumber, DataSet ds_prj, int docType)
+        private void setProjectDocHistory(string pNumber, DataSet ds_prj, int docType)
         {
             // set member variables
             projectNumber = pNumber;
@@ -83,7 +76,6 @@ namespace CMS
             dt_dgv_DocumentHistory = dt_dgv_DocumentHistory.DefaultView.ToTable();
 
             dgv_ProjectDocHistory.DataSource = dt_dgv_DocumentHistory;
-            //dgv_ProjectDocHistory.Sort(dgv_ProjectDocHistory.Columns["Submitted"], ListSortDirection.Descending);
             dgv_ProjectDocHistory.Columns["pdID"].Visible = false;
             dgv_ProjectDocHistory.Columns["Document Type"].Width = 140;
             dgv_ProjectDocHistory.Columns["Version"].Width = 70;
@@ -145,7 +137,7 @@ namespace CMS
                     MessageBox.Show("Failed to refresh tblProjectDocument" + Environment.NewLine + Environment.NewLine + ex.Message);
                 }
 
-                setMembersAndControls(projectNumber, ds_Projects, documentType);
+                setProjectDocHistory(projectNumber, ds_Projects, documentType);
             }
         }
     }
