@@ -1,7 +1,10 @@
-﻿using System;
+﻿using DataControlsLib;
+using DataControlsLib.DataModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -15,11 +18,20 @@ namespace CMS
         public frm_ProjectDocHistory(string pNumber, DataSet ds_prj, int docType)
         {
             InitializeComponent();
-            setControls(pNumber, ds_prj, docType);
+            setMembersAndControls(pNumber, ds_prj, docType);
         }
 
-        private void setControls(string pNumber, DataSet ds_prj, int docType)
+        string projectNumber;
+        DataSet ds_Projects;
+        int documentType;
+
+        private void setMembersAndControls(string pNumber, DataSet ds_prj, int docType)
         {
+            // set member variables
+            projectNumber = pNumber;
+            ds_Projects = ds_prj;
+            documentType = docType;
+
             //set labels
             lbl_ProjectNumber.Text = pNumber;
             foreach (DataRow pRow in ds_prj.Tables["tblProjects"].Select($"ProjectNumber = '{pNumber}'"))
@@ -67,9 +79,11 @@ namespace CMS
 
                 dt_dgv_DocumentHistory.Rows.Add(row);
             }
+            dt_dgv_DocumentHistory.DefaultView.Sort = "Document Type Asc, Version Desc";
+            dt_dgv_DocumentHistory = dt_dgv_DocumentHistory.DefaultView.ToTable();
 
             dgv_ProjectDocHistory.DataSource = dt_dgv_DocumentHistory;
-            dgv_ProjectDocHistory.Sort(dgv_ProjectDocHistory.Columns["Submitted"], ListSortDirection.Descending);
+            //dgv_ProjectDocHistory.Sort(dgv_ProjectDocHistory.Columns["Submitted"], ListSortDirection.Descending);
             dgv_ProjectDocHistory.Columns["pdID"].Visible = false;
             dgv_ProjectDocHistory.Columns["Document Type"].Width = 140;
             dgv_ProjectDocHistory.Columns["Version"].Width = 70;
@@ -103,15 +117,36 @@ namespace CMS
             }
         }
 
-        //add document
-        private void addProjectDocument()
-        {
-
-        }
-
         private void btn_ProjectDocAccept_click(object sender, EventArgs e)
         {
             acceptProjectDocument();
+        }
+        
+        private void btn_ProjectDocAdd_click(object sender, EventArgs e)
+        {
+            using (frm_ProjectDocAdd addProjectDoc = new frm_ProjectDocAdd(projectNumber, ds_Projects, documentType))
+            {
+                addProjectDoc.ShowDialog();
+
+                try
+                {
+                    ds_Projects.Tables["tblProjectDocument"].Clear();
+                    //use the central connection string from the SQL_Stuff class
+                    SQL_Stuff conString = new SQL_Stuff();
+                    using (SqlConnection connection = new SqlConnection(conString.getString()))
+                    {
+                        GetDB.GetDataTable(connection, ds_Projects, "tblProjectDocument",
+                        $"select * from [dbo].[tblProjectDocument]" +
+                        $"where [ValidTo] is null");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Failed to refresh tblProjectDocument" + Environment.NewLine + Environment.NewLine + ex.Message);
+                }
+
+                setMembersAndControls(projectNumber, ds_Projects, documentType);
+            }
         }
     }
 }

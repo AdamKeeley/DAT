@@ -93,6 +93,12 @@
     <Compile Include="Project\frm_ProjectAll.Designer.cs">
       <DependentUpon>frm_ProjectAll.cs</DependentUpon>
     </Compile>
+    <Compile Include="Project\frm_ProjectDocAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Project\frm_ProjectDocAdd.Designer.cs">
+      <DependentUpon>frm_ProjectDocAdd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Project\frm_ProjectDocHistory.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -163,6 +169,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Project\frm_ProjectAll.resx">
       <DependentUpon>frm_ProjectAll.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Project\frm_ProjectDocAdd.resx">
+      <DependentUpon>frm_ProjectDocAdd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Project\frm_ProjectDocHistory.resx">
       <DependentUpon>frm_ProjectDocHistory.cs</DependentUpon>

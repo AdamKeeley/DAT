@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Windows.Forms;
 using DataControlsLib;
 using DataControlsLib.DataModels;
+using System.Linq.Expressions;
 
 namespace CMS
 {
@@ -58,7 +59,8 @@ namespace CMS
                         $"select * from [dbo].[tblUserProject] " +
                         $"where [ValidTo] is null");
                     GetDB.GetDataTable(connection, ds_prj, "tblProjectDocument",
-                        $"select * from [dbo].[tblProjectDocument]");
+                        $"select * from [dbo].[tblProjectDocument]" +
+                        $"where [ValidTo] is null");
                     GetDB.GetDataTable(connection, ds_prj, "tlkDocuments",
                         $"select * from [dbo].[tlkDocuments]" +
                         $"where [ValidTo] is null");
@@ -370,6 +372,80 @@ namespace CMS
             }
         }
 
+        /// <summary>
+        /// Takes the project number and document type and queries the database for the next whole version number.
+        /// </summary>
+        /// <param name="ProjectNumber"></param>
+        /// <param name="DocumentType"></param>
+        /// <returns></returns>
+        public int? getNextDocVersion(ProjectDocModel mdl_ProjectDoc)
+        {
+            int? version = null;
+
+            try
+            {
+                SQL_Stuff conString = new SQL_Stuff();
+                using (SqlConnection connection = new SqlConnection(conString.getString()))
+                {
+                    //generate the parameterised SQL query to insert new record
+                    SqlCommand qry_getNextDocVersion = new SqlCommand();
+                    qry_getNextDocVersion.Connection = connection;
+                    qry_getNextDocVersion.CommandText = $"select max(floor([VersionNumber])) + 1 " +
+                        $"from[dbo].[tblProjectDocument] " +
+                        $"where[ValidTo] is null " +
+                        $"and [ProjectNumber] = @ProjectNumber " +
+                        $"and[DocumentType] = @DocumentType ";
+                    qry_getNextDocVersion.Parameters.Add("@ProjectNumber", SqlDbType.VarChar).Value = mdl_ProjectDoc.ProjectNumber;
+                    qry_getNextDocVersion.Parameters.Add("@DocumentType", SqlDbType.Int).Value = mdl_ProjectDoc.DocumentType;
+
+                    connection.Open();
+                    object result = qry_getNextDocVersion.ExecuteScalar();
+                    result = (result == DBNull.Value) ? null : result;
+                    version = Convert.ToInt32(result);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to generate next document version number." + Environment.NewLine + ex.Message);
+            }
+
+            return version;
+        }
+
+        public bool insertNewDoc(ProjectDocModel mdl_ProjectDoc)
+        {
+            bool success = false;
+
+            try
+            {
+                SQL_Stuff conString = new SQL_Stuff();
+                using (SqlConnection connection = new SqlConnection(conString.getString()))
+                {
+                    //generate the parameterised SQL query to insert new record
+                    SqlCommand qry_insertNewDoc = new SqlCommand();
+                    qry_insertNewDoc.Connection = connection;
+                    qry_insertNewDoc.CommandText = $"insert into [dbo].[tblProjectDocument] " +
+                        $"([ProjectNumber], [DocumentType], [VersionNumber], [Submitted]) " +
+                        $"values " +
+                        $"(@ProjectNumber, @DocumentType, @VersionNumber, @Submitted) ";
+                    qry_insertNewDoc.Parameters.Add("@ProjectNumber", SqlDbType.VarChar).Value = mdl_ProjectDoc.ProjectNumber;
+                    qry_insertNewDoc.Parameters.Add("@DocumentType", SqlDbType.Int).Value = mdl_ProjectDoc.DocumentType;
+                    qry_insertNewDoc.Parameters.Add("@VersionNumber", SqlDbType.Decimal).Value = mdl_ProjectDoc.VersionNumber;
+                    qry_insertNewDoc.Parameters.Add("@Submitted", SqlDbType.DateTime).Value = mdl_ProjectDoc.Submitted;
+
+                    connection.Open();
+                    qry_insertNewDoc.ExecuteNonQuery();
+
+                    success = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to insert new document." + Environment.NewLine + ex.Message);
+            }
+            return success;
+        }
+
         public bool acceptProjectDocument(int pdID)
         {
             bool success = false;
@@ -477,6 +553,31 @@ namespace CMS
             if (mdl_Project.LeadApplicant == null || mdl_Project.LeadApplicant < 0)
             {
                 MessageBox.Show("Please select a Lead Applicant.");
+                requiredFields = false;
+            }
+
+            return requiredFields;
+        }
+
+        /// <summary>
+        /// Checks if mandatory fields have an entry.
+        /// </summary>
+        /// <param name="mdl_Project"></param>
+        /// <returns> 
+        /// 'true' if all fields are populated, 'false' and mesaagebox feedback if any are missing.
+        /// </returns>
+        public bool requiredDocFields(ProjectDocModel mdl_ProjectDoc)
+        {
+            bool requiredFields = true;
+
+            if (mdl_ProjectDoc.DocumentType < 1)
+            {
+                MessageBox.Show("Please choose a Document Type.");
+                requiredFields = false;
+            }
+            if (mdl_ProjectDoc.Submitted == null)
+            {
+                MessageBox.Show("Please enter a Submitted Date.");
                 requiredFields = false;
             }
 

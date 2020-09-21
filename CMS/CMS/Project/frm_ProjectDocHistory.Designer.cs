@@ -62,6 +62,7 @@
             this.btn_ProjectDocAdd.TabIndex = 2;
             this.btn_ProjectDocAdd.Text = "Add Document";
             this.btn_ProjectDocAdd.UseVisualStyleBackColor = true;
+            this.btn_ProjectDocAdd.Click += new System.EventHandler(this.btn_ProjectDocAdd_click);
             // 
             // dgv_ProjectDocHistory
             // 

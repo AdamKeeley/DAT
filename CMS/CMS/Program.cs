@@ -14,12 +14,14 @@ namespace CMS
              * Project Documents 
              *     - incorporate some sort of 'timeline' of submitted documents?
              *      x add new ProjectDocuments SQL tables to Project dataset
-             *      - create document history form (single document type)
-             *      - create all docs form (current/latest only)
-             *          - both should include facililty to add new document
-             *          - create add document form
+             *      x create document history form (single document type)
+             *      x create all docs form (current/latest only)
+             *          x both should include facililty to add new document
+             *          x create add document form
              *      - change colour of buttons on parent form dependant on submitted/accepted status?
-             *      
+             *      - stop forms from closing!
+             *    
+             * Compartmentalise getDataSet
              *     
              * Platform 
              *     - tabs for various platforms?
