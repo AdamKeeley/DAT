@@ -315,12 +315,6 @@ namespace CMS
             btn_ProjectApply.TabIndex = 33;
             btn_ProjectOK.TabIndex = 34;
             btn_ProjectCancel.TabIndex = 35;
-
-            panel1.TabIndex = 36;
-            btn_Projects.TabIndex = 37;
-            btn_Users.TabIndex = 38;
-            btn_Documents.TabIndex = 39;
-            btn_Platform.TabIndex = 40;
         }
 
         /// <summary>
