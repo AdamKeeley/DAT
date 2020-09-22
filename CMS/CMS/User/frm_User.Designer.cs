@@ -250,6 +250,7 @@
             this.mtb_UserStartDate.Size = new System.Drawing.Size(76, 20);
             this.mtb_UserStartDate.TabIndex = 41;
             this.mtb_UserStartDate.ValidatingType = typeof(System.DateTime);
+            this.mtb_UserStartDate.Click += new System.EventHandler(this.enter_TextBox);
             // 
             // mtb_UserEndDate
             // 
@@ -260,6 +261,7 @@
             this.mtb_UserEndDate.Size = new System.Drawing.Size(76, 20);
             this.mtb_UserEndDate.TabIndex = 43;
             this.mtb_UserEndDate.ValidatingType = typeof(System.DateTime);
+            this.mtb_UserEndDate.Click += new System.EventHandler(this.enter_TextBox);
             // 
             // lbl_EndDate
             // 
@@ -290,6 +292,7 @@
             this.mtb_IRCAgreement.Size = new System.Drawing.Size(76, 20);
             this.mtb_IRCAgreement.TabIndex = 45;
             this.mtb_IRCAgreement.ValidatingType = typeof(System.DateTime);
+            this.mtb_IRCAgreement.Click += new System.EventHandler(this.enter_TextBox);
             // 
             // mtb_ISET
             // 
@@ -300,6 +303,7 @@
             this.mtb_ISET.Size = new System.Drawing.Size(76, 20);
             this.mtb_ISET.TabIndex = 47;
             this.mtb_ISET.ValidatingType = typeof(System.DateTime);
+            this.mtb_ISET.Click += new System.EventHandler(this.enter_TextBox);
             // 
             // lbl_ISET
             // 
@@ -330,6 +334,7 @@
             this.mtb_ISAT.Size = new System.Drawing.Size(76, 20);
             this.mtb_ISAT.TabIndex = 49;
             this.mtb_ISAT.ValidatingType = typeof(System.DateTime);
+            this.mtb_ISAT.Click += new System.EventHandler(this.enter_TextBox);
             // 
             // mtb_SAFE
             // 
@@ -340,6 +345,7 @@
             this.mtb_SAFE.Size = new System.Drawing.Size(76, 20);
             this.mtb_SAFE.TabIndex = 51;
             this.mtb_SAFE.ValidatingType = typeof(System.DateTime);
+            this.mtb_SAFE.Click += new System.EventHandler(this.enter_TextBox);
             // 
             // lbl_SAFE
             // 
@@ -380,6 +386,7 @@
             this.mtb_TokenIssued.Size = new System.Drawing.Size(76, 20);
             this.mtb_TokenIssued.TabIndex = 55;
             this.mtb_TokenIssued.ValidatingType = typeof(System.DateTime);
+            this.mtb_TokenIssued.Click += new System.EventHandler(this.enter_TextBox);
             // 
             // mtb_TokenReturned
             // 
@@ -390,6 +397,7 @@
             this.mtb_TokenReturned.Size = new System.Drawing.Size(76, 20);
             this.mtb_TokenReturned.TabIndex = 57;
             this.mtb_TokenReturned.ValidatingType = typeof(System.DateTime);
+            this.mtb_TokenReturned.Click += new System.EventHandler(this.enter_TextBox);
             // 
             // lbl_TokenReturned
             // 

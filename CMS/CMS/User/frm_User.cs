@@ -76,11 +76,13 @@ namespace CMS
                 if (mdl_CurrentUser.Title == null)
                     cb_UserTitle.SelectedIndex = -1;
                 else
-                    cb_UserTitle.SelectedValue = mdl_CurrentUser.Title;
-                foreach (DataRow t in ds_User.Tables["tlkTitle"].Select($"TitleID = {mdl_CurrentUser.Title}"))
                 {
-                    current_TitleText = t["TitleDescription"].ToString();
-                }
+                    cb_UserTitle.SelectedValue = mdl_CurrentUser.Title;
+                    foreach (DataRow t in ds_User.Tables["tlkTitle"].Select($"TitleID = {mdl_CurrentUser.Title}"))
+                    {
+                        current_TitleText = t["TitleDescription"].ToString();
+                    }
+                }                
                 lbl_FullName.Text = $"{current_TitleText} {mdl_CurrentUser.LastName}, {mdl_CurrentUser.FirstName}";
                 tb_FirstName.Text = mdl_CurrentUser.FirstName;
                 tb_LastName.Text = mdl_CurrentUser.LastName;
@@ -103,7 +105,7 @@ namespace CMS
             catch (Exception ex)
             {
                 MessageBox.Show("Method setUserDetails of class frm_User has failed" + Environment.NewLine + ex);
-                //throw;
+                throw;
             }
         }
 
@@ -465,6 +467,17 @@ namespace CMS
             }
         }
 
+        private void enter_TextBox(object sender, EventArgs e)
+        {
+            MaskedTextBox textBox = sender as MaskedTextBox;
+            if (textBox.Text == "  /  /")
+            {
+                this.BeginInvoke((MethodInvoker)delegate ()
+                {
+                    textBox.Select(0, 0);
+                });
+            }
+        }
 
         private void btn_InsertUserNote_Click(object sender, EventArgs e)
         {
