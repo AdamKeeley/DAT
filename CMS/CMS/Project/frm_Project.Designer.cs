@@ -63,12 +63,7 @@ namespace CMS
             this.gb_Governance = new System.Windows.Forms.GroupBox();
             this.chkb_ISO27001 = new System.Windows.Forms.CheckBox();
             this.chkb_DSPT = new System.Windows.Forms.CheckBox();
-            this.btn_Users = new System.Windows.Forms.Button();
-            this.btn_Projects = new System.Windows.Forms.Button();
-            this.btn_Documents = new System.Windows.Forms.Button();
             this.btn_Refresh = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.btn_Platform = new System.Windows.Forms.Button();
             this.lbl_LeadApplicant = new System.Windows.Forms.Label();
             this.mtb_ProjectedStartDateValue = new System.Windows.Forms.MaskedTextBox();
             this.lbl_ProjectedStartDate = new System.Windows.Forms.Label();
@@ -88,7 +83,6 @@ namespace CMS
             ((System.ComponentModel.ISupportInitialize)(this.dgv_pNotes)).BeginInit();
             this.gb_Platform.SuspendLayout();
             this.gb_Governance.SuspendLayout();
-            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ProjectUsers)).BeginInit();
             this.gb_ProjectUsers.SuspendLayout();
             this.gb_ProjectNotes.SuspendLayout();
@@ -99,7 +93,7 @@ namespace CMS
             // lbl_pNumber
             // 
             this.lbl_pNumber.AutoSize = true;
-            this.lbl_pNumber.Location = new System.Drawing.Point(124, 9);
+            this.lbl_pNumber.Location = new System.Drawing.Point(11, 9);
             this.lbl_pNumber.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_pNumber.Name = "lbl_pNumber";
             this.lbl_pNumber.Size = new System.Drawing.Size(80, 13);
@@ -109,7 +103,7 @@ namespace CMS
             // lbl_pName
             // 
             this.lbl_pName.AutoSize = true;
-            this.lbl_pName.Location = new System.Drawing.Point(125, 34);
+            this.lbl_pName.Location = new System.Drawing.Point(12, 34);
             this.lbl_pName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_pName.Name = "lbl_pName";
             this.lbl_pName.Size = new System.Drawing.Size(63, 13);
@@ -118,7 +112,7 @@ namespace CMS
             // 
             // tb_pNameValue
             // 
-            this.tb_pNameValue.Location = new System.Drawing.Point(233, 31);
+            this.tb_pNameValue.Location = new System.Drawing.Point(120, 31);
             this.tb_pNameValue.Margin = new System.Windows.Forms.Padding(2);
             this.tb_pNameValue.MaxLength = 100;
             this.tb_pNameValue.Name = "tb_pNameValue";
@@ -128,7 +122,7 @@ namespace CMS
             // lbl_pStage
             // 
             this.lbl_pStage.AutoSize = true;
-            this.lbl_pStage.Location = new System.Drawing.Point(161, 175);
+            this.lbl_pStage.Location = new System.Drawing.Point(48, 175);
             this.lbl_pStage.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_pStage.Name = "lbl_pStage";
             this.lbl_pStage.Size = new System.Drawing.Size(35, 13);
@@ -140,7 +134,7 @@ namespace CMS
             this.cb_pStage.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cb_pStage.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cb_pStage.FormattingEnabled = true;
-            this.cb_pStage.Location = new System.Drawing.Point(202, 172);
+            this.cb_pStage.Location = new System.Drawing.Point(89, 172);
             this.cb_pStage.Margin = new System.Windows.Forms.Padding(2);
             this.cb_pStage.Name = "cb_pStage";
             this.cb_pStage.Size = new System.Drawing.Size(124, 21);
@@ -149,7 +143,7 @@ namespace CMS
             // lbl_pPI
             // 
             this.lbl_pPI.AutoSize = true;
-            this.lbl_pPI.Location = new System.Drawing.Point(338, 176);
+            this.lbl_pPI.Location = new System.Drawing.Point(225, 176);
             this.lbl_pPI.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_pPI.Name = "lbl_pPI";
             this.lbl_pPI.Size = new System.Drawing.Size(105, 13);
@@ -239,7 +233,7 @@ namespace CMS
             // 
             this.cb_pNumberValue.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cb_pNumberValue.FormattingEnabled = true;
-            this.cb_pNumberValue.Location = new System.Drawing.Point(233, 7);
+            this.cb_pNumberValue.Location = new System.Drawing.Point(120, 7);
             this.cb_pNumberValue.Margin = new System.Windows.Forms.Padding(2);
             this.cb_pNumberValue.Name = "cb_pNumberValue";
             this.cb_pNumberValue.Size = new System.Drawing.Size(92, 21);
@@ -249,7 +243,7 @@ namespace CMS
             // btn_ProjectCancel
             // 
             this.btn_ProjectCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btn_ProjectCancel.Location = new System.Drawing.Point(763, 448);
+            this.btn_ProjectCancel.Location = new System.Drawing.Point(650, 448);
             this.btn_ProjectCancel.Margin = new System.Windows.Forms.Padding(2);
             this.btn_ProjectCancel.Name = "btn_ProjectCancel";
             this.btn_ProjectCancel.Size = new System.Drawing.Size(56, 24);
@@ -260,7 +254,7 @@ namespace CMS
             // 
             // btn_ProjectOK
             // 
-            this.btn_ProjectOK.Location = new System.Drawing.Point(703, 448);
+            this.btn_ProjectOK.Location = new System.Drawing.Point(590, 448);
             this.btn_ProjectOK.Margin = new System.Windows.Forms.Padding(2);
             this.btn_ProjectOK.Name = "btn_ProjectOK";
             this.btn_ProjectOK.Size = new System.Drawing.Size(56, 24);
@@ -271,7 +265,7 @@ namespace CMS
             // 
             // btn_ProjectApply
             // 
-            this.btn_ProjectApply.Location = new System.Drawing.Point(642, 448);
+            this.btn_ProjectApply.Location = new System.Drawing.Point(529, 448);
             this.btn_ProjectApply.Margin = new System.Windows.Forms.Padding(2);
             this.btn_ProjectApply.Name = "btn_ProjectApply";
             this.btn_ProjectApply.Size = new System.Drawing.Size(56, 24);
@@ -282,7 +276,7 @@ namespace CMS
             // 
             // btn_NewProject
             // 
-            this.btn_NewProject.Location = new System.Drawing.Point(132, 448);
+            this.btn_NewProject.Location = new System.Drawing.Point(19, 448);
             this.btn_NewProject.Margin = new System.Windows.Forms.Padding(2);
             this.btn_NewProject.Name = "btn_NewProject";
             this.btn_NewProject.Size = new System.Drawing.Size(90, 24);
@@ -318,7 +312,7 @@ namespace CMS
             this.gb_Platform.Controls.Add(this.chkb_Azure);
             this.gb_Platform.Controls.Add(this.chkb_IRC);
             this.gb_Platform.Controls.Add(this.chkb_SEED);
-            this.gb_Platform.Location = new System.Drawing.Point(136, 67);
+            this.gb_Platform.Location = new System.Drawing.Point(23, 67);
             this.gb_Platform.Margin = new System.Windows.Forms.Padding(2);
             this.gb_Platform.Name = "gb_Platform";
             this.gb_Platform.Padding = new System.Windows.Forms.Padding(2);
@@ -343,7 +337,7 @@ namespace CMS
             this.cb_pClassification.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cb_pClassification.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cb_pClassification.FormattingEnabled = true;
-            this.cb_pClassification.Location = new System.Drawing.Point(202, 198);
+            this.cb_pClassification.Location = new System.Drawing.Point(89, 198);
             this.cb_pClassification.Name = "cb_pClassification";
             this.cb_pClassification.Size = new System.Drawing.Size(124, 21);
             this.cb_pClassification.TabIndex = 20;
@@ -351,7 +345,7 @@ namespace CMS
             // lbl_pClassification
             // 
             this.lbl_pClassification.AutoSize = true;
-            this.lbl_pClassification.Location = new System.Drawing.Point(128, 201);
+            this.lbl_pClassification.Location = new System.Drawing.Point(15, 201);
             this.lbl_pClassification.Name = "lbl_pClassification";
             this.lbl_pClassification.Size = new System.Drawing.Size(68, 13);
             this.lbl_pClassification.TabIndex = 21;
@@ -360,7 +354,7 @@ namespace CMS
             // lbl_DATRAG
             // 
             this.lbl_DATRAG.AutoSize = true;
-            this.lbl_DATRAG.Location = new System.Drawing.Point(483, 8);
+            this.lbl_DATRAG.Location = new System.Drawing.Point(370, 8);
             this.lbl_DATRAG.Name = "lbl_DATRAG";
             this.lbl_DATRAG.Size = new System.Drawing.Size(55, 13);
             this.lbl_DATRAG.TabIndex = 22;
@@ -371,7 +365,7 @@ namespace CMS
             this.cb_DATRAG.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cb_DATRAG.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cb_DATRAG.FormattingEnabled = true;
-            this.cb_DATRAG.Location = new System.Drawing.Point(544, 5);
+            this.cb_DATRAG.Location = new System.Drawing.Point(431, 5);
             this.cb_DATRAG.Name = "cb_DATRAG";
             this.cb_DATRAG.Size = new System.Drawing.Size(76, 21);
             this.cb_DATRAG.TabIndex = 23;
@@ -402,7 +396,7 @@ namespace CMS
             this.cb_Faculty.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cb_Faculty.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cb_Faculty.FormattingEnabled = true;
-            this.cb_Faculty.Location = new System.Drawing.Point(447, 198);
+            this.cb_Faculty.Location = new System.Drawing.Point(334, 198);
             this.cb_Faculty.Name = "cb_Faculty";
             this.cb_Faculty.Size = new System.Drawing.Size(173, 21);
             this.cb_Faculty.TabIndex = 27;
@@ -410,7 +404,7 @@ namespace CMS
             // lbl_Faculty
             // 
             this.lbl_Faculty.AutoSize = true;
-            this.lbl_Faculty.Location = new System.Drawing.Point(402, 201);
+            this.lbl_Faculty.Location = new System.Drawing.Point(289, 201);
             this.lbl_Faculty.Name = "lbl_Faculty";
             this.lbl_Faculty.Size = new System.Drawing.Size(41, 13);
             this.lbl_Faculty.TabIndex = 26;
@@ -420,7 +414,7 @@ namespace CMS
             // 
             this.gb_Governance.Controls.Add(this.chkb_ISO27001);
             this.gb_Governance.Controls.Add(this.chkb_DSPT);
-            this.gb_Governance.Location = new System.Drawing.Point(233, 67);
+            this.gb_Governance.Location = new System.Drawing.Point(120, 67);
             this.gb_Governance.Margin = new System.Windows.Forms.Padding(2);
             this.gb_Governance.Name = "gb_Governance";
             this.gb_Governance.Padding = new System.Windows.Forms.Padding(2);
@@ -451,36 +445,9 @@ namespace CMS
             this.chkb_DSPT.Text = "NHS DSPT";
             this.chkb_DSPT.UseVisualStyleBackColor = true;
             // 
-            // btn_Users
-            // 
-            this.btn_Users.Location = new System.Drawing.Point(3, 49);
-            this.btn_Users.Name = "btn_Users";
-            this.btn_Users.Size = new System.Drawing.Size(75, 23);
-            this.btn_Users.TabIndex = 28;
-            this.btn_Users.Text = "Users";
-            this.btn_Users.UseVisualStyleBackColor = true;
-            // 
-            // btn_Projects
-            // 
-            this.btn_Projects.Location = new System.Drawing.Point(3, 3);
-            this.btn_Projects.Name = "btn_Projects";
-            this.btn_Projects.Size = new System.Drawing.Size(75, 23);
-            this.btn_Projects.TabIndex = 29;
-            this.btn_Projects.Text = "All Projects";
-            this.btn_Projects.UseVisualStyleBackColor = true;
-            // 
-            // btn_Documents
-            // 
-            this.btn_Documents.Location = new System.Drawing.Point(3, 78);
-            this.btn_Documents.Name = "btn_Documents";
-            this.btn_Documents.Size = new System.Drawing.Size(75, 23);
-            this.btn_Documents.TabIndex = 30;
-            this.btn_Documents.Text = "Documents";
-            this.btn_Documents.UseVisualStyleBackColor = true;
-            // 
             // btn_Refresh
             // 
-            this.btn_Refresh.Location = new System.Drawing.Point(562, 449);
+            this.btn_Refresh.Location = new System.Drawing.Point(449, 449);
             this.btn_Refresh.Name = "btn_Refresh";
             this.btn_Refresh.Size = new System.Drawing.Size(75, 23);
             this.btn_Refresh.TabIndex = 31;
@@ -488,30 +455,10 @@ namespace CMS
             this.btn_Refresh.UseVisualStyleBackColor = true;
             this.btn_Refresh.Click += new System.EventHandler(this.btn_Refresh_Click);
             // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.btn_Platform);
-            this.panel1.Controls.Add(this.btn_Projects);
-            this.panel1.Controls.Add(this.btn_Users);
-            this.panel1.Controls.Add(this.btn_Documents);
-            this.panel1.Location = new System.Drawing.Point(12, 12);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(81, 139);
-            this.panel1.TabIndex = 32;
-            // 
-            // btn_Platform
-            // 
-            this.btn_Platform.Location = new System.Drawing.Point(3, 108);
-            this.btn_Platform.Name = "btn_Platform";
-            this.btn_Platform.Size = new System.Drawing.Size(75, 23);
-            this.btn_Platform.TabIndex = 31;
-            this.btn_Platform.Text = "Platform";
-            this.btn_Platform.UseVisualStyleBackColor = true;
-            // 
             // lbl_LeadApplicant
             // 
             this.lbl_LeadApplicant.AutoSize = true;
-            this.lbl_LeadApplicant.Location = new System.Drawing.Point(365, 152);
+            this.lbl_LeadApplicant.Location = new System.Drawing.Point(252, 152);
             this.lbl_LeadApplicant.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_LeadApplicant.Name = "lbl_LeadApplicant";
             this.lbl_LeadApplicant.Size = new System.Drawing.Size(78, 13);
@@ -544,7 +491,7 @@ namespace CMS
             this.cb_LeadApplicant.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cb_LeadApplicant.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cb_LeadApplicant.FormattingEnabled = true;
-            this.cb_LeadApplicant.Location = new System.Drawing.Point(447, 149);
+            this.cb_LeadApplicant.Location = new System.Drawing.Point(334, 149);
             this.cb_LeadApplicant.Name = "cb_LeadApplicant";
             this.cb_LeadApplicant.Size = new System.Drawing.Size(173, 21);
             this.cb_LeadApplicant.TabIndex = 37;
@@ -554,7 +501,7 @@ namespace CMS
             this.cb_PI.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cb_PI.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cb_PI.FormattingEnabled = true;
-            this.cb_PI.Location = new System.Drawing.Point(447, 173);
+            this.cb_PI.Location = new System.Drawing.Point(334, 173);
             this.cb_PI.Name = "cb_PI";
             this.cb_PI.Size = new System.Drawing.Size(173, 21);
             this.cb_PI.TabIndex = 39;
@@ -600,7 +547,7 @@ namespace CMS
             this.gb_ProjectUsers.Controls.Add(this.dgv_ProjectUsers);
             this.gb_ProjectUsers.Controls.Add(this.btn_ProjectUserRemove);
             this.gb_ProjectUsers.Controls.Add(this.btn_ProjectUserAdd);
-            this.gb_ProjectUsers.Location = new System.Drawing.Point(634, 5);
+            this.gb_ProjectUsers.Location = new System.Drawing.Point(521, 5);
             this.gb_ProjectUsers.Name = "gb_ProjectUsers";
             this.gb_ProjectUsers.Size = new System.Drawing.Size(185, 214);
             this.gb_ProjectUsers.TabIndex = 45;
@@ -612,7 +559,7 @@ namespace CMS
             this.gb_ProjectNotes.Controls.Add(this.tb_NewProjectNote);
             this.gb_ProjectNotes.Controls.Add(this.dgv_pNotes);
             this.gb_ProjectNotes.Controls.Add(this.btn_InsertProjectNote);
-            this.gb_ProjectNotes.Location = new System.Drawing.Point(127, 225);
+            this.gb_ProjectNotes.Location = new System.Drawing.Point(14, 225);
             this.gb_ProjectNotes.Name = "gb_ProjectNotes";
             this.gb_ProjectNotes.Size = new System.Drawing.Size(506, 218);
             this.gb_ProjectNotes.TabIndex = 46;
@@ -629,7 +576,7 @@ namespace CMS
             this.gb_KeyDates.Controls.Add(this.lbl_ProjectedEndDate);
             this.gb_KeyDates.Controls.Add(this.mtb_ProjectedEndDateValue);
             this.gb_KeyDates.Controls.Add(this.mtb_ProjectedStartDateValue);
-            this.gb_KeyDates.Location = new System.Drawing.Point(341, 56);
+            this.gb_KeyDates.Location = new System.Drawing.Point(228, 56);
             this.gb_KeyDates.Name = "gb_KeyDates";
             this.gb_KeyDates.Size = new System.Drawing.Size(287, 73);
             this.gb_KeyDates.TabIndex = 47;
@@ -644,7 +591,7 @@ namespace CMS
             this.gb_ProjectDocuments.Controls.Add(this.btn_DMP);
             this.gb_ProjectDocuments.Controls.Add(this.btn_Proposal);
             this.gb_ProjectDocuments.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.gb_ProjectDocuments.Location = new System.Drawing.Point(639, 225);
+            this.gb_ProjectDocuments.Location = new System.Drawing.Point(526, 225);
             this.gb_ProjectDocuments.Name = "gb_ProjectDocuments";
             this.gb_ProjectDocuments.Size = new System.Drawing.Size(180, 218);
             this.gb_ProjectDocuments.TabIndex = 48;
@@ -699,7 +646,7 @@ namespace CMS
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btn_ProjectCancel;
-            this.ClientSize = new System.Drawing.Size(828, 480);
+            this.ClientSize = new System.Drawing.Size(718, 480);
             this.Controls.Add(this.gb_ProjectDocuments);
             this.Controls.Add(this.gb_KeyDates);
             this.Controls.Add(this.gb_ProjectNotes);
@@ -707,7 +654,6 @@ namespace CMS
             this.Controls.Add(this.cb_PI);
             this.Controls.Add(this.cb_LeadApplicant);
             this.Controls.Add(this.lbl_LeadApplicant);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.btn_Refresh);
             this.Controls.Add(this.gb_Governance);
             this.Controls.Add(this.cb_Faculty);
@@ -736,7 +682,6 @@ namespace CMS
             this.gb_Platform.PerformLayout();
             this.gb_Governance.ResumeLayout(false);
             this.gb_Governance.PerformLayout();
-            this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ProjectUsers)).EndInit();
             this.gb_ProjectUsers.ResumeLayout(false);
             this.gb_ProjectNotes.ResumeLayout(false);
@@ -783,16 +728,11 @@ namespace CMS
         private System.Windows.Forms.GroupBox gb_Governance;
         private System.Windows.Forms.CheckBox chkb_ISO27001;
         private System.Windows.Forms.CheckBox chkb_DSPT;
-        private System.Windows.Forms.Button btn_Users;
-        private System.Windows.Forms.Button btn_Projects;
-        private System.Windows.Forms.Button btn_Documents;
         private System.Windows.Forms.Button btn_Refresh;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.CheckBox chkb_Azure;
         private System.Windows.Forms.Label lbl_LeadApplicant;
         private System.Windows.Forms.MaskedTextBox mtb_ProjectedStartDateValue;
         private System.Windows.Forms.Label lbl_ProjectedStartDate;
-        private System.Windows.Forms.Button btn_Platform;
         private System.Windows.Forms.ComboBox cb_LeadApplicant;
         private System.Windows.Forms.ComboBox cb_PI;
         private System.Windows.Forms.DataGridView dgv_ProjectUsers;
