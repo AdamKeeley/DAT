@@ -10,9 +10,36 @@ namespace CMS
         public frm_HomePage()
         {
             InitializeComponent();
+            setTabIndex();
         }
 
-        private void btn_GoToProjects_Click(object sender, EventArgs e)
+        private void setTabIndex()
+        {
+            int x = 999;
+            foreach (Control c in this.Controls)
+            {
+                c.TabIndex = x;
+            }
+
+            gb_Projects.TabIndex        = 0;
+            btn_GoToProjects.TabIndex   = 1;
+            btn_AddProject.TabIndex     = 2;
+            
+            gb_Users.TabIndex           = 3;
+            btn_GoToUsers.TabIndex      = 4;
+            btn_AddUser.TabIndex        = 5;
+
+            gb_DSAs.TabIndex            = 6;
+            btn_DSAsView.TabIndex       = 7;
+            btn_DSAs.TabIndex           = 8;
+            btn_DSAsUpdate.TabIndex     = 9;
+            btn_DataOwnerAdd.TabIndex   = 10;
+
+            gb_DataTracking.TabIndex    = 11;
+            btn_GoToDataIO.TabIndex     = 12;
+        }
+
+            private void btn_GoToProjects_Click(object sender, EventArgs e)
         {
             frm_ProjectAll ProjectAllForm = new frm_ProjectAll();
             ProjectAllForm.Show();
