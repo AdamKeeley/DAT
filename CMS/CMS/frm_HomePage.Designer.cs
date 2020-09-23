@@ -115,6 +115,7 @@
             // gb_DataTracking
             // 
             this.gb_DataTracking.Controls.Add(this.btn_GoToDataIO);
+            this.gb_DataTracking.Enabled = false;
             this.gb_DataTracking.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gb_DataTracking.Location = new System.Drawing.Point(224, 189);
             this.gb_DataTracking.Margin = new System.Windows.Forms.Padding(2);
@@ -131,6 +132,7 @@
             this.gb_DSAs.Controls.Add(this.btn_DSAsUpdate);
             this.gb_DSAs.Controls.Add(this.btn_DSAsView);
             this.gb_DSAs.Controls.Add(this.btn_DSAs);
+            this.gb_DSAs.Enabled = false;
             this.gb_DSAs.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gb_DSAs.Location = new System.Drawing.Point(11, 189);
             this.gb_DSAs.Margin = new System.Windows.Forms.Padding(2);
