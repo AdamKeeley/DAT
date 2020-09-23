@@ -43,6 +43,7 @@
             this.btn_GoToUsers = new System.Windows.Forms.Button();
             this.btn_AddUser = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.lbl_TFTD = new System.Windows.Forms.Label();
             this.gb_Projects.SuspendLayout();
             this.gb_DataTracking.SuspendLayout();
             this.gb_DSAs.SuspendLayout();
@@ -224,11 +225,20 @@
             this.pictureBox1.TabIndex = 7;
             this.pictureBox1.TabStop = false;
             // 
+            // lbl_TFTD
+            // 
+            this.lbl_TFTD.Location = new System.Drawing.Point(225, 272);
+            this.lbl_TFTD.Name = "lbl_TFTD";
+            this.lbl_TFTD.Size = new System.Drawing.Size(208, 89);
+            this.lbl_TFTD.TabIndex = 8;
+            this.lbl_TFTD.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // frm_HomePage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(444, 372);
+            this.Controls.Add(this.lbl_TFTD);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.gb_Users);
             this.Controls.Add(this.gb_DSAs);
@@ -262,5 +272,6 @@
         private System.Windows.Forms.Button btn_DSAsView;
         private System.Windows.Forms.Button btn_GoToUsers;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label lbl_TFTD;
     }
 }

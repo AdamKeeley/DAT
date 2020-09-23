@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 using CMS.DataTracking;
 using CMS.DSAs;
+using DataControlsLib;
 
 namespace CMS
 {
@@ -11,6 +13,27 @@ namespace CMS
         {
             InitializeComponent();
             setTabIndex();
+            setTFTD();
+        }
+
+        private void setTFTD()
+        {
+            try
+            {
+                SQL_Stuff conString = new SQL_Stuff();
+                using (SqlConnection connection = new SqlConnection(conString.getString()))
+                {
+                    SqlCommand qryGetTFTD = new SqlCommand();
+                    qryGetTFTD.Connection = connection;
+                    qryGetTFTD.CommandText =$"select top 1 tftd from dbo.tlkTFTD order by newid()";
+                    connection.Open();
+                    lbl_TFTD.Text = (string)qryGetTFTD.ExecuteScalar();
+                }
+            }
+            catch (Exception ex)
+            {
+                return;
+            }
         }
 
         private void setTabIndex()
@@ -39,7 +62,7 @@ namespace CMS
             btn_GoToDataIO.TabIndex     = 12;
         }
 
-            private void btn_GoToProjects_Click(object sender, EventArgs e)
+        private void btn_GoToProjects_Click(object sender, EventArgs e)
         {
             frm_ProjectAll ProjectAllForm = new frm_ProjectAll();
             ProjectAllForm.Show();
