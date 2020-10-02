@@ -124,10 +124,12 @@ namespace CMS
                 {
                     ds_Projects.Tables["tblProjectDocument"].Clear();
                     //use the central connection string from the SQL_Stuff class
-                    SQL_Stuff conString = new SQL_Stuff();
-                    using (SqlConnection connection = new SqlConnection(conString.getString()))
+                    SqlConnection conn = new SqlConnection();
+                    conn.ConnectionString = SQL_Stuff.conString;
+                    conn.Credential = SQL_Stuff.credential;
+                    using (conn)
                     {
-                        GetDB.GetDataTable(connection, ds_Projects, "tblProjectDocument",
+                        GetDB.GetDataTable(conn, ds_Projects, "tblProjectDocument",
                         $"select * from [dbo].[tblProjectDocument]" +
                         $"where [ValidTo] is null");
                     }

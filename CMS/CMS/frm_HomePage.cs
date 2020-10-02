@@ -13,25 +13,38 @@ namespace CMS
         {
             InitializeComponent();
             setTabIndex();
+            setCredentials();
             setTFTD();
+        }
+
+        private void setCredentials()
+        {
+            using (frm_Login Login = new frm_Login())
+            {
+                Login.ShowDialog();
+
+            }
         }
 
         private void setTFTD()
         {
             try
             {
-                SQL_Stuff conString = new SQL_Stuff();
-                using (SqlConnection connection = new SqlConnection(conString.getString()))
+                SqlConnection conn = new SqlConnection();
+                conn.ConnectionString = SQL_Stuff.conString;
+                conn.Credential = SQL_Stuff.credential;
+                using (conn)
                 {
                     SqlCommand qryGetTFTD = new SqlCommand();
-                    qryGetTFTD.Connection = connection;
+                    qryGetTFTD.Connection = conn;
                     qryGetTFTD.CommandText =$"select top 1 tftd from dbo.tlkTFTD order by newid()";
-                    connection.Open();
+                    conn.Open();
                     lbl_TFTD.Text = (string)qryGetTFTD.ExecuteScalar();
                 }
             }
             catch (Exception ex)
             {
+                MessageBox.Show(ex.Message);
                 return;
             }
         }

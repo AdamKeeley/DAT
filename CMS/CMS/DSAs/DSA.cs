@@ -19,23 +19,25 @@ namespace CMS.DSAs
         {
             DataSet ds = new DataSet("DSAs");
 
-            SQL_Stuff conString = new SQL_Stuff();
-            using (SqlConnection connection = new SqlConnection(conString.getString()))
+            SqlConnection conn = new SqlConnection();
+            conn.ConnectionString = SQL_Stuff.conString;
+            conn.Credential = SQL_Stuff.credential;
+            using (conn)
             {
-                GetDB.GetDataTable(connection, ds, "tblDsas",
+                GetDB.GetDataTable(conn, ds, "tblDsas",
                     @"SELECT DsaID, DataOwner, AmendmentOf, DsaName, DsaFileLoc, StartDate, ExpiryDate, 
                              DSPT, ISO27001, RequiresEncryption, NoRemoteAccess, DateAdded, LastUpdated
                       FROM dbo.tblDsas");
-                GetDB.GetDataTable(connection, ds, "tblDsaNotes",
+                GetDB.GetDataTable(conn, ds, "tblDsaNotes",
                     @"SELECT dnID, Dsa, Note, Created, CreatedBy
                       FROM dbo.tblDsaNotes");
-                GetDB.GetDataTable(connection, ds, "tblDsasProjects",
+                GetDB.GetDataTable(conn, ds, "tblDsasProjects",
                     @"SELECT dpID, DsaID, Project, DateAdded
                       FROM dbo.tblDsasProjects");
-                GetDB.GetDataTable(connection, ds, "tblDsaDataOwners",
+                GetDB.GetDataTable(conn, ds, "tblDsaDataOwners",
                     @"SELECT doID, RebrandOf, DataOwnerName
                       FROM dbo.tblDsaDataOwners");
-                GetDB.GetDataTable(connection, ds, "tblProject",
+                GetDB.GetDataTable(conn, ds, "tblProject",
                     @"SELECT *
                       FROM dbo.tblProject
                       WHERE ValidTo IS NULL");
@@ -63,8 +65,6 @@ namespace CMS.DSAs
         {
             bool[] success = new bool[3];
 
-            SQL_Stuff conString = new SQL_Stuff();
-
             string qryDsas = @"
                 INSERT INTO dbo.tblDsas 
                     (DataOwner, AmendmentOf, DsaName, DsaFileLoc, StartDate, ExpiryDate, 
@@ -75,7 +75,10 @@ namespace CMS.DSAs
                      @DSPT, @ISO27001, @RequiresEncryption, @NoRemoteAccess, @DateAdded)
             ";
 
-            using (SqlConnection conn = new SqlConnection(conString.getString()))
+            SqlConnection conn = new SqlConnection();
+            conn.ConnectionString = SQL_Stuff.conString;
+            conn.Credential = SQL_Stuff.credential;
+            using (conn)
             {
                 conn.Open();
                 SqlTransaction trans = conn.BeginTransaction();
@@ -156,15 +159,16 @@ namespace CMS.DSAs
         {
             string query = "INSERT INTO dbo.tblDsaDataOwners (DataOwnerName, RebrandOf) VALUES (@Name, @OldNameID)";
 
-            SQL_Stuff conString = new SQL_Stuff();
-
-            using (SqlConnection connection = new SqlConnection(conString.getString()))
-            using (SqlCommand cmd = new SqlCommand(query, connection))
+            SqlConnection conn = new SqlConnection();
+            conn.ConnectionString = SQL_Stuff.conString;
+            conn.Credential = SQL_Stuff.credential;
+            using (conn)
+            using (SqlCommand cmd = new SqlCommand(query, conn))
             {
                 cmd.Parameters.Add("@Name", SqlDbType.VarChar, 50).Value = insertData.DateOwnerName;
                 cmd.Parameters.Add("@OldNameID", SqlDbType.Int).Value = insertData.RebrandOf.HasValue ? insertData.RebrandOf : (object)DBNull.Value;
 
-                connection.Open();
+                conn.Open();
                 cmd.ExecuteNonQuery();
             }
         }

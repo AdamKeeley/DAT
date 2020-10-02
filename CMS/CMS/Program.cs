@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Data.SqlClient;
+using System.Security;
 using System.Windows.Forms;
 using DataControlsLib;
 
@@ -10,6 +12,13 @@ namespace CMS
         static void Main(string[] args)
         {
             /* TO DO
+             * 
+             * Create Login form
+             * 
+             * Update user list combobox datasource when adding new user from new project
+             * Confirm New Project Details (a la New User)
+             * AcceptDocument to perform logical delete and insert rather than update
+             * Link Projects to VREs
              * 
              * Project Documents 
              *      - stop forms from closing!
@@ -26,14 +35,12 @@ namespace CMS
              * 	    
              */
 
-            //test connection to database
-            SQL_Stuff testCon = new SQL_Stuff();
-            testCon.testConnection();
-
             //initialise form
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            //Application.Run(new frm_Login());
             Application.Run(new frm_HomePage());
+
         }
     }                                                 
 }

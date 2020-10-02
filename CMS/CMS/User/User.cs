@@ -30,27 +30,29 @@ namespace CMS
             try
             {
                 //use the central connection string from the SQL_Stuff class
-                SQL_Stuff conString = new SQL_Stuff();
-                using (SqlConnection connection = new SqlConnection(conString.getString()))
+                SqlConnection conn = new SqlConnection();
+                conn.ConnectionString = SQL_Stuff.conString;
+                conn.Credential = SQL_Stuff.credential;
+                using (conn)
                 {
                     //use method from GetDB to create, fill and add DataTables to class DataSet
-                    GetDB.GetDataTable(connection, ds_usr, "tblUser",
+                    GetDB.GetDataTable(conn, ds_usr, "tblUser",
                         $"select *, [LastName] + ', ' + [FirstName] as FullName " +
                         $"from [dbo].[tblUser] " +
                         $"where [ValidTo] is null " +
                         $"order by [LastName], [FirstName], [UserID]");
-                    GetDB.GetDataTable(connection, ds_usr, "tlkUserStatus",
+                    GetDB.GetDataTable(conn, ds_usr, "tlkUserStatus",
                         $"select * from [dbo].[tlkUserStatus] " +
                         $"where [ValidTo] is null");
-                    GetDB.GetDataTable(connection, ds_usr, "tlkTitle",
+                    GetDB.GetDataTable(conn, ds_usr, "tlkTitle",
                         $"select * from [dbo].[tlkTitle] " +
                         $"where [ValidTo] is null");
-                    GetDB.GetDataTable(connection, ds_usr, "tblUserNotes",
+                    GetDB.GetDataTable(conn, ds_usr, "tblUserNotes",
                         $"select * from [dbo].[tblUserNotes]");
-                    GetDB.GetDataTable(connection, ds_usr, "tblUserProject",
+                    GetDB.GetDataTable(conn, ds_usr, "tblUserProject",
                         $"select * from [dbo].[tblUserProject] " +
                         $"where [ValidTo] is null");
-                    GetDB.GetDataTable(connection, ds_usr, "tblProjects",
+                    GetDB.GetDataTable(conn, ds_usr, "tblProjects",
                         $"select * from [dbo].[tblProject] " +
                         $"where [ValidTo] is null " +
                         $"order by [ProjectNumber], [pID]");
@@ -157,19 +159,21 @@ namespace CMS
         {
             try
             {
-                SQL_Stuff conString = new SQL_Stuff();
-                using (SqlConnection connection = new SqlConnection(conString.getString()))
+                SqlConnection conn = new SqlConnection();
+                conn.ConnectionString = SQL_Stuff.conString;
+                conn.Credential = SQL_Stuff.credential;
+                using (conn)
                 {
                     //create parameterised SQL query to insert a new record to tblUserNotes
                     SqlCommand qryInsertUserNote = new SqlCommand();
-                    qryInsertUserNote.Connection = connection;
+                    qryInsertUserNote.Connection = conn;
                     qryInsertUserNote.CommandText = "insert into [dbo].[tblUserNotes] "
                         + "([UserNumber],[uNote]) values (@UserNumber, @uNote)";
                     qryInsertUserNote.Parameters.Add("@UserNumber", SqlDbType.Int).Value = UserNumber;
                     qryInsertUserNote.Parameters.Add("@uNote", SqlDbType.VarChar, 8000).Value = uNote;
 
                     //open connection and execute insert
-                    connection.Open();
+                    conn.Open();
                     qryInsertUserNote.ExecuteNonQuery();
                 }
             }
@@ -196,15 +200,16 @@ namespace CMS
             bool recordCurrent = false;
             try
             {
-                SQL_Stuff conString = new SQL_Stuff();
-
-                using (SqlConnection connection = new SqlConnection(conString.getString()))
+                SqlConnection conn = new SqlConnection();
+                conn.ConnectionString = SQL_Stuff.conString;
+                conn.Credential = SQL_Stuff.credential;
+                using (conn)
                 {
                     SqlCommand qryCheckLatestRecord = new SqlCommand();
-                    qryCheckLatestRecord.Connection = connection;
-                    qryCheckLatestRecord.CommandText = $"select max([UserID]) from [DAT_CMS].[dbo].[tblUser] where [UserNumber] = @UserNumber and ValidTo is null";
+                    qryCheckLatestRecord.Connection = conn;
+                    qryCheckLatestRecord.CommandText = $"select max([UserID]) from [dbo].[tblUser] where [UserNumber] = @UserNumber and ValidTo is null";
                     qryCheckLatestRecord.Parameters.Add("@UserNumber", SqlDbType.Int).Value = UserNumber;
-                    connection.Open();
+                    conn.Open();
                     UserID = (int)qryCheckLatestRecord.ExecuteScalar();
                 }
             }
@@ -233,14 +238,16 @@ namespace CMS
             try
             {
                 //update ValidUntil field of current record of user (perform 'logical' delete)
-                SQL_Stuff conString = new SQL_Stuff();
-                using (SqlConnection connection = new SqlConnection(conString.getString()))
+                SqlConnection conn = new SqlConnection();
+                conn.ConnectionString = SQL_Stuff.conString;
+                conn.Credential = SQL_Stuff.credential;
+                using (conn)
                 {
                     SqlCommand qryDeleteUser = new SqlCommand();
-                    qryDeleteUser.Connection = connection;
+                    qryDeleteUser.Connection = conn;
                     qryDeleteUser.CommandText = "update [dbo].[tblUser] set [ValidTo] = getdate() where [UserID] = @UserID";
                     qryDeleteUser.Parameters.Add("@UserID", SqlDbType.Int).Value = UserID;
-                    connection.Open();
+                    conn.Open();
                     qryDeleteUser.ExecuteNonQuery();
                 }
 
@@ -265,12 +272,14 @@ namespace CMS
 
             try
             {
-                SQL_Stuff conString = new SQL_Stuff();
-                using (SqlConnection connection = new SqlConnection(conString.getString()))
+                SqlConnection conn = new SqlConnection();
+                conn.ConnectionString = SQL_Stuff.conString;
+                conn.Credential = SQL_Stuff.credential;
+                using (conn)
                 {
                     //generate the parameterised SQL query to insert new record
                     SqlCommand qryInsertUser = new SqlCommand();
-                    qryInsertUser.Connection = connection;
+                    qryInsertUser.Connection = conn;
                     qryInsertUser.CommandText = "insert into [dbo].[tblUser] "
                         + "([UserNumber], [Status], [Title], [FirstName], [LastName], [Email], [Phone], [UserName]"
                         + ", [Organisation], [StartDate], [EndDate], [IRCAgreement], [ISET], [ISAT]"
@@ -323,7 +332,7 @@ namespace CMS
                     qryInsertUser.Parameters.Add(param_TokenReturned);
 
                     //open connection to database, run query and close connection
-                    connection.Open();
+                    conn.Open();
                     qryInsertUser.ExecuteNonQuery();
 
                     MessageBox.Show($"User details updated for {mdl_User.LastName}, {mdl_User.FirstName}");
@@ -348,15 +357,17 @@ namespace CMS
             try
             {
                 //update ValidUntil field of current record of UserProject (perform 'logical' delete)
-                SQL_Stuff conString = new SQL_Stuff();
-                using (SqlConnection connection = new SqlConnection(conString.getString()))
+                SqlConnection conn = new SqlConnection();
+                conn.ConnectionString = SQL_Stuff.conString;
+                conn.Credential = SQL_Stuff.credential;
+                using (conn)
                 {
                     SqlCommand qryRemoveUserProject = new SqlCommand();
-                    qryRemoveUserProject.Connection = connection;
+                    qryRemoveUserProject.Connection = conn;
                     qryRemoveUserProject.CommandText = "update [dbo].[tblUserProject] set [ValidTo] = getdate() where [UserNumber] = @UserNumber and [ProjectNumber] = @ProjectNumber";
                     qryRemoveUserProject.Parameters.Add("@UserNumber", SqlDbType.Int).Value = UserNumber;
                     qryRemoveUserProject.Parameters.Add("@ProjectNumber", SqlDbType.VarChar,5).Value = ProjectNumber;
-                    connection.Open();
+                    conn.Open();
                     qryRemoveUserProject.ExecuteNonQuery();
                 }
             }
@@ -377,17 +388,19 @@ namespace CMS
         {
             bool PK_NotPresent = true;
 
-            SQL_Stuff conString = new SQL_Stuff();
-            using (SqlConnection connection = new SqlConnection(conString.getString()))
+            SqlConnection conn = new SqlConnection();
+            conn.ConnectionString = SQL_Stuff.conString;
+            conn.Credential = SQL_Stuff.credential;
+            using (conn)
             {
                 SqlCommand qryUserProjectExists = new SqlCommand();
-                qryUserProjectExists.Connection = connection;
+                qryUserProjectExists.Connection = conn;
                 qryUserProjectExists.CommandText = "select count(*) from [dbo].[tblUserProject] "
                     + "where [UserNumber] = @UserNumber and [ProjectNumber] = @ProjectNumber "
                     + "and [ValidTo] is null";
                 qryUserProjectExists.Parameters.Add("@UserNumber", SqlDbType.Int).Value = UserNumber;
                 qryUserProjectExists.Parameters.Add("@ProjectNumber", SqlDbType.VarChar, 5).Value = ProjectNumber;
-                connection.Open();
+                conn.Open();
                 int i = (int)qryUserProjectExists.ExecuteScalar();
 
                 if (i > 0)
@@ -411,15 +424,17 @@ namespace CMS
             try
             {
                 //update ValidUntil field of current record of UserProject (perform 'logical' delete)
-                SQL_Stuff conString = new SQL_Stuff();
-                using (SqlConnection connection = new SqlConnection(conString.getString()))
+                SqlConnection conn = new SqlConnection();
+                conn.ConnectionString = SQL_Stuff.conString;
+                conn.Credential = SQL_Stuff.credential;
+                using (conn)
                 {
                     SqlCommand qryInsertUserProject = new SqlCommand();
-                    qryInsertUserProject.Connection = connection;
+                    qryInsertUserProject.Connection = conn;
                     qryInsertUserProject.CommandText = "insert into [dbo].[tblUserProject] ([UserNumber], [ProjectNumber]) values (@UserNumber, @ProjectNumber)";
                     qryInsertUserProject.Parameters.Add("@UserNumber", SqlDbType.Int).Value = UserNumber;
                     qryInsertUserProject.Parameters.Add("@ProjectNumber", SqlDbType.VarChar, 5).Value = ProjectNumber;
-                    connection.Open();
+                    conn.Open();
                     qryInsertUserProject.ExecuteNonQuery();
                 }
             }
@@ -439,17 +454,19 @@ namespace CMS
 
             try
             {
-                SQL_Stuff conString = new SQL_Stuff();
-                using (SqlConnection connection = new SqlConnection(conString.getString()))
+                SqlConnection conn = new SqlConnection();
+                conn.ConnectionString = SQL_Stuff.conString;
+                conn.Credential = SQL_Stuff.credential;
+                using (conn)
                 {
                     //create new SQL query
                     SqlCommand qryGetNewProjectNumber = new SqlCommand();
-                    qryGetNewProjectNumber.Connection = connection;
+                    qryGetNewProjectNumber.Connection = conn;
                     qryGetNewProjectNumber.CommandText =
                         $"select max([UserNumber]) " +
                         $"from [dbo].[tblUser]";
                     //open connection and execute query, returing result in variable pNumInt
-                    connection.Open();
+                    conn.Open();
                     UserNumber = (int)qryGetNewProjectNumber.ExecuteScalar();
                 }
             }

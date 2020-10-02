@@ -1,9 +1,12 @@
 --create database DAT_CMS
 --go
 
-use [DAT_CMS]
+use lida_dat_cms
 go
 
+CREATE TABLE [dbo].[tlkTFTD](
+	[tftd] [varchar](100) NULL
+)
 
 /************************************************************
 *	Project stuff 
@@ -251,7 +254,7 @@ create table dbo.tblUserProject (
 	, [ValidFrom] datetime default getdate()
 	, [ValidTo] datetime 
 	, [CreatedBy] varchar(50) default suser_sname()
-	constraint PK_UserProject primary key nonclustered (UserNumber, ProjectNumber)
+	--constraint PK_UserProject primary key nonclustered (UserNumber, ProjectNumber)
 	)
 
 
@@ -323,62 +326,62 @@ values (1, 1, 'Flint', 'Sparkoff')
 insert into dbo.tlkDocuments (documentDescription) values
 	('Project Proposal'), ('Data Management Plan'), ('Risk Assessment')
  
-/*
-Data tracking tables schema
-*/
+--/*
+--Data tracking tables schema
+--*/
 
-CREATE TABLE dbo.tblDataIORequests(
-	RequestID			INT IDENTITY(1,1) NOT NULL,
-	Project				VARCHAR(5) NULL,
-	-- Include VRE ID foreign key?
-	ChangeType			INT NOT NULL,
-	ChangeDate			DATETIME NULL DEFAULT (getdate()),
-	ChangedBy			VARCHAR(50) NULL DEFAULT (suser_sname()),
-	RequestedBy			VARCHAR(50) NULL, -- Needs to reference user ID once Users table has been created
-	RequesterNotes		VARCHAR(MAX) NULL, -- Researchers communication explaining data/etc. Or a link to same text elsewhere?
-	ChangerResponse		VARCHAR(MAX) NULL, -- Response communication from DAT to confirm import status?
-	-- In future, we could include here a ConversationID, linking to DAT-user interactions and remove RequesterNotes and ChangerResponse here
-	CONSTRAINT PK_DataIORequests PRIMARY KEY (RequestID)
-);
+--CREATE TABLE dbo.tblDataIORequests(
+--	RequestID			INT IDENTITY(1,1) NOT NULL,
+--	Project				VARCHAR(5) NULL,
+--	-- Include VRE ID foreign key?
+--	ChangeType			INT NOT NULL,
+--	ChangeDate			DATETIME NULL DEFAULT (getdate()),
+--	ChangedBy			VARCHAR(50) NULL DEFAULT (suser_sname()),
+--	RequestedBy			VARCHAR(50) NULL, -- Needs to reference user ID once Users table has been created
+--	RequesterNotes		VARCHAR(MAX) NULL, -- Researchers communication explaining data/etc. Or a link to same text elsewhere?
+--	ChangerResponse		VARCHAR(MAX) NULL, -- Response communication from DAT to confirm import status?
+--	-- In future, we could include here a ConversationID, linking to DAT-user interactions and remove RequesterNotes and ChangerResponse here
+--	CONSTRAINT PK_DataIORequests PRIMARY KEY (RequestID)
+--);
 
-CREATE TABLE dbo.tlkAssetChangeTypes (
-	ChangeTypeID		INT IDENTITY(1,1) NOT NULL,
-	ChangeTypeLabel		VARCHAR(25) NULL,
-	CONSTRAINT PK_AssetChangeTypes PRIMARY KEY (ChangeTypeID)
-);
-ALTER TABLE dbo.tblDataIORequests
-	ADD CONSTRAINT FK_DataIORequests_ChangeType FOREIGN KEY (ChangeType) REFERENCES dbo.tlkAssetChangeTypes (ChangeTypeID)
-		ON DELETE CASCADE
-		ON UPDATE CASCADE;
-INSERT INTO dbo.tlkAssetChangeTypes (ChangeTypeLabel)
-     VALUES (''), ('Import'), ('Export'), ('Delete');
+--CREATE TABLE dbo.tlkAssetChangeTypes (
+--	ChangeTypeID		INT IDENTITY(1,1) NOT NULL,
+--	ChangeTypeLabel		VARCHAR(25) NULL,
+--	CONSTRAINT PK_AssetChangeTypes PRIMARY KEY (ChangeTypeID)
+--);
+--ALTER TABLE dbo.tblDataIORequests
+--	ADD CONSTRAINT FK_DataIORequests_ChangeType FOREIGN KEY (ChangeType) REFERENCES dbo.tlkAssetChangeTypes (ChangeTypeID)
+--		ON DELETE CASCADE
+--		ON UPDATE CASCADE;
+--INSERT INTO dbo.tlkAssetChangeTypes (ChangeTypeLabel)
+--     VALUES (''), ('Import'), ('Export'), ('Delete');
 
-CREATE TABLE dbo.tblAssetsRegister(
-	AssetID			INT IDENTITY(1,1) NOT NULL, -- Might be better if this was a sha2 checksum?
-	Project			VARCHAR(5) NULL,
-	AssetName		VARCHAR(100) NOT NULL,
-	AssetSha256sum	CHAR(64) NULL, -- This could become the primary key instead?
-	-- Asset-DSA will be many-to-many so will probably need intermediary table
-	VreFilePath		VARCHAR(200) NULL, -- Path to file in VRE
-	CONSTRAINT PK_AssetsRegister PRIMARY KEY (AssetID)
-);
+--CREATE TABLE dbo.tblAssetsRegister(
+--	AssetID			INT IDENTITY(1,1) NOT NULL, -- Might be better if this was a sha2 checksum?
+--	Project			VARCHAR(5) NULL,
+--	AssetName		VARCHAR(100) NOT NULL,
+--	AssetSha256sum	CHAR(64) NULL, -- This could become the primary key instead?
+--	-- Asset-DSA will be many-to-many so will probably need intermediary table
+--	VreFilePath		VARCHAR(200) NULL, -- Path to file in VRE
+--	CONSTRAINT PK_AssetsRegister PRIMARY KEY (AssetID)
+--);
 
--- Intermediary table between dbo.tblDataIORequest
-CREATE TABLE dbo.tblAssetsChangeLog(
-	ChangeID		INT IDENTITY(1,1) NOT NULL,
-	RequestID		INT NOT NULL,
-	AssetID			INT NOT NULL,
-	ChangeAccepted	BIT NULL DEFAULT 1, -- 0 = File transfer was rejected
-	RejectionNotes	VARCHAR(MAX) NULL, -- Reasons for rejecting change (e.g. not meeting import requirements)
-	CONSTRAINT PK_AssetsChangeLog PRIMARY KEY (ChangeID),
-	CONSTRAINT FK_AssetsChangeLog_DataIORequests FOREIGN KEY (RequestID) REFERENCES dbo.tblDataIORequests (RequestID),
-	CONSTRAINT FK_AssetsChangeLog_AssetsRegister FOREIGN KEY (AssetID) REFERENCES dbo.tblAssetsRegister (AssetID)
-);
+---- Intermediary table between dbo.tblDataIORequest
+--CREATE TABLE dbo.tblAssetsChangeLog(
+--	ChangeID		INT IDENTITY(1,1) NOT NULL,
+--	RequestID		INT NOT NULL,
+--	AssetID			INT NOT NULL,
+--	ChangeAccepted	BIT NULL DEFAULT 1, -- 0 = File transfer was rejected
+--	RejectionNotes	VARCHAR(MAX) NULL, -- Reasons for rejecting change (e.g. not meeting import requirements)
+--	CONSTRAINT PK_AssetsChangeLog PRIMARY KEY (ChangeID),
+--	CONSTRAINT FK_AssetsChangeLog_DataIORequests FOREIGN KEY (RequestID) REFERENCES dbo.tblDataIORequests (RequestID),
+--	CONSTRAINT FK_AssetsChangeLog_AssetsRegister FOREIGN KEY (AssetID) REFERENCES dbo.tblAssetsRegister (AssetID)
+--);
 
 
 
-/*
-TO DO NEXT:
-Add DSA table and AssetRegister_DSA intermediary table.
+--/*
+--TO DO NEXT:
+--Add DSA table and AssetRegister_DSA intermediary table.
 
-*/
+--*/

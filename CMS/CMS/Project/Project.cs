@@ -33,43 +33,45 @@ namespace CMS
             try
             {
                 //use the central connection string from the SQL_Stuff class
-                SQL_Stuff conString = new SQL_Stuff();
-                using (SqlConnection connection = new SqlConnection(conString.getString()))
+                SqlConnection conn = new SqlConnection();
+                conn.ConnectionString = SQL_Stuff.conString;
+                conn.Credential = SQL_Stuff.credential;
+                using (conn)
                 {
-                    GetDB.GetDataTable(connection, ds_prj, "tblProjects",
+                    GetDB.GetDataTable(conn, ds_prj, "tblProjects",
                         $"select * from [dbo].[tblProject] " +
                         $"where [ValidTo] is null " +
                         $"order by [ProjectNumber], [pID]");
-                    GetDB.GetDataTable(connection, ds_prj, "tlkStage",
+                    GetDB.GetDataTable(conn, ds_prj, "tlkStage",
                         $"select * from [dbo].[tlkStage] " +
                         $"where [ValidTo] is null");
-                    GetDB.GetDataTable(connection, ds_prj, "tlkClassification",
+                    GetDB.GetDataTable(conn, ds_prj, "tlkClassification",
                         $"select * from [dbo].[tlkClassification] " +
                         $"where [ValidTo] is null");
-                    GetDB.GetDataTable(connection, ds_prj, "tlkRAG",
+                    GetDB.GetDataTable(conn, ds_prj, "tlkRAG",
                         $"select * from [dbo].[tlkRAG] " +
                         $"where [ValidTo] is null");
-                    GetDB.GetDataTable(connection, ds_prj, "tlkFaculty",
+                    GetDB.GetDataTable(conn, ds_prj, "tlkFaculty",
                         $"select * from [dbo].[tlkFaculty] " +
                         $"where [ValidTo] is null");
-                    GetDB.GetDataTable(connection, ds_prj, "tblProjectNotes",
+                    GetDB.GetDataTable(conn, ds_prj, "tblProjectNotes",
                         $"select * from [dbo].[tblProjectNotes] " +
                         $"order by [ProjectNumber], [Created] desc");
-                    GetDB.GetDataTable(connection, ds_prj, "tblUserProject",
+                    GetDB.GetDataTable(conn, ds_prj, "tblUserProject",
                         $"select * from [dbo].[tblUserProject] " +
                         $"where [ValidTo] is null");
-                    GetDB.GetDataTable(connection, ds_prj, "tblProjectDocument",
+                    GetDB.GetDataTable(conn, ds_prj, "tblProjectDocument",
                         $"select * from [dbo].[tblProjectDocument]" +
                         $"where [ValidTo] is null");
-                    GetDB.GetDataTable(connection, ds_prj, "tlkDocuments",
+                    GetDB.GetDataTable(conn, ds_prj, "tlkDocuments",
                         $"select * from [dbo].[tlkDocuments]" +
                         $"where [ValidTo] is null");
-                    GetDB.GetDataTable(connection, ds_prj, "tblUser",
+                    GetDB.GetDataTable(conn, ds_prj, "tblUser",
                         $"select *, [LastName] + ', ' + [FirstName] as FullName " +
                         $"from [dbo].[tblUser] " +
                         $"where [ValidTo] is null " +
                         $"order by [LastName], [FirstName], [UserID]");
-                    GetDB.GetDataTable(connection, ds_prj, "tblDocsAccepted",
+                    GetDB.GetDataTable(conn, ds_prj, "tblDocsAccepted",
                         $"select tbl.ProjectNumber " +
                         $"    , tlk.DocumentID " +
                         $"    , tlk.DocumentDescription " +
@@ -212,15 +214,16 @@ namespace CMS
             bool recordCurrent = false;
             try
             {
-                SQL_Stuff conString = new SQL_Stuff();
-
-                using (SqlConnection connection = new SqlConnection(conString.getString()))
+                SqlConnection conn = new SqlConnection();
+                conn.ConnectionString = SQL_Stuff.conString;
+                conn.Credential = SQL_Stuff.credential;
+                using (conn)
                 {
                     SqlCommand qryCheckLatestRecord = new SqlCommand();
-                    qryCheckLatestRecord.Connection = connection;
-                    qryCheckLatestRecord.CommandText = $"select max([pID]) from [DAT_CMS].[dbo].[tblProject] where [ProjectNumber] = @pNumber and ValidTo is null";
+                    qryCheckLatestRecord.Connection = conn;
+                    qryCheckLatestRecord.CommandText = $"select max([pID]) from [dbo].[tblProject] where [ProjectNumber] = @pNumber and ValidTo is null";
                     qryCheckLatestRecord.Parameters.Add("@pNumber", SqlDbType.VarChar, 5).Value = pNumber;
-                    connection.Open();
+                    conn.Open();
                     pID = (int)qryCheckLatestRecord.ExecuteScalar();
                 }
             }
@@ -250,15 +253,17 @@ namespace CMS
             try
             {
                 //update ValidUntil field of current record of project (perform 'logical' delete)
-                SQL_Stuff conString = new SQL_Stuff();
-                    using (SqlConnection connection = new SqlConnection(conString.getString()))
-                    {
-                        SqlCommand qryDeleteProject = new SqlCommand();
-                        qryDeleteProject.Connection = connection;
-                        qryDeleteProject.CommandText = "update [dbo].[tblProject] set [ValidTo] = getdate() where [pID] = @pID";
-                        qryDeleteProject.Parameters.Add("@pID", SqlDbType.Int).Value = pID;
-                        connection.Open();
-                        qryDeleteProject.ExecuteNonQuery();
+                SqlConnection conn = new SqlConnection();
+                conn.ConnectionString = SQL_Stuff.conString;
+                conn.Credential = SQL_Stuff.credential;
+                using (conn)
+                {
+                    SqlCommand qryDeleteProject = new SqlCommand();
+                    qryDeleteProject.Connection = conn;
+                    qryDeleteProject.CommandText = "update [dbo].[tblProject] set [ValidTo] = getdate() where [pID] = @pID";
+                    qryDeleteProject.Parameters.Add("@pID", SqlDbType.Int).Value = pID;
+                    conn.Open();
+                    qryDeleteProject.ExecuteNonQuery();
                     }
                 
             }
@@ -283,12 +288,14 @@ namespace CMS
 
             try
             {
-                SQL_Stuff conString = new SQL_Stuff();
-                using (SqlConnection connection = new SqlConnection(conString.getString()))
+                SqlConnection conn = new SqlConnection();
+                conn.ConnectionString = SQL_Stuff.conString;
+                conn.Credential = SQL_Stuff.credential;
+                using (conn)
                 {
                     //generate the parameterised SQL query to insert new record
                     SqlCommand qryInsertProject = new SqlCommand();
-                    qryInsertProject.Connection = connection;
+                    qryInsertProject.Connection = conn;
                     qryInsertProject.CommandText = "insert into [dbo].[tblProject] "
                         + "(ProjectNumber, ProjectName, Stage, Classification, DATRAG, ProjectedStartDate, ProjectedEndDate "
                         + ", StartDate, EndDate, [PI], LeadApplicant, Faculty, DSPT, ISO27001, Azure, IRC, SEED) "
@@ -335,9 +342,9 @@ namespace CMS
                     qryInsertProject.Parameters.Add("@Azure", SqlDbType.Bit).Value = mdl_Project.Azure;
                     qryInsertProject.Parameters.Add("@IRC", SqlDbType.Bit).Value = mdl_Project.IRC;
                     qryInsertProject.Parameters.Add("@SEED", SqlDbType.Bit).Value = mdl_Project.SEED;
-                    
+
                     //open connection to database, run query and close connection
-                    connection.Open();
+                    conn.Open();
                     qryInsertProject.ExecuteNonQuery();
                     MessageBox.Show($"Project details updated for {mdl_Project.ProjectNumber}");
 
@@ -363,19 +370,21 @@ namespace CMS
         {
             try
             {
-                SQL_Stuff conString = new SQL_Stuff();
-                using (SqlConnection connection = new SqlConnection(conString.getString()))
+                SqlConnection conn = new SqlConnection();
+                conn.ConnectionString = SQL_Stuff.conString;
+                conn.Credential = SQL_Stuff.credential;
+                using (conn)
                 {
                     //create parameterised SQL query to insert a new record to tblProjectNotes
                     SqlCommand qryInsertProjectNote = new SqlCommand();
-                    qryInsertProjectNote.Connection = connection;
+                    qryInsertProjectNote.Connection = conn;
                     qryInsertProjectNote.CommandText = "insert into [dbo].[tblProjectNotes] "
                         + "([ProjectNumber],[pNote]) values (@pNumber, @pNote)";
                     qryInsertProjectNote.Parameters.Add("@pNumber", SqlDbType.VarChar, 5).Value = pNumber;
                     qryInsertProjectNote.Parameters.Add("@pNote", SqlDbType.VarChar, 8000).Value = pNote;
 
                     //open connection and execute insert
-                    connection.Open();
+                    conn.Open();
                     qryInsertProjectNote.ExecuteNonQuery();
                 }
             }
@@ -398,12 +407,14 @@ namespace CMS
 
             try
             {
-                SQL_Stuff conString = new SQL_Stuff();
-                using (SqlConnection connection = new SqlConnection(conString.getString()))
+                SqlConnection conn = new SqlConnection();
+                conn.ConnectionString = SQL_Stuff.conString;
+                conn.Credential = SQL_Stuff.credential;
+                using (conn)
                 {
                     //generate the parameterised SQL query to insert new record
                     SqlCommand qry_getNextDocVersion = new SqlCommand();
-                    qry_getNextDocVersion.Connection = connection;
+                    qry_getNextDocVersion.Connection = conn;
                     qry_getNextDocVersion.CommandText = $"select isnull(max(floor([VersionNumber])) + 1, 1) " +
                         $"from[dbo].[tblProjectDocument] " +
                         $"where[ValidTo] is null " +
@@ -412,7 +423,7 @@ namespace CMS
                     qry_getNextDocVersion.Parameters.Add("@ProjectNumber", SqlDbType.VarChar).Value = mdl_ProjectDoc.ProjectNumber;
                     qry_getNextDocVersion.Parameters.Add("@DocumentType", SqlDbType.Int).Value = mdl_ProjectDoc.DocumentType;
 
-                    connection.Open();
+                    conn.Open();
                     object result = qry_getNextDocVersion.ExecuteScalar();
                     result = (result == DBNull.Value) ? null : result;
                     version = Convert.ToInt32(result);
@@ -426,16 +437,41 @@ namespace CMS
             return version;
         }
 
+        //public bool deleteProjectDoc(int pdID)
+        //{
+        //    try
+        //    {
+        //        //update ValidUntil field of current record of project document (perform 'logical' delete)
+        //        SQL_Stuff conString = new SQL_Stuff();
+        //        using (SqlConnection connection = new SqlConnection(conString.getString()))
+        //        {
+        //            SqlCommand qryDeleteProjectDoc = new SqlCommand();
+        //            qryDeleteProjectDoc.Connection = connection;
+        //            qryDeleteProjectDoc.CommandText = "update [dbo].[tblProjectDocument] set [ValidTo] = getdate() where [pID] = @pID";
+        //            qryDeleteProjectDoc.Parameters.Add("@pID", SqlDbType.Int).Value = pdID;
+        //            connection.Open();
+        //            qryDeleteProjectDoc.ExecuteNonQuery();
+        //        }
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show("Failed to delete record" + Environment.NewLine + Environment.NewLine + ex.Message);
+        //    }
+        //}
+
         public bool insertNewDoc(ProjectDocModel mdl_ProjectDoc)
         {
             try
             {
-                SQL_Stuff conString = new SQL_Stuff();
-                using (SqlConnection connection = new SqlConnection(conString.getString()))
+                SqlConnection conn = new SqlConnection();
+                conn.ConnectionString = SQL_Stuff.conString;
+                conn.Credential = SQL_Stuff.credential;
+                using (conn)
                 {
                     //generate the parameterised SQL query to insert new record
                     SqlCommand qry_insertNewDoc = new SqlCommand();
-                    qry_insertNewDoc.Connection = connection;
+                    qry_insertNewDoc.Connection = conn;
                     qry_insertNewDoc.CommandText = $"insert into [dbo].[tblProjectDocument] " +
                         $"([ProjectNumber], [DocumentType], [VersionNumber], [Submitted]) " +
                         $"values " +
@@ -445,7 +481,7 @@ namespace CMS
                     qry_insertNewDoc.Parameters.Add("@VersionNumber", SqlDbType.Decimal).Value = mdl_ProjectDoc.VersionNumber;
                     qry_insertNewDoc.Parameters.Add("@Submitted", SqlDbType.DateTime).Value = mdl_ProjectDoc.Submitted;
 
-                    connection.Open();
+                    conn.Open();
                     qry_insertNewDoc.ExecuteNonQuery();
                 }
                 return true;
@@ -456,25 +492,27 @@ namespace CMS
                 return false;
             }
         }
-
+        
         public bool acceptProjectDocument(int pdID)
         {
             bool success = false;
             try
             {
-                SQL_Stuff conString = new SQL_Stuff();
-                using (SqlConnection connection = new SqlConnection(conString.getString()))
+                SqlConnection conn = new SqlConnection();
+                conn.ConnectionString = SQL_Stuff.conString;
+                conn.Credential = SQL_Stuff.credential;
+                using (conn)
                 {
                     //create parameterised SQL query to insert a new record to tblProjectNotes
                     SqlCommand qryUpdateProjectDoc = new SqlCommand();
-                    qryUpdateProjectDoc.Connection = connection;
+                    qryUpdateProjectDoc.Connection = conn;
                     qryUpdateProjectDoc.CommandText = $"update [dbo].[tblProjectDocument] " +
                         $"set[Accepted] = getdate() " +
                         $"where[pdID] = @pdID";
                     qryUpdateProjectDoc.Parameters.Add("@pdID", SqlDbType.Int).Value = pdID;
 
                     //open connection and execute insert
-                    connection.Open();
+                    conn.Open();
                     qryUpdateProjectDoc.ExecuteNonQuery();
                     
                     success = true;
@@ -503,18 +541,20 @@ namespace CMS
             int pNumInt;
             try
             {
-                SQL_Stuff conString = new SQL_Stuff();
-                using (SqlConnection connection = new SqlConnection(conString.getString()))
+                SqlConnection conn = new SqlConnection();
+                conn.ConnectionString = SQL_Stuff.conString;
+                conn.Credential = SQL_Stuff.credential;
+                using (conn)
                 {
                     //create new SQL query
                     SqlCommand qryGetNewProjectNumber = new SqlCommand();
-                    qryGetNewProjectNumber.Connection = connection;
+                    qryGetNewProjectNumber.Connection = conn;
                     qryGetNewProjectNumber.CommandText =
                         "SELECT max(cast(LEFT(SUBSTRING(ProjectNumber, PATINDEX('%[0-9.-]%', ProjectNumber), 8000) "
                         + ",PATINDEX('%[^0-9.-]%',	SUBSTRING(ProjectNumber, PATINDEX('%[0-9.-]%', ProjectNumber), 8000) + 'X') -1) as int)) "
                         + "from [dbo].[tblProject]";
                     //open connection and execute query, returing result in variable pNumInt
-                    connection.Open();
+                    conn.Open();
                     pNumInt = (int)qryGetNewProjectNumber.ExecuteScalar();
                 }
             }
