@@ -44,6 +44,7 @@
             this.btn_AddUser = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lbl_TFTD = new System.Windows.Forms.Label();
+            this.lbl_LoggedInAs = new System.Windows.Forms.Label();
             this.gb_Projects.SuspendLayout();
             this.gb_DataTracking.SuspendLayout();
             this.gb_DSAs.SuspendLayout();
@@ -229,15 +230,25 @@
             // 
             this.lbl_TFTD.Location = new System.Drawing.Point(225, 272);
             this.lbl_TFTD.Name = "lbl_TFTD";
-            this.lbl_TFTD.Size = new System.Drawing.Size(208, 89);
+            this.lbl_TFTD.Size = new System.Drawing.Size(208, 66);
             this.lbl_TFTD.TabIndex = 8;
             this.lbl_TFTD.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_LoggedInAs
+            // 
+            this.lbl_LoggedInAs.Location = new System.Drawing.Point(224, 338);
+            this.lbl_LoggedInAs.Name = "lbl_LoggedInAs";
+            this.lbl_LoggedInAs.Size = new System.Drawing.Size(209, 23);
+            this.lbl_LoggedInAs.TabIndex = 9;
+            this.lbl_LoggedInAs.Text = "UserName";
+            this.lbl_LoggedInAs.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // frm_HomePage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(444, 372);
+            this.Controls.Add(this.lbl_LoggedInAs);
             this.Controls.Add(this.lbl_TFTD);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.gb_Users);
@@ -273,5 +284,6 @@
         private System.Windows.Forms.Button btn_GoToUsers;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label lbl_TFTD;
+        private System.Windows.Forms.Label lbl_LoggedInAs;
     }
 }

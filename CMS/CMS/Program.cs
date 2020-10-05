@@ -13,8 +13,8 @@ namespace CMS
         {
             /* TO DO
              * 
-             * Create Login form
-             * 
+             * Change password functionality
+             * Log in as guest for read only?
              * Update user list combobox datasource when adding new user from new project
              * Confirm New Project Details (a la New User)
              * AcceptDocument to perform logical delete and insert rather than update
@@ -38,7 +38,6 @@ namespace CMS
             //initialise form
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new frm_Login());
             Application.Run(new frm_HomePage());
 
         }

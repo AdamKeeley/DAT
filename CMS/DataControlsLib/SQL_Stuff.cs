@@ -2,11 +2,30 @@
 
 namespace DataControlsLib
 {
+    /// <summary>
+    /// Static class that contains variables that can be accessed throughout the solution. Contains a static variable 
+    /// to store login credentials (SQL_Stuff.credential, captured from frm_login) and another to store connection 
+    /// string (SQL_Stuff.conString, populated from member method called from frm_login).
+    /// </summary>
     public static class SQL_Stuff
     {
+        /// <summary>
+        /// Static variable to store login credentials for CMS database. Used to populate Credential  
+        /// property of a new SqlConnection. Using it directly risks garbage collection clearing it after SQL operation.
+        /// </summary>
         public static SqlCredential credential { get; set; }
+
+        /// <summary>
+        /// Static variable to store connection string for CMS database. Used to populate ConnectionString 
+        /// property of a new SqlConnection. Using it directly risks garbage collection clearing it after SQL operation.
+        /// </summary>
         public static string conString { get; set; }
-        public static void getString()
+        
+        /// <summary>
+        /// Uses a SqlConnectionStringBuilder to construct the connection string and place it into a 
+        /// static variable within this static class. 
+        /// </summary>
+        public static void setString()
         {
             //Azure!
             SqlConnectionStringBuilder conStringBuilder = new SqlConnectionStringBuilder

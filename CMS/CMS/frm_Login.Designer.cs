@@ -33,6 +33,7 @@
             this.tb_UserName = new System.Windows.Forms.TextBox();
             this.tb_Password = new System.Windows.Forms.TextBox();
             this.btn_Login = new System.Windows.Forms.Button();
+            this.btn_LoginCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lbl_UserName
@@ -57,7 +58,7 @@
             // 
             this.tb_UserName.Location = new System.Drawing.Point(78, 12);
             this.tb_UserName.Name = "tb_UserName";
-            this.tb_UserName.Size = new System.Drawing.Size(100, 20);
+            this.tb_UserName.Size = new System.Drawing.Size(181, 20);
             this.tb_UserName.TabIndex = 2;
             // 
             // tb_Password
@@ -65,13 +66,13 @@
             this.tb_Password.Location = new System.Drawing.Point(78, 38);
             this.tb_Password.Name = "tb_Password";
             this.tb_Password.PasswordChar = '*';
-            this.tb_Password.Size = new System.Drawing.Size(100, 20);
+            this.tb_Password.Size = new System.Drawing.Size(181, 20);
             this.tb_Password.TabIndex = 3;
             this.tb_Password.UseSystemPasswordChar = true;
             // 
             // btn_Login
             // 
-            this.btn_Login.Location = new System.Drawing.Point(184, 35);
+            this.btn_Login.Location = new System.Drawing.Point(184, 64);
             this.btn_Login.Name = "btn_Login";
             this.btn_Login.Size = new System.Drawing.Size(75, 23);
             this.btn_Login.TabIndex = 4;
@@ -79,12 +80,25 @@
             this.btn_Login.UseVisualStyleBackColor = true;
             this.btn_Login.Click += new System.EventHandler(this.btn_Login_Click);
             // 
+            // btn_LoginCancel
+            // 
+            this.btn_LoginCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btn_LoginCancel.Location = new System.Drawing.Point(103, 64);
+            this.btn_LoginCancel.Name = "btn_LoginCancel";
+            this.btn_LoginCancel.Size = new System.Drawing.Size(75, 23);
+            this.btn_LoginCancel.TabIndex = 5;
+            this.btn_LoginCancel.Text = "Cancel";
+            this.btn_LoginCancel.UseVisualStyleBackColor = true;
+            this.btn_LoginCancel.Click += new System.EventHandler(this.btn_LoginCancel_Click);
+            // 
             // frm_Login
             // 
             this.AcceptButton = this.btn_Login;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(267, 66);
+            this.CancelButton = this.btn_LoginCancel;
+            this.ClientSize = new System.Drawing.Size(268, 94);
+            this.Controls.Add(this.btn_LoginCancel);
             this.Controls.Add(this.btn_Login);
             this.Controls.Add(this.tb_Password);
             this.Controls.Add(this.tb_UserName);
@@ -104,5 +118,6 @@
         private System.Windows.Forms.TextBox tb_UserName;
         private System.Windows.Forms.TextBox tb_Password;
         private System.Windows.Forms.Button btn_Login;
+        private System.Windows.Forms.Button btn_LoginCancel;
     }
 }

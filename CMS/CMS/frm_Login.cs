@@ -13,10 +13,23 @@ namespace CMS
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Used to control behaviour of parent form.
+        /// </summary>
+        public bool loggedIn = false;
+        /// <summary>
+        /// Used to control behaviour of parent form.
+        /// </summary>
+        public bool loginCancel = false;
+
+        /// <summary>
+        /// Calls static method to populate static variable with SQL connection string. 
+        /// Captures username and password from form controls to store in static variable (SQL_Stuff.credential).
+        /// </summary>
         private void setConnection()
         {
             //set SQL connection string
-            SQL_Stuff.getString();
+            SQL_Stuff.setString();
 
             //set SQL Credentials
             string usr = tb_UserName.Text;
@@ -34,6 +47,10 @@ namespace CMS
             SQL_Stuff.credential = new SqlCredential(usr, pwd);
         }
 
+        /// <summary>
+        /// Attempts to connect to database and run simple select query. 
+        /// </summary>
+        /// <returns>true on success, false on fail</returns>
         public bool testConnection()
         {
 
@@ -63,7 +80,16 @@ namespace CMS
         {
             setConnection();
             if (testConnection() == true)
+            {
+                loggedIn = true;
                 this.Close();
+            }
+        }
+
+        private void btn_LoginCancel_Click(object sender, EventArgs e)
+        {
+            loginCancel = true;
+            this.Close();
         }
     }
 }

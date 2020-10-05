@@ -17,15 +17,30 @@ namespace CMS
             setTFTD();
         }
 
+        /// <summary>
+        /// Opens frm_Login, from which the credentials to access the database are captured. Persists the form until 
+        /// either a successful login or user cancels (closing application).
+        /// </summary>
         private void setCredentials()
         {
             using (frm_Login Login = new frm_Login())
             {
-                Login.ShowDialog();
-
+                while (Login.loggedIn == false & Login.loginCancel == false)
+                {
+                    Login.ShowDialog();
+                }
+                
+                if (Login.loginCancel == true)
+                    Environment.Exit(0);
+                
+                lbl_LoggedInAs.Text = SQL_Stuff.credential.UserId;
             }
         }
 
+        /// <summary>
+        /// Silly cliche I couldn't resist. Displays a 'Thought For The Day' on home page, selected at randon from 
+        /// a table in the database. Catches (and ignores) all exceptions for little consequence of failure.
+        /// </summary>
         private void setTFTD()
         {
             try
@@ -42,13 +57,16 @@ namespace CMS
                     lbl_TFTD.Text = (string)qryGetTFTD.ExecuteScalar();
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show(ex.Message);
                 return;
             }
         }
 
+        /// <summary>
+        /// Each control on form assigned a tab index.
+        /// If any controls are added/removed it's easier to change here than on actual form!
+        /// </summary>
         private void setTabIndex()
         {
             int x = 999;
