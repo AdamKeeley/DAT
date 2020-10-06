@@ -1,4 +1,5 @@
-﻿using DataControlsLib;
+﻿using CMS.Login;
+using DataControlsLib;
 using System;
 using System.Data.SqlClient;
 using System.Security;
@@ -90,6 +91,18 @@ namespace CMS
         {
             loginCancel = true;
             this.Close();
+        }
+
+        private void btn_ChangePassword_Click(object sender, EventArgs e)
+        {
+            setConnection();
+            if (testConnection() == true)
+            {
+                using (frm_ChangePassword changePassword = new frm_ChangePassword())
+                {
+                    changePassword.ShowDialog();
+                }
+            }
         }
     }
 }
