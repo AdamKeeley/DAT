@@ -13,7 +13,6 @@ namespace CMS
         {
             /* TO DO
              * 
-             * Change password functionality
              * Log in as guest for read only?
              * Update user list combobox datasource when adding new user from new project
              * Confirm New Project Details (a la New User)

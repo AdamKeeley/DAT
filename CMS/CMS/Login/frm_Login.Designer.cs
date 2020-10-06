@@ -1,4 +1,4 @@
-﻿namespace CMS
+﻿namespace CMS.Login
 {
     partial class frm_Login
     {

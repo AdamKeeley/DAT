@@ -43,7 +43,7 @@
             this.tb_NewPassword1.Location = new System.Drawing.Point(109, 51);
             this.tb_NewPassword1.Name = "tb_NewPassword1";
             this.tb_NewPassword1.PasswordChar = '*';
-            this.tb_NewPassword1.Size = new System.Drawing.Size(171, 20);
+            this.tb_NewPassword1.Size = new System.Drawing.Size(201, 20);
             this.tb_NewPassword1.TabIndex = 3;
             this.tb_NewPassword1.UseSystemPasswordChar = true;
             this.tb_NewPassword1.Leave += new System.EventHandler(this.validatePasswords);
@@ -80,7 +80,7 @@
             this.tb_NewPassword2.Location = new System.Drawing.Point(109, 77);
             this.tb_NewPassword2.Name = "tb_NewPassword2";
             this.tb_NewPassword2.PasswordChar = '*';
-            this.tb_NewPassword2.Size = new System.Drawing.Size(171, 20);
+            this.tb_NewPassword2.Size = new System.Drawing.Size(201, 20);
             this.tb_NewPassword2.TabIndex = 5;
             this.tb_NewPassword2.UseSystemPasswordChar = true;
             this.tb_NewPassword2.Leave += new System.EventHandler(this.validatePasswords);
@@ -88,7 +88,7 @@
             // btn_ChangePasswordCancel
             // 
             this.btn_ChangePasswordCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btn_ChangePasswordCancel.Location = new System.Drawing.Point(124, 103);
+            this.btn_ChangePasswordCancel.Location = new System.Drawing.Point(154, 103);
             this.btn_ChangePasswordCancel.Name = "btn_ChangePasswordCancel";
             this.btn_ChangePasswordCancel.Size = new System.Drawing.Size(75, 23);
             this.btn_ChangePasswordCancel.TabIndex = 6;
@@ -98,7 +98,7 @@
             // 
             // btn_ChangePasswordOK
             // 
-            this.btn_ChangePasswordOK.Location = new System.Drawing.Point(205, 103);
+            this.btn_ChangePasswordOK.Location = new System.Drawing.Point(235, 103);
             this.btn_ChangePasswordOK.Name = "btn_ChangePasswordOK";
             this.btn_ChangePasswordOK.Size = new System.Drawing.Size(75, 23);
             this.btn_ChangePasswordOK.TabIndex = 7;
@@ -122,7 +122,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btn_ChangePasswordCancel;
-            this.ClientSize = new System.Drawing.Size(289, 134);
+            this.ClientSize = new System.Drawing.Size(321, 134);
             this.Controls.Add(this.lbl_ChangePasswordValidation);
             this.Controls.Add(this.btn_ChangePasswordOK);
             this.Controls.Add(this.btn_ChangePasswordCancel);

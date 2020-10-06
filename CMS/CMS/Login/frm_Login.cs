@@ -1,11 +1,10 @@
-﻿using CMS.Login;
-using DataControlsLib;
+﻿using DataControlsLib;
 using System;
 using System.Data.SqlClient;
 using System.Security;
 using System.Windows.Forms;
 
-namespace CMS
+namespace CMS.Login
 {
     public partial class frm_Login : Form
     {
@@ -69,10 +68,23 @@ namespace CMS
                     qryTestConnection.ExecuteScalar();
                     return true;
                 }
-                catch (Exception e)
+                catch (SqlException e)
                 {
-                    MessageBox.Show("Connection to database could not be established" + Environment.NewLine + e.Message);
-                    return false;
+                    if (e.Number == 40615)
+                    {
+                        MessageBox.Show($"Access not currently permitted from this IP address. Please add your " +
+                            $"IP address to the Azure SQL Database firewall whitelist to continue." 
+                            + Environment.NewLine 
+                            + Environment.NewLine + e.Message);
+                        return false;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Connection to database could not be established"
+                            + Environment.NewLine
+                            + Environment.NewLine + e.Message);
+                        return false;
+                    }
                 }
             }
         }
