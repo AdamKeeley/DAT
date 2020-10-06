@@ -46,6 +46,7 @@
             this.tb_NewPassword1.Size = new System.Drawing.Size(171, 20);
             this.tb_NewPassword1.TabIndex = 3;
             this.tb_NewPassword1.UseSystemPasswordChar = true;
+            this.tb_NewPassword1.Leave += new System.EventHandler(this.validatePasswords);
             // 
             // lbl_NewPassword1
             // 
@@ -82,6 +83,7 @@
             this.tb_NewPassword2.Size = new System.Drawing.Size(171, 20);
             this.tb_NewPassword2.TabIndex = 5;
             this.tb_NewPassword2.UseSystemPasswordChar = true;
+            this.tb_NewPassword2.Leave += new System.EventHandler(this.validatePasswords);
             // 
             // btn_ChangePasswordCancel
             // 
