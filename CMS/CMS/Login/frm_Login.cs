@@ -101,6 +101,7 @@ namespace CMS
                 using (frm_ChangePassword changePassword = new frm_ChangePassword())
                 {
                     changePassword.ShowDialog();
+                    tb_Password.Clear();
                 }
             }
         }

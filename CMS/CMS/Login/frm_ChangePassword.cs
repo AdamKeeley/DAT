@@ -3,8 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -48,6 +50,32 @@ namespace CMS.Login
             }
         }
 
+        private bool changePassword()
+        {
+            SqlConnection conn = new SqlConnection();
+            conn.ConnectionString = SQL_Stuff.conString;
+            conn.Credential = SQL_Stuff.credential;
+            using (conn)
+            {
+                string oldPwd = new System.Net.NetworkCredential(string.Empty, SQL_Stuff.credential.Password).Password;
+                SqlCommand qryChangePassword = new SqlCommand();
+                qryChangePassword.Connection = conn;
+                qryChangePassword.CommandText = $"alter user {SQL_Stuff.credential.UserId} with password = '{tb_NewPassword1.Text}' old_password = '{oldPwd}'";
+                try
+                {
+                    conn.Open();
+                    qryChangePassword.ExecuteNonQuery();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Password change failed for user {SQL_Stuff.credential.UserId}" + Environment.NewLine + ex.Message);
+                    return false;
+                }
+            }
+
+        }
+
         private void btn_ChangePasswordCancel_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -55,7 +83,9 @@ namespace CMS.Login
 
         private void btn_ChangePasswordOK_Click(object sender, EventArgs e)
         {
-
+            if (validate == true)
+                if (changePassword() == true)
+                    this.Close();
         }
     }
 }
