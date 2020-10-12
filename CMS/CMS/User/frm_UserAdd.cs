@@ -17,6 +17,7 @@ namespace CMS
         }
 
         DataSet ds_User;
+        public bool userAdded = false;
 
         /// <summary>
         /// Fills class member DataSet (ds_User).
@@ -57,7 +58,7 @@ namespace CMS
         /// Takes values from form controls, checks dates are dates, calls confirmationBox 
         /// to present them for review and inserts into SQL database if confirmed.
         /// </summary>
-        private void insertNewUser()
+        private bool insertNewUser()
         {
             User Users = new User();
             UserModel mdl_User = new UserModel();
@@ -186,13 +187,14 @@ namespace CMS
             //Check required fields have an entry
             if (Users.requiredFields(mdl_User) == false)
             {
-                return;
+                return false;
             }
 
             //Check if user already exists
             if (Users.userExists(mdl_User, ds_User.Tables["tblUser"]) == true)
             {
-                return;
+                MessageBox.Show("New user not added.");
+                return false;
             }
 
             if (dateCheck == true)
@@ -200,10 +202,12 @@ namespace CMS
                 if (confirmationBox(mdl_User) == DialogResult.OK)
                 {
                     //insert new record
-                    Users.insertUser(mdl_User);
-                    this.Close();
+                    if (Users.insertUser(mdl_User) == true)
+                        return true;
                 }
             }
+            MessageBox.Show("New user not added.");
+            return false;
         }
 
         /// <summary>
@@ -305,7 +309,11 @@ namespace CMS
 
         private void btn_UserOK_Click(object sender, EventArgs e)
         {
-            insertNewUser();
+            if (insertNewUser() == true)
+            {
+                userAdded = true;
+                this.Close();
+            }
         }
     }
 }

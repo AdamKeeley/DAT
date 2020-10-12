@@ -510,15 +510,15 @@ namespace CMS
         }
 
         /// <summary>
-        /// Checks first & last name against ds_User to see if it already exists. 
-        /// Presents dialog asking to confirm if duplicate, returns true on yes false on no.
+        /// Checks first and last name against ds_User to see if it already exists. 
+        /// Presents dialog asking to confirm if duplicate.
         /// </summary>
         /// <param name="mdl_User"></param>
         /// <param name="tbl_User"></param>
-        /// <returns></returns>
+        /// <returns>True if confirmed that user already does exist in database, False if new user</returns>
         public bool userExists(UserModel mdl_User, DataTable tbl_User)
         {
-            bool userExists = false;
+            //bool userExists = false;
 
             var existingUser = from row in tbl_User.AsEnumerable()
                                where row.Field<string>("FirstName").ToLower() == mdl_User.FirstName.ToLower()
@@ -532,7 +532,8 @@ namespace CMS
                 {
                     existingMessage += $"{user.Field<string>("FirstName")} " +
                         $"{user.Field<string>("LastName")}, " +
-                        $"{user.Field<string>("Email")}" + Environment.NewLine;
+                        $"{user.Field<string>("Email")}" + Environment.NewLine +
+                        $"{user.Field<string>("Organisation")}" + Environment.NewLine;
                 }
 
                 DialogResult confirm = MessageBox.Show(
@@ -542,11 +543,11 @@ namespace CMS
 
                 if (confirm == DialogResult.Yes)
                 {
-                    userExists = true;
+                    return true;
                 }
             }
 
-            return userExists;
+            return false;
         }
 
     }

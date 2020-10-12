@@ -169,7 +169,7 @@ namespace CMS
             if (dateCheck == true)
             {
                 //insert new record
-                if (Projects.insertProject(mdl_Project) == true);
+                if (Projects.insertProject(mdl_Project) == true)
                     this.Close();
             }
         }
@@ -194,8 +194,14 @@ namespace CMS
 
         private void btn_UserAdd_Click(object sender, EventArgs e)
         {
-            frm_UserAdd UserAdd = new frm_UserAdd();
-            UserAdd.Show();
+            using (frm_UserAdd UserAdd = new frm_UserAdd())
+            {
+                UserAdd.ShowDialog();
+                if (UserAdd.userAdded == true)
+                {
+                    set_ProjectAdd();
+                }
+            }
         }
 
         private void btn_Cancel_Click(object sender, EventArgs e)

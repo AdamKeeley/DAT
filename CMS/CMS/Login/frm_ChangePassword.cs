@@ -16,7 +16,7 @@ namespace CMS.Login
         }
 
         /// <summary>
-        /// Used to prevent command getting sent to SQL database if password validation fails.
+        /// Used to prevent sending command to SQL database if password validation fails.
         /// </summary>
         private bool validate = false;
 
@@ -63,8 +63,8 @@ namespace CMS.Login
         }
 
         /// <summary>
-        /// Runs a T-SQL command on server to change password, using credentials used at login and new 
-        /// password entered by user on this form.
+        /// Executes a stored procedure on database server to change password, using credentials used at 
+        /// login and new password entered by user on this form.
         /// </summary>
         /// <returns>true on success, false on fail</returns>
         private bool changePassword()
