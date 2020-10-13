@@ -201,6 +201,7 @@
             this.dgv_UserList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_UserList.Size = new System.Drawing.Size(810, 285);
             this.dgv_UserList.TabIndex = 40;
+            this.dgv_UserList.TabStop = false;
             this.dgv_UserList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_UserList_CellDoubleClick);
             // 
             // btn_Refresh

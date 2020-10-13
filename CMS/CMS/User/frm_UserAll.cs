@@ -52,6 +52,9 @@ namespace CMS
                 cb_UserTitle.DisplayMember = "TitleDescription";
                 cb_UserTitle.SelectedIndex = -1;
 
+                // default to Enabled users
+                cb_UserStatus.SelectedValue = 1;
+
                 textChanged = true;
             }
             catch (Exception e)
