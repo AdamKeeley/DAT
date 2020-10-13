@@ -97,6 +97,16 @@ create table dbo.tblProjectDocument (
 	constraint PK_tblProjectDocument primary key nonclustered (pdID)
 	)
 
+create table dbo.tblProjectPlatformInfo (
+	ProjectPlatformInfoID int identity(1,1)
+	, ProjectNumber varchar(5)
+	, PlatformInfoID int
+	, ProjectPlatformInfo varchar(255)
+	, ValidFrom datetime default getdate()
+	, ValidTo datetime 
+	, CreatedBy varchar(50) default suser_sname()
+	constraint PK_ProjectPlatformInfo primary key nonclustered (ProjectPlatformInfoID)
+	)
 
 CREATE TABLE [dbo].[tlkClassification](
 	[classificationID] [int] IDENTITY(1,1) NOT NULL,
@@ -166,6 +176,14 @@ create table dbo.tlkDocuments (
 	constraint PK_Documents primary key nonclustered (documentID)
 	)
 
+create table dbo.tlkPlatformInfo (
+	PlatformInfoID int identity(1,1)
+	, PlatformInfoDescription varchar(50)
+	, ValidFrom datetime default getdate()
+	, ValidTo datetime
+	constraint PK_PlatformInfo primary key nonclustered (PlatformInfoID)
+	)
+
 ALTER TABLE [dbo].[tblProject]  WITH CHECK ADD  CONSTRAINT [FK_Project_Classification] FOREIGN KEY([Classification])
 REFERENCES [dbo].[tlkClassification] ([classificationID])
 ON UPDATE CASCADE
@@ -208,6 +226,17 @@ add constraint FK_ProjectDocument_Documents foreign key (DocumentType)
 	on delete cascade
 	on update cascade
 
+ALTER TABLE dbo.tblProjectDocument CHECK CONSTRAINT FK_ProjectDocument_Documents
+GO
+
+alter table dbo.tblProjectPlatformInfo
+add constraint FK_ProjectPlatformInfo_PlatformInfo foreign key (PlatformInfoID)
+	references dbo.tlkPlatformInfo(PlatformInfoID)
+	on update cascade
+	on delete cascade
+
+ALTER TABLE dbo.tblProjectPlatformInfo CHECK CONSTRAINT FK_ProjectPlatformInfo_PlatformInfo
+GO
 
 /************************************************************
 *	User stuff 
@@ -326,6 +355,10 @@ values (1, 1, 'Flint', 'Sparkoff')
 
 insert into dbo.tlkDocuments (documentDescription) values
 	('Project Proposal'), ('Data Management Plan'), ('Risk Assessment')
+
+insert into dbo.tlkPlatformInfo (PlatformInfoDescription) values
+	('VRE Number'), ('S:/ File Path'), ('SEED Database'), ('SEED Web App')
+
  
 --/*
 --Data tracking tables schema
