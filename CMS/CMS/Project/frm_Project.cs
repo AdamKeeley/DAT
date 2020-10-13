@@ -19,9 +19,9 @@ namespace CMS
         public frm_Project(string pNumber)
         {
             InitializeComponent();
+            setTabIndex();
             fillProjectsDataSet();
             refreshProjectForm(pNumber);
-            setTabIndex();
         }
 
         /// <summary>

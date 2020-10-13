@@ -10,6 +10,7 @@ namespace CMS
         public frm_ProjectDocAdd(string pNumber, DataSet ds_prj, int docType)
         {
             InitializeComponent();
+            setTabIndex();
             setProjectDocAdd(pNumber, ds_prj, docType);
             fillProjectDocModel();
         }
@@ -109,12 +110,35 @@ namespace CMS
         }
 
         /// <summary>
+        /// Each control on form assigned a tab index.
+        /// If any controls are added/removed it's easier to change here than on actual form!
+        /// </summary>
+        private void setTabIndex()
+        {
+            int x = 999;
+            foreach (Control c in this.Controls)
+            {
+                c.TabIndex = x;
+            }
+
+            x = 0;
+
+            cb_DocType.TabIndex = ++x;
+            nud_DocVersion.TabIndex = ++x;
+            mtb_DocSubmitted.TabIndex = ++x;
+            mtb_DocAccepted.TabIndex = ++x;
+
+            btn_DocAddCreate.TabIndex = ++x;
+            btn_DocAddCancel.TabIndex = ++x;
+        }
+        
+        /// <summary>
         /// Prevent the cursor from being positioned in the middle of a masked textbox when 
         /// the user clicks in it. Needs to be called by the OnClick event of the control.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void enter_TextBox(object sender, EventArgs e)
+        private void enter_TextBox(object sender, EventArgs e) 
         {
             MaskedTextBox textBox = sender as MaskedTextBox;
             if (textBox.Text == "  /  /")

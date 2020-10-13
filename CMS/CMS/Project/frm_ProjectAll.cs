@@ -10,6 +10,7 @@ namespace CMS
         public frm_ProjectAll()
         {
             InitializeComponent();
+            setTabIndex();
             fillProjectsDataSet();
             setControlDataSource();
             fillDataGridView();
@@ -241,6 +242,36 @@ namespace CMS
             dgv_ProjectList.Columns["Faculty"].Width = 180;
 
             lbl_recordCount.Text = dt_dgv_ProjectList.Rows.Count.ToString() + " records";
+        }
+
+        /// <summary>
+        /// Each control on form assigned a tab index.
+        /// If any controls are added/removed it's easier to change here than on actual form!
+        /// </summary>
+        private void setTabIndex()
+        {
+            int x = 999;
+            foreach (Control c in this.Controls)
+            {
+                c.TabIndex = x;
+            }
+
+            x = 0;
+
+            cb_DATRAG.TabIndex = ++x;
+            tb_pNameValue.TabIndex = ++x;
+
+            cb_PortfolioNo.TabIndex = ++x;
+            cb_pStage.TabIndex = ++x;
+            cb_pClassification.TabIndex = ++x;
+            cb_LeadApplicant.TabIndex = ++x;
+            cb_PI.TabIndex = ++x;
+            cb_Faculty.TabIndex = ++x;
+
+            btn_Refresh.TabIndex = ++x;
+            btn_ClearSearch.TabIndex = ++x;
+            btn_NewProject.TabIndex = ++x;
+
         }
 
         private void dgv_ProjectList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

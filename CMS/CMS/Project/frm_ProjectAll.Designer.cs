@@ -263,6 +263,8 @@
             // 
             // cb_PortfolioNo
             // 
+            this.cb_PortfolioNo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.cb_PortfolioNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cb_PortfolioNo.FormattingEnabled = true;
             this.cb_PortfolioNo.Location = new System.Drawing.Point(273, 57);
             this.cb_PortfolioNo.Name = "cb_PortfolioNo";

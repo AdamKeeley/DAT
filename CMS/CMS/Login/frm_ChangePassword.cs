@@ -12,6 +12,7 @@ namespace CMS.Login
         public frm_ChangePassword()
         {
             InitializeComponent();
+            setTabIndex();
             setControls();
         }
 
@@ -94,6 +95,26 @@ namespace CMS.Login
                     return false;
                 }
             }
+        }
+
+        /// <summary>
+        /// Each control on form assigned a tab index.
+        /// If any controls are added/removed it's easier to change here than on actual form!
+        /// </summary>
+        private void setTabIndex()
+        {
+            int x = 999;
+            foreach (Control c in this.Controls)
+            {
+                c.TabIndex = x;
+            }
+
+            x = 0;
+
+            tb_NewPassword1.TabIndex = ++x;
+            tb_NewPassword2.TabIndex = ++x;
+            btn_ChangePasswordOK.TabIndex = ++x;
+            btn_ChangePasswordCancel.TabIndex = ++x;
         }
 
         private void btn_ChangePasswordCancel_Click(object sender, EventArgs e)

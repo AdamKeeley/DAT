@@ -15,8 +15,8 @@ namespace CMS
         public frm_ProjectAdd()
         {
             InitializeComponent();
-            set_ProjectAdd();
             setTabIndex();
+            set_ProjectAdd();
         }
 
         DataSet ds_Project;

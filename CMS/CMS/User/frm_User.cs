@@ -12,13 +12,13 @@ namespace CMS
         public frm_User(int UserNumber)
         {
             InitializeComponent();
+            setTabIndex();
             nud_TokenSerial.Controls.RemoveAt(0);
             fillUsersDataSet();
             fillCurrentUserVariables(UserNumber);
             setUserDetails(UserNumber);
             setUserProjects(UserNumber);
             setUserNotes(UserNumber);
-            setTabIndex();
         }
 
         DataSet ds_User;
@@ -188,41 +188,43 @@ namespace CMS
                 c.TabIndex = x;
             }
 
-            gb_UserDetail.TabIndex = 0;
-            cb_UserStatus.TabIndex = 1;
-            cb_UserTitle.TabIndex = 2;
-            tb_FirstName.TabIndex = 3;
-            tb_LastName.TabIndex = 4;
-            tb_UserName.TabIndex = 5;
-            tb_Email.TabIndex = 6;
-            tb_Phone.TabIndex = 7;
-            tb_Organisation.TabIndex = 8;
-            mtb_UserStartDate.TabIndex = 9;
-            mtb_UserEndDate.TabIndex = 10;
+            x = 0;
 
-            gb_Training.TabIndex = 11;
-            mtb_IRCAgreement.TabIndex = 12;
-            mtb_ISET.TabIndex = 13;
-            mtb_ISAT.TabIndex = 14;
-            mtb_SAFE.TabIndex = 15;
+            gb_UserDetail.TabIndex = ++x;
+            cb_UserStatus.TabIndex = ++x;
+            cb_UserTitle.TabIndex = ++x;
+            tb_FirstName.TabIndex = ++x;
+            tb_LastName.TabIndex = ++x;
+            tb_UserName.TabIndex = ++x;
+            tb_Email.TabIndex = ++x;
+            tb_Phone.TabIndex = ++x;
+            tb_Organisation.TabIndex = ++x;
+            mtb_UserStartDate.TabIndex = ++x;
+            mtb_UserEndDate.TabIndex = ++x;
 
-            gb_MFA.TabIndex = 16;
-            nud_TokenSerial.TabIndex = 17;
-            mtb_TokenIssued.TabIndex = 18;
-            mtb_TokenReturned.TabIndex = 19;
+            gb_Training.TabIndex = ++x;
+            mtb_IRCAgreement.TabIndex = ++x;
+            mtb_ISET.TabIndex = ++x;
+            mtb_ISAT.TabIndex = ++x;
+            mtb_SAFE.TabIndex = ++x;
 
-            gb_UserNotes.TabIndex = 20;
-            tb_NewUserNote.TabIndex = 21;
-            btn_InsertUserNote.TabIndex = 22;
-            btn_UserRefresh.TabIndex = 23;
-            btn_UserApply.TabIndex = 24;
-            btn_UserOK.TabIndex = 25;
-            btn_UserCancel.TabIndex = 26;
-            btn_NewUser.TabIndex = 27;
+            gb_MFA.TabIndex = ++x;
+            nud_TokenSerial.TabIndex = ++x;
+            mtb_TokenIssued.TabIndex = ++x;
+            mtb_TokenReturned.TabIndex = ++x;
 
-            gb_UserProjects.TabIndex = 28;
-            btn_ProjectUserAdd.TabIndex = 29;
-            btn_ProjectUserRemove.TabIndex = 30;
+            gb_UserNotes.TabIndex = ++x;
+            tb_NewUserNote.TabIndex = ++x;
+            btn_InsertUserNote.TabIndex = ++x;
+            btn_UserRefresh.TabIndex = ++x;
+            btn_UserApply.TabIndex = ++x;
+            btn_UserOK.TabIndex = ++x;
+            btn_UserCancel.TabIndex = ++x;
+            btn_NewUser.TabIndex = ++x;
+
+            gb_UserProjects.TabIndex = ++x;
+            btn_ProjectUserAdd.TabIndex = ++x;
+            btn_ProjectUserRemove.TabIndex = ++x;
         }
 
         /// <summary>

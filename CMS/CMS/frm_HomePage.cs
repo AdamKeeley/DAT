@@ -76,22 +76,24 @@ namespace CMS
                 c.TabIndex = x;
             }
 
-            gb_Projects.TabIndex        = 0;
-            btn_GoToProjects.TabIndex   = 1;
-            btn_AddProject.TabIndex     = 2;
-            
-            gb_Users.TabIndex           = 3;
-            btn_GoToUsers.TabIndex      = 4;
-            btn_AddUser.TabIndex        = 5;
+            x = 0;
 
-            gb_DSAs.TabIndex            = 6;
-            btn_DSAsView.TabIndex       = 7;
-            btn_DSAs.TabIndex           = 8;
-            btn_DSAsUpdate.TabIndex     = 9;
-            btn_DataOwnerAdd.TabIndex   = 10;
+            gb_Projects.TabIndex        = ++x;
+            btn_GoToProjects.TabIndex   = ++x;
+            btn_AddProject.TabIndex     = ++x;
 
-            gb_DataTracking.TabIndex    = 11;
-            btn_GoToDataIO.TabIndex     = 12;
+            gb_Users.TabIndex           = ++x;
+            btn_GoToUsers.TabIndex      = ++x;
+            btn_AddUser.TabIndex        = ++x;
+
+            gb_DSAs.TabIndex            = ++x;
+            btn_DSAsView.TabIndex       = ++x;
+            btn_DSAs.TabIndex           = ++x;
+            btn_DSAsUpdate.TabIndex     = ++x;
+            btn_DataOwnerAdd.TabIndex   = ++x;
+
+            gb_DataTracking.TabIndex    = ++x;
+            btn_GoToDataIO.TabIndex     = ++x;
         }
 
         private void btn_GoToProjects_Click(object sender, EventArgs e)

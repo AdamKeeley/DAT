@@ -11,6 +11,7 @@ namespace CMS
         public frm_ProjectDocHistory(string pNumber, DataSet ds_prj, int docType)
         {
             InitializeComponent();
+            setTabIndex();
             setProjectDocHistory(pNumber, ds_prj, docType);
         }
 
@@ -107,6 +108,24 @@ namespace CMS
             {
                 MessageBox.Show("Please select a document record.");
             }
+        }
+
+        /// <summary>
+        /// Each control on form assigned a tab index.
+        /// If any controls are added/removed it's easier to change here than on actual form!
+        /// </summary>
+        private void setTabIndex()
+        {
+            int x = 999;
+            foreach (Control c in this.Controls)
+            {
+                c.TabIndex = x;
+            }
+
+            x = 0;
+
+            btn_ProjectDocAdd.TabIndex = ++x;
+            btn_ProjectDocAccept.TabIndex = ++x;
         }
 
         private void btn_ProjectDocAccept_click(object sender, EventArgs e)

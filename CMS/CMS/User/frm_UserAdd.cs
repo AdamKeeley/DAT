@@ -10,10 +10,10 @@ namespace CMS
         public frm_UserAdd()
         {
             InitializeComponent();
+            setTabIndex();
             nud_TokenSerial.Controls.RemoveAt(0);
             fillUserDataSet();
             setUserAdd();
-            setTabIndex();
         }
 
         DataSet ds_User;
@@ -257,31 +257,31 @@ namespace CMS
                 c.TabIndex = x;
             }
 
-            gb_UserDetail.TabIndex = 0;
-            cb_UserStatus.TabIndex = 1;
-            cb_UserTitle.TabIndex = 2;
-            tb_FirstName.TabIndex = 3;
-            tb_LastName.TabIndex = 4;
-            mtb_UserStartDate.TabIndex = 5;
-            mtb_UserEndDate.TabIndex = 6;
-            tb_UserName.TabIndex = 7;
-            tb_Email.TabIndex = 8;
-            tb_Phone.TabIndex = 9;
-            tb_Organisation.TabIndex = 10;
+            gb_UserDetail.TabIndex = ++x;
+            cb_UserStatus.TabIndex = ++x;
+            cb_UserTitle.TabIndex = ++x;
+            tb_FirstName.TabIndex = ++x;
+            tb_LastName.TabIndex = ++x;
+            mtb_UserStartDate.TabIndex = ++x;
+            mtb_UserEndDate.TabIndex = ++x;
+            tb_UserName.TabIndex = ++x;
+            tb_Email.TabIndex = ++x;
+            tb_Phone.TabIndex = ++x;
+            tb_Organisation.TabIndex = ++x;
 
-            gb_Training.TabIndex = 11;
-            mtb_IRCAgreement.TabIndex = 12;
-            mtb_ISET.TabIndex = 13;
-            mtb_ISAT.TabIndex = 14;
-            mtb_SAFE.TabIndex = 15;
+            gb_Training.TabIndex = ++x;
+            mtb_IRCAgreement.TabIndex = ++x;
+            mtb_ISET.TabIndex = ++x;
+            mtb_ISAT.TabIndex = ++x;
+            mtb_SAFE.TabIndex = ++x;
 
-            gb_MFA.TabIndex = 16;
-            nud_TokenSerial.TabIndex = 17;
-            mtb_TokenIssued.TabIndex = 18;
-            mtb_TokenReturned.TabIndex = 19;
+            gb_MFA.TabIndex = ++x;
+            nud_TokenSerial.TabIndex = ++x;
+            mtb_TokenIssued.TabIndex = ++x;
+            mtb_TokenReturned.TabIndex = ++x;
 
-            btn_UserOK.TabIndex = 20;
-            btn_UserCancel.TabIndex = 21;
+            btn_UserOK.TabIndex = ++x;
+            btn_UserCancel.TabIndex = ++x;
         }
 
         /// <summary>

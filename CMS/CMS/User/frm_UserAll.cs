@@ -15,6 +15,7 @@ namespace CMS
         public frm_UserAll()
         {
             InitializeComponent();
+            setTabIndex();
             fillUserDataSet();
             setControlDataSource();
             fillDataGridView();
@@ -163,6 +164,33 @@ namespace CMS
             dgv_UserList.Columns["Organisation"].Width = 200;
 
             lbl_recordCount.Text = dt_dgv_UserList.Rows.Count.ToString() + " records";
+        }
+
+        /// <summary>
+        /// Each control on form assigned a tab index.
+        /// If any controls are added/removed it's easier to change here than on actual form!
+        /// </summary>
+        private void setTabIndex()
+        {
+            int x = 999;
+            foreach (Control c in this.Controls)
+            {
+                c.TabIndex = x;
+            }
+
+            x = 0;
+
+            cb_UserStatus.TabIndex = ++x;
+            cb_UserTitle.TabIndex = ++x;
+            tb_FirstName.TabIndex = ++x;
+            tb_LastName.TabIndex = ++x;
+            tb_UserName.TabIndex = ++x;
+            tb_Email.TabIndex = ++x;
+            tb_Organisation.TabIndex = ++x;
+
+            btn_Refresh.TabIndex = ++x;
+            btn_ClearSearch.TabIndex = ++x;
+            btn_NewUser.TabIndex = ++x;
         }
 
         private void dgv_UserList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

@@ -9,6 +9,7 @@ namespace CMS
         public frm_ProjectUserAdd(string pNumber, DataSet ds_prj)
         {
             InitializeComponent();
+            setTabIndex();
             setVariablesAndControl(pNumber, ds_prj);
         }
 
@@ -57,7 +58,24 @@ namespace CMS
             }
         }
 
+        /// <summary>
+        /// Each control on form assigned a tab index.
+        /// If any controls are added/removed it's easier to change here than on actual form!
+        /// </summary>
+        private void setTabIndex()
+        {
+            int x = 999;
+            foreach (Control c in this.Controls)
+            {
+                c.TabIndex = x;
+            }
 
+            x = 0;
+
+            cb_Researcher.TabIndex = ++x;
+            btn_UserProjectAdd_Add.TabIndex = ++x;
+            btn_UserProjectAdd_Cancel.TabIndex = ++x;
+        }
 
         private void btn_UserProjectAdd_Cancel_Click(object sender, EventArgs e)
         {
