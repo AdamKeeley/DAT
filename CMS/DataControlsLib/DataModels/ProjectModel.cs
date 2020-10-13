@@ -15,6 +15,7 @@ namespace DataControlsLib.DataModels
         public int pID { get; set; }
         public string ProjectNumber { get; set; }
         public string ProjectName { get; set; }
+        public string PortfolioNumber { get; set; }
         public int? Stage { get; set; }
         public int? Classification { get; set; }
         public int? DATRAG { get; set; }
@@ -47,6 +48,7 @@ namespace DataControlsLib.DataModels
 
             if (ProjectNumber != other.ProjectNumber
                 || ProjectName != other.ProjectName
+                || PortfolioNumber != other.PortfolioNumber
                 || Stage != other.Stage
                 || Classification != other.Classification
                 || DATRAG != other.DATRAG

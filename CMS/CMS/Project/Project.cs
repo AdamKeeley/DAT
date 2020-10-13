@@ -163,6 +163,7 @@ namespace CMS
                 mdl_Project.pID         = (int)pRow["pID"];
                 mdl_Project.ProjectNumber = pRow["ProjectNumber"].ToString();
                 mdl_Project.ProjectName = pRow["ProjectName"].ToString();
+                mdl_Project.PortfolioNumber = pRow["PortfolioNumber"].ToString();
                 if (pRow["Stage"].ToString().Length > 0)
                     mdl_Project.Stage = (int?)pRow["Stage"];
                 if (pRow["Classification"].ToString().Length > 0)
@@ -297,16 +298,17 @@ namespace CMS
                     SqlCommand qryInsertProject = new SqlCommand();
                     qryInsertProject.Connection = conn;
                     qryInsertProject.CommandText = "insert into [dbo].[tblProject] "
-                        + "(ProjectNumber, ProjectName, Stage, Classification, DATRAG, ProjectedStartDate, ProjectedEndDate "
+                        + "(ProjectNumber, ProjectName, PortfolioNumber, Stage, Classification, DATRAG, ProjectedStartDate, ProjectedEndDate "
                         + ", StartDate, EndDate, [PI], LeadApplicant, Faculty, DSPT, ISO27001, Azure, IRC, SEED) "
                         + "values "
-                        + "(@ProjectNumber, @ProjectName, @Stage, @Classification, @DATRAG, @ProjectedStartDate "
+                        + "(@ProjectNumber, @ProjectName, @PortfolioNumber, @Stage, @Classification, @DATRAG, @ProjectedStartDate "
                         + ", @ProjectedEndDate, @StartDate, @EndDate, @PI, @LeadApplicant, @Faculty, @DSPT "
                         + ", @ISO27001, @Azure, @IRC, @SEED) ";
 
                     //assign the parameter values
                     qryInsertProject.Parameters.Add("@ProjectNumber", SqlDbType.VarChar, 5).Value = mdl_Project.ProjectNumber;
                     qryInsertProject.Parameters.Add("@ProjectName", SqlDbType.VarChar, 100).Value = mdl_Project.ProjectName;
+                    qryInsertProject.Parameters.Add("@PortfolioNumber", SqlDbType.VarChar, 9).Value = mdl_Project.PortfolioNumber;
                     SqlParameter param_Stage = new SqlParameter("@Stage", mdl_Project.Stage == null ? (object)DBNull.Value : mdl_Project.Stage);
                     param_Stage.IsNullable = true;
                     qryInsertProject.Parameters.Add(param_Stage);

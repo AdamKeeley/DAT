@@ -15,6 +15,7 @@ CREATE TABLE [dbo].[tblProject](
 	[pID] [int] IDENTITY(1,1) NOT NULL,
 	[ProjectNumber] [varchar](5) NULL,
 	[ProjectName] [varchar](100) NULL,
+	PortfolioNumber varchar(9) null,
 	[Stage] [int] NULL,
 	[Classification] [int] NULL,
 	[DATRAG] [int] NULL,

@@ -97,6 +97,7 @@ namespace CMS
                 cb_pNumberValue.DisplayMember           = "ProjectNumber";
                 cb_pNumberValue.Text                    = pNumber;
                 tb_pNameValue.Text                      = mdl_CurrentProject.ProjectName;
+                tb_PortfolioNo.Text                     = mdl_CurrentProject.PortfolioNumber;
                 cb_pStage.DataSource                    = ds_Project.Tables["tlkStage"];
                 cb_pStage.ValueMember                   = "StageID";
                 cb_pStage.DisplayMember                 = "pStageDescription";
@@ -271,50 +272,53 @@ namespace CMS
                 c.TabIndex = x;
             }
 
-            cb_pNumberValue.TabIndex = 0;
-            cb_DATRAG.TabIndex = 1;
-            tb_pNameValue.TabIndex = 2;
-            
-            gb_Platform.TabIndex = 3;
-            chkb_Azure.TabIndex = 4;
-            chkb_IRC.TabIndex = 5;
-            chkb_SEED.TabIndex = 6;
-            
-            gb_Governance.TabIndex = 7;
-            chkb_ISO27001.TabIndex = 8;
-            chkb_DSPT.TabIndex = 9;
+            x = 0;
 
-            gb_KeyDates.TabIndex = 10;
-            mtb_ProjectedStartDateValue.TabIndex = 11;
-            mtb_ProjectedEndDateValue.TabIndex = 12;
-            mtb_pStartDateValue.TabIndex = 13;
-            mtb_pEndDateValue.TabIndex = 14;
-            
-            cb_pStage.TabIndex = 15;
-            cb_pClassification.TabIndex = 16;
-            cb_LeadApplicant.TabIndex = 17;
-            cb_PI.TabIndex = 18;
-            cb_Faculty.TabIndex = 19;
+            cb_pNumberValue.TabIndex = ++x;
+            cb_DATRAG.TabIndex = ++x;
+            tb_pNameValue.TabIndex = ++x;
 
-            gb_ProjectNotes.TabIndex = 20;
-            tb_NewProjectNote.TabIndex = 21;
-            btn_InsertProjectNote.TabIndex = 22;
+            gb_Platform.TabIndex = ++x;
+            chkb_Azure.TabIndex = ++x;
+            chkb_IRC.TabIndex = ++x;
+            chkb_SEED.TabIndex = ++x;
 
-            gb_ProjectUsers.TabIndex = 23;
-            btn_ProjectUserAdd.TabIndex = 24;
-            btn_ProjectUserRemove.TabIndex = 25;
+            gb_Governance.TabIndex = ++x;
+            chkb_ISO27001.TabIndex = ++x;
+            chkb_DSPT.TabIndex = ++x;
 
-            gb_ProjectDocuments.TabIndex = 26;
-            btn_Proposal.TabIndex = 27;
-            btn_DMP.TabIndex = 28;
-            btn_RA.TabIndex = 29;
-            btn_AllDocs.TabIndex = 30;
+            gb_KeyDates.TabIndex = ++x;
+            mtb_ProjectedStartDateValue.TabIndex = ++x;
+            mtb_ProjectedEndDateValue.TabIndex = ++x;
+            mtb_pStartDateValue.TabIndex = ++x;
+            mtb_pEndDateValue.TabIndex = ++x;
 
-            btn_NewProject.TabIndex = 31;
-            btn_Refresh.TabIndex = 32;
-            btn_ProjectApply.TabIndex = 33;
-            btn_ProjectOK.TabIndex = 34;
-            btn_ProjectCancel.TabIndex = 35;
+            tb_PortfolioNo.TabIndex = ++x;
+            cb_pStage.TabIndex = ++x;
+            cb_pClassification.TabIndex = ++x;
+            cb_LeadApplicant.TabIndex = ++x;
+            cb_PI.TabIndex = ++x;
+            cb_Faculty.TabIndex = ++x;
+
+            gb_ProjectNotes.TabIndex = ++x;
+            tb_NewProjectNote.TabIndex = ++x;
+            btn_InsertProjectNote.TabIndex = ++x;
+
+            gb_ProjectUsers.TabIndex = ++x;
+            btn_ProjectUserAdd.TabIndex = ++x;
+            btn_ProjectUserRemove.TabIndex = ++x;
+
+            gb_ProjectDocuments.TabIndex = ++x;
+            btn_Proposal.TabIndex = ++x;
+            btn_DMP.TabIndex = ++x;
+            btn_RA.TabIndex = ++x;
+            btn_AllDocs.TabIndex = ++x;
+
+            btn_NewProject.TabIndex = ++x;
+            btn_Refresh.TabIndex = ++x;
+            btn_ProjectApply.TabIndex = ++x;
+            btn_ProjectOK.TabIndex = ++x;
+            btn_ProjectCancel.TabIndex = ++x;
         }
 
         /// <summary>
@@ -355,6 +359,7 @@ namespace CMS
 
             mdl_NewProject.ProjectNumber        = pNumber;
             mdl_NewProject.ProjectName          = tb_pNameValue.Text;
+            mdl_NewProject.PortfolioNumber      = tb_PortfolioNo.Text;
             mdl_NewProject.DSPT                 = chkb_DSPT.Checked;
             mdl_NewProject.ISO27001             = chkb_ISO27001.Checked;
             mdl_NewProject.Azure                = chkb_Azure.Checked;

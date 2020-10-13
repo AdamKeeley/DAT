@@ -62,6 +62,8 @@
             this.cb_PI = new System.Windows.Forms.ComboBox();
             this.cb_LeadApplicant = new System.Windows.Forms.ComboBox();
             this.lbl_ProjectAdd = new System.Windows.Forms.Label();
+            this.tb_PortfolioNo = new System.Windows.Forms.TextBox();
+            this.lbl_PortfolioNo = new System.Windows.Forms.Label();
             this.gb_Governance.SuspendLayout();
             this.gb_Platform.SuspendLayout();
             this.SuspendLayout();
@@ -111,7 +113,7 @@
             // lbl_pPI
             // 
             this.lbl_pPI.AutoSize = true;
-            this.lbl_pPI.Location = new System.Drawing.Point(215, 177);
+            this.lbl_pPI.Location = new System.Drawing.Point(212, 186);
             this.lbl_pPI.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_pPI.Name = "lbl_pPI";
             this.lbl_pPI.Size = new System.Drawing.Size(105, 13);
@@ -121,7 +123,7 @@
             // cb_pStage
             // 
             this.cb_pStage.FormattingEnabled = true;
-            this.cb_pStage.Location = new System.Drawing.Point(79, 173);
+            this.cb_pStage.Location = new System.Drawing.Point(76, 182);
             this.cb_pStage.Margin = new System.Windows.Forms.Padding(2);
             this.cb_pStage.Name = "cb_pStage";
             this.cb_pStage.Size = new System.Drawing.Size(124, 21);
@@ -130,7 +132,7 @@
             // lbl_pStage
             // 
             this.lbl_pStage.AutoSize = true;
-            this.lbl_pStage.Location = new System.Drawing.Point(35, 177);
+            this.lbl_pStage.Location = new System.Drawing.Point(32, 186);
             this.lbl_pStage.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_pStage.Name = "lbl_pStage";
             this.lbl_pStage.Size = new System.Drawing.Size(35, 13);
@@ -158,7 +160,7 @@
             // btn_Cancel
             // 
             this.btn_Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btn_Cancel.Location = new System.Drawing.Point(441, 225);
+            this.btn_Cancel.Location = new System.Drawing.Point(438, 234);
             this.btn_Cancel.Margin = new System.Windows.Forms.Padding(2);
             this.btn_Cancel.Name = "btn_Cancel";
             this.btn_Cancel.Size = new System.Drawing.Size(56, 24);
@@ -169,7 +171,7 @@
             // 
             // btn_Create
             // 
-            this.btn_Create.Location = new System.Drawing.Point(380, 225);
+            this.btn_Create.Location = new System.Drawing.Point(377, 234);
             this.btn_Create.Margin = new System.Windows.Forms.Padding(2);
             this.btn_Create.Name = "btn_Create";
             this.btn_Create.Size = new System.Drawing.Size(56, 24);
@@ -202,7 +204,7 @@
             // lbl_LeadApplicant
             // 
             this.lbl_LeadApplicant.AutoSize = true;
-            this.lbl_LeadApplicant.Location = new System.Drawing.Point(242, 153);
+            this.lbl_LeadApplicant.Location = new System.Drawing.Point(239, 162);
             this.lbl_LeadApplicant.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_LeadApplicant.Name = "lbl_LeadApplicant";
             this.lbl_LeadApplicant.Size = new System.Drawing.Size(78, 13);
@@ -249,7 +251,7 @@
             this.cb_Faculty.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cb_Faculty.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cb_Faculty.FormattingEnabled = true;
-            this.cb_Faculty.Location = new System.Drawing.Point(324, 199);
+            this.cb_Faculty.Location = new System.Drawing.Point(321, 208);
             this.cb_Faculty.Name = "cb_Faculty";
             this.cb_Faculty.Size = new System.Drawing.Size(173, 21);
             this.cb_Faculty.TabIndex = 58;
@@ -257,7 +259,7 @@
             // lbl_Faculty
             // 
             this.lbl_Faculty.AutoSize = true;
-            this.lbl_Faculty.Location = new System.Drawing.Point(279, 202);
+            this.lbl_Faculty.Location = new System.Drawing.Point(276, 211);
             this.lbl_Faculty.Name = "lbl_Faculty";
             this.lbl_Faculty.Size = new System.Drawing.Size(41, 13);
             this.lbl_Faculty.TabIndex = 57;
@@ -306,7 +308,7 @@
             // lbl_pClassification
             // 
             this.lbl_pClassification.AutoSize = true;
-            this.lbl_pClassification.Location = new System.Drawing.Point(5, 202);
+            this.lbl_pClassification.Location = new System.Drawing.Point(2, 211);
             this.lbl_pClassification.Name = "lbl_pClassification";
             this.lbl_pClassification.Size = new System.Drawing.Size(68, 13);
             this.lbl_pClassification.TabIndex = 52;
@@ -317,7 +319,7 @@
             this.cb_pClassification.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cb_pClassification.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cb_pClassification.FormattingEnabled = true;
-            this.cb_pClassification.Location = new System.Drawing.Point(79, 199);
+            this.cb_pClassification.Location = new System.Drawing.Point(76, 208);
             this.cb_pClassification.Name = "cb_pClassification";
             this.cb_pClassification.Size = new System.Drawing.Size(124, 21);
             this.cb_pClassification.TabIndex = 50;
@@ -372,7 +374,7 @@
             // lbl_PI_NewUser
             // 
             this.lbl_PI_NewUser.AutoSize = true;
-            this.lbl_PI_NewUser.Location = new System.Drawing.Point(502, 177);
+            this.lbl_PI_NewUser.Location = new System.Drawing.Point(499, 186);
             this.lbl_PI_NewUser.Name = "lbl_PI_NewUser";
             this.lbl_PI_NewUser.Size = new System.Drawing.Size(36, 13);
             this.lbl_PI_NewUser.TabIndex = 63;
@@ -382,7 +384,7 @@
             // lbl_LeadApplicant_NewUser
             // 
             this.lbl_LeadApplicant_NewUser.AutoSize = true;
-            this.lbl_LeadApplicant_NewUser.Location = new System.Drawing.Point(502, 153);
+            this.lbl_LeadApplicant_NewUser.Location = new System.Drawing.Point(499, 162);
             this.lbl_LeadApplicant_NewUser.Name = "lbl_LeadApplicant_NewUser";
             this.lbl_LeadApplicant_NewUser.Size = new System.Drawing.Size(36, 13);
             this.lbl_LeadApplicant_NewUser.TabIndex = 64;
@@ -394,7 +396,7 @@
             this.cb_PI.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cb_PI.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cb_PI.FormattingEnabled = true;
-            this.cb_PI.Location = new System.Drawing.Point(324, 173);
+            this.cb_PI.Location = new System.Drawing.Point(321, 182);
             this.cb_PI.Name = "cb_PI";
             this.cb_PI.Size = new System.Drawing.Size(173, 21);
             this.cb_PI.TabIndex = 66;
@@ -404,7 +406,7 @@
             this.cb_LeadApplicant.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cb_LeadApplicant.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cb_LeadApplicant.FormattingEnabled = true;
-            this.cb_LeadApplicant.Location = new System.Drawing.Point(324, 149);
+            this.cb_LeadApplicant.Location = new System.Drawing.Point(321, 158);
             this.cb_LeadApplicant.Name = "cb_LeadApplicant";
             this.cb_LeadApplicant.Size = new System.Drawing.Size(173, 21);
             this.cb_LeadApplicant.TabIndex = 65;
@@ -420,13 +422,31 @@
             this.lbl_ProjectAdd.Text = "Add new project";
             this.lbl_ProjectAdd.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // tb_PortfolioNo
+            // 
+            this.tb_PortfolioNo.Location = new System.Drawing.Point(76, 157);
+            this.tb_PortfolioNo.Name = "tb_PortfolioNo";
+            this.tb_PortfolioNo.Size = new System.Drawing.Size(124, 20);
+            this.tb_PortfolioNo.TabIndex = 68;
+            // 
+            // lbl_PortfolioNo
+            // 
+            this.lbl_PortfolioNo.AutoSize = true;
+            this.lbl_PortfolioNo.Location = new System.Drawing.Point(8, 160);
+            this.lbl_PortfolioNo.Name = "lbl_PortfolioNo";
+            this.lbl_PortfolioNo.Size = new System.Drawing.Size(62, 13);
+            this.lbl_PortfolioNo.TabIndex = 69;
+            this.lbl_PortfolioNo.Text = "Portfolio No";
+            // 
             // frm_ProjectAdd
             // 
             this.AcceptButton = this.btn_Create;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btn_Cancel;
-            this.ClientSize = new System.Drawing.Size(540, 255);
+            this.ClientSize = new System.Drawing.Size(540, 265);
+            this.Controls.Add(this.tb_PortfolioNo);
+            this.Controls.Add(this.lbl_PortfolioNo);
             this.Controls.Add(this.lbl_ProjectAdd);
             this.Controls.Add(this.cb_PI);
             this.Controls.Add(this.cb_LeadApplicant);
@@ -503,5 +523,7 @@
         private System.Windows.Forms.ComboBox cb_PI;
         private System.Windows.Forms.ComboBox cb_LeadApplicant;
         private System.Windows.Forms.Label lbl_ProjectAdd;
+        private System.Windows.Forms.TextBox tb_PortfolioNo;
+        private System.Windows.Forms.Label lbl_PortfolioNo;
     }
 }

@@ -117,6 +117,12 @@
     <Compile Include="Project\frm_ProjectDocHistory.Designer.cs">
       <DependentUpon>frm_ProjectDocHistory.cs</DependentUpon>
     </Compile>
+    <Compile Include="Project\frm_ProjectPlatform.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Project\frm_ProjectPlatform.Designer.cs">
+      <DependentUpon>frm_ProjectPlatform.cs</DependentUpon>
+    </Compile>
     <Compile Include="Project\frm_ProjectUserAdd.cs">
       <SubType>Form</SubType>
     </Compile>

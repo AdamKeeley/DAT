@@ -16,6 +16,7 @@ namespace CMS
         {
             InitializeComponent();
             set_ProjectAdd();
+            setTabIndex();
         }
 
         DataSet ds_Project;
@@ -87,6 +88,7 @@ namespace CMS
             //populate ProjectModel class variables with values held in form controls
             mdl_Project.ProjectNumber      = pNumber;
             mdl_Project.ProjectName        = tb_pNameValue.Text;
+            mdl_Project.PortfolioNumber    = tb_PortfolioNo.Text;
             mdl_Project.DSPT               = chkb_DSPT.Checked;
             mdl_Project.ISO27001           = chkb_ISO27001.Checked;
             mdl_Project.Azure              = chkb_Azure.Checked;
@@ -173,6 +175,46 @@ namespace CMS
                     this.Close();
             }
         }
+
+        /// <summary>
+        /// Each control on form assigned a tab index.
+        /// If any controls are added/removed it's easier to change here than on actual form!
+        /// </summary>
+        private void setTabIndex()
+        {
+            int x = 999;
+            foreach (Control c in this.Controls)
+            {
+                c.TabIndex = x;
+            }
+
+            x = 0;
+
+            cb_DATRAG.TabIndex = ++x;
+            tb_pNameValue.TabIndex = ++x;
+
+            gb_Platform.TabIndex = ++x;
+            chkb_Azure.TabIndex = ++x;
+            chkb_IRC.TabIndex = ++x;
+            chkb_SEED.TabIndex = ++x;
+
+            gb_Governance.TabIndex = ++x;
+            chkb_ISO27001.TabIndex = ++x;
+            chkb_DSPT.TabIndex = ++x;
+
+            mtb_ProjectedStartDateValue.TabIndex = ++x;
+            mtb_ProjectedEndDateValue.TabIndex = ++x;
+            mtb_pStartDateValue.TabIndex = ++x;
+            mtb_pEndDateValue.TabIndex = ++x;
+
+            tb_PortfolioNo.TabIndex = ++x;
+            cb_pStage.TabIndex = ++x;
+            cb_pClassification.TabIndex = ++x;
+            cb_LeadApplicant.TabIndex = ++x;
+            cb_PI.TabIndex = ++x;
+            cb_Faculty.TabIndex = ++x;
+        }
+
 
         /// <summary>
         /// Prevent the cursor from being positioned in the middle of a masked textbox when 

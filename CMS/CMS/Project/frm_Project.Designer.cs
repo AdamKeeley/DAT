@@ -80,6 +80,8 @@ namespace CMS
             this.btn_RA = new System.Windows.Forms.Button();
             this.btn_DMP = new System.Windows.Forms.Button();
             this.btn_Proposal = new System.Windows.Forms.Button();
+            this.lbl_PortfolioNo = new System.Windows.Forms.Label();
+            this.tb_PortfolioNo = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_pNotes)).BeginInit();
             this.gb_Platform.SuspendLayout();
             this.gb_Governance.SuspendLayout();
@@ -593,7 +595,7 @@ namespace CMS
             this.gb_ProjectDocuments.ForeColor = System.Drawing.SystemColors.ControlText;
             this.gb_ProjectDocuments.Location = new System.Drawing.Point(526, 225);
             this.gb_ProjectDocuments.Name = "gb_ProjectDocuments";
-            this.gb_ProjectDocuments.Size = new System.Drawing.Size(180, 218);
+            this.gb_ProjectDocuments.Size = new System.Drawing.Size(180, 164);
             this.gb_ProjectDocuments.TabIndex = 48;
             this.gb_ProjectDocuments.TabStop = false;
             this.gb_ProjectDocuments.Text = "Project Documents";
@@ -622,7 +624,7 @@ namespace CMS
             // btn_DMP
             // 
             this.btn_DMP.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.btn_DMP.Location = new System.Drawing.Point(6, 48);
+            this.btn_DMP.Location = new System.Drawing.Point(4, 48);
             this.btn_DMP.Name = "btn_DMP";
             this.btn_DMP.Size = new System.Drawing.Size(170, 23);
             this.btn_DMP.TabIndex = 1;
@@ -633,7 +635,7 @@ namespace CMS
             // btn_Proposal
             // 
             this.btn_Proposal.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.btn_Proposal.Location = new System.Drawing.Point(6, 19);
+            this.btn_Proposal.Location = new System.Drawing.Point(4, 19);
             this.btn_Proposal.Name = "btn_Proposal";
             this.btn_Proposal.Size = new System.Drawing.Size(170, 23);
             this.btn_Proposal.TabIndex = 0;
@@ -641,12 +643,30 @@ namespace CMS
             this.btn_Proposal.UseVisualStyleBackColor = false;
             this.btn_Proposal.Click += new System.EventHandler(this.btn_Proposal_Click);
             // 
+            // lbl_PortfolioNo
+            // 
+            this.lbl_PortfolioNo.AutoSize = true;
+            this.lbl_PortfolioNo.Location = new System.Drawing.Point(21, 152);
+            this.lbl_PortfolioNo.Name = "lbl_PortfolioNo";
+            this.lbl_PortfolioNo.Size = new System.Drawing.Size(62, 13);
+            this.lbl_PortfolioNo.TabIndex = 50;
+            this.lbl_PortfolioNo.Text = "Portfolio No";
+            // 
+            // tb_PortfolioNo
+            // 
+            this.tb_PortfolioNo.Location = new System.Drawing.Point(89, 149);
+            this.tb_PortfolioNo.Name = "tb_PortfolioNo";
+            this.tb_PortfolioNo.Size = new System.Drawing.Size(124, 20);
+            this.tb_PortfolioNo.TabIndex = 50;
+            // 
             // frm_Project
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btn_ProjectCancel;
             this.ClientSize = new System.Drawing.Size(718, 480);
+            this.Controls.Add(this.tb_PortfolioNo);
+            this.Controls.Add(this.lbl_PortfolioNo);
             this.Controls.Add(this.gb_ProjectDocuments);
             this.Controls.Add(this.gb_KeyDates);
             this.Controls.Add(this.gb_ProjectNotes);
@@ -746,5 +766,7 @@ namespace CMS
         private System.Windows.Forms.Button btn_DMP;
         private System.Windows.Forms.Button btn_Proposal;
         private System.Windows.Forms.Button btn_AllDocs;
+        private System.Windows.Forms.Label lbl_PortfolioNo;
+        private System.Windows.Forms.TextBox tb_PortfolioNo;
     }
 }

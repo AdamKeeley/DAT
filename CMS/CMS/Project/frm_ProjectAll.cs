@@ -35,6 +35,20 @@ namespace CMS
                 //searchItemAdded method. This boolean flag prevents the method from running fillDataGridView 12 times
                 textChanged = false;
 
+                //Only display portfolio numbers that are present in the PortfolioNumber column of the Project table
+                DataTable dt_PortfolioNo = new DataTable();
+                dt_PortfolioNo.Columns.Add("ProjectNumber");
+                dt_PortfolioNo.Columns.Add("PortfolioNumber");
+                dt_PortfolioNo.DefaultView.Sort = "PortfolioNumber";
+                DataRow ptRow;
+                foreach (DataRow pRow in ds_Project.Tables["tblProjects"].Select("[PortfolioNumber] is not null"))
+                {
+                    ptRow = dt_PortfolioNo.NewRow();
+                    ptRow["ProjectNumber"] = pRow["ProjectNumber"];
+                    ptRow["PortfolioNumber"] = pRow["PortfolioNumber"];
+                    dt_PortfolioNo.Rows.Add(ptRow);
+                }
+
                 //Only display names that are present in the LeadApplicant column of the Project table
                 DataTable dt_LeadApplicants = new DataTable();
                 dt_LeadApplicants.Columns.Add("UserID");
@@ -74,6 +88,10 @@ namespace CMS
                 cb_DATRAG.ValueMember = "ragID";
                 cb_DATRAG.DisplayMember = "ragDescription";
                 cb_DATRAG.SelectedIndex = -1;
+                cb_PortfolioNo.DataSource = dt_PortfolioNo.DefaultView.ToTable(true, "ProjectNumber", "PortfolioNumber");
+                cb_PortfolioNo.ValueMember = "ProjectNumber";
+                cb_PortfolioNo.DisplayMember = "PortfolioNumber";
+                cb_PortfolioNo.SelectedIndex = -1;
                 cb_pStage.DataSource = ds_Project.Tables["tlkStage"];
                 cb_pStage.ValueMember = "StageID";
                 cb_pStage.DisplayMember = "pStageDescription";
@@ -108,6 +126,7 @@ namespace CMS
         {
             string filterAll                = "ProjectNumber like '%'";
             string filterProjectName        = $"ProjectName like '%{tb_pNameValue.Text}%'";
+            string filterPortfolioNumber = $"PortfolioNumber like '%{cb_PortfolioNo.Text}%'";
             string filterStage              = $"Stage = '{cb_pStage.Text}'";
             string filterClassification     = $"Classification = '{cb_pClassification.Text}'";
             string filterDATRAG             = $"DATRAG = '{cb_DATRAG.Text}'";
@@ -117,6 +136,8 @@ namespace CMS
 
             if (tb_pNameValue.Text != "")
                 filterAll += " AND " + filterProjectName;
+            if (cb_PortfolioNo.Text != "")
+                filterAll += " AND " + filterPortfolioNumber;
             if (cb_pStage.SelectedIndex > -1)
                 filterAll += " AND " + filterStage;
             if (cb_pClassification.SelectedIndex > -1)
@@ -134,6 +155,7 @@ namespace CMS
             DataTable dt_ProjectList = new DataTable();
             dt_ProjectList.Columns.Add("ProjectNumber");
             dt_ProjectList.Columns.Add("ProjectName");
+            dt_ProjectList.Columns.Add("PortfolioNumber");
             dt_ProjectList.Columns.Add("Stage");
             dt_ProjectList.Columns.Add("Classification");
             dt_ProjectList.Columns.Add("DATRAG");
@@ -147,6 +169,7 @@ namespace CMS
                 a_row = dt_ProjectList.NewRow();
                 a_row["ProjectNumber"] = pRow["ProjectNumber"];
                 a_row["ProjectName"] = pRow["ProjectName"];
+                a_row["PortfolioNumber"] = pRow["PortfolioNumber"];
                 foreach (DataRow sRow in pRow.GetParentRows("Project_Stage"))
                 {
                     a_row["Stage"] = sRow["pStageDescription"];
@@ -179,6 +202,7 @@ namespace CMS
             DataTable dt_dgv_ProjectList = new DataTable();
             dt_dgv_ProjectList.Columns.Add("Project Number");
             dt_dgv_ProjectList.Columns.Add("Project Name");
+            dt_dgv_ProjectList.Columns.Add("Portfolio Number"); 
             dt_dgv_ProjectList.Columns.Add("Stage");
             dt_dgv_ProjectList.Columns.Add("Classification");
             dt_dgv_ProjectList.Columns.Add("DATRAG");
@@ -192,6 +216,7 @@ namespace CMS
                 f_row = dt_dgv_ProjectList.NewRow();
                 f_row["Project Number"] = pRow["ProjectNumber"];
                 f_row["Project Name"] = pRow["ProjectName"];
+                f_row["Portfolio Number"] = pRow["PortfolioNumber"];
                 f_row["Stage"] = pRow["Stage"];
                 f_row["Classification"] = pRow["Classification"];
                 f_row["DATRAG"] = pRow["DATRAG"];
@@ -207,6 +232,7 @@ namespace CMS
 
             dgv_ProjectList.Columns["Project Number"].Width = 50;
             dgv_ProjectList.Columns["Project Name"].Width = 260;
+            dgv_ProjectList.Columns["Portfolio Number"].Width = 50;
             dgv_ProjectList.Columns["Stage"].Width = 70;
             dgv_ProjectList.Columns["Classification"].Width = 90;
             dgv_ProjectList.Columns["DATRAG"].Width = 60;
