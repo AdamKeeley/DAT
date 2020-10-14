@@ -46,16 +46,22 @@ namespace CMS
         /// Calls method from Users class to check active record doesn't already exist in tblUserProject.
         /// Inserts new record if not.
         /// </summary>
-        private void addProjectUser()
+        private bool addProjectUser()
         {
             int UserNumber = (int)cb_Researcher.SelectedValue;
 
             User Users = new User();
-            if (Users.checkUserProject(UserNumber, ProjectNumber))
+            if (Users.checkUserProject(UserNumber, ProjectNumber) == true)
             {
                 Users.insertUserProject(UserNumber, ProjectNumber);
                 MessageBox.Show("User added");
+                return true;
             }
+            else
+            {
+                return false;
+            }
+            
         }
 
         /// <summary>
@@ -84,8 +90,8 @@ namespace CMS
 
         private void btn_UserProjectAdd_Add_Click(object sender, EventArgs e)
         {
-            addProjectUser();
-            this.Close();
+            if (addProjectUser() == true)
+                this.Close();
         }
     }
 }

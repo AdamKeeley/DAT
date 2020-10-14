@@ -83,7 +83,7 @@ namespace CMS
             //generate new pNumber and put it into class variable, can be used within 
             //this method/class but also to feed back to parent form.
             pNumber = getNewProjectNumber();
-            ProjectModel mdl_Project = new ProjectModel();
+            mdl_Project mdl_Project = new mdl_Project();
 
             //populate ProjectModel class variables with values held in form controls
             mdl_Project.ProjectNumber      = pNumber;

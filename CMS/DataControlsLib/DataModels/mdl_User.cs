@@ -10,7 +10,7 @@ namespace DataControlsLib.DataModels
     /// Data model containing class variables that describe a single user. Includes Equals (and operator) 
     /// override to compare values of class variables in two instances of this class.
     /// </summary>
-    public class UserModel
+    public class mdl_User
     {
         public int          UserID          { get; set; }
         public int          UserNumber      { get; set; }
@@ -43,10 +43,10 @@ namespace DataControlsLib.DataModels
         /// <returns></returns>
         public override bool Equals(object obj)
         {
-            if (!(obj is UserModel))
+            if (!(obj is mdl_User))
                 return false;
 
-            var other = obj as UserModel;
+            var other = obj as mdl_User;
 
             if (UserNumber          != other.UserNumber       
                 || Status           != other.Status       
@@ -80,7 +80,7 @@ namespace DataControlsLib.DataModels
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns></returns>
-        public static bool operator ==(UserModel x, UserModel y)
+        public static bool operator ==(mdl_User x, mdl_User y)
         {
             return x.Equals(y);
         }
@@ -92,7 +92,7 @@ namespace DataControlsLib.DataModels
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns></returns>
-        public static bool operator !=(UserModel x, UserModel y)
+        public static bool operator !=(mdl_User x, mdl_User y)
         {
             return !(x == y);
         }

@@ -10,7 +10,7 @@ namespace DataControlsLib.DataModels
     /// Data model containing class variables that describe a single project. Includes Equals (and operator) 
     /// override to compare values of class variables in two instances of this class.
     /// </summary>
-    public class ProjectModel
+    public class mdl_Project
     {
         public int pID { get; set; }
         public string ProjectNumber { get; set; }
@@ -41,10 +41,10 @@ namespace DataControlsLib.DataModels
         /// <returns></returns>
         public override bool Equals(object obj)
         {
-            if (!(obj is ProjectModel))
+            if (!(obj is mdl_Project))
                 return false;
             
-            var other = obj as ProjectModel;
+            var other = obj as mdl_Project;
 
             if (ProjectNumber != other.ProjectNumber
                 || ProjectName != other.ProjectName
@@ -77,7 +77,7 @@ namespace DataControlsLib.DataModels
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns></returns>
-        public static bool operator ==(ProjectModel x, ProjectModel y)
+        public static bool operator ==(mdl_Project x, mdl_Project y)
         {
             return x.Equals(y);
         }
@@ -89,7 +89,7 @@ namespace DataControlsLib.DataModels
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns></returns>
-        public static bool operator !=(ProjectModel x, ProjectModel y)
+        public static bool operator !=(mdl_Project x, mdl_Project y)
         {
             return !(x==y);
         }

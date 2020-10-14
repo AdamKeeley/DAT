@@ -61,7 +61,7 @@ namespace CMS
         private bool insertNewUser()
         {
             User Users = new User();
-            UserModel mdl_User = new UserModel();
+            mdl_User mdl_User = new mdl_User();
 
             //put control values into UserModel
             mdl_User.UserNumber     = Users.getLastUserNumber() + 1;
@@ -216,7 +216,7 @@ namespace CMS
         /// </summary>
         /// <param name="mdl_User"></param>
         /// <returns></returns>
-        private DialogResult confirmationBox(UserModel mdl_User)
+        private DialogResult confirmationBox(mdl_User mdl_User)
         {
             string reviewUserDetails = $"Create new user with these details?" + Environment.NewLine + Environment.NewLine;
             reviewUserDetails += $"Status:\t\t{mdl_User.Status_Desc}" + Environment.NewLine + Environment.NewLine;

@@ -10,7 +10,7 @@ namespace DataControlsLib.DataModels
     /// Data model containing class variables that describe a single project document. Includes Equals (and operator) 
     /// override to compare values of class variables in two instances of this class.
     /// </summary>
-    public class ProjectDocModel
+    public class mdl_ProjectDoc
     {
         public int?         pdID            { get; set; }
         public string       ProjectNumber   { get; set; }
@@ -27,10 +27,10 @@ namespace DataControlsLib.DataModels
         /// <returns></returns>
         public override bool Equals(object obj)
         {
-            if (!(obj is ProjectDocModel))
+            if (!(obj is mdl_ProjectDoc))
                 return false;
 
-            var other = obj as ProjectDocModel;
+            var other = obj as mdl_ProjectDoc;
 
             if (ProjectNumber != other.ProjectNumber
                 || DocumentType != other.DocumentType
@@ -50,7 +50,7 @@ namespace DataControlsLib.DataModels
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns></returns>
-        public static bool operator ==(ProjectDocModel x, ProjectDocModel y)
+        public static bool operator ==(mdl_ProjectDoc x, mdl_ProjectDoc y)
         {
             return x.Equals(y);
         }
@@ -62,7 +62,7 @@ namespace DataControlsLib.DataModels
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns></returns>
-        public static bool operator !=(ProjectDocModel x, ProjectDocModel y)
+        public static bool operator !=(mdl_ProjectDoc x, mdl_ProjectDoc y)
         {
             return !(x == y);
         }

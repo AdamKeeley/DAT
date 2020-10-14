@@ -34,7 +34,7 @@ namespace CMS
         /// <summary>
         /// Class instance containing variables that describe a single project.
         /// </summary>
-        ProjectModel mdl_CurrentProject;
+        mdl_Project mdl_CurrentProject;
 
         /// <summary>
         /// Creates a new class object from Project class and calls method getProjectsDataSet() to populate DataSet in this class (ds_Project).
@@ -55,6 +55,7 @@ namespace CMS
             fillCurrentProjectVariables(pNumber);
             setProjectDetails(pNumber);
             setProjectNotes(pNumber);
+            setProjectPlatformInfo(pNumber);
             setProjectUsers(pNumber);
             changeDocButtonColour(pNumber);
         }
@@ -183,12 +184,38 @@ namespace CMS
             dgv_pNotes.DataSource = dt_dgv_pNotes;
 
             //format DataGridView (dgv_pNotes) column widths etc.
-            dgv_pNotes.Columns["Note"].Width = 330;
-            dgv_pNotes.Columns["Created Date"].Width = 80;
-            dgv_pNotes.Columns["Created By"].Width = 80;
+            dgv_pNotes.Columns["Note"].Width = 711;
+            dgv_pNotes.Columns["Created Date"].Width = 81;
+            dgv_pNotes.Columns["Created By"].Width = 81;
             dgv_pNotes.Columns["Note"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             dgv_pNotes.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dgv_pNotes.Sort(dgv_pNotes.Columns["Created Date"], ListSortDirection.Descending);
+        }
+
+        private void setProjectPlatformInfo(string pNumber)
+        {
+            //populate DataGridView (dgv_PlatformDetails) from DataTable (ds_Project.Tables["tblProjectPlatformInfo"])
+            //create new DataTable (dt_dgv_PlatformDetails) that just contains columns of interest
+            DataTable dt_dgv_PlatformDetails = new DataTable();
+            dt_dgv_PlatformDetails.Columns.Add("Item");
+            dt_dgv_PlatformDetails.Columns.Add("Info");
+
+            //iterate through each record in source DataTable and add to newly created DataTable
+            DataRow row;
+            foreach (DataRow plRow in ds_Project.Tables["tblProjectPlatformInfo"].Select($"ProjectNumber = '{pNumber}'"))
+            {
+                row = dt_dgv_PlatformDetails.NewRow();
+                foreach (DataRow platformInfoRow in plRow.GetParentRows("ProjectPlatformInfo_PlatformInfo"))
+                {
+                    row["Item"] = (string)platformInfoRow["PlatformInfoDescription"];
+                }
+                row["Info"] = (string)plRow["ProjectPlatformInfo"];
+                dt_dgv_PlatformDetails.Rows.Add(row);
+            }
+            dgv_PlatformDetails.DataSource = dt_dgv_PlatformDetails;
+            dgv_PlatformDetails.Sort(dgv_PlatformDetails.Columns["Item"], ListSortDirection.Ascending);
+            dgv_PlatformDetails.Columns["Item"].Width = 75;
+            dgv_PlatformDetails.Columns["Info"].Width = 280;
         }
 
         /// <summary>
@@ -200,7 +227,7 @@ namespace CMS
         /// <param name="pNumber"></param>
         private void setProjectUsers(string pNumber)
         {
-            //populate DataGridView (dgv_ProjectUsers) from DataTable (ds_Project.Tables["tblProjectNotes"])
+            //populate DataGridView (dgv_ProjectUsers) from DataTable (ds_Project.Tables["tblUserProject"])
             //create new DataTable (dt_dgv_pUsers) that just contains columns of interest
             DataTable dt_dgv_pUsers = new DataTable();
             dt_dgv_pUsers.Columns.Add("Full Name");
@@ -278,11 +305,6 @@ namespace CMS
             cb_DATRAG.TabIndex = ++x;
             tb_pNameValue.TabIndex = ++x;
 
-            gb_Platform.TabIndex = ++x;
-            chkb_Azure.TabIndex = ++x;
-            chkb_IRC.TabIndex = ++x;
-            chkb_SEED.TabIndex = ++x;
-
             gb_Governance.TabIndex = ++x;
             chkb_ISO27001.TabIndex = ++x;
             chkb_DSPT.TabIndex = ++x;
@@ -293,6 +315,11 @@ namespace CMS
             mtb_pStartDateValue.TabIndex = ++x;
             mtb_pEndDateValue.TabIndex = ++x;
 
+            gb_Platform.TabIndex = ++x;
+            chkb_Azure.TabIndex = ++x;
+            chkb_IRC.TabIndex = ++x;
+            chkb_SEED.TabIndex = ++x;
+
             tb_PortfolioNo.TabIndex = ++x;
             cb_pStage.TabIndex = ++x;
             cb_pClassification.TabIndex = ++x;
@@ -300,9 +327,9 @@ namespace CMS
             cb_PI.TabIndex = ++x;
             cb_Faculty.TabIndex = ++x;
 
-            gb_ProjectNotes.TabIndex = ++x;
-            tb_NewProjectNote.TabIndex = ++x;
-            btn_InsertProjectNote.TabIndex = ++x;
+            gb_PlatformDetails.TabIndex = ++x;
+            btn_PlatformDetailsAdd.TabIndex = ++x;
+            btn_PlatformDetailsRemove.TabIndex = ++x;
 
             gb_ProjectUsers.TabIndex = ++x;
             btn_ProjectUserAdd.TabIndex = ++x;
@@ -313,6 +340,10 @@ namespace CMS
             btn_DMP.TabIndex = ++x;
             btn_RA.TabIndex = ++x;
             btn_AllDocs.TabIndex = ++x;
+
+            gb_ProjectNotes.TabIndex = ++x;
+            tb_NewProjectNote.TabIndex = ++x;
+            btn_InsertProjectNote.TabIndex = ++x;
 
             btn_NewProject.TabIndex = ++x;
             btn_Refresh.TabIndex = ++x;
@@ -355,7 +386,7 @@ namespace CMS
         private bool updateProject(string pNumber)
         {
             bool success = false;
-            ProjectModel mdl_NewProject = new ProjectModel();
+            mdl_Project mdl_NewProject = new mdl_Project();
 
             mdl_NewProject.ProjectNumber        = pNumber;
             mdl_NewProject.ProjectName          = tb_pNameValue.Text;

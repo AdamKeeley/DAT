@@ -86,9 +86,9 @@ namespace CMS
         /// <param name="UserNumber"></param>
         /// <param name="ds_User"></param>
         /// <returns></returns>
-        public UserModel getUser(int UserNumber, DataSet ds_User)
+        public mdl_User getUser(int UserNumber, DataSet ds_User)
         {
-            UserModel mdl_User = new UserModel();
+            mdl_User mdl_User = new mdl_User();
 
             //if no records found, try will fail at "DataRow uRow = uRows[i];" and go to catch
             try
@@ -266,7 +266,7 @@ namespace CMS
         /// </summary>
         /// <param name="mdl_User"></param>
         /// <returns></returns>
-        public bool insertUser(UserModel mdl_User)
+        public bool insertUser(mdl_User mdl_User)
         {
             bool success = false;
 
@@ -485,7 +485,7 @@ namespace CMS
         /// </summary>
         /// <param name="mdl_User"></param>
         /// <returns></returns>
-        public bool requiredFields(UserModel mdl_User)
+        public bool requiredFields(mdl_User mdl_User)
         {
             bool requiredFields = true;
 
@@ -516,7 +516,7 @@ namespace CMS
         /// <param name="mdl_User"></param>
         /// <param name="tbl_User"></param>
         /// <returns>True if confirmed that user already does exist in database, False if new user</returns>
-        public bool userExists(UserModel mdl_User, DataTable tbl_User)
+        public bool userExists(mdl_User mdl_User, DataTable tbl_User)
         {
             //bool userExists = false;
 

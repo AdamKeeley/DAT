@@ -22,7 +22,7 @@ namespace CMS
         }
 
         DataSet ds_User;
-        UserModel mdl_CurrentUser;
+        mdl_User mdl_CurrentUser;
 
         private void fillUsersDataSet()
         {
@@ -245,7 +245,7 @@ namespace CMS
         private bool updateUser(int UserNumber)
         {
             bool success = false;
-            UserModel mdl_NewUser = new UserModel();
+            mdl_User mdl_NewUser = new mdl_User();
 
             mdl_NewUser.UserNumber = UserNumber;
             if (cb_UserStatus.SelectedIndex > -1)

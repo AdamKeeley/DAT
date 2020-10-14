@@ -57,6 +57,11 @@ namespace CMS
                     GetDB.GetDataTable(conn, ds_prj, "tblProjectNotes",
                         $"select * from [dbo].[tblProjectNotes] " +
                         $"order by [ProjectNumber], [Created] desc");
+                    GetDB.GetDataTable(conn, ds_prj, "tblProjectPlatformInfo",
+                        $"Select * from [dbo].[tblProjectPlatformInfo] " +
+                        $"where [ValidTo] is null");
+                    GetDB.GetDataTable(conn, ds_prj, "tlkPlatformInfo",
+                        $"select * from [dbo].[tlkPlatformInfo]");
                     GetDB.GetDataTable(conn, ds_prj, "tblUserProject",
                         $"select * from [dbo].[tblUserProject] " +
                         $"where [ValidTo] is null");
@@ -115,6 +120,9 @@ namespace CMS
                     ds_prj.Relations.Add("UserProject_User"
                         , ds_prj.Tables["tblUser"].Columns["UserNumber"]
                         , ds_prj.Tables["tblUserProject"].Columns["UserNumber"]);
+                    ds_prj.Relations.Add("ProjectPlatformInfo_PlatformInfo"
+                        , ds_prj.Tables["tlkPlatformInfo"].Columns["PlatformInfoID"]
+                        , ds_prj.Tables["tblProjectPlatformInfo"].Columns["PlatformInfoID"]);
                     ds_prj.Relations.Add("ProjectDocument_Document"
                         , ds_prj.Tables["tlkDocuments"].Columns["DocumentID"]
                         , ds_prj.Tables["tblProjectDocument"].Columns["DocumentType"]);
@@ -138,9 +146,9 @@ namespace CMS
         /// <returns>
         /// Populated ProjectModel 
         /// </returns>
-        public ProjectModel getProject(string pNumber, DataSet ds_Project)
+        public mdl_Project getProject(string pNumber, DataSet ds_Project)
         {
-            ProjectModel mdl_Project = new ProjectModel();
+            mdl_Project mdl_Project = new mdl_Project();
             
             //if no records found, try will fail at "DataRow pRow = pRows[i];" and go to catch
             try
@@ -283,7 +291,7 @@ namespace CMS
         /// <returns>
         /// true on success, defaults to false
         /// </returns>
-        public bool insertProject(ProjectModel mdl_Project)
+        public bool insertProject(mdl_Project mdl_Project)
         {
             bool success = false;
 
@@ -403,7 +411,7 @@ namespace CMS
         /// <param name="ProjectNumber"></param>
         /// <param name="DocumentType"></param>
         /// <returns></returns>
-        public int? getNextDocVersion(ProjectDocModel mdl_ProjectDoc)
+        public int? getNextDocVersion(mdl_ProjectDoc mdl_ProjectDoc)
         {
             int? version = null;
 
@@ -462,7 +470,7 @@ namespace CMS
         //    }
         //}
 
-        public bool insertNewDoc(ProjectDocModel mdl_ProjectDoc)
+        public bool insertNewDoc(mdl_ProjectDoc mdl_ProjectDoc)
         {
             try
             {
@@ -594,7 +602,7 @@ namespace CMS
         /// <returns> 
         /// 'true' if all fields are populated, 'false' and mesaagebox feedback if any are missing.
         /// </returns>
-        public bool requiredFields(ProjectModel mdl_Project)
+        public bool requiredFields(mdl_Project mdl_Project)
         {
             bool requiredFields = true;
 
@@ -619,7 +627,7 @@ namespace CMS
         /// <returns> 
         /// 'true' if all fields are populated, 'false' and mesaagebox feedback if any are missing.
         /// </returns>
-        public bool requiredDocFields(ProjectDocModel mdl_ProjectDoc)
+        public bool requiredDocFields(mdl_ProjectDoc mdl_ProjectDoc)
         {
             if (mdl_ProjectDoc.DocumentType < 1 || mdl_ProjectDoc.DocumentType == null)
             {

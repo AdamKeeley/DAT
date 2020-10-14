@@ -46,8 +46,8 @@
     <Compile Include="DataModels\DsaModel.cs" />
     <Compile Include="DataModels\DsaNoteModel.cs" />
     <Compile Include="DataModels\DsasProjectsModel.cs" />
-    <Compile Include="DataModels\ProjectDocModel.cs" />
-    <Compile Include="DataModels\UserModel.cs" />
+    <Compile Include="DataModels\mdl_ProjectDoc.cs" />
+    <Compile Include="DataModels\mdl_User.cs" />
     <Compile Include="IEnumerableExtensions.cs" />
     <Compile Include="PutDB.cs" />
     <Compile Include="SQL_Stuff.cs" />
@@ -55,7 +55,7 @@
     <Compile Include="DataModels\AssetsChangeLogModel.cs" />
     <Compile Include="DataModels\AssetsRegisterModel.cs" />
     <Compile Include="DataModels\DataIOModel.cs" />
-    <Compile Include="DataModels\ProjectModel.cs" />
+    <Compile Include="DataModels\mdl_Project.cs" />
     <Compile Include="DataModels\tlkAssetChangeTypeModel.cs" />
     <Compile Include="GetDB.cs" />
     <Compile Include="StringExtensions.cs" />

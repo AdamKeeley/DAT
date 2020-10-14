@@ -18,7 +18,7 @@ namespace CMS
         bool docTypeChanged = false;
         DataSet ds_Projects;
         int documentType;
-        ProjectDocModel mdl_ProjectDoc = new ProjectDocModel();
+        mdl_ProjectDoc mdl_ProjectDoc = new mdl_ProjectDoc();
 
         private void setProjectDocAdd(string pNumber, DataSet ds_prj, int docType)
         {
