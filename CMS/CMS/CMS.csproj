@@ -117,6 +117,12 @@
     <Compile Include="Project\frm_ProjectDocHistory.Designer.cs">
       <DependentUpon>frm_ProjectDocHistory.cs</DependentUpon>
     </Compile>
+    <Compile Include="Project\frm_ProjectPlatformInfoAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Project\frm_ProjectPlatformInfoAdd.Designer.cs">
+      <DependentUpon>frm_ProjectPlatformInfoAdd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Project\frm_ProjectUserAdd.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -198,6 +204,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Project\frm_ProjectDocHistory.resx">
       <DependentUpon>frm_ProjectDocHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Project\frm_ProjectPlatformInfoAdd.resx">
+      <DependentUpon>frm_ProjectPlatformInfoAdd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Project\frm_ProjectUserAdd.resx">
       <DependentUpon>frm_ProjectUserAdd.cs</DependentUpon>

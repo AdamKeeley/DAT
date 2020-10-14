@@ -691,7 +691,7 @@ namespace CMS
             this.dgv_PlatformDetails.ReadOnly = true;
             this.dgv_PlatformDetails.RowHeadersVisible = false;
             this.dgv_PlatformDetails.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dgv_PlatformDetails.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.dgv_PlatformDetails.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_PlatformDetails.Size = new System.Drawing.Size(355, 66);
             this.dgv_PlatformDetails.TabIndex = 41;
             this.dgv_PlatformDetails.TabStop = false;
@@ -704,6 +704,7 @@ namespace CMS
             this.btn_PlatformDetailsRemove.TabIndex = 43;
             this.btn_PlatformDetailsRemove.Text = "Remove";
             this.btn_PlatformDetailsRemove.UseVisualStyleBackColor = true;
+            this.btn_PlatformDetailsRemove.Click += new System.EventHandler(this.btn_PlatformDetailsRemove_Click);
             // 
             // btn_PlatformDetailsAdd
             // 
@@ -713,6 +714,7 @@ namespace CMS
             this.btn_PlatformDetailsAdd.TabIndex = 42;
             this.btn_PlatformDetailsAdd.Text = "Add";
             this.btn_PlatformDetailsAdd.UseVisualStyleBackColor = true;
+            this.btn_PlatformDetailsAdd.Click += new System.EventHandler(this.btn_PlatformDetailsAdd_Click);
             // 
             // frm_Project
             // 

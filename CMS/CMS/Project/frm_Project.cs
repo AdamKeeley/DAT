@@ -197,6 +197,7 @@ namespace CMS
             //populate DataGridView (dgv_PlatformDetails) from DataTable (ds_Project.Tables["tblProjectPlatformInfo"])
             //create new DataTable (dt_dgv_PlatformDetails) that just contains columns of interest
             DataTable dt_dgv_PlatformDetails = new DataTable();
+            dt_dgv_PlatformDetails.Columns.Add("ProjectPlatformInfoID");
             dt_dgv_PlatformDetails.Columns.Add("Item");
             dt_dgv_PlatformDetails.Columns.Add("Info");
 
@@ -205,6 +206,7 @@ namespace CMS
             foreach (DataRow plRow in ds_Project.Tables["tblProjectPlatformInfo"].Select($"ProjectNumber = '{pNumber}'"))
             {
                 row = dt_dgv_PlatformDetails.NewRow();
+                row["ProjectPlatformInfoID"] = (int)plRow["ProjectPlatformInfoID"];
                 foreach (DataRow platformInfoRow in plRow.GetParentRows("ProjectPlatformInfo_PlatformInfo"))
                 {
                     row["Item"] = (string)platformInfoRow["PlatformInfoDescription"];
@@ -213,8 +215,9 @@ namespace CMS
                 dt_dgv_PlatformDetails.Rows.Add(row);
             }
             dgv_PlatformDetails.DataSource = dt_dgv_PlatformDetails;
-            dgv_PlatformDetails.Sort(dgv_PlatformDetails.Columns["Item"], ListSortDirection.Ascending);
-            dgv_PlatformDetails.Columns["Item"].Width = 75;
+            dgv_PlatformDetails.Columns["ProjectPlatformInfoID"].Visible = false;
+            dgv_PlatformDetails.Sort(dgv_PlatformDetails.Columns["Item"], ListSortDirection.Descending);
+            dgv_PlatformDetails.Columns["Item"].Width = 100;
             dgv_PlatformDetails.Columns["Info"].Width = 280;
         }
 
@@ -536,6 +539,34 @@ namespace CMS
             }
         }
 
+        private void removeProjectPlatformInfo()
+        {
+            int rowCount = dgv_PlatformDetails.Rows.GetRowCount(DataGridViewElementStates.Selected);
+
+            if (rowCount > 0)
+            {
+                List<int> removedPlatformInfo = new List<int>();
+                for (int i = 0; i < rowCount; i++)
+                {
+                    int rowIndex = dgv_PlatformDetails.SelectedRows[i].Index;
+                    int projectPlatformInfoID = Convert.ToInt32(dgv_PlatformDetails.Rows[rowIndex].Cells["ProjectPlatformInfoID"].Value);
+                    string projectPlatformItem = dgv_PlatformDetails.Rows[rowIndex].Cells["Item"].Value.ToString();
+
+                    Project Projects = new Project();
+                    DialogResult removeInfo = MessageBox.Show($"Remove {projectPlatformItem} from project record?", "", MessageBoxButtons.YesNo);
+                    if (removeInfo == DialogResult.Yes)
+                    {
+                        if(Projects.deleteProjectPlatformInfo(projectPlatformInfoID) == true)
+                            removedPlatformInfo.Add(rowIndex);
+                    }
+                }
+                foreach (int rowIndex in removedPlatformInfo)
+                {
+                    dgv_PlatformDetails.Rows.RemoveAt(rowIndex);
+                }
+            }
+        }
+
         /// <summary>
         /// Passes each selected UserNumber in the Research Team DataGridView (dgv_ProjectUsers) and the current 
         /// ProjectNumber through to the deleteUserProject method of the Users class. 
@@ -648,11 +679,6 @@ namespace CMS
             }
         }
 
-        private void btn_ProjectUserRemove_Click(object sender, EventArgs e)
-        {
-            removeProjectUser();
-        }
-
         private void btn_Refresh_Click(object sender, EventArgs e)
         {
             string pNumber = cb_pNumberValue.Text;
@@ -687,6 +713,26 @@ namespace CMS
                 fillProjectsDataSet();
                 refreshProjectForm(mdl_CurrentProject.ProjectNumber);
             }
+        }
+
+        private void btn_ProjectUserRemove_Click(object sender, EventArgs e)
+        {
+            removeProjectUser();
+        }
+
+        private void btn_PlatformDetailsAdd_Click(object sender, EventArgs e)
+        {
+            using (frm_ProjectPlatformInfoAdd ProjectPlatformInfoAdd = new frm_ProjectPlatformInfoAdd(mdl_CurrentProject.ProjectNumber, ds_Project))
+            {
+                ProjectPlatformInfoAdd.ShowDialog();
+                fillProjectsDataSet();
+                refreshProjectForm(mdl_CurrentProject.ProjectNumber);
+            }
+        }
+
+        private void btn_PlatformDetailsRemove_Click(object sender, EventArgs e)
+        {
+            removeProjectPlatformInfo();
         }
 
         private void btn_AllDocs_Click(object sender, EventArgs e)

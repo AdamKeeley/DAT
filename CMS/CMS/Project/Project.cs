@@ -470,6 +470,71 @@ namespace CMS
         //    }
         //}
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ProjectPlatformInfoID"></param>
+        /// <returns></returns>
+        public bool deleteProjectPlatformInfo(int ProjectPlatformInfoID)
+        {
+            try
+            {
+                //update ValidUntil field of current record (perform 'logical' delete)
+                SqlConnection conn = new SqlConnection();
+                conn.ConnectionString = SQL_Stuff.conString;
+                conn.Credential = SQL_Stuff.credential;
+                using (conn)
+                {
+                    SqlCommand qryRemoveProjectPlatformInfo = new SqlCommand();
+                    qryRemoveProjectPlatformInfo.Connection = conn;
+                    qryRemoveProjectPlatformInfo.CommandText = $"update [dbo].[tblProjectPlatformInfo] " +
+                        $"set[ValidTo] = getdate() " +
+                        $"where[ValidTo] is null " +
+                        $"and [ProjectPlatformInfoID] = @ProjectPlatformInfoID";
+                    qryRemoveProjectPlatformInfo.Parameters.Add("@ProjectPlatformInfoID", SqlDbType.Int).Value = ProjectPlatformInfoID;
+                    conn.Open();
+                    qryRemoveProjectPlatformInfo.ExecuteNonQuery();
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to delete record" + Environment.NewLine + Environment.NewLine + ex);
+                return false;
+            }
+        }
+
+        public bool insertProjectPlatformInfo(string pNumber, int ProjectPlatformInfoID, string PlatformInfoDescription)
+        {
+            try
+            {
+                SqlConnection conn = new SqlConnection();
+                conn.ConnectionString = SQL_Stuff.conString;
+                conn.Credential = SQL_Stuff.credential;
+                using (conn)
+                {
+                    //create parameterised SQL query to insert a new record to tblProjectNotes
+                    SqlCommand qryInsertProjectPlatformInfo = new SqlCommand();
+                    qryInsertProjectPlatformInfo.Connection = conn;
+                    qryInsertProjectPlatformInfo.CommandText = $"insert into [dbo].[tblProjectPlatformInfo] " +
+                        "([ProjectNumber], [PlatformInfoID], [ProjectPlatformInfo]) values (@pNumber, @PlatformInfoID, @ProjectPlatformInfo)";
+                    qryInsertProjectPlatformInfo.Parameters.Add("@pNumber", SqlDbType.VarChar, 5).Value = pNumber;
+                    qryInsertProjectPlatformInfo.Parameters.Add("@PlatformInfoID", SqlDbType.Int).Value = ProjectPlatformInfoID;
+                    qryInsertProjectPlatformInfo.Parameters.Add("@ProjectPlatformInfo", SqlDbType.VarChar, 255).Value = PlatformInfoDescription;
+
+                    //open connection and execute insert
+                    conn.Open();
+                    qryInsertProjectPlatformInfo.ExecuteNonQuery();
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to add new platform information" + Environment.NewLine + ex.Message);
+                return false;
+            }
+        }
+
         public bool insertNewDoc(mdl_ProjectDoc mdl_ProjectDoc)
         {
             try

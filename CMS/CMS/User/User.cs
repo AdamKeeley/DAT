@@ -364,7 +364,7 @@ namespace CMS
                 {
                     SqlCommand qryRemoveUserProject = new SqlCommand();
                     qryRemoveUserProject.Connection = conn;
-                    qryRemoveUserProject.CommandText = "update [dbo].[tblUserProject] set [ValidTo] = getdate() where [UserNumber] = @UserNumber and [ProjectNumber] = @ProjectNumber";
+                    qryRemoveUserProject.CommandText = "update [dbo].[tblUserProject] set [ValidTo] = getdate() where [ValidTo] is null and [UserNumber] = @UserNumber and [ProjectNumber] = @ProjectNumber";
                     qryRemoveUserProject.Parameters.Add("@UserNumber", SqlDbType.Int).Value = UserNumber;
                     qryRemoveUserProject.Parameters.Add("@ProjectNumber", SqlDbType.VarChar,5).Value = ProjectNumber;
                     conn.Open();
