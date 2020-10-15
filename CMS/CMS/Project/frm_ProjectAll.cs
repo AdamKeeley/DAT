@@ -303,7 +303,7 @@ namespace CMS
         {
             cb_DATRAG.SelectedIndex = -1;
             tb_pNameValue.Clear();
-            cb_PortfolioNo.Select = -1;
+            cb_PortfolioNo.SelectedIndex = -1;
             cb_pStage.SelectedIndex = -1;
             cb_pClassification.SelectedIndex = -1;
             cb_DATRAG.SelectedIndex = -1;
