@@ -1,4 +1,5 @@
-﻿using System.Data.SqlClient;
+﻿using System.Data;
+using System.Data.SqlClient;
 
 namespace DataControlsLib
 {
@@ -46,6 +47,16 @@ namespace DataControlsLib
 
             //// Sean's laptop
             //conString = "Data Source=SEAN-LAPTOP\\SQLEXPRESS;Initial Catalog=DAT_CMS;Integrated Security=True";
+        }
+
+        public static void getDataTable(SqlConnection cnn, DataSet dsObj, string tblName, string sql)
+        {
+            SqlDataAdapter da = new SqlDataAdapter();
+            SqlCommand qry = new SqlCommand();
+            qry.CommandText = sql;
+            qry.Connection = cnn;
+            da.SelectCommand = qry;
+            da.Fill(dsObj, tblName);
         }
     }
 }

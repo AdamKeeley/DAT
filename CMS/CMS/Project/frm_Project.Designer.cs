@@ -147,6 +147,7 @@ namespace CMS
             this.cb_pStage.Name = "cb_pStage";
             this.cb_pStage.Size = new System.Drawing.Size(124, 21);
             this.cb_pStage.TabIndex = 5;
+            this.cb_pStage.Enter += new System.EventHandler(this.combobox_RemoveLegacyItems);
             // 
             // lbl_pPI
             // 
@@ -350,6 +351,7 @@ namespace CMS
             this.cb_pClassification.Name = "cb_pClassification";
             this.cb_pClassification.Size = new System.Drawing.Size(124, 21);
             this.cb_pClassification.TabIndex = 20;
+            this.cb_pClassification.Enter += new System.EventHandler(this.combobox_RemoveLegacyItems);
             // 
             // lbl_pClassification
             // 
@@ -378,6 +380,7 @@ namespace CMS
             this.cb_DATRAG.Name = "cb_DATRAG";
             this.cb_DATRAG.Size = new System.Drawing.Size(76, 21);
             this.cb_DATRAG.TabIndex = 23;
+            this.cb_DATRAG.Enter += new System.EventHandler(this.combobox_RemoveLegacyItems);
             // 
             // mtb_ProjectedEndDateValue
             // 
@@ -409,6 +412,7 @@ namespace CMS
             this.cb_Faculty.Name = "cb_Faculty";
             this.cb_Faculty.Size = new System.Drawing.Size(173, 21);
             this.cb_Faculty.TabIndex = 27;
+            this.cb_Faculty.Enter += new System.EventHandler(this.combobox_RemoveLegacyItems);
             // 
             // lbl_Faculty
             // 

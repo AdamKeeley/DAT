@@ -148,7 +148,7 @@ namespace CMS
                     conn.Credential = SQL_Stuff.credential;
                     using (conn)
                     {
-                        GetDB.GetDataTable(conn, ds_Projects, "tblProjectDocument",
+                        SQL_Stuff.getDataTable(conn, ds_Projects, "tblProjectDocument",
                         $"select * from [dbo].[tblProjectDocument]" +
                         $"where [ValidTo] is null");
                     }

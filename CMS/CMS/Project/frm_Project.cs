@@ -99,6 +99,7 @@ namespace CMS
                 cb_pNumberValue.Text                    = pNumber;
                 tb_pNameValue.Text                      = mdl_CurrentProject.ProjectName;
                 tb_PortfolioNo.Text                     = mdl_CurrentProject.PortfolioNumber;
+
                 cb_pStage.DataSource                    = ds_Project.Tables["tlkStage"];
                 cb_pStage.ValueMember                   = "StageID";
                 cb_pStage.DisplayMember                 = "pStageDescription";
@@ -106,6 +107,7 @@ namespace CMS
                     cb_pStage.SelectedIndex = -1;
                 else
                     cb_pStage.SelectedValue             = mdl_CurrentProject.Stage;
+                
                 cb_pClassification.DataSource           = ds_Project.Tables["tlkClassification"];
                 cb_pClassification.ValueMember          = "classificationID";
                 cb_pClassification.DisplayMember        = "classificationDescription";
@@ -630,6 +632,50 @@ namespace CMS
             }
         }
 
+        /// <summary>
+        /// Removes expired selectable items from a combobox. 
+        /// Expired items are those in sql db with an entry under ValidTo field.
+        /// Retains currently selected item, even if expired.
+        /// To be triggered on Focus Enter event.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void combobox_RemoveLegacyItems(object sender, EventArgs e)
+        {
+            if (sender is ComboBox)
+            {
+                // get combobox name, and currently assigned properties
+                string combobox_target = ((Control)sender).Name;
+                string combobox_ValueMember = ((ComboBox)Controls[combobox_target]).ValueMember;
+                string combobox_DisplayMember = ((ComboBox)Controls[combobox_target]).DisplayMember;
+
+                // put current datasource into new datatable
+                DataTable itemsToFilter = new DataTable();
+                itemsToFilter = ((ComboBox)Controls[combobox_target]).DataSource as DataTable;
+
+                // filter new data table to only retain non-expired items (where ValidTo is null) and currently selected value
+                // ensuring that currently elected items remain selected.
+                DataView filteredItems = new DataView(itemsToFilter);
+                if (((ComboBox)Controls[combobox_target]).SelectedIndex > -1)
+                {
+                    int currentValue = (int)((ComboBox)Controls[combobox_target]).SelectedValue;
+                    filteredItems.RowFilter = $"[ValidTo] is null or {combobox_ValueMember} = {currentValue}";
+                    ((ComboBox)Controls[combobox_target]).DataSource = filteredItems.ToTable();
+                    ((ComboBox)Controls[combobox_target]).ValueMember = combobox_ValueMember;
+                    ((ComboBox)Controls[combobox_target]).DisplayMember = combobox_DisplayMember;
+                    ((ComboBox)Controls[combobox_target]).SelectedValue = currentValue;
+                }
+                else
+                {
+                    filteredItems.RowFilter = $"[ValidTo] is null";
+                    ((ComboBox)Controls[combobox_target]).DataSource = filteredItems.ToTable();
+                    ((ComboBox)Controls[combobox_target]).ValueMember = combobox_ValueMember;
+                    ((ComboBox)Controls[combobox_target]).DisplayMember = combobox_DisplayMember;
+                    ((ComboBox)Controls[combobox_target]).SelectedIndex = -1;
+                }
+            }
+        }
+
         private void btn_InsertProjectNote_Click(object sender, EventArgs e)
         {
             string pNumber = cb_pNumberValue.Text;
@@ -756,5 +802,6 @@ namespace CMS
             //Passing through DocumentID = 3; corresponds to Risk Assessment in SQL db
             openProjectDocHistory(3);
         }
+
     }
 }

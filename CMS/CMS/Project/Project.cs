@@ -38,45 +38,40 @@ namespace CMS
                 conn.Credential = SQL_Stuff.credential;
                 using (conn)
                 {
-                    GetDB.GetDataTable(conn, ds_prj, "tblProjects",
+                    SQL_Stuff.getDataTable(conn, ds_prj, "tblProjects",
                         $"select * from [dbo].[tblProject] " +
                         $"where [ValidTo] is null " +
                         $"order by [ProjectNumber], [pID]");
-                    GetDB.GetDataTable(conn, ds_prj, "tlkStage",
-                        $"select * from [dbo].[tlkStage] " +
-                        $"where [ValidTo] is null");
-                    GetDB.GetDataTable(conn, ds_prj, "tlkClassification",
-                        $"select * from [dbo].[tlkClassification] " +
-                        $"where [ValidTo] is null");
-                    GetDB.GetDataTable(conn, ds_prj, "tlkRAG",
-                        $"select * from [dbo].[tlkRAG] " +
-                        $"where [ValidTo] is null");
-                    GetDB.GetDataTable(conn, ds_prj, "tlkFaculty",
-                        $"select * from [dbo].[tlkFaculty] " +
-                        $"where [ValidTo] is null");
-                    GetDB.GetDataTable(conn, ds_prj, "tblProjectNotes",
+                    SQL_Stuff.getDataTable(conn, ds_prj, "tlkStage",
+                        $"select * from [dbo].[tlkStage] ");
+                    SQL_Stuff.getDataTable(conn, ds_prj, "tlkClassification",
+                        $"select * from [dbo].[tlkClassification] ");
+                    SQL_Stuff.getDataTable(conn, ds_prj, "tlkRAG",
+                        $"select * from [dbo].[tlkRAG] ");
+                    SQL_Stuff.getDataTable(conn, ds_prj, "tlkFaculty",
+                        $"select * from [dbo].[tlkFaculty] ");
+                    SQL_Stuff.getDataTable(conn, ds_prj, "tblProjectNotes",
                         $"select * from [dbo].[tblProjectNotes] " +
                         $"order by [ProjectNumber], [Created] desc");
-                    GetDB.GetDataTable(conn, ds_prj, "tblProjectPlatformInfo",
+                    SQL_Stuff.getDataTable(conn, ds_prj, "tblProjectPlatformInfo",
                         $"Select * from [dbo].[tblProjectPlatformInfo] " +
                         $"where [ValidTo] is null");
-                    GetDB.GetDataTable(conn, ds_prj, "tlkPlatformInfo",
+                    SQL_Stuff.getDataTable(conn, ds_prj, "tlkPlatformInfo",
                         $"select * from [dbo].[tlkPlatformInfo]");
-                    GetDB.GetDataTable(conn, ds_prj, "tblUserProject",
+                    SQL_Stuff.getDataTable(conn, ds_prj, "tblUserProject",
                         $"select * from [dbo].[tblUserProject] " +
                         $"where [ValidTo] is null");
-                    GetDB.GetDataTable(conn, ds_prj, "tblProjectDocument",
+                    SQL_Stuff.getDataTable(conn, ds_prj, "tblProjectDocument",
                         $"select * from [dbo].[tblProjectDocument]" +
                         $"where [ValidTo] is null");
-                    GetDB.GetDataTable(conn, ds_prj, "tlkDocuments",
-                        $"select * from [dbo].[tlkDocuments]" +
-                        $"where [ValidTo] is null");
-                    GetDB.GetDataTable(conn, ds_prj, "tblUser",
+                    SQL_Stuff.getDataTable(conn, ds_prj, "tlkDocuments",
+                        $"select * from [dbo].[tlkDocuments]");
+                    SQL_Stuff.getDataTable(conn, ds_prj, "tblUser",
                         $"select *, [LastName] + ', ' + [FirstName] as FullName " +
                         $"from [dbo].[tblUser] " +
                         $"where [ValidTo] is null " +
                         $"order by [LastName], [FirstName], [UserID]");
-                    GetDB.GetDataTable(conn, ds_prj, "tblDocsAccepted",
+                    SQL_Stuff.getDataTable(conn, ds_prj, "tblDocsAccepted",
                         $"select tbl.ProjectNumber " +
                         $"    , tlk.DocumentID " +
                         $"    , tlk.DocumentDescription " +

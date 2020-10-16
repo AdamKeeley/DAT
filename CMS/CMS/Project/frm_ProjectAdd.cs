@@ -46,27 +46,40 @@ namespace CMS
             ds_Project = Projects.getProjectsDataSet();
 
             //bind DataSource to comboboxes
-            cb_DATRAG.DataSource = ds_Project.Tables["tlkRAG"];
+            DataView DATRAGItems = new DataView(ds_Project.Tables["tlkRAG"]);
+            DATRAGItems.RowFilter = "[ValidTo] is null";
+            cb_DATRAG.DataSource = DATRAGItems;
             cb_DATRAG.ValueMember = "ragID";
             cb_DATRAG.DisplayMember = "ragDescription";
             cb_DATRAG.SelectedIndex = -1;
-            cb_pStage.DataSource = ds_Project.Tables["tlkStage"];
+
+            DataView pStageItems = new DataView(ds_Project.Tables["tlkStage"]);
+            pStageItems.RowFilter = "[ValidTo] is null";
+            cb_pStage.DataSource = pStageItems;
             cb_pStage.ValueMember = "StageID";
             cb_pStage.DisplayMember = "pStageDescription";
             cb_pStage.SelectedIndex = -1;
-            cb_pClassification.DataSource = ds_Project.Tables["tlkClassification"];
+
+            DataView pClassificationItems = new DataView(ds_Project.Tables["tlkClassification"]);
+            pClassificationItems.RowFilter = "[ValidTo] is null";
+            cb_pClassification.DataSource = pClassificationItems;
             cb_pClassification.ValueMember = "classificationID";
             cb_pClassification.DisplayMember = "classificationDescription";
             cb_pClassification.SelectedIndex = -1;
+
             cb_LeadApplicant.DataSource = ds_Project.Tables["tlkLeadApplicant"];
             cb_LeadApplicant.ValueMember = "UserNumber";
             cb_LeadApplicant.DisplayMember = "FullName";
             cb_LeadApplicant.SelectedIndex = -1;
+
             cb_PI.DataSource = ds_Project.Tables["tlkPI"];
             cb_PI.ValueMember = "UserNumber";
             cb_PI.DisplayMember = "FullName";
-            cb_PI.SelectedIndex = -1;           
-            cb_Faculty.DataSource = ds_Project.Tables["tlkFaculty"];
+            cb_PI.SelectedIndex = -1;
+
+            DataView facultyItems = new DataView(ds_Project.Tables["tlkFaculty"]);
+            facultyItems.RowFilter = "[ValidTo] is null";
+            cb_Faculty.DataSource = facultyItems;
             cb_Faculty.ValueMember = "facultyID";
             cb_Faculty.DisplayMember = "facultyDescription";
             cb_Faculty.SelectedIndex = -1;

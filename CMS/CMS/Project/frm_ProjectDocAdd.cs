@@ -30,7 +30,9 @@ namespace CMS
             documentType = docType;
 
             //set controls values
-            cb_DocType.DataSource = ds_Projects.Tables["tlkDocuments"];
+            DataView documentItems = new DataView(ds_Projects.Tables["tlkDocuments"]);
+            documentItems.RowFilter = "[ValidTo] is null";
+            cb_DocType.DataSource = documentItems;
             cb_DocType.ValueMember = "DocumentID";
             cb_DocType.DisplayMember = "DocumentDescription";
             cb_DocType.SelectedIndex = -1;
