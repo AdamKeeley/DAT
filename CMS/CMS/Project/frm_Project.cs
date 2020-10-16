@@ -393,7 +393,8 @@ namespace CMS
 
             mdl_NewProject.ProjectNumber        = pNumber;
             mdl_NewProject.ProjectName          = tb_pNameValue.Text;
-            mdl_NewProject.PortfolioNumber      = tb_PortfolioNo.Text;
+            if (tb_PortfolioNo.Text.Length > 0)
+                mdl_NewProject.PortfolioNumber  = tb_PortfolioNo.Text;
             mdl_NewProject.DSPT                 = chkb_DSPT.Checked;
             mdl_NewProject.ISO27001             = chkb_ISO27001.Checked;
             mdl_NewProject.Azure                = chkb_Azure.Checked;

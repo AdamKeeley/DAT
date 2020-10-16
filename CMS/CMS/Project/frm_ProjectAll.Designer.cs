@@ -49,6 +49,8 @@
             this.lbl_recordCount = new System.Windows.Forms.Label();
             this.lbl_PortfolioNo = new System.Windows.Forms.Label();
             this.cb_PortfolioNo = new System.Windows.Forms.ComboBox();
+            this.lbl_VreNumber = new System.Windows.Forms.Label();
+            this.cb_VreNumber = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ProjectList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -272,11 +274,31 @@
             this.cb_PortfolioNo.TabIndex = 75;
             this.cb_PortfolioNo.TextChanged += new System.EventHandler(this.searchItemAdded);
             // 
+            // lbl_VreNumber
+            // 
+            this.lbl_VreNumber.AutoSize = true;
+            this.lbl_VreNumber.Location = new System.Drawing.Point(200, 9);
+            this.lbl_VreNumber.Name = "lbl_VreNumber";
+            this.lbl_VreNumber.Size = new System.Drawing.Size(69, 13);
+            this.lbl_VreNumber.TabIndex = 76;
+            this.lbl_VreNumber.Text = "VRE Number";
+            // 
+            // cb_VreNumber
+            // 
+            this.cb_VreNumber.FormattingEnabled = true;
+            this.cb_VreNumber.Location = new System.Drawing.Point(273, 6);
+            this.cb_VreNumber.Name = "cb_VreNumber";
+            this.cb_VreNumber.Size = new System.Drawing.Size(124, 21);
+            this.cb_VreNumber.TabIndex = 77;
+            this.cb_VreNumber.TextChanged += new System.EventHandler(this.searchItemAdded);
+            // 
             // frm_ProjectAll
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(994, 581);
+            this.Controls.Add(this.cb_VreNumber);
+            this.Controls.Add(this.lbl_VreNumber);
             this.Controls.Add(this.cb_PortfolioNo);
             this.Controls.Add(this.lbl_PortfolioNo);
             this.Controls.Add(this.lbl_recordCount);
@@ -328,5 +350,7 @@
         private System.Windows.Forms.Label lbl_recordCount;
         private System.Windows.Forms.Label lbl_PortfolioNo;
         private System.Windows.Forms.ComboBox cb_PortfolioNo;
+        private System.Windows.Forms.Label lbl_VreNumber;
+        private System.Windows.Forms.ComboBox cb_VreNumber;
     }
 }

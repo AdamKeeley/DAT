@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 
 namespace CMS
@@ -35,6 +38,20 @@ namespace CMS
                 //Setting DataSource and SelectedIndex triggers the TextChanged event, which is set to run 
                 //searchItemAdded method. This boolean flag prevents the method from running fillDataGridView 12 times
                 textChanged = false;
+
+                //Only display VRE numbers that are present in the PlatformInfoID column of the ProjectPlatformInfo table
+                DataTable dt_VreNumber = new DataTable();
+                dt_VreNumber.Columns.Add("ProjectNumber");
+                dt_VreNumber.Columns.Add("VRENumber");
+                dt_VreNumber.DefaultView.Sort = "VRENumber";
+                DataRow vreRow;
+                foreach (DataRow pRow in ds_Project.Tables["tblProjectPlatformInfo"].Select("[PlatformInfoID] = 1"))
+                {
+                    vreRow = dt_VreNumber.NewRow();
+                    vreRow["ProjectNumber"] = pRow["ProjectNumber"];
+                    vreRow["VRENumber"] = pRow["ProjectPlatformInfo"];
+                    dt_VreNumber.Rows.Add(vreRow);
+                }
 
                 //Only display portfolio numbers that are present in the PortfolioNumber column of the Project table
                 DataTable dt_PortfolioNo = new DataTable();
@@ -85,6 +102,10 @@ namespace CMS
                 }
 
                 //set controls values
+                cb_VreNumber.DataSource = dt_VreNumber.DefaultView.ToTable(true, "ProjectNumber", "VRENumber");
+                cb_VreNumber.ValueMember = "ProjectNumber";
+                cb_VreNumber.DisplayMember = "VRENumber";
+                cb_VreNumber.SelectedIndex = -1;              
                 cb_DATRAG.DataSource = ds_Project.Tables["tlkRAG"];
                 cb_DATRAG.ValueMember = "ragID";
                 cb_DATRAG.DisplayMember = "ragDescription";
@@ -126,8 +147,9 @@ namespace CMS
         private void fillDataGridView()
         {
             string filterAll                = "ProjectNumber like '%'";
+            string filterVreNumber          = $"VreNumber like '%{cb_VreNumber.Text}%'";
             string filterProjectName        = $"ProjectName like '%{tb_pNameValue.Text}%'";
-            string filterPortfolioNumber = $"PortfolioNumber like '%{cb_PortfolioNo.Text}%'";
+            string filterPortfolioNumber    = $"PortfolioNumber like '%{cb_PortfolioNo.Text}%'";
             string filterStage              = $"Stage = '{cb_pStage.Text}'";
             string filterClassification     = $"Classification = '{cb_pClassification.Text}'";
             string filterDATRAG             = $"DATRAG = '{cb_DATRAG.Text}'";
@@ -135,6 +157,8 @@ namespace CMS
             string filterPI                 = $"PI like '%{cb_PI.Text}%'";
             string filterFaculty            = $"Faculty = '{cb_Faculty.Text}'";
 
+            if (cb_VreNumber.Text != "")
+                filterAll += " AND " + filterVreNumber;
             if (tb_pNameValue.Text != "")
                 filterAll += " AND " + filterProjectName;
             if (cb_PortfolioNo.Text != "")
@@ -156,6 +180,7 @@ namespace CMS
             DataTable dt_ProjectList = new DataTable();
             dt_ProjectList.Columns.Add("ProjectNumber");
             dt_ProjectList.Columns.Add("ProjectName");
+            dt_ProjectList.Columns.Add("VreNumber");
             dt_ProjectList.Columns.Add("PortfolioNumber");
             dt_ProjectList.Columns.Add("Stage");
             dt_ProjectList.Columns.Add("Classification");
@@ -168,6 +193,15 @@ namespace CMS
             foreach (DataRow pRow in ds_Project.Tables["tblProjects"].Rows)
             {
                 a_row = dt_ProjectList.NewRow();
+
+                //concatenate VreNumbers into single string by creatig a list and joining with seperator
+                List<string> vreNo = new List<string>();
+                foreach (DataRow vRow in ds_Project.Tables["tblProjectPlatformInfo"].Select($"[PlatformInfoID] = 1 and [ProjectNumber] = '{pRow["ProjectNumber"]}'"))
+                {
+                    vreNo.Add(vRow["ProjectPlatformInfo"].ToString());
+                }
+                a_row["VreNumber"] = string.Join(";", vreNo);
+                
                 a_row["ProjectNumber"] = pRow["ProjectNumber"];
                 a_row["ProjectName"] = pRow["ProjectName"];
                 a_row["PortfolioNumber"] = pRow["PortfolioNumber"];
@@ -203,6 +237,7 @@ namespace CMS
             DataTable dt_dgv_ProjectList = new DataTable();
             dt_dgv_ProjectList.Columns.Add("Project Number");
             dt_dgv_ProjectList.Columns.Add("Project Name");
+            dt_dgv_ProjectList.Columns.Add("VRE Number");
             dt_dgv_ProjectList.Columns.Add("Portfolio Number"); 
             dt_dgv_ProjectList.Columns.Add("Stage");
             dt_dgv_ProjectList.Columns.Add("Classification");
@@ -217,6 +252,7 @@ namespace CMS
                 f_row = dt_dgv_ProjectList.NewRow();
                 f_row["Project Number"] = pRow["ProjectNumber"];
                 f_row["Project Name"] = pRow["ProjectName"];
+                f_row["VRE Number"] = pRow["VreNumber"];
                 f_row["Portfolio Number"] = pRow["PortfolioNumber"];
                 f_row["Stage"] = pRow["Stage"];
                 f_row["Classification"] = pRow["Classification"];
@@ -233,6 +269,7 @@ namespace CMS
 
             dgv_ProjectList.Columns["Project Number"].Width = 50;
             dgv_ProjectList.Columns["Project Name"].Width = 260;
+            dgv_ProjectList.Columns["VRE Number"].Width = 50;
             dgv_ProjectList.Columns["Portfolio Number"].Width = 50;
             dgv_ProjectList.Columns["Stage"].Width = 70;
             dgv_ProjectList.Columns["Classification"].Width = 90;
@@ -258,6 +295,7 @@ namespace CMS
 
             x = 0;
 
+            cb_VreNumber.TabIndex = ++x;
             cb_DATRAG.TabIndex = ++x;
             tb_pNameValue.TabIndex = ++x;
 
@@ -301,8 +339,11 @@ namespace CMS
 
         private void clearSearch(object sender, EventArgs e)
         {
+            cb_VreNumber.ResetText();
+            cb_VreNumber.SelectedIndex = -1;
             cb_DATRAG.SelectedIndex = -1;
             tb_pNameValue.Clear();
+            cb_PortfolioNo.ResetText();
             cb_PortfolioNo.SelectedIndex = -1;
             cb_pStage.SelectedIndex = -1;
             cb_pClassification.SelectedIndex = -1;
