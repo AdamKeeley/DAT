@@ -98,6 +98,7 @@
             this.cb_UserStatus.Name = "cb_UserStatus";
             this.cb_UserStatus.Size = new System.Drawing.Size(76, 21);
             this.cb_UserStatus.TabIndex = 25;
+            this.cb_UserStatus.Enter += new System.EventHandler(this.combobox_RemoveLegacyItems);
             // 
             // lbl_UserStatus
             // 
@@ -117,6 +118,7 @@
             this.cb_UserTitle.Name = "cb_UserTitle";
             this.cb_UserTitle.Size = new System.Drawing.Size(76, 21);
             this.cb_UserTitle.TabIndex = 27;
+            this.cb_UserTitle.Enter += new System.EventHandler(this.combobox_RemoveLegacyItems);
             // 
             // lbl_UserTitle
             // 

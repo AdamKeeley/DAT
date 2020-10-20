@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 using DataControlsLib.DataModels;
 
@@ -645,33 +646,33 @@ namespace CMS
             if (sender is ComboBox)
             {
                 // get combobox name, and currently assigned properties
-                string combobox_target = ((Control)sender).Name;
-                string combobox_ValueMember = ((ComboBox)Controls[combobox_target]).ValueMember;
-                string combobox_DisplayMember = ((ComboBox)Controls[combobox_target]).DisplayMember;
+                ComboBox combobox_Target = (ComboBox)Controls.Find(((Control)sender).Name, true).First();
+                string combobox_ValueMember = combobox_Target.ValueMember;
+                string combobox_DisplayMember = combobox_Target.DisplayMember;
 
                 // put current datasource into new datatable
                 DataTable itemsToFilter = new DataTable();
-                itemsToFilter = ((ComboBox)Controls[combobox_target]).DataSource as DataTable;
+                itemsToFilter = combobox_Target.DataSource as DataTable;
 
                 // filter new data table to only retain non-expired items (where ValidTo is null) and currently selected value
                 // ensuring that currently elected items remain selected.
                 DataView filteredItems = new DataView(itemsToFilter);
-                if (((ComboBox)Controls[combobox_target]).SelectedIndex > -1)
+                if (combobox_Target.SelectedIndex > -1)
                 {
-                    int currentValue = (int)((ComboBox)Controls[combobox_target]).SelectedValue;
+                    int currentValue = (int)combobox_Target.SelectedValue;
                     filteredItems.RowFilter = $"[ValidTo] is null or {combobox_ValueMember} = {currentValue}";
-                    ((ComboBox)Controls[combobox_target]).DataSource = filteredItems.ToTable();
-                    ((ComboBox)Controls[combobox_target]).ValueMember = combobox_ValueMember;
-                    ((ComboBox)Controls[combobox_target]).DisplayMember = combobox_DisplayMember;
-                    ((ComboBox)Controls[combobox_target]).SelectedValue = currentValue;
+                    combobox_Target.DataSource = filteredItems.ToTable();
+                    combobox_Target.ValueMember = combobox_ValueMember;
+                    combobox_Target.DisplayMember = combobox_DisplayMember;
+                    combobox_Target.SelectedValue = currentValue;
                 }
                 else
                 {
                     filteredItems.RowFilter = $"[ValidTo] is null";
-                    ((ComboBox)Controls[combobox_target]).DataSource = filteredItems.ToTable();
-                    ((ComboBox)Controls[combobox_target]).ValueMember = combobox_ValueMember;
-                    ((ComboBox)Controls[combobox_target]).DisplayMember = combobox_DisplayMember;
-                    ((ComboBox)Controls[combobox_target]).SelectedIndex = -1;
+                    combobox_Target.DataSource = filteredItems.ToTable();
+                    combobox_Target.ValueMember = combobox_ValueMember;
+                    combobox_Target.DisplayMember = combobox_DisplayMember;
+                    combobox_Target.SelectedIndex = -1;
                 }
             }
         }

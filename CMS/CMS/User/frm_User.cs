@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 using DataControlsLib.DataModels;
 
@@ -61,7 +62,7 @@ namespace CMS
         {
             try
             {
-                string current_TitleText = "";
+                //string current_TitleText = "";
                 //set controls values
                 cb_UserStatus.DataSource = ds_User.Tables["tlkUserStatus"];
                 cb_UserStatus.ValueMember = "StatusID";
@@ -78,12 +79,13 @@ namespace CMS
                 else
                 {
                     cb_UserTitle.SelectedValue = mdl_CurrentUser.Title;
-                    foreach (DataRow t in ds_User.Tables["tlkTitle"].Select($"TitleID = {mdl_CurrentUser.Title}"))
-                    {
-                        current_TitleText = t["TitleDescription"].ToString();
-                    }
-                }                
-                lbl_FullName.Text = $"{current_TitleText} {mdl_CurrentUser.LastName}, {mdl_CurrentUser.FirstName}";
+                    //foreach (DataRow t in ds_User.Tables["tlkTitle"].Select($"TitleID = {mdl_CurrentUser.Title}"))
+                    //{
+                    //    current_TitleText = t["TitleDescription"].ToString();
+                    //}
+                }
+                //lbl_FullName.Text = $"{current_TitleText} {mdl_CurrentUser.LastName}, {mdl_CurrentUser.FirstName}";
+                lbl_FullName.Text = $"{cb_UserTitle.Text} {mdl_CurrentUser.LastName}, {mdl_CurrentUser.FirstName}";
                 tb_FirstName.Text = mdl_CurrentUser.FirstName;
                 tb_LastName.Text = mdl_CurrentUser.LastName;
                 tb_UserName.Text = mdl_CurrentUser.UserName;
@@ -190,6 +192,20 @@ namespace CMS
 
             x = 0;
 
+            gb_UserNotes.TabIndex = ++x;
+            tb_NewUserNote.TabIndex = ++x;
+            btn_InsertUserNote.TabIndex = ++x;
+
+            btn_UserRefresh.TabIndex = ++x;
+            btn_UserApply.TabIndex = ++x;
+            btn_UserOK.TabIndex = ++x;
+            btn_UserCancel.TabIndex = ++x;
+            btn_NewUser.TabIndex = ++x;
+
+            gb_UserProjects.TabIndex = ++x;
+            btn_ProjectUserAdd.TabIndex = ++x;
+            btn_ProjectUserRemove.TabIndex = ++x;
+
             gb_UserDetail.TabIndex = ++x;
             cb_UserStatus.TabIndex = ++x;
             cb_UserTitle.TabIndex = ++x;
@@ -212,19 +228,6 @@ namespace CMS
             nud_TokenSerial.TabIndex = ++x;
             mtb_TokenIssued.TabIndex = ++x;
             mtb_TokenReturned.TabIndex = ++x;
-
-            gb_UserNotes.TabIndex = ++x;
-            tb_NewUserNote.TabIndex = ++x;
-            btn_InsertUserNote.TabIndex = ++x;
-            btn_UserRefresh.TabIndex = ++x;
-            btn_UserApply.TabIndex = ++x;
-            btn_UserOK.TabIndex = ++x;
-            btn_UserCancel.TabIndex = ++x;
-            btn_NewUser.TabIndex = ++x;
-
-            gb_UserProjects.TabIndex = ++x;
-            btn_ProjectUserAdd.TabIndex = ++x;
-            btn_ProjectUserRemove.TabIndex = ++x;
         }
 
         /// <summary>
@@ -478,6 +481,50 @@ namespace CMS
                 {
                     textBox.Select(0, 0);
                 });
+            }
+        }
+
+        /// <summary>
+        /// Removes expired selectable items from a combobox. 
+        /// Expired items are those in sql db with an entry under ValidTo field.
+        /// Retains currently selected item, even if expired.
+        /// To be triggered on Focus Enter event.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void combobox_RemoveLegacyItems(object sender, EventArgs e)
+        {
+            if (sender is ComboBox)
+            {
+                // get combobox name, and currently assigned properties
+                ComboBox combobox_Target = (ComboBox)Controls.Find(((Control)sender).Name, true).First();
+                string combobox_ValueMember = combobox_Target.ValueMember;
+                string combobox_DisplayMember = combobox_Target.DisplayMember;
+
+                // put current datasource into new datatable
+                DataTable itemsToFilter = new DataTable();
+                itemsToFilter = combobox_Target.DataSource as DataTable;
+
+                // filter new data table to only retain non-expired items (where ValidTo is null) and currently selected value
+                // ensuring that currently elected items remain selected.
+                DataView filteredItems = new DataView(itemsToFilter);
+                if (combobox_Target.SelectedIndex > -1)
+                {
+                    int currentValue = (int)combobox_Target.SelectedValue;
+                    filteredItems.RowFilter = $"[ValidTo] is null or {combobox_ValueMember} = {currentValue}";
+                    combobox_Target.DataSource = filteredItems.ToTable();
+                    combobox_Target.ValueMember = combobox_ValueMember;
+                    combobox_Target.DisplayMember = combobox_DisplayMember;
+                    combobox_Target.SelectedValue = currentValue;
+                }
+                else
+                {
+                    filteredItems.RowFilter = $"[ValidTo] is null";
+                    combobox_Target.DataSource = filteredItems.ToTable();
+                    combobox_Target.ValueMember = combobox_ValueMember;
+                    combobox_Target.DisplayMember = combobox_DisplayMember;
+                    combobox_Target.SelectedIndex = -1;
+                }
             }
         }
 

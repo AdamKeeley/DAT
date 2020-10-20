@@ -37,11 +37,15 @@ namespace CMS
             try
             {
                 //set controls values
-                cb_UserStatus.DataSource = ds_User.Tables["tlkUserStatus"];
+                DataView dv_UserStatus = new DataView(ds_User.Tables["tlkUserStatus"]);
+                dv_UserStatus.RowFilter = $"[ValidTo] is null";
+                cb_UserStatus.DataSource = dv_UserStatus;
                 cb_UserStatus.ValueMember = "StatusID";
                 cb_UserStatus.DisplayMember = "StatusDescription";
                 cb_UserStatus.SelectedIndex = -1;
-                cb_UserTitle.DataSource = ds_User.Tables["tlkTitle"];
+                DataView dv_Title = new DataView(ds_User.Tables["tlkTitle"]);
+                dv_Title.RowFilter = $"[ValidTo] is null";
+                cb_UserTitle.DataSource = dv_Title;
                 cb_UserTitle.ValueMember = "TitleID";
                 cb_UserTitle.DisplayMember = "TitleDescription";
                 cb_UserTitle.SelectedIndex = -1;

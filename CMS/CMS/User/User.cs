@@ -42,11 +42,9 @@ namespace CMS
                         $"where [ValidTo] is null " +
                         $"order by [LastName], [FirstName], [UserID]");
                     SQL_Stuff.getDataTable(conn, ds_usr, "tlkUserStatus",
-                        $"select * from [dbo].[tlkUserStatus] " +
-                        $"where [ValidTo] is null");
+                        $"select * from [dbo].[tlkUserStatus] ");
                     SQL_Stuff.getDataTable(conn, ds_usr, "tlkTitle",
-                        $"select * from [dbo].[tlkTitle] " +
-                        $"where [ValidTo] is null");
+                        $"select * from [dbo].[tlkTitle] ");
                     SQL_Stuff.getDataTable(conn, ds_usr, "tblUserNotes",
                         $"select * from [dbo].[tblUserNotes]");
                     SQL_Stuff.getDataTable(conn, ds_usr, "tblUserProject",
@@ -62,7 +60,7 @@ namespace CMS
                         , ds_usr.Tables["tblUser"].Columns["Status"]);          //child
                     ds_usr.Relations.Add("User_Title"
                         , ds_usr.Tables["tlkTitle"].Columns["TitleID"]
-                        , ds_usr.Tables["tblUser"].Columns["Title"]);                                                            //datarelation
+                        , ds_usr.Tables["tblUser"].Columns["Title"]);
                     ds_usr.Relations.Add("UserProject_Project"
                         , ds_usr.Tables["tblProjects"].Columns["ProjectNumber"]     
                         , ds_usr.Tables["tblUserProject"].Columns["ProjectNumber"]);
