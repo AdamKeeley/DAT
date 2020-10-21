@@ -724,7 +724,7 @@ namespace CMS
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Please double click on a data row to see user details." + Environment.NewLine + ex);
+                    MessageBox.Show("Please double click on a data row to see user details." + Environment.NewLine + ex.Message);
                 }
             }
         }

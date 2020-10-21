@@ -143,7 +143,6 @@
             // 
             // btn_DocAddCreate
             // 
-            this.btn_DocAddCreate.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_DocAddCreate.Location = new System.Drawing.Point(230, 134);
             this.btn_DocAddCreate.Name = "btn_DocAddCreate";
             this.btn_DocAddCreate.Size = new System.Drawing.Size(75, 23);
