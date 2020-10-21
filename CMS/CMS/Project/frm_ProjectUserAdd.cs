@@ -1,5 +1,7 @@
-﻿using System;
+﻿using DataControlsLib;
+using System;
 using System.Data;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace CMS
@@ -80,6 +82,21 @@ namespace CMS
             cb_Researcher.TabIndex = ++x;
             btn_UserProjectAdd_Add.TabIndex = ++x;
             btn_UserProjectAdd_Cancel.TabIndex = ++x;
+        }
+
+
+        private void lbl_NewUser_Click(object sender, EventArgs e)
+        {
+            using (frm_UserAdd UserAdd = new frm_UserAdd())
+            {
+                UserAdd.ShowDialog();
+                if (UserAdd.userAdded == true)
+                {
+                    Project project = new Project();
+                    ds_Project = project.getProjectsDataSet();
+                    setVariablesAndControl(ProjectNumber, ds_Project);
+                }
+            }
         }
 
         private void btn_UserProjectAdd_Cancel_Click(object sender, EventArgs e)

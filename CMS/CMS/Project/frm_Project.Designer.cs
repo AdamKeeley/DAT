@@ -86,6 +86,7 @@ namespace CMS
             this.dgv_PlatformDetails = new System.Windows.Forms.DataGridView();
             this.btn_PlatformDetailsRemove = new System.Windows.Forms.Button();
             this.btn_PlatformDetailsAdd = new System.Windows.Forms.Button();
+            this.lbl_NewUser = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_pNotes)).BeginInit();
             this.gb_Platform.SuspendLayout();
             this.gb_Governance.SuspendLayout();
@@ -720,12 +721,23 @@ namespace CMS
             this.btn_PlatformDetailsAdd.UseVisualStyleBackColor = true;
             this.btn_PlatformDetailsAdd.Click += new System.EventHandler(this.btn_PlatformDetailsAdd_Click);
             // 
+            // lbl_NewUser
+            // 
+            this.lbl_NewUser.AutoSize = true;
+            this.lbl_NewUser.Location = new System.Drawing.Point(448, 184);
+            this.lbl_NewUser.Name = "lbl_NewUser";
+            this.lbl_NewUser.Size = new System.Drawing.Size(59, 13);
+            this.lbl_NewUser.TabIndex = 51;
+            this.lbl_NewUser.Text = "new user...";
+            this.lbl_NewUser.Click += new System.EventHandler(this.lbl_NewUser_Click);
+            // 
             // frm_Project
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btn_ProjectCancel;
             this.ClientSize = new System.Drawing.Size(914, 561);
+            this.Controls.Add(this.lbl_NewUser);
             this.Controls.Add(this.gb_PlatformDetails);
             this.Controls.Add(this.tb_PortfolioNo);
             this.Controls.Add(this.lbl_PortfolioNo);
@@ -836,5 +848,6 @@ namespace CMS
         private System.Windows.Forms.DataGridView dgv_PlatformDetails;
         private System.Windows.Forms.Button btn_PlatformDetailsRemove;
         private System.Windows.Forms.Button btn_PlatformDetailsAdd;
+        private System.Windows.Forms.Label lbl_NewUser;
     }
 }

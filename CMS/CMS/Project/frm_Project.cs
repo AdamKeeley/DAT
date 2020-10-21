@@ -653,6 +653,18 @@ namespace CMS
             }
         }
 
+        private void lbl_NewUser_Click(object sender, EventArgs e)
+        {
+            using (frm_UserAdd UserAdd = new frm_UserAdd())
+            {
+                UserAdd.ShowDialog();
+                if (UserAdd.userAdded == true)
+                {
+                    refreshProjectForm(mdl_CurrentProject.ProjectNumber);
+                }
+            }
+        }
+
         private void btn_InsertProjectNote_Click(object sender, EventArgs e)
         {
             string pNumber = cb_pNumberValue.Text;

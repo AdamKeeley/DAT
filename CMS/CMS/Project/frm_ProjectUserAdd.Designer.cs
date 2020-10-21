@@ -32,6 +32,7 @@
             this.lbl_Researcher = new System.Windows.Forms.Label();
             this.btn_UserProjectAdd_Add = new System.Windows.Forms.Button();
             this.btn_UserProjectAdd_Cancel = new System.Windows.Forms.Button();
+            this.lbl_NewUser = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // cb_Researcher
@@ -56,7 +57,7 @@
             // 
             // btn_UserProjectAdd_Add
             // 
-            this.btn_UserProjectAdd_Add.Location = new System.Drawing.Point(110, 33);
+            this.btn_UserProjectAdd_Add.Location = new System.Drawing.Point(166, 33);
             this.btn_UserProjectAdd_Add.Name = "btn_UserProjectAdd_Add";
             this.btn_UserProjectAdd_Add.Size = new System.Drawing.Size(75, 23);
             this.btn_UserProjectAdd_Add.TabIndex = 41;
@@ -67,7 +68,7 @@
             // btn_UserProjectAdd_Cancel
             // 
             this.btn_UserProjectAdd_Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btn_UserProjectAdd_Cancel.Location = new System.Drawing.Point(191, 33);
+            this.btn_UserProjectAdd_Cancel.Location = new System.Drawing.Point(247, 33);
             this.btn_UserProjectAdd_Cancel.Name = "btn_UserProjectAdd_Cancel";
             this.btn_UserProjectAdd_Cancel.Size = new System.Drawing.Size(75, 23);
             this.btn_UserProjectAdd_Cancel.TabIndex = 40;
@@ -75,13 +76,24 @@
             this.btn_UserProjectAdd_Cancel.UseVisualStyleBackColor = true;
             this.btn_UserProjectAdd_Cancel.Click += new System.EventHandler(this.btn_UserProjectAdd_Cancel_Click);
             // 
+            // lbl_NewUser
+            // 
+            this.lbl_NewUser.AutoSize = true;
+            this.lbl_NewUser.Location = new System.Drawing.Point(272, 9);
+            this.lbl_NewUser.Name = "lbl_NewUser";
+            this.lbl_NewUser.Size = new System.Drawing.Size(59, 13);
+            this.lbl_NewUser.TabIndex = 52;
+            this.lbl_NewUser.Text = "new user...";
+            this.lbl_NewUser.Click += new System.EventHandler(this.lbl_NewUser_Click);
+            // 
             // frm_ProjectUserAdd
             // 
             this.AcceptButton = this.btn_UserProjectAdd_Add;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btn_UserProjectAdd_Cancel;
-            this.ClientSize = new System.Drawing.Size(278, 66);
+            this.ClientSize = new System.Drawing.Size(334, 70);
+            this.Controls.Add(this.lbl_NewUser);
             this.Controls.Add(this.btn_UserProjectAdd_Add);
             this.Controls.Add(this.btn_UserProjectAdd_Cancel);
             this.Controls.Add(this.cb_Researcher);
@@ -99,5 +111,6 @@
         private System.Windows.Forms.Label lbl_Researcher;
         private System.Windows.Forms.Button btn_UserProjectAdd_Add;
         private System.Windows.Forms.Button btn_UserProjectAdd_Cancel;
+        private System.Windows.Forms.Label lbl_NewUser;
     }
 }
