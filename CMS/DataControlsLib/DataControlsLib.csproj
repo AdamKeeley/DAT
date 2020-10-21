@@ -51,6 +51,7 @@
     <Compile Include="IEnumerableExtensions.cs" />
     <Compile Include="PutDB.cs" />
     <Compile Include="SQL_Stuff.cs" />
+    <Compile Include="Static_Helper.cs" />
     <Compile Include="ViewModels\AssetHistoryViewModel.cs" />
     <Compile Include="DataModels\AssetsChangeLogModel.cs" />
     <Compile Include="DataModels\AssetsRegisterModel.cs" />

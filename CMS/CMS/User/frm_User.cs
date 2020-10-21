@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using DataControlsLib;
 using DataControlsLib.DataModels;
 
 namespace CMS
@@ -62,7 +63,6 @@ namespace CMS
         {
             try
             {
-                //string current_TitleText = "";
                 //set controls values
                 cb_UserStatus.DataSource = ds_User.Tables["tlkUserStatus"];
                 cb_UserStatus.ValueMember = "StatusID";
@@ -77,14 +77,7 @@ namespace CMS
                 if (mdl_CurrentUser.Title == null)
                     cb_UserTitle.SelectedIndex = -1;
                 else
-                {
                     cb_UserTitle.SelectedValue = mdl_CurrentUser.Title;
-                    //foreach (DataRow t in ds_User.Tables["tlkTitle"].Select($"TitleID = {mdl_CurrentUser.Title}"))
-                    //{
-                    //    current_TitleText = t["TitleDescription"].ToString();
-                    //}
-                }
-                //lbl_FullName.Text = $"{current_TitleText} {mdl_CurrentUser.LastName}, {mdl_CurrentUser.FirstName}";
                 lbl_FullName.Text = $"{cb_UserTitle.Text} {mdl_CurrentUser.LastName}, {mdl_CurrentUser.FirstName}";
                 tb_FirstName.Text = mdl_CurrentUser.FirstName;
                 tb_LastName.Text = mdl_CurrentUser.LastName;
@@ -486,8 +479,8 @@ namespace CMS
 
         /// <summary>
         /// Removes expired selectable items from a combobox. 
-        /// Expired items are those in sql db with an entry under ValidTo field.
-        /// Retains currently selected item, even if expired.
+        /// Get's a reference to target combobox and passes it through to method in static helper class 
+        /// that removes expired items. 
         /// To be triggered on Focus Enter event.
         /// </summary>
         /// <param name="sender"></param>
@@ -496,35 +489,10 @@ namespace CMS
         {
             if (sender is ComboBox)
             {
-                // get combobox name, and currently assigned properties
+                // get combobox name
                 ComboBox combobox_Target = (ComboBox)Controls.Find(((Control)sender).Name, true).First();
-                string combobox_ValueMember = combobox_Target.ValueMember;
-                string combobox_DisplayMember = combobox_Target.DisplayMember;
-
-                // put current datasource into new datatable
-                DataTable itemsToFilter = new DataTable();
-                itemsToFilter = combobox_Target.DataSource as DataTable;
-
-                // filter new data table to only retain non-expired items (where ValidTo is null) and currently selected value
-                // ensuring that currently elected items remain selected.
-                DataView filteredItems = new DataView(itemsToFilter);
-                if (combobox_Target.SelectedIndex > -1)
-                {
-                    int currentValue = (int)combobox_Target.SelectedValue;
-                    filteredItems.RowFilter = $"[ValidTo] is null or {combobox_ValueMember} = {currentValue}";
-                    combobox_Target.DataSource = filteredItems.ToTable();
-                    combobox_Target.ValueMember = combobox_ValueMember;
-                    combobox_Target.DisplayMember = combobox_DisplayMember;
-                    combobox_Target.SelectedValue = currentValue;
-                }
-                else
-                {
-                    filteredItems.RowFilter = $"[ValidTo] is null";
-                    combobox_Target.DataSource = filteredItems.ToTable();
-                    combobox_Target.ValueMember = combobox_ValueMember;
-                    combobox_Target.DisplayMember = combobox_DisplayMember;
-                    combobox_Target.SelectedIndex = -1;
-                }
+                // pass reference to combobox through to method that removes expired items.
+                Static_Helper.combobox_RemoveLegacyItems(combobox_Target);
             }
         }
 

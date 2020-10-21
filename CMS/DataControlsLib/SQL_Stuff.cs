@@ -1,5 +1,8 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Data.SqlClient;
+using System.Windows.Forms;
+using System.Linq;
 
 namespace DataControlsLib
 {
@@ -58,6 +61,7 @@ namespace DataControlsLib
             da.SelectCommand = qry;
             da.Fill(dsObj, tblName);
         }
+
     }
 }
 
