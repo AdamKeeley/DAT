@@ -24,20 +24,20 @@ namespace CMS.DSAs
             conn.Credential = SQL_Stuff.credential;
             using (conn)
             {
-                GetDB.GetDataTable(conn, ds, "tblDsas",
+                SQL_Stuff.getDataTable(conn, ds, "tblDsas",
                     @"SELECT DsaID, DataOwner, AmendmentOf, DsaName, DsaFileLoc, StartDate, ExpiryDate, 
                              DSPT, ISO27001, RequiresEncryption, NoRemoteAccess, DateAdded, LastUpdated
                       FROM dbo.tblDsas");
-                GetDB.GetDataTable(conn, ds, "tblDsaNotes",
+                SQL_Stuff.getDataTable(conn, ds, "tblDsaNotes",
                     @"SELECT dnID, Dsa, Note, Created, CreatedBy
                       FROM dbo.tblDsaNotes");
-                GetDB.GetDataTable(conn, ds, "tblDsasProjects",
+                SQL_Stuff.getDataTable(conn, ds, "tblDsasProjects",
                     @"SELECT dpID, DsaID, Project, DateAdded
                       FROM dbo.tblDsasProjects");
-                GetDB.GetDataTable(conn, ds, "tblDsaDataOwners",
+                SQL_Stuff.getDataTable(conn, ds, "tblDsaDataOwners",
                     @"SELECT doID, RebrandOf, DataOwnerName
                       FROM dbo.tblDsaDataOwners");
-                GetDB.GetDataTable(conn, ds, "tblProject",
+                SQL_Stuff.getDataTable(conn, ds, "tblProject",
                     @"SELECT *
                       FROM dbo.tblProject
                       WHERE ValidTo IS NULL");
@@ -114,7 +114,7 @@ namespace CMS.DSAs
                     }
 
                     DataTable tblDsaNotes = inDsaNotes.ToDataTable();
-                    int notesRows = PutDB.InsertBulk(tblDsaNotes, "dbo.tblDsaNotes", conn, trans);
+                    int notesRows = SQL_Stuff.insertBulk(tblDsaNotes, "dbo.tblDsaNotes", conn, trans);
                     success[1] = notesRows == tblDsaNotes.Rows.Count;
 
                     // Add new DSA identity to tblDsasProjects insert, then bulk insert
@@ -124,7 +124,7 @@ namespace CMS.DSAs
                     }
 
                     DataTable tblDsasProjects = inDsaProjects.ToDataTable();
-                    int prjRows = PutDB.InsertBulk(tblDsasProjects, "dbo.tblDsasProjects", conn, trans);
+                    int prjRows = SQL_Stuff.insertBulk(tblDsasProjects, "dbo.tblDsasProjects", conn, trans);
                     success[2] = prjRows == tblDsasProjects.Rows.Count;
 
                     trans.Commit();

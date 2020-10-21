@@ -22,15 +22,15 @@ namespace CMS.DataTracking
             conn.Credential = SQL_Stuff.credential;
             using (conn)
             {
-                GetDB.GetDataTable(conn, ds_io, "tblDataIORequests",
+                SQL_Stuff.getDataTable(conn, ds_io, "tblDataIORequests",
                     "SELECT RequestID, Project, ChangeDate, ChangeType, RequestedBy, ChangedBy FROM dbo.tblDataIORequests ORDER BY ChangeDate DESC");
-                GetDB.GetDataTable(conn, ds_io, "tblAssetsRegister",
+                SQL_Stuff.getDataTable(conn, ds_io, "tblAssetsRegister",
                     "SELECT AssetID, AssetName, AssetSha256sum, VreFilePath FROM dbo.tblAssetsRegister");
-                GetDB.GetDataTable(conn, ds_io, "tblAssetsChangeLog",
+                SQL_Stuff.getDataTable(conn, ds_io, "tblAssetsChangeLog",
                     "SELECT ChangeID, RequestID, AssetID, ChangeAccepted, RejectionNotes FROM dbo.tblAssetsChangeLog");
-                GetDB.GetDataTable(conn, ds_io, "tlkAssetChangeTypes",
+                SQL_Stuff.getDataTable(conn, ds_io, "tlkAssetChangeTypes",
                     "SELECT ChangeTypeID, ChangeTypeLabel FROM dbo.tlkAssetChangeTypes");
-                GetDB.GetDataTable(conn, ds_io, "tblProject",
+                SQL_Stuff.getDataTable(conn, ds_io, "tblProject",
                     "SELECT * FROM dbo.tblProject WHERE ValidTo IS NULL");
 
                 // Relations not needed due to LINQ joins, but at least they help enforce the schema

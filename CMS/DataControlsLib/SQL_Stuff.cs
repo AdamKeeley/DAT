@@ -62,6 +62,21 @@ namespace DataControlsLib
             da.Fill(dsObj, tblName);
         }
 
+        public static int insertBulk(DataTable dt, string tbl, SqlConnection cn, SqlTransaction tr)
+        {
+            int nrows = 0;
+
+            using (SqlBulkCopy blk = new SqlBulkCopy(cn, SqlBulkCopyOptions.Default, tr))
+            {
+                blk.DestinationTableName = tbl;
+                blk.NotifyAfter = dt.Rows.Count;
+                blk.SqlRowsCopied += (s, e) => nrows = (int)e.RowsCopied;
+                blk.WriteToServer(dt);
+            }
+
+            return nrows;
+        }
+
     }
 }
 
