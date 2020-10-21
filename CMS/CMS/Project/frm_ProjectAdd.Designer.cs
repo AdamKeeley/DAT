@@ -54,7 +54,7 @@
             this.lbl_pClassification = new System.Windows.Forms.Label();
             this.cb_pClassification = new System.Windows.Forms.ComboBox();
             this.gb_Platform = new System.Windows.Forms.GroupBox();
-            this.chkb_Azure = new System.Windows.Forms.CheckBox();
+            this.chkb_LASER = new System.Windows.Forms.CheckBox();
             this.chkb_IRC = new System.Windows.Forms.CheckBox();
             this.chkb_SEED = new System.Windows.Forms.CheckBox();
             this.lbl_PI_NewUser = new System.Windows.Forms.Label();
@@ -64,13 +64,15 @@
             this.lbl_ProjectAdd = new System.Windows.Forms.Label();
             this.tb_PortfolioNo = new System.Windows.Forms.TextBox();
             this.lbl_PortfolioNo = new System.Windows.Forms.Label();
+            this.gb_KeyDates = new System.Windows.Forms.GroupBox();
             this.gb_Governance.SuspendLayout();
             this.gb_Platform.SuspendLayout();
+            this.gb_KeyDates.SuspendLayout();
             this.SuspendLayout();
             // 
             // mtb_pStartDateValue
             // 
-            this.mtb_pStartDateValue.Location = new System.Drawing.Point(421, 76);
+            this.mtb_pStartDateValue.Location = new System.Drawing.Point(206, 19);
             this.mtb_pStartDateValue.Margin = new System.Windows.Forms.Padding(2);
             this.mtb_pStartDateValue.Mask = "00/00/0000";
             this.mtb_pStartDateValue.Name = "mtb_pStartDateValue";
@@ -81,7 +83,7 @@
             // 
             // mtb_pEndDateValue
             // 
-            this.mtb_pEndDateValue.Location = new System.Drawing.Point(421, 104);
+            this.mtb_pEndDateValue.Location = new System.Drawing.Point(206, 47);
             this.mtb_pEndDateValue.Margin = new System.Windows.Forms.Padding(2);
             this.mtb_pEndDateValue.Mask = "00/00/0000";
             this.mtb_pEndDateValue.Name = "mtb_pEndDateValue";
@@ -93,7 +95,7 @@
             // lbl_pEndDate
             // 
             this.lbl_pEndDate.AutoSize = true;
-            this.lbl_pEndDate.Location = new System.Drawing.Point(365, 107);
+            this.lbl_pEndDate.Location = new System.Drawing.Point(150, 50);
             this.lbl_pEndDate.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_pEndDate.Name = "lbl_pEndDate";
             this.lbl_pEndDate.Size = new System.Drawing.Size(52, 13);
@@ -103,7 +105,7 @@
             // lbl_pStartDate
             // 
             this.lbl_pStartDate.AutoSize = true;
-            this.lbl_pStartDate.Location = new System.Drawing.Point(362, 79);
+            this.lbl_pStartDate.Location = new System.Drawing.Point(147, 22);
             this.lbl_pStartDate.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_pStartDate.Name = "lbl_pStartDate";
             this.lbl_pStartDate.Size = new System.Drawing.Size(55, 13);
@@ -144,7 +146,7 @@
             this.tb_pNameValue.Location = new System.Drawing.Point(119, 32);
             this.tb_pNameValue.Margin = new System.Windows.Forms.Padding(2);
             this.tb_pNameValue.Name = "tb_pNameValue";
-            this.tb_pNameValue.Size = new System.Drawing.Size(379, 20);
+            this.tb_pNameValue.Size = new System.Drawing.Size(375, 20);
             this.tb_pNameValue.TabIndex = 13;
             // 
             // lbl_pName
@@ -182,7 +184,7 @@
             // 
             // mtb_ProjectedStartDateValue
             // 
-            this.mtb_ProjectedStartDateValue.Location = new System.Drawing.Point(279, 76);
+            this.mtb_ProjectedStartDateValue.Location = new System.Drawing.Point(64, 19);
             this.mtb_ProjectedStartDateValue.Margin = new System.Windows.Forms.Padding(2);
             this.mtb_ProjectedStartDateValue.Mask = "00/00/0000";
             this.mtb_ProjectedStartDateValue.Name = "mtb_ProjectedStartDateValue";
@@ -194,7 +196,7 @@
             // lbl_ProjectedStartDate
             // 
             this.lbl_ProjectedStartDate.AutoSize = true;
-            this.lbl_ProjectedStartDate.Location = new System.Drawing.Point(220, 73);
+            this.lbl_ProjectedStartDate.Location = new System.Drawing.Point(5, 16);
             this.lbl_ProjectedStartDate.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_ProjectedStartDate.Name = "lbl_ProjectedStartDate";
             this.lbl_ProjectedStartDate.Size = new System.Drawing.Size(55, 26);
@@ -215,7 +217,7 @@
             // 
             this.gb_Governance.Controls.Add(this.chkb_ISO27001);
             this.gb_Governance.Controls.Add(this.chkb_DSPT);
-            this.gb_Governance.Location = new System.Drawing.Point(110, 73);
+            this.gb_Governance.Location = new System.Drawing.Point(11, 73);
             this.gb_Governance.Margin = new System.Windows.Forms.Padding(2);
             this.gb_Governance.Name = "gb_Governance";
             this.gb_Governance.Padding = new System.Windows.Forms.Padding(2);
@@ -267,7 +269,7 @@
             // 
             // mtb_ProjectedEndDateValue
             // 
-            this.mtb_ProjectedEndDateValue.Location = new System.Drawing.Point(279, 104);
+            this.mtb_ProjectedEndDateValue.Location = new System.Drawing.Point(64, 47);
             this.mtb_ProjectedEndDateValue.Margin = new System.Windows.Forms.Padding(2);
             this.mtb_ProjectedEndDateValue.Mask = "00/00/0000";
             this.mtb_ProjectedEndDateValue.Name = "mtb_ProjectedEndDateValue";
@@ -279,7 +281,7 @@
             // lbl_ProjectedEndDate
             // 
             this.lbl_ProjectedEndDate.AutoSize = true;
-            this.lbl_ProjectedEndDate.Location = new System.Drawing.Point(220, 101);
+            this.lbl_ProjectedEndDate.Location = new System.Drawing.Point(5, 44);
             this.lbl_ProjectedEndDate.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_ProjectedEndDate.Name = "lbl_ProjectedEndDate";
             this.lbl_ProjectedEndDate.Size = new System.Drawing.Size(55, 26);
@@ -291,7 +293,7 @@
             this.cb_DATRAG.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cb_DATRAG.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cb_DATRAG.FormattingEnabled = true;
-            this.cb_DATRAG.Location = new System.Drawing.Point(421, 6);
+            this.cb_DATRAG.Location = new System.Drawing.Point(418, 5);
             this.cb_DATRAG.Name = "cb_DATRAG";
             this.cb_DATRAG.Size = new System.Drawing.Size(76, 21);
             this.cb_DATRAG.TabIndex = 54;
@@ -299,7 +301,7 @@
             // lbl_DATRAG
             // 
             this.lbl_DATRAG.AutoSize = true;
-            this.lbl_DATRAG.Location = new System.Drawing.Point(360, 9);
+            this.lbl_DATRAG.Location = new System.Drawing.Point(357, 8);
             this.lbl_DATRAG.Name = "lbl_DATRAG";
             this.lbl_DATRAG.Size = new System.Drawing.Size(55, 13);
             this.lbl_DATRAG.TabIndex = 53;
@@ -326,10 +328,10 @@
             // 
             // gb_Platform
             // 
-            this.gb_Platform.Controls.Add(this.chkb_Azure);
+            this.gb_Platform.Controls.Add(this.chkb_LASER);
             this.gb_Platform.Controls.Add(this.chkb_IRC);
             this.gb_Platform.Controls.Add(this.chkb_SEED);
-            this.gb_Platform.Location = new System.Drawing.Point(13, 73);
+            this.gb_Platform.Location = new System.Drawing.Point(426, 73);
             this.gb_Platform.Margin = new System.Windows.Forms.Padding(2);
             this.gb_Platform.Name = "gb_Platform";
             this.gb_Platform.Padding = new System.Windows.Forms.Padding(2);
@@ -338,16 +340,16 @@
             this.gb_Platform.TabStop = false;
             this.gb_Platform.Text = "Platform";
             // 
-            // chkb_Azure
+            // chkb_LASER
             // 
-            this.chkb_Azure.AutoSize = true;
-            this.chkb_Azure.Location = new System.Drawing.Point(4, 17);
-            this.chkb_Azure.Margin = new System.Windows.Forms.Padding(2);
-            this.chkb_Azure.Name = "chkb_Azure";
-            this.chkb_Azure.Size = new System.Drawing.Size(53, 17);
-            this.chkb_Azure.TabIndex = 19;
-            this.chkb_Azure.Text = "Azure";
-            this.chkb_Azure.UseVisualStyleBackColor = true;
+            this.chkb_LASER.AutoSize = true;
+            this.chkb_LASER.Location = new System.Drawing.Point(4, 17);
+            this.chkb_LASER.Margin = new System.Windows.Forms.Padding(2);
+            this.chkb_LASER.Name = "chkb_LASER";
+            this.chkb_LASER.Size = new System.Drawing.Size(61, 17);
+            this.chkb_LASER.TabIndex = 19;
+            this.chkb_LASER.Text = "LASER";
+            this.chkb_LASER.UseVisualStyleBackColor = true;
             // 
             // chkb_IRC
             // 
@@ -438,13 +440,31 @@
             this.lbl_PortfolioNo.TabIndex = 69;
             this.lbl_PortfolioNo.Text = "Portfolio No";
             // 
+            // gb_KeyDates
+            // 
+            this.gb_KeyDates.Controls.Add(this.lbl_ProjectedStartDate);
+            this.gb_KeyDates.Controls.Add(this.lbl_pStartDate);
+            this.gb_KeyDates.Controls.Add(this.lbl_pEndDate);
+            this.gb_KeyDates.Controls.Add(this.mtb_pEndDateValue);
+            this.gb_KeyDates.Controls.Add(this.mtb_pStartDateValue);
+            this.gb_KeyDates.Controls.Add(this.lbl_ProjectedEndDate);
+            this.gb_KeyDates.Controls.Add(this.mtb_ProjectedEndDateValue);
+            this.gb_KeyDates.Controls.Add(this.mtb_ProjectedStartDateValue);
+            this.gb_KeyDates.Location = new System.Drawing.Point(117, 73);
+            this.gb_KeyDates.Name = "gb_KeyDates";
+            this.gb_KeyDates.Size = new System.Drawing.Size(296, 76);
+            this.gb_KeyDates.TabIndex = 70;
+            this.gb_KeyDates.TabStop = false;
+            this.gb_KeyDates.Text = "Key Dates";
+            // 
             // frm_ProjectAdd
             // 
             this.AcceptButton = this.btn_Create;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btn_Cancel;
-            this.ClientSize = new System.Drawing.Size(540, 265);
+            this.ClientSize = new System.Drawing.Size(544, 270);
+            this.Controls.Add(this.gb_KeyDates);
             this.Controls.Add(this.tb_PortfolioNo);
             this.Controls.Add(this.lbl_PortfolioNo);
             this.Controls.Add(this.lbl_ProjectAdd);
@@ -452,14 +472,10 @@
             this.Controls.Add(this.cb_LeadApplicant);
             this.Controls.Add(this.lbl_LeadApplicant_NewUser);
             this.Controls.Add(this.lbl_PI_NewUser);
-            this.Controls.Add(this.mtb_ProjectedStartDateValue);
-            this.Controls.Add(this.lbl_ProjectedStartDate);
             this.Controls.Add(this.lbl_LeadApplicant);
             this.Controls.Add(this.gb_Governance);
             this.Controls.Add(this.cb_Faculty);
             this.Controls.Add(this.lbl_Faculty);
-            this.Controls.Add(this.mtb_ProjectedEndDateValue);
-            this.Controls.Add(this.lbl_ProjectedEndDate);
             this.Controls.Add(this.cb_DATRAG);
             this.Controls.Add(this.lbl_DATRAG);
             this.Controls.Add(this.lbl_pClassification);
@@ -467,10 +483,6 @@
             this.Controls.Add(this.gb_Platform);
             this.Controls.Add(this.btn_Create);
             this.Controls.Add(this.btn_Cancel);
-            this.Controls.Add(this.mtb_pStartDateValue);
-            this.Controls.Add(this.mtb_pEndDateValue);
-            this.Controls.Add(this.lbl_pEndDate);
-            this.Controls.Add(this.lbl_pStartDate);
             this.Controls.Add(this.lbl_pPI);
             this.Controls.Add(this.cb_pStage);
             this.Controls.Add(this.lbl_pStage);
@@ -483,6 +495,8 @@
             this.gb_Governance.PerformLayout();
             this.gb_Platform.ResumeLayout(false);
             this.gb_Platform.PerformLayout();
+            this.gb_KeyDates.ResumeLayout(false);
+            this.gb_KeyDates.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -515,7 +529,7 @@
         private System.Windows.Forms.Label lbl_pClassification;
         private System.Windows.Forms.ComboBox cb_pClassification;
         private System.Windows.Forms.GroupBox gb_Platform;
-        private System.Windows.Forms.CheckBox chkb_Azure;
+        private System.Windows.Forms.CheckBox chkb_LASER;
         private System.Windows.Forms.CheckBox chkb_IRC;
         private System.Windows.Forms.CheckBox chkb_SEED;
         private System.Windows.Forms.Label lbl_PI_NewUser;
@@ -525,5 +539,6 @@
         private System.Windows.Forms.Label lbl_ProjectAdd;
         private System.Windows.Forms.TextBox tb_PortfolioNo;
         private System.Windows.Forms.Label lbl_PortfolioNo;
+        private System.Windows.Forms.GroupBox gb_KeyDates;
     }
 }

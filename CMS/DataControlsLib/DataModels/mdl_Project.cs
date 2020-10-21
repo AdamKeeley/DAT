@@ -29,7 +29,7 @@ namespace DataControlsLib.DataModels
         public bool LIDA { get; set; }
         public bool DSPT { get; set; }
         public bool ISO27001 { get; set; }
-        public bool Azure { get; set; }
+        public bool LASER { get; set; }
         public bool IRC { get; set; }
         public bool SEED { get; set; }
 
@@ -62,7 +62,7 @@ namespace DataControlsLib.DataModels
                 || LIDA != other.LIDA
                 || DSPT != other.DSPT
                 || ISO27001 != other.ISO27001
-                || Azure != other.Azure
+                || LASER != other.LASER
                 || IRC != other.IRC
                 || SEED != other.SEED)
                 return false;

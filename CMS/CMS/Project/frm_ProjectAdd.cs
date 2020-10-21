@@ -104,7 +104,7 @@ namespace CMS
             mdl_Project.PortfolioNumber    = tb_PortfolioNo.Text;
             mdl_Project.DSPT               = chkb_DSPT.Checked;
             mdl_Project.ISO27001           = chkb_ISO27001.Checked;
-            mdl_Project.Azure              = chkb_Azure.Checked;
+            mdl_Project.LASER              = chkb_LASER.Checked;
             mdl_Project.IRC                = chkb_IRC.Checked;
             mdl_Project.SEED               = chkb_SEED.Checked;
 
@@ -207,7 +207,7 @@ namespace CMS
             tb_pNameValue.TabIndex = ++x;
 
             gb_Platform.TabIndex = ++x;
-            chkb_Azure.TabIndex = ++x;
+            chkb_LASER.TabIndex = ++x;
             chkb_IRC.TabIndex = ++x;
             chkb_SEED.TabIndex = ++x;
 

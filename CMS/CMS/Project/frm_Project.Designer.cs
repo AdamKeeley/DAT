@@ -51,7 +51,7 @@ namespace CMS
             this.chkb_IRC = new System.Windows.Forms.CheckBox();
             this.chkb_SEED = new System.Windows.Forms.CheckBox();
             this.gb_Platform = new System.Windows.Forms.GroupBox();
-            this.chkb_Azure = new System.Windows.Forms.CheckBox();
+            this.chkb_LASER = new System.Windows.Forms.CheckBox();
             this.cb_pClassification = new System.Windows.Forms.ComboBox();
             this.lbl_pClassification = new System.Windows.Forms.Label();
             this.lbl_DATRAG = new System.Windows.Forms.Label();
@@ -319,28 +319,28 @@ namespace CMS
             // 
             // gb_Platform
             // 
-            this.gb_Platform.Controls.Add(this.chkb_Azure);
+            this.gb_Platform.Controls.Add(this.chkb_LASER);
             this.gb_Platform.Controls.Add(this.chkb_IRC);
             this.gb_Platform.Controls.Add(this.chkb_SEED);
             this.gb_Platform.Location = new System.Drawing.Point(426, 81);
             this.gb_Platform.Margin = new System.Windows.Forms.Padding(2);
             this.gb_Platform.Name = "gb_Platform";
             this.gb_Platform.Padding = new System.Windows.Forms.Padding(2);
-            this.gb_Platform.Size = new System.Drawing.Size(92, 85);
+            this.gb_Platform.Size = new System.Drawing.Size(81, 85);
             this.gb_Platform.TabIndex = 19;
             this.gb_Platform.TabStop = false;
             this.gb_Platform.Text = "Platform";
             // 
-            // chkb_Azure
+            // chkb_LASER
             // 
-            this.chkb_Azure.AutoSize = true;
-            this.chkb_Azure.Location = new System.Drawing.Point(4, 17);
-            this.chkb_Azure.Margin = new System.Windows.Forms.Padding(2);
-            this.chkb_Azure.Name = "chkb_Azure";
-            this.chkb_Azure.Size = new System.Drawing.Size(53, 17);
-            this.chkb_Azure.TabIndex = 19;
-            this.chkb_Azure.Text = "Azure";
-            this.chkb_Azure.UseVisualStyleBackColor = true;
+            this.chkb_LASER.AutoSize = true;
+            this.chkb_LASER.Location = new System.Drawing.Point(4, 17);
+            this.chkb_LASER.Margin = new System.Windows.Forms.Padding(2);
+            this.chkb_LASER.Name = "chkb_LASER";
+            this.chkb_LASER.Size = new System.Drawing.Size(61, 17);
+            this.chkb_LASER.TabIndex = 19;
+            this.chkb_LASER.Text = "LASER";
+            this.chkb_LASER.UseVisualStyleBackColor = true;
             // 
             // cb_pClassification
             // 
@@ -813,7 +813,7 @@ namespace CMS
         private System.Windows.Forms.CheckBox chkb_ISO27001;
         private System.Windows.Forms.CheckBox chkb_DSPT;
         private System.Windows.Forms.Button btn_Refresh;
-        private System.Windows.Forms.CheckBox chkb_Azure;
+        private System.Windows.Forms.CheckBox chkb_LASER;
         private System.Windows.Forms.Label lbl_LeadApplicant;
         private System.Windows.Forms.MaskedTextBox mtb_ProjectedStartDateValue;
         private System.Windows.Forms.Label lbl_ProjectedStartDate;
