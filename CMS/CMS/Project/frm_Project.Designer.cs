@@ -87,6 +87,8 @@ namespace CMS
             this.btn_PlatformDetailsRemove = new System.Windows.Forms.Button();
             this.btn_PlatformDetailsAdd = new System.Windows.Forms.Button();
             this.lbl_NewUser = new System.Windows.Forms.Label();
+            this.lbl_searchNotes = new System.Windows.Forms.Label();
+            this.tb_searchNotes = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_pNotes)).BeginInit();
             this.gb_Platform.SuspendLayout();
             this.gb_Governance.SuspendLayout();
@@ -226,12 +228,12 @@ namespace CMS
             this.tb_NewProjectNote.MaxLength = 8000;
             this.tb_NewProjectNote.Multiline = true;
             this.tb_NewProjectNote.Name = "tb_NewProjectNote";
-            this.tb_NewProjectNote.Size = new System.Drawing.Size(817, 40);
+            this.tb_NewProjectNote.Size = new System.Drawing.Size(632, 40);
             this.tb_NewProjectNote.TabIndex = 10;
             // 
             // btn_InsertProjectNote
             // 
-            this.btn_InsertProjectNote.Location = new System.Drawing.Point(826, 18);
+            this.btn_InsertProjectNote.Location = new System.Drawing.Point(641, 18);
             this.btn_InsertProjectNote.Margin = new System.Windows.Forms.Padding(2);
             this.btn_InsertProjectNote.Name = "btn_InsertProjectNote";
             this.btn_InsertProjectNote.Size = new System.Drawing.Size(55, 40);
@@ -571,6 +573,8 @@ namespace CMS
             // 
             // gb_ProjectNotes
             // 
+            this.gb_ProjectNotes.Controls.Add(this.tb_searchNotes);
+            this.gb_ProjectNotes.Controls.Add(this.lbl_searchNotes);
             this.gb_ProjectNotes.Controls.Add(this.tb_NewProjectNote);
             this.gb_ProjectNotes.Controls.Add(this.dgv_pNotes);
             this.gb_ProjectNotes.Controls.Add(this.btn_InsertProjectNote);
@@ -731,6 +735,23 @@ namespace CMS
             this.lbl_NewUser.Text = "new user...";
             this.lbl_NewUser.Click += new System.EventHandler(this.lbl_NewUser_Click);
             // 
+            // lbl_searchNotes
+            // 
+            this.lbl_searchNotes.AutoSize = true;
+            this.lbl_searchNotes.Location = new System.Drawing.Point(701, 21);
+            this.lbl_searchNotes.Name = "lbl_searchNotes";
+            this.lbl_searchNotes.Size = new System.Drawing.Size(70, 13);
+            this.lbl_searchNotes.TabIndex = 13;
+            this.lbl_searchNotes.Text = "Search notes";
+            // 
+            // tb_searchNotes
+            // 
+            this.tb_searchNotes.Location = new System.Drawing.Point(702, 37);
+            this.tb_searchNotes.Name = "tb_searchNotes";
+            this.tb_searchNotes.Size = new System.Drawing.Size(179, 20);
+            this.tb_searchNotes.TabIndex = 14;
+            this.tb_searchNotes.TextChanged += new System.EventHandler(this.searchItemAdded);
+            // 
             // frm_Project
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -849,5 +870,7 @@ namespace CMS
         private System.Windows.Forms.Button btn_PlatformDetailsRemove;
         private System.Windows.Forms.Button btn_PlatformDetailsAdd;
         private System.Windows.Forms.Label lbl_NewUser;
+        private System.Windows.Forms.TextBox tb_searchNotes;
+        private System.Windows.Forms.Label lbl_searchNotes;
     }
 }

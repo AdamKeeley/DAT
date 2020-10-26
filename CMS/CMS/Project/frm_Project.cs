@@ -169,6 +169,13 @@ namespace CMS
         /// <param name="pNumber"></param>
         private void setProjectNotes(string pNumber)
         {
+            string filter = $"ProjectNumber = '{pNumber}'";
+            string filterNotes = $"pNote like '%{tb_searchNotes.Text}%'";
+            if (tb_searchNotes.Text != "")
+            {
+                filter += $" AND {filterNotes}";
+            }
+            
             //populate DataGridView (dgv_pNotes) from DataTable (ds_Project.Tables["tblProjectNotes"])
             //create new DataTable (dt_dgv_pNotes) that just contains columns of interest
             DataTable dt_dgv_pNotes = new DataTable();
@@ -177,7 +184,7 @@ namespace CMS
             dt_dgv_pNotes.Columns.Add("Created By");
             //iterate through each project note in source DataTable and add to newly created DataTable
             DataRow row;
-            foreach (DataRow nRow in ds_Project.Tables["tblProjectNotes"].Select($"ProjectNumber = '{pNumber}'"))
+            foreach (DataRow nRow in ds_Project.Tables["tblProjectNotes"].Select(filter))
             {
                 row = dt_dgv_pNotes.NewRow();
                 row["Note"] = nRow["pNote"];
@@ -194,6 +201,11 @@ namespace CMS
             dgv_pNotes.Columns["Note"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             dgv_pNotes.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dgv_pNotes.Sort(dgv_pNotes.Columns["Created Date"], ListSortDirection.Descending);
+        }
+
+        private void searchItemAdded(object sender, EventArgs e)
+        {
+            setProjectNotes(mdl_CurrentProject.ProjectNumber);
         }
 
         private void setProjectPlatformInfo(string pNumber)
@@ -351,6 +363,7 @@ namespace CMS
             gb_ProjectNotes.TabIndex = ++x;
             tb_NewProjectNote.TabIndex = ++x;
             btn_InsertProjectNote.TabIndex = ++x;
+            tb_searchNotes.TabIndex = ++x;
 
             btn_NewProject.TabIndex = ++x;
             btn_Refresh.TabIndex = ++x;
