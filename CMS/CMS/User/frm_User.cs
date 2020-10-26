@@ -124,7 +124,9 @@ namespace CMS
             //create new DataTable (dt_dgv_pNotes) that just contains columns of interest
             DataTable dt_dgv_uNotes = new DataTable();
             dt_dgv_uNotes.Columns.Add("Note");
-            dt_dgv_uNotes.Columns.Add("Created Date");
+            DataColumn CreatedDate = new DataColumn("Created Date");
+            CreatedDate.DataType = System.Type.GetType("System.DateTime");
+            dt_dgv_uNotes.Columns.Add(CreatedDate);
             dt_dgv_uNotes.Columns.Add("Created By");
             //iterate through each project note in source DataTable and add to newly created DataTable
             DataRow row;
