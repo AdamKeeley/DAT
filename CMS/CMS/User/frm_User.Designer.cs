@@ -79,6 +79,8 @@
             this.gb_UserDetail = new System.Windows.Forms.GroupBox();
             this.lbl_FullName = new System.Windows.Forms.Label();
             this.gb_UserNotes = new System.Windows.Forms.GroupBox();
+            this.tb_searchNotes = new System.Windows.Forms.TextBox();
+            this.lbl_searchNotes = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_UserNotes)).BeginInit();
             this.gb_UserProjects.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_UserProjects)).BeginInit();
@@ -423,7 +425,7 @@
             // 
             // btn_InsertUserNote
             // 
-            this.btn_InsertUserNote.Location = new System.Drawing.Point(443, 18);
+            this.btn_InsertUserNote.Location = new System.Drawing.Point(316, 18);
             this.btn_InsertUserNote.Margin = new System.Windows.Forms.Padding(2);
             this.btn_InsertUserNote.Name = "btn_InsertUserNote";
             this.btn_InsertUserNote.Size = new System.Drawing.Size(55, 40);
@@ -439,7 +441,7 @@
             this.tb_NewUserNote.MaxLength = 8000;
             this.tb_NewUserNote.Multiline = true;
             this.tb_NewUserNote.Name = "tb_NewUserNote";
-            this.tb_NewUserNote.Size = new System.Drawing.Size(433, 40);
+            this.tb_NewUserNote.Size = new System.Drawing.Size(307, 40);
             this.tb_NewUserNote.TabIndex = 58;
             // 
             // dgv_UserNotes
@@ -647,7 +649,9 @@
             // 
             // gb_UserNotes
             // 
+            this.gb_UserNotes.Controls.Add(this.tb_searchNotes);
             this.gb_UserNotes.Controls.Add(this.tb_NewUserNote);
+            this.gb_UserNotes.Controls.Add(this.lbl_searchNotes);
             this.gb_UserNotes.Controls.Add(this.dgv_UserNotes);
             this.gb_UserNotes.Controls.Add(this.btn_InsertUserNote);
             this.gb_UserNotes.Location = new System.Drawing.Point(201, 192);
@@ -656,6 +660,23 @@
             this.gb_UserNotes.TabIndex = 0;
             this.gb_UserNotes.TabStop = false;
             this.gb_UserNotes.Text = "Notes";
+            // 
+            // tb_searchNotes
+            // 
+            this.tb_searchNotes.Location = new System.Drawing.Point(376, 38);
+            this.tb_searchNotes.Name = "tb_searchNotes";
+            this.tb_searchNotes.Size = new System.Drawing.Size(123, 20);
+            this.tb_searchNotes.TabIndex = 68;
+            this.tb_searchNotes.TextChanged += new System.EventHandler(this.searchItemAdded);
+            // 
+            // lbl_searchNotes
+            // 
+            this.lbl_searchNotes.AutoSize = true;
+            this.lbl_searchNotes.Location = new System.Drawing.Point(376, 22);
+            this.lbl_searchNotes.Name = "lbl_searchNotes";
+            this.lbl_searchNotes.Size = new System.Drawing.Size(70, 13);
+            this.lbl_searchNotes.TabIndex = 67;
+            this.lbl_searchNotes.Text = "Search notes";
             // 
             // frm_User
             // 
@@ -745,5 +766,7 @@
         private System.Windows.Forms.Label lbl_FullName;
         private System.Windows.Forms.GroupBox gb_UserNotes;
         private System.Windows.Forms.NumericUpDown nud_TokenSerial;
+        private System.Windows.Forms.TextBox tb_searchNotes;
+        private System.Windows.Forms.Label lbl_searchNotes;
     }
 }

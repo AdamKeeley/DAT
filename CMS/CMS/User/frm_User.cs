@@ -113,6 +113,13 @@ namespace CMS
         /// <param name="UserNumber"></param>
         private void setUserNotes(int UserNumber)
         {
+            string filter = $"UserNumber = '{UserNumber}'";
+            string filterNotes = $"uNote like '%{tb_searchNotes.Text}%'";
+            if (tb_searchNotes.Text != "")
+            {
+                filter += $" AND {filterNotes}";
+            }
+            
             //populate DataGridView (dgv_pNotes) from DataTable (ds_Project.Tables["tblProjectNotes"])
             //create new DataTable (dt_dgv_pNotes) that just contains columns of interest
             DataTable dt_dgv_uNotes = new DataTable();
@@ -121,7 +128,7 @@ namespace CMS
             dt_dgv_uNotes.Columns.Add("Created By");
             //iterate through each project note in source DataTable and add to newly created DataTable
             DataRow row;
-            foreach (DataRow nRow in ds_User.Tables["tblUserNotes"].Select($"UserNumber = '{UserNumber}'"))
+            foreach (DataRow nRow in ds_User.Tables["tblUserNotes"].Select(filter))
             {
                 row = dt_dgv_uNotes.NewRow();
                 row["Note"] = nRow["uNote"];
@@ -138,6 +145,11 @@ namespace CMS
             dgv_UserNotes.Columns["Note"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             dgv_UserNotes.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dgv_UserNotes.Sort(dgv_UserNotes.Columns["Created Date"], ListSortDirection.Descending);
+        }
+
+        private void searchItemAdded(object sender, EventArgs e)
+        {
+            setUserNotes(mdl_CurrentUser.UserNumber);
         }
 
         /// <summary>
