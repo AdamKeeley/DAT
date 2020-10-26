@@ -11,6 +11,18 @@ namespace DataControlsLib
     public static class Static_Helper
     {
         /// <summary>
+        /// Prevent the cursor from being positioned in the middle of a masked textbox when 
+        /// the user clicks in it, if the control is empty
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public static void enter_MaskedTextBox(MaskedTextBox maskedtextbox_Target)
+        {
+            if (maskedtextbox_Target.Text == "  /  /")
+                maskedtextbox_Target.Select(0, 0);
+        }
+
+        /// <summary>
         /// Removes expired selectable items from a combobox. 
         /// Expired items are those in sql db with an entry under ValidTo field.
         /// Retains currently selected item, even if expired.

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Windows.Forms;
+using DataControlsLib;
 using DataControlsLib.DataModels;
 
 namespace CMS
@@ -289,20 +290,19 @@ namespace CMS
         }
 
         /// <summary>
-        /// Prevent the cursor from being positioned in the middle of a masked textbox when 
-        /// the user clicks in it. Needs to be called by the OnClick event of the control.
+        /// Prevent the cursor from being positioned in the middle of an empty masked textbox when 
+        /// the user clicks in it. Get's a reference to target control and passes it through to method in 
+        /// static helper class.
+        /// To be called by the OnClick event of the control.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void enter_TextBox(object sender, EventArgs e)
+        private void enter_MaskedTextBox(object sender, EventArgs e)
         {
-            MaskedTextBox textBox = sender as MaskedTextBox;
-            if (textBox.Text == "  /  /")
+            if (sender is MaskedTextBox)
             {
-                this.BeginInvoke((MethodInvoker)delegate ()
-                {
-                    textBox.Select(0, 0);
-                });
+                MaskedTextBox maskedtextBox_Target = (MaskedTextBox)Controls.Find(((Control)sender).Name, true).First();
+                Static_Helper.enter_MaskedTextBox(maskedtextBox_Target);
             }
         }
 

@@ -119,7 +119,7 @@
             this.mtb_DocSubmitted.Size = new System.Drawing.Size(76, 20);
             this.mtb_DocSubmitted.TabIndex = 37;
             this.mtb_DocSubmitted.ValidatingType = typeof(System.DateTime);
-            this.mtb_DocSubmitted.Click += new System.EventHandler(this.enter_TextBox);
+            this.mtb_DocSubmitted.Click += new System.EventHandler(this.enter_MaskedTextBox);
             // 
             // mtb_DocAccepted
             // 
@@ -130,7 +130,7 @@
             this.mtb_DocAccepted.Size = new System.Drawing.Size(76, 20);
             this.mtb_DocAccepted.TabIndex = 38;
             this.mtb_DocAccepted.ValidatingType = typeof(System.DateTime);
-            this.mtb_DocAccepted.Click += new System.EventHandler(this.enter_TextBox);
+            this.mtb_DocAccepted.Click += new System.EventHandler(this.enter_MaskedTextBox);
             // 
             // lbl_DocAccepted
             // 
