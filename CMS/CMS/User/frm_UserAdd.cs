@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 using DataControlsLib;
 using DataControlsLib.DataModels;
@@ -211,7 +212,6 @@ namespace CMS
                         return true;
                 }
             }
-            MessageBox.Show("New user not added.");
             return false;
         }
 
@@ -223,6 +223,7 @@ namespace CMS
         /// <returns></returns>
         private DialogResult confirmationBox(mdl_User mdl_User)
         {
+            // tabs and newlines align and break up displayed information for ease of review
             string reviewUserDetails = $"Create new user with these details?" + Environment.NewLine + Environment.NewLine;
             reviewUserDetails += $"Status:\t\t{mdl_User.Status_Desc}" + Environment.NewLine + Environment.NewLine;
             reviewUserDetails += $"Title:\t\t{mdl_User.Title_Desc}" + Environment.NewLine;

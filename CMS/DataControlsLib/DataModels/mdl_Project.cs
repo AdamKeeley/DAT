@@ -12,26 +12,32 @@ namespace DataControlsLib.DataModels
     /// </summary>
     public class mdl_Project
     {
-        public int pID { get; set; }
-        public string ProjectNumber { get; set; }
-        public string ProjectName { get; set; }
-        public string PortfolioNumber { get; set; }
-        public int? Stage { get; set; }
-        public int? Classification { get; set; }
-        public int? DATRAG { get; set; }
-        public DateTime? ProjectedStartDate { get; set; }
-        public DateTime? ProjectedEndDate { get; set; }
-        public DateTime? StartDate { get; set; }
-        public DateTime? EndDate { get; set; }
-        public int? PI { get; set; }
-        public int? LeadApplicant { get; set; }
-        public int? Faculty { get; set; }
-        public bool LIDA { get; set; }
-        public bool DSPT { get; set; }
-        public bool ISO27001 { get; set; }
-        public bool LASER { get; set; }
-        public bool IRC { get; set; }
-        public bool SEED { get; set; }
+        public int          pID                 { get; set; }
+        public string       ProjectNumber       { get; set; }
+        public string       ProjectName         { get; set; }
+        public string       PortfolioNumber     { get; set; }
+        public int?         Stage               { get; set; }
+        public string       Stage_Desc          { get; set; }
+        public int?         Classification      { get; set; }
+        public string       Classification_Desc { get; set; }
+        public int?         DATRAG              { get; set; }
+        public string       DATRAG_Desc         { get; set; }
+        public DateTime?    ProjectedStartDate  { get; set; }
+        public DateTime?    ProjectedEndDate    { get; set; }
+        public DateTime?    StartDate           { get; set; }
+        public DateTime?    EndDate             { get; set; }
+        public int?         PI                  { get; set; }
+        public string       PI_Desc             { get; set; }
+        public int?         LeadApplicant       { get; set; }
+        public string       LeadApplicant_Desc  { get; set; }
+        public int?         Faculty             { get; set; }
+        public string       Faculty_Desc        { get; set; }
+        public bool         LIDA                { get; set; }
+        public bool         DSPT                { get; set; }
+        public bool         ISO27001            { get; set; }
+        public bool         LASER               { get; set; }
+        public bool         IRC                 { get; set; }
+        public bool         SEED                { get; set; }
 
         /// <summary>
         /// Equals override so that the values contained in two instances of this class 

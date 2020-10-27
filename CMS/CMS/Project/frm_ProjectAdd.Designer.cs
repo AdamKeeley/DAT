@@ -57,7 +57,7 @@
             this.chkb_LASER = new System.Windows.Forms.CheckBox();
             this.chkb_IRC = new System.Windows.Forms.CheckBox();
             this.chkb_SEED = new System.Windows.Forms.CheckBox();
-            this.lbl_LeadApplicant_NewUser = new System.Windows.Forms.Label();
+            this.lbl_NewUser = new System.Windows.Forms.Label();
             this.cb_PI = new System.Windows.Forms.ComboBox();
             this.cb_LeadApplicant = new System.Windows.Forms.ComboBox();
             this.lbl_ProjectAdd = new System.Windows.Forms.Label();
@@ -372,15 +372,15 @@
             this.chkb_SEED.Text = "SEED";
             this.chkb_SEED.UseVisualStyleBackColor = true;
             // 
-            // lbl_LeadApplicant_NewUser
+            // lbl_NewUser
             // 
-            this.lbl_LeadApplicant_NewUser.AutoSize = true;
-            this.lbl_LeadApplicant_NewUser.Location = new System.Drawing.Point(435, 163);
-            this.lbl_LeadApplicant_NewUser.Name = "lbl_LeadApplicant_NewUser";
-            this.lbl_LeadApplicant_NewUser.Size = new System.Drawing.Size(59, 13);
-            this.lbl_LeadApplicant_NewUser.TabIndex = 64;
-            this.lbl_LeadApplicant_NewUser.Text = "new user...";
-            this.lbl_LeadApplicant_NewUser.Click += new System.EventHandler(this.btn_UserAdd_Click);
+            this.lbl_NewUser.AutoSize = true;
+            this.lbl_NewUser.Location = new System.Drawing.Point(435, 163);
+            this.lbl_NewUser.Name = "lbl_NewUser";
+            this.lbl_NewUser.Size = new System.Drawing.Size(59, 13);
+            this.lbl_NewUser.TabIndex = 64;
+            this.lbl_NewUser.Text = "new user...";
+            this.lbl_NewUser.Click += new System.EventHandler(this.btn_UserAdd_Click);
             // 
             // cb_PI
             // 
@@ -459,7 +459,7 @@
             this.Controls.Add(this.lbl_ProjectAdd);
             this.Controls.Add(this.cb_PI);
             this.Controls.Add(this.cb_LeadApplicant);
-            this.Controls.Add(this.lbl_LeadApplicant_NewUser);
+            this.Controls.Add(this.lbl_NewUser);
             this.Controls.Add(this.lbl_LeadApplicant);
             this.Controls.Add(this.gb_Governance);
             this.Controls.Add(this.cb_Faculty);
@@ -520,7 +520,7 @@
         private System.Windows.Forms.CheckBox chkb_LASER;
         private System.Windows.Forms.CheckBox chkb_IRC;
         private System.Windows.Forms.CheckBox chkb_SEED;
-        private System.Windows.Forms.Label lbl_LeadApplicant_NewUser;
+        private System.Windows.Forms.Label lbl_NewUser;
         private System.Windows.Forms.ComboBox cb_PI;
         private System.Windows.Forms.ComboBox cb_LeadApplicant;
         private System.Windows.Forms.Label lbl_ProjectAdd;

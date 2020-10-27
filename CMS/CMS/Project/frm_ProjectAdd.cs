@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 using DataControlsLib;
 using DataControlsLib.DataModels;
@@ -92,7 +93,8 @@ namespace CMS
         /// checks dates are dates and passes them as parameters to 
         /// the insertProject(...) method of the Projects class.
         /// </summary>
-        private void insertNewProject()
+        /// <returns>true on successful insert, false on fail</returns>
+        private bool insertNewProject()
         {
             //generate new pNumber and put it into class variable, can be used within 
             //this method/class but also to feed back to parent form.
@@ -110,17 +112,35 @@ namespace CMS
             mdl_Project.SEED               = chkb_SEED.Checked;
 
             if (cb_pStage.SelectedIndex > -1)
+            {
                 mdl_Project.Stage = int.Parse(cb_pStage.SelectedValue.ToString());
+                mdl_Project.Stage_Desc = cb_pStage.Text;
+            }
             if (cb_pClassification.SelectedIndex > -1)
+            {
                 mdl_Project.Classification = int.Parse(cb_pClassification.SelectedValue.ToString());
+                mdl_Project.Classification_Desc = cb_pClassification.Text;
+            }
             if (cb_DATRAG.SelectedIndex > -1)
+            {
                 mdl_Project.DATRAG = int.Parse(cb_DATRAG.SelectedValue.ToString());
+                mdl_Project.DATRAG_Desc = cb_DATRAG.Text;
+            }
             if (cb_LeadApplicant.SelectedIndex > -1)
+            {
                 mdl_Project.LeadApplicant = int.Parse(cb_LeadApplicant.SelectedValue.ToString());
+                mdl_Project.LeadApplicant_Desc = cb_LeadApplicant.Text;
+            }
             if (cb_PI.SelectedIndex > -1)
+            {
                 mdl_Project.PI = int.Parse(cb_PI.SelectedValue.ToString());
+                mdl_Project.PI_Desc = cb_PI.Text;
+            }
             if (cb_Faculty.SelectedIndex > -1)
+            {
                 mdl_Project.Faculty = int.Parse(cb_Faculty.SelectedValue.ToString());
+                mdl_Project.Faculty_Desc = cb_Faculty.Text;
+            }
 
             //dates are fuckey
             bool dateCheck = true;
@@ -179,15 +199,61 @@ namespace CMS
             //Check required fields have an entry
             if (Projects.requiredFields(mdl_Project) == false)
             {
-                return;
+                return false;
             }
 
             if (dateCheck == true)
             {
-                //insert new record
-                if (Projects.insertProject(mdl_Project) == true)
-                    this.Close();
+                if (confirmationBox(mdl_Project) == DialogResult.OK)
+                {
+                    //insert new record
+                    if (Projects.insertProject(mdl_Project) == true)
+                        return true;
+                }
             }
+            return false;
+        }
+
+        /// <summary>
+        /// Takes the UserModel and constructs a string that is presented via a MessageBox for 
+        /// review of entered details. Returns which button was clicked.
+        /// </summary>
+        /// <param name="mdl_User"></param>
+        /// <returns></returns>
+        private DialogResult confirmationBox(mdl_Project mdl_Project)
+        {
+            // tabs and newlines align and break up displayed information for ease of review
+            string reviewProjectDetails = $"Create new project with these details?" + Environment.NewLine + Environment.NewLine;
+
+            reviewProjectDetails += $"DATRAG:\t\t\t{mdl_Project.DATRAG_Desc}" + Environment.NewLine;
+            reviewProjectDetails += $"Project Name:\t\t{mdl_Project.ProjectName}" + Environment.NewLine + Environment.NewLine;
+
+            reviewProjectDetails += $"DSPT:\t\t\t{mdl_Project.DSPT}" + Environment.NewLine;
+            reviewProjectDetails += $"ISO27001:\t\t{mdl_Project.ISO27001}" + Environment.NewLine + Environment.NewLine;
+
+            reviewProjectDetails += $"Projected Start Date:\t{mdl_Project.ProjectedStartDate}" + Environment.NewLine;
+            reviewProjectDetails += $"Projected End Date:\t{mdl_Project.ProjectedEndDate}" + Environment.NewLine;
+            reviewProjectDetails += $"Start Date:\t\t{mdl_Project.StartDate}" + Environment.NewLine;
+            reviewProjectDetails += $"End Date:\t\t{mdl_Project.EndDate}" + Environment.NewLine + Environment.NewLine;
+
+            reviewProjectDetails += $"LASER:\t\t\t{mdl_Project.LASER}" + Environment.NewLine;
+            reviewProjectDetails += $"IRC:\t\t\t{mdl_Project.IRC}" + Environment.NewLine;
+            reviewProjectDetails += $"SEED:\t\t\t{mdl_Project.SEED}" + Environment.NewLine + Environment.NewLine;
+
+            reviewProjectDetails += $"Portfolio Number:\t\t{mdl_Project.PortfolioNumber}" + Environment.NewLine;
+            reviewProjectDetails += $"Stage:\t\t\t{mdl_Project.Stage_Desc}" + Environment.NewLine;
+            reviewProjectDetails += $"Classification:\t\t{mdl_Project.Classification_Desc}" + Environment.NewLine + Environment.NewLine;
+
+            reviewProjectDetails += $"PI:\t\t\t{mdl_Project.PI_Desc}" + Environment.NewLine;
+            reviewProjectDetails += $"Lead Applicant:\t\t{mdl_Project.LeadApplicant_Desc}" + Environment.NewLine;
+            reviewProjectDetails += $"Faculty:\t\t\t{mdl_Project.Faculty_Desc}" + Environment.NewLine + Environment.NewLine;
+
+            DialogResult confirm = MessageBox.Show(
+                text: reviewProjectDetails
+                , caption: "Confirmation"
+                , buttons: MessageBoxButtons.OKCancel);
+
+            return confirm;
         }
 
         /// <summary>
@@ -206,24 +272,27 @@ namespace CMS
 
             cb_DATRAG.TabIndex = ++x;
             tb_pNameValue.TabIndex = ++x;
+ 
+            gb_Governance.TabIndex = ++x;
+            chkb_ISO27001.TabIndex = ++x;
+            chkb_DSPT.TabIndex = ++x;
+
+            gb_KeyDates.TabIndex = ++x;
+            mtb_ProjectedStartDateValue.TabIndex = ++x;
+            mtb_ProjectedEndDateValue.TabIndex = ++x;
+            mtb_pStartDateValue.TabIndex = ++x;
+            mtb_pEndDateValue.TabIndex = ++x;
 
             gb_Platform.TabIndex = ++x;
             chkb_LASER.TabIndex = ++x;
             chkb_IRC.TabIndex = ++x;
             chkb_SEED.TabIndex = ++x;
 
-            gb_Governance.TabIndex = ++x;
-            chkb_ISO27001.TabIndex = ++x;
-            chkb_DSPT.TabIndex = ++x;
-
-            mtb_ProjectedStartDateValue.TabIndex = ++x;
-            mtb_ProjectedEndDateValue.TabIndex = ++x;
-            mtb_pStartDateValue.TabIndex = ++x;
-            mtb_pEndDateValue.TabIndex = ++x;
-
             tb_PortfolioNo.TabIndex = ++x;
             cb_pStage.TabIndex = ++x;
             cb_pClassification.TabIndex = ++x;
+
+            lbl_NewUser.TabIndex = ++x;
             cb_LeadApplicant.TabIndex = ++x;
             cb_PI.TabIndex = ++x;
             cb_Faculty.TabIndex = ++x;
@@ -266,7 +335,8 @@ namespace CMS
 
         private void btn_Create_Click(object sender, EventArgs e)
         {
-            insertNewProject();
+            if (insertNewProject() == true)
+                this.Close();
         }
     }
 }
