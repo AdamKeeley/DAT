@@ -33,6 +33,7 @@
             this.btn_ProjectDocAdd = new System.Windows.Forms.Button();
             this.dgv_ProjectDocHistory = new System.Windows.Forms.DataGridView();
             this.btn_ProjectDocAccept = new System.Windows.Forms.Button();
+            this.btn_ProjectDocDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ProjectDocHistory)).BeginInit();
             this.SuspendLayout();
             // 
@@ -88,11 +89,22 @@
             this.btn_ProjectDocAccept.UseVisualStyleBackColor = true;
             this.btn_ProjectDocAccept.Click += new System.EventHandler(this.btn_ProjectDocAccept_click);
             // 
+            // btn_ProjectDocDelete
+            // 
+            this.btn_ProjectDocDelete.Location = new System.Drawing.Point(310, 223);
+            this.btn_ProjectDocDelete.Name = "btn_ProjectDocDelete";
+            this.btn_ProjectDocDelete.Size = new System.Drawing.Size(75, 23);
+            this.btn_ProjectDocDelete.TabIndex = 6;
+            this.btn_ProjectDocDelete.Text = "Delete";
+            this.btn_ProjectDocDelete.UseVisualStyleBackColor = true;
+            this.btn_ProjectDocDelete.Click += new System.EventHandler(this.btn_ProjectDocDelete_Click);
+            // 
             // frm_ProjectDocHistory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(397, 231);
+            this.ClientSize = new System.Drawing.Size(397, 253);
+            this.Controls.Add(this.btn_ProjectDocDelete);
             this.Controls.Add(this.btn_ProjectDocAccept);
             this.Controls.Add(this.dgv_ProjectDocHistory);
             this.Controls.Add(this.btn_ProjectDocAdd);
@@ -112,5 +124,6 @@
         private System.Windows.Forms.Button btn_ProjectDocAdd;
         private System.Windows.Forms.DataGridView dgv_ProjectDocHistory;
         private System.Windows.Forms.Button btn_ProjectDocAccept;
+        private System.Windows.Forms.Button btn_ProjectDocDelete;
     }
 }

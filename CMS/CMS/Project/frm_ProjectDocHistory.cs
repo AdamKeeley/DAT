@@ -100,12 +100,13 @@ namespace CMS
                     int current_pdID = int.Parse(r.Cells["pdID"].Value.ToString());
                     mdl_ProjectDoc.ProjectNumber = projectNumber;
                     mdl_ProjectDoc.DocumentType = int.Parse(r.Cells["DocumentID"].Value.ToString());
+                    mdl_ProjectDoc.DocumentType_Desc = r.Cells["Document Type"].Value.ToString();
                     mdl_ProjectDoc.VersionNumber = Decimal.Parse(r.Cells["Version"].Value.ToString());
                     if (r.Cells["Submitted"].Value.ToString().Length > 0)
                         mdl_ProjectDoc.Submitted = DateTime.Parse(r.Cells["Submitted"].Value.ToString());
                     mdl_ProjectDoc.Accepted = DateTime.Now;
 
-                    DialogResult acceptProjectDoc = MessageBox.Show($"Accept version {mdl_ProjectDoc.VersionNumber} of the {mdl_ProjectDoc.DocumentType}?", "", MessageBoxButtons.YesNo);
+                    DialogResult acceptProjectDoc = MessageBox.Show($"Accept version {mdl_ProjectDoc.VersionNumber} of the {mdl_ProjectDoc.DocumentType_Desc}?", "", MessageBoxButtons.YesNo);
                     if (acceptProjectDoc == DialogResult.Yes)
                     {
                         
@@ -117,6 +118,35 @@ namespace CMS
                             if (projects.deleteProjectDocument(current_pdID) == true)
                                 r.Cells["Accepted"].Value = DateTime.Now;
                         }
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a document record.");
+            }
+        }
+
+        //delete document
+        private void deleteProjectDocument()
+        {
+            if (dgv_ProjectDocHistory.Rows.Count > 0 & dgv_ProjectDocHistory.SelectedRows.Count > 0)
+            {
+                foreach (DataGridViewRow r in dgv_ProjectDocHistory.SelectedRows)
+                {
+                    mdl_ProjectDoc mdl_ProjectDoc = new mdl_ProjectDoc();
+
+                    int current_pdID = int.Parse(r.Cells["pdID"].Value.ToString());
+                    mdl_ProjectDoc.DocumentType_Desc = r.Cells["Document Type"].Value.ToString();
+                    mdl_ProjectDoc.VersionNumber = Decimal.Parse(r.Cells["Version"].Value.ToString());
+
+                    DialogResult acceptProjectDoc = MessageBox.Show($"Delete version {mdl_ProjectDoc.VersionNumber} of the {mdl_ProjectDoc.DocumentType_Desc}?", "", MessageBoxButtons.YesNo);
+                    if (acceptProjectDoc == DialogResult.Yes)
+                    {
+                        Project projects = new Project();
+                        // update valid to of current record
+                        if (projects.deleteProjectDocument(current_pdID) == true)
+                            dgv_ProjectDocHistory.Rows.RemoveAt(r.Index);
                     }
                 }
             }
@@ -142,6 +172,7 @@ namespace CMS
 
             btn_ProjectDocAdd.TabIndex = ++x;
             btn_ProjectDocAccept.TabIndex = ++x;
+            btn_ProjectDocDelete.TabIndex = ++x;
         }
 
         private void btn_ProjectDocAccept_click(object sender, EventArgs e)
@@ -176,6 +207,11 @@ namespace CMS
 
                 setProjectDocHistory(projectNumber, ds_Projects, documentType);
             }
+        }
+
+        private void btn_ProjectDocDelete_Click(object sender, EventArgs e)
+        {
+            deleteProjectDocument();
         }
     }
 }
