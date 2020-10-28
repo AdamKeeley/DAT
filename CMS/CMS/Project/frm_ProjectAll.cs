@@ -268,7 +268,7 @@ namespace CMS
             dgv_ProjectList.Sort(dgv_ProjectList.Columns["Project Number"], ListSortDirection.Descending);
 
             dgv_ProjectList.Columns["Project Number"].Width = 50;
-            dgv_ProjectList.Columns["Project Name"].Width = 260;
+            dgv_ProjectList.Columns["Project Name"].Width = 250;
             dgv_ProjectList.Columns["VRE Number"].Width = 50;
             dgv_ProjectList.Columns["Portfolio Number"].Width = 50;
             dgv_ProjectList.Columns["Stage"].Width = 70;
@@ -276,7 +276,7 @@ namespace CMS
             dgv_ProjectList.Columns["DATRAG"].Width = 60;
             dgv_ProjectList.Columns["Lead Applicant"].Width = 120;
             dgv_ProjectList.Columns["PI"].Width = 120;
-            dgv_ProjectList.Columns["Faculty"].Width = 180;
+            dgv_ProjectList.Columns["Faculty"].Width = 170;
 
             lbl_recordCount.Text = dt_dgv_ProjectList.Rows.Count.ToString() + " records";
         }
