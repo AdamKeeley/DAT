@@ -55,7 +55,7 @@ namespace CMS
             else mdl_ProjectDoc.DocumentType = null;
 
             mdl_ProjectDoc.VersionNumber = nud_DocVersion.Value;
-            
+
             //dates are fuckey
             if (mtb_DocSubmitted.Text != "" & mtb_DocSubmitted.Text != "  /  /")
             {
@@ -69,6 +69,8 @@ namespace CMS
                     return false;
                 }
             }
+            else
+                mdl_ProjectDoc.Submitted = null;
             if (mtb_DocAccepted.Text != "" & mtb_DocAccepted.Text != "  /  /")
             {
                 try
@@ -81,6 +83,8 @@ namespace CMS
                     return false;
                 }
             }
+            else
+                mdl_ProjectDoc.Accepted = null;
             return true;
         }
 
@@ -161,7 +165,6 @@ namespace CMS
 
         private void btn_DocAddCreate_click(object sender, EventArgs e)
         {
-
             insertNewProjectDoc();
         }
 

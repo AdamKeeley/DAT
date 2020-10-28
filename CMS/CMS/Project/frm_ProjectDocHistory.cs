@@ -1,4 +1,5 @@
 ﻿using DataControlsLib;
+using DataControlsLib.DataModels;
 using System;
 using System.Data;
 using System.Data.SqlClient;
@@ -38,6 +39,7 @@ namespace CMS
 
             dt_dgv_DocumentHistory.Columns.Add("pdID");
             dt_dgv_DocumentHistory.Columns.Add("Document Type");
+            dt_dgv_DocumentHistory.Columns.Add("DocumentID");
             dt_dgv_DocumentHistory.Columns.Add("Version");
             dt_dgv_DocumentHistory.Columns.Add("Submitted");
             dt_dgv_DocumentHistory.Columns.Add("Accepted");
@@ -66,6 +68,7 @@ namespace CMS
                 foreach (DataRow tRow in hRow.GetParentRows("ProjectDocument_Document"))
                 {
                     row["Document Type"] = tRow["DocumentDescription"];
+                    row["DocumentID"] = tRow["DocumentID"];
                 }
                 row["Version"] = hRow["VersionNumber"];
                 row["Submitted"] = hRow["Submitted"];
@@ -79,6 +82,7 @@ namespace CMS
             dgv_ProjectDocHistory.DataSource = dt_dgv_DocumentHistory;
             dgv_ProjectDocHistory.Columns["pdID"].Visible = false;
             dgv_ProjectDocHistory.Columns["Document Type"].Width = 140;
+            dgv_ProjectDocHistory.Columns["DocumentID"].Visible = false;
             dgv_ProjectDocHistory.Columns["Version"].Width = 70;
             dgv_ProjectDocHistory.Columns["Submitted"].Width = 80;
             dgv_ProjectDocHistory.Columns["Accepted"].Width = 80;
@@ -91,16 +95,28 @@ namespace CMS
             {
                 foreach (DataGridViewRow r in dgv_ProjectDocHistory.SelectedRows)
                 {
-                    int pdID = int.Parse(r.Cells["pdID"].Value.ToString());
-                    string pdVersion = r.Cells["Version"].Value.ToString();
-                    string pdDocType = r.Cells["Document Type"].Value.ToString();
+                    mdl_ProjectDoc mdl_ProjectDoc = new mdl_ProjectDoc();
 
-                    DialogResult acceptProjectDoc = MessageBox.Show($"Accept version {pdVersion} of the {pdDocType}?", "", MessageBoxButtons.YesNo);
+                    int current_pdID = int.Parse(r.Cells["pdID"].Value.ToString());
+                    mdl_ProjectDoc.ProjectNumber = projectNumber;
+                    mdl_ProjectDoc.DocumentType = int.Parse(r.Cells["DocumentID"].Value.ToString());
+                    mdl_ProjectDoc.VersionNumber = Decimal.Parse(r.Cells["Version"].Value.ToString());
+                    if (r.Cells["Submitted"].Value.ToString().Length > 0)
+                        mdl_ProjectDoc.Submitted = DateTime.Parse(r.Cells["Submitted"].Value.ToString());
+                    mdl_ProjectDoc.Accepted = DateTime.Now;
+
+                    DialogResult acceptProjectDoc = MessageBox.Show($"Accept version {mdl_ProjectDoc.VersionNumber} of the {mdl_ProjectDoc.DocumentType}?", "", MessageBoxButtons.YesNo);
                     if (acceptProjectDoc == DialogResult.Yes)
                     {
+                        
                         Project projects = new Project();
-                        if (projects.acceptProjectDocument(pdID) == true)
-                            r.Cells["Accepted"].Value = DateTime.Now;
+                        // insert new record
+                        if (projects.insertNewDoc(mdl_ProjectDoc) == true)
+                        {
+                            // update valid to of current record
+                            if (projects.deleteProjectDocument(current_pdID) == true)
+                                r.Cells["Accepted"].Value = DateTime.Now;
+                        }
                     }
                 }
             }

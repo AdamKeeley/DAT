@@ -546,14 +546,17 @@ namespace CMS
                     SqlCommand qry_insertNewDoc = new SqlCommand();
                     qry_insertNewDoc.Connection = conn;
                     qry_insertNewDoc.CommandText = $"insert into [dbo].[tblProjectDocument] " +
-                        $"([ProjectNumber], [DocumentType], [VersionNumber], [Submitted]) " +
+                        $"([ProjectNumber], [DocumentType], [VersionNumber], [Submitted], [Accepted]) " +
                         $"values " +
-                        $"(@ProjectNumber, @DocumentType, @VersionNumber, @Submitted) ";
+                        $"(@ProjectNumber, @DocumentType, @VersionNumber, @Submitted, @Accepted) ";
                     qry_insertNewDoc.Parameters.Add("@ProjectNumber", SqlDbType.VarChar).Value = mdl_ProjectDoc.ProjectNumber;
                     qry_insertNewDoc.Parameters.Add("@DocumentType", SqlDbType.Int).Value = mdl_ProjectDoc.DocumentType;
                     qry_insertNewDoc.Parameters.Add("@VersionNumber", SqlDbType.Decimal).Value = mdl_ProjectDoc.VersionNumber;
                     qry_insertNewDoc.Parameters.Add("@Submitted", SqlDbType.DateTime).Value = mdl_ProjectDoc.Submitted;
-
+                    SqlParameter param_Accepted = new SqlParameter("@Accepted", mdl_ProjectDoc.Accepted == null ? (object)DBNull.Value : mdl_ProjectDoc.Accepted);
+                    qry_insertNewDoc.Parameters.Add(param_Accepted);
+                    param_Accepted.IsNullable = true;
+                    
                     conn.Open();
                     qry_insertNewDoc.ExecuteNonQuery();
                 }
@@ -566,7 +569,7 @@ namespace CMS
             }
         }
         
-        public bool acceptProjectDocument(int pdID)
+        public bool deleteProjectDocument(int pdID)
         {
             bool success = false;
             try
@@ -580,7 +583,7 @@ namespace CMS
                     SqlCommand qryUpdateProjectDoc = new SqlCommand();
                     qryUpdateProjectDoc.Connection = conn;
                     qryUpdateProjectDoc.CommandText = $"update [dbo].[tblProjectDocument] " +
-                        $"set[Accepted] = getdate() " +
+                        $"set[ValidTo] = getdate() " +
                         $"where[pdID] = @pdID";
                     qryUpdateProjectDoc.Parameters.Add("@pdID", SqlDbType.Int).Value = pdID;
 
