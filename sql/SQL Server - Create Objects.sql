@@ -184,6 +184,15 @@ create table dbo.tlkPlatformInfo (
 	constraint PK_PlatformInfo primary key nonclustered (PlatformInfoID)
 	)
 
+create table dbo.tblProjectDatTime (
+	dtID int identity(1,1) not null
+	, ProjectNumber varchar(5)
+	, HoursSpent decimal(3,1)
+	, Created datetime default getdate()
+	, CreatedBy varchar(50) default suser_name()
+	constraint PK_ProjectDatTime primary key (dtID)
+	)
+
 ALTER TABLE [dbo].[tblProject]  WITH CHECK ADD  CONSTRAINT [FK_Project_Classification] FOREIGN KEY([Classification])
 REFERENCES [dbo].[tlkClassification] ([classificationID])
 ON UPDATE CASCADE
