@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_ProjectDocAdd));
             this.lbl_ProjectName = new System.Windows.Forms.Label();
             this.lbl_ProjectNumber = new System.Windows.Forms.Label();
             this.cb_DocType = new System.Windows.Forms.ComboBox();
@@ -181,6 +182,7 @@
             this.Controls.Add(this.cb_DocType);
             this.Controls.Add(this.lbl_ProjectName);
             this.Controls.Add(this.lbl_ProjectNumber);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frm_ProjectDocAdd";
             this.Text = "frm_ProjectDocAdd";
             ((System.ComponentModel.ISupportInitialize)(this.nud_DocVersion)).EndInit();

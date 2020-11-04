@@ -255,9 +255,10 @@
             this.Controls.Add(this.gb_DSAs);
             this.Controls.Add(this.gb_DataTracking);
             this.Controls.Add(this.gb_Projects);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frm_HomePage";
-            this.Text = "DAT CMS";
+            this.Text = "PRISM";
             this.gb_Projects.ResumeLayout(false);
             this.gb_DataTracking.ResumeLayout(false);
             this.gb_DSAs.ResumeLayout(false);

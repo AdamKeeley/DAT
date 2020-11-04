@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_UserProjectAdd));
             this.cb_pNumberValue = new System.Windows.Forms.ComboBox();
             this.tb_pNameValue = new System.Windows.Forms.TextBox();
             this.lbl_pName = new System.Windows.Forms.Label();
@@ -111,6 +112,7 @@
             this.Controls.Add(this.tb_pNameValue);
             this.Controls.Add(this.lbl_pName);
             this.Controls.Add(this.lbl_pNumber);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frm_UserProjectAdd";
             this.Text = "Add Project to User Record";
             this.ResumeLayout(false);

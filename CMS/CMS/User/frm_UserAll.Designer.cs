@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_UserAll));
             this.cb_UserStatus = new System.Windows.Forms.ComboBox();
             this.lbl_UserTitle = new System.Windows.Forms.Label();
             this.lbl_UserStatus = new System.Windows.Forms.Label();
@@ -269,6 +270,7 @@
             this.Controls.Add(this.tb_UserName);
             this.Controls.Add(this.tb_FirstName);
             this.Controls.Add(this.lbl_Email);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frm_UserAll";
             this.Text = "LIDA Users";
             ((System.ComponentModel.ISupportInitialize)(this.dgv_UserList)).EndInit();

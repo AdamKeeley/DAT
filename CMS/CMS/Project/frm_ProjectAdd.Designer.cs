@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_ProjectAdd));
             this.mtb_pStartDateValue = new System.Windows.Forms.MaskedTextBox();
             this.mtb_pEndDateValue = new System.Windows.Forms.MaskedTextBox();
             this.lbl_pEndDate = new System.Windows.Forms.Label();
@@ -476,6 +477,7 @@
             this.Controls.Add(this.lbl_pStage);
             this.Controls.Add(this.tb_pNameValue);
             this.Controls.Add(this.lbl_pName);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frm_ProjectAdd";
             this.Text = "Create New Project";

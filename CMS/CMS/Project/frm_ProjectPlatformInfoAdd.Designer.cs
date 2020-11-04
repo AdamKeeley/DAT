@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_ProjectPlatformInfoAdd));
             this.lbl_PlatformItem = new System.Windows.Forms.Label();
             this.cb_PlatformItem = new System.Windows.Forms.ComboBox();
             this.lbl_PlatformItemDescription = new System.Windows.Forms.Label();
@@ -103,6 +104,7 @@
             this.Controls.Add(this.lbl_PlatformItemDescription);
             this.Controls.Add(this.cb_PlatformItem);
             this.Controls.Add(this.lbl_PlatformItem);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frm_ProjectPlatformInfoAdd";
             this.Text = "Add Project Platform Info";
             this.ResumeLayout(false);

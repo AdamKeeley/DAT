@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_UserAdd));
             this.cb_UserStatus = new System.Windows.Forms.ComboBox();
             this.lbl_UserStatus = new System.Windows.Forms.Label();
             this.cb_UserTitle = new System.Windows.Forms.ComboBox();
@@ -526,6 +527,7 @@
             this.Controls.Add(this.gb_MFA);
             this.Controls.Add(this.btn_UserOK);
             this.Controls.Add(this.btn_UserCancel);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frm_UserAdd";
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.Text = "New User";

@@ -30,6 +30,7 @@ namespace CMS
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_Project));
             this.lbl_pNumber = new System.Windows.Forms.Label();
             this.lbl_pName = new System.Windows.Forms.Label();
             this.tb_pNameValue = new System.Windows.Forms.TextBox();
@@ -90,10 +91,10 @@ namespace CMS
             this.btn_PlatformDetailsAdd = new System.Windows.Forms.Button();
             this.lbl_NewUser = new System.Windows.Forms.Label();
             this.gb_DatTime = new System.Windows.Forms.GroupBox();
-            this.nud_DatHoursSpent = new System.Windows.Forms.NumericUpDown();
-            this.lbl_DatHoursSpent = new System.Windows.Forms.Label();
-            this.btn_DatHoursAdd = new System.Windows.Forms.Button();
             this.dgv_DatHours = new System.Windows.Forms.DataGridView();
+            this.btn_DatHoursAdd = new System.Windows.Forms.Button();
+            this.lbl_DatHoursSpent = new System.Windows.Forms.Label();
+            this.nud_DatHoursSpent = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_pNotes)).BeginInit();
             this.gb_Platform.SuspendLayout();
             this.gb_Governance.SuspendLayout();
@@ -105,8 +106,8 @@ namespace CMS
             this.gb_PlatformDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_PlatformDetails)).BeginInit();
             this.gb_DatTime.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nud_DatHoursSpent)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_DatHours)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_DatHoursSpent)).BeginInit();
             this.SuspendLayout();
             // 
             // lbl_pNumber
@@ -773,32 +774,6 @@ namespace CMS
             this.gb_DatTime.TabStop = false;
             this.gb_DatTime.Text = "DAT Hours";
             // 
-            // nud_DatHoursSpent
-            // 
-            this.nud_DatHoursSpent.Location = new System.Drawing.Point(88, 19);
-            this.nud_DatHoursSpent.Name = "nud_DatHoursSpent";
-            this.nud_DatHoursSpent.Size = new System.Drawing.Size(91, 20);
-            this.nud_DatHoursSpent.TabIndex = 0;
-            // 
-            // lbl_DatHoursSpent
-            // 
-            this.lbl_DatHoursSpent.AutoSize = true;
-            this.lbl_DatHoursSpent.Location = new System.Drawing.Point(6, 21);
-            this.lbl_DatHoursSpent.Name = "lbl_DatHoursSpent";
-            this.lbl_DatHoursSpent.Size = new System.Drawing.Size(76, 13);
-            this.lbl_DatHoursSpent.TabIndex = 1;
-            this.lbl_DatHoursSpent.Text = "Hours Worked";
-            // 
-            // btn_DatHoursAdd
-            // 
-            this.btn_DatHoursAdd.Location = new System.Drawing.Point(104, 45);
-            this.btn_DatHoursAdd.Name = "btn_DatHoursAdd";
-            this.btn_DatHoursAdd.Size = new System.Drawing.Size(75, 23);
-            this.btn_DatHoursAdd.TabIndex = 2;
-            this.btn_DatHoursAdd.Text = "Add time";
-            this.btn_DatHoursAdd.UseVisualStyleBackColor = true;
-            this.btn_DatHoursAdd.Click += new System.EventHandler(this.btn_DatTimeAdd_Click);
-            // 
             // dgv_DatHours
             // 
             this.dgv_DatHours.AllowUserToAddRows = false;
@@ -818,6 +793,32 @@ namespace CMS
             this.dgv_DatHours.Size = new System.Drawing.Size(170, 118);
             this.dgv_DatHours.TabIndex = 15;
             this.dgv_DatHours.TabStop = false;
+            // 
+            // btn_DatHoursAdd
+            // 
+            this.btn_DatHoursAdd.Location = new System.Drawing.Point(104, 45);
+            this.btn_DatHoursAdd.Name = "btn_DatHoursAdd";
+            this.btn_DatHoursAdd.Size = new System.Drawing.Size(75, 23);
+            this.btn_DatHoursAdd.TabIndex = 2;
+            this.btn_DatHoursAdd.Text = "Add time";
+            this.btn_DatHoursAdd.UseVisualStyleBackColor = true;
+            this.btn_DatHoursAdd.Click += new System.EventHandler(this.btn_DatTimeAdd_Click);
+            // 
+            // lbl_DatHoursSpent
+            // 
+            this.lbl_DatHoursSpent.AutoSize = true;
+            this.lbl_DatHoursSpent.Location = new System.Drawing.Point(6, 21);
+            this.lbl_DatHoursSpent.Name = "lbl_DatHoursSpent";
+            this.lbl_DatHoursSpent.Size = new System.Drawing.Size(76, 13);
+            this.lbl_DatHoursSpent.TabIndex = 1;
+            this.lbl_DatHoursSpent.Text = "Hours Worked";
+            // 
+            // nud_DatHoursSpent
+            // 
+            this.nud_DatHoursSpent.Location = new System.Drawing.Point(88, 19);
+            this.nud_DatHoursSpent.Name = "nud_DatHoursSpent";
+            this.nud_DatHoursSpent.Size = new System.Drawing.Size(91, 20);
+            this.nud_DatHoursSpent.TabIndex = 0;
             // 
             // frm_Project
             // 
@@ -857,6 +858,7 @@ namespace CMS
             this.Controls.Add(this.tb_pNameValue);
             this.Controls.Add(this.lbl_pName);
             this.Controls.Add(this.lbl_pNumber);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frm_Project";
             this.Text = "Project Details";
@@ -876,8 +878,8 @@ namespace CMS
             ((System.ComponentModel.ISupportInitialize)(this.dgv_PlatformDetails)).EndInit();
             this.gb_DatTime.ResumeLayout(false);
             this.gb_DatTime.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nud_DatHoursSpent)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_DatHours)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_DatHoursSpent)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

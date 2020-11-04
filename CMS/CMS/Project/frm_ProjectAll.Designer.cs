@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_ProjectAll));
             this.lbl_LeadApplicant = new System.Windows.Forms.Label();
             this.btn_ClearSearch = new System.Windows.Forms.Button();
             this.cb_Faculty = new System.Windows.Forms.ComboBox();
@@ -320,6 +321,7 @@
             this.Controls.Add(this.lbl_pStage);
             this.Controls.Add(this.tb_pNameValue);
             this.Controls.Add(this.lbl_pName);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frm_ProjectAll";
             this.Text = "LIDA Projects";
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ProjectList)).EndInit();

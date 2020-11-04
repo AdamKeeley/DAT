@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_ProjectDocHistory));
             this.lbl_ProjectNumber = new System.Windows.Forms.Label();
             this.lbl_ProjectName = new System.Windows.Forms.Label();
             this.btn_ProjectDocAdd = new System.Windows.Forms.Button();
@@ -110,8 +111,9 @@
             this.Controls.Add(this.btn_ProjectDocAdd);
             this.Controls.Add(this.lbl_ProjectName);
             this.Controls.Add(this.lbl_ProjectNumber);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frm_ProjectDocHistory";
-            this.Text = "frm_ProjectDocHistory";
+            this.Text = "Project Document History";
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ProjectDocHistory)).EndInit();
             this.ResumeLayout(false);
 

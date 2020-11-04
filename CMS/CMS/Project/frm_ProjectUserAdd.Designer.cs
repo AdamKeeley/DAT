@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_ProjectUserAdd));
             this.cb_Researcher = new System.Windows.Forms.ComboBox();
             this.lbl_Researcher = new System.Windows.Forms.Label();
             this.btn_UserProjectAdd_Add = new System.Windows.Forms.Button();
@@ -98,6 +99,7 @@
             this.Controls.Add(this.btn_UserProjectAdd_Cancel);
             this.Controls.Add(this.cb_Researcher);
             this.Controls.Add(this.lbl_Researcher);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frm_ProjectUserAdd";
             this.Text = "Add User to a Project";
             this.ResumeLayout(false);
