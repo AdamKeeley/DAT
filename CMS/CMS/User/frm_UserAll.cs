@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataControlsLib;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -165,6 +166,8 @@ namespace CMS
             dgv_UserList.Columns["Email"].Width = 180;
             dgv_UserList.Columns["User Name"].Width = 70;
             dgv_UserList.Columns["Organisation"].Width = 200;
+
+            dgv_UserList.DoubleBuffered(true);
 
             lbl_recordCount.Text = dt_dgv_UserList.Rows.Count.ToString() + " records";
         }

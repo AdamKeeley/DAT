@@ -1,9 +1,8 @@
-﻿using System;
+﻿using DataControlsLib;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace CMS
@@ -277,6 +276,8 @@ namespace CMS
             dgv_ProjectList.Columns["Lead Applicant"].Width = 120;
             dgv_ProjectList.Columns["PI"].Width = 120;
             dgv_ProjectList.Columns["Faculty"].Width = 170;
+
+            dgv_ProjectList.DoubleBuffered(true);
 
             lbl_recordCount.Text = dt_dgv_ProjectList.Rows.Count.ToString() + " records";
         }

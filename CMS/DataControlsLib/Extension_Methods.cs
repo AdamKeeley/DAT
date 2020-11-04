@@ -3,13 +3,38 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace DataControlsLib
 {
-    public static class IEnumerableExtensions
+    public static class Extension_Methods
     {
+        /// <summary>
+        /// Used to apply double buffering to DataGridViews.
+        /// This reduces screen tear when scrolling through large volume data.
+        /// Usage: this.dataGridView1.DoubleBuffered(true);
+        /// </summary>
+        /// <param name="dgv"></param>
+        /// <param name="setting"></param>
+        public static void DoubleBuffered(this DataGridView dgv, bool setting)
+        {
+            Type dgvType = dgv.GetType();
+            PropertyInfo pi = dgvType.GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
+            pi.SetValue(dgv, setting, null);
+        }
+
+        public static string NullIfEmpty(this string value)
+        {
+            if (String.IsNullOrWhiteSpace(value))
+            {
+                return null;
+            }
+            else
+            {
+                return value;
+            }
+        }
+
         public static DataTable ToDataTable<T>(this IEnumerable<T> input)
             where T : class
         {
