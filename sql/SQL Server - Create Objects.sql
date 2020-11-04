@@ -108,6 +108,14 @@ create table dbo.tblProjectPlatformInfo (
 	constraint PK_ProjectPlatformInfo primary key nonclustered (ProjectPlatformInfoID)
 	)
 
+create table dbo.versioning (
+	versionID int identity(1,1)
+	, VersionName varchar(50)
+	, ValidFrom datetime default cast(getdate() as Date)
+	, ValidTo datetime
+	constraint PK_Versioning primary key (versionID)
+	)
+
 CREATE TABLE [dbo].[tlkClassification](
 	[classificationID] [int] IDENTITY(1,1) NOT NULL,
 	[classificationDescription] [varchar](25) NULL,

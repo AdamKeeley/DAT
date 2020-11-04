@@ -38,21 +38,28 @@ namespace CMS
 
         private bool addProjectPlatformInfo()
         {
-            int PlatformInfoID = (int)cb_PlatformItem.SelectedValue;
-            string PlatformInfoDescription = tb_PlatformItemDescription.Text;
-
-            Project Projects = new Project();
-            if (PlatformInfoDescription.Length > 0)
+            if (cb_PlatformItem.SelectedIndex > -1)
             {
-                if (Projects.insertProjectPlatformInfo(projectNumber, PlatformInfoID, PlatformInfoDescription) == true)
+                int PlatformInfoID = (int)cb_PlatformItem.SelectedValue;
+                string PlatformInfoDescription = tb_PlatformItemDescription.Text;
+
+                Project Projects = new Project();
+                if (PlatformInfoDescription.Length > 0)
                 {
-                    MessageBox.Show("Item added");
-                    return true;
+                    if (Projects.insertProjectPlatformInfo(projectNumber, PlatformInfoID, PlatformInfoDescription) == true)
+                    {
+                        MessageBox.Show("Item added");
+                        return true;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Please enter a Project Platform Info Description.");
                 }
             }
             else
             {
-                MessageBox.Show("Please enter a Project Platform Info Description.");
+                MessageBox.Show("Please select a Project Platform Item.");
             }
             return false;
         }
