@@ -803,16 +803,19 @@ namespace CMS
             // 
             this.dgv_DatHours.AllowUserToAddRows = false;
             this.dgv_DatHours.AllowUserToDeleteRows = false;
+            this.dgv_DatHours.AllowUserToResizeColumns = false;
+            this.dgv_DatHours.AllowUserToResizeRows = false;
             this.dgv_DatHours.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_DatHours.Location = new System.Drawing.Point(9, 73);
             this.dgv_DatHours.Margin = new System.Windows.Forms.Padding(2);
             this.dgv_DatHours.Name = "dgv_DatHours";
             this.dgv_DatHours.ReadOnly = true;
             this.dgv_DatHours.RowHeadersVisible = false;
+            this.dgv_DatHours.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgv_DatHours.RowTemplate.Height = 24;
-            this.dgv_DatHours.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.dgv_DatHours.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.dgv_DatHours.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_DatHours.Size = new System.Drawing.Size(170, 139);
+            this.dgv_DatHours.Size = new System.Drawing.Size(170, 118);
             this.dgv_DatHours.TabIndex = 15;
             this.dgv_DatHours.TabStop = false;
             // 

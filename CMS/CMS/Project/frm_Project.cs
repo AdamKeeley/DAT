@@ -60,6 +60,7 @@ namespace CMS
             setProjectPlatformInfo(pNumber);
             setProjectUsers(pNumber);
             changeDocButtonColour(pNumber);
+            setDatTime(pNumber);
         }
 
         /// <summary>
@@ -270,6 +271,39 @@ namespace CMS
             dgv_ProjectUsers.Sort(dgv_ProjectUsers.Columns["Full Name"], ListSortDirection.Ascending);
             dgv_ProjectUsers.Columns["User Number"].Visible = false;
             dgv_ProjectUsers.Columns["Full Name"].Width = 155;
+        }
+
+        private void setDatTime(string pNumber)
+        {
+            //create new DataTable that just contains columns of interest
+            DataTable dt_dgv_DatHours = new DataTable();
+            dt_dgv_DatHours.Columns.Add("Period");
+            dt_dgv_DatHours.Columns.Add("DAT Hours");
+
+            DataRow row;
+            foreach (DataRow dhRow in ds_Project.Tables["tblDatHours"].Select($"ProjectNumber = '{pNumber}'"))
+            {
+                row = dt_dgv_DatHours.NewRow();
+                row["Period"] = "This Month";
+                row["DAT Hours"] = dhRow["ThisMonth"];
+                dt_dgv_DatHours.Rows.Add(row);
+                row = dt_dgv_DatHours.NewRow();
+                row["Period"] = "Last 6 Month";
+                row["DAT Hours"] = dhRow["Last6Month"];
+                dt_dgv_DatHours.Rows.Add(row);
+                row = dt_dgv_DatHours.NewRow();
+                row["Period"] = "Last 12 Month";
+                row["DAT Hours"] = dhRow["Last12Month"];
+                dt_dgv_DatHours.Rows.Add(row);
+                row = dt_dgv_DatHours.NewRow();
+                row["Period"] = "All Time";
+                row["DAT Hours"] = dhRow["AllTime"];
+                dt_dgv_DatHours.Rows.Add(row);
+            }
+            dgv_DatHours.DataSource = dt_dgv_DatHours;
+            dgv_DatHours.Columns["Period"].Width = 100;
+            dgv_DatHours.Columns["Period"].SortMode = DataGridViewColumnSortMode.NotSortable;
+            dgv_DatHours.Columns["DAT Hours"].SortMode = DataGridViewColumnSortMode.NotSortable;
         }
 
         /// <summary>
@@ -646,6 +680,8 @@ namespace CMS
                 {
                     MessageBox.Show($"Added {DatHours} hours to project {pNumber}.");
                     nud_DatHoursSpent.Value = 0;
+                    fillProjectsDataSet();
+                    refreshProjectForm(pNumber);
                 }
             }
         }

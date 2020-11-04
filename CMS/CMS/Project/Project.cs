@@ -73,18 +73,29 @@ namespace CMS
                         $"order by [LastName], [FirstName], [UserID]");
                     SQL_Stuff.getDataTable(conn, ds_prj, "tblDocsAccepted",
                         $"select tbl.ProjectNumber " +
-                        $"    , tlk.DocumentID " +
-                        $"    , tlk.DocumentDescription " +
-                        $"    , max(tbl.Accepted) as maxAccepted " +
+                        $"  , tlk.DocumentID " +
+                        $"  , tlk.DocumentDescription " +
+                        $"  , max(tbl.Accepted) as maxAccepted " +
                         $"from[dbo].[tlkDocuments] tlk " +
-                        $"    left join[dbo].[tblProjectDocument] tbl " +
-                        $"        on tlk.DocumentID = tbl.DocumentType " +
+                        $"  left join[dbo].[tblProjectDocument] tbl " +
+                        $"      on tlk.DocumentID = tbl.DocumentType " +
                         $"where tlk.ValidTo is null and tbl.ValidTo is null " +
-                        $"    and tbl.ProjectNumber is not null " +
+                        $"  and tbl.ProjectNumber is not null " +
                         $"group by tbl.ProjectNumber " +
-                        $"    , tlk.DocumentID " +
-                        $"    , tlk.DocumentDescription " +
+                        $"  , tlk.DocumentID " +
+                        $"  , tlk.DocumentDescription " +
                         $"order by tbl.ProjectNumber, tlk.DocumentID");
+                    SQL_Stuff.getDataTable(conn, ds_prj, "tblDatHours",
+                        $"select ProjectNumber " +
+                        $"  , sum(case when datediff(m, Created, getdate()) = 0 " +
+                        $"      then[DatHours] else 0 end) as ThisMonth " +
+                        $"  , sum(case when datediff(m, Created, getdate()) between 1 and 6 " +
+                        $"      then[DatHours] else 0 end) as Last6Month " +
+                        $"  , sum(case when datediff(m, Created, getdate()) between 1 and 12 " +
+                        $"      then[DatHours] else 0 end) as Last12Month " +
+                        $"  , sum([DatHours]) as AllTime " +
+                        $"from [dbo].[tblProjectDatTime] " +
+                        $"group by ProjectNumber ");
                     // Copies made of tblUser so that the can be referenced by LeadApplicant and 
                     // PI fields of tblProjects via DataRelations without additional SQL Server hits
                     DataTable leadApp = ds_prj.Tables["tblUser"].Copy();
