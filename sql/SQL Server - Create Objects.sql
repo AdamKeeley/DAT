@@ -29,7 +29,7 @@ CREATE TABLE [dbo].[tblProject](
 	[LIDA] [bit] NULL,
 	[DSPT] [bit] NULL,
 	[ISO27001] [bit] NULL,
-	[Azure] [bit] NULL,
+	[LASER] [bit] NULL,
 	[IRC] [bit] NULL,
 	[SEED] [bit] NULL,
 	[ValidFrom] [datetime] NULL,
@@ -187,7 +187,7 @@ create table dbo.tlkPlatformInfo (
 create table dbo.tblProjectDatTime (
 	dtID int identity(1,1) not null
 	, ProjectNumber varchar(5)
-	, HoursSpent decimal(3,1)
+	, DatHours decimal(3,1)
 	, Created datetime default getdate()
 	, CreatedBy varchar(50) default suser_name()
 	constraint PK_ProjectDatTime primary key (dtID)

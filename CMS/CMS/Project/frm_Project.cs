@@ -197,7 +197,7 @@ namespace CMS
             dgv_pNotes.DataSource = dt_dgv_pNotes;
 
             //format DataGridView (dgv_pNotes) column widths etc.
-            dgv_pNotes.Columns["Note"].Width = 711;
+            dgv_pNotes.Columns["Note"].Width = 511;
             dgv_pNotes.Columns["Created Date"].Width = 81;
             dgv_pNotes.Columns["Created By"].Width = 81;
             dgv_pNotes.Columns["Note"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
@@ -366,6 +366,10 @@ namespace CMS
             tb_NewProjectNote.TabIndex = ++x;
             btn_InsertProjectNote.TabIndex = ++x;
             tb_searchNotes.TabIndex = ++x;
+
+            gb_DatTime.TabIndex = ++x;
+            nud_DatHoursSpent.TabIndex = ++x;
+            btn_DatHoursAdd.TabIndex = ++x;
 
             btn_NewProject.TabIndex = ++x;
             btn_Refresh.TabIndex = ++x;
@@ -631,6 +635,21 @@ namespace CMS
             }
         }
 
+        private void addDatTimeSpent()
+        {
+            decimal DatHours = nud_DatHoursSpent.Value;
+            string pNumber = mdl_CurrentProject.ProjectNumber;
+            if (DatHours > 0)
+            {
+                Project projects = new Project();
+                if (projects.insertDatTime(pNumber, DatHours) == true)
+                {
+                    MessageBox.Show($"Added {DatHours} hours to project {pNumber}.");
+                    nud_DatHoursSpent.Value = 0;
+                }
+            }
+        }
+
         /// <summary>
         /// Prevent the cursor from being positioned in the middle of an empty masked textbox when 
         /// the user clicks in it. Get's a reference to target control and passes it through to method in 
@@ -778,6 +797,11 @@ namespace CMS
                 fillProjectsDataSet();
                 refreshProjectForm(mdl_CurrentProject.ProjectNumber);
             }
+        }
+
+        private void btn_DatTimeAdd_Click(object sender, EventArgs e)
+        {
+            addDatTimeSpent();
         }
 
         private void btn_PlatformDetailsRemove_Click(object sender, EventArgs e)

@@ -564,7 +564,7 @@ namespace CMS
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Failed to insert new document." + Environment.NewLine + ex.Message);
+                MessageBox.Show("Failed to insert new document." + Environment.NewLine + Environment.NewLine + ex.Message);
                 return false;
             }
         }
@@ -601,6 +601,34 @@ namespace CMS
             }
             
             return success;
+        }
+
+        public bool insertDatTime(string pNumber, decimal DatHours)
+        {
+            try
+            {
+                SqlConnection conn = new SqlConnection();
+                conn.ConnectionString = SQL_Stuff.conString;
+                conn.Credential = SQL_Stuff.credential;
+                using (conn)
+                {
+                    SqlCommand qryInsertDatTime = new SqlCommand();
+                    qryInsertDatTime.Connection = conn;
+                    qryInsertDatTime.CommandText = $"insert into[dbo].[tblProjectDatTime] (ProjectNumber, DatHours) " +
+                        $"values (@ProjectNumber, @DatHours)";
+                    qryInsertDatTime.Parameters.Add("@ProjectNumber", SqlDbType.VarChar).Value = pNumber;
+                    qryInsertDatTime.Parameters.Add("@DatHours", SqlDbType.Decimal).Value = DatHours;
+
+                    conn.Open();
+                    qryInsertDatTime.ExecuteNonQuery();
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to add worked hours to project." + Environment.NewLine + Environment.NewLine + ex.Message);
+                return false;
+            }
         }
 
         /// <summary>
