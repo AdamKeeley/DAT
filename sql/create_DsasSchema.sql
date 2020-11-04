@@ -1,5 +1,5 @@
-use DAT_CMS
-go
+USE lida_dat_cms_test
+GO
 
 CREATE TABLE dbo.tblDsas(
 	DsaID				INT IDENTITY(1,1) NOT NULL,
@@ -9,12 +9,15 @@ CREATE TABLE dbo.tblDsas(
 	DsaFileLoc			VARCHAR(200) NULL,
 	StartDate			DATETIME NULL,
 	ExpiryDate			DATETIME NULL,
+	DataDestructionDate	DATETIME NULL,
+	AgreementOwnerEmail	VARCHAR(50) NULL,
 	DSPT				BIT NOT NULL,
 	ISO27001			BIT NOT NULL,
 	RequiresEncryption	BIT NOT NULL,
 	NoRemoteAccess		BIT NOT NULL,
 	DateAdded			DATETIME NULL DEFAULT (getdate()),
 	LastUpdated			DATETIME NULL,
+	ValidUntil			DATETIME NULL,
 	CONSTRAINT PK_Dsas PRIMARY KEY (DsaID),
 	CONSTRAINT FK_AmendmentOf_DsaID FOREIGN KEY (AmendmentOf) REFERENCES dbo.tblDsas (DsaID)
 )
@@ -41,6 +44,7 @@ CREATE TABLE dbo.tblDsaDataOwners(
 	doID			INT IDENTITY(1,1) NOT NULL,
 	DataOwnerName	VARCHAR(50) NOT NULL UNIQUE,
 	RebrandOf		INT NULL, -- References primary key to link brands when they change their name
+	DataOwnerEmail	VARCHAR(50) NULL,
 	CONSTRAINT PK_DataOwners PRIMARY KEY (doID),
 	CONSTRAINT FK_RebrandOf_doID FOREIGN KEY (RebrandOf) REFERENCES dbo.tblDsaDataOwners (doID)
 )
