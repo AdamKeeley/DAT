@@ -15,8 +15,15 @@ namespace CMS
             InitializeComponent();
             setTabIndex();
             setCredentials();
+            checkVersion();
             setTFTD();
         }
+
+        /// <summary>
+        /// Release date of the current version of this application. 
+        /// Used by checkVersino method to compare to values in dbo.versioning 
+        /// </summary>
+        DateTime thisRelease = new DateTime(2020, 11, 04);
 
         /// <summary>
         /// Opens frm_Login, from which the credentials to access the database are captured. Persists the form until 
@@ -36,6 +43,37 @@ namespace CMS
                 
                 lbl_LoggedInAs.Text = SQL_Stuff.credential.UserId;
             }
+        }
+
+        /// <summary>
+        /// Queries dbo.versioning for latest [ValidFrom] date and compares it to thisRelease variable in this class.
+        /// If date in table is after date in class variable, informs user that newer version is available.
+        /// </summary>
+        private void checkVersion()
+        {
+            DateTime latestRelease;
+            try
+            {
+                SqlConnection conn = new SqlConnection();
+                conn.ConnectionString = SQL_Stuff.conString;
+                conn.Credential = SQL_Stuff.credential;
+                using (conn)
+                {
+                    SqlCommand qryCheckVersion = new SqlCommand();
+                    qryCheckVersion.Connection = conn;
+                    qryCheckVersion.CommandText = $"select max(ValidFrom) from dbo.versioning where ValidTo is null";
+
+                    conn.Open();
+                    latestRelease = (DateTime)qryCheckVersion.ExecuteScalar();
+                }
+            }
+            catch (Exception)
+            {
+                return;
+            }
+
+            if (latestRelease > thisRelease)
+                MessageBox.Show("There is a newer version available.");
         }
 
         /// <summary>
