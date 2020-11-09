@@ -46,6 +46,7 @@
     <Compile Include="DataModels\DsaModel.cs" />
     <Compile Include="DataModels\DsaNoteModel.cs" />
     <Compile Include="DataModels\DsasProjectsModel.cs" />
+    <Compile Include="DataModels\FileTransferMethodsModel.cs" />
     <Compile Include="DataModels\mdl_ProjectDoc.cs" />
     <Compile Include="DataModels\mdl_User.cs" />
     <Compile Include="Extension_Methods.cs" />

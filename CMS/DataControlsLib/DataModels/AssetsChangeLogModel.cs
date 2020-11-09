@@ -11,6 +11,8 @@ namespace DataControlsLib.DataModels
         public int ChangeID { get; set; }
         public int RequestID { get; set; }
         public int AssetID { get; set; }
+        public int TransferMethod { get; set; }
+        public int DsaReviewed { get; set; }
         public bool? ChangeAccepted { get; set; }
         public string RejectionNotes { get; set; }
     }
