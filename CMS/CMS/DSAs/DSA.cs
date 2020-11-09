@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 using DataControlsLib;
 using DataControlsLib.DataModels;
+using DataControlsLib.ViewModels;
 
 namespace CMS.DSAs
 {
@@ -18,7 +19,6 @@ namespace CMS.DSAs
         public DataSet GetDsaData()
         {
             DataSet ds = new DataSet("DSAs");
-
             SqlConnection conn = new SqlConnection();
             conn.ConnectionString = SQL_Stuff.conString;
             conn.Credential = SQL_Stuff.credential;
@@ -44,20 +44,6 @@ namespace CMS.DSAs
                 // Add asset register stuff?
             }
 
-            // Relations not needed due to LINQ joins, but at least they help enforce the schema
-            ds.Relations.Add("AmendmentOf_DsaID_",
-                    parentColumn: ds.Tables["tblDsas"].Columns["DsaID"],
-                    childColumn: ds.Tables["tblDsas"].Columns["AmendmentOf"]);
-            ds.Relations.Add("Dsas_DsaDataOwners",
-                    parentColumn: ds.Tables["tblDsaDataOwners"].Columns["doID"],
-                    childColumn: ds.Tables["tblDsas"].Columns["DataOwner"]);
-            ds.Relations.Add("DsasProjects_Dsas",
-                    parentColumn: ds.Tables["tblDsas"].Columns["DsaID"],
-                    childColumn: ds.Tables["tblDsasProjects"].Columns["DsaID"]);
-            ds.Relations.Add("RebrandOf_doID",
-                    parentColumn: ds.Tables["tblDsaDataOwners"].Columns["doID"],
-                    childColumn: ds.Tables["tblDsaDataOwners"].Columns["RebrandOf"]);
-
             return ds;
         }
 
@@ -82,7 +68,6 @@ namespace CMS.DSAs
             {
                 conn.Open();
                 SqlTransaction trans = conn.BeginTransaction();
-
                 try
                 {
                     // tblDsas insert
@@ -104,7 +89,6 @@ namespace CMS.DSAs
 
                         inDsa.DsaID = (int)cmd.ExecuteScalar();
                     }
-
                     success[0] = inDsa.DsaID > 0;
 
                     // Add new DSA identity to tblDsaNotes insert, then bulk insert
@@ -136,7 +120,6 @@ namespace CMS.DSAs
                         ex.Message + "\n\n" +
                         ex.StackTrace
                     );
-
                     try
                     {
                         trans.Rollback();
@@ -171,6 +154,139 @@ namespace CMS.DSAs
                 conn.Open();
                 cmd.ExecuteNonQuery();
             }
+        }
+
+        public List<string> CollectDataOwnersList(DataSet ds)
+        {
+            List<int> rebrands = ds.Tables["tblDsaDataOwners"].AsEnumerable()
+                .Where(t => t.Field<int?>("RebrandOf") != null)
+                .Select(t => new List<int> { t.Field<int?>("RebrandOf").GetValueOrDefault() })
+                .Distinct().SelectMany(x => x).ToList();
+            List<string> dataOwners = ds.Tables["tblDsaDataOwners"].AsEnumerable()
+                .Where(t => !rebrands.Contains(t.Field<int>("doID")))
+                .OrderBy(p => p.Field<string>("DataOwnerName"))
+                .Select(p => p.Field<string>("DataOwnerName"))
+                .ToList();
+            dataOwners.Insert(0, "");
+
+            return dataOwners;
+        }
+
+        public List<DsaBasicsViewModel> CreateDsasBasicView(DataSet ds)
+        {
+            // Needs DSA table to left outer join with itself to get name of previous DSA versions.
+            IEnumerable<DsaBasicsViewModel> dsaQuery =
+                from dsa in ds.Tables["tblDsas"].AsEnumerable()
+                join own in ds.Tables["tblDsaDataOwners"].AsEnumerable() on dsa.Field<int>("DataOwner") equals own.Field<int>("doID")
+                join dsa2 in ds.Tables["tblDsas"].AsEnumerable() on dsa.Field<int?>("AmendmentOf") equals dsa2.Field<int>("DsaID") into dsa2tmp
+                from dsa2 in dsa2tmp.DefaultIfEmpty()
+                select new DsaBasicsViewModel
+                {
+                    DsaID = dsa.Field<int>("DsaID"),
+                    DataOwner = own.Field<string>("DataOwnerName"),
+                    StartDate = dsa.Field<DateTime?>("StartDate"),
+                    ExpiryDate = dsa.Field<DateTime?>("ExpiryDate"),
+                    DsaName = dsa.Field<string>("DsaName"),
+                    FilePath = dsa.Field<string>("DsaFileLoc"),
+                    AmendmentOf = dsa2?.Field<string>("DsaName"),
+                    DSPT = dsa.Field<bool>("DSPT"),
+                    ISO27001 = dsa.Field<bool>("ISO27001"),
+                    RequiresEncryption = dsa.Field<bool>("RequiresEncryption"),
+                    NoRemoteAccess = dsa.Field<bool>("NoRemoteAccess")
+                };
+
+            return dsaQuery.ToList();
+        }
+
+        public bool ValidateInputs(string fileName, string filePath, string dataOwner)
+        {
+            if (String.IsNullOrWhiteSpace(fileName))
+            {
+                MessageBox.Show(
+                    text: "You haven't given a File Name for the DSA, which is required.\n",
+                    caption: "Missing information",
+                    buttons: MessageBoxButtons.OK
+                );
+                return false;
+            }
+
+            if (String.IsNullOrWhiteSpace(filePath))
+            {
+                MessageBox.Show(
+                    text: "You haven't specified the File Path where the DSA file is stored, which is required.\n",
+                    caption: "Missing information",
+                    buttons: MessageBoxButtons.OK
+                );
+                return false;
+            }
+
+            if (String.IsNullOrWhiteSpace(dataOwner))
+            {
+                MessageBox.Show(
+                    text: "You haven't specified a data owner, which is required.\n",
+                    caption: "Missing information",
+                    buttons: MessageBoxButtons.OK
+                );
+                return false;
+            }
+
+            return true;
+        }
+
+        public DsaModel CollectDsasForInsert(DataSet ds, string dataOwner, bool isAmendment, DataGridView dgvAmendment, string fileName, string filePath, DateTime? startDate, DateTime? expiryDate, bool dspt, bool iso27001, bool encryption, bool remote)
+        {
+            int dataOwnerIndex = (
+                    from own in ds.Tables["tblDsaDataOwners"].AsEnumerable()
+                    where own.Field<string>("DataOwnerName") == dataOwner
+                    select own.Field<int>("doID")
+                ).ToList().FirstOrDefault();
+
+            int? amendmentOfID = null;
+            if (isAmendment)
+            {
+                amendmentOfID = (int?)dgvAmendment.SelectedRows[0].Cells["DsaID"].Value;
+            }
+
+            DsaModel newDsa = new DsaModel();
+            newDsa.DataOwner = dataOwnerIndex;
+            newDsa.AmendmentOf = amendmentOfID;
+            newDsa.DsaName = fileName;
+            newDsa.DsaFileLoc = filePath;
+            newDsa.StartDate = startDate;
+            newDsa.ExpiryDate = expiryDate;
+            newDsa.DSPT = dspt;
+            newDsa.ISO27001 = iso27001;
+            newDsa.RequiresEncryption = encryption;
+            newDsa.NoRemoteAccess = remote;
+            newDsa.DateAdded = DateTime.Now;
+            newDsa.LastUpdated = null;
+
+            return newDsa;
+        }
+
+        public List<DsaNoteModel> CollectDsaNotesForInsert(DataGridView dgvNotes)
+        {
+            List<DsaNoteModel> newDsaNotes = new List<DsaNoteModel>();
+            foreach (DataGridViewRow dr in dgvNotes.Rows)
+            {
+                newDsaNotes.Add(new DsaNoteModel
+                {
+                    Note = dr.Cells["Notes"].Value.ToString()
+                });
+            }
+            
+            return newDsaNotes;
+        }
+
+        public List<DsasProjectsModel> CollectDsaProjectsForInsert(IEnumerable<string> projects)
+        {
+            List<DsasProjectsModel> newDsaProject = new List<DsasProjectsModel>();
+            newDsaProject = projects
+                .Where(x => !String.IsNullOrWhiteSpace(x))
+                .Select(prj => new DsasProjectsModel { Project = prj })
+                .ToList();
+
+            return newDsaProject;
         }
     }
 }

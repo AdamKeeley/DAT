@@ -28,13 +28,12 @@ namespace CMS.DSAs
         DsaModel dsasInsertData = new DsaModel();
         List<DsaNoteModel> dsaNotesInsertData = new List<DsaNoteModel>();
         List<DsasProjectsModel> dsasProjectsInsertData = new List<DsasProjectsModel>();
-
+        DSA dsa = new DSA();
 
         public void PopulateDsaDataset()
         {
             try
             {
-                DSA dsa = new DSA();
                 ds = dsa.GetDsaData();
             }
             catch (Exception ex)
@@ -71,17 +70,7 @@ namespace CMS.DSAs
 
         private void FillDataOwnersList()
         {
-            List<int> rebrands = ds.Tables["tblDsaDataOwners"].AsEnumerable()
-                .Where(t => t.Field<int?>("RebrandOf") != null)
-                .Select(t => new List<int> { t.Field<int?>("RebrandOf").GetValueOrDefault() })
-                .Distinct().SelectMany(x => x).ToList();
-            List<string> dataOwners = ds.Tables["tblDsaDataOwners"].AsEnumerable()
-                .Where(t => !rebrands.Contains(t.Field<int>("doID")))
-                .OrderBy(p => p.Field<string>("DataOwnerName"))
-                .Select(p => p.Field<string>("DataOwnerName"))
-                .ToList();
-            dataOwners.Insert(0, "");
-            cb_ExistingDataOwner.DataSource = dataOwners;
+            cb_ExistingDataOwner.DataSource = dsa.CollectDataOwnersList(ds);
         }
 
         private void chkb_IsAmendment_CheckedChanged(object sender, EventArgs e)
@@ -89,29 +78,7 @@ namespace CMS.DSAs
             if (chkb_IsAmendment.Checked)
             {
                 dgv_AmendmentOf.Enabled = true;
-
-                // Create view of DSAs. Needs DSA table to left outer join with itself to get name of previous DSA versions.
-                IEnumerable<DsaBasicsViewModel> dsaQuery =
-                    from dsa in ds.Tables["tblDsas"].AsEnumerable()
-                    join own in ds.Tables["tblDsaDataOwners"].AsEnumerable() on dsa.Field<int>("DataOwner") equals own.Field<int>("doID")
-                    join dsa2 in ds.Tables["tblDsas"].AsEnumerable() on dsa.Field<int?>("AmendmentOf") equals dsa2.Field<int>("DsaID") into dsa2tmp
-                    from dsa2 in dsa2tmp.DefaultIfEmpty()
-                    select new DsaBasicsViewModel
-                    {
-                        DsaID = dsa.Field<int>("DsaID"),
-                        DataOwner = own.Field<string>("DataOwnerName"),
-                        StartDate = dsa.Field<DateTime?>("StartDate"),
-                        ExpiryDate = dsa.Field<DateTime?>("ExpiryDate"),
-                        DsaName = dsa.Field<string>("DsaName"),
-                        FilePath = dsa.Field<string>("DsaFileLoc"),
-                        AmendmentOf = dsa2?.Field<string>("DsaName"),
-                        DSPT = dsa.Field<bool>("DSPT"),
-                        ISO27001 = dsa.Field<bool>("ISO27001"),
-                        RequiresEncryption = dsa.Field<bool>("RequiresEncryption"),
-                        NoRemoteAccess = dsa.Field<bool>("NoRemoteAccess")
-                    };
-                dgv_AmendmentOf.DataSource = dsaQuery.ToList();
-
+                dgv_AmendmentOf.DataSource = dsa.CreateDsasBasicView(ds);
                 dgv_AmendmentOf.Columns["DsaID"].Width = 50;
                 dgv_AmendmentOf.Columns["DataOwner"].Width = 120;
                 dgv_AmendmentOf.Columns["StartDate"].Width = 85;
@@ -154,7 +121,11 @@ namespace CMS.DSAs
 
         private void btn_OK_Click(object sender, EventArgs e)
         {
-            bool hasRequiredInputs = ValidateDsaInputs();
+            bool hasRequiredInputs = dsa.ValidateInputs(
+                fileName: tb_FileName.Text, 
+                filePath: tb_FilePath.Text, 
+                dataOwner: cb_ExistingDataOwner.SelectedItem.ToString()
+            );
 
             if (!hasRequiredInputs)
             {
@@ -166,9 +137,29 @@ namespace CMS.DSAs
                 return;
             }
 
-            CollectDsaInputs();
+            dsasInsertData = dsa.CollectDsasForInsert(
+                ds: ds,
+                dataOwner: cb_ExistingDataOwner.SelectedItem.ToString(),
+                isAmendment: chkb_IsAmendment.Checked,
+                dgvAmendment: dgv_AmendmentOf,
+                fileName: tb_FileName.Text,
+                filePath: tb_FilePath.Text,
+                startDate: dtp_StartDate.Checked ? dtp_StartDate?.Value.Date : null,
+                expiryDate: dtp_ExpiryDate.Checked ? dtp_ExpiryDate?.Value.Date : null,
+                dspt: chkb_DSPT.Checked,
+                iso27001: chkb_ISO27001.Checked,
+                encryption: chkb_Encryption.Checked,
+                remote: chkb_NoRemoteAccess.Checked
+            );
 
-            DSA dsa = new DSA();
+            dsaNotesInsertData = dsa.CollectDsaNotesForInsert(
+                dgvNotes: dgv_AddNote
+            );
+
+            dsasProjectsInsertData = dsa.CollectDsaProjectsForInsert(
+                projects: lbx_ProjectsList.SelectedItems.Cast<string>()
+            );
+
             bool insertSuccessful = dsa.PutDsaData(dsasInsertData, dsaNotesInsertData, dsasProjectsInsertData);
 
             if (insertSuccessful)
@@ -176,80 +167,6 @@ namespace CMS.DSAs
                 MessageBox.Show("Successfully added new DSA record.\n", "DSA Added", MessageBoxButtons.OK);
                 this.Close();
             }
-        }
-
-        private bool ValidateDsaInputs()
-        {
-            if (String.IsNullOrWhiteSpace(tb_FileName.Text))
-            {
-                MessageBox.Show(
-                    text: "You haven't given a File Name for the DSA, which is required.\n",
-                    caption: "Missing information",
-                    buttons: MessageBoxButtons.OK
-                );
-                return false;
-            }
-
-            if (String.IsNullOrWhiteSpace(tb_FilePath.Text))
-            {
-                MessageBox.Show(
-                    text: "You haven't specified the File Path where the DSA file is stored, which is required.\n",
-                    caption: "Missing information",
-                    buttons: MessageBoxButtons.OK
-                );
-                return false;
-            }
-
-            if (String.IsNullOrWhiteSpace(cb_ExistingDataOwner.SelectedItem.ToString()))
-            {
-                MessageBox.Show(
-                    text: "You haven't specified a data owner, which is required.\n",
-                    caption: "Missing information",
-                    buttons: MessageBoxButtons.OK
-                );
-                return false;
-            }
-
-            return true;
-        }
-
-        private void CollectDsaInputs()
-        {
-            int dataOwnerIndex = (
-                    from own in ds.Tables["tblDsaDataOwners"].AsEnumerable()
-                    where own.Field<string>("DataOwnerName") == cb_ExistingDataOwner.SelectedItem.ToString()
-                    select own.Field<int>("doID")
-                ).ToList().FirstOrDefault();
-
-            int? amendmentOfID = null;
-            if (chkb_IsAmendment.Checked)
-            {
-                amendmentOfID = (int?)dgv_AmendmentOf.SelectedRows[0].Cells["DsaID"].Value;
-            }
-
-            dsasInsertData.DataOwner = dataOwnerIndex;
-            dsasInsertData.AmendmentOf = amendmentOfID;
-            dsasInsertData.DsaName = tb_FileName.Text;
-            dsasInsertData.DsaFileLoc = tb_FilePath.Text;
-            dsasInsertData.StartDate = dtp_StartDate.Checked ? dtp_StartDate?.Value.Date : null;
-            dsasInsertData.ExpiryDate = dtp_ExpiryDate.Checked ? dtp_ExpiryDate?.Value.Date : null;
-            dsasInsertData.DSPT = chkb_DSPT.Checked;
-            dsasInsertData.ISO27001 = chkb_ISO27001.Checked;
-            dsasInsertData.RequiresEncryption = chkb_Encryption.Checked;
-            dsasInsertData.NoRemoteAccess = chkb_NoRemoteAccess.Checked;
-            dsasInsertData.DateAdded = DateTime.Now;
-            dsasInsertData.LastUpdated = null;
-
-            foreach(DataGridViewRow dr in dgv_AddNote.Rows)
-            {
-                dsaNotesInsertData.Add(new DsaNoteModel { 
-                    Note = dr.Cells["Notes"].Value.ToString()
-                });
-            }
-
-            dsasProjectsInsertData = lbx_ProjectsList.SelectedItems.Cast<string>()
-                .Where(x => !String.IsNullOrWhiteSpace(x))
-                .Select(prj => new DsasProjectsModel { Project = prj }).ToList();
         }
 
         private DialogResult ConfirmationMsg()
