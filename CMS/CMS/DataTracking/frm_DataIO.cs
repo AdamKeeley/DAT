@@ -26,12 +26,12 @@ namespace CMS.DataTracking
         private DataSet ds;
         private List<string> changeTypesWanted;
         private List<bool?> approvalsWanted;
+        DataIO io = new DataIO();
 
         public void PopulateIODataset()
         {
             try
             {
-                DataIO io = new DataIO();
                 ds = io.GetAssetsHistoryDataSet();
             }
             catch (Exception ex)
@@ -78,11 +78,14 @@ namespace CMS.DataTracking
         {
             try
             {
-                dgv_DataIOHistory.DataSource = CreateAssetsHistoryView(
+                dgv_DataIOHistory.DataSource = io.CreateAssetsHistoryView(
+                    ds: ds,
                     dateFrom: dtp_DateFromFilter.Value.Date, 
                     dateTo: dtp_DateToFilter.Value.Date, 
                     proj: cb_ProjectFilter.Text.NullIfEmpty(), 
-                    fPath: tb_FilePathFilter.Text.NullIfEmpty()
+                    fPath: tb_FilePathFilter.Text.NullIfEmpty(),
+                    changeTypes: changeTypesWanted,
+                    approvals: approvalsWanted
                 );
                 dgv_DataIOHistory.Columns["Project"].Width = 60;
                 dgv_DataIOHistory.Columns["ChangeDate"].Width = 100;
@@ -101,35 +104,6 @@ namespace CMS.DataTracking
                                 Environment.NewLine +
                                 ex.StackTrace);
             }
-        }
-
-        public List<AssetHistoryViewModel> CreateAssetsHistoryView(DateTime? dateFrom, DateTime? dateTo, string proj, string fPath)
-        {
-            IEnumerable<AssetHistoryViewModel> query = 
-                from cl in ds.Tables["tblAssetsChangeLog"].AsEnumerable()
-                join rq in ds.Tables["tblDataIORequests"].AsEnumerable() on cl.Field<int>("RequestID") equals rq.Field<int>("RequestID")
-                join ar in ds.Tables["tblAssetsRegister"].AsEnumerable() on cl.Field<int>("AssetID") equals ar.Field<int>("AssetID")
-                join ct in ds.Tables["tlkAssetChangeTypes"].AsEnumerable() on rq.Field<int>("ChangeType") equals ct.Field<int>("ChangeTypeID")
-                where (dateFrom == null || (rq.Field<DateTime?>("ChangeDate").HasValue && dateFrom <= rq.Field<DateTime?>("ChangeDate").Value.Date)) 
-                    && (dateTo == null || (rq.Field<DateTime?>("ChangeDate").HasValue && dateTo >= rq.Field<DateTime?>("ChangeDate").Value.Date))
-                    && (proj == null || (proj == rq.Field<string>("Project").NullIfEmpty()))
-                    && (fPath == null || ar.Field<string>("VreFilePath").NullIfEmpty().Contains(fPath))
-                    && (changeTypesWanted.Contains(ct.Field<string>("ChangeTypeLabel")))
-                    && (approvalsWanted.Contains(cl.Field<bool?>("ChangeAccepted")))
-                select new AssetHistoryViewModel
-                {
-                    Project = rq.Field<string>("Project"),
-                    ChangeDate = rq.Field<DateTime?>("ChangeDate"),
-                    ChangeType = ct.Field<string>("ChangeTypeLabel"),
-                    AssetName = ar.Field<string>("AssetName"),
-                    FilePath = ar.Field<string>("VreFilePath"),
-                    Checksum = ar.Field<string>("AssetSha256sum"),
-                    ChangeAccepted = cl.Field<bool?>("ChangeAccepted"),
-                    RequestedBy = rq.Field<string>("RequestedBy"),
-                    ChangedBy = rq.Field<string>("ChangedBy")
-                };
-
-            return query.ToList();
         }
 
         private void btn_RefreshAssetsHistoryView_Click(object sender, EventArgs e)

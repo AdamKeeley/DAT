@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using DataControlsLib;
 using DataControlsLib.DataModels;
+using DataControlsLib.ViewModels;
 
 namespace CMS.DataTracking
 {
@@ -32,19 +33,37 @@ namespace CMS.DataTracking
                     "SELECT ChangeTypeID, ChangeTypeLabel FROM dbo.tlkAssetChangeTypes");
                 SQL_Stuff.getDataTable(conn, ds_io, "tblProject",
                     "SELECT * FROM dbo.tblProject WHERE ValidTo IS NULL");
-
-                // Relations not needed due to LINQ joins, but at least they help enforce the schema
-                ds_io.Relations.Add("DataIORequests_AssetChangeTypes",
-                    parentColumn: ds_io.Tables["tlkAssetChangeTypes"].Columns["ChangeTypeID"],
-                    childColumn: ds_io.Tables["tblDataIORequests"].Columns["ChangeType"]);
-                ds_io.Relations.Add("AssetsChangeLog_DataIORequests",
-                    parentColumn: ds_io.Tables["tblDataIORequests"].Columns["RequestID"],
-                    childColumn: ds_io.Tables["tblAssetsChangeLog"].Columns["RequestID"]);
-                ds_io.Relations.Add("AssetsChangeLog_AssetsRegister",
-                    parentColumn: ds_io.Tables["tblAssetsRegister"].Columns["AssetID"],
-                    childColumn: ds_io.Tables["tblAssetsChangeLog"].Columns["AssetID"]);
             }
             return ds_io;
+        }
+
+        public List<AssetHistoryViewModel> CreateAssetsHistoryView(DataSet ds, DateTime? dateFrom, DateTime? dateTo, string proj, string fPath, List<string> changeTypes, List<bool?> approvals)
+        {
+            IEnumerable<AssetHistoryViewModel> query =
+                from cl in ds.Tables["tblAssetsChangeLog"].AsEnumerable()
+                join rq in ds.Tables["tblDataIORequests"].AsEnumerable() on cl.Field<int>("RequestID") equals rq.Field<int>("RequestID")
+                join ar in ds.Tables["tblAssetsRegister"].AsEnumerable() on cl.Field<int>("AssetID") equals ar.Field<int>("AssetID")
+                join ct in ds.Tables["tlkAssetChangeTypes"].AsEnumerable() on rq.Field<int>("ChangeType") equals ct.Field<int>("ChangeTypeID")
+                where (dateFrom == null || (rq.Field<DateTime?>("ChangeDate").HasValue && dateFrom <= rq.Field<DateTime?>("ChangeDate").Value.Date))
+                    && (dateTo == null || (rq.Field<DateTime?>("ChangeDate").HasValue && dateTo >= rq.Field<DateTime?>("ChangeDate").Value.Date))
+                    && (proj == null || (proj == rq.Field<string>("Project").NullIfEmpty()))
+                    && (fPath == null || ar.Field<string>("VreFilePath").NullIfEmpty().Contains(fPath))
+                    && (changeTypes.Contains(ct.Field<string>("ChangeTypeLabel")))
+                    && (approvals.Contains(cl.Field<bool?>("ChangeAccepted")))
+                select new AssetHistoryViewModel
+                {
+                    Project = rq.Field<string>("Project"),
+                    ChangeDate = rq.Field<DateTime?>("ChangeDate"),
+                    ChangeType = ct.Field<string>("ChangeTypeLabel"),
+                    AssetName = ar.Field<string>("AssetName"),
+                    FilePath = ar.Field<string>("VreFilePath"),
+                    Checksum = ar.Field<string>("AssetSha256sum"),
+                    ChangeAccepted = cl.Field<bool?>("ChangeAccepted"),
+                    RequestedBy = rq.Field<string>("RequestedBy"),
+                    ChangedBy = rq.Field<string>("ChangedBy")
+                };
+
+            return query.ToList();
         }
     }
 }
