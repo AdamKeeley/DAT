@@ -365,7 +365,7 @@ insert into dbo.tlkTitle (TitleDescription) values
 	('Mr'), ('Mrs'), ('Ms'), ('Miss'), ('Dr'), ('Prof'), ('Sir')
 
  insert into dbo.tlkUserStatus (StatusDescription) values
-	('Enabled'), ('Disabled')
+	('Enabled'), ('Disabled'), ('Pending')
 
 insert into dbo.tblUser (UserNumber, Title, FirstName, LastName)
 values (1, 1, 'Flint', 'Sparkoff')
