@@ -5,26 +5,26 @@ CREATE TABLE dbo.tblDataIORequests(
 	RequestID			INT IDENTITY(1,1) NOT NULL,
 	Project				VARCHAR(5) NULL,
 	-- Include VRE ID foreign key?
-	ChangeType			INT NOT NULL,
-	ChangeDate			DATETIME NULL DEFAULT (getdate()),
+	RequestType			INT NOT NULL,
 	RequestedBy			VARCHAR(50) NULL, -- Needs to reference user ID once Users table has been created
 	RequesterNotes		VARCHAR(MAX) NULL, -- Researchers communication explaining data/etc. Or a link to same text elsewhere?
 	ReviewedBy			VARCHAR(50) NULL DEFAULT (suser_sname()),
+	ReviewDate			DATETIME NULL DEFAULT (getdate()),
 	ReviewNotes			VARCHAR(MAX) NULL, -- Response communication from DAT to confirm import status?
 	-- In future, we could include here a ConversationID, linking to DAT-user interactions and remove RequesterNotes and ChangerResponse here
 	CONSTRAINT PK_DataIORequests PRIMARY KEY (RequestID)
 );
 
-CREATE TABLE dbo.tlkAssetChangeTypes (
-	ChangeTypeID		INT IDENTITY(1,1) NOT NULL,
-	ChangeTypeLabel		VARCHAR(25) NULL,
-	CONSTRAINT PK_AssetChangeTypes PRIMARY KEY (ChangeTypeID)
+CREATE TABLE dbo.tlkAssetRequestTypes (
+	RequestTypeID		INT IDENTITY(1,1) NOT NULL,
+	RequestTypeLabel		VARCHAR(25) NULL,
+	CONSTRAINT PK_AssetRequestTypes PRIMARY KEY (RequestTypeID)
 );
 ALTER TABLE dbo.tblDataIORequests
-	ADD CONSTRAINT FK_DataIORequests_ChangeType FOREIGN KEY (ChangeType) REFERENCES dbo.tlkAssetChangeTypes (ChangeTypeID)
+	ADD CONSTRAINT FK_DataIORequests_RequestTypes FOREIGN KEY (RequestType) REFERENCES dbo.tlkAssetRequestTypes (RequestTypeID)
 		ON DELETE CASCADE
 		ON UPDATE CASCADE;
-INSERT INTO dbo.tlkAssetChangeTypes (ChangeTypeLabel)
+INSERT INTO dbo.tlkAssetRequestTypes (RequestTypeLabel)
      VALUES (''), ('Import'), ('Export'), ('Delete');
 
 CREATE TABLE dbo.tblAssetsRegister(
@@ -32,7 +32,6 @@ CREATE TABLE dbo.tblAssetsRegister(
 	Project			VARCHAR(5) NULL,
 	AssetName		VARCHAR(100) NOT NULL,
 	AssetSha256sum	CHAR(64) NULL, -- This could become the primary key instead?
-	-- Asset-DSA will be many-to-many so will probably need intermediary table
 	VreFilePath		VARCHAR(200) NULL, -- Path to file in VRE
 	CONSTRAINT PK_AssetsRegister PRIMARY KEY (AssetID)
 );
@@ -50,15 +49,6 @@ CREATE TABLE dbo.tblAssetsChangeLog(
 	CONSTRAINT FK_AssetsChangeLog_DataIORequests FOREIGN KEY (RequestID) REFERENCES dbo.tblDataIORequests (RequestID),
 	CONSTRAINT FK_AssetsChangeLog_AssetsRegister FOREIGN KEY (AssetID) REFERENCES dbo.tblAssetsRegister (AssetID),
 	CONSTRAINT FK_AssetsDsas_Dsas FOREIGN KEY (DsaReviewed) REFERENCES dbo.tblDsas (DsaID)
-);
-
-CREATE TABLE dbo.tblAssetsDsas(
-	AssetDsaID		INT IDENTITY(1,1) NOT NULL,
-	AssetID			INT NOT NULL,
-	
-	CONSTRAINT PK_AssetsDsas PRIMARY KEY (AssetDsaID),
-	CONSTRAINT FK_AssetsDsas_AssetsRegister FOREIGN KEY (AssetID) REFERENCES dbo.tblAssetsRegister (AssetID),
-	
 );
 
 CREATE TABLE dbo.tlkFileTransferMethods(

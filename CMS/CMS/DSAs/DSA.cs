@@ -26,7 +26,8 @@ namespace CMS.DSAs
             {
                 SQL_Stuff.getDataTable(conn, ds, "tblDsas",
                     @"SELECT DsaID, DataOwner, AmendmentOf, DsaName, DsaFileLoc, StartDate, ExpiryDate, 
-                             DSPT, ISO27001, RequiresEncryption, NoRemoteAccess, DateAdded, LastUpdated
+                             DataDestructionDate, AgreementOwnerEmail, DSPT, ISO27001, RequiresEncryption,
+                             NoRemoteAccess, DateAdded, LastUpdated, ValidUntil
                       FROM dbo.tblDsas");
                 SQL_Stuff.getDataTable(conn, ds, "tblDsaNotes",
                     @"SELECT dnID, Dsa, Note, Created, CreatedBy
@@ -35,7 +36,7 @@ namespace CMS.DSAs
                     @"SELECT dpID, DsaID, Project, DateAdded
                       FROM dbo.tblDsasProjects");
                 SQL_Stuff.getDataTable(conn, ds, "tblDsaDataOwners",
-                    @"SELECT doID, RebrandOf, DataOwnerName
+                    @"SELECT doID, DataOwnerName, RebrandOf, DataOwnerEmail
                       FROM dbo.tblDsaDataOwners");
                 SQL_Stuff.getDataTable(conn, ds, "tblProject",
                     @"SELECT *
@@ -53,12 +54,12 @@ namespace CMS.DSAs
 
             string qryDsas = @"
                 INSERT INTO dbo.tblDsas 
-                    (DataOwner, AmendmentOf, DsaName, DsaFileLoc, StartDate, ExpiryDate, 
-                     DSPT, ISO27001, RequiresEncryption, NoRemoteAccess, DateAdded)
+                    (DataOwner, AmendmentOf, DsaName, DsaFileLoc, StartDate, ExpiryDate, DataDestructionDate,
+                     AgreementOwnerEmail, DSPT, ISO27001, RequiresEncryption, NoRemoteAccess, DateAdded)
                 OUTPUT INSERTED.DsaID
                 VALUES
-                    (@DataOwner, @AmendmentOf, @DsaName, @DsaFileLoc, @StartDate, @ExpiryDate,
-                     @DSPT, @ISO27001, @RequiresEncryption, @NoRemoteAccess, @DateAdded)
+                    (@DataOwner, @AmendmentOf, @DsaName, @DsaFileLoc, @StartDate, @ExpiryDate, @DataDestructionDate,
+                     @AgreementOwnerEmail, @DSPT, @ISO27001, @RequiresEncryption, @NoRemoteAccess, @DateAdded)
             ";
 
             SqlConnection conn = new SqlConnection();
@@ -81,6 +82,9 @@ namespace CMS.DSAs
                             inDsa.StartDate.HasValue ? inDsa.StartDate.Value.Date : (object)DBNull.Value;
                         cmd.Parameters.Add("@ExpiryDate", SqlDbType.DateTime).Value = 
                             inDsa.ExpiryDate.HasValue ? inDsa.ExpiryDate.Value.Date : (object)DBNull.Value;
+                        cmd.Parameters.Add("@DataDestructionDate", SqlDbType.DateTime).Value =
+                            inDsa.DataDestructionDate.HasValue ? inDsa.DataDestructionDate.Value.Date : (object)DBNull.Value;
+                        cmd.Parameters.Add("@AgreementOwnerEmail", SqlDbType.VarChar, 50).Value = inDsa.AgreementOwnerEmail;
                         cmd.Parameters.Add("@DSPT", SqlDbType.Bit).Value = inDsa.DSPT;
                         cmd.Parameters.Add("@ISO27001", SqlDbType.Bit).Value = inDsa.ISO27001;
                         cmd.Parameters.Add("@RequiresEncryption", SqlDbType.Bit).Value = inDsa.RequiresEncryption;
@@ -140,7 +144,7 @@ namespace CMS.DSAs
 
         public void PutDataOwnerData(DsaDataOwnerModel insertData)
         {
-            string query = "INSERT INTO dbo.tblDsaDataOwners (DataOwnerName, RebrandOf) VALUES (@Name, @OldNameID)";
+            string query = "INSERT INTO dbo.tblDsaDataOwners (DataOwnerName, RebrandOf, DataOwnerEmail) VALUES (@Name, @OldNameID, @Email)";
 
             SqlConnection conn = new SqlConnection();
             conn.ConnectionString = SQL_Stuff.conString;
@@ -150,6 +154,7 @@ namespace CMS.DSAs
             {
                 cmd.Parameters.Add("@Name", SqlDbType.VarChar, 50).Value = insertData.DateOwnerName;
                 cmd.Parameters.Add("@OldNameID", SqlDbType.Int).Value = insertData.RebrandOf.HasValue ? insertData.RebrandOf : (object)DBNull.Value;
+                cmd.Parameters.Add("@Email", SqlDbType.VarChar, 50).Value = insertData.DataOwnerEmail;
 
                 conn.Open();
                 cmd.ExecuteNonQuery();
@@ -186,6 +191,7 @@ namespace CMS.DSAs
                     DataOwner = own.Field<string>("DataOwnerName"),
                     StartDate = dsa.Field<DateTime?>("StartDate"),
                     ExpiryDate = dsa.Field<DateTime?>("ExpiryDate"),
+                    DataDestructionDate = dsa.Field<DateTime?>("DataDestructionDate"),
                     DsaName = dsa.Field<string>("DsaName"),
                     FilePath = dsa.Field<string>("DsaFileLoc"),
                     AmendmentOf = dsa2?.Field<string>("DsaName"),
@@ -233,7 +239,9 @@ namespace CMS.DSAs
             return true;
         }
 
-        public DsaModel CollectDsasForInsert(DataSet ds, string dataOwner, bool isAmendment, DataGridView dgvAmendment, string fileName, string filePath, DateTime? startDate, DateTime? expiryDate, bool dspt, bool iso27001, bool encryption, bool remote)
+        public DsaModel CollectDsasForInsert(DataSet ds, string dataOwner, bool isAmendment, DataGridView dgvAmendment, string fileName, 
+                                             string filePath, DateTime? startDate, DateTime? expiryDate, DateTime? destroyDate, 
+                                             string ownerEmail, bool dspt, bool iso27001, bool encryption, bool remote)
         {
             int dataOwnerIndex = (
                     from own in ds.Tables["tblDsaDataOwners"].AsEnumerable()
@@ -247,19 +255,23 @@ namespace CMS.DSAs
                 amendmentOfID = (int?)dgvAmendment.SelectedRows[0].Cells["DsaID"].Value;
             }
 
-            DsaModel newDsa = new DsaModel();
-            newDsa.DataOwner = dataOwnerIndex;
-            newDsa.AmendmentOf = amendmentOfID;
-            newDsa.DsaName = fileName;
-            newDsa.DsaFileLoc = filePath;
-            newDsa.StartDate = startDate;
-            newDsa.ExpiryDate = expiryDate;
-            newDsa.DSPT = dspt;
-            newDsa.ISO27001 = iso27001;
-            newDsa.RequiresEncryption = encryption;
-            newDsa.NoRemoteAccess = remote;
-            newDsa.DateAdded = DateTime.Now;
-            newDsa.LastUpdated = null;
+            DsaModel newDsa = new DsaModel
+            {
+                DataOwner = dataOwnerIndex,
+                AmendmentOf = amendmentOfID,
+                DsaName = fileName,
+                DsaFileLoc = filePath,
+                StartDate = startDate,
+                ExpiryDate = expiryDate,
+                DataDestructionDate = destroyDate,
+                AgreementOwnerEmail = ownerEmail,
+                DSPT = dspt,
+                ISO27001 = iso27001,
+                RequiresEncryption = encryption,
+                NoRemoteAccess = remote,
+                DateAdded = DateTime.Now,
+                LastUpdated = null
+            };
 
             return newDsa;
         }

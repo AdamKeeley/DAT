@@ -49,6 +49,7 @@ namespace CMS.DSAs
         {
             dtp_StartDate.Value = DateTime.Now.Date;
             dtp_ExpiryDate.Value = DateTime.Now.Date;
+            dtp_DestroyDate.Value = DateTime.Now.Date;
 
             List<string> projNumbers = ds.Tables["tblProject"].AsEnumerable()
                 .OrderBy(p => p.Field<string>("ProjectNumber"))
@@ -83,6 +84,7 @@ namespace CMS.DSAs
                 dgv_AmendmentOf.Columns["DataOwner"].Width = 120;
                 dgv_AmendmentOf.Columns["StartDate"].Width = 85;
                 dgv_AmendmentOf.Columns["ExpiryDate"].Width = 85;
+                dgv_AmendmentOf.Columns["DataDestructionDate"].Width = 140;
                 dgv_AmendmentOf.Columns["DsaName"].Width = 140;
                 dgv_AmendmentOf.Columns["AmendmentOf"].Width = 140;
                 dgv_AmendmentOf.Columns["DSPT"].Width = 75;
@@ -146,6 +148,8 @@ namespace CMS.DSAs
                 filePath: tb_FilePath.Text,
                 startDate: dtp_StartDate.Checked ? dtp_StartDate?.Value.Date : null,
                 expiryDate: dtp_ExpiryDate.Checked ? dtp_ExpiryDate?.Value.Date : null,
+                destroyDate: dtp_DestroyDate.Checked ? dtp_DestroyDate?.Value.Date : null, // Add dtp_destroyDate form element
+                ownerEmail: tb_OwnerEmail.Text, // Add tb_ownerEmail form element
                 dspt: chkb_DSPT.Checked,
                 iso27001: chkb_ISO27001.Checked,
                 encryption: chkb_Encryption.Checked,
@@ -174,10 +178,12 @@ namespace CMS.DSAs
             string resp = "You are about to create a new DSA record with the following details:\n\n";
 
             resp += $"Data owner: {cb_ExistingDataOwner.SelectedItem}\n";
+            resp += $"Primary contact: {tb_OwnerEmail.Text}\n";
             resp += $"File name: {tb_FileName.Text}\n";
             resp += $"File path: {tb_FilePath.Text}\n";
             resp += $"Start date: { (dtp_StartDate.Checked ? dtp_StartDate?.Value.Date.ToString("yyyy-MM-dd") : "NOT SPECIFIED") }\n";
             resp += $"Expiry date: { (dtp_ExpiryDate.Checked ? dtp_ExpiryDate?.Value.Date.ToString("yyyy-MM-dd") : "NOT SPECIFIED") }\n";
+            resp += $"Data destruction date: { (dtp_DestroyDate.Checked ? dtp_DestroyDate?.Value.Date.ToString("yyyy-MM-dd") : "NOT SPECIFIED") }\n";
 
             if (chkb_IsAmendment.Checked)
             {

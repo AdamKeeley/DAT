@@ -53,14 +53,14 @@ namespace CMS.DataTracking
                 select new AssetHistoryViewModel
                 {
                     Project = rq.Field<string>("Project"),
-                    ChangeDate = rq.Field<DateTime?>("ChangeDate"),
-                    ChangeType = ct.Field<string>("ChangeTypeLabel"),
+                    Date = rq.Field<DateTime?>("ChangeDate"),
+                    RequestType = ct.Field<string>("ChangeTypeLabel"),
                     AssetName = ar.Field<string>("AssetName"),
                     FilePath = ar.Field<string>("VreFilePath"),
                     Checksum = ar.Field<string>("AssetSha256sum"),
                     ChangeAccepted = cl.Field<bool?>("ChangeAccepted"),
                     RequestedBy = rq.Field<string>("RequestedBy"),
-                    ChangedBy = rq.Field<string>("ChangedBy")
+                    ReviewedBy = rq.Field<string>("ReviewedBy")
                 };
 
             return query.ToList();

@@ -15,11 +15,14 @@ namespace DataControlsLib.DataModels
         public string DsaFileLoc { get; set; }
         public DateTime? StartDate { get; set; }
         public DateTime? ExpiryDate { get; set; }
+        public DateTime? DataDestructionDate { get; set; }
+        public string AgreementOwnerEmail { get; set; }
         public bool DSPT { get; set; }
         public bool ISO27001 { get; set; }
         public bool RequiresEncryption { get; set; }
         public bool NoRemoteAccess { get; set; }
         public DateTime? DateAdded { get; set; }
         public DateTime? LastUpdated { get; set; }
+        public DateTime? ValidUntil { get; set; }
     }
 }

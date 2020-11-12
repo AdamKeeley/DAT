@@ -12,6 +12,7 @@ namespace DataControlsLib.ViewModels
         public string DataOwner { get; set; }
         public DateTime? StartDate { get; set; }
         public DateTime? ExpiryDate { get; set; }
+        public DateTime? DataDestructionDate { get; set; }
         public string DsaName { get; set; }
         public string FilePath { get; set; }
         public string AmendmentOf { get; set; }

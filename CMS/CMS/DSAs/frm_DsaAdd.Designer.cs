@@ -58,6 +58,10 @@
             this.btn_OK = new System.Windows.Forms.Button();
             this.btn_Cancel = new System.Windows.Forms.Button();
             this.gb_Dates = new System.Windows.Forms.GroupBox();
+            this.tb_OwnerEmail = new System.Windows.Forms.TextBox();
+            this.lbl_OwnerEmail = new System.Windows.Forms.Label();
+            this.lbl_DestroyDate = new System.Windows.Forms.Label();
+            this.dtp_DestroyDate = new System.Windows.Forms.DateTimePicker();
             this.gb_DataOwner.SuspendLayout();
             this.gb_DsaFileDetails.SuspendLayout();
             this.gb_AmendmentOf.SuspendLayout();
@@ -73,28 +77,30 @@
             // 
             this.cb_ExistingDataOwner.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cb_ExistingDataOwner.FormattingEnabled = true;
-            this.cb_ExistingDataOwner.Location = new System.Drawing.Point(10, 26);
+            this.cb_ExistingDataOwner.Location = new System.Drawing.Point(10, 21);
             this.cb_ExistingDataOwner.Name = "cb_ExistingDataOwner";
-            this.cb_ExistingDataOwner.Size = new System.Drawing.Size(368, 28);
+            this.cb_ExistingDataOwner.Size = new System.Drawing.Size(474, 28);
             this.cb_ExistingDataOwner.TabIndex = 1;
             // 
             // gb_DataOwner
             // 
+            this.gb_DataOwner.Controls.Add(this.tb_OwnerEmail);
+            this.gb_DataOwner.Controls.Add(this.lbl_OwnerEmail);
             this.gb_DataOwner.Controls.Add(this.btn_NewDataOwner);
             this.gb_DataOwner.Controls.Add(this.cb_ExistingDataOwner);
             this.gb_DataOwner.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gb_DataOwner.Location = new System.Drawing.Point(12, 12);
             this.gb_DataOwner.Name = "gb_DataOwner";
-            this.gb_DataOwner.Size = new System.Drawing.Size(384, 104);
+            this.gb_DataOwner.Size = new System.Drawing.Size(632, 104);
             this.gb_DataOwner.TabIndex = 2;
             this.gb_DataOwner.TabStop = false;
             this.gb_DataOwner.Text = "Data Owner";
             // 
             // btn_NewDataOwner
             // 
-            this.btn_NewDataOwner.Location = new System.Drawing.Point(56, 60);
+            this.btn_NewDataOwner.Location = new System.Drawing.Point(490, 14);
             this.btn_NewDataOwner.Name = "btn_NewDataOwner";
-            this.btn_NewDataOwner.Size = new System.Drawing.Size(266, 37);
+            this.btn_NewDataOwner.Size = new System.Drawing.Size(136, 85);
             this.btn_NewDataOwner.TabIndex = 2;
             this.btn_NewDataOwner.Text = "Add New Data Owner to List";
             this.btn_NewDataOwner.UseVisualStyleBackColor = true;
@@ -107,7 +113,7 @@
             this.gb_DsaFileDetails.Controls.Add(this.tb_FileName);
             this.gb_DsaFileDetails.Controls.Add(this.lbl_FileName);
             this.gb_DsaFileDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gb_DsaFileDetails.Location = new System.Drawing.Point(431, 12);
+            this.gb_DsaFileDetails.Location = new System.Drawing.Point(650, 12);
             this.gb_DsaFileDetails.Name = "gb_DsaFileDetails";
             this.gb_DsaFileDetails.Size = new System.Drawing.Size(561, 104);
             this.gb_DsaFileDetails.TabIndex = 3;
@@ -150,7 +156,7 @@
             // 
             this.dtp_StartDate.Checked = false;
             this.dtp_StartDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtp_StartDate.Location = new System.Drawing.Point(194, 19);
+            this.dtp_StartDate.Location = new System.Drawing.Point(149, 19);
             this.dtp_StartDate.MaxDate = new System.DateTime(2099, 12, 31, 0, 0, 0, 0);
             this.dtp_StartDate.MinDate = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
             this.dtp_StartDate.Name = "dtp_StartDate";
@@ -162,7 +168,7 @@
             // 
             this.dtp_ExpiryDate.Checked = false;
             this.dtp_ExpiryDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtp_ExpiryDate.Location = new System.Drawing.Point(686, 19);
+            this.dtp_ExpiryDate.Location = new System.Drawing.Point(509, 17);
             this.dtp_ExpiryDate.MaxDate = new System.DateTime(2099, 12, 31, 0, 0, 0, 0);
             this.dtp_ExpiryDate.MinDate = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
             this.dtp_ExpiryDate.Name = "dtp_ExpiryDate";
@@ -174,7 +180,7 @@
             // 
             this.lbl_StartDate.AutoSize = true;
             this.lbl_StartDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_StartDate.Location = new System.Drawing.Point(77, 23);
+            this.lbl_StartDate.Location = new System.Drawing.Point(52, 22);
             this.lbl_StartDate.Name = "lbl_StartDate";
             this.lbl_StartDate.Size = new System.Drawing.Size(86, 20);
             this.lbl_StartDate.TabIndex = 6;
@@ -184,7 +190,7 @@
             // 
             this.lbl_ExpiryDate.AutoSize = true;
             this.lbl_ExpiryDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_ExpiryDate.Location = new System.Drawing.Point(560, 25);
+            this.lbl_ExpiryDate.Location = new System.Drawing.Point(402, 20);
             this.lbl_ExpiryDate.Name = "lbl_ExpiryDate";
             this.lbl_ExpiryDate.Size = new System.Drawing.Size(96, 20);
             this.lbl_ExpiryDate.TabIndex = 7;
@@ -198,10 +204,10 @@
             this.gb_AmendmentOf.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gb_AmendmentOf.Location = new System.Drawing.Point(12, 175);
             this.gb_AmendmentOf.Name = "gb_AmendmentOf";
-            this.gb_AmendmentOf.Size = new System.Drawing.Size(980, 246);
+            this.gb_AmendmentOf.Size = new System.Drawing.Size(1199, 246);
             this.gb_AmendmentOf.TabIndex = 8;
             this.gb_AmendmentOf.TabStop = false;
-            this.gb_AmendmentOf.Text = "Amendment of Previous DSA";
+            this.gb_AmendmentOf.Text = "Amendment of Previous DSA?";
             // 
             // chkb_IsAmendment
             // 
@@ -237,7 +243,7 @@
             this.dgv_AmendmentOf.RowHeadersWidth = 51;
             this.dgv_AmendmentOf.RowTemplate.Height = 24;
             this.dgv_AmendmentOf.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_AmendmentOf.Size = new System.Drawing.Size(968, 174);
+            this.dgv_AmendmentOf.Size = new System.Drawing.Size(1182, 174);
             this.dgv_AmendmentOf.TabIndex = 0;
             // 
             // gb_GovernanceReq
@@ -249,7 +255,7 @@
             this.gb_GovernanceReq.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gb_GovernanceReq.Location = new System.Drawing.Point(12, 426);
             this.gb_GovernanceReq.Name = "gb_GovernanceReq";
-            this.gb_GovernanceReq.Size = new System.Drawing.Size(338, 80);
+            this.gb_GovernanceReq.Size = new System.Drawing.Size(420, 85);
             this.gb_GovernanceReq.TabIndex = 9;
             this.gb_GovernanceReq.TabStop = false;
             this.gb_GovernanceReq.Text = "Governance Requirements";
@@ -257,7 +263,7 @@
             // chkb_NoRemoteAccess
             // 
             this.chkb_NoRemoteAccess.AutoSize = true;
-            this.chkb_NoRemoteAccess.Location = new System.Drawing.Point(136, 49);
+            this.chkb_NoRemoteAccess.Location = new System.Drawing.Point(204, 52);
             this.chkb_NoRemoteAccess.Name = "chkb_NoRemoteAccess";
             this.chkb_NoRemoteAccess.Size = new System.Drawing.Size(168, 24);
             this.chkb_NoRemoteAccess.TabIndex = 3;
@@ -267,7 +273,7 @@
             // chkb_Encryption
             // 
             this.chkb_Encryption.AutoSize = true;
-            this.chkb_Encryption.Location = new System.Drawing.Point(136, 24);
+            this.chkb_Encryption.Location = new System.Drawing.Point(204, 26);
             this.chkb_Encryption.Name = "chkb_Encryption";
             this.chkb_Encryption.Size = new System.Drawing.Size(176, 24);
             this.chkb_Encryption.TabIndex = 2;
@@ -277,7 +283,7 @@
             // chkb_ISO27001
             // 
             this.chkb_ISO27001.AutoSize = true;
-            this.chkb_ISO27001.Location = new System.Drawing.Point(8, 49);
+            this.chkb_ISO27001.Location = new System.Drawing.Point(24, 52);
             this.chkb_ISO27001.Name = "chkb_ISO27001";
             this.chkb_ISO27001.Size = new System.Drawing.Size(104, 24);
             this.chkb_ISO27001.TabIndex = 1;
@@ -287,7 +293,7 @@
             // chkb_DSPT
             // 
             this.chkb_DSPT.AutoSize = true;
-            this.chkb_DSPT.Location = new System.Drawing.Point(8, 24);
+            this.chkb_DSPT.Location = new System.Drawing.Point(24, 26);
             this.chkb_DSPT.Name = "chkb_DSPT";
             this.chkb_DSPT.Size = new System.Drawing.Size(76, 24);
             this.chkb_DSPT.TabIndex = 0;
@@ -300,9 +306,9 @@
             this.gb_Notes.Controls.Add(this.btn_AddNote);
             this.gb_Notes.Controls.Add(this.tb_AddNote);
             this.gb_Notes.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gb_Notes.Location = new System.Drawing.Point(356, 426);
+            this.gb_Notes.Location = new System.Drawing.Point(474, 427);
             this.gb_Notes.Name = "gb_Notes";
-            this.gb_Notes.Size = new System.Drawing.Size(636, 242);
+            this.gb_Notes.Size = new System.Drawing.Size(737, 242);
             this.gb_Notes.TabIndex = 10;
             this.gb_Notes.TabStop = false;
             this.gb_Notes.Text = "Notes";
@@ -315,12 +321,12 @@
             this.dgv_AddNote.Name = "dgv_AddNote";
             this.dgv_AddNote.RowHeadersWidth = 51;
             this.dgv_AddNote.RowTemplate.Height = 24;
-            this.dgv_AddNote.Size = new System.Drawing.Size(609, 108);
+            this.dgv_AddNote.Size = new System.Drawing.Size(718, 108);
             this.dgv_AddNote.TabIndex = 2;
             // 
             // btn_AddNote
             // 
-            this.btn_AddNote.Location = new System.Drawing.Point(543, 26);
+            this.btn_AddNote.Location = new System.Drawing.Point(652, 26);
             this.btn_AddNote.Name = "btn_AddNote";
             this.btn_AddNote.Size = new System.Drawing.Size(79, 76);
             this.btn_AddNote.TabIndex = 1;
@@ -333,7 +339,7 @@
             this.tb_AddNote.Location = new System.Drawing.Point(13, 26);
             this.tb_AddNote.Multiline = true;
             this.tb_AddNote.Name = "tb_AddNote";
-            this.tb_AddNote.Size = new System.Drawing.Size(513, 76);
+            this.tb_AddNote.Size = new System.Drawing.Size(633, 76);
             this.tb_AddNote.TabIndex = 0;
             // 
             // gb_Project
@@ -342,7 +348,7 @@
             this.gb_Project.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gb_Project.Location = new System.Drawing.Point(12, 526);
             this.gb_Project.Name = "gb_Project";
-            this.gb_Project.Size = new System.Drawing.Size(338, 142);
+            this.gb_Project.Size = new System.Drawing.Size(420, 142);
             this.gb_Project.TabIndex = 11;
             this.gb_Project.TabStop = false;
             this.gb_Project.Text = "Link With Project(s)";
@@ -354,15 +360,15 @@
             this.lbx_ProjectsList.Location = new System.Drawing.Point(10, 27);
             this.lbx_ProjectsList.Name = "lbx_ProjectsList";
             this.lbx_ProjectsList.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lbx_ProjectsList.Size = new System.Drawing.Size(322, 104);
+            this.lbx_ProjectsList.Size = new System.Drawing.Size(404, 104);
             this.lbx_ProjectsList.TabIndex = 0;
             // 
             // btn_OK
             // 
             this.btn_OK.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_OK.Location = new System.Drawing.Point(888, 675);
+            this.btn_OK.Location = new System.Drawing.Point(1063, 675);
             this.btn_OK.Name = "btn_OK";
-            this.btn_OK.Size = new System.Drawing.Size(103, 34);
+            this.btn_OK.Size = new System.Drawing.Size(148, 34);
             this.btn_OK.TabIndex = 12;
             this.btn_OK.Text = "OK";
             this.btn_OK.UseVisualStyleBackColor = true;
@@ -371,9 +377,9 @@
             // btn_Cancel
             // 
             this.btn_Cancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Cancel.Location = new System.Drawing.Point(779, 675);
+            this.btn_Cancel.Location = new System.Drawing.Point(908, 675);
             this.btn_Cancel.Name = "btn_Cancel";
-            this.btn_Cancel.Size = new System.Drawing.Size(103, 34);
+            this.btn_Cancel.Size = new System.Drawing.Size(149, 34);
             this.btn_Cancel.TabIndex = 13;
             this.btn_Cancel.Text = "Cancel";
             this.btn_Cancel.UseVisualStyleBackColor = true;
@@ -381,6 +387,8 @@
             // 
             // gb_Dates
             // 
+            this.gb_Dates.Controls.Add(this.lbl_DestroyDate);
+            this.gb_Dates.Controls.Add(this.dtp_DestroyDate);
             this.gb_Dates.Controls.Add(this.dtp_StartDate);
             this.gb_Dates.Controls.Add(this.lbl_StartDate);
             this.gb_Dates.Controls.Add(this.lbl_ExpiryDate);
@@ -388,16 +396,55 @@
             this.gb_Dates.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gb_Dates.Location = new System.Drawing.Point(12, 118);
             this.gb_Dates.Name = "gb_Dates";
-            this.gb_Dates.Size = new System.Drawing.Size(980, 53);
+            this.gb_Dates.Size = new System.Drawing.Size(1199, 53);
             this.gb_Dates.TabIndex = 14;
             this.gb_Dates.TabStop = false;
             this.gb_Dates.Text = "Dates";
+            // 
+            // tb_OwnerEmail
+            // 
+            this.tb_OwnerEmail.Location = new System.Drawing.Point(151, 61);
+            this.tb_OwnerEmail.Name = "tb_OwnerEmail";
+            this.tb_OwnerEmail.Size = new System.Drawing.Size(333, 27);
+            this.tb_OwnerEmail.TabIndex = 4;
+            // 
+            // lbl_OwnerEmail
+            // 
+            this.lbl_OwnerEmail.AutoSize = true;
+            this.lbl_OwnerEmail.Location = new System.Drawing.Point(6, 56);
+            this.lbl_OwnerEmail.Name = "lbl_OwnerEmail";
+            this.lbl_OwnerEmail.Size = new System.Drawing.Size(120, 40);
+            this.lbl_OwnerEmail.TabIndex = 3;
+            this.lbl_OwnerEmail.Text = "DSA Contact\'s\r\nEmail Address";
+            // 
+            // lbl_DestroyDate
+            // 
+            this.lbl_DestroyDate.AutoSize = true;
+            this.lbl_DestroyDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_DestroyDate.Location = new System.Drawing.Point(762, 21);
+            this.lbl_DestroyDate.Name = "lbl_DestroyDate";
+            this.lbl_DestroyDate.Size = new System.Drawing.Size(178, 20);
+            this.lbl_DestroyDate.TabIndex = 9;
+            this.lbl_DestroyDate.Text = "Data Destruction Date";
+            this.lbl_DestroyDate.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // dtp_DestroyDate
+            // 
+            this.dtp_DestroyDate.Checked = false;
+            this.dtp_DestroyDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtp_DestroyDate.Location = new System.Drawing.Point(962, 17);
+            this.dtp_DestroyDate.MaxDate = new System.DateTime(2099, 12, 31, 0, 0, 0, 0);
+            this.dtp_DestroyDate.MinDate = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
+            this.dtp_DestroyDate.Name = "dtp_DestroyDate";
+            this.dtp_DestroyDate.ShowCheckBox = true;
+            this.dtp_DestroyDate.Size = new System.Drawing.Size(226, 27);
+            this.dtp_DestroyDate.TabIndex = 8;
             // 
             // frm_DsaAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1004, 717);
+            this.ClientSize = new System.Drawing.Size(1222, 717);
             this.Controls.Add(this.gb_Dates);
             this.Controls.Add(this.btn_Cancel);
             this.Controls.Add(this.btn_OK);
@@ -410,6 +457,7 @@
             this.Name = "frm_DsaAdd";
             this.Text = "Add a New DSA";
             this.gb_DataOwner.ResumeLayout(false);
+            this.gb_DataOwner.PerformLayout();
             this.gb_DsaFileDetails.ResumeLayout(false);
             this.gb_DsaFileDetails.PerformLayout();
             this.gb_AmendmentOf.ResumeLayout(false);
@@ -458,5 +506,9 @@
         private System.Windows.Forms.CheckBox chkb_NoRemoteAccess;
         private System.Windows.Forms.CheckBox chkb_Encryption;
         private System.Windows.Forms.CheckBox chkb_IsAmendment;
+        private System.Windows.Forms.TextBox tb_OwnerEmail;
+        private System.Windows.Forms.Label lbl_OwnerEmail;
+        private System.Windows.Forms.Label lbl_DestroyDate;
+        private System.Windows.Forms.DateTimePicker dtp_DestroyDate;
     }
 }

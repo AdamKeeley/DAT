@@ -9,8 +9,8 @@ namespace DataControlsLib.DataModels
     public class DsaDataOwnerModel
     {
         public int doID { get; set; }
-        public int? RebrandOf { get; set; }
         public string DateOwnerName { get; set; }
-
+        public int? RebrandOf { get; set; }
+        public string DataOwnerEmail { get; set; }
     }
 }
