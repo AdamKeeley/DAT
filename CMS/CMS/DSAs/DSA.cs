@@ -19,9 +19,11 @@ namespace CMS.DSAs
         public DataSet GetDsaData()
         {
             DataSet ds = new DataSet("DSAs");
-            SqlConnection conn = new SqlConnection();
-            conn.ConnectionString = SQL_Stuff.conString;
-            conn.Credential = SQL_Stuff.credential;
+            SqlConnection conn = new SqlConnection
+            {
+                ConnectionString = SQL_Stuff.conString,
+                Credential = SQL_Stuff.credential
+            };
             using (conn)
             {
                 SQL_Stuff.getDataTable(conn, ds, "tblDsas",

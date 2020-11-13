@@ -26,7 +26,7 @@ namespace CMS.DataTracking
         private DataSet ds;
         private List<string> changeTypesWanted;
         private List<bool?> approvalsWanted;
-        DataIO io = new DataIO();
+        private DataIO io = new DataIO();
 
         public void PopulateIODataset()
         {
@@ -78,6 +78,7 @@ namespace CMS.DataTracking
         {
             try
             {
+                // Add filters for data owner, DSA, and transfer method
                 dgv_DataIOHistory.DataSource = io.CreateAssetsHistoryView(
                     ds: ds,
                     dateFrom: dtp_DateFromFilter.Value.Date, 
@@ -88,14 +89,17 @@ namespace CMS.DataTracking
                     approvals: approvalsWanted
                 );
                 dgv_DataIOHistory.Columns["Project"].Width = 60;
-                dgv_DataIOHistory.Columns["ChangeDate"].Width = 100;
-                dgv_DataIOHistory.Columns["ChangeType"].Width = 95;
+                dgv_DataIOHistory.Columns["DataOwner"].Width = 120;
+                dgv_DataIOHistory.Columns["ReviewDate"].Width = 100;
+                dgv_DataIOHistory.Columns["RequestType"].Width = 95;
                 dgv_DataIOHistory.Columns["AssetName"].Width = 200;
-                dgv_DataIOHistory.Columns["FilePath"].Width = 100;
+                dgv_DataIOHistory.Columns["FilePath"].Width = 130;
                 dgv_DataIOHistory.Columns["Checksum"].Width = 100;
+                dgv_DataIOHistory.Columns["TransferMethod"].Width = 110;
+                dgv_DataIOHistory.Columns["RequestedBy"].Width = 105;
+                dgv_DataIOHistory.Columns["DsaReviewed"].Width = 130;
+                dgv_DataIOHistory.Columns["ReviewedBy"].Width = 95;
                 dgv_DataIOHistory.Columns["ChangeAccepted"].Width = 120;
-                dgv_DataIOHistory.Columns["RequestedBy"].Width = 115;
-                dgv_DataIOHistory.Columns["ChangedBy"].Width = 115;
             }
             catch (Exception ex)
             {
