@@ -72,6 +72,7 @@ namespace CMS
                 return;
             }
 
+            // Open new form as dialog to provide url to latest release
             if (latestRelease > thisRelease)
             {
                 using (frm_NewRelease frm_NewRelease = new frm_NewRelease(latestRelease))
