@@ -43,7 +43,7 @@ namespace CMS
                         $"where [ValidTo] is null " +
                         $"order by [ProjectNumber], [pID]");
                     SQL_Stuff.getDataTable(conn, ds_prj, "tlkStage",
-                        $"select * from [dbo].[tlkStage] ");
+                        $"select * from [dbo].[tlkStage] order by StageNumber asc");
                     SQL_Stuff.getDataTable(conn, ds_prj, "tlkClassification",
                         $"select * from [dbo].[tlkClassification] ");
                     SQL_Stuff.getDataTable(conn, ds_prj, "tlkRAG",

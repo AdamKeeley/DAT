@@ -100,6 +100,25 @@ namespace CMS
                     dt_PIs.Rows.Add(piRow);
                 }
 
+                //only display project stages that are present in the Stage column of the Project table
+                DataTable dt_Stage = new DataTable();
+                dt_Stage.Columns.Add("StageID");
+                dt_Stage.Columns.Add("pStageDescription");
+                dt_Stage.Columns.Add("StageNumber");
+                dt_Stage.DefaultView.Sort = "StageNumber";
+                DataRow stageRow;
+                foreach (DataRow sRow in ds_Project.Tables["tblProjects"].Select("[Stage] is not null"))
+                {
+                    stageRow = dt_Stage.NewRow();
+                    stageRow["StageID"] = sRow["Stage"];
+                    foreach (DataRow r in sRow.GetParentRows("Project_Stage"))
+                    {
+                        stageRow["pStageDescription"] = r["pStageDescription"];
+                        stageRow["StageNumber"] = r["StageNumber"];
+                    }
+                    dt_Stage.Rows.Add(stageRow);
+                }
+
                 //set controls values
                 cb_VreNumber.DataSource = dt_VreNumber.DefaultView.ToTable(true, "ProjectNumber", "VRENumber");
                 cb_VreNumber.ValueMember = "ProjectNumber";
@@ -113,10 +132,12 @@ namespace CMS
                 cb_PortfolioNo.ValueMember = "ProjectNumber";
                 cb_PortfolioNo.DisplayMember = "PortfolioNumber";
                 cb_PortfolioNo.SelectedIndex = -1;
-                cb_pStage.DataSource = ds_Project.Tables["tlkStage"];
+
+                cb_pStage.DataSource = dt_Stage.DefaultView.ToTable(true, "StageID", "pStageDescription");
                 cb_pStage.ValueMember = "StageID";
                 cb_pStage.DisplayMember = "pStageDescription";
                 cb_pStage.SelectedIndex = -1;
+                
                 cb_pClassification.DataSource = ds_Project.Tables["tlkClassification"];
                 cb_pClassification.ValueMember = "classificationID";
                 cb_pClassification.DisplayMember = "classificationDescription";
