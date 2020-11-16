@@ -90,6 +90,12 @@
     <Compile Include="Login\frm_Login.Designer.cs">
       <DependentUpon>frm_Login.cs</DependentUpon>
     </Compile>
+    <Compile Include="Login\frm_NewRelease.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\frm_NewRelease.Designer.cs">
+      <DependentUpon>frm_NewRelease.cs</DependentUpon>
+    </Compile>
     <Compile Include="Project\frm_Project.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -192,6 +198,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Login\frm_Login.resx">
       <DependentUpon>frm_Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login\frm_NewRelease.resx">
+      <DependentUpon>frm_NewRelease.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Project\frm_Project.resx">
       <DependentUpon>frm_Project.cs</DependentUpon>

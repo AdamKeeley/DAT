@@ -73,8 +73,14 @@ namespace CMS
             }
 
             if (latestRelease > thisRelease)
-                MessageBox.Show("There is a newer version available.");
+            {
+                using (frm_NewRelease frm_NewRelease = new frm_NewRelease(latestRelease))
+                {
+                    frm_NewRelease.ShowDialog();
+                }
+            }
         }
+
 
         /// <summary>
         /// Silly cliche I couldn't resist. Displays a 'Thought For The Day' on home page, selected at randon from 
