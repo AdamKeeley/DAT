@@ -23,7 +23,7 @@ namespace CMS
         /// Release date of the current version of this application. 
         /// Used by checkVersino method to compare to values in dbo.versioning 
         /// </summary>
-        DateTime thisRelease = new DateTime(2020, 11, 04);
+        DateTime thisRelease = new DateTime(2020, 11, 18);
 
         /// <summary>
         /// Opens frm_Login, from which the credentials to access the database are captured. Persists the form until 
