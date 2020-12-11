@@ -150,6 +150,7 @@ namespace CMS
                     cb_Faculty.SelectedValue            = mdl_CurrentProject.Faculty;
                 chkb_ISO27001.Checked                   = mdl_CurrentProject.ISO27001;
                 chkb_DSPT.Checked                       = mdl_CurrentProject.DSPT;
+                chkb_LIDA.Checked                       = mdl_CurrentProject.LIDA;
                 chkb_LASER.Checked                      = mdl_CurrentProject.LASER;
                 chkb_IRC.Checked                        = mdl_CurrentProject.IRC;
                 chkb_SEED.Checked                       = mdl_CurrentProject.SEED;
@@ -206,7 +207,7 @@ namespace CMS
             dgv_pNotes.Sort(dgv_pNotes.Columns["Created Date"], ListSortDirection.Descending);
         }
 
-        private void searchItemAdded(object sender, EventArgs e)
+        private void searchItemAddedNotes(object sender, EventArgs e)
         {
             setProjectNotes(mdl_CurrentProject.ProjectNumber);
         }
@@ -364,6 +365,8 @@ namespace CMS
             chkb_ISO27001.TabIndex = ++x;
             chkb_DSPT.TabIndex = ++x;
 
+            chkb_LIDA.TabIndex = ++x;
+
             gb_KeyDates.TabIndex = ++x;
             mtb_ProjectedStartDateValue.TabIndex = ++x;
             mtb_ProjectedEndDateValue.TabIndex = ++x;
@@ -454,6 +457,7 @@ namespace CMS
                 mdl_NewProject.PortfolioNumber  = tb_PortfolioNo.Text;
             mdl_NewProject.DSPT                 = chkb_DSPT.Checked;
             mdl_NewProject.ISO27001             = chkb_ISO27001.Checked;
+            mdl_NewProject.LIDA                 = chkb_LIDA.Checked;
             mdl_NewProject.LASER                = chkb_LASER.Checked;
             mdl_NewProject.IRC                  = chkb_IRC.Checked;
             mdl_NewProject.SEED                 = chkb_SEED.Checked;

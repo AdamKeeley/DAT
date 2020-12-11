@@ -95,6 +95,7 @@ namespace CMS
             this.btn_DatHoursAdd = new System.Windows.Forms.Button();
             this.lbl_DatHoursSpent = new System.Windows.Forms.Label();
             this.nud_DatHoursSpent = new System.Windows.Forms.NumericUpDown();
+            this.chkb_LIDA = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_pNotes)).BeginInit();
             this.gb_Platform.SuspendLayout();
             this.gb_Governance.SuspendLayout();
@@ -600,7 +601,7 @@ namespace CMS
             this.tb_searchNotes.Name = "tb_searchNotes";
             this.tb_searchNotes.Size = new System.Drawing.Size(179, 20);
             this.tb_searchNotes.TabIndex = 14;
-            this.tb_searchNotes.TextChanged += new System.EventHandler(this.searchItemAdded);
+            this.tb_searchNotes.TextChanged += new System.EventHandler(this.searchItemAddedNotes);
             // 
             // lbl_searchNotes
             // 
@@ -820,12 +821,23 @@ namespace CMS
             this.nud_DatHoursSpent.Size = new System.Drawing.Size(91, 20);
             this.nud_DatHoursSpent.TabIndex = 0;
             // 
+            // chkb_LIDA
+            // 
+            this.chkb_LIDA.AutoSize = true;
+            this.chkb_LIDA.Location = new System.Drawing.Point(16, 148);
+            this.chkb_LIDA.Name = "chkb_LIDA";
+            this.chkb_LIDA.Size = new System.Drawing.Size(50, 17);
+            this.chkb_LIDA.TabIndex = 53;
+            this.chkb_LIDA.Text = "LIDA";
+            this.chkb_LIDA.UseVisualStyleBackColor = true;
+            // 
             // frm_Project
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btn_ProjectCancel;
             this.ClientSize = new System.Drawing.Size(914, 561);
+            this.Controls.Add(this.chkb_LIDA);
             this.Controls.Add(this.gb_DatTime);
             this.Controls.Add(this.lbl_NewUser);
             this.Controls.Add(this.gb_PlatformDetails);
@@ -951,5 +963,6 @@ namespace CMS
         private System.Windows.Forms.Label lbl_DatHoursSpent;
         private System.Windows.Forms.NumericUpDown nud_DatHoursSpent;
         private System.Windows.Forms.DataGridView dgv_DatHours;
+        private System.Windows.Forms.CheckBox chkb_LIDA;
     }
 }
