@@ -32,7 +32,7 @@ namespace DataControlsLib.DataModels
         public string       LeadApplicant_Desc  { get; set; }
         public int?         Faculty             { get; set; }
         public string       Faculty_Desc        { get; set; }
-        public bool         LIDA                { get; set; }
+        public bool         LIDA                { get; set; } = true;
         public bool         DSPT                { get; set; }
         public bool         ISO27001            { get; set; }
         public bool         LASER               { get; set; }

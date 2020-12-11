@@ -120,6 +120,11 @@ namespace CMS
                 }
 
                 //set controls values
+                cb_pNumber.DataSource = ds_Project.Tables["tblProject"];
+                cb_pNumber.ValueMember = "ProjectNumber";
+                cb_pNumber.DisplayMember = "ProjectNumber";
+                cb_pNumber.SelectedIndex = -1;
+
                 cb_VreNumber.DataSource = dt_VreNumber.DefaultView.ToTable(true, "ProjectNumber", "VRENumber");
                 cb_VreNumber.ValueMember = "ProjectNumber";
                 cb_VreNumber.DisplayMember = "VRENumber";
@@ -166,7 +171,7 @@ namespace CMS
 
         private void fillDataGridView()
         {
-            string filterAll                = "ProjectNumber like '%'";
+            string filterProjectNumber      = $"ProjectNumber like '%{cb_pNumber.Text}%'";
             string filterVreNumber          = $"VreNumber like '%{cb_VreNumber.Text}%'";
             string filterProjectName        = $"ProjectName like '%{tb_pNameValue.Text}%'";
             string filterPortfolioNumber    = $"PortfolioNumber like '%{cb_PortfolioNo.Text}%'";
@@ -178,26 +183,32 @@ namespace CMS
             string filterFaculty            = $"Faculty = '{cb_Faculty.Text}'";
             string filterLIDA               = $"LIDA = {chkb_LIDA.Checked}";
 
+            // Create list and add above filter clauses if appropriate, 
+            // before concatenating to single string seperated with " AND "
+            List<string> filter = new List<string>();
+            if (cb_pNumber.Text != "")
+                filter.Add(filterProjectNumber);
             if (cb_VreNumber.Text != "")
-                filterAll += " AND " + filterVreNumber;
+                filter.Add(filterVreNumber);
             if (tb_pNameValue.Text != "")
-                filterAll += " AND " + filterProjectName;
+                filter.Add(filterProjectName);
             if (cb_PortfolioNo.Text != "")
-                filterAll += " AND " + filterPortfolioNumber;
+                filter.Add(filterPortfolioNumber);
             if (cb_pStage.SelectedIndex > -1)
-                filterAll += " AND " + filterStage;
+                filter.Add(filterStage);
             if (cb_pClassification.SelectedIndex > -1)
-                filterAll += " AND " + filterClassification;
+                filter.Add(filterClassification);
             if (cb_DATRAG.SelectedIndex > -1)
-                filterAll += " AND " + filterDATRAG;
+                filter.Add(filterDATRAG);
             if (cb_LeadApplicant.SelectedIndex > -1)
-                filterAll += " AND " + filterLeadApplicant;
+                filter.Add(filterLeadApplicant);
             if (cb_PI.SelectedIndex > -1)
-                filterAll += " AND " + filterPI;
+                filter.Add(filterPI);
             if (cb_Faculty.SelectedIndex > -1)
-                filterAll += " AND " + filterFaculty;
+                filter.Add(filterFaculty);
             if (chkb_LIDA.Checked == true)
-                filterAll += " AND " + filterLIDA;
+                filter.Add(filterLIDA);
+            string filterAll = string.Join(" AND ", filter);
 
             //DataTable to fill with de-normalised text values of all projects
             DataTable dt_ProjectList = new DataTable();
@@ -323,6 +334,8 @@ namespace CMS
             }
 
             x = 0;
+
+            cb_pNumber.TabIndex = ++x;
 
             cb_VreNumber.TabIndex = ++x;
             cb_DATRAG.TabIndex = ++x;

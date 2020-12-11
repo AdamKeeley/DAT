@@ -53,6 +53,8 @@
             this.lbl_VreNumber = new System.Windows.Forms.Label();
             this.cb_VreNumber = new System.Windows.Forms.ComboBox();
             this.chkb_LIDA = new System.Windows.Forms.CheckBox();
+            this.cb_pNumber = new System.Windows.Forms.ComboBox();
+            this.lbl_pNumber = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ProjectList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -305,11 +307,33 @@
             this.chkb_LIDA.UseVisualStyleBackColor = true;
             this.chkb_LIDA.CheckedChanged += new System.EventHandler(this.searchItemAddedProjectAll);
             // 
+            // cb_pNumber
+            // 
+            this.cb_pNumber.FormattingEnabled = true;
+            this.cb_pNumber.Location = new System.Drawing.Point(117, 6);
+            this.cb_pNumber.Margin = new System.Windows.Forms.Padding(2);
+            this.cb_pNumber.Name = "cb_pNumber";
+            this.cb_pNumber.Size = new System.Drawing.Size(92, 21);
+            this.cb_pNumber.TabIndex = 75;
+            this.cb_pNumber.TextChanged += new System.EventHandler(this.searchItemAddedProjectAll);
+            // 
+            // lbl_pNumber
+            // 
+            this.lbl_pNumber.AutoSize = true;
+            this.lbl_pNumber.Location = new System.Drawing.Point(11, 9);
+            this.lbl_pNumber.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_pNumber.Name = "lbl_pNumber";
+            this.lbl_pNumber.Size = new System.Drawing.Size(80, 13);
+            this.lbl_pNumber.TabIndex = 74;
+            this.lbl_pNumber.Text = "Project Number";
+            // 
             // frm_ProjectAll
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1073, 593);
+            this.Controls.Add(this.cb_pNumber);
+            this.Controls.Add(this.lbl_pNumber);
             this.Controls.Add(this.chkb_LIDA);
             this.Controls.Add(this.cb_VreNumber);
             this.Controls.Add(this.lbl_VreNumber);
@@ -368,5 +392,7 @@
         private System.Windows.Forms.Label lbl_VreNumber;
         private System.Windows.Forms.ComboBox cb_VreNumber;
         private System.Windows.Forms.CheckBox chkb_LIDA;
+        private System.Windows.Forms.ComboBox cb_pNumber;
+        private System.Windows.Forms.Label lbl_pNumber;
     }
 }
