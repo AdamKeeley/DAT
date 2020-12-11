@@ -229,12 +229,12 @@ namespace CMS
             reviewProjectDetails += $"Project Name:\t\t{mdl_Project.ProjectName}" + Environment.NewLine + Environment.NewLine;
 
             reviewProjectDetails += $"DSPT:\t\t\t{mdl_Project.DSPT}" + Environment.NewLine;
-            reviewProjectDetails += $"ISO27001:\t\t{mdl_Project.ISO27001}" + Environment.NewLine + Environment.NewLine;
+            reviewProjectDetails += $"ISO27001:\t\t\t{mdl_Project.ISO27001}" + Environment.NewLine + Environment.NewLine;
 
-            reviewProjectDetails += $"Projected Start Date:\t{mdl_Project.ProjectedStartDate}" + Environment.NewLine;
-            reviewProjectDetails += $"Projected End Date:\t{mdl_Project.ProjectedEndDate}" + Environment.NewLine;
-            reviewProjectDetails += $"Start Date:\t\t{mdl_Project.StartDate}" + Environment.NewLine;
-            reviewProjectDetails += $"End Date:\t\t{mdl_Project.EndDate}" + Environment.NewLine + Environment.NewLine;
+            reviewProjectDetails += $"Projected Start Date:\t\t{mdl_Project.ProjectedStartDate}" + Environment.NewLine;
+            reviewProjectDetails += $"Projected End Date:\t\t{mdl_Project.ProjectedEndDate}" + Environment.NewLine;
+            reviewProjectDetails += $"Start Date:\t\t\t{mdl_Project.StartDate}" + Environment.NewLine;
+            reviewProjectDetails += $"End Date:\t\t\t{mdl_Project.EndDate}" + Environment.NewLine + Environment.NewLine;
 
             reviewProjectDetails += $"LASER:\t\t\t{mdl_Project.LASER}" + Environment.NewLine;
             reviewProjectDetails += $"IRC:\t\t\t{mdl_Project.IRC}" + Environment.NewLine;
