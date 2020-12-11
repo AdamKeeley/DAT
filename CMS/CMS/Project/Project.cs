@@ -489,6 +489,10 @@ namespace CMS
                     //open connection to database, run query and close connection
                     conn.Open();
                     qryInsertProject.ExecuteNonQuery();
+
+                    //Add new PI and Lead Applicant to project research team
+                    insertResearchTeam(mdl_Project);
+
                     MessageBox.Show($"Project details updated for {mdl_Project.ProjectNumber}");
 
                     success = true;
@@ -500,6 +504,41 @@ namespace CMS
                 //throw;
             }
             return success;
+        }
+
+        /// <summary>
+        /// Uses methods in User.cs to add Lead Applicant and PI to project research team if they're not already present.
+        /// </summary>
+        /// <param name="mdl_Project"></param>
+        private void insertResearchTeam(mdl_Project mdl_Project)
+        {
+            int? PI_UserNumber = mdl_Project.PI;
+            int? LA_UserNumber = mdl_Project.LeadApplicant;
+            string ProjectNumber = mdl_Project.ProjectNumber;
+
+            try
+            {
+                User Users = new User();
+                if (PI_UserNumber != null)
+                {
+                    if (Users.checkUserProject((int)PI_UserNumber, ProjectNumber) == true)
+                    {
+                        Users.insertUserProject((int)PI_UserNumber, ProjectNumber);
+                    }
+                }
+                if (LA_UserNumber != null)
+                {
+                    if (Users.checkUserProject((int)LA_UserNumber, ProjectNumber) == true)
+                    {
+                        Users.insertUserProject((int)LA_UserNumber, ProjectNumber);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to insert Principal Investigator or Lead Applicant to project research team." + Environment.NewLine + ex.Message);
+                //throw;
+            }
         }
 
         /// <summary>

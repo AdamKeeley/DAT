@@ -46,7 +46,7 @@ namespace CMS
             }
         }
 
-        private void addUserProject()
+        private bool addUserProject()
         {
             string ProjectNumber = cb_pNumberValue.Text;
 
@@ -55,6 +55,12 @@ namespace CMS
             {
                 Users.insertUserProject(UserNumber, ProjectNumber);
                 MessageBox.Show("Project added");
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("Project already present on User record.");
+                return false;
             }
         }
 
@@ -89,8 +95,8 @@ namespace CMS
 
         private void btn_UserProjectAdd_Add_Click(object sender, EventArgs e)
         {
-            addUserProject();
-            this.Close();
+            if(addUserProject() == true)
+                this.Close();
         }
     }
 }

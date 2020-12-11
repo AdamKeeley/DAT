@@ -404,7 +404,7 @@ namespace CMS
                 if (i > 0)
                 {
                     PK_NotPresent = false;
-                    MessageBox.Show("User already present on project.");
+                    //MessageBox.Show("User already present on project.");
                 }
             }
 

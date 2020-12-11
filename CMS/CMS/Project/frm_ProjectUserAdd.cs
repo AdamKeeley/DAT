@@ -61,6 +61,7 @@ namespace CMS
             }
             else
             {
+                MessageBox.Show("User already present on project.");
                 return false;
             }
         }
