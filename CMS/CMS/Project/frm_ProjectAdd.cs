@@ -69,15 +69,7 @@ namespace CMS
             cb_pClassification.DisplayMember = "classificationDescription";
             cb_pClassification.SelectedIndex = -1;
 
-            cb_LeadApplicant.DataSource = ds_Project.Tables["tlkLeadApplicant"];
-            cb_LeadApplicant.ValueMember = "UserNumber";
-            cb_LeadApplicant.DisplayMember = "FullName";
-            cb_LeadApplicant.SelectedIndex = -1;
-
-            cb_PI.DataSource = ds_Project.Tables["tlkPI"];
-            cb_PI.ValueMember = "UserNumber";
-            cb_PI.DisplayMember = "FullName";
-            cb_PI.SelectedIndex = -1;
+            set_ProjectAddUser();
 
             DataView facultyItems = new DataView(ds_Project.Tables["tlkFaculty"]);
             facultyItems.RowFilter = "[ValidTo] is null";
@@ -85,6 +77,27 @@ namespace CMS
             cb_Faculty.ValueMember = "facultyID";
             cb_Faculty.DisplayMember = "facultyDescription";
             cb_Faculty.SelectedIndex = -1;
+        }
+
+        private void set_ProjectAddUser()
+        {
+            try
+            {
+                cb_LeadApplicant.DataSource = ds_Project.Tables["tlkLeadApplicant"];
+                cb_LeadApplicant.ValueMember = "UserNumber";
+                cb_LeadApplicant.DisplayMember = "FullName";
+                cb_LeadApplicant.SelectedIndex = -1;
+
+                cb_PI.DataSource = ds_Project.Tables["tlkPI"];
+                cb_PI.ValueMember = "UserNumber";
+                cb_PI.DisplayMember = "FullName";
+                cb_PI.SelectedIndex = -1;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Method set_ProjectAddUser of class frm_ProjectAdd has failed" + Environment.NewLine + ex);
+                //throw;
+            }
         }
 
         /// <summary>
@@ -323,7 +336,12 @@ namespace CMS
                 UserAdd.ShowDialog();
                 if (UserAdd.userAdded == true)
                 {
-                    set_ProjectAdd();
+                    // Need to just refresh user datasources and controls bound to them, not entire dataset & form.
+                    Project project = new Project();
+                    // First refresh dataset
+                    ds_Project = project.refreshProjectUserTables(ds_Project);
+                    // Then refresh data bindings
+                    set_ProjectAddUser();
                 }
             }
         }

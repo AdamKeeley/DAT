@@ -93,7 +93,7 @@ namespace CMS
                 if (UserAdd.userAdded == true)
                 {
                     Project project = new Project();
-                    ds_Project = project.getProjectsDataSet();
+                    ds_Project = project.refreshProjectUserTables(ds_Project);
                     setVariablesAndControl(ProjectNumber, ds_Project);
                 }
             }

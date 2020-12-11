@@ -66,11 +66,6 @@ namespace CMS
                         $"where [ValidTo] is null");
                     SQL_Stuff.getDataTable(conn, ds_prj, "tlkDocuments",
                         $"select * from [dbo].[tlkDocuments]");
-                    SQL_Stuff.getDataTable(conn, ds_prj, "tblUser",
-                        $"select *, [LastName] + ', ' + [FirstName] as FullName " +
-                        $"from [dbo].[tblUser] " +
-                        $"where [ValidTo] is null " +
-                        $"order by [LastName], [FirstName], [UserID]");
                     SQL_Stuff.getDataTable(conn, ds_prj, "tblDocsAccepted",
                         $"select tbl.ProjectNumber " +
                         $"  , tlk.DocumentID " +
@@ -96,50 +91,176 @@ namespace CMS
                         $"  , sum([DatHours]) as AllTime " +
                         $"from [dbo].[tblProjectDatTime] " +
                         $"group by ProjectNumber ");
-                    // Copies made of tblUser so that the can be referenced by LeadApplicant and 
-                    // PI fields of tblProjects via DataRelations without additional SQL Server hits
-                    DataTable leadApp = ds_prj.Tables["tblUser"].Copy();
-                    leadApp.TableName = "tlkLeadApplicant";
-                    ds_prj.Tables.Add(leadApp);
-                    DataTable PI = ds_prj.Tables["tblUser"].Copy();
-                    PI.TableName = "tlkPI";
-                    ds_prj.Tables.Add(PI);
-
-                    ds_prj.Relations.Add("Project_Stage"
-                        , ds_prj.Tables["tlkStage"].Columns["StageID"]      //parent
-                        , ds_prj.Tables["tblProjects"].Columns["Stage"]);   //child
-                    ds_prj.Relations.Add("Project_Classification"
-                        , ds_prj.Tables["tlkClassification"].Columns["classificationID"]
-                        , ds_prj.Tables["tblProjects"].Columns["Classification"]);
-                    ds_prj.Relations.Add("Project_DATRAG"
-                        , ds_prj.Tables["tlkRAG"].Columns["ragID"]         
-                        , ds_prj.Tables["tblProjects"].Columns["DATRAG"]);
-                    ds_prj.Relations.Add("Project_Faculty"
-                        , ds_prj.Tables["tlkFaculty"].Columns["facultyID"]
-                        , ds_prj.Tables["tblProjects"].Columns["Faculty"]);
-                    ds_prj.Relations.Add("Project_LeadApplicant"
-                        , ds_prj.Tables["tlkLeadApplicant"].Columns["UserNumber"]
-                        , ds_prj.Tables["tblProjects"].Columns["LeadApplicant"]);
-                    ds_prj.Relations.Add("Project_PI"
-                        , ds_prj.Tables["tlkPI"].Columns["UserNumber"]
-                        , ds_prj.Tables["tblProjects"].Columns["PI"]);
-                    ds_prj.Relations.Add("UserProject_User"
-                        , ds_prj.Tables["tblUser"].Columns["UserNumber"]
-                        , ds_prj.Tables["tblUserProject"].Columns["UserNumber"]);
-                    ds_prj.Relations.Add("ProjectPlatformInfo_PlatformInfo"
-                        , ds_prj.Tables["tlkPlatformInfo"].Columns["PlatformInfoID"]
-                        , ds_prj.Tables["tblProjectPlatformInfo"].Columns["PlatformInfoID"]);
-                    ds_prj.Relations.Add("ProjectDocument_Document"
-                        , ds_prj.Tables["tlkDocuments"].Columns["DocumentID"]
-                        , ds_prj.Tables["tblProjectDocument"].Columns["DocumentType"]);
+                   
+                    // get the user tables needed to link to project details and merge with project dataset
+                    DataSet ds_prj_usr = getUserDataSet();
+                    ds_prj.Merge(ds_prj_usr);
                 }
+
+                ds_prj.Relations.Add("Project_Stage"
+                    , ds_prj.Tables["tlkStage"].Columns["StageID"]      //parent
+                    , ds_prj.Tables["tblProjects"].Columns["Stage"]);   //child
+                ds_prj.Relations.Add("Project_Classification"
+                    , ds_prj.Tables["tlkClassification"].Columns["classificationID"]
+                    , ds_prj.Tables["tblProjects"].Columns["Classification"]);
+                ds_prj.Relations.Add("Project_DATRAG"
+                    , ds_prj.Tables["tlkRAG"].Columns["ragID"]         
+                    , ds_prj.Tables["tblProjects"].Columns["DATRAG"]);
+                ds_prj.Relations.Add("Project_Faculty"
+                    , ds_prj.Tables["tlkFaculty"].Columns["facultyID"]
+                    , ds_prj.Tables["tblProjects"].Columns["Faculty"]);
+                ds_prj.Relations.Add("ProjectPlatformInfo_PlatformInfo"
+                    , ds_prj.Tables["tlkPlatformInfo"].Columns["PlatformInfoID"]
+                    , ds_prj.Tables["tblProjectPlatformInfo"].Columns["PlatformInfoID"]);
+                ds_prj.Relations.Add("ProjectDocument_Document"
+                    , ds_prj.Tables["tlkDocuments"].Columns["DocumentID"]
+                    , ds_prj.Tables["tblProjectDocument"].Columns["DocumentType"]);
+
+                ds_prj = addProjectUserDataRelations(ds_prj);
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Failed to populate ds_prj DataSet" + Environment.NewLine + Environment.NewLine + ex.Message);
             }
-                //return DataSet (ds_prj) as the output of this method
-                return ds_prj;
+            
+            //return DataSet (ds_prj) as the output of this method
+            return ds_prj;
+        }
+
+        /// <summary>
+        /// Takes a Project DataSet and removes user related DataTables
+        /// </summary>
+        /// <param name="ds_prj"></param>
+        /// <returns>Project DataSet without user tables</returns>
+        public DataSet dropProjectUserTablesFromProjectDataSet(DataSet ds_prj)
+        {
+            if (ds_prj.Tables.Contains("tblUser"))
+            {
+                if (ds_prj.Relations.Contains("UserProject_User"))
+                {
+                    ds_prj.Relations.Remove("UserProject_User");
+                    ds_prj.Tables["tblUserProject"].Constraints.Remove("UserProject_User");
+                }
+                ds_prj.Tables.Remove("tblUser");
+            }
+
+            if (ds_prj.Tables.Contains("tlkLeadApplicant"))
+            {
+                if (ds_prj.Relations.Contains("Project_LeadApplicant")) 
+                { 
+                    ds_prj.Relations.Remove("Project_LeadApplicant");
+                    ds_prj.Tables["tblProjects"].Constraints.Remove("Project_LeadApplicant");
+                } 
+                ds_prj.Tables.Remove("tlkLeadApplicant");
+            }
+
+            if (ds_prj.Tables.Contains("tlkPI"))
+            {
+                if (ds_prj.Relations.Contains("Project_PI"))
+                {
+                    ds_prj.Relations.Remove("Project_PI");
+                    ds_prj.Tables["tblProjects"].Constraints.Remove("Project_PI");
+                }
+                ds_prj.Tables.Remove("tlkPI");
+            }
+
+            return ds_prj;
+        }
+
+        /// <summary>
+        /// Gets user tables for project DataSet, can be used with ds.dt.Merge() to add to existing DataSet
+        /// </summary>
+        /// <returns>DataSet containing just project related User tables</returns>
+        public DataSet getUserDataSet()
+        {
+            DataSet ds_prj_usr = new DataSet("Users");
+            try
+            {
+                //use the central connection string from the SQL_Stuff class
+                SqlConnection conn = new SqlConnection();
+                conn.ConnectionString = SQL_Stuff.conString;
+                conn.Credential = SQL_Stuff.credential;
+                using (conn)
+                {
+                    SQL_Stuff.getDataTable(conn, ds_prj_usr, "tblUser",
+                        $"select *, [LastName] + ', ' + [FirstName] as FullName " +
+                        $"from [dbo].[tblUser] " +
+                        $"where [ValidTo] is null " +
+                        $"order by [LastName], [FirstName], [UserID]");
+                    // Copies made of tblUser so that the can be referenced by LeadApplicant and 
+                    // PI fields of tblProjects via DataRelations without additional SQL Server hits
+                    DataTable leadApp = ds_prj_usr.Tables["tblUser"].Copy();
+                    leadApp.TableName = "tlkLeadApplicant";
+                    ds_prj_usr.Tables.Add(leadApp);
+                    DataTable PI = ds_prj_usr.Tables["tblUser"].Copy();
+                    PI.TableName = "tlkPI";
+                    ds_prj_usr.Tables.Add(PI);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to populate ds_prj_usr DataSet" + Environment.NewLine + Environment.NewLine + ex.Message);
+            }
+            return ds_prj_usr;
+        }
+
+        /// <summary>
+        /// Takes a project DataSet and adds DataRelations for project user DataTables
+        /// </summary>
+        /// <param name="ds_prj"></param>
+        /// <returns>Project DataSet with DataRelations to project related user tables</returns>
+        public DataSet addProjectUserDataRelations(DataSet ds_prj)
+        {
+            if (ds_prj.Tables.Contains("tlkLeadApplicant") && ds_prj.Tables.Contains("tblProjects"))
+            {
+                if (ds_prj.Relations.Contains("Project_LeadApplicant") == false)
+                {
+                    ds_prj.Relations.Add("Project_LeadApplicant"
+                        , ds_prj.Tables["tlkLeadApplicant"].Columns["UserNumber"]
+                        , ds_prj.Tables["tblProjects"].Columns["LeadApplicant"]);
+                }
+            }
+            if (ds_prj.Tables.Contains("tlkPI") && ds_prj.Tables.Contains("tblProjects"))
+            {
+                if (ds_prj.Relations.Contains("Project_PI") == false)
+                {
+                    ds_prj.Relations.Add("Project_PI"
+                        , ds_prj.Tables["tlkPI"].Columns["UserNumber"]
+                        , ds_prj.Tables["tblProjects"].Columns["PI"]);
+                }
+            }
+            if (ds_prj.Tables.Contains("tblUser") && ds_prj.Tables.Contains("tblUserProject"))
+            {
+                if (ds_prj.Relations.Contains("UserProject_User") == false)
+                {
+                    ds_prj.Relations.Add("UserProject_User"
+                        , ds_prj.Tables["tblUser"].Columns["UserNumber"]
+                        , ds_prj.Tables["tblUserProject"].Columns["UserNumber"]);
+                }
+            }
+
+            return ds_prj;
+        }
+
+        /// <summary>
+        /// Performs three operations on a Project DataSet, 
+        ///     1 drops user tables if present;
+        ///     2 re-adds new user tables to project DataSet from sql db;
+        ///     3 re-adds DataRelations;
+        /// </summary>
+        /// <param name="ds_prj"></param>
+        /// <returns>Project dataset with original data and refresh user tables</returns>
+        public DataSet refreshProjectUserTables(DataSet ds_prj)
+        {
+            // First drop project_user tables from project dataset
+            ds_prj = dropProjectUserTablesFromProjectDataSet(ds_prj);
+            // Then re-add refreshed project_user tables to project dataset
+            ds_prj.Merge(getUserDataSet());
+            // Then re-add datarelations
+            ds_prj = addProjectUserDataRelations(ds_prj);
+
+            return ds_prj;
         }
 
         /// <summary>

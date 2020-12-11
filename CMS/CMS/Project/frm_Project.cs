@@ -118,6 +118,7 @@ namespace CMS
                     cb_pClassification.SelectedIndex = -1;
                 else
                     cb_pClassification.SelectedValue    = mdl_CurrentProject.Classification;
+                
                 cb_DATRAG.DataSource                    = ds_Project.Tables["tlkRAG"];
                 cb_DATRAG.ValueMember                   = "ragID";
                 cb_DATRAG.DisplayMember                 = "ragDescription";
@@ -125,22 +126,14 @@ namespace CMS
                     cb_DATRAG.SelectedIndex = -1;
                 else
                     cb_DATRAG.SelectedValue             = mdl_CurrentProject.DATRAG;
+                
                 mtb_ProjectedStartDateValue.Text        = mdl_CurrentProject.ProjectedStartDate.ToString();
                 mtb_ProjectedEndDateValue.Text          = mdl_CurrentProject.ProjectedEndDate.ToString();
                 mtb_pStartDateValue.Text                = mdl_CurrentProject.StartDate.ToString();
                 mtb_pEndDateValue.Text                  = mdl_CurrentProject.EndDate.ToString();
-                cb_LeadApplicant.DataSource             = ds_Project.Tables["tlkLeadApplicant"];
-                cb_LeadApplicant.ValueMember            = "UserNumber";
-                cb_LeadApplicant.DisplayMember          = "FullName";
-                if (mdl_CurrentProject.LeadApplicant == null)
-                    cb_LeadApplicant.SelectedIndex = -1;
-                else cb_LeadApplicant.SelectedValue     = mdl_CurrentProject.LeadApplicant;
-                cb_PI.DataSource = ds_Project.Tables["tlkPI"];
-                cb_PI.ValueMember = "UserNumber";
-                cb_PI.DisplayMember = "FullName";
-                if (mdl_CurrentProject.PI == null)
-                    cb_PI.SelectedIndex = -1;
-                else cb_PI.SelectedValue = mdl_CurrentProject.PI;
+
+                setProjectLeadUsers();
+
                 cb_Faculty.DataSource                   = ds_Project.Tables["tlkFaculty"];
                 cb_Faculty.ValueMember                  = "facultyID";
                 cb_Faculty.DisplayMember                = "facultyDescription";
@@ -148,6 +141,7 @@ namespace CMS
                     cb_Faculty.SelectedIndex = -1;
                 else
                     cb_Faculty.SelectedValue            = mdl_CurrentProject.Faculty;
+                
                 chkb_ISO27001.Checked                   = mdl_CurrentProject.ISO27001;
                 chkb_DSPT.Checked                       = mdl_CurrentProject.DSPT;
                 chkb_LIDA.Checked                       = mdl_CurrentProject.LIDA;
@@ -158,6 +152,31 @@ namespace CMS
             catch (Exception ex)
             {
                 MessageBox.Show("Method setProjectDetails of class frm_Project has failed" + Environment.NewLine + ex);
+                //throw;
+            }
+        }
+
+        private void setProjectLeadUsers()
+        {
+            try
+            {
+                cb_LeadApplicant.DataSource = ds_Project.Tables["tlkLeadApplicant"];
+                cb_LeadApplicant.ValueMember = "UserNumber";
+                cb_LeadApplicant.DisplayMember = "FullName";
+                if (mdl_CurrentProject.LeadApplicant == null)
+                    cb_LeadApplicant.SelectedIndex = -1;
+                else cb_LeadApplicant.SelectedValue = mdl_CurrentProject.LeadApplicant;
+
+                cb_PI.DataSource = ds_Project.Tables["tlkPI"];
+                cb_PI.ValueMember = "UserNumber";
+                cb_PI.DisplayMember = "FullName";
+                if (mdl_CurrentProject.PI == null)
+                    cb_PI.SelectedIndex = -1;
+                else cb_PI.SelectedValue = mdl_CurrentProject.PI;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Method setProjectLeadUsers of class frm_Project has failed" + Environment.NewLine + ex);
                 //throw;
             }
         }
@@ -733,7 +752,12 @@ namespace CMS
                 UserAdd.ShowDialog();
                 if (UserAdd.userAdded == true)
                 {
-                    refreshProjectForm(mdl_CurrentProject.ProjectNumber);
+                    // Need to just refresh user datasources and controls bound to them, not entire dataset & form.
+                    Project project = new Project();
+                    // First refresh dataset
+                    ds_Project = project.refreshProjectUserTables(ds_Project);
+                    // Then refresh data bindings
+                    setProjectLeadUsers();
                 }
             }
         }
