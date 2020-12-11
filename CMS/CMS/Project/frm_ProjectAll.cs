@@ -176,6 +176,7 @@ namespace CMS
             string filterLeadApplicant      = $"LeadApplicant like '%{cb_LeadApplicant.Text}%'";
             string filterPI                 = $"PI like '%{cb_PI.Text}%'";
             string filterFaculty            = $"Faculty = '{cb_Faculty.Text}'";
+            string filterLIDA               = $"LIDA = {chkb_LIDA.Checked}";
 
             if (cb_VreNumber.Text != "")
                 filterAll += " AND " + filterVreNumber;
@@ -195,6 +196,8 @@ namespace CMS
                 filterAll += " AND " + filterPI;
             if (cb_Faculty.SelectedIndex > -1)
                 filterAll += " AND " + filterFaculty;
+            if (chkb_LIDA.Checked == true)
+                filterAll += " AND " + filterLIDA;
 
             //DataTable to fill with de-normalised text values of all projects
             DataTable dt_ProjectList = new DataTable();
@@ -208,13 +211,14 @@ namespace CMS
             dt_ProjectList.Columns.Add("LeadApplicant");
             dt_ProjectList.Columns.Add("PI");
             dt_ProjectList.Columns.Add("Faculty");
+            dt_ProjectList.Columns.Add("LIDA");
 
             DataRow a_row;
             foreach (DataRow pRow in ds_Project.Tables["tblProjects"].Rows)
             {
                 a_row = dt_ProjectList.NewRow();
 
-                //concatenate VreNumbers into single string by creatig a list and joining with seperator
+                //concatenate VreNumbers into single string by creating a list and joining with seperator
                 List<string> vreNo = new List<string>();
                 foreach (DataRow vRow in ds_Project.Tables["tblProjectPlatformInfo"].Select($"[PlatformInfoID] = 1 and [ProjectNumber] = '{pRow["ProjectNumber"]}'"))
                 {
@@ -249,6 +253,7 @@ namespace CMS
                 {
                     a_row["Faculty"] = fRow["facultyDescription"];
                 }
+                a_row["LIDA"] = pRow["LIDA"];
 
                 dt_ProjectList.Rows.Add(a_row);
             }
@@ -265,6 +270,7 @@ namespace CMS
             dt_dgv_ProjectList.Columns.Add("Lead Applicant");
             dt_dgv_ProjectList.Columns.Add("PI");
             dt_dgv_ProjectList.Columns.Add("Faculty");
+            dt_dgv_ProjectList.Columns.Add("LIDA");
 
             DataRow f_row;
             foreach (DataRow pRow in dt_ProjectList.Select(filterAll))
@@ -280,6 +286,7 @@ namespace CMS
                 f_row["Lead Applicant"] = pRow["LeadApplicant"];
                 f_row["PI"] = pRow["PI"];
                 f_row["Faculty"] = pRow["Faculty"];
+                f_row["LIDA"] = pRow["LIDA"];
 
                 dt_dgv_ProjectList.Rows.Add(f_row);
             }
@@ -328,6 +335,8 @@ namespace CMS
             cb_PI.TabIndex = ++x;
             cb_Faculty.TabIndex = ++x;
 
+            chkb_LIDA.TabIndex = ++x;
+
             btn_Refresh.TabIndex = ++x;
             btn_ClearSearch.TabIndex = ++x;
             btn_NewProject.TabIndex = ++x;
@@ -353,7 +362,7 @@ namespace CMS
             }
         }
 
-        private void searchItemAdded(object sender, EventArgs e)
+        private void searchItemAddedProjectAll(object sender, EventArgs e)
         {
             if (textChanged == true)
             fillDataGridView();
@@ -373,6 +382,7 @@ namespace CMS
             cb_LeadApplicant.SelectedIndex = -1;
             cb_PI.SelectedIndex = -1;
             cb_Faculty.SelectedIndex = -1;
+            chkb_LIDA.Checked = false;
 
             fillDataGridView();
         }

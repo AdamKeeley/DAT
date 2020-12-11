@@ -52,6 +52,7 @@
             this.cb_PortfolioNo = new System.Windows.Forms.ComboBox();
             this.lbl_VreNumber = new System.Windows.Forms.Label();
             this.cb_VreNumber = new System.Windows.Forms.ComboBox();
+            this.chkb_LIDA = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ProjectList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -84,7 +85,7 @@
             this.cb_Faculty.Name = "cb_Faculty";
             this.cb_Faculty.Size = new System.Drawing.Size(173, 21);
             this.cb_Faculty.TabIndex = 17;
-            this.cb_Faculty.TextChanged += new System.EventHandler(this.searchItemAdded);
+            this.cb_Faculty.TextChanged += new System.EventHandler(this.searchItemAddedProjectAll);
             // 
             // lbl_Faculty
             // 
@@ -104,7 +105,7 @@
             this.cb_DATRAG.Name = "cb_DATRAG";
             this.cb_DATRAG.Size = new System.Drawing.Size(76, 21);
             this.cb_DATRAG.TabIndex = 3;
-            this.cb_DATRAG.TextChanged += new System.EventHandler(this.searchItemAdded);
+            this.cb_DATRAG.TextChanged += new System.EventHandler(this.searchItemAddedProjectAll);
             // 
             // lbl_DATRAG
             // 
@@ -133,7 +134,7 @@
             this.cb_pClassification.Name = "cb_pClassification";
             this.cb_pClassification.Size = new System.Drawing.Size(124, 21);
             this.cb_pClassification.TabIndex = 11;
-            this.cb_pClassification.TextChanged += new System.EventHandler(this.searchItemAdded);
+            this.cb_pClassification.TextChanged += new System.EventHandler(this.searchItemAddedProjectAll);
             // 
             // btn_NewProject
             // 
@@ -183,7 +184,7 @@
             this.cb_pStage.Name = "cb_pStage";
             this.cb_pStage.Size = new System.Drawing.Size(124, 21);
             this.cb_pStage.TabIndex = 9;
-            this.cb_pStage.TextChanged += new System.EventHandler(this.searchItemAdded);
+            this.cb_pStage.TextChanged += new System.EventHandler(this.searchItemAddedProjectAll);
             // 
             // lbl_pStage
             // 
@@ -202,7 +203,7 @@
             this.tb_pNameValue.Name = "tb_pNameValue";
             this.tb_pNameValue.Size = new System.Drawing.Size(418, 20);
             this.tb_pNameValue.TabIndex = 5;
-            this.tb_pNameValue.TextChanged += new System.EventHandler(this.searchItemAdded);
+            this.tb_pNameValue.TextChanged += new System.EventHandler(this.searchItemAddedProjectAll);
             // 
             // lbl_pName
             // 
@@ -233,7 +234,7 @@
             this.cb_LeadApplicant.Name = "cb_LeadApplicant";
             this.cb_LeadApplicant.Size = new System.Drawing.Size(173, 21);
             this.cb_LeadApplicant.TabIndex = 13;
-            this.cb_LeadApplicant.TextChanged += new System.EventHandler(this.searchItemAdded);
+            this.cb_LeadApplicant.TextChanged += new System.EventHandler(this.searchItemAddedProjectAll);
             // 
             // cb_PI
             // 
@@ -244,7 +245,7 @@
             this.cb_PI.Name = "cb_PI";
             this.cb_PI.Size = new System.Drawing.Size(173, 21);
             this.cb_PI.TabIndex = 15;
-            this.cb_PI.TextChanged += new System.EventHandler(this.searchItemAdded);
+            this.cb_PI.TextChanged += new System.EventHandler(this.searchItemAddedProjectAll);
             // 
             // lbl_recordCount
             // 
@@ -273,7 +274,7 @@
             this.cb_PortfolioNo.Name = "cb_PortfolioNo";
             this.cb_PortfolioNo.Size = new System.Drawing.Size(124, 21);
             this.cb_PortfolioNo.TabIndex = 7;
-            this.cb_PortfolioNo.TextChanged += new System.EventHandler(this.searchItemAdded);
+            this.cb_PortfolioNo.TextChanged += new System.EventHandler(this.searchItemAddedProjectAll);
             // 
             // lbl_VreNumber
             // 
@@ -291,13 +292,25 @@
             this.cb_VreNumber.Name = "cb_VreNumber";
             this.cb_VreNumber.Size = new System.Drawing.Size(124, 21);
             this.cb_VreNumber.TabIndex = 1;
-            this.cb_VreNumber.TextChanged += new System.EventHandler(this.searchItemAdded);
+            this.cb_VreNumber.TextChanged += new System.EventHandler(this.searchItemAddedProjectAll);
+            // 
+            // chkb_LIDA
+            // 
+            this.chkb_LIDA.AutoSize = true;
+            this.chkb_LIDA.Location = new System.Drawing.Point(12, 115);
+            this.chkb_LIDA.Name = "chkb_LIDA";
+            this.chkb_LIDA.Size = new System.Drawing.Size(111, 17);
+            this.chkb_LIDA.TabIndex = 73;
+            this.chkb_LIDA.Text = "Only include LIDA";
+            this.chkb_LIDA.UseVisualStyleBackColor = true;
+            this.chkb_LIDA.CheckedChanged += new System.EventHandler(this.searchItemAddedProjectAll);
             // 
             // frm_ProjectAll
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1073, 593);
+            this.Controls.Add(this.chkb_LIDA);
             this.Controls.Add(this.cb_VreNumber);
             this.Controls.Add(this.lbl_VreNumber);
             this.Controls.Add(this.cb_PortfolioNo);
@@ -354,5 +367,6 @@
         private System.Windows.Forms.ComboBox cb_PortfolioNo;
         private System.Windows.Forms.Label lbl_VreNumber;
         private System.Windows.Forms.ComboBox cb_VreNumber;
+        private System.Windows.Forms.CheckBox chkb_LIDA;
     }
 }
