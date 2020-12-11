@@ -580,29 +580,6 @@ namespace CMS
             return version;
         }
 
-        //public bool deleteProjectDoc(int pdID)
-        //{
-        //    try
-        //    {
-        //        //update ValidUntil field of current record of project document (perform 'logical' delete)
-        //        SQL_Stuff conString = new SQL_Stuff();
-        //        using (SqlConnection connection = new SqlConnection(conString.getString()))
-        //        {
-        //            SqlCommand qryDeleteProjectDoc = new SqlCommand();
-        //            qryDeleteProjectDoc.Connection = connection;
-        //            qryDeleteProjectDoc.CommandText = "update [dbo].[tblProjectDocument] set [ValidTo] = getdate() where [pID] = @pID";
-        //            qryDeleteProjectDoc.Parameters.Add("@pID", SqlDbType.Int).Value = pdID;
-        //            connection.Open();
-        //            qryDeleteProjectDoc.ExecuteNonQuery();
-        //        }
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show("Failed to delete record" + Environment.NewLine + Environment.NewLine + ex.Message);
-        //    }
-        //}
-
         /// <summary>
         /// 
         /// </summary>
@@ -731,7 +708,7 @@ namespace CMS
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Failed to add new note" + Environment.NewLine + ex.Message);
+                MessageBox.Show("Failed to delete project document." + Environment.NewLine + ex.Message);
                 //throw;
             }
             
