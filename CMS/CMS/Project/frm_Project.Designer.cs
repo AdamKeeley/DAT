@@ -96,6 +96,7 @@ namespace CMS
             this.lbl_DatHoursSpent = new System.Windows.Forms.Label();
             this.nud_DatHoursSpent = new System.Windows.Forms.NumericUpDown();
             this.chkb_LIDA = new System.Windows.Forms.CheckBox();
+            this.btn_UserDocs = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_pNotes)).BeginInit();
             this.gb_Platform.SuspendLayout();
             this.gb_Governance.SuspendLayout();
@@ -831,12 +832,23 @@ namespace CMS
             this.chkb_LIDA.Text = "LIDA";
             this.chkb_LIDA.UseVisualStyleBackColor = true;
             // 
+            // btn_UserDocs
+            // 
+            this.btn_UserDocs.Location = new System.Drawing.Point(523, 527);
+            this.btn_UserDocs.Name = "btn_UserDocs";
+            this.btn_UserDocs.Size = new System.Drawing.Size(75, 23);
+            this.btn_UserDocs.TabIndex = 54;
+            this.btn_UserDocs.Text = "User Docs";
+            this.btn_UserDocs.UseVisualStyleBackColor = true;
+            this.btn_UserDocs.Click += new System.EventHandler(this.btn_UserDocs_Click);
+            // 
             // frm_Project
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btn_ProjectCancel;
             this.ClientSize = new System.Drawing.Size(914, 561);
+            this.Controls.Add(this.btn_UserDocs);
             this.Controls.Add(this.chkb_LIDA);
             this.Controls.Add(this.gb_DatTime);
             this.Controls.Add(this.lbl_NewUser);
@@ -964,5 +976,6 @@ namespace CMS
         private System.Windows.Forms.NumericUpDown nud_DatHoursSpent;
         private System.Windows.Forms.DataGridView dgv_DatHours;
         private System.Windows.Forms.CheckBox chkb_LIDA;
+        private System.Windows.Forms.Button btn_UserDocs;
     }
 }

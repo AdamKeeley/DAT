@@ -894,5 +894,12 @@ namespace CMS
             openProjectDocHistory(3);
         }
 
+        private void btn_UserDocs_Click(object sender, EventArgs e)
+        {
+            using(frm_ProjectUserDocs frm_pud = new frm_ProjectUserDocs(mdl_CurrentProject.ProjectNumber, mdl_CurrentProject.ProjectName))
+            {
+                frm_pud.ShowDialog();
+            }
+        }
     }
 }
