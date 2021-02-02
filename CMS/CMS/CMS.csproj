@@ -53,6 +53,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataTracking\DataIO.cs" />
+    <Compile Include="DataTracking\frm_DataTransferAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DataTracking\frm_DataTransferAdd.Designer.cs">
+      <DependentUpon>frm_DataTransferAdd.cs</DependentUpon>
+    </Compile>
     <Compile Include="DSAs\DSA.cs" />
     <Compile Include="DataTracking\frm_DataIO.cs">
       <SubType>Form</SubType>
@@ -189,6 +195,9 @@
   <ItemGroup>
     <EmbeddedResource Include="DataTracking\frm_DataIO.resx">
       <DependentUpon>frm_DataIO.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataTracking\frm_DataTransferAdd.resx">
+      <DependentUpon>frm_DataTransferAdd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DSAs\frm_DsaAdd.resx">
       <DependentUpon>frm_DsaAdd.cs</DependentUpon>

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_DsaDataOwnerAdd));
             this.tb_NewDataOwnerName = new System.Windows.Forms.TextBox();
             this.btn_NewDataOwner = new System.Windows.Forms.Button();
             this.gb_DataOwners = new System.Windows.Forms.GroupBox();
@@ -156,8 +157,9 @@
             this.ClientSize = new System.Drawing.Size(800, 515);
             this.Controls.Add(this.gb_AddDataOwner);
             this.Controls.Add(this.gb_DataOwners);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frm_DsaDataOwnerAdd";
-            this.Text = "Add a New Data Owner";
+            this.Text = "Create New Data Owner";
             this.gb_DataOwners.ResumeLayout(false);
             this.gb_DataOwners.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_DataOwners)).EndInit();

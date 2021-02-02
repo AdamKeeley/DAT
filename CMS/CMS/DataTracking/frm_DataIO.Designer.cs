@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_DataIO));
             this.dgv_DataIOHistory = new System.Windows.Forms.DataGridView();
             this.lbl_DateFromFilter = new System.Windows.Forms.Label();
             this.gb_DataIOHistoryFilterOptions = new System.Windows.Forms.GroupBox();
@@ -339,11 +340,11 @@
             this.dtp_DateFromFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtp_DateFromFilter.Location = new System.Drawing.Point(1126, 33);
             this.dtp_DateFromFilter.MaxDate = new System.DateTime(2050, 12, 31, 0, 0, 0, 0);
-            this.dtp_DateFromFilter.MinDate = new System.DateTime(2017, 1, 1, 0, 0, 0, 0);
+            this.dtp_DateFromFilter.MinDate = new System.DateTime(2015, 1, 1, 0, 0, 0, 0);
             this.dtp_DateFromFilter.Name = "dtp_DateFromFilter";
             this.dtp_DateFromFilter.Size = new System.Drawing.Size(190, 27);
             this.dtp_DateFromFilter.TabIndex = 3;
-            this.dtp_DateFromFilter.Value = new System.DateTime(2017, 1, 1, 0, 0, 0, 0);
+            this.dtp_DateFromFilter.Value = new System.DateTime(2015, 1, 1, 0, 0, 0, 0);
             // 
             // btn_NewImportRequest
             // 
@@ -374,9 +375,10 @@
             this.Controls.Add(this.gb_DataIOHistoryFilterOptions);
             this.Controls.Add(this.dgv_DataIOHistory);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frm_DataIO";
-            this.Text = "Data Assets I/O History";
+            this.Text = "View File Transfers Log";
             ((System.ComponentModel.ISupportInitialize)(this.dgv_DataIOHistory)).EndInit();
             this.gb_DataIOHistoryFilterOptions.ResumeLayout(false);
             this.gb_DataIOHistoryFilterOptions.PerformLayout();

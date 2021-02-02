@@ -28,8 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_DsaAdd));
             this.cb_ExistingDataOwner = new System.Windows.Forms.ComboBox();
             this.gb_DataOwner = new System.Windows.Forms.GroupBox();
+            this.tb_OwnerEmail = new System.Windows.Forms.TextBox();
+            this.lbl_OwnerEmail = new System.Windows.Forms.Label();
             this.btn_NewDataOwner = new System.Windows.Forms.Button();
             this.gb_DsaFileDetails = new System.Windows.Forms.GroupBox();
             this.tb_FilePath = new System.Windows.Forms.TextBox();
@@ -58,8 +61,6 @@
             this.btn_OK = new System.Windows.Forms.Button();
             this.btn_Cancel = new System.Windows.Forms.Button();
             this.gb_Dates = new System.Windows.Forms.GroupBox();
-            this.tb_OwnerEmail = new System.Windows.Forms.TextBox();
-            this.lbl_OwnerEmail = new System.Windows.Forms.Label();
             this.lbl_DestroyDate = new System.Windows.Forms.Label();
             this.dtp_DestroyDate = new System.Windows.Forms.DateTimePicker();
             this.gb_DataOwner.SuspendLayout();
@@ -95,6 +96,22 @@
             this.gb_DataOwner.TabIndex = 2;
             this.gb_DataOwner.TabStop = false;
             this.gb_DataOwner.Text = "Data Owner";
+            // 
+            // tb_OwnerEmail
+            // 
+            this.tb_OwnerEmail.Location = new System.Drawing.Point(151, 61);
+            this.tb_OwnerEmail.Name = "tb_OwnerEmail";
+            this.tb_OwnerEmail.Size = new System.Drawing.Size(333, 27);
+            this.tb_OwnerEmail.TabIndex = 4;
+            // 
+            // lbl_OwnerEmail
+            // 
+            this.lbl_OwnerEmail.AutoSize = true;
+            this.lbl_OwnerEmail.Location = new System.Drawing.Point(6, 56);
+            this.lbl_OwnerEmail.Name = "lbl_OwnerEmail";
+            this.lbl_OwnerEmail.Size = new System.Drawing.Size(120, 40);
+            this.lbl_OwnerEmail.TabIndex = 3;
+            this.lbl_OwnerEmail.Text = "DSA Contact\'s\r\nEmail Address";
             // 
             // btn_NewDataOwner
             // 
@@ -401,22 +418,6 @@
             this.gb_Dates.TabStop = false;
             this.gb_Dates.Text = "Dates";
             // 
-            // tb_OwnerEmail
-            // 
-            this.tb_OwnerEmail.Location = new System.Drawing.Point(151, 61);
-            this.tb_OwnerEmail.Name = "tb_OwnerEmail";
-            this.tb_OwnerEmail.Size = new System.Drawing.Size(333, 27);
-            this.tb_OwnerEmail.TabIndex = 4;
-            // 
-            // lbl_OwnerEmail
-            // 
-            this.lbl_OwnerEmail.AutoSize = true;
-            this.lbl_OwnerEmail.Location = new System.Drawing.Point(6, 56);
-            this.lbl_OwnerEmail.Name = "lbl_OwnerEmail";
-            this.lbl_OwnerEmail.Size = new System.Drawing.Size(120, 40);
-            this.lbl_OwnerEmail.TabIndex = 3;
-            this.lbl_OwnerEmail.Text = "DSA Contact\'s\r\nEmail Address";
-            // 
             // lbl_DestroyDate
             // 
             this.lbl_DestroyDate.AutoSize = true;
@@ -454,8 +455,9 @@
             this.Controls.Add(this.gb_AmendmentOf);
             this.Controls.Add(this.gb_DsaFileDetails);
             this.Controls.Add(this.gb_DataOwner);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frm_DsaAdd";
-            this.Text = "Add a New DSA";
+            this.Text = "Create New DSA";
             this.gb_DataOwner.ResumeLayout(false);
             this.gb_DataOwner.PerformLayout();
             this.gb_DsaFileDetails.ResumeLayout(false);
