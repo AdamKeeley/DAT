@@ -32,18 +32,13 @@ namespace CMS.DSAs
                              NoRemoteAccess, DateAdded, LastUpdated, ValidUntil
                       FROM dbo.tblDsas");
                 SQL_Stuff.getDataTable(conn, ds, "tblDsaNotes",
-                    @"SELECT dnID, Dsa, Note, Created, CreatedBy
-                      FROM dbo.tblDsaNotes");
+                    @"SELECT dnID, Dsa, Note, Created, CreatedBy FROM dbo.tblDsaNotes");
                 SQL_Stuff.getDataTable(conn, ds, "tblDsasProjects",
-                    @"SELECT dpID, DsaID, Project, DateAdded
-                      FROM dbo.tblDsasProjects");
+                    @"SELECT dpID, DsaID, Project, DateAdded FROM dbo.tblDsasProjects");
                 SQL_Stuff.getDataTable(conn, ds, "tblDsaDataOwners",
-                    @"SELECT doID, DataOwnerName, RebrandOf, DataOwnerEmail
-                      FROM dbo.tblDsaDataOwners");
+                    @"SELECT doID, DataOwnerName, RebrandOf, DataOwnerEmail FROM dbo.tblDsaDataOwners");
                 SQL_Stuff.getDataTable(conn, ds, "tblProject",
-                    @"SELECT *
-                      FROM dbo.tblProject
-                      WHERE ValidTo IS NULL");
+                    @"SELECT * FROM dbo.tblProject WHERE ValidTo IS NULL");
                 // Add asset register stuff?
             }
 
@@ -61,8 +56,7 @@ namespace CMS.DSAs
                 OUTPUT INSERTED.DsaID
                 VALUES
                     (@DataOwner, @AmendmentOf, @DsaName, @DsaFileLoc, @StartDate, @ExpiryDate, @DataDestructionDate,
-                     @AgreementOwnerEmail, @DSPT, @ISO27001, @RequiresEncryption, @NoRemoteAccess, @DateAdded)
-            ";
+                     @AgreementOwnerEmail, @DSPT, @ISO27001, @RequiresEncryption, @NoRemoteAccess, @DateAdded)";
 
             SqlConnection conn = new SqlConnection();
             conn.ConnectionString = SQL_Stuff.conString;
@@ -301,6 +295,25 @@ namespace CMS.DSAs
                 .ToList();
 
             return newDsaProject;
+        }
+
+        public List<DataOwnersViewModel> CreateDataOwnerGridView(DataSet ds, string searchTxt)
+        {
+            List<DataOwnersViewModel> dataOwners = (
+                from do1 in ds.Tables["tblDsaDataOwners"].AsEnumerable()
+                join do2 in ds.Tables["tblDsaDataOwners"].AsEnumerable() on do1.Field<int?>("RebrandOf") equals do2.Field<int>("doID") into do2tmp
+                orderby do1.Field<string>("DataOwnerName")
+                from do2 in do2tmp.DefaultIfEmpty()
+                where searchTxt == null
+                    || ((do1 == null) ? false : do1.Field<string>("DataOwnerName").ToLower().Contains(searchTxt))
+                    || ((do2 == null) ? false : do2.Field<string>("DataOwnerName").ToLower().Contains(searchTxt))
+                select new DataOwnersViewModel
+                {
+                    DataOwner = do1.Field<string>("DataOwnerName"),
+                    RebrandingOf = do2?.Field<string>("DataOwnerName")
+                }).ToList();
+
+            return dataOwners;
         }
     }
 }

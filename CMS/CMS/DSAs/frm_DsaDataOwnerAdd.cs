@@ -22,6 +22,7 @@ namespace CMS.DSAs
             UpdateDataOwnerControls();
         }
 
+        DSA dsa = new DSA();
         private DataSet ds;
 
         private void UpdateDataOwnerControls()
@@ -37,7 +38,6 @@ namespace CMS.DSAs
         {
             try
             {
-                DSA dsa = new DSA();
                 ds = dsa.GetDsaData();
             }
             catch (Exception ex)
@@ -63,23 +63,7 @@ namespace CMS.DSAs
         {
             string searchTxt = tb_Search.Text.ToLower().NullIfEmpty();
             
-            List<DataOwnersViewModel> doList = (
-                from do1 in ds.Tables["tblDsaDataOwners"].AsEnumerable()
-                join do2 in ds.Tables["tblDsaDataOwners"].AsEnumerable() on do1.Field<int?>("RebrandOf") equals do2.Field<int>("doID") into do2tmp
-                orderby do1.Field<string>("DataOwnerName")
-                from do2 in do2tmp.DefaultIfEmpty()
-                where 
-                (
-                    searchTxt == null
-                        || ((do1 == null) ? false : do1.Field<string>("DataOwnerName").ToLower().Contains(searchTxt))
-                        || ((do2 == null) ? false : do2.Field<string>("DataOwnerName").ToLower().Contains(searchTxt))
-                )
-                select new DataOwnersViewModel
-                {
-                    DataOwner = do1.Field<string>("DataOwnerName"),
-                    RebrandingOf = do2?.Field<string>("DataOwnerName")
-                })
-                .ToList();
+            List<DataOwnersViewModel> doList = dsa.CreateDataOwnerGridView(ds, searchTxt);
 
             dgv_DataOwners.DataSource = doList;
             dgv_DataOwners.Columns["DataOwner"].Width = 230;
