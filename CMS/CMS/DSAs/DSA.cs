@@ -50,7 +50,7 @@ namespace CMS.DSAs
             return ds;
         }
 
-        public bool PutDsaData(DsaModel inDsa, List<DsaNoteModel> inDsaNotes, List<DsasProjectsModel> inDsaProjects)
+        public bool PutDsaData(mdl_Dsas inDsa, List<mdl_DsaNotes> inDsaNotes, List<mdl_DsasProjects> inDsaProjects)
         {
             bool[] success = new bool[3];
 
@@ -98,7 +98,7 @@ namespace CMS.DSAs
                     success[0] = inDsa.DsaID > 0;
 
                     // Add new DSA identity to tblDsaNotes insert, then bulk insert
-                    foreach (DsaNoteModel note in inDsaNotes)
+                    foreach (mdl_DsaNotes note in inDsaNotes)
                     {
                         note.Dsa = inDsa.DsaID;
                     }
@@ -108,7 +108,7 @@ namespace CMS.DSAs
                     success[1] = notesRows == tblDsaNotes.Rows.Count;
 
                     // Add new DSA identity to tblDsasProjects insert, then bulk insert
-                    foreach (DsasProjectsModel prj in inDsaProjects)
+                    foreach (mdl_DsasProjects prj in inDsaProjects)
                     {
                         prj.DsaID = inDsa.DsaID;
                     }
@@ -144,7 +144,7 @@ namespace CMS.DSAs
             return !success.Contains(false);
         }
 
-        public void PutDataOwnerData(DsaDataOwnerModel insertData)
+        public void PutDataOwnerData(mdl_DsaDataOwners insertData)
         {
             string query = "INSERT INTO dbo.tblDsaDataOwners (DataOwnerName, RebrandOf, DataOwnerEmail) VALUES (@Name, @OldNameID, @Email)";
 
@@ -241,7 +241,7 @@ namespace CMS.DSAs
             return true;
         }
 
-        public DsaModel CollectDsasForInsert(DataSet ds, string dataOwner, bool isAmendment, DataGridView dgvAmendment, string fileName, 
+        public mdl_Dsas CollectDsasForInsert(DataSet ds, string dataOwner, bool isAmendment, DataGridView dgvAmendment, string fileName, 
                                              string filePath, DateTime? startDate, DateTime? expiryDate, DateTime? destroyDate, 
                                              string ownerEmail, bool dspt, bool iso27001, bool encryption, bool remote)
         {
@@ -257,7 +257,7 @@ namespace CMS.DSAs
                 amendmentOfID = (int?)dgvAmendment.SelectedRows[0].Cells["DsaID"].Value;
             }
 
-            DsaModel newDsa = new DsaModel
+            mdl_Dsas newDsa = new mdl_Dsas
             {
                 DataOwner = dataOwnerIndex,
                 AmendmentOf = amendmentOfID,
@@ -278,12 +278,12 @@ namespace CMS.DSAs
             return newDsa;
         }
 
-        public List<DsaNoteModel> CollectDsaNotesForInsert(DataGridView dgvNotes)
+        public List<mdl_DsaNotes> CollectDsaNotesForInsert(DataGridView dgvNotes)
         {
-            List<DsaNoteModel> newDsaNotes = new List<DsaNoteModel>();
+            List<mdl_DsaNotes> newDsaNotes = new List<mdl_DsaNotes>();
             foreach (DataGridViewRow dr in dgvNotes.Rows)
             {
-                newDsaNotes.Add(new DsaNoteModel
+                newDsaNotes.Add(new mdl_DsaNotes
                 {
                     Note = dr.Cells["Notes"].Value.ToString()
                 });
@@ -292,12 +292,12 @@ namespace CMS.DSAs
             return newDsaNotes;
         }
 
-        public List<DsasProjectsModel> CollectDsaProjectsForInsert(IEnumerable<string> projects)
+        public List<mdl_DsasProjects> CollectDsaProjectsForInsert(IEnumerable<string> projects)
         {
-            List<DsasProjectsModel> newDsaProject = new List<DsasProjectsModel>();
+            List<mdl_DsasProjects> newDsaProject = new List<mdl_DsasProjects>();
             newDsaProject = projects
                 .Where(x => !String.IsNullOrWhiteSpace(x))
-                .Select(prj => new DsasProjectsModel { Project = prj })
+                .Select(prj => new mdl_DsasProjects { Project = prj })
                 .ToList();
 
             return newDsaProject;

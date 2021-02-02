@@ -31,6 +31,13 @@
             this.dgv_DataIOHistory = new System.Windows.Forms.DataGridView();
             this.lbl_DateFromFilter = new System.Windows.Forms.Label();
             this.gb_DataIOHistoryFilterOptions = new System.Windows.Forms.GroupBox();
+            this.gb_TransferMethodFilter = new System.Windows.Forms.GroupBox();
+            this.chkb_TransferOther = new System.Windows.Forms.CheckBox();
+            this.chkb_TransferBiscom = new System.Windows.Forms.CheckBox();
+            this.lbl_DsaFilter = new System.Windows.Forms.Label();
+            this.cb_DsaFilter = new System.Windows.Forms.ComboBox();
+            this.lbl_DataOwnerFilter = new System.Windows.Forms.Label();
+            this.cb_DataOwnerFilter = new System.Windows.Forms.ComboBox();
             this.gb_RequestTypeFilter = new System.Windows.Forms.GroupBox();
             this.chkb_ChangeTypeDelete = new System.Windows.Forms.CheckBox();
             this.chkb_ChangeTypeExport = new System.Windows.Forms.CheckBox();
@@ -47,18 +54,11 @@
             this.dtp_DateFromFilter = new System.Windows.Forms.DateTimePicker();
             this.btn_NewImportRequest = new System.Windows.Forms.Button();
             this.btn_RefreshAssetsHistoryView = new System.Windows.Forms.Button();
-            this.lbl_DataOwnerFilter = new System.Windows.Forms.Label();
-            this.cb_DataOwnerFilter = new System.Windows.Forms.ComboBox();
-            this.lbl_DsaFilter = new System.Windows.Forms.Label();
-            this.cb_DsaFilter = new System.Windows.Forms.ComboBox();
-            this.gb_TransferMethodFilter = new System.Windows.Forms.GroupBox();
-            this.chkb_TransferOther = new System.Windows.Forms.CheckBox();
-            this.chkb_TransferBiscom = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_DataIOHistory)).BeginInit();
             this.gb_DataIOHistoryFilterOptions.SuspendLayout();
+            this.gb_TransferMethodFilter.SuspendLayout();
             this.gb_RequestTypeFilter.SuspendLayout();
             this.gb_ChangeAcceptedFilter.SuspendLayout();
-            this.gb_TransferMethodFilter.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgv_DataIOHistory
@@ -106,6 +106,84 @@
             this.gb_DataIOHistoryFilterOptions.TabIndex = 3;
             this.gb_DataIOHistoryFilterOptions.TabStop = false;
             this.gb_DataIOHistoryFilterOptions.Text = "Filter I/O history by";
+            // 
+            // gb_TransferMethodFilter
+            // 
+            this.gb_TransferMethodFilter.Controls.Add(this.chkb_TransferOther);
+            this.gb_TransferMethodFilter.Controls.Add(this.chkb_TransferBiscom);
+            this.gb_TransferMethodFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gb_TransferMethodFilter.Location = new System.Drawing.Point(640, 18);
+            this.gb_TransferMethodFilter.Name = "gb_TransferMethodFilter";
+            this.gb_TransferMethodFilter.Size = new System.Drawing.Size(147, 108);
+            this.gb_TransferMethodFilter.TabIndex = 10;
+            this.gb_TransferMethodFilter.TabStop = false;
+            this.gb_TransferMethodFilter.Text = "Transfer method";
+            // 
+            // chkb_TransferOther
+            // 
+            this.chkb_TransferOther.AutoSize = true;
+            this.chkb_TransferOther.Checked = true;
+            this.chkb_TransferOther.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkb_TransferOther.Location = new System.Drawing.Point(16, 69);
+            this.chkb_TransferOther.Name = "chkb_TransferOther";
+            this.chkb_TransferOther.Size = new System.Drawing.Size(73, 24);
+            this.chkb_TransferOther.TabIndex = 1;
+            this.chkb_TransferOther.Tag = "0";
+            this.chkb_TransferOther.Text = "Other";
+            this.chkb_TransferOther.UseVisualStyleBackColor = true;
+            // 
+            // chkb_TransferBiscom
+            // 
+            this.chkb_TransferBiscom.AutoSize = true;
+            this.chkb_TransferBiscom.Checked = true;
+            this.chkb_TransferBiscom.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkb_TransferBiscom.Location = new System.Drawing.Point(16, 32);
+            this.chkb_TransferBiscom.Name = "chkb_TransferBiscom";
+            this.chkb_TransferBiscom.Size = new System.Drawing.Size(124, 24);
+            this.chkb_TransferBiscom.TabIndex = 0;
+            this.chkb_TransferBiscom.Tag = "1";
+            this.chkb_TransferBiscom.Text = "SFT Biscom";
+            this.chkb_TransferBiscom.UseVisualStyleBackColor = true;
+            // 
+            // lbl_DsaFilter
+            // 
+            this.lbl_DsaFilter.AutoSize = true;
+            this.lbl_DsaFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_DsaFilter.Location = new System.Drawing.Point(245, 43);
+            this.lbl_DsaFilter.Name = "lbl_DsaFilter";
+            this.lbl_DsaFilter.Size = new System.Drawing.Size(44, 20);
+            this.lbl_DsaFilter.TabIndex = 15;
+            this.lbl_DsaFilter.Text = "DSA";
+            this.lbl_DsaFilter.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // cb_DsaFilter
+            // 
+            this.cb_DsaFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_DsaFilter.FormattingEnabled = true;
+            this.cb_DsaFilter.Location = new System.Drawing.Point(295, 39);
+            this.cb_DsaFilter.Name = "cb_DsaFilter";
+            this.cb_DsaFilter.Size = new System.Drawing.Size(330, 28);
+            this.cb_DsaFilter.TabIndex = 14;
+            // 
+            // lbl_DataOwnerFilter
+            // 
+            this.lbl_DataOwnerFilter.AutoSize = true;
+            this.lbl_DataOwnerFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_DataOwnerFilter.Location = new System.Drawing.Point(17, 85);
+            this.lbl_DataOwnerFilter.Name = "lbl_DataOwnerFilter";
+            this.lbl_DataOwnerFilter.Size = new System.Drawing.Size(54, 40);
+            this.lbl_DataOwnerFilter.TabIndex = 13;
+            this.lbl_DataOwnerFilter.Text = "Data\r\nowner";
+            this.lbl_DataOwnerFilter.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // cb_DataOwnerFilter
+            // 
+            this.cb_DataOwnerFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_DataOwnerFilter.FormattingEnabled = true;
+            this.cb_DataOwnerFilter.Location = new System.Drawing.Point(75, 92);
+            this.cb_DataOwnerFilter.Name = "cb_DataOwnerFilter";
+            this.cb_DataOwnerFilter.Size = new System.Drawing.Size(203, 28);
+            this.cb_DataOwnerFilter.TabIndex = 12;
             // 
             // gb_RequestTypeFilter
             // 
@@ -286,84 +364,6 @@
             this.btn_RefreshAssetsHistoryView.UseVisualStyleBackColor = true;
             this.btn_RefreshAssetsHistoryView.Click += new System.EventHandler(this.btn_RefreshAssetsHistoryView_Click);
             // 
-            // lbl_DataOwnerFilter
-            // 
-            this.lbl_DataOwnerFilter.AutoSize = true;
-            this.lbl_DataOwnerFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_DataOwnerFilter.Location = new System.Drawing.Point(17, 85);
-            this.lbl_DataOwnerFilter.Name = "lbl_DataOwnerFilter";
-            this.lbl_DataOwnerFilter.Size = new System.Drawing.Size(54, 40);
-            this.lbl_DataOwnerFilter.TabIndex = 13;
-            this.lbl_DataOwnerFilter.Text = "Data\r\nowner";
-            this.lbl_DataOwnerFilter.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // cb_DataOwnerFilter
-            // 
-            this.cb_DataOwnerFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cb_DataOwnerFilter.FormattingEnabled = true;
-            this.cb_DataOwnerFilter.Location = new System.Drawing.Point(75, 92);
-            this.cb_DataOwnerFilter.Name = "cb_DataOwnerFilter";
-            this.cb_DataOwnerFilter.Size = new System.Drawing.Size(203, 28);
-            this.cb_DataOwnerFilter.TabIndex = 12;
-            // 
-            // lbl_DsaFilter
-            // 
-            this.lbl_DsaFilter.AutoSize = true;
-            this.lbl_DsaFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_DsaFilter.Location = new System.Drawing.Point(245, 43);
-            this.lbl_DsaFilter.Name = "lbl_DsaFilter";
-            this.lbl_DsaFilter.Size = new System.Drawing.Size(44, 20);
-            this.lbl_DsaFilter.TabIndex = 15;
-            this.lbl_DsaFilter.Text = "DSA";
-            this.lbl_DsaFilter.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // cb_DsaFilter
-            // 
-            this.cb_DsaFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cb_DsaFilter.FormattingEnabled = true;
-            this.cb_DsaFilter.Location = new System.Drawing.Point(295, 39);
-            this.cb_DsaFilter.Name = "cb_DsaFilter";
-            this.cb_DsaFilter.Size = new System.Drawing.Size(330, 28);
-            this.cb_DsaFilter.TabIndex = 14;
-            // 
-            // gb_TransferMethodFilter
-            // 
-            this.gb_TransferMethodFilter.Controls.Add(this.chkb_TransferOther);
-            this.gb_TransferMethodFilter.Controls.Add(this.chkb_TransferBiscom);
-            this.gb_TransferMethodFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gb_TransferMethodFilter.Location = new System.Drawing.Point(640, 18);
-            this.gb_TransferMethodFilter.Name = "gb_TransferMethodFilter";
-            this.gb_TransferMethodFilter.Size = new System.Drawing.Size(147, 108);
-            this.gb_TransferMethodFilter.TabIndex = 10;
-            this.gb_TransferMethodFilter.TabStop = false;
-            this.gb_TransferMethodFilter.Text = "Transfer method";
-            // 
-            // chkb_TransferOther
-            // 
-            this.chkb_TransferOther.AutoSize = true;
-            this.chkb_TransferOther.Checked = true;
-            this.chkb_TransferOther.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkb_TransferOther.Location = new System.Drawing.Point(16, 69);
-            this.chkb_TransferOther.Name = "chkb_TransferOther";
-            this.chkb_TransferOther.Size = new System.Drawing.Size(73, 24);
-            this.chkb_TransferOther.TabIndex = 1;
-            this.chkb_TransferOther.Tag = "0";
-            this.chkb_TransferOther.Text = "Other";
-            this.chkb_TransferOther.UseVisualStyleBackColor = true;
-            // 
-            // chkb_TransferBiscom
-            // 
-            this.chkb_TransferBiscom.AutoSize = true;
-            this.chkb_TransferBiscom.Checked = true;
-            this.chkb_TransferBiscom.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkb_TransferBiscom.Location = new System.Drawing.Point(16, 32);
-            this.chkb_TransferBiscom.Name = "chkb_TransferBiscom";
-            this.chkb_TransferBiscom.Size = new System.Drawing.Size(88, 24);
-            this.chkb_TransferBiscom.TabIndex = 0;
-            this.chkb_TransferBiscom.Tag = "1";
-            this.chkb_TransferBiscom.Text = "Biscom";
-            this.chkb_TransferBiscom.UseVisualStyleBackColor = true;
-            // 
             // frm_DataIO
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
@@ -380,12 +380,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgv_DataIOHistory)).EndInit();
             this.gb_DataIOHistoryFilterOptions.ResumeLayout(false);
             this.gb_DataIOHistoryFilterOptions.PerformLayout();
+            this.gb_TransferMethodFilter.ResumeLayout(false);
+            this.gb_TransferMethodFilter.PerformLayout();
             this.gb_RequestTypeFilter.ResumeLayout(false);
             this.gb_RequestTypeFilter.PerformLayout();
             this.gb_ChangeAcceptedFilter.ResumeLayout(false);
             this.gb_ChangeAcceptedFilter.PerformLayout();
-            this.gb_TransferMethodFilter.ResumeLayout(false);
-            this.gb_TransferMethodFilter.PerformLayout();
             this.ResumeLayout(false);
 
         }

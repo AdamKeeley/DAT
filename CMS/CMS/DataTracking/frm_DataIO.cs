@@ -26,6 +26,7 @@ namespace CMS.DataTracking
         private DataSet ds;
         private List<string> changeTypesWanted;
         private List<bool?> approvalsWanted;
+        private List<string> transferMethodsWanted;
         private DataIO io = new DataIO();
 
         public void PopulateIODataset()
@@ -57,6 +58,7 @@ namespace CMS.DataTracking
 
             UpdateChangeTypesWanted();
             UpdateApprovalsWanted();
+            UpdateTransferMethodsWanted();
         }
 
         public void UpdateChangeTypesWanted()
@@ -74,6 +76,29 @@ namespace CMS.DataTracking
             if (chkb_ChangeAccepted0.Checked) approvalsWanted.Add(false);
         }
 
+        public void UpdateTransferMethodsWanted()
+        {
+            transferMethodsWanted = new List<string>();
+            if (chkb_TransferBiscom.Checked)
+            {
+                transferMethodsWanted.AddRange(
+                    ds.Tables["tlkFileTransferMethods"].AsEnumerable()
+                        .Where(tm => tm.Field<string>("MethodLabel").Contains(chkb_TransferBiscom.Text))
+                        .Select(tm => tm.Field<string>("MethodLabel"))
+                        .ToList()
+                );
+            }
+            if (chkb_TransferOther.Checked)
+            {
+                transferMethodsWanted.AddRange(
+                    ds.Tables["tlkFileTransferMethods"].AsEnumerable()
+                        .Where(tm => !tm.Field<string>("MethodLabel").Contains(chkb_TransferBiscom.Text))
+                        .Select(tm => tm.Field<string>("MethodLabel"))
+                        .ToList()
+                );
+            }
+        }
+
         public void UpdateDataViewBinding()
         {
             try
@@ -83,7 +108,10 @@ namespace CMS.DataTracking
                     ds: ds,
                     dateFrom: dtp_DateFromFilter.Value.Date, 
                     dateTo: dtp_DateToFilter.Value.Date, 
-                    proj: cb_ProjectFilter.Text.NullIfEmpty(), 
+                    proj: cb_ProjectFilter.Text.NullIfEmpty(),
+                    owner: cb_DataOwnerFilter.Text.NullIfEmpty(),
+                    dsa: cb_DsaFilter.Text.NullIfEmpty(),
+                    transferMethods: transferMethodsWanted,
                     fPath: tb_FilePathFilter.Text.NullIfEmpty(),
                     changeTypes: changeTypesWanted,
                     approvals: approvalsWanted
@@ -92,10 +120,14 @@ namespace CMS.DataTracking
                 dgv_DataIOHistory.Columns["DataOwner"].Width = 120;
                 dgv_DataIOHistory.Columns["ReviewDate"].Width = 100;
                 dgv_DataIOHistory.Columns["RequestType"].Width = 95;
-                dgv_DataIOHistory.Columns["AssetName"].Width = 200;
+                dgv_DataIOHistory.Columns["FileName"].Width = 200;
+                dgv_DataIOHistory.Columns["AssetGroup"].Width = 200;
                 dgv_DataIOHistory.Columns["FilePath"].Width = 130;
+                dgv_DataIOHistory.Columns["RepoPath"].Width = 130;
                 dgv_DataIOHistory.Columns["Checksum"].Width = 100;
                 dgv_DataIOHistory.Columns["TransferMethod"].Width = 110;
+                dgv_DataIOHistory.Columns["TransferFrom"].Width = 120;
+                dgv_DataIOHistory.Columns["TransferTo"].Width = 120;
                 dgv_DataIOHistory.Columns["RequestedBy"].Width = 105;
                 dgv_DataIOHistory.Columns["DsaReviewed"].Width = 130;
                 dgv_DataIOHistory.Columns["ReviewedBy"].Width = 95;
@@ -114,6 +146,7 @@ namespace CMS.DataTracking
         {
             UpdateChangeTypesWanted();
             UpdateApprovalsWanted();
+            UpdateTransferMethodsWanted();
             UpdateDataViewBinding();
         }
 

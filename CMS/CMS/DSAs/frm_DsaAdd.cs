@@ -25,9 +25,9 @@ namespace CMS.DSAs
         private DataSet ds;
         DataTable dsaNotes = new DataTable();
 
-        DsaModel dsasInsertData = new DsaModel();
-        List<DsaNoteModel> dsaNotesInsertData = new List<DsaNoteModel>();
-        List<DsasProjectsModel> dsasProjectsInsertData = new List<DsasProjectsModel>();
+        mdl_Dsas dsasInsertData = new mdl_Dsas();
+        List<mdl_DsaNotes> dsaNotesInsertData = new List<mdl_DsaNotes>();
+        List<mdl_DsasProjects> dsasProjectsInsertData = new List<mdl_DsasProjects>();
         DSA dsa = new DSA();
 
         public void PopulateDsaDataset()

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataControlsLib.DataModels
 {
-    public class DsaModel
+    public class mdl_Dsas
     {
         public int DsaID { get; set; }
         public int DataOwner { get; set; }

@@ -120,7 +120,7 @@ namespace CMS.DSAs
                     .ToList()
                     .FirstOrDefault();
 
-            DsaDataOwnerModel doInput = new DsaDataOwnerModel
+            mdl_DsaDataOwners doInput = new mdl_DsaDataOwners
             {
                 DateOwnerName = tb_NewDataOwnerName.Text,
                 RebrandOf = rebrandedIndex

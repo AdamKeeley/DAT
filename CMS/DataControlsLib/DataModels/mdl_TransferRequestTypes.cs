@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace DataControlsLib.DataModels
 {
-    public class FileTransferMethodsModel
+    public class mdl_TransferRequestTypes
     {
-        public int MethodID { get; set; }
-        public string MethodLabel { get; set; }
+        public int RequestTypeID { get; set; }
+        public string RequestTypeLabel { get; set; }
     }
 }

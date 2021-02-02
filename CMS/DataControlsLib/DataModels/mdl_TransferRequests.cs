@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace DataControlsLib.DataModels
 {
-    public class DataIOModel
+    public class mdl_TransferRequests
     {
         public int RequestID { get; set; }
-        public int Project { get; set; }
+        public string Project { get; set; }
         public int RequestType { get; set; }
         public string RequestedBy { get; set; }
         public string RequesterNotes { get; set; }

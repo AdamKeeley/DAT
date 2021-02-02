@@ -42,22 +42,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataModels\DsaDataOwnerModel.cs" />
-    <Compile Include="DataModels\DsaModel.cs" />
-    <Compile Include="DataModels\DsaNoteModel.cs" />
-    <Compile Include="DataModels\DsasProjectsModel.cs" />
-    <Compile Include="DataModels\FileTransferMethodsModel.cs" />
+    <Compile Include="DataModels\mdl_AssetGroups.cs" />
+    <Compile Include="DataModels\mdl_DsaDataOwners.cs" />
+    <Compile Include="DataModels\mdl_Dsas.cs" />
+    <Compile Include="DataModels\mdl_DsaNotes.cs" />
+    <Compile Include="DataModels\mdl_DsasProjects.cs" />
+    <Compile Include="DataModels\mdl_FileTransferMethods.cs" />
     <Compile Include="DataModels\mdl_ProjectDoc.cs" />
     <Compile Include="DataModels\mdl_User.cs" />
     <Compile Include="Extension_Methods.cs" />
     <Compile Include="SQL_Stuff.cs" />
     <Compile Include="Static_Helper.cs" />
     <Compile Include="ViewModels\AssetHistoryViewModel.cs" />
-    <Compile Include="DataModels\AssetsChangeLogModel.cs" />
-    <Compile Include="DataModels\AssetsRegisterModel.cs" />
-    <Compile Include="DataModels\DataIOModel.cs" />
+    <Compile Include="DataModels\mdl_AssetsChangeLog.cs" />
+    <Compile Include="DataModels\mdl_AssetsRegister.cs" />
+    <Compile Include="DataModels\mdl_TransferRequests.cs" />
     <Compile Include="DataModels\mdl_Project.cs" />
-    <Compile Include="DataModels\tlkAssetChangeTypeModel.cs" />
+    <Compile Include="DataModels\mdl_TransferRequestTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\DataOwnersViewModel.cs" />
     <Compile Include="ViewModels\DsaBasicsViewModel.cs" />
