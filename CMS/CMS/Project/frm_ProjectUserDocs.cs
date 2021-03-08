@@ -63,9 +63,16 @@ namespace CMS
             dt_dgv_ProjectUserDocs = dt_dgv_ProjectUserDocs.DefaultView.ToTable();
 
             dgv_ProjectUserDocs.DataSource = dt_dgv_ProjectUserDocs;
+
+            dgv_ProjectUserDocs.Columns["User Status"].Width = 50;
+            dgv_ProjectUserDocs.Columns["Name"].Width = 150;
+            dgv_ProjectUserDocs.Columns["IRC User Agreement"].Width = 100;
+            dgv_ProjectUserDocs.Columns["Information Security Essentials"].Width = 100;
+            dgv_ProjectUserDocs.Columns["Information Security Advanced"].Width = 100;
+            dgv_ProjectUserDocs.Columns["SAFE Researcher Training"].Width = 100;
         }
 
-        private void btn_OK_Click(object sender, EventArgs e)
+        private void btn_Close_Click(object sender, EventArgs e)
         {
             this.Close();
         }

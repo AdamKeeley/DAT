@@ -633,6 +633,7 @@ namespace CMS
             // gb_ProjectDocuments
             // 
             this.gb_ProjectDocuments.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.gb_ProjectDocuments.Controls.Add(this.btn_UserDocs);
             this.gb_ProjectDocuments.Controls.Add(this.btn_AllDocs);
             this.gb_ProjectDocuments.Controls.Add(this.btn_RA);
             this.gb_ProjectDocuments.Controls.Add(this.btn_DMP);
@@ -651,7 +652,7 @@ namespace CMS
             this.btn_AllDocs.Name = "btn_AllDocs";
             this.btn_AllDocs.Size = new System.Drawing.Size(75, 23);
             this.btn_AllDocs.TabIndex = 49;
-            this.btn_AllDocs.Text = "All Docs";
+            this.btn_AllDocs.Text = "All Project Docs";
             this.btn_AllDocs.UseVisualStyleBackColor = true;
             this.btn_AllDocs.Click += new System.EventHandler(this.btn_AllDocs_Click);
             // 
@@ -834,7 +835,7 @@ namespace CMS
             // 
             // btn_UserDocs
             // 
-            this.btn_UserDocs.Location = new System.Drawing.Point(523, 527);
+            this.btn_UserDocs.Location = new System.Drawing.Point(9, 116);
             this.btn_UserDocs.Name = "btn_UserDocs";
             this.btn_UserDocs.Size = new System.Drawing.Size(75, 23);
             this.btn_UserDocs.TabIndex = 54;
@@ -848,7 +849,6 @@ namespace CMS
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btn_ProjectCancel;
             this.ClientSize = new System.Drawing.Size(914, 561);
-            this.Controls.Add(this.btn_UserDocs);
             this.Controls.Add(this.chkb_LIDA);
             this.Controls.Add(this.gb_DatTime);
             this.Controls.Add(this.lbl_NewUser);

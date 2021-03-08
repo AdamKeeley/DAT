@@ -31,7 +31,7 @@
             this.lbl_ProjectName = new System.Windows.Forms.Label();
             this.lbl_ProjectNumber = new System.Windows.Forms.Label();
             this.dgv_ProjectUserDocs = new System.Windows.Forms.DataGridView();
-            this.btn_OK = new System.Windows.Forms.Button();
+            this.btn_Close = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ProjectUserDocs)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,29 +58,32 @@
             this.dgv_ProjectUserDocs.AllowUserToAddRows = false;
             this.dgv_ProjectUserDocs.AllowUserToDeleteRows = false;
             this.dgv_ProjectUserDocs.AllowUserToOrderColumns = true;
+            this.dgv_ProjectUserDocs.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText;
             this.dgv_ProjectUserDocs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_ProjectUserDocs.Location = new System.Drawing.Point(13, 68);
             this.dgv_ProjectUserDocs.Name = "dgv_ProjectUserDocs";
             this.dgv_ProjectUserDocs.ReadOnly = true;
-            this.dgv_ProjectUserDocs.Size = new System.Drawing.Size(480, 300);
+            this.dgv_ProjectUserDocs.Size = new System.Drawing.Size(660, 150);
             this.dgv_ProjectUserDocs.TabIndex = 8;
             // 
-            // btn_OK
+            // btn_Close
             // 
-            this.btn_OK.Location = new System.Drawing.Point(417, 375);
-            this.btn_OK.Name = "btn_OK";
-            this.btn_OK.Size = new System.Drawing.Size(75, 23);
-            this.btn_OK.TabIndex = 9;
-            this.btn_OK.Text = "OK";
-            this.btn_OK.UseVisualStyleBackColor = true;
-            this.btn_OK.Click += new System.EventHandler(this.btn_OK_Click);
+            this.btn_Close.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btn_Close.Location = new System.Drawing.Point(598, 224);
+            this.btn_Close.Name = "btn_Close";
+            this.btn_Close.Size = new System.Drawing.Size(75, 23);
+            this.btn_Close.TabIndex = 9;
+            this.btn_Close.Text = "Close";
+            this.btn_Close.UseVisualStyleBackColor = true;
+            this.btn_Close.Click += new System.EventHandler(this.btn_Close_Click);
             // 
             // frm_ProjectUserDocs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(505, 406);
-            this.Controls.Add(this.btn_OK);
+            this.CancelButton = this.btn_Close;
+            this.ClientSize = new System.Drawing.Size(684, 255);
+            this.Controls.Add(this.btn_Close);
             this.Controls.Add(this.dgv_ProjectUserDocs);
             this.Controls.Add(this.lbl_ProjectName);
             this.Controls.Add(this.lbl_ProjectNumber);
@@ -96,6 +99,6 @@
         private System.Windows.Forms.Label lbl_ProjectName;
         private System.Windows.Forms.Label lbl_ProjectNumber;
         private System.Windows.Forms.DataGridView dgv_ProjectUserDocs;
-        private System.Windows.Forms.Button btn_OK;
+        private System.Windows.Forms.Button btn_Close;
     }
 }
