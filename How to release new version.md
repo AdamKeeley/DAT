@@ -1,5 +1,11 @@
 ## Releasing a new version of Prism
 
+### Summary
+- Change release date in app
+- Create release on GitHub
+- Update versioning table on database
+
+### Detail
 frm_HomePage.cs --> replace date parts with date of release (usually today):
 	DateTime thisRelease = new DateTime(yyyy, mm, dd);
 commit change and push to remote.
