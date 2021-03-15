@@ -14,6 +14,6 @@ namespace DataControlsLib.DataModels
         public string Sha256sum { get; set; }
         public string VreFilePath { get; set; }
         public string DataRepoFilePath { get; set; }
-        public int AssetID { get; set; }
+        public int? AssetID { get; set; }
     }
 }

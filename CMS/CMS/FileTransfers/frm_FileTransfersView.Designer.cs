@@ -1,6 +1,6 @@
-﻿namespace CMS.DataTracking
+﻿namespace CMS.FileTransfers
 {
-    partial class frm_DataIO
+    partial class frm_FileTransfersView
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_DataIO));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_FileTransfersView));
             this.dgv_DataIOHistory = new System.Windows.Forms.DataGridView();
             this.lbl_DateFromFilter = new System.Windows.Forms.Label();
             this.gb_DataIOHistoryFilterOptions = new System.Windows.Forms.GroupBox();
@@ -354,6 +354,7 @@
             this.btn_NewImportRequest.TabIndex = 4;
             this.btn_NewImportRequest.Text = "New Import";
             this.btn_NewImportRequest.UseVisualStyleBackColor = true;
+            //this.btn_NewImportRequest.Click += new System.EventHandler(this.btn_NewImportRequest_Click);
             // 
             // btn_RefreshAssetsHistoryView
             // 

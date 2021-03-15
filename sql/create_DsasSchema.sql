@@ -3,6 +3,7 @@ GO
 
 CREATE TABLE dbo.tblDsas(
 	DsaID				INT IDENTITY(1,1) NOT NULL,
+	DocumentID			INT NOT NULL,
 	DataOwner			INT NOT NULL,
 	AmendmentOf			INT NULL, -- References primary key to link amendments with original agreement
 	DsaName				VARCHAR(100) NULL,
@@ -15,9 +16,9 @@ CREATE TABLE dbo.tblDsas(
 	ISO27001			BIT NOT NULL,
 	RequiresEncryption	BIT NOT NULL,
 	NoRemoteAccess		BIT NOT NULL,
-	DateAdded			DATETIME NULL DEFAULT (getdate()),
-	LastUpdated			DATETIME NULL,
-	ValidUntil			DATETIME NULL,
+	ValidFrom			DATETIME NULL DEFAULT getdate(),
+	ValidTo				DATETIME NULL,
+	Deprecated			BIT NOT NULL DEFAULT 0,
 	CONSTRAINT PK_Dsas PRIMARY KEY (DsaID),
 	CONSTRAINT FK_AmendmentOf_DsaID FOREIGN KEY (AmendmentOf) REFERENCES dbo.tblDsas (DsaID)
 )
@@ -26,18 +27,19 @@ CREATE TABLE dbo.tblDsaNotes(
 	dnID		INT IDENTITY(1,1) NOT NULL,
 	Dsa			INT NOT NULL,
 	Note		VARCHAR(MAX) NULL,
-	Created		DATETIME NULL DEFAULT (getdate()),
-	CreatedBy	VARCHAR(50) NULL DEFAULT (suser_sname()),
+	Created		DATETIME NULL DEFAULT getdate(),
+	CreatedBy	VARCHAR(50) NULL DEFAULT suser_sname(),
 	CONSTRAINT PK_DsaNotes PRIMARY KEY (dnID)
 )
 
 CREATE TABLE dbo.tblDsasProjects(
 	dpID		INT IDENTITY(1,1) NOT NULL,
-	DsaID		INT NOT NULL,
+	DocumentID	INT NOT NULL,
 	Project		VARCHAR(5) NULL,
-	DateAdded	DATETIME NULL DEFAULT (getdate()),
-	CONSTRAINT PK_DsasProjects PRIMARY KEY (dpID),
-	CONSTRAINT FK_DsasProjects_Dsas FOREIGN KEY (DsaID) REFERENCES dbo.tblDsas (DsaID)
+	ValidFrom	DATETIME NULL DEFAULT getdate(),
+	ValidTo		DATETIME NULL,
+	CONSTRAINT PK_DsasProjects PRIMARY KEY (dpID)
+	--CONSTRAINT FK_DsasProjects_Dsas FOREIGN KEY (DsaID) REFERENCES dbo.tblDsas (DsaID)
 )
 
 CREATE TABLE dbo.tblDsaDataOwners(

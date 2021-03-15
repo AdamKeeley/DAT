@@ -63,12 +63,13 @@ namespace DataControlsLib
             //conString = "Data Source=SEAN-LAPTOP\\SQLEXPRESS;Initial Catalog=DAT_CMS;Integrated Security=True";
         }
 
-        public static void getDataTable(SqlConnection cnn, DataSet dsObj, string tblName, string sql)
+        public static void getDataTable(SqlConnection cnn, SqlTransaction tr, DataSet dsObj, string tblName, string sql)
         {
             SqlDataAdapter da = new SqlDataAdapter();
             SqlCommand qry = new SqlCommand();
             qry.CommandText = sql;
             qry.Connection = cnn;
+            qry.Transaction = tr;
             da.SelectCommand = qry;
             da.Fill(dsObj, tblName);
         }

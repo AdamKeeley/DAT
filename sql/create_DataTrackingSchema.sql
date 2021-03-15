@@ -4,14 +4,13 @@ GO
 CREATE TABLE dbo.tblTransferRequests(
 	RequestID			INT IDENTITY(1,1) NOT NULL,
 	Project				VARCHAR(5) NULL,
-	-- Include VRE ID foreign key?
+	VreNumber			VARCHAR(15) NULL,
 	RequestType			INT NOT NULL,
-	RequestedBy			VARCHAR(50) NULL,	-- Needs to reference user ID once Users table has been created
+	RequestedBy			INT NOT NULL,
 	RequesterNotes		VARCHAR(MAX) NULL,	-- Researchers communication explaining data/etc. Or a link to same text elsewhere?
-	ReviewedBy			VARCHAR(50) NULL DEFAULT (suser_sname()),
+	ReviewedBy			INT NOT NULL DEFAULT (suser_sname()),
 	ReviewDate			DATETIME NULL DEFAULT (getdate()),
 	ReviewNotes			VARCHAR(MAX) NULL,	-- Response communication from DAT to confirm import status?
-	-- In future, we could include here a ConversationID, linking to DAT-user interactions and remove RequesterNotes and ChangerResponse here
 	CONSTRAINT PK_TransferRequests PRIMARY KEY (RequestID)
 );
 
@@ -31,7 +30,7 @@ CREATE TABLE dbo.tblAssetsRegister(
 	FileID				INT IDENTITY(1,1) NOT NULL,
 	Project				VARCHAR(5) NULL,
 	DataFileName		VARCHAR(100) NOT NULL,
-	Sha256sum			CHAR(64) NULL,
+	--Sha256sum			CHAR(64) NULL,
 	VreFilePath			VARCHAR(200) NULL,	-- Path to file in VRE
 	DataRepoFilePath	VARCHAR(200) NULL,	-- Path to file in DAT Repo \\datstagingdata.file.core.windows.net
 	AssetID				INT NULL,			-- ID of asset to which each file belongs
@@ -44,8 +43,8 @@ CREATE TABLE dbo.tblAssetsChangeLog(
 	RequestID		INT NOT NULL,
 	FileID			INT NOT NULL,
 	TransferMethod	INT NOT NULL,
-	TransferFrom	VARCHAR(50) NOT NULL,
-	TransferTo		VARCHAR(50) NOT NULL,
+	TransferFrom	VARCHAR(50) NULL,
+	TransferTo		VARCHAR(50) NULL,
 	DsaReviewed		INT NOT NULL,
 	ChangeAccepted	BIT NULL DEFAULT 1, -- 0 = File transfer was rejected
 	RejectionNotes	VARCHAR(MAX) NULL,	-- Reasons for rejecting change (e.g. not meeting import requirements)
@@ -58,7 +57,7 @@ CREATE TABLE dbo.tblAssetsChangeLog(
 CREATE TABLE dbo.tblAssetGroups(
 	AssetID		INT IDENTITY(1,1) NOT NULL,
 	Project		VARCHAR(5) NULL,
-	AssetName	VARCHAR(100) NULL,
+	AssetName	VARCHAR(500) NULL,
 	CONSTRAINT PK_AssetGroups PRIMARY KEY (AssetID)
 );
 ALTER TABLE dbo.tblAssetsRegister
@@ -76,7 +75,7 @@ ALTER TABLE dbo.tblAssetsChangeLog
 		ON DELETE CASCADE
 		ON UPDATE CASCADE;
 INSERT INTO dbo.tlkFileTransferMethods (MethodLabel)
-     VALUES (''), ('Email'), ('SCP'), ('SFT Biscom'), ('SFT SEFT'), ('CPRD'), ('GPG');
+     VALUES (''), ('SFT Biscom'), ('SFT SEFT'), ('CPRD'), ('Egress'), ('Other SFT'), ('Email'), ('OneDrive'), ('SCP'), ('GPG');
 
 --/*
 --TO DO NEXT:

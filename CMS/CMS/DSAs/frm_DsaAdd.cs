@@ -22,13 +22,37 @@ namespace CMS.DSAs
             SetInitialControls();
         }
 
-        private DataSet ds;
+        public frm_DsaAdd(int id)
+        {
+            InitializeComponent();
+            PopulateDsaDataset();
+            SetInitialControls();
+            InputDsaInfo(id);
+        }
+
+        DSA dsa = new DSA();
+        public DataSet ds;
+        mdl_Dsas dsaRecord = new mdl_Dsas();
+
         DataTable dsaNotes = new DataTable();
 
         mdl_Dsas dsasInsertData = new mdl_Dsas();
         List<mdl_DsaNotes> dsaNotesInsertData = new List<mdl_DsaNotes>();
         List<mdl_DsasProjects> dsasProjectsInsertData = new List<mdl_DsasProjects>();
-        DSA dsa = new DSA();
+
+        public DataGridView Amendment
+        {
+            get { return dgv_AmendmentOf; }
+            set { dgv_AmendmentOf = value; }
+        }
+
+        public DataGridView Projects
+        {
+            get { return dgv_DsasProjects; }
+            set { dgv_DsasProjects = value; }
+        }
+
+        public bool insertSuccessful = false;
 
         public void PopulateDsaDataset()
         {
@@ -51,36 +75,68 @@ namespace CMS.DSAs
             dtp_ExpiryDate.Value = DateTime.Now.Date;
             dtp_DestroyDate.Value = DateTime.Now.Date;
 
-            List<string> projNumbers = ds.Tables["tblProject"].AsEnumerable()
-                .OrderBy(p => p.Field<string>("ProjectNumber"))
-                .Select(p => p.Field<string>("ProjectNumber"))
-                .ToList();
-            projNumbers.Insert(0, "");
-            lbx_ProjectsList.DataSource = projNumbers;
-
-            chkb_IsAmendment.Checked = false;
-            dgv_AmendmentOf.DataSource = null;
-            dgv_AmendmentOf.Enabled = false;
-
+            chkb_OldDataOwners.Checked = true;
             FillDataOwnersList();
 
+            dgv_DsasProjects.ColumnCount = 1;
+            dgv_DsasProjects.Columns[0].Name = "Project";
+            dgv_DsasProjects.Columns["Project"].Width = 246;
+            dgv_DsasProjects.RowHeadersWidth = 15;
+
             dsaNotes.Columns.Add("Notes", typeof(string));
+            dsaNotes.Columns.Add("Created", typeof(DateTime));
+            //dsaNotes.Columns.Add("CreatedBy", typeof(string));
             dgv_AddNote.DataSource = dsaNotes;
-            dgv_AddNote.Columns["Notes"].Width = 375;
+            dgv_AddNote.Columns["Notes"].Width = 266;
+            dgv_AddNote.Columns["Created"].Width = 100;
+            //dgv_AddNote.Columns["CreatedBy"].Width = 100;
+            dgv_AddNote.RowHeadersWidth = 15;
         }
 
-        private void FillDataOwnersList()
+        public void InputDsaInfo(int id)
         {
-            cb_ExistingDataOwner.DataSource = dsa.CollectDataOwnersList(ds);
-        }
+            dsaRecord = dsa.GetDsaRecord(ds, id);
+            List<string> dsaPrjList = dsa.GetDsaProjectsList(ds, id);
+            List<mdl_DsaNotes> dsaNotesHistory = dsa.GetDsaNotes(ds, id);
 
-        private void chkb_IsAmendment_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkb_IsAmendment.Checked)
+            int isRebranded = ds.Tables["tblDsaDataOwners"].AsEnumerable()
+                .Where(r => r.Field<int?>("RebrandOf") == dsaRecord.DataOwner)
+                .Select(x => x.Field<int?>("RebrandOf"))
+                .ToList()
+                .Count;
+
+            if (isRebranded > 0)
             {
-                dgv_AmendmentOf.Enabled = true;
-                dgv_AmendmentOf.DataSource = dsa.CreateDsasBasicView(ds);
-                dgv_AmendmentOf.Columns["DsaID"].Width = 50;
+                chkb_OldDataOwners.Checked = false;
+                FillDataOwnersList();
+            }
+
+            cb_ExistingDataOwner.SelectedValue = dsaRecord.DataOwner;
+
+            tb_OwnerEmail.Text = dsaRecord.AgreementOwnerEmail;
+            tb_FileName.Text = dsaRecord.DsaName;
+            tb_FilePath.Text = dsaRecord.DsaFileLoc;
+
+            if (dsaRecord.StartDate.HasValue)
+            {
+                dtp_StartDate.Checked = true;
+                dtp_StartDate.Value = dsaRecord.StartDate.HasValue ? (DateTime)dsaRecord.StartDate : DateTime.Now.Date;
+            }
+            if (dsaRecord.ExpiryDate.HasValue)
+            {
+                dtp_ExpiryDate.Checked = true;
+                dtp_ExpiryDate.Value = dsaRecord.ExpiryDate.HasValue ? (DateTime)dsaRecord.ExpiryDate : DateTime.Now.Date;
+            }
+            if (dsaRecord.DataDestructionDate.HasValue)
+            {
+                dtp_DestroyDate.Checked = true;
+                dtp_DestroyDate.Value = dsaRecord.DataDestructionDate.HasValue ? (DateTime)dsaRecord.DataDestructionDate : DateTime.Now.Date;
+            }
+
+            if (dsaRecord.AmendmentOf.HasValue)
+            {
+                dgv_AmendmentOf.DataSource = dsa.CreateDsasBasicView(ds).Where(x => x.DocumentID == dsaRecord.AmendmentOf).ToList();
+                dgv_AmendmentOf.Columns["DocumentID"].Width = 80;
                 dgv_AmendmentOf.Columns["DataOwner"].Width = 120;
                 dgv_AmendmentOf.Columns["StartDate"].Width = 85;
                 dgv_AmendmentOf.Columns["ExpiryDate"].Width = 85;
@@ -91,24 +147,48 @@ namespace CMS.DSAs
                 dgv_AmendmentOf.Columns["ISO27001"].Width = 75;
                 dgv_AmendmentOf.Columns["RequiresEncryption"].Width = 140;
                 dgv_AmendmentOf.Columns["NoRemoteAccess"].Width = 125;
+                dgv_AmendmentOf.RowHeadersWidth = 15;
             }
-            else
+
+            chkb_DSPT.Checked = dsaRecord.DSPT;
+            chkb_ISO27001.Checked = dsaRecord.ISO27001;
+            chkb_Encryption.Checked = dsaRecord.RequiresEncryption;
+            chkb_NoRemoteAccess.Checked = dsaRecord.NoRemoteAccess;
+
+            foreach (string prj in dsaPrjList)
             {
-                dgv_AmendmentOf.DataSource = null;
-                dgv_AmendmentOf.Enabled = false;
+                dgv_DsasProjects.Rows.Add(prj);
             }
+
+            foreach (mdl_DsaNotes n in dsaNotesHistory)
+            {
+                //dsaNotes.Rows.Add(n.Note, n.Created, n.CreatedBy);
+                dsaNotes.Rows.Add(n.Note, n.Created);
+            }
+        }
+
+        private void FillDataOwnersList()
+        {
+            cb_ExistingDataOwner.DataSource = dsa.CollectDataOwnersList(ds, chkb_OldDataOwners.Checked);
+            cb_ExistingDataOwner.ValueMember = "doID";
+            cb_ExistingDataOwner.DisplayMember = "DataOwnerName";
+        }
+
+        private void chkb_OldDataOwners_CheckedChanged(object sender, EventArgs e)
+        {
+            FillDataOwnersList();
         }
 
         private void btn_AddNote_Click(object sender, EventArgs e)
         {
             if (!String.IsNullOrWhiteSpace(tb_AddNote.Text))
             {
-                dsaNotes.Rows.Add(tb_AddNote.Text);
+                dsaNotes.Rows.Add(tb_AddNote.Text, DateTime.Now); // Add DB user
             }
             tb_AddNote.Text = null;
         }
 
-        private void btn_NewDataOwner_Click(object sender, EventArgs e)
+        private void lbl_NewDataOwner_Click(object sender, EventArgs e)
         {
             frm_DsaDataOwnerAdd DataOwnerAdd = new frm_DsaDataOwnerAdd();
             DataOwnerAdd.FormClosing += new FormClosingEventHandler(this.UpdateDataOwnerControls);
@@ -119,6 +199,17 @@ namespace CMS.DSAs
         {
             PopulateDsaDataset();
             FillDataOwnersList();
+        }
+
+        private void btn_AddAmendment_Click(object sender, EventArgs e)
+        {
+            frm_DsaAmendmentAdd frmAmendment = new frm_DsaAmendmentAdd(this);
+            frmAmendment.Show();
+        }
+        private void btn_ProjectAdd_Click(object sender, EventArgs e)
+        {
+            frm_DsaProjectAdd frmProj = new frm_DsaProjectAdd(this);
+            frmProj.Show();
         }
 
         private void btn_OK_Click(object sender, EventArgs e)
@@ -134,37 +225,48 @@ namespace CMS.DSAs
                 return;
             }
 
-            if (ConfirmationMsg() == DialogResult.Cancel)
+            if (dsaRecord.ID == 0 && ConfirmationMsg() == DialogResult.Cancel)
             {
                 return;
             }
 
             dsasInsertData = dsa.CollectDsasForInsert(
                 ds: ds,
-                dataOwner: cb_ExistingDataOwner.SelectedItem.ToString(),
-                isAmendment: chkb_IsAmendment.Checked,
+                dataOwner: (int)cb_ExistingDataOwner.SelectedValue,
+                isAmendment: dgv_AmendmentOf.Rows.Count == 1,
                 dgvAmendment: dgv_AmendmentOf,
                 fileName: tb_FileName.Text,
                 filePath: tb_FilePath.Text,
                 startDate: dtp_StartDate.Checked ? dtp_StartDate?.Value.Date : null,
                 expiryDate: dtp_ExpiryDate.Checked ? dtp_ExpiryDate?.Value.Date : null,
-                destroyDate: dtp_DestroyDate.Checked ? dtp_DestroyDate?.Value.Date : null, // Add dtp_destroyDate form element
-                ownerEmail: tb_OwnerEmail.Text, // Add tb_ownerEmail form element
+                destroyDate: dtp_DestroyDate.Checked ? dtp_DestroyDate?.Value.Date : null, 
+                ownerEmail: tb_OwnerEmail.Text, 
                 dspt: chkb_DSPT.Checked,
                 iso27001: chkb_ISO27001.Checked,
                 encryption: chkb_Encryption.Checked,
                 remote: chkb_NoRemoteAccess.Checked
             );
 
+            if (dsaRecord != null && dsaRecord.ID > 0)
+            {
+                dsasInsertData.ID = dsaRecord.ID;
+            }
+
             dsaNotesInsertData = dsa.CollectDsaNotesForInsert(
-                dgvNotes: dgv_AddNote
+                dgvNotes: dgv_AddNote,
+                ds: ds,
+                rcrd: dsaRecord
             );
 
             dsasProjectsInsertData = dsa.CollectDsaProjectsForInsert(
-                projects: lbx_ProjectsList.SelectedItems.Cast<string>()
+                ds: ds,
+                rcrd: dsaRecord,
+                projects: dgv_DsasProjects.Rows.OfType<DataGridViewRow>()
+                            .Select(r => r.Cells["Project"])
+                            .Select(c => c.Value.ToString())
             );
 
-            bool insertSuccessful = dsa.PutDsaData(dsasInsertData, dsaNotesInsertData, dsasProjectsInsertData);
+            insertSuccessful = dsa.PutDsaData(dsasInsertData, dsaNotesInsertData, dsasProjectsInsertData, dsaRecord);
 
             if (insertSuccessful)
             {
@@ -185,10 +287,9 @@ namespace CMS.DSAs
             resp += $"Expiry date: { (dtp_ExpiryDate.Checked ? dtp_ExpiryDate?.Value.Date.ToString("yyyy-MM-dd") : "NOT SPECIFIED") }\n";
             resp += $"Data destruction date: { (dtp_DestroyDate.Checked ? dtp_DestroyDate?.Value.Date.ToString("yyyy-MM-dd") : "NOT SPECIFIED") }\n";
 
-            if (chkb_IsAmendment.Checked)
+            if (dgv_AmendmentOf.Rows.Count > 0)
             {
-                DataGridViewRow row = dgv_AmendmentOf.SelectedRows[0];
-                resp += $"Amends \"{row.Cells["DsaName"].Value}\" agreement with {row.Cells["DataOwner"].Value}\n";
+                resp += $"Amends \"{dgv_AmendmentOf.SelectedRows[0].Cells["DsaName"].Value}\" agreement\n";
             }
             else
             {
@@ -200,7 +301,8 @@ namespace CMS.DSAs
             resp += $"Requires encryption? { (chkb_Encryption.Checked ? "Yes" : "No") }\n";
             resp += $"Requires on-site (i.e., prohibits remote access)? { (chkb_NoRemoteAccess.Checked ? "Yes" : "No") }\n";
 
-            List<string> projSelections = lbx_ProjectsList.SelectedItems.Cast<string>().ToList();
+            List<string> projSelections = dsa.GetDsaProjectsList(ds, dsaRecord == null ? -1 : dsaRecord.ID);
+            
             resp += "Associated projects:\n";
             if (projSelections.Count == 1 && String.IsNullOrWhiteSpace(projSelections[0]))
             {

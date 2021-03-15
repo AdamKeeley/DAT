@@ -87,6 +87,7 @@ namespace CMS.DSAs
             DialogResult confirmation = MessageBox.Show(
                 "You're about to create a new data owner record in the database with the name:\n\n" +
                 $"{tb_NewDataOwnerName.Text}\n" +
+                $"Contact email: {tb_Email.Text}\n" +
                 $"{(cb_RebrandingOfOldName.SelectedItem.ToString().NullIfEmpty() == null ? null : $"a rebrand of {cb_RebrandingOfOldName.SelectedItem}\n")}\n" +
                 "Are you sure?",
                 caption: "New data owner confirmation",
@@ -107,7 +108,8 @@ namespace CMS.DSAs
             mdl_DsaDataOwners doInput = new mdl_DsaDataOwners
             {
                 DateOwnerName = tb_NewDataOwnerName.Text,
-                RebrandOf = rebrandedIndex
+                RebrandOf = rebrandedIndex,
+                DataOwnerEmail = tb_Email.Text
             };
 
             try

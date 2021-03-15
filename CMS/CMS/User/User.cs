@@ -36,21 +36,21 @@ namespace CMS
                 using (conn)
                 {
                     //use method from GetDB to create, fill and add DataTables to class DataSet
-                    SQL_Stuff.getDataTable(conn, ds_usr, "tblUser",
+                    SQL_Stuff.getDataTable(conn, null, ds_usr, "tblUser",
                         $"select *, [LastName] + ', ' + [FirstName] as FullName " +
                         $"from [dbo].[tblUser] " +
                         $"where [ValidTo] is null " +
                         $"order by [LastName], [FirstName], [UserID]");
-                    SQL_Stuff.getDataTable(conn, ds_usr, "tlkUserStatus",
+                    SQL_Stuff.getDataTable(conn, null, ds_usr, "tlkUserStatus",
                         $"select * from [dbo].[tlkUserStatus] ");
-                    SQL_Stuff.getDataTable(conn, ds_usr, "tlkTitle",
+                    SQL_Stuff.getDataTable(conn, null, ds_usr, "tlkTitle",
                         $"select * from [dbo].[tlkTitle] ");
-                    SQL_Stuff.getDataTable(conn, ds_usr, "tblUserNotes",
+                    SQL_Stuff.getDataTable(conn, null, ds_usr, "tblUserNotes",
                         $"select * from [dbo].[tblUserNotes]");
-                    SQL_Stuff.getDataTable(conn, ds_usr, "tblUserProject",
+                    SQL_Stuff.getDataTable(conn, null, ds_usr, "tblUserProject",
                         $"select * from [dbo].[tblUserProject] " +
                         $"where [ValidTo] is null");
-                    SQL_Stuff.getDataTable(conn, ds_usr, "tblProjects",
+                    SQL_Stuff.getDataTable(conn, null, ds_usr, "tblProjects",
                         $"select * from [dbo].[tblProject] " +
                         $"where [ValidTo] is null " +
                         $"order by [ProjectNumber], [pID]");

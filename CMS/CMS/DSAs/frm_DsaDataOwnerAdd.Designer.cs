@@ -39,6 +39,8 @@
             this.cb_RebrandingOfOldName = new System.Windows.Forms.ComboBox();
             this.lbl_RebrandingOfOldName = new System.Windows.Forms.Label();
             this.lbl_NewDataOwnerName = new System.Windows.Forms.Label();
+            this.lbl_Email = new System.Windows.Forms.Label();
+            this.tb_Email = new System.Windows.Forms.TextBox();
             this.gb_DataOwners.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_DataOwners)).BeginInit();
             this.gb_AddDataOwner.SuspendLayout();
@@ -47,7 +49,7 @@
             // tb_NewDataOwnerName
             // 
             this.tb_NewDataOwnerName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_NewDataOwnerName.Location = new System.Drawing.Point(231, 24);
+            this.tb_NewDataOwnerName.Location = new System.Drawing.Point(217, 24);
             this.tb_NewDataOwnerName.Name = "tb_NewDataOwnerName";
             this.tb_NewDataOwnerName.Size = new System.Drawing.Size(367, 27);
             this.tb_NewDataOwnerName.TabIndex = 0;
@@ -55,9 +57,9 @@
             // btn_NewDataOwner
             // 
             this.btn_NewDataOwner.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_NewDataOwner.Location = new System.Drawing.Point(482, 106);
+            this.btn_NewDataOwner.Location = new System.Drawing.Point(482, 117);
             this.btn_NewDataOwner.Name = "btn_NewDataOwner";
-            this.btn_NewDataOwner.Size = new System.Drawing.Size(199, 33);
+            this.btn_NewDataOwner.Size = new System.Drawing.Size(221, 58);
             this.btn_NewDataOwner.TabIndex = 1;
             this.btn_NewDataOwner.Text = "Add Data Owner";
             this.btn_NewDataOwner.UseVisualStyleBackColor = true;
@@ -69,7 +71,7 @@
             this.gb_DataOwners.Controls.Add(this.dgv_DataOwners);
             this.gb_DataOwners.Controls.Add(this.tb_Search);
             this.gb_DataOwners.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gb_DataOwners.Location = new System.Drawing.Point(39, 168);
+            this.gb_DataOwners.Location = new System.Drawing.Point(39, 212);
             this.gb_DataOwners.Name = "gb_DataOwners";
             this.gb_DataOwners.Size = new System.Drawing.Size(724, 335);
             this.gb_DataOwners.TabIndex = 2;
@@ -110,6 +112,8 @@
             // 
             // gb_AddDataOwner
             // 
+            this.gb_AddDataOwner.Controls.Add(this.lbl_Email);
+            this.gb_AddDataOwner.Controls.Add(this.tb_Email);
             this.gb_AddDataOwner.Controls.Add(this.cb_RebrandingOfOldName);
             this.gb_AddDataOwner.Controls.Add(this.lbl_RebrandingOfOldName);
             this.gb_AddDataOwner.Controls.Add(this.lbl_NewDataOwnerName);
@@ -118,7 +122,7 @@
             this.gb_AddDataOwner.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gb_AddDataOwner.Location = new System.Drawing.Point(39, 12);
             this.gb_AddDataOwner.Name = "gb_AddDataOwner";
-            this.gb_AddDataOwner.Size = new System.Drawing.Size(724, 150);
+            this.gb_AddDataOwner.Size = new System.Drawing.Size(724, 194);
             this.gb_AddDataOwner.TabIndex = 3;
             this.gb_AddDataOwner.TabStop = false;
             this.gb_AddDataOwner.Text = "New Data Owner";
@@ -127,7 +131,7 @@
             // 
             this.cb_RebrandingOfOldName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cb_RebrandingOfOldName.FormattingEnabled = true;
-            this.cb_RebrandingOfOldName.Location = new System.Drawing.Point(231, 71);
+            this.cb_RebrandingOfOldName.Location = new System.Drawing.Point(217, 71);
             this.cb_RebrandingOfOldName.Name = "cb_RebrandingOfOldName";
             this.cb_RebrandingOfOldName.Size = new System.Drawing.Size(222, 28);
             this.cb_RebrandingOfOldName.TabIndex = 4;
@@ -150,11 +154,28 @@
             this.lbl_NewDataOwnerName.TabIndex = 2;
             this.lbl_NewDataOwnerName.Text = "Data Owner Name";
             // 
+            // lbl_Email
+            // 
+            this.lbl_Email.AutoSize = true;
+            this.lbl_Email.Location = new System.Drawing.Point(49, 136);
+            this.lbl_Email.Name = "lbl_Email";
+            this.lbl_Email.Size = new System.Drawing.Size(118, 20);
+            this.lbl_Email.TabIndex = 6;
+            this.lbl_Email.Text = "Email Address";
+            // 
+            // tb_Email
+            // 
+            this.tb_Email.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_Email.Location = new System.Drawing.Point(217, 133);
+            this.tb_Email.Name = "tb_Email";
+            this.tb_Email.Size = new System.Drawing.Size(222, 27);
+            this.tb_Email.TabIndex = 5;
+            // 
             // frm_DsaDataOwnerAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 515);
+            this.ClientSize = new System.Drawing.Size(800, 559);
             this.Controls.Add(this.gb_AddDataOwner);
             this.Controls.Add(this.gb_DataOwners);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -181,5 +202,7 @@
         private System.Windows.Forms.ComboBox cb_RebrandingOfOldName;
         private System.Windows.Forms.Label lbl_RebrandingOfOldName;
         private System.Windows.Forms.Label lbl_NewDataOwnerName;
+        private System.Windows.Forms.Label lbl_Email;
+        private System.Windows.Forms.TextBox tb_Email;
     }
 }

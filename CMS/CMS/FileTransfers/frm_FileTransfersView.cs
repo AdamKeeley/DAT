@@ -11,11 +11,11 @@ using DataControlsLib;
 using DataControlsLib.DataModels;
 using DataControlsLib.ViewModels;
 
-namespace CMS.DataTracking
+namespace CMS.FileTransfers
 {
-    public partial class frm_DataIO : Form
+    public partial class frm_FileTransfersView : Form
     {
-        public frm_DataIO()
+        public frm_FileTransfersView()
         {
             InitializeComponent();
             PopulateIODataset();
@@ -27,7 +27,7 @@ namespace CMS.DataTracking
         private List<string> changeTypesWanted;
         private List<bool?> approvalsWanted;
         private List<string> transferMethodsWanted;
-        private DataIO io = new DataIO();
+        private FileTransfer io = new FileTransfer();
 
         public void PopulateIODataset()
         {
@@ -117,6 +117,7 @@ namespace CMS.DataTracking
                     approvals: approvalsWanted
                 );
                 dgv_DataIOHistory.Columns["Project"].Width = 60;
+                dgv_DataIOHistory.Columns["VRE"].Width = 60;
                 dgv_DataIOHistory.Columns["DataOwner"].Width = 120;
                 dgv_DataIOHistory.Columns["ReviewDate"].Width = 100;
                 dgv_DataIOHistory.Columns["RequestType"].Width = 95;
@@ -124,14 +125,14 @@ namespace CMS.DataTracking
                 dgv_DataIOHistory.Columns["AssetGroup"].Width = 200;
                 dgv_DataIOHistory.Columns["FilePath"].Width = 130;
                 dgv_DataIOHistory.Columns["RepoPath"].Width = 130;
-                dgv_DataIOHistory.Columns["Checksum"].Width = 100;
                 dgv_DataIOHistory.Columns["TransferMethod"].Width = 110;
                 dgv_DataIOHistory.Columns["TransferFrom"].Width = 120;
                 dgv_DataIOHistory.Columns["TransferTo"].Width = 120;
                 dgv_DataIOHistory.Columns["RequestedBy"].Width = 105;
-                dgv_DataIOHistory.Columns["DsaReviewed"].Width = 130;
                 dgv_DataIOHistory.Columns["ReviewedBy"].Width = 95;
+                dgv_DataIOHistory.Columns["DsaReviewed"].Width = 130;
                 dgv_DataIOHistory.Columns["ChangeAccepted"].Width = 120;
+                dgv_DataIOHistory.RowHeadersWidth = 15;
             }
             catch (Exception ex)
             {
@@ -142,6 +143,8 @@ namespace CMS.DataTracking
             }
         }
 
+
+
         private void btn_RefreshAssetsHistoryView_Click(object sender, EventArgs e)
         {
             UpdateChangeTypesWanted();
@@ -150,11 +153,11 @@ namespace CMS.DataTracking
             UpdateDataViewBinding();
         }
 
-        /*private void btn_NewImportRequest_Click(object sender, EventArgs e)
-        {
-            frm_DataIO_ImportRequest NewImport = new frm_DataIO_ImportRequest();
-            //NewImport.FormClosing += new FormClosingEventHandler(this.refreshPage);
-            NewImport.Show();
-        }*/
+        //private void btn_NewImportRequest_Click(object sender, EventArgs e)
+        //{
+        //    frm_DataTransferAdd NewTransfer = new frm_DataTransferAdd();
+        //    NewTransfer.FormClosing += new FormClosingEventHandler(this.UpdateDataViewBinding);
+        //    NewTransfer.Show();
+        //}
     }
 }
