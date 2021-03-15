@@ -8,7 +8,7 @@ namespace DataControlsLib.ViewModels
 {
     public class mdl_TransferDsas
     {
-        public int DsaID { get; set; }
+        public int DocumentID { get; set; }
         public int? AmendmentOf { get; set; }
         public string DsaName { get; set; }
         //public string Project { get; set; }

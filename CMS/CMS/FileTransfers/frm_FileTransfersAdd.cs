@@ -174,7 +174,7 @@ namespace CMS.FileTransfers
         private void FillDsaReviewedControl()
         {
             cb_DsaReviewed.DataSource = io.GetDsas(ds, cb_Project.Text.NullIfEmpty(), chkb_OldDSAs.Checked);
-            cb_DsaReviewed.ValueMember = "DsaID";
+            cb_DsaReviewed.ValueMember = "DocumentID";
             cb_DsaReviewed.DisplayMember = "DsaName";
             cb_DsaReviewed.SelectedIndex = -1;
         }

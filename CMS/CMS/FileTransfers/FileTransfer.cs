@@ -56,14 +56,20 @@ namespace CMS.FileTransfers
         public void GetAssetsRegister(DataSet ds, SqlConnection cn, SqlTransaction tr)
         {
             SQL_Stuff.getDataTable(cn, tr, ds, "tblAssetsRegister",
-                    @"SELECT FileID, Project, DataFileName, Sha256sum, VreFilePath, DataRepoFilePath, AssetID 
+                    @"SELECT FileID, Project, DataFileName, VreFilePath, DataRepoFilePath, AssetID 
                       FROM dbo.tblAssetsRegister");
         }
 
         public void GetDsasData(DataSet ds, SqlConnection cn, SqlTransaction tr)
         {
-            SQL_Stuff.getDataTable(cn, tr, ds, "tblDsas", "SELECT DsaID, DataOwner, AmendmentOf, DsaName FROM dbo.tblDsas");
-            SQL_Stuff.getDataTable(cn, tr, ds, "tblDsasProjects", "SELECT * FROM dbo.tblDsasProjects");
+            SQL_Stuff.getDataTable(cn, tr, ds, "tblDsas",
+                @"SELECT DsaID, DocumentID, DataOwner, AmendmentOf, DsaName, DsaFileLoc, StartDate, ExpiryDate, 
+                             DataDestructionDate, AgreementOwnerEmail, DSPT, ISO27001, RequiresEncryption,
+                             NoRemoteAccess, ValidFrom, ValidTo, Deprecated
+                      FROM dbo.tblDsas
+                      WHERE ValidTo IS NULL
+                      ORDER BY DocumentID");
+            SQL_Stuff.getDataTable(cn, tr, ds, "tblDsasProjects", "SELECT * FROM dbo.tblDsasProjects WHERE ValidTo IS NULL");
             SQL_Stuff.getDataTable(cn, tr, ds, "tblDsaDataOwners", "SELECT doID, DataOwnerName FROM dbo.tblDsaDataOwners");
         }
 
@@ -189,14 +195,14 @@ namespace CMS.FileTransfers
             IEnumerable<mdl_TransferDsas> dsas =
                 from d in ds.Tables["tblDsas"].AsEnumerable()
                 join p in ds.Tables["tblDsasProjects"].AsEnumerable()
-                    on d.Field<int>("DsaID") equals p.Field<int>("DsaID")
+                    on d.Field<int>("DocumentID") equals p.Field<int>("DocumentID")
                     into DsaPrjGrp
                 from dpg in DsaPrjGrp.DefaultIfEmpty()
                 where (prj == null || prj == dpg?.Field<string>("Project"))
                 orderby d.Field<string>("DsaName")
                 select new mdl_TransferDsas
                 {
-                    DsaID = d.Field<int>("DsaID"),
+                    DocumentID = d.Field<int>("DocumentID"),
                     AmendmentOf = d.Field<int?>("AmendmentOf"),
                     DsaName = d.Field<string>("DsaName")
                 };
@@ -209,7 +215,7 @@ namespace CMS.FileTransfers
                     .Select(t => new List<int> { t.Field<int?>("AmendmentOf").GetValueOrDefault() })
                     .Distinct().SelectMany(x => x).ToList();
                 // Filter DSAs which have been superseded by amendments
-                dsas = dsas.Where(d => !amended.Contains(d.DsaID));
+                dsas = dsas.Where(d => !amended.Contains(d.DocumentID));
             }
 
             // Duplicates if user has multiple projects. Make user distinct
