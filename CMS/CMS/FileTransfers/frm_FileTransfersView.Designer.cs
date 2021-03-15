@@ -354,7 +354,7 @@
             this.btn_NewImportRequest.TabIndex = 4;
             this.btn_NewImportRequest.Text = "New Import";
             this.btn_NewImportRequest.UseVisualStyleBackColor = true;
-            //this.btn_NewImportRequest.Click += new System.EventHandler(this.btn_NewImportRequest_Click);
+            this.btn_NewImportRequest.Click += new System.EventHandler(this.btn_NewImportRequest_Click);
             // 
             // btn_RefreshAssetsHistoryView
             // 
@@ -366,7 +366,7 @@
             this.btn_RefreshAssetsHistoryView.UseVisualStyleBackColor = true;
             this.btn_RefreshAssetsHistoryView.Click += new System.EventHandler(this.btn_RefreshAssetsHistoryView_Click);
             // 
-            // frm_DataIO
+            // frm_FileTransfersView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -378,7 +378,7 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "frm_DataIO";
+            this.Name = "frm_FileTransfersView";
             this.Text = "View File Transfers Log";
             ((System.ComponentModel.ISupportInitialize)(this.dgv_DataIOHistory)).EndInit();
             this.gb_DataIOHistoryFilterOptions.ResumeLayout(false);

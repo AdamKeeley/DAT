@@ -143,7 +143,11 @@ namespace CMS.FileTransfers
             }
         }
 
-
+        public void RefreshView()
+        {
+            PopulateIODataset();
+            UpdateDataViewBinding();
+        }
 
         private void btn_RefreshAssetsHistoryView_Click(object sender, EventArgs e)
         {
@@ -151,6 +155,18 @@ namespace CMS.FileTransfers
             UpdateApprovalsWanted();
             UpdateTransferMethodsWanted();
             UpdateDataViewBinding();
+        }
+
+        private void btn_NewImportRequest_Click(object sender, EventArgs e)
+        {
+            using (frm_FileTransfersAdd TransferAdd = new frm_FileTransfersAdd())
+            {
+                TransferAdd.ShowDialog();
+                if (TransferAdd.insertSuccessful == true)
+                {
+                    RefreshView();
+                }
+            }
         }
 
         //private void btn_NewImportRequest_Click(object sender, EventArgs e)

@@ -55,6 +55,8 @@ namespace CMS.FileTransfers
             set { dgv_Rejections = value; }
         }
 
+        public bool insertSuccessful = false;
+
         public void PopulateIODataset()
         {
             try
@@ -303,7 +305,7 @@ namespace CMS.FileTransfers
                 return;
             }
 
-            bool insertSuccessful = io.PutTransferRecords(
+            insertSuccessful = io.PutTransferRecords(
                 ds: ds,
                 prj: SelectedPrj,
                 vre: cb_VRE.Text,
