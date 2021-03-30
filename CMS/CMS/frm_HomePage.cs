@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data.SqlClient;
 using System.Windows.Forms;
-using CMS.DataTracking;
+using CMS.FileTransfers;
 using CMS.DSAs;
 using CMS.Login;
 using DataControlsLib;
@@ -23,7 +23,7 @@ namespace CMS
         /// Release date of the current version of this application. 
         /// Used by checkVersion method to compare to values in dbo.versioning 
         /// </summary>
-        DateTime thisRelease = new DateTime(2020, 12, 11);
+        DateTime thisRelease = new DateTime(2021, 03, 15);
 
         /// <summary>
         /// Opens frm_Login, from which the credentials to access the database are captured. Persists the form until 
@@ -134,8 +134,6 @@ namespace CMS
             gb_DSAs.TabIndex            = ++x;
             btn_DSAsView.TabIndex       = ++x;
             btn_DSAs.TabIndex           = ++x;
-            btn_DSAsUpdate.TabIndex     = ++x;
-            btn_DataOwnerAdd.TabIndex   = ++x;
 
             gb_DataTracking.TabIndex    = ++x;
             btn_GoToDataIO.TabIndex     = ++x;
@@ -149,8 +147,8 @@ namespace CMS
 
         private void btn_GoToDataIO_Click(object sender, EventArgs e)
         {
-            frm_DataIO DataIOForm = new frm_DataIO();
-            DataIOForm.Show();
+            frm_FileTransfersView FileTransferForm = new frm_FileTransfersView();
+            FileTransferForm.Show();
         }
 
         private void btn_DSAs_Click(object sender, EventArgs e)
@@ -181,6 +179,18 @@ namespace CMS
         {
             frm_DsaDataOwnerAdd DataOwnerAddForm = new frm_DsaDataOwnerAdd();
             DataOwnerAddForm.Show();
+        }
+
+        private void btn_AddTransfer_Click(object sender, EventArgs e)
+        {
+            frm_FileTransfersAdd DataTransferAddForm = new frm_FileTransfersAdd();
+            DataTransferAddForm.Show();
+        }
+
+        private void btn_DSAsView_Click(object sender, EventArgs e)
+        {
+            frm_DsasView DsaViewForm = new frm_DsasView();
+            DsaViewForm.Show();
         }
     }
 }

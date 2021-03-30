@@ -38,35 +38,35 @@ namespace CMS
                 conn.Credential = SQL_Stuff.credential;
                 using (conn)
                 {
-                    SQL_Stuff.getDataTable(conn, ds_prj, "tblProjects",
+                    SQL_Stuff.getDataTable(conn, null, ds_prj, "tblProjects",
                         $"select * from [dbo].[tblProject] " +
                         $"where [ValidTo] is null " +
                         $"order by [ProjectNumber], [pID]");
-                    SQL_Stuff.getDataTable(conn, ds_prj, "tlkStage",
+                    SQL_Stuff.getDataTable(conn, null, ds_prj, "tlkStage",
                         $"select * from [dbo].[tlkStage] order by StageNumber asc");
-                    SQL_Stuff.getDataTable(conn, ds_prj, "tlkClassification",
+                    SQL_Stuff.getDataTable(conn, null, ds_prj, "tlkClassification",
                         $"select * from [dbo].[tlkClassification] ");
-                    SQL_Stuff.getDataTable(conn, ds_prj, "tlkRAG",
+                    SQL_Stuff.getDataTable(conn, null, ds_prj, "tlkRAG",
                         $"select * from [dbo].[tlkRAG] ");
-                    SQL_Stuff.getDataTable(conn, ds_prj, "tlkFaculty",
+                    SQL_Stuff.getDataTable(conn, null, ds_prj, "tlkFaculty",
                         $"select * from [dbo].[tlkFaculty] ");
-                    SQL_Stuff.getDataTable(conn, ds_prj, "tblProjectNotes",
+                    SQL_Stuff.getDataTable(conn, null, ds_prj, "tblProjectNotes",
                         $"select * from [dbo].[tblProjectNotes] " +
                         $"order by [ProjectNumber], [Created] desc");
-                    SQL_Stuff.getDataTable(conn, ds_prj, "tblProjectPlatformInfo",
+                    SQL_Stuff.getDataTable(conn, null, ds_prj, "tblProjectPlatformInfo",
                         $"Select * from [dbo].[tblProjectPlatformInfo] " +
                         $"where [ValidTo] is null");
-                    SQL_Stuff.getDataTable(conn, ds_prj, "tlkPlatformInfo",
+                    SQL_Stuff.getDataTable(conn, null, ds_prj, "tlkPlatformInfo",
                         $"select * from [dbo].[tlkPlatformInfo]");
-                    SQL_Stuff.getDataTable(conn, ds_prj, "tblUserProject",
+                    SQL_Stuff.getDataTable(conn, null, ds_prj, "tblUserProject",
                         $"select * from [dbo].[tblUserProject] " +
                         $"where [ValidTo] is null");
-                    SQL_Stuff.getDataTable(conn, ds_prj, "tblProjectDocument",
+                    SQL_Stuff.getDataTable(conn, null, ds_prj, "tblProjectDocument",
                         $"select * from [dbo].[tblProjectDocument]" +
                         $"where [ValidTo] is null");
-                    SQL_Stuff.getDataTable(conn, ds_prj, "tlkDocuments",
+                    SQL_Stuff.getDataTable(conn, null, ds_prj, "tlkDocuments",
                         $"select * from [dbo].[tlkDocuments]");
-                    SQL_Stuff.getDataTable(conn, ds_prj, "tblDocsAccepted",
+                    SQL_Stuff.getDataTable(conn, null, ds_prj, "tblDocsAccepted",
                         $"select tbl.ProjectNumber " +
                         $"  , tlk.DocumentID " +
                         $"  , tlk.DocumentDescription " +
@@ -80,7 +80,7 @@ namespace CMS
                         $"  , tlk.DocumentID " +
                         $"  , tlk.DocumentDescription " +
                         $"order by tbl.ProjectNumber, tlk.DocumentID");
-                    SQL_Stuff.getDataTable(conn, ds_prj, "tblDatHours",
+                    SQL_Stuff.getDataTable(conn, null, ds_prj, "tblDatHours",
                         $"select ProjectNumber " +
                         $"  , sum(case when datediff(m, Created, getdate()) = 0 " +
                         $"      then[DatHours] else 0 end) as ThisMonth " +
@@ -182,7 +182,7 @@ namespace CMS
                 conn.Credential = SQL_Stuff.credential;
                 using (conn)
                 {
-                    SQL_Stuff.getDataTable(conn, ds_prj_usr, "tblUser",
+                    SQL_Stuff.getDataTable(conn, null, ds_prj_usr, "tblUser",
                         $"select *, [LastName] + ', ' + [FirstName] as FullName " +
                         $"from [dbo].[tblUser] " +
                         $"where [ValidTo] is null " +

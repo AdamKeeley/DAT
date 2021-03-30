@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace DataControlsLib.DataModels
 {
-    public class tlkAssetChangeTypeModel
+    public class mdl_AssetGroups
     {
-        public int ChangeTypeID { get; set; }
-        public string ChangeTypeLabel { get; set; }
+        public int AssetID { get; set; }
+        public string Project { get; set; }
+        public string AssetName { get; set; }
     }
 }

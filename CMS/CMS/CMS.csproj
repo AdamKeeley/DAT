@@ -40,9 +40,17 @@
     <ApplicationIcon>prism.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAPICodePack-Core.1.1.1\lib\Microsoft.WindowsAPICodePack.dll</HintPath>
+    </Reference>
+    <Reference Include="Ookii.Dialogs.WinForms, Version=1.0.0.0, Culture=neutral, PublicKeyToken=66aa232afad40158, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ookii.Dialogs.WinForms.1.2.0\lib\net45\Ookii.Dialogs.WinForms.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -52,13 +60,49 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataTracking\DataIO.cs" />
-    <Compile Include="DSAs\DSA.cs" />
-    <Compile Include="DataTracking\frm_DataIO.cs">
+    <Compile Include="DSAs\frm_DsaAmendmentAdd.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DataTracking\frm_DataIO.Designer.cs">
-      <DependentUpon>frm_DataIO.cs</DependentUpon>
+    <Compile Include="DSAs\frm_DsaAmendmentAdd.Designer.cs">
+      <DependentUpon>frm_DsaAmendmentAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DSAs\frm_DsaProjectAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DSAs\frm_DsaProjectAdd.Designer.cs">
+      <DependentUpon>frm_DsaProjectAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DSAs\frm_DsasView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DSAs\frm_DsasView.Designer.cs">
+      <DependentUpon>frm_DsasView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FileTransfers\FileTransfer.cs" />
+    <Compile Include="FileTransfers\frm_AssetGroupAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FileTransfers\frm_AssetGroupAdd.Designer.cs">
+      <DependentUpon>frm_AssetGroupAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FileTransfers\frm_FileTransfersAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FileTransfers\frm_FileTransfersAdd.Designer.cs">
+      <DependentUpon>frm_FileTransfersAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FileTransfers\frm_FileRejectionsAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FileTransfers\frm_FileRejectionsAdd.Designer.cs">
+      <DependentUpon>frm_FileRejectionsAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DSAs\DSA.cs" />
+    <Compile Include="FileTransfers\frm_FileTransfersView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FileTransfers\frm_FileTransfersView.Designer.cs">
+      <DependentUpon>frm_FileTransfersView.cs</DependentUpon>
     </Compile>
     <Compile Include="DSAs\frm_DsaAdd.cs">
       <SubType>Form</SubType>
@@ -180,6 +224,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
     <None Include="Properties\DataSources\frm_Project.datasource" />
     <None Include="Properties\DataSources\Program.datasource" />
     <None Include="Properties\DataSources\Project.datasource" />
@@ -187,8 +232,26 @@
     <None Include="Properties\DataSources\SQL_Stuff.datasource" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="DataTracking\frm_DataIO.resx">
-      <DependentUpon>frm_DataIO.cs</DependentUpon>
+    <EmbeddedResource Include="DSAs\frm_DsaAmendmentAdd.resx">
+      <DependentUpon>frm_DsaAmendmentAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DSAs\frm_DsaProjectAdd.resx">
+      <DependentUpon>frm_DsaProjectAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DSAs\frm_DsasView.resx">
+      <DependentUpon>frm_DsasView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FileTransfers\frm_AssetGroupAdd.resx">
+      <DependentUpon>frm_AssetGroupAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FileTransfers\frm_FileTransfersView.resx">
+      <DependentUpon>frm_FileTransfersView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FileTransfers\frm_FileTransfersAdd.resx">
+      <DependentUpon>frm_FileTransfersAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FileTransfers\frm_FileRejectionsAdd.resx">
+      <DependentUpon>frm_FileRejectionsAdd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DSAs\frm_DsaAdd.resx">
       <DependentUpon>frm_DsaAdd.cs</DependentUpon>

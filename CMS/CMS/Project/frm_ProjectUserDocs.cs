@@ -29,7 +29,7 @@ namespace CMS
                 conn.Credential = SQL_Stuff.credential;
                 using (conn)
                 {
-                    SQL_Stuff.getDataTable(conn, ds_ProjectUserDocs, "tblProjectUserDocs",
+                    SQL_Stuff.getDataTable(conn, null, ds_ProjectUserDocs, "tblProjectUserDocs",
                         $"exec dbo.sp_UserDocStatusByProject '{pNumber}'");
                 }
             }
