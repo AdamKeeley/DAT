@@ -31,27 +31,27 @@ namespace DataControlsLib
         /// </summary>
         public static void setString()
         {
-            ////Azure LIVE!
-            //SqlConnectionStringBuilder conStringBuilder = new SqlConnectionStringBuilder
-            //{
-            //    ["Data Source"] = "lida-dat-cms.database.windows.net",
-            //    ["Initial Catalog"] = "lida_dat_cms",
-            //    ["Integrated Security"] = "False",
-            //    ["Persist Security Info"] = "False",
-            //    ["Encrypt"] = "True",
-            //};
-            //conString = conStringBuilder.ConnectionString;
-
-            //Azure TEST
+            //Azure LIVE!
             SqlConnectionStringBuilder conStringBuilder = new SqlConnectionStringBuilder
             {
-                ["Data Source"] = "lida-dat-cms-test.database.windows.net",
-                ["Initial Catalog"] = "lida_dat_cms_test",
+                ["Data Source"] = "lida-dat-cms.database.windows.net",
+                ["Initial Catalog"] = "lida_dat_cms",
                 ["Integrated Security"] = "False",
                 ["Persist Security Info"] = "False",
                 ["Encrypt"] = "True",
             };
             conString = conStringBuilder.ConnectionString;
+
+            //Azure TEST
+            //SqlConnectionStringBuilder conStringBuilder = new SqlConnectionStringBuilder
+            //{
+            //    ["Data Source"] = "lida-dat-cms-test.database.windows.net",
+            //    ["Initial Catalog"] = "lida_dat_cms_test",
+            //    ["Integrated Security"] = "False",
+            //    ["Persist Security Info"] = "False",
+            //    ["Encrypt"] = "True",
+            //};
+            //conString = conStringBuilder.ConnectionString;
 
             ////Adam's LIDA desktop
             //conString = "Data Source=IRC-PC010;Initial Catalog=DAT_CMS;Integrated Security=True";
