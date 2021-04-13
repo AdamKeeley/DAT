@@ -88,7 +88,7 @@
             this.Controls.Add(this.lbl_ProjectName);
             this.Controls.Add(this.lbl_ProjectNumber);
             this.Name = "frm_ProjectUserDocs";
-            this.Text = "frm_ProjectUserDocs";
+            this.Text = "Project User Docs";
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ProjectUserDocs)).EndInit();
             this.ResumeLayout(false);
 
