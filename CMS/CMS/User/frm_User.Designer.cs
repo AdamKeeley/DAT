@@ -702,6 +702,7 @@
             this.mtb_LASERAgreement.Size = new System.Drawing.Size(76, 20);
             this.mtb_LASERAgreement.TabIndex = 53;
             this.mtb_LASERAgreement.ValidatingType = typeof(System.DateTime);
+            this.mtb_LASERAgreement.Click += new System.EventHandler(this.enter_MaskedTextBox);
             // 
             // gb_Agreements
             // 
@@ -727,6 +728,7 @@
             this.mtb_SEEDAgreement.Size = new System.Drawing.Size(76, 20);
             this.mtb_SEEDAgreement.TabIndex = 55;
             this.mtb_SEEDAgreement.ValidatingType = typeof(System.DateTime);
+            this.mtb_SEEDAgreement.Click += new System.EventHandler(this.enter_MaskedTextBox);
             // 
             // lbl_SEEDAgreement
             // 
