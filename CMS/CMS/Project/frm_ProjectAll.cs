@@ -273,7 +273,7 @@ namespace CMS
             DataTable dt_dgv_ProjectList = new DataTable();
             dt_dgv_ProjectList.Columns.Add("Project Number");
             dt_dgv_ProjectList.Columns.Add("Project Name");
-            dt_dgv_ProjectList.Columns.Add("VRE Number");
+            dt_dgv_ProjectList.Columns.Add("IRC VRE Number");
             dt_dgv_ProjectList.Columns.Add("Portfolio Number"); 
             dt_dgv_ProjectList.Columns.Add("Stage");
             dt_dgv_ProjectList.Columns.Add("Classification");
@@ -289,7 +289,7 @@ namespace CMS
                 f_row = dt_dgv_ProjectList.NewRow();
                 f_row["Project Number"] = pRow["ProjectNumber"];
                 f_row["Project Name"] = pRow["ProjectName"];
-                f_row["VRE Number"] = pRow["VreNumber"];
+                f_row["IRC VRE Number"] = pRow["VreNumber"];
                 f_row["Portfolio Number"] = pRow["PortfolioNumber"];
                 f_row["Stage"] = pRow["Stage"];
                 f_row["Classification"] = pRow["Classification"];
@@ -307,7 +307,7 @@ namespace CMS
 
             dgv_ProjectList.Columns["Project Number"].Width = 50;
             dgv_ProjectList.Columns["Project Name"].Width = 250;
-            dgv_ProjectList.Columns["VRE Number"].Width = 50;
+            dgv_ProjectList.Columns["IRC VRE Number"].Width = 50;
             dgv_ProjectList.Columns["Portfolio Number"].Width = 50;
             dgv_ProjectList.Columns["Stage"].Width = 70;
             dgv_ProjectList.Columns["Classification"].Width = 90;
@@ -383,6 +383,8 @@ namespace CMS
 
         private void clearSearch(object sender, EventArgs e)
         {
+            cb_pNumber.ResetText();
+            cb_pNumber.SelectedIndex = -1;
             cb_VreNumber.ResetText();
             cb_VreNumber.SelectedIndex = -1;
             cb_DATRAG.SelectedIndex = -1;

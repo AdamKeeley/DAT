@@ -281,11 +281,11 @@
             // lbl_VreNumber
             // 
             this.lbl_VreNumber.AutoSize = true;
-            this.lbl_VreNumber.Location = new System.Drawing.Point(266, 9);
+            this.lbl_VreNumber.Location = new System.Drawing.Point(243, 9);
             this.lbl_VreNumber.Name = "lbl_VreNumber";
-            this.lbl_VreNumber.Size = new System.Drawing.Size(69, 13);
+            this.lbl_VreNumber.Size = new System.Drawing.Size(90, 13);
             this.lbl_VreNumber.TabIndex = 0;
-            this.lbl_VreNumber.Text = "VRE Number";
+            this.lbl_VreNumber.Text = "IRC VRE Number";
             // 
             // cb_VreNumber
             // 
