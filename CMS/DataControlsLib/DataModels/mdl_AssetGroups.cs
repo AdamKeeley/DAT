@@ -11,5 +11,6 @@ namespace DataControlsLib.DataModels
         public int AssetID { get; set; }
         public string Project { get; set; }
         public string AssetName { get; set; }
+        public string DataOwner { get; set; }
     }
 }
