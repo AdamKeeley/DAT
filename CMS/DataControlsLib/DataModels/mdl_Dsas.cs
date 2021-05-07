@@ -18,10 +18,10 @@ namespace DataControlsLib.DataModels
         public DateTime? ExpiryDate { get; set; }
         public DateTime? DataDestructionDate { get; set; }
         public string AgreementOwnerEmail { get; set; }
-        public bool DSPT { get; set; }
-        public bool ISO27001 { get; set; }
-        public bool RequiresEncryption { get; set; }
-        public bool NoRemoteAccess { get; set; }
+        public bool? DSPT { get; set; }
+        public bool? ISO27001 { get; set; }
+        public bool? RequiresEncryption { get; set; }
+        public bool? NoRemoteAccess { get; set; }
         public DateTime? ValidFrom { get; set; }
         public DateTime? ValidTo { get; set; }
         public bool Deprecated { get; set; }

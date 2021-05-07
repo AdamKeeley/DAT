@@ -45,8 +45,8 @@ namespace DataControlsLib
             ////Azure TEST
             SqlConnectionStringBuilder conStringBuilder = new SqlConnectionStringBuilder
             {
-                ["Data Source"] = "lida-dat-cms-test.database.windows.net",
-                ["Initial Catalog"] = "lida_dat_cms_test",
+                ["Data Source"] = "lida-dat-cms.database.windows.net",
+                ["Initial Catalog"] = "lida_dat_cms",
                 ["Integrated Security"] = "False",
                 ["Persist Security Info"] = "False",
                 ["Encrypt"] = "True",

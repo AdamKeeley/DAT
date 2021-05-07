@@ -30,9 +30,11 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_FileTransfersAdd));
             this.gb_Request = new System.Windows.Forms.GroupBox();
+            this.lbl_VRE = new System.Windows.Forms.Label();
+            this.cb_VRE = new System.Windows.Forms.ComboBox();
             this.lbl_NewUser = new System.Windows.Forms.Label();
             this.lbl_RequesterNotes = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tb_RequestNotes = new System.Windows.Forms.TextBox();
             this.lbl_RequestedBy = new System.Windows.Forms.Label();
             this.cb_RequestedBy = new System.Windows.Forms.ComboBox();
             this.lbl_RequestType = new System.Windows.Forms.Label();
@@ -55,6 +57,7 @@
             this.lbl_TransferFrom = new System.Windows.Forms.Label();
             this.lbl_TransferTo = new System.Windows.Forms.Label();
             this.gb_Files = new System.Windows.Forms.GroupBox();
+            this.lbl_NumFiles = new System.Windows.Forms.Label();
             this.btn_AddFiles = new System.Windows.Forms.Button();
             this.dgv_FilesList = new System.Windows.Forms.DataGridView();
             this.gb_Transfer = new System.Windows.Forms.GroupBox();
@@ -72,9 +75,6 @@
             this.dgv_Rejections = new System.Windows.Forms.DataGridView();
             this.btn_OK = new System.Windows.Forms.Button();
             this.btn_Cancel = new System.Windows.Forms.Button();
-            this.lbl_VRE = new System.Windows.Forms.Label();
-            this.cb_VRE = new System.Windows.Forms.ComboBox();
-            this.lbl_NumFiles = new System.Windows.Forms.Label();
             this.gb_Request.SuspendLayout();
             this.gb_Review.SuspendLayout();
             this.gb_Files.SuspendLayout();
@@ -92,7 +92,7 @@
             this.gb_Request.Controls.Add(this.cb_VRE);
             this.gb_Request.Controls.Add(this.lbl_NewUser);
             this.gb_Request.Controls.Add(this.lbl_RequesterNotes);
-            this.gb_Request.Controls.Add(this.textBox1);
+            this.gb_Request.Controls.Add(this.tb_RequestNotes);
             this.gb_Request.Controls.Add(this.lbl_RequestedBy);
             this.gb_Request.Controls.Add(this.cb_RequestedBy);
             this.gb_Request.Controls.Add(this.lbl_RequestType);
@@ -106,6 +106,26 @@
             this.gb_Request.TabIndex = 0;
             this.gb_Request.TabStop = false;
             this.gb_Request.Text = "Request";
+            // 
+            // lbl_VRE
+            // 
+            this.lbl_VRE.AutoSize = true;
+            this.lbl_VRE.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_VRE.Location = new System.Drawing.Point(49, 57);
+            this.lbl_VRE.Name = "lbl_VRE";
+            this.lbl_VRE.Size = new System.Drawing.Size(90, 17);
+            this.lbl_VRE.TabIndex = 10;
+            this.lbl_VRE.Text = "VRE Number";
+            // 
+            // cb_VRE
+            // 
+            this.cb_VRE.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_VRE.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cb_VRE.FormattingEnabled = true;
+            this.cb_VRE.Location = new System.Drawing.Point(145, 54);
+            this.cb_VRE.Name = "cb_VRE";
+            this.cb_VRE.Size = new System.Drawing.Size(156, 24);
+            this.cb_VRE.TabIndex = 9;
             // 
             // lbl_NewUser
             // 
@@ -130,17 +150,17 @@
             this.lbl_RequesterNotes.Text = "Requester\'s\r\nNote";
             this.lbl_RequesterNotes.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // textBox1
+            // tb_RequestNotes
             // 
-            this.textBox1.AcceptsReturn = true;
-            this.textBox1.AcceptsTab = true;
-            this.textBox1.AllowDrop = true;
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(145, 144);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(343, 80);
-            this.textBox1.TabIndex = 6;
+            this.tb_RequestNotes.AcceptsReturn = true;
+            this.tb_RequestNotes.AcceptsTab = true;
+            this.tb_RequestNotes.AllowDrop = true;
+            this.tb_RequestNotes.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_RequestNotes.Location = new System.Drawing.Point(145, 144);
+            this.tb_RequestNotes.Multiline = true;
+            this.tb_RequestNotes.Name = "tb_RequestNotes";
+            this.tb_RequestNotes.Size = new System.Drawing.Size(343, 80);
+            this.tb_RequestNotes.TabIndex = 6;
             // 
             // lbl_RequestedBy
             // 
@@ -385,6 +405,17 @@
             this.gb_Files.TabStop = false;
             this.gb_Files.Text = "Files";
             // 
+            // lbl_NumFiles
+            // 
+            this.lbl_NumFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbl_NumFiles.ImageAlign = System.Drawing.ContentAlignment.TopRight;
+            this.lbl_NumFiles.Location = new System.Drawing.Point(256, 16);
+            this.lbl_NumFiles.Name = "lbl_NumFiles";
+            this.lbl_NumFiles.Size = new System.Drawing.Size(245, 38);
+            this.lbl_NumFiles.TabIndex = 2;
+            this.lbl_NumFiles.Text = "0 files";
+            this.lbl_NumFiles.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // btn_AddFiles
             // 
             this.btn_AddFiles.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -401,6 +432,7 @@
             this.dgv_FilesList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_FilesList.Location = new System.Drawing.Point(11, 60);
             this.dgv_FilesList.Name = "dgv_FilesList";
+            this.dgv_FilesList.ReadOnly = true;
             this.dgv_FilesList.RowHeadersWidth = 51;
             this.dgv_FilesList.RowTemplate.Height = 24;
             this.dgv_FilesList.Size = new System.Drawing.Size(490, 340);
@@ -511,6 +543,7 @@
             this.dgv_Assets.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_Assets.Location = new System.Drawing.Point(10, 52);
             this.dgv_Assets.Name = "dgv_Assets";
+            this.dgv_Assets.ReadOnly = true;
             this.dgv_Assets.RowHeadersWidth = 51;
             this.dgv_Assets.RowTemplate.Height = 24;
             this.dgv_Assets.Size = new System.Drawing.Size(489, 145);
@@ -545,6 +578,7 @@
             this.dgv_Rejections.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_Rejections.Location = new System.Drawing.Point(10, 52);
             this.dgv_Rejections.Name = "dgv_Rejections";
+            this.dgv_Rejections.ReadOnly = true;
             this.dgv_Rejections.RowHeadersWidth = 51;
             this.dgv_Rejections.RowTemplate.Height = 24;
             this.dgv_Rejections.Size = new System.Drawing.Size(489, 97);
@@ -563,6 +597,7 @@
             // 
             // btn_Cancel
             // 
+            this.btn_Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_Cancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Cancel.Location = new System.Drawing.Point(797, 720);
             this.btn_Cancel.Name = "btn_Cancel";
@@ -572,41 +607,11 @@
             this.btn_Cancel.UseVisualStyleBackColor = true;
             this.btn_Cancel.Click += new System.EventHandler(this.btn_Cancel_Click);
             // 
-            // lbl_VRE
-            // 
-            this.lbl_VRE.AutoSize = true;
-            this.lbl_VRE.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_VRE.Location = new System.Drawing.Point(49, 57);
-            this.lbl_VRE.Name = "lbl_VRE";
-            this.lbl_VRE.Size = new System.Drawing.Size(90, 17);
-            this.lbl_VRE.TabIndex = 10;
-            this.lbl_VRE.Text = "VRE Number";
-            // 
-            // cb_VRE
-            // 
-            this.cb_VRE.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cb_VRE.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cb_VRE.FormattingEnabled = true;
-            this.cb_VRE.Location = new System.Drawing.Point(145, 54);
-            this.cb_VRE.Name = "cb_VRE";
-            this.cb_VRE.Size = new System.Drawing.Size(156, 24);
-            this.cb_VRE.TabIndex = 9;
-            // 
-            // lbl_NumFiles
-            // 
-            this.lbl_NumFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbl_NumFiles.ImageAlign = System.Drawing.ContentAlignment.TopRight;
-            this.lbl_NumFiles.Location = new System.Drawing.Point(256, 16);
-            this.lbl_NumFiles.Name = "lbl_NumFiles";
-            this.lbl_NumFiles.Size = new System.Drawing.Size(245, 38);
-            this.lbl_NumFiles.TabIndex = 2;
-            this.lbl_NumFiles.Text = "0 files";
-            this.lbl_NumFiles.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // frm_FileTransfersAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btn_Cancel;
             this.ClientSize = new System.Drawing.Size(1075, 769);
             this.Controls.Add(this.btn_Cancel);
             this.Controls.Add(this.btn_OK);
@@ -644,7 +649,7 @@
         private System.Windows.Forms.Label lbl_Project;
         private System.Windows.Forms.Label lbl_RequestedBy;
         private System.Windows.Forms.ComboBox cb_RequestedBy;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox tb_RequestNotes;
         private System.Windows.Forms.Label lbl_RequesterNotes;
         private System.Windows.Forms.GroupBox gb_Review;
         private System.Windows.Forms.Label lbl_NewUser;

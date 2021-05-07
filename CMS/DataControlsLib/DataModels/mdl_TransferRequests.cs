@@ -12,9 +12,9 @@ namespace DataControlsLib.DataModels
         public string Project { get; set; }
         public string VreNumber { get; set; }
         public int RequestType { get; set; }
-        public int RequestedBy { get; set; }
+        public int? RequestedBy { get; set; }
         public string RequesterNotes { get; set; }
-        public int ReviewedBy { get; set; }
+        public int? ReviewedBy { get; set; }
         public DateTime? ReviewDate { get; set; }
         public string ReviewNotes { get; set; }
     }

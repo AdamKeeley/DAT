@@ -122,8 +122,12 @@ namespace CMS
                 if (uRow["EndDate"].ToString().Length > 0)
                     mdl_User.EndDate = (DateTime?)uRow["EndDate"];
                 mdl_User.Priviledged = (bool)uRow["Priviledged"];
+                if (uRow["SEEDAgreement"].ToString().Length > 0)
+                    mdl_User.SEEDAgreement = (DateTime?)uRow["SEEDAgreement"];
                 if (uRow["IRCAgreement"].ToString().Length > 0)
                     mdl_User.IRCAgreement = (DateTime?)uRow["IRCAgreement"];
+                if (uRow["LASERAgreement"].ToString().Length > 0)
+                    mdl_User.LASERAgreement = (DateTime?)uRow["LASERAgreement"];
                 if (uRow["ISET"].ToString().Length > 0)
                     mdl_User.ISET = (DateTime?)uRow["ISET"];
                 if (uRow["ISAT"].ToString().Length > 0)
@@ -280,12 +284,12 @@ namespace CMS
                     qryInsertUser.Connection = conn;
                     qryInsertUser.CommandText = "insert into [dbo].[tblUser] "
                         + "([UserNumber], [Status], [Title], [FirstName], [LastName], [Email], [Phone], [UserName]"
-                        + ", [Organisation], [StartDate], [EndDate], [IRCAgreement], [ISET], [ISAT]"
-                        + ", [SAFE], [TokenSerial], [TokenIssued], [TokenReturned]) "
+                        + ", [Organisation], [StartDate], [EndDate], [SEEDAgreement], [IRCAgreement], [LASERAgreement]" 
+                        + ", [ISET], [ISAT], [SAFE], [TokenSerial], [TokenIssued], [TokenReturned]) "
                         + "values "
                         + "(@UserNumber, @Status, @Title, @FirstName, @LastName, @Email, @Phone, @UserName"
-                        + ", @Organisation, @StartDate, @EndDate, @IRCAgreement, @ISET, @ISAT, @SAFE"
-                        + ", @TokenSerial, @TokenIssued, @TokenReturned)";
+                        + ", @Organisation, @StartDate, @EndDate, @SEEDAgreement, @IRCAgreement, @LASERAgreement" 
+                        + ", @ISET, @ISAT, @SAFE, @TokenSerial, @TokenIssued, @TokenReturned)";
 
                     //assign the parameter values
                     qryInsertUser.Parameters.Add("@UserNumber", SqlDbType.Int).Value = mdl_User.UserNumber;
@@ -307,9 +311,15 @@ namespace CMS
                     SqlParameter param_EndDate = new SqlParameter("@EndDate", mdl_User.EndDate == null ? (object)DBNull.Value : mdl_User.EndDate);
                     param_EndDate.IsNullable = true;
                     qryInsertUser.Parameters.Add(param_EndDate);
+                    SqlParameter param_SEEDAgreement = new SqlParameter("@SEEDAgreement", mdl_User.SEEDAgreement == null ? (object)DBNull.Value : mdl_User.SEEDAgreement);
+                    param_SEEDAgreement.IsNullable = true;
+                    qryInsertUser.Parameters.Add(param_SEEDAgreement);
                     SqlParameter param_IRCAgreement = new SqlParameter("@IRCAgreement", mdl_User.IRCAgreement == null ? (object)DBNull.Value : mdl_User.IRCAgreement);
                     param_IRCAgreement.IsNullable = true;
                     qryInsertUser.Parameters.Add(param_IRCAgreement);
+                    SqlParameter param_LASERAgreement = new SqlParameter("@LASERAgreement", mdl_User.LASERAgreement == null ? (object)DBNull.Value : mdl_User.LASERAgreement);
+                    param_LASERAgreement.IsNullable = true;
+                    qryInsertUser.Parameters.Add(param_LASERAgreement);
                     SqlParameter param_ISET = new SqlParameter("@ISET", mdl_User.ISET == null ? (object)DBNull.Value : mdl_User.ISET);
                     param_ISET.IsNullable = true;
                     qryInsertUser.Parameters.Add(param_ISET);

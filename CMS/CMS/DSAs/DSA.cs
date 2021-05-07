@@ -62,10 +62,10 @@ namespace CMS.DSAs
                     ExpiryDate = x.Field<DateTime?>("ExpiryDate"),
                     DataDestructionDate = x.Field<DateTime?>("DataDestructionDate"),
                     AgreementOwnerEmail = x.Field<string>("AgreementOwnerEmail"),
-                    DSPT = x.Field<bool>("DSPT"),
-                    ISO27001 = x.Field<bool>("ISO27001"),
-                    RequiresEncryption = x.Field<bool>("RequiresEncryption"),
-                    NoRemoteAccess = x.Field<bool>("NoRemoteAccess"),
+                    DSPT = x.Field<bool?>("DSPT"),
+                    ISO27001 = x.Field<bool?>("ISO27001"),
+                    RequiresEncryption = x.Field<bool?>("RequiresEncryption"),
+                    NoRemoteAccess = x.Field<bool?>("NoRemoteAccess"),
                     ValidFrom = x.Field<DateTime?>("ValidFrom"),
                     ValidTo = x.Field<DateTime?>("ValidTo"),
                     Deprecated = x.Field<bool>("Deprecated")
@@ -240,7 +240,7 @@ namespace CMS.DSAs
             using (conn)
             using (SqlCommand cmd = new SqlCommand(query, conn))
             {
-                cmd.Parameters.Add("@Name", SqlDbType.VarChar, 50).Value = insertData.DateOwnerName;
+                cmd.Parameters.Add("@Name", SqlDbType.VarChar, 100).Value = insertData.DateOwnerName;
                 cmd.Parameters.Add("@OldNameID", SqlDbType.Int).Value = insertData.RebrandOf.HasValue ? insertData.RebrandOf : (object)DBNull.Value;
                 cmd.Parameters.Add("@Email", SqlDbType.VarChar, 50).Value = insertData.DataOwnerEmail;
 
@@ -283,6 +283,7 @@ namespace CMS.DSAs
                 join own in ds.Tables["tblDsaDataOwners"].AsEnumerable() on dsa.Field<int>("DataOwner") equals own.Field<int>("doID")
                 join dsa2 in ds.Tables["tblDsas"].AsEnumerable() on dsa.Field<int?>("AmendmentOf") equals dsa2.Field<int>("DocumentID") into dsa2tmp
                 from dsa2 in dsa2tmp.DefaultIfEmpty()
+                orderby own.Field<string>("DataOwnerName")
                 select new DsaBasicsViewModel
                 {
                     DocumentID = dsa.Field<int>("DocumentID"),
@@ -293,10 +294,10 @@ namespace CMS.DSAs
                     DsaName = dsa.Field<string>("DsaName"),
                     FilePath = dsa.Field<string>("DsaFileLoc"),
                     AmendmentOf = dsa2?.Field<string>("DsaName"),
-                    DSPT = dsa.Field<bool>("DSPT"),
-                    ISO27001 = dsa.Field<bool>("ISO27001"),
-                    RequiresEncryption = dsa.Field<bool>("RequiresEncryption"),
-                    NoRemoteAccess = dsa.Field<bool>("NoRemoteAccess")
+                    DSPT = dsa.Field<bool?>("DSPT"),
+                    ISO27001 = dsa.Field<bool?>("ISO27001"),
+                    RequiresEncryption = dsa.Field<bool?>("RequiresEncryption"),
+                    NoRemoteAccess = dsa.Field<bool?>("NoRemoteAccess")
                 };
 
             return dsaQuery.ToList();
