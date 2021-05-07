@@ -111,17 +111,17 @@ namespace CMS.FileTransfers
         {
             IEnumerable<AssetHistoryViewModel> query =
                 from cl in ds.Tables["tblAssetsChangeLog"].AsEnumerable()
-                join rq in ds.Tables["tblTransferRequests"].AsEnumerable() on cl.Field<int>("RequestID") equals rq.Field<int>("RequestID")
-                join urq in ds.Tables["tblUser"].AsEnumerable() on rq.Field<int>("RequestedBy") equals urq.Field<int>("UserNumber")
-                join urv in ds.Tables["tblUser"].AsEnumerable() on rq.Field<int>("ReviewedBy") equals urv.Field<int>("UserNumber")
+                join rq in ds.Tables["tblTransferRequests"].AsEnumerable() on cl.Field<int?>("RequestID") equals rq.Field<int>("RequestID")
+                join urq in ds.Tables["tblUser"].AsEnumerable() on rq.Field<int?>("RequestedBy") equals urq.Field<int>("UserNumber")
+                join urv in ds.Tables["tblUser"].AsEnumerable() on rq.Field<int?>("ReviewedBy") equals urv.Field<int>("UserNumber")
                 join ar in ds.Tables["tblAssetsRegister"].AsEnumerable() on cl.Field<int>("FileID") equals ar.Field<int>("FileID")
                 join ag in ds.Tables["tblAssetGroups"].AsEnumerable() 
                     on ar.Field<int?>("AssetID") equals ag.Field<int>("AssetID")
                     into AssetsLeftJoin
                 from ag2 in AssetsLeftJoin.DefaultIfEmpty()
                 join ct in ds.Tables["tlkTransferRequestTypes"].AsEnumerable() on rq.Field<int>("RequestType") equals ct.Field<int>("RequestTypeID")
-                join tm in ds.Tables["tlkFileTransferMethods"].AsEnumerable() on cl.Field<int>("TransferMethod") equals tm.Field<int>("MethodID")
-                join da in ds.Tables["tblDsas"].AsEnumerable() on cl.Field<int>("DsaReviewed") equals da.Field<int>("DsaID")
+                join tm in ds.Tables["tlkFileTransferMethods"].AsEnumerable() on cl.Field<int?>("TransferMethod") equals tm.Field<int>("MethodID")
+                join da in ds.Tables["tblDsas"].AsEnumerable() on cl.Field<int?>("DsaReviewed") equals da.Field<int>("DsaID")
                 join dp in ds.Tables["tblDsaDataOwners"].AsEnumerable() on da.Field<int>("DataOwner") equals dp.Field<int>("doID")
                 where (dateFrom == null || (rq.Field<DateTime?>("ReviewDate").HasValue && (dateFrom <= rq.Field<DateTime?>("ReviewDate").Value.Date)))
                     && (dateTo == null || (rq.Field<DateTime?>("ReviewDate").HasValue && (dateTo >= rq.Field<DateTime?>("ReviewDate").Value.Date)))
@@ -132,6 +132,7 @@ namespace CMS.FileTransfers
                     && (fPath == null || ar.Field<string>("VreFilePath").NullIfEmpty().Contains(fPath))
                     && (changeTypes.Contains(ct.Field<string>("RequestTypeLabel")))
                     && (approvals.Contains(cl.Field<bool?>("ChangeAccepted")))
+                orderby rq.Field<DateTime?>("ReviewDate") descending
                 select new AssetHistoryViewModel
                 {
                     Project = rq.Field<string>("Project"),
