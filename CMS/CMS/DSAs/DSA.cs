@@ -240,7 +240,7 @@ namespace CMS.DSAs
             using (conn)
             using (SqlCommand cmd = new SqlCommand(query, conn))
             {
-                cmd.Parameters.Add("@Name", SqlDbType.VarChar, 50).Value = insertData.DateOwnerName;
+                cmd.Parameters.Add("@Name", SqlDbType.VarChar, 100).Value = insertData.DateOwnerName;
                 cmd.Parameters.Add("@OldNameID", SqlDbType.Int).Value = insertData.RebrandOf.HasValue ? insertData.RebrandOf : (object)DBNull.Value;
                 cmd.Parameters.Add("@Email", SqlDbType.VarChar, 50).Value = insertData.DataOwnerEmail;
 
