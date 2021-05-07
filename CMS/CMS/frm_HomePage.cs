@@ -137,6 +137,7 @@ namespace CMS
 
             gb_DataTracking.TabIndex    = ++x;
             btn_GoToDataIO.TabIndex     = ++x;
+            btn_AddTransfer.TabIndex    = ++x;
         }
 
         private void btn_GoToProjects_Click(object sender, EventArgs e)
