@@ -82,6 +82,11 @@
             this.gb_UserNotes = new System.Windows.Forms.GroupBox();
             this.tb_searchNotes = new System.Windows.Forms.TextBox();
             this.lbl_searchNotes = new System.Windows.Forms.Label();
+            this.lbl_LASERAgreement = new System.Windows.Forms.Label();
+            this.mtb_LASERAgreement = new System.Windows.Forms.MaskedTextBox();
+            this.gb_Agreements = new System.Windows.Forms.GroupBox();
+            this.mtb_SEEDAgreement = new System.Windows.Forms.MaskedTextBox();
+            this.lbl_SEEDAgreement = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_UserNotes)).BeginInit();
             this.gb_UserProjects.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_UserProjects)).BeginInit();
@@ -90,6 +95,7 @@
             this.gb_Training.SuspendLayout();
             this.gb_UserDetail.SuspendLayout();
             this.gb_UserNotes.SuspendLayout();
+            this.gb_Agreements.SuspendLayout();
             this.SuspendLayout();
             // 
             // cb_UserStatus
@@ -290,7 +296,7 @@
             // 
             // mtb_IRCAgreement
             // 
-            this.mtb_IRCAgreement.Location = new System.Drawing.Point(94, 18);
+            this.mtb_IRCAgreement.Location = new System.Drawing.Point(102, 42);
             this.mtb_IRCAgreement.Margin = new System.Windows.Forms.Padding(2);
             this.mtb_IRCAgreement.Mask = "00/00/0000";
             this.mtb_IRCAgreement.Name = "mtb_IRCAgreement";
@@ -301,7 +307,7 @@
             // 
             // mtb_ISET
             // 
-            this.mtb_ISET.Location = new System.Drawing.Point(94, 42);
+            this.mtb_ISET.Location = new System.Drawing.Point(102, 18);
             this.mtb_ISET.Margin = new System.Windows.Forms.Padding(2);
             this.mtb_ISET.Mask = "00/00/0000";
             this.mtb_ISET.Name = "mtb_ISET";
@@ -313,7 +319,7 @@
             // lbl_ISET
             // 
             this.lbl_ISET.AutoSize = true;
-            this.lbl_ISET.Location = new System.Drawing.Point(5, 45);
+            this.lbl_ISET.Location = new System.Drawing.Point(5, 21);
             this.lbl_ISET.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_ISET.Name = "lbl_ISET";
             this.lbl_ISET.Size = new System.Drawing.Size(31, 13);
@@ -323,7 +329,7 @@
             // lbl_IRCAgreement
             // 
             this.lbl_IRCAgreement.AutoSize = true;
-            this.lbl_IRCAgreement.Location = new System.Drawing.Point(5, 21);
+            this.lbl_IRCAgreement.Location = new System.Drawing.Point(5, 45);
             this.lbl_IRCAgreement.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_IRCAgreement.Name = "lbl_IRCAgreement";
             this.lbl_IRCAgreement.Size = new System.Drawing.Size(79, 13);
@@ -332,7 +338,7 @@
             // 
             // mtb_ISAT
             // 
-            this.mtb_ISAT.Location = new System.Drawing.Point(94, 66);
+            this.mtb_ISAT.Location = new System.Drawing.Point(102, 42);
             this.mtb_ISAT.Margin = new System.Windows.Forms.Padding(2);
             this.mtb_ISAT.Mask = "00/00/0000";
             this.mtb_ISAT.Name = "mtb_ISAT";
@@ -343,7 +349,7 @@
             // 
             // mtb_SAFE
             // 
-            this.mtb_SAFE.Location = new System.Drawing.Point(94, 90);
+            this.mtb_SAFE.Location = new System.Drawing.Point(102, 66);
             this.mtb_SAFE.Margin = new System.Windows.Forms.Padding(2);
             this.mtb_SAFE.Mask = "00/00/0000";
             this.mtb_SAFE.Name = "mtb_SAFE";
@@ -355,7 +361,7 @@
             // lbl_SAFE
             // 
             this.lbl_SAFE.AutoSize = true;
-            this.lbl_SAFE.Location = new System.Drawing.Point(5, 93);
+            this.lbl_SAFE.Location = new System.Drawing.Point(5, 69);
             this.lbl_SAFE.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_SAFE.Name = "lbl_SAFE";
             this.lbl_SAFE.Size = new System.Drawing.Size(34, 13);
@@ -365,7 +371,7 @@
             // lbl_ISAT
             // 
             this.lbl_ISAT.AutoSize = true;
-            this.lbl_ISAT.Location = new System.Drawing.Point(5, 69);
+            this.lbl_ISAT.Location = new System.Drawing.Point(5, 45);
             this.lbl_ISAT.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_ISAT.Name = "lbl_ISAT";
             this.lbl_ISAT.Size = new System.Drawing.Size(31, 13);
@@ -384,7 +390,7 @@
             // 
             // mtb_TokenIssued
             // 
-            this.mtb_TokenIssued.Location = new System.Drawing.Point(94, 42);
+            this.mtb_TokenIssued.Location = new System.Drawing.Point(103, 42);
             this.mtb_TokenIssued.Margin = new System.Windows.Forms.Padding(2);
             this.mtb_TokenIssued.Mask = "00/00/0000";
             this.mtb_TokenIssued.Name = "mtb_TokenIssued";
@@ -395,7 +401,7 @@
             // 
             // mtb_TokenReturned
             // 
-            this.mtb_TokenReturned.Location = new System.Drawing.Point(94, 66);
+            this.mtb_TokenReturned.Location = new System.Drawing.Point(103, 66);
             this.mtb_TokenReturned.Margin = new System.Windows.Forms.Padding(2);
             this.mtb_TokenReturned.Mask = "00/00/0000";
             this.mtb_TokenReturned.Name = "mtb_TokenReturned";
@@ -457,7 +463,7 @@
             this.dgv_UserNotes.RowHeadersVisible = false;
             this.dgv_UserNotes.RowTemplate.Height = 24;
             this.dgv_UserNotes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_UserNotes.Size = new System.Drawing.Size(494, 150);
+            this.dgv_UserNotes.Size = new System.Drawing.Size(494, 212);
             this.dgv_UserNotes.TabIndex = 60;
             this.dgv_UserNotes.TabStop = false;
             // 
@@ -509,7 +515,7 @@
             // 
             // btn_UserRefresh
             // 
-            this.btn_UserRefresh.Location = new System.Drawing.Point(451, 422);
+            this.btn_UserRefresh.Location = new System.Drawing.Point(446, 480);
             this.btn_UserRefresh.Name = "btn_UserRefresh";
             this.btn_UserRefresh.Size = new System.Drawing.Size(75, 23);
             this.btn_UserRefresh.TabIndex = 66;
@@ -519,7 +525,7 @@
             // 
             // btn_NewUser
             // 
-            this.btn_NewUser.Location = new System.Drawing.Point(206, 422);
+            this.btn_NewUser.Location = new System.Drawing.Point(201, 480);
             this.btn_NewUser.Margin = new System.Windows.Forms.Padding(2);
             this.btn_NewUser.Name = "btn_NewUser";
             this.btn_NewUser.Size = new System.Drawing.Size(90, 24);
@@ -530,7 +536,7 @@
             // 
             // btn_UserApply
             // 
-            this.btn_UserApply.Location = new System.Drawing.Point(531, 421);
+            this.btn_UserApply.Location = new System.Drawing.Point(526, 479);
             this.btn_UserApply.Margin = new System.Windows.Forms.Padding(2);
             this.btn_UserApply.Name = "btn_UserApply";
             this.btn_UserApply.Size = new System.Drawing.Size(56, 24);
@@ -541,7 +547,7 @@
             // 
             // btn_UserOK
             // 
-            this.btn_UserOK.Location = new System.Drawing.Point(592, 421);
+            this.btn_UserOK.Location = new System.Drawing.Point(587, 479);
             this.btn_UserOK.Margin = new System.Windows.Forms.Padding(2);
             this.btn_UserOK.Name = "btn_UserOK";
             this.btn_UserOK.Size = new System.Drawing.Size(56, 24);
@@ -553,7 +559,7 @@
             // btn_UserCancel
             // 
             this.btn_UserCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btn_UserCancel.Location = new System.Drawing.Point(652, 421);
+            this.btn_UserCancel.Location = new System.Drawing.Point(647, 479);
             this.btn_UserCancel.Margin = new System.Windows.Forms.Padding(2);
             this.btn_UserCancel.Name = "btn_UserCancel";
             this.btn_UserCancel.Size = new System.Drawing.Size(56, 24);
@@ -570,9 +576,9 @@
             this.gb_MFA.Controls.Add(this.lbl_TokenReturned);
             this.gb_MFA.Controls.Add(this.mtb_TokenIssued);
             this.gb_MFA.Controls.Add(this.mtb_TokenReturned);
-            this.gb_MFA.Location = new System.Drawing.Point(12, 318);
+            this.gb_MFA.Location = new System.Drawing.Point(12, 404);
             this.gb_MFA.Name = "gb_MFA";
-            this.gb_MFA.Size = new System.Drawing.Size(183, 98);
+            this.gb_MFA.Size = new System.Drawing.Size(183, 100);
             this.gb_MFA.TabIndex = 0;
             this.gb_MFA.TabStop = false;
             this.gb_MFA.Text = "MFA Token";
@@ -580,7 +586,7 @@
             // nud_TokenSerial
             // 
             this.nud_TokenSerial.InterceptArrowKeys = false;
-            this.nud_TokenSerial.Location = new System.Drawing.Point(93, 19);
+            this.nud_TokenSerial.Location = new System.Drawing.Point(102, 19);
             this.nud_TokenSerial.Maximum = new decimal(new int[] {
             -1,
             2147483647,
@@ -592,17 +598,15 @@
             // 
             // gb_Training
             // 
-            this.gb_Training.Controls.Add(this.lbl_IRCAgreement);
-            this.gb_Training.Controls.Add(this.mtb_IRCAgreement);
             this.gb_Training.Controls.Add(this.mtb_ISET);
             this.gb_Training.Controls.Add(this.lbl_ISET);
             this.gb_Training.Controls.Add(this.mtb_ISAT);
             this.gb_Training.Controls.Add(this.lbl_ISAT);
             this.gb_Training.Controls.Add(this.mtb_SAFE);
             this.gb_Training.Controls.Add(this.lbl_SAFE);
-            this.gb_Training.Location = new System.Drawing.Point(12, 192);
+            this.gb_Training.Location = new System.Drawing.Point(12, 298);
             this.gb_Training.Name = "gb_Training";
-            this.gb_Training.Size = new System.Drawing.Size(183, 120);
+            this.gb_Training.Size = new System.Drawing.Size(183, 100);
             this.gb_Training.TabIndex = 0;
             this.gb_Training.TabStop = false;
             this.gb_Training.Text = "Training";
@@ -657,7 +661,7 @@
             this.gb_UserNotes.Controls.Add(this.btn_InsertUserNote);
             this.gb_UserNotes.Location = new System.Drawing.Point(201, 192);
             this.gb_UserNotes.Name = "gb_UserNotes";
-            this.gb_UserNotes.Size = new System.Drawing.Size(507, 224);
+            this.gb_UserNotes.Size = new System.Drawing.Size(507, 283);
             this.gb_UserNotes.TabIndex = 0;
             this.gb_UserNotes.TabStop = false;
             this.gb_UserNotes.Text = "Notes";
@@ -679,12 +683,70 @@
             this.lbl_searchNotes.TabIndex = 67;
             this.lbl_searchNotes.Text = "Search notes";
             // 
+            // lbl_LASERAgreement
+            // 
+            this.lbl_LASERAgreement.AutoSize = true;
+            this.lbl_LASERAgreement.Location = new System.Drawing.Point(5, 69);
+            this.lbl_LASERAgreement.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_LASERAgreement.Name = "lbl_LASERAgreement";
+            this.lbl_LASERAgreement.Size = new System.Drawing.Size(96, 13);
+            this.lbl_LASERAgreement.TabIndex = 52;
+            this.lbl_LASERAgreement.Text = "LASER Agreement";
+            // 
+            // mtb_LASERAgreement
+            // 
+            this.mtb_LASERAgreement.Location = new System.Drawing.Point(102, 66);
+            this.mtb_LASERAgreement.Margin = new System.Windows.Forms.Padding(2);
+            this.mtb_LASERAgreement.Mask = "00/00/0000";
+            this.mtb_LASERAgreement.Name = "mtb_LASERAgreement";
+            this.mtb_LASERAgreement.Size = new System.Drawing.Size(76, 20);
+            this.mtb_LASERAgreement.TabIndex = 53;
+            this.mtb_LASERAgreement.ValidatingType = typeof(System.DateTime);
+            this.mtb_LASERAgreement.Click += new System.EventHandler(this.enter_MaskedTextBox);
+            // 
+            // gb_Agreements
+            // 
+            this.gb_Agreements.Controls.Add(this.mtb_SEEDAgreement);
+            this.gb_Agreements.Controls.Add(this.lbl_SEEDAgreement);
+            this.gb_Agreements.Controls.Add(this.mtb_IRCAgreement);
+            this.gb_Agreements.Controls.Add(this.lbl_LASERAgreement);
+            this.gb_Agreements.Controls.Add(this.mtb_LASERAgreement);
+            this.gb_Agreements.Controls.Add(this.lbl_IRCAgreement);
+            this.gb_Agreements.Location = new System.Drawing.Point(12, 192);
+            this.gb_Agreements.Name = "gb_Agreements";
+            this.gb_Agreements.Size = new System.Drawing.Size(183, 100);
+            this.gb_Agreements.TabIndex = 67;
+            this.gb_Agreements.TabStop = false;
+            this.gb_Agreements.Text = "Agreements";
+            // 
+            // mtb_SEEDAgreement
+            // 
+            this.mtb_SEEDAgreement.Location = new System.Drawing.Point(102, 18);
+            this.mtb_SEEDAgreement.Margin = new System.Windows.Forms.Padding(2);
+            this.mtb_SEEDAgreement.Mask = "00/00/0000";
+            this.mtb_SEEDAgreement.Name = "mtb_SEEDAgreement";
+            this.mtb_SEEDAgreement.Size = new System.Drawing.Size(76, 20);
+            this.mtb_SEEDAgreement.TabIndex = 55;
+            this.mtb_SEEDAgreement.ValidatingType = typeof(System.DateTime);
+            this.mtb_SEEDAgreement.Click += new System.EventHandler(this.enter_MaskedTextBox);
+            // 
+            // lbl_SEEDAgreement
+            // 
+            this.lbl_SEEDAgreement.AutoSize = true;
+            this.lbl_SEEDAgreement.Location = new System.Drawing.Point(5, 21);
+            this.lbl_SEEDAgreement.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_SEEDAgreement.Name = "lbl_SEEDAgreement";
+            this.lbl_SEEDAgreement.Size = new System.Drawing.Size(90, 13);
+            this.lbl_SEEDAgreement.TabIndex = 54;
+            this.lbl_SEEDAgreement.Text = "SEED Agreement";
+            // 
             // frm_User
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btn_UserCancel;
-            this.ClientSize = new System.Drawing.Size(723, 456);
+            this.ClientSize = new System.Drawing.Size(723, 518);
+            this.Controls.Add(this.gb_Agreements);
             this.Controls.Add(this.gb_UserNotes);
             this.Controls.Add(this.gb_UserDetail);
             this.Controls.Add(this.gb_Training);
@@ -711,6 +773,8 @@
             this.gb_UserDetail.PerformLayout();
             this.gb_UserNotes.ResumeLayout(false);
             this.gb_UserNotes.PerformLayout();
+            this.gb_Agreements.ResumeLayout(false);
+            this.gb_Agreements.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -770,5 +834,10 @@
         private System.Windows.Forms.NumericUpDown nud_TokenSerial;
         private System.Windows.Forms.TextBox tb_searchNotes;
         private System.Windows.Forms.Label lbl_searchNotes;
+        private System.Windows.Forms.Label lbl_LASERAgreement;
+        private System.Windows.Forms.MaskedTextBox mtb_LASERAgreement;
+        private System.Windows.Forms.GroupBox gb_Agreements;
+        private System.Windows.Forms.MaskedTextBox mtb_SEEDAgreement;
+        private System.Windows.Forms.Label lbl_SEEDAgreement;
     }
 }

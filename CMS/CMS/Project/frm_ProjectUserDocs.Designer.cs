@@ -63,13 +63,13 @@
             this.dgv_ProjectUserDocs.Location = new System.Drawing.Point(13, 68);
             this.dgv_ProjectUserDocs.Name = "dgv_ProjectUserDocs";
             this.dgv_ProjectUserDocs.ReadOnly = true;
-            this.dgv_ProjectUserDocs.Size = new System.Drawing.Size(660, 150);
+            this.dgv_ProjectUserDocs.Size = new System.Drawing.Size(860, 150);
             this.dgv_ProjectUserDocs.TabIndex = 8;
             // 
             // btn_Close
             // 
             this.btn_Close.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btn_Close.Location = new System.Drawing.Point(598, 224);
+            this.btn_Close.Location = new System.Drawing.Point(797, 224);
             this.btn_Close.Name = "btn_Close";
             this.btn_Close.Size = new System.Drawing.Size(75, 23);
             this.btn_Close.TabIndex = 9;
@@ -82,13 +82,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btn_Close;
-            this.ClientSize = new System.Drawing.Size(684, 255);
+            this.ClientSize = new System.Drawing.Size(884, 255);
             this.Controls.Add(this.btn_Close);
             this.Controls.Add(this.dgv_ProjectUserDocs);
             this.Controls.Add(this.lbl_ProjectName);
             this.Controls.Add(this.lbl_ProjectNumber);
             this.Name = "frm_ProjectUserDocs";
-            this.Text = "frm_ProjectUserDocs";
+            this.Text = "Project User Docs";
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ProjectUserDocs)).EndInit();
             this.ResumeLayout(false);
 

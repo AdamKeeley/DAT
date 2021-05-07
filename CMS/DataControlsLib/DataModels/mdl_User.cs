@@ -27,7 +27,9 @@ namespace DataControlsLib.DataModels
         public DateTime?    StartDate       { get; set; }
         public DateTime?    EndDate         { get; set; }
         public bool         Priviledged     { get; set; }
+        public DateTime?    SEEDAgreement   { get; set; }
         public DateTime?    IRCAgreement    { get; set; }
+        public DateTime?    LASERAgreement  { get; set; }
         public DateTime?    ISET            { get; set; }
         public DateTime?    ISAT            { get; set; }
         public DateTime?    SAFE            { get; set; }
@@ -60,7 +62,9 @@ namespace DataControlsLib.DataModels
                 || StartDate        != other.StartDate    
                 || EndDate          != other.EndDate      
                 || Priviledged      != other.Priviledged  
-                || IRCAgreement     != other.IRCAgreement 
+                || SEEDAgreement    != other.SEEDAgreement
+                || IRCAgreement     != other.IRCAgreement
+                || LASERAgreement   != other.LASERAgreement
                 || ISET             != other.ISET         
                 || ISAT             != other.ISAT         
                 || SAFE             != other.SAFE         

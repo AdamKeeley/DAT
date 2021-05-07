@@ -79,6 +79,7 @@ namespace CMS
             this.lbl_searchNotes = new System.Windows.Forms.Label();
             this.gb_KeyDates = new System.Windows.Forms.GroupBox();
             this.gb_ProjectDocuments = new System.Windows.Forms.GroupBox();
+            this.btn_UserDocs = new System.Windows.Forms.Button();
             this.btn_AllDocs = new System.Windows.Forms.Button();
             this.btn_RA = new System.Windows.Forms.Button();
             this.btn_DMP = new System.Windows.Forms.Button();
@@ -96,7 +97,6 @@ namespace CMS
             this.lbl_DatHoursSpent = new System.Windows.Forms.Label();
             this.nud_DatHoursSpent = new System.Windows.Forms.NumericUpDown();
             this.chkb_LIDA = new System.Windows.Forms.CheckBox();
-            this.btn_UserDocs = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_pNotes)).BeginInit();
             this.gb_Platform.SuspendLayout();
             this.gb_Governance.SuspendLayout();
@@ -646,13 +646,23 @@ namespace CMS
             this.gb_ProjectDocuments.TabStop = false;
             this.gb_ProjectDocuments.Text = "Project Documents";
             // 
+            // btn_UserDocs
+            // 
+            this.btn_UserDocs.Location = new System.Drawing.Point(9, 116);
+            this.btn_UserDocs.Name = "btn_UserDocs";
+            this.btn_UserDocs.Size = new System.Drawing.Size(75, 23);
+            this.btn_UserDocs.TabIndex = 54;
+            this.btn_UserDocs.Text = "User Docs";
+            this.btn_UserDocs.UseVisualStyleBackColor = true;
+            this.btn_UserDocs.Click += new System.EventHandler(this.btn_UserDocs_Click);
+            // 
             // btn_AllDocs
             // 
-            this.btn_AllDocs.Location = new System.Drawing.Point(104, 116);
+            this.btn_AllDocs.Location = new System.Drawing.Point(90, 116);
             this.btn_AllDocs.Name = "btn_AllDocs";
-            this.btn_AllDocs.Size = new System.Drawing.Size(75, 23);
+            this.btn_AllDocs.Size = new System.Drawing.Size(89, 23);
             this.btn_AllDocs.TabIndex = 49;
-            this.btn_AllDocs.Text = "All Project Docs";
+            this.btn_AllDocs.Text = "Project Docs";
             this.btn_AllDocs.UseVisualStyleBackColor = true;
             this.btn_AllDocs.Click += new System.EventHandler(this.btn_AllDocs_Click);
             // 
@@ -832,16 +842,6 @@ namespace CMS
             this.chkb_LIDA.TabIndex = 53;
             this.chkb_LIDA.Text = "LIDA";
             this.chkb_LIDA.UseVisualStyleBackColor = true;
-            // 
-            // btn_UserDocs
-            // 
-            this.btn_UserDocs.Location = new System.Drawing.Point(9, 116);
-            this.btn_UserDocs.Name = "btn_UserDocs";
-            this.btn_UserDocs.Size = new System.Drawing.Size(75, 23);
-            this.btn_UserDocs.TabIndex = 54;
-            this.btn_UserDocs.Text = "User Docs";
-            this.btn_UserDocs.UseVisualStyleBackColor = true;
-            this.btn_UserDocs.Click += new System.EventHandler(this.btn_UserDocs_Click);
             // 
             // frm_Project
             // 

@@ -256,8 +256,8 @@ namespace CMS
             dgv_PlatformDetails.DataSource = dt_dgv_PlatformDetails;
             dgv_PlatformDetails.Columns["ProjectPlatformInfoID"].Visible = false;
             dgv_PlatformDetails.Sort(dgv_PlatformDetails.Columns["Item"], ListSortDirection.Descending);
-            dgv_PlatformDetails.Columns["Item"].Width = 100;
-            dgv_PlatformDetails.Columns["Info"].Width = 280;
+            dgv_PlatformDetails.Columns["Item"].Width = 120;
+            dgv_PlatformDetails.Columns["Info"].Width = 260;
         }
 
         /// <summary>

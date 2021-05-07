@@ -87,7 +87,9 @@ namespace CMS
                 tb_Organisation.Text = mdl_CurrentUser.Organisation;
                 mtb_UserStartDate.Text = mdl_CurrentUser.StartDate.ToString();
                 mtb_UserEndDate.Text = mdl_CurrentUser.EndDate.ToString();
+                mtb_SEEDAgreement.Text = mdl_CurrentUser.SEEDAgreement.ToString();
                 mtb_IRCAgreement.Text = mdl_CurrentUser.IRCAgreement.ToString();
+                mtb_LASERAgreement.Text = mdl_CurrentUser.LASERAgreement.ToString();
                 mtb_ISET.Text = mdl_CurrentUser.ISET.ToString();
                 mtb_ISAT.Text = mdl_CurrentUser.ISAT.ToString();
                 mtb_SAFE.Text = mdl_CurrentUser.SAFE.ToString();
@@ -225,8 +227,12 @@ namespace CMS
             mtb_UserStartDate.TabIndex = ++x;
             mtb_UserEndDate.TabIndex = ++x;
 
-            gb_Training.TabIndex = ++x;
+            gb_Agreements.TabIndex = ++x;
+            mtb_SEEDAgreement.TabIndex = ++x;
             mtb_IRCAgreement.TabIndex = ++x;
+            mtb_LASERAgreement.TabIndex = ++x;
+
+            gb_Training.TabIndex = ++x;
             mtb_ISET.TabIndex = ++x;
             mtb_ISAT.TabIndex = ++x;
             mtb_SAFE.TabIndex = ++x;
@@ -297,6 +303,18 @@ namespace CMS
                     dateCheck = false;
                 }
             }
+            if (dateCheck == true & mtb_SEEDAgreement.Text != "" & mtb_SEEDAgreement.Text != "  /  /")
+            {
+                try
+                {
+                    mdl_NewUser.SEEDAgreement = Convert.ToDateTime(mtb_SEEDAgreement.Text);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Please enter valid SEED Confidentiality Agreement Date");
+                    dateCheck = false;
+                }
+            }
             if (dateCheck == true & mtb_IRCAgreement.Text != "" & mtb_IRCAgreement.Text != "  /  /")
             {
                 try
@@ -305,7 +323,19 @@ namespace CMS
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Please enter valid IRC Agreement Date");
+                    MessageBox.Show("Please enter valid IRC User Agreement Date");
+                    dateCheck = false;
+                }
+            }
+            if (dateCheck == true & mtb_LASERAgreement.Text != "" & mtb_LASERAgreement.Text != "  /  /")
+            {
+                try
+                {
+                    mdl_NewUser.LASERAgreement = Convert.ToDateTime(mtb_LASERAgreement.Text);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Please enter valid IRC User Agreement Date");
                     dateCheck = false;
                 }
             }
