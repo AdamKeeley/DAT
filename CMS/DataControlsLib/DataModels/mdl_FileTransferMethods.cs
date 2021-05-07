@@ -10,5 +10,7 @@ namespace DataControlsLib.DataModels
     {
         public int MethodID { get; set; }
         public string MethodLabel { get; set; }
+        public DateTime? ValidFrom { get; set; }
+        public DateTime? ValidTo { get; set; }
     }
 }

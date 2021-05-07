@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_DsaAdd));
             this.cb_ExistingDataOwner = new System.Windows.Forms.ComboBox();
             this.gb_DataOwner = new System.Windows.Forms.GroupBox();
@@ -374,17 +372,10 @@
             // 
             this.dgv_AddNote.AllowUserToAddRows = false;
             this.dgv_AddNote.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv_AddNote.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgv_AddNote.Location = new System.Drawing.Point(6, 85);
             this.dgv_AddNote.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgv_AddNote.Name = "dgv_AddNote";
+            this.dgv_AddNote.ReadOnly = true;
             this.dgv_AddNote.RowHeadersWidth = 51;
             this.dgv_AddNote.RowTemplate.Height = 24;
             this.dgv_AddNote.Size = new System.Drawing.Size(644, 166);
@@ -429,16 +420,9 @@
             // 
             this.dgv_DsasProjects.AllowUserToAddRows = false;
             this.dgv_DsasProjects.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv_DsasProjects.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgv_DsasProjects.Location = new System.Drawing.Point(8, 72);
             this.dgv_DsasProjects.Name = "dgv_DsasProjects";
+            this.dgv_DsasProjects.ReadOnly = true;
             this.dgv_DsasProjects.RowHeadersWidth = 51;
             this.dgv_DsasProjects.RowTemplate.Height = 24;
             this.dgv_DsasProjects.Size = new System.Drawing.Size(351, 138);
@@ -468,6 +452,7 @@
             // 
             // btn_Cancel
             // 
+            this.btn_Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_Cancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Cancel.Location = new System.Drawing.Point(739, 606);
             this.btn_Cancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -523,6 +508,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btn_Cancel;
             this.ClientSize = new System.Drawing.Size(1051, 647);
             this.Controls.Add(this.gb_Dates);
             this.Controls.Add(this.gb_GovernanceReq);

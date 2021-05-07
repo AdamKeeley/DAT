@@ -10,5 +10,7 @@ namespace DataControlsLib.DataModels
     {
         public int RequestTypeID { get; set; }
         public string RequestTypeLabel { get; set; }
+        public DateTime? ValidFrom { get; set; }
+        public DateTime? ValidTo { get; set; }
     }
 }
