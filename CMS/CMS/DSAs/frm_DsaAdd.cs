@@ -150,10 +150,10 @@ namespace CMS.DSAs
                 dgv_AmendmentOf.RowHeadersWidth = 15;
             }
 
-            chkb_DSPT.Checked = dsaRecord.DSPT;
-            chkb_ISO27001.Checked = dsaRecord.ISO27001;
-            chkb_Encryption.Checked = dsaRecord.RequiresEncryption;
-            chkb_NoRemoteAccess.Checked = dsaRecord.NoRemoteAccess;
+            chkb_DSPT.Checked = dsaRecord.DSPT ?? false;
+            chkb_ISO27001.Checked = dsaRecord.ISO27001 ?? false;
+            chkb_Encryption.Checked = dsaRecord.RequiresEncryption ?? false;
+            chkb_NoRemoteAccess.Checked = dsaRecord.NoRemoteAccess ?? false;
 
             foreach (string prj in dsaPrjList)
             {
