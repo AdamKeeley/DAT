@@ -1,4 +1,4 @@
-USE lida_dat_cms_test
+USE lida_dat_cms
 GO
 
 CREATE TABLE dbo.tblDsas(
@@ -12,10 +12,10 @@ CREATE TABLE dbo.tblDsas(
 	ExpiryDate			DATETIME NULL,
 	DataDestructionDate	DATETIME NULL,
 	AgreementOwnerEmail	VARCHAR(50) NULL,
-	DSPT				BIT NOT NULL,
-	ISO27001			BIT NOT NULL,
-	RequiresEncryption	BIT NOT NULL,
-	NoRemoteAccess		BIT NOT NULL,
+	DSPT				BIT NULL,
+	ISO27001			BIT NULL,
+	RequiresEncryption	BIT NULL,
+	NoRemoteAccess		BIT NULL,
 	ValidFrom			DATETIME NULL DEFAULT getdate(),
 	ValidTo				DATETIME NULL,
 	Deprecated			BIT NOT NULL DEFAULT 0,
@@ -44,7 +44,7 @@ CREATE TABLE dbo.tblDsasProjects(
 
 CREATE TABLE dbo.tblDsaDataOwners(
 	doID			INT IDENTITY(1,1) NOT NULL,
-	DataOwnerName	VARCHAR(50) NOT NULL UNIQUE,
+	DataOwnerName	VARCHAR(100) NOT NULL UNIQUE,
 	RebrandOf		INT NULL, -- References primary key to link brands when they change their name
 	DataOwnerEmail	VARCHAR(50) NULL,
 	CONSTRAINT PK_DataOwners PRIMARY KEY (doID),
