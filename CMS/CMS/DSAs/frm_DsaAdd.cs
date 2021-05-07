@@ -18,6 +18,7 @@ namespace CMS.DSAs
         public frm_DsaAdd()
         {
             InitializeComponent();
+            setTabIndex();
             PopulateDsaDataset();
             SetInitialControls();
         }
@@ -25,6 +26,7 @@ namespace CMS.DSAs
         public frm_DsaAdd(int id)
         {
             InitializeComponent();
+            setTabIndex();
             PopulateDsaDataset();
             SetInitialControls();
             InputDsaInfo(id);
@@ -53,6 +55,48 @@ namespace CMS.DSAs
         }
 
         public bool insertSuccessful = false;
+
+        /// <summary>
+        /// Each control on form assigned a tab index.
+        /// If any controls are added/removed it's easier to change here than on actual form!
+        /// </summary>
+        private void setTabIndex()
+        {
+            int x = 999;
+            foreach (Control c in this.Controls)
+            {
+                c.TabIndex = x;
+            }
+
+            x = 0;
+
+            lbl_NewDataOwner.TabIndex = ++x;
+            cb_ExistingDataOwner.TabIndex = ++x;
+            chkb_OldDataOwners.TabIndex = ++x;
+            tb_OwnerEmail.TabIndex = ++x;
+
+            tb_FileName.TabIndex = ++x;
+            tb_FilePath.TabIndex = ++x;
+
+            dtp_StartDate.TabIndex = ++x;
+            dtp_ExpiryDate.TabIndex = ++x;
+            dtp_DestroyDate.TabIndex = ++x;
+
+            chkb_DSPT.TabIndex = ++x;
+            chkb_ISO27001.TabIndex = ++x;
+            chkb_Encryption.TabIndex = ++x;
+            chkb_NoRemoteAccess.TabIndex = ++x;
+
+            btn_AddAmendment.TabIndex = ++x;
+
+            tb_AddNote.TabIndex = ++x;
+            btn_AddNote.TabIndex = ++x;
+
+            btn_ProjectAdd.TabIndex = ++x;
+
+            btn_Cancel.TabIndex = ++x;
+            btn_OK.TabIndex = ++x;
+        }
 
         public void PopulateDsaDataset()
         {

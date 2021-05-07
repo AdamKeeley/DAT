@@ -21,6 +21,7 @@ namespace CMS.FileTransfers
         public frm_FileTransfersAdd()
         {
             InitializeComponent();
+            setTabIndex();
             PopulateIODataset();
             SetControls();
         }
@@ -56,6 +57,45 @@ namespace CMS.FileTransfers
         }
 
         public bool insertSuccessful = false;
+
+        /// <summary>
+        /// Each control on form assigned a tab index.
+        /// If any controls are added/removed it's easier to change here than on actual form!
+        /// </summary>
+        private void setTabIndex()
+        {
+            int x = 999;
+            foreach (Control c in this.Controls)
+            {
+                c.TabIndex = x;
+            }
+
+            x = 0;
+
+            cb_Project.TabIndex = ++x;
+            cb_VRE.TabIndex = ++x;
+            cb_RequestType.TabIndex = ++x;
+            cb_RequestedBy.TabIndex = ++x;
+            lbl_NewUser.TabIndex = ++x;
+            tb_RequestNotes.TabIndex = ++x;
+
+            cb_ReviewedBy.TabIndex = ++x;
+            dtp_ReviewDate.TabIndex = ++x;
+            tb_ReviewNotes.TabIndex = ++x;
+            cb_DsaReviewed.TabIndex = ++x;
+            lbl_NewDSA.TabIndex = ++x;
+            chkb_OldDSAs.TabIndex = ++x;
+
+            tb_TransferFrom.TabIndex = ++x;
+            cb_TransferMethod.TabIndex = ++x;
+            tb_TransferTo.TabIndex = ++x;
+            tb_VreDir.TabIndex = ++x;
+            tb_RepoDir.TabIndex = ++x;
+
+            btn_AddFiles.TabIndex = ++x;
+            btn_AddAsset.TabIndex = ++x;
+            btn_Rejections.TabIndex = ++x;
+        }
 
         public void PopulateIODataset()
         {
@@ -311,8 +351,10 @@ namespace CMS.FileTransfers
                 vre: cb_VRE.Text,
                 rt: cb_RequestType.Text,
                 rq: cb_RequestedBy.Text,
+                rqn: tb_RequestNotes.Text.NullIfEmpty(),
                 rv: cb_ReviewedBy.Text,
                 rd: dtp_ReviewDate.Value.Date,
+                rvn: tb_ReviewNotes.Text.NullIfEmpty(),
                 assets: AssetsList,
                 files: FilesList,
                 vreDir: tb_VreDir.Text.NullIfEmpty(),

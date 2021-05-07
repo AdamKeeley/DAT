@@ -34,7 +34,7 @@
             this.cb_VRE = new System.Windows.Forms.ComboBox();
             this.lbl_NewUser = new System.Windows.Forms.Label();
             this.lbl_RequesterNotes = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tb_RequestNotes = new System.Windows.Forms.TextBox();
             this.lbl_RequestedBy = new System.Windows.Forms.Label();
             this.cb_RequestedBy = new System.Windows.Forms.ComboBox();
             this.lbl_RequestType = new System.Windows.Forms.Label();
@@ -92,7 +92,7 @@
             this.gb_Request.Controls.Add(this.cb_VRE);
             this.gb_Request.Controls.Add(this.lbl_NewUser);
             this.gb_Request.Controls.Add(this.lbl_RequesterNotes);
-            this.gb_Request.Controls.Add(this.textBox1);
+            this.gb_Request.Controls.Add(this.tb_RequestNotes);
             this.gb_Request.Controls.Add(this.lbl_RequestedBy);
             this.gb_Request.Controls.Add(this.cb_RequestedBy);
             this.gb_Request.Controls.Add(this.lbl_RequestType);
@@ -150,17 +150,17 @@
             this.lbl_RequesterNotes.Text = "Requester\'s\r\nNote";
             this.lbl_RequesterNotes.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // textBox1
+            // tb_RequestNotes
             // 
-            this.textBox1.AcceptsReturn = true;
-            this.textBox1.AcceptsTab = true;
-            this.textBox1.AllowDrop = true;
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(145, 144);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(343, 80);
-            this.textBox1.TabIndex = 6;
+            this.tb_RequestNotes.AcceptsReturn = true;
+            this.tb_RequestNotes.AcceptsTab = true;
+            this.tb_RequestNotes.AllowDrop = true;
+            this.tb_RequestNotes.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_RequestNotes.Location = new System.Drawing.Point(145, 144);
+            this.tb_RequestNotes.Multiline = true;
+            this.tb_RequestNotes.Name = "tb_RequestNotes";
+            this.tb_RequestNotes.Size = new System.Drawing.Size(343, 80);
+            this.tb_RequestNotes.TabIndex = 6;
             // 
             // lbl_RequestedBy
             // 
@@ -649,7 +649,7 @@
         private System.Windows.Forms.Label lbl_Project;
         private System.Windows.Forms.Label lbl_RequestedBy;
         private System.Windows.Forms.ComboBox cb_RequestedBy;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox tb_RequestNotes;
         private System.Windows.Forms.Label lbl_RequesterNotes;
         private System.Windows.Forms.GroupBox gb_Review;
         private System.Windows.Forms.Label lbl_NewUser;
