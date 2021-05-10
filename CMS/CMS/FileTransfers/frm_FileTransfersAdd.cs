@@ -35,6 +35,11 @@ namespace CMS.FileTransfers
             get { return dgv_FilesList; }
             set { dgv_FilesList.DataSource = value; }
         }
+        public DataGridView FilesListObj
+        {
+            get { return dgv_FilesList; }
+            set { dgv_FilesList = value; }
+        }
         public string SelectedPrj
         {
             get { return cb_Project.SelectedItem.ToString().NullIfEmpty(); }
@@ -54,6 +59,11 @@ namespace CMS.FileTransfers
         {
             get { return dgv_Rejections; }
             set { dgv_Rejections = value; }
+        }
+        public string NumFiles
+        {
+            get { return lbl_NumFiles.Text; }
+            set { lbl_NumFiles.Text = value; }
         }
 
         public bool insertSuccessful = false;
@@ -162,7 +172,7 @@ namespace CMS.FileTransfers
             dgv_Assets.Columns["FileName"].Width = 200;
             dgv_Assets.RowHeadersWidth = 10;
 
-            // Add columns to the assets list DGV
+            // Add columns to the rejections list DGV
             dgv_Rejections.ColumnCount = 2;
             dgv_Rejections.Columns[0].Name = "RejectionReason";
             dgv_Rejections.Columns[1].Name = "FileName";
@@ -307,6 +317,12 @@ namespace CMS.FileTransfers
                                     Environment.NewLine + ex.StackTrace);
                 }
             }
+        }
+
+        private void btn_AddFilesManual_Click(object sender, EventArgs e)
+        {
+            frm_FileListAdd newFileList = new frm_FileListAdd(this);
+            newFileList.Show();
         }
 
         private void btn_AddAsset_Click(object sender, EventArgs e)
