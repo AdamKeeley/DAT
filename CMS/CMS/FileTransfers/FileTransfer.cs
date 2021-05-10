@@ -409,11 +409,11 @@ namespace CMS.FileTransfers
                         cmd.Parameters.Add("@VreNumber", SqlDbType.VarChar, 5).Value = tr.VreNumber;
                         cmd.Parameters.Add("@RequestType", SqlDbType.Int).Value = tr.RequestType;
                         cmd.Parameters.Add("@RequestedBy", SqlDbType.Int).Value = tr.RequestedBy;
-                        cmd.Parameters.Add("@RequesterNotes", SqlDbType.VarChar, int.MaxValue).Value = tr.RequesterNotes;
+                        cmd.Parameters.Add("@RequesterNotes", SqlDbType.VarChar, int.MaxValue).Value = tr?.RequesterNotes ?? (object)DBNull.Value;
                         cmd.Parameters.Add("@ReviewedBy", SqlDbType.Int).Value = tr.ReviewedBy;
                         cmd.Parameters.Add("@ReviewDate", SqlDbType.DateTime).Value =
                             tr.ReviewDate.HasValue ? tr.ReviewDate.Value.Date : (object)DBNull.Value;
-                        cmd.Parameters.Add("@ReviewNotes", SqlDbType.VarChar, int.MaxValue).Value = tr.ReviewNotes;
+                        cmd.Parameters.Add("@ReviewNotes", SqlDbType.VarChar, int.MaxValue).Value = tr?.ReviewNotes ?? (object)DBNull.Value;
                         // Execute insert and get the newly created ID
                         tr.RequestID = (int)cmd.ExecuteScalar();
                     }
