@@ -85,6 +85,12 @@
     <Compile Include="FileTransfers\frm_AssetGroupAdd.Designer.cs">
       <DependentUpon>frm_AssetGroupAdd.cs</DependentUpon>
     </Compile>
+    <Compile Include="FileTransfers\frm_FileListAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FileTransfers\frm_FileListAdd.Designer.cs">
+      <DependentUpon>frm_FileListAdd.cs</DependentUpon>
+    </Compile>
     <Compile Include="FileTransfers\frm_FileTransfersAdd.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -243,6 +249,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FileTransfers\frm_AssetGroupAdd.resx">
       <DependentUpon>frm_AssetGroupAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FileTransfers\frm_FileListAdd.resx">
+      <DependentUpon>frm_FileListAdd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FileTransfers\frm_FileTransfersView.resx">
       <DependentUpon>frm_FileTransfersView.cs</DependentUpon>
