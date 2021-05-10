@@ -75,6 +75,7 @@
             this.dgv_Rejections = new System.Windows.Forms.DataGridView();
             this.btn_OK = new System.Windows.Forms.Button();
             this.btn_Cancel = new System.Windows.Forms.Button();
+            this.btn_AddFilesManual = new System.Windows.Forms.Button();
             this.gb_Request.SuspendLayout();
             this.gb_Review.SuspendLayout();
             this.gb_Files.SuspendLayout();
@@ -394,6 +395,7 @@
             // 
             // gb_Files
             // 
+            this.gb_Files.Controls.Add(this.btn_AddFilesManual);
             this.gb_Files.Controls.Add(this.lbl_NumFiles);
             this.gb_Files.Controls.Add(this.btn_AddFiles);
             this.gb_Files.Controls.Add(this.dgv_FilesList);
@@ -419,11 +421,11 @@
             // btn_AddFiles
             // 
             this.btn_AddFiles.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_AddFiles.Location = new System.Drawing.Point(58, 22);
+            this.btn_AddFiles.Location = new System.Drawing.Point(11, 22);
             this.btn_AddFiles.Name = "btn_AddFiles";
             this.btn_AddFiles.Size = new System.Drawing.Size(192, 32);
             this.btn_AddFiles.TabIndex = 1;
-            this.btn_AddFiles.Text = "Add Files To List";
+            this.btn_AddFiles.Text = "Add From Folder";
             this.btn_AddFiles.UseVisualStyleBackColor = true;
             this.btn_AddFiles.Click += new System.EventHandler(this.btn_AddFiles_Click);
             // 
@@ -607,6 +609,17 @@
             this.btn_Cancel.UseVisualStyleBackColor = true;
             this.btn_Cancel.Click += new System.EventHandler(this.btn_Cancel_Click);
             // 
+            // btn_AddFilesManual
+            // 
+            this.btn_AddFilesManual.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_AddFilesManual.Location = new System.Drawing.Point(209, 22);
+            this.btn_AddFilesManual.Name = "btn_AddFilesManual";
+            this.btn_AddFilesManual.Size = new System.Drawing.Size(192, 32);
+            this.btn_AddFilesManual.TabIndex = 3;
+            this.btn_AddFilesManual.Text = "Add List Manually";
+            this.btn_AddFilesManual.UseVisualStyleBackColor = true;
+            this.btn_AddFilesManual.Click += new System.EventHandler(this.btn_AddFilesManual_Click);
+            // 
             // frm_FileTransfersAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -688,5 +701,6 @@
         private System.Windows.Forms.Label lbl_VRE;
         private System.Windows.Forms.ComboBox cb_VRE;
         private System.Windows.Forms.Label lbl_NumFiles;
+        private System.Windows.Forms.Button btn_AddFilesManual;
     }
 }
