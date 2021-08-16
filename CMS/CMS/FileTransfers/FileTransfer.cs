@@ -228,7 +228,7 @@ namespace CMS.FileTransfers
         {
             // Are any required variables missing or is files list empty
             bool missingInfo = String.IsNullOrWhiteSpace(prj) ||
-                String.IsNullOrWhiteSpace(vre) ||
+                // String.IsNullOrWhiteSpace(vre) ||
                 String.IsNullOrWhiteSpace(rt) ||
                 String.IsNullOrWhiteSpace(rq) ||
                 String.IsNullOrWhiteSpace(rv) ||
@@ -240,7 +240,7 @@ namespace CMS.FileTransfers
             {
                 string missingMsg = "You are missing required information:\n\n";
                 if (String.IsNullOrWhiteSpace(prj)) missingMsg += "Project number\n";
-                if (String.IsNullOrWhiteSpace(vre)) missingMsg += "VRE number\n";
+                // if (String.IsNullOrWhiteSpace(vre)) missingMsg += "VRE number\n";
                 if (String.IsNullOrWhiteSpace(rt)) missingMsg += "Requested transfer type\n";
                 if (String.IsNullOrWhiteSpace(rq)) missingMsg += "Name of requester\n";
                 if (String.IsNullOrWhiteSpace(rv)) missingMsg += "Name of reviewer\n";
