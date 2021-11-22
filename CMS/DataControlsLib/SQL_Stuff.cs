@@ -14,6 +14,12 @@ namespace DataControlsLib
     public static class SQL_Stuff
     {
         /// <summary>
+        /// Define whether application connects to test or live database. 
+        /// Aceptable values are "test" or "live".
+        /// </summary>
+        public static string env = "test";
+
+        /// <summary>
         /// Static variable to store login credentials for CMS database. Used to populate Credential  
         /// property of a new SqlConnection. Using it directly risks garbage collection clearing it after SQL operation.
         /// </summary>
@@ -31,27 +37,33 @@ namespace DataControlsLib
         /// </summary>
         public static void setString()
         {
-            //Azure LIVE!
-            SqlConnectionStringBuilder conStringBuilder = new SqlConnectionStringBuilder
+            if (env == "live")
             {
-                ["Data Source"] = "lida-dat-cms.database.windows.net",
-                ["Initial Catalog"] = "lida_dat_cms",
-                ["Integrated Security"] = "False",
-                ["Persist Security Info"] = "False",
-                ["Encrypt"] = "True",
-            };
-            conString = conStringBuilder.ConnectionString;
+                //Azure LIVE!
+                SqlConnectionStringBuilder conStringBuilder = new SqlConnectionStringBuilder
+                {
+                    ["Data Source"] = "lida-dat-cms.database.windows.net",
+                    ["Initial Catalog"] = "lida_dat_cms",
+                    ["Integrated Security"] = "False",
+                    ["Persist Security Info"] = "False",
+                    ["Encrypt"] = "True",
+                };
+                conString = conStringBuilder.ConnectionString;
+            }
 
-            ////Azure TEST
-            //SqlConnectionStringBuilder conStringBuilder = new SqlConnectionStringBuilder
-            //{
-            //    ["Data Source"] = "lida-dat-cms-test.database.windows.net",
-            //    ["Initial Catalog"] = "lida_dat_cms_test",
-            //    ["Integrated Security"] = "False",
-            //    ["Persist Security Info"] = "False",
-            //    ["Encrypt"] = "True",
-            //};
-            //conString = conStringBuilder.ConnectionString;
+            if (env == "test")
+            {
+                //Azure TEST
+                SqlConnectionStringBuilder conStringBuilder = new SqlConnectionStringBuilder
+                {
+                    ["Data Source"] = "lida-dat-cms-test.database.windows.net",
+                    ["Initial Catalog"] = "lida_dat_cms_test",
+                    ["Integrated Security"] = "False",
+                    ["Persist Security Info"] = "False",
+                    ["Encrypt"] = "True",
+                };
+                conString = conStringBuilder.ConnectionString;
+            }
 
             ////Adam's LIDA desktop
             //conString = "Data Source=IRC-PC010;Initial Catalog=DAT_CMS;Integrated Security=True";

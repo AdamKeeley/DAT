@@ -40,8 +40,16 @@ namespace CMS
                 
                 if (Login.loginCancel == true)
                     Environment.Exit(0);
+
+                if(SQL_Stuff.env == "test")
+                {
+                    lbl_LoggedInAs.Text = "*** TEST ENVIRONMENT *** " + SQL_Stuff.credential.UserId;
+                }
+                else
+                {
+                    lbl_LoggedInAs.Text = SQL_Stuff.credential.UserId;
+                }
                 
-                lbl_LoggedInAs.Text = SQL_Stuff.credential.UserId;
             }
         }
 

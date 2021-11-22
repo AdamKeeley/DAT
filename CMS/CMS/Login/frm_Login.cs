@@ -12,6 +12,7 @@ namespace CMS.Login
         {
             InitializeComponent();
             setTabIndex();
+            setTestColour();
         }
 
         /// <summary>
@@ -109,6 +110,17 @@ namespace CMS.Login
             btn_LoginCancel.TabIndex = ++x;
             btn_ChangePassword.TabIndex = ++x;
             btn_Login.TabIndex = ++x;
+        }
+
+        /// <summary>
+        /// Changes background colour of form if connected to test data
+        /// </summary>
+        private void setTestColour()
+        {
+            if (SQL_Stuff.env == "test")
+            {
+                this.BackColor = System.Drawing.Color.Salmon;
+            }
         }
 
         private void btn_Login_Click(object sender, EventArgs e)
