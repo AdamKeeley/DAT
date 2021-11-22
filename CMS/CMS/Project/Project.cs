@@ -1021,7 +1021,10 @@ namespace CMS
             if (ProjectKristalID == null)
                 return false;
             else
+            {
+                MessageBox.Show("Kristal Reference already on project record");
                 return true;
+            }
         }
 
         /// <summary>

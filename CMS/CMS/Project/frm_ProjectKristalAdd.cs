@@ -47,15 +47,18 @@ namespace CMS
             if (cb_GrantStage.SelectedIndex > -1)
             {
                 int GrantStageID = (int)cb_GrantStage.SelectedValue;
-                int KristalRef = int.Parse(tb_KristalRef.Text);
+                int KristalRef;
 
-                Project Projects = new Project();
-                if (KristalRef > 0)
+                if (int.TryParse(tb_KristalRef.Text, out KristalRef))
                 {
-                    if (Projects.insertProjectKristalReference(projectNumber, GrantStageID, KristalRef) == true)
-                    {
-                        MessageBox.Show("Item added");
-                        return true;
+                    KristalRef = int.Parse(tb_KristalRef.Text);
+                    if (KristalRef > 0)
+                    { Project Projects = new Project();
+                        if (Projects.insertProjectKristalReference(projectNumber, GrantStageID, KristalRef) == true)
+                        {
+                            MessageBox.Show("Item added");
+                            return true;
+                        }
                     }
                 }
                 else

@@ -711,6 +711,34 @@ namespace CMS
             }
         }
 
+        private void removeProjectKristal()
+        {
+            int rowCount = dgv_KristalRef.Rows.GetRowCount(DataGridViewElementStates.Selected);
+
+            if (rowCount > 0)
+            {
+                List<int> removedRefs = new List<int>();
+                for (int i = 0; i < rowCount; i++)
+                {
+                    int rowIndex = dgv_KristalRef.SelectedRows[i].Index;
+                    int projectKristalID = Convert.ToInt32(dgv_KristalRef.Rows[rowIndex].Cells["ProjectKristalID"].Value);
+                    string kristalRef = dgv_KristalRef.Rows[rowIndex].Cells["Kristal Ref"].Value.ToString();
+
+                    Project Projects = new Project();
+                    DialogResult removeRef = MessageBox.Show($"Remove {kristalRef} from project record?", "", MessageBoxButtons.YesNo);
+                    if (removeRef == DialogResult.Yes)
+                    {
+                        Projects.deleteProjectKristal(projectKristalID);
+                        removedRefs.Add(rowIndex);
+                    }
+                }
+                foreach (int rowIndex in removedRefs)
+                {
+                    dgv_KristalRef.Rows.RemoveAt(rowIndex);
+                }
+            }
+        }
+
         private void openProjectDocHistory(int docType)
         {
             using (frm_ProjectDocHistory ProjectDocHistory = new frm_ProjectDocHistory(mdl_CurrentProject.ProjectNumber, ds_Project, docType))
@@ -943,6 +971,11 @@ namespace CMS
                 fillProjectsDataSet();
                 refreshProjectForm(mdl_CurrentProject.ProjectNumber);
             }
+        }
+
+        private void btn_KristalRemove_Click(object sender, EventArgs e)
+        {
+            removeProjectKristal();
         }
 
         //private void dgv_KristalRef_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

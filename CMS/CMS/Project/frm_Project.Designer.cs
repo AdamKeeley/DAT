@@ -115,6 +115,7 @@ namespace CMS
             this.gb_KristalRef = new System.Windows.Forms.GroupBox();
             this.dgv_KristalRef = new System.Windows.Forms.DataGridView();
             this.btn_KristalAdd = new System.Windows.Forms.Button();
+            this.btn_KristalRemove = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_pNotes)).BeginInit();
             this.gb_Platform.SuspendLayout();
             this.gb_Governance.SuspendLayout();
@@ -961,6 +962,7 @@ namespace CMS
             // 
             // gb_KristalRef
             // 
+            this.gb_KristalRef.Controls.Add(this.btn_KristalRemove);
             this.gb_KristalRef.Controls.Add(this.dgv_KristalRef);
             this.gb_KristalRef.Controls.Add(this.btn_KristalAdd);
             this.gb_KristalRef.Location = new System.Drawing.Point(905, 142);
@@ -1012,13 +1014,23 @@ namespace CMS
             // 
             // btn_KristalAdd
             // 
-            this.btn_KristalAdd.Location = new System.Drawing.Point(104, 116);
+            this.btn_KristalAdd.Location = new System.Drawing.Point(23, 116);
             this.btn_KristalAdd.Name = "btn_KristalAdd";
             this.btn_KristalAdd.Size = new System.Drawing.Size(75, 23);
             this.btn_KristalAdd.TabIndex = 1;
             this.btn_KristalAdd.Text = "Add";
             this.btn_KristalAdd.UseVisualStyleBackColor = true;
             this.btn_KristalAdd.Click += new System.EventHandler(this.btn_KristalAdd_Click);
+            // 
+            // btn_KristalRemove
+            // 
+            this.btn_KristalRemove.Location = new System.Drawing.Point(104, 116);
+            this.btn_KristalRemove.Name = "btn_KristalRemove";
+            this.btn_KristalRemove.Size = new System.Drawing.Size(75, 23);
+            this.btn_KristalRemove.TabIndex = 44;
+            this.btn_KristalRemove.Text = "Remove";
+            this.btn_KristalRemove.UseVisualStyleBackColor = true;
+            this.btn_KristalRemove.Click += new System.EventHandler(this.btn_KristalRemove_Click);
             // 
             // frm_Project
             // 
@@ -1160,5 +1172,6 @@ namespace CMS
         private System.Windows.Forms.GroupBox gb_KristalRef;
         private System.Windows.Forms.Button btn_KristalAdd;
         private System.Windows.Forms.DataGridView dgv_KristalRef;
+        private System.Windows.Forms.Button btn_KristalRemove;
     }
 }
