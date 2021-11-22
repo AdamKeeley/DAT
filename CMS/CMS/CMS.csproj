@@ -307,6 +307,9 @@
     <EmbeddedResource Include="Project\frm_ProjectDocHistory.resx">
       <DependentUpon>frm_ProjectDocHistory.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Project\frm_ProjectKristalAdd.resx">
+      <DependentUpon>frm_ProjectKristalAdd.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Project\frm_ProjectPlatformInfoAdd.resx">
       <DependentUpon>frm_ProjectPlatformInfoAdd.cs</DependentUpon>
     </EmbeddedResource>

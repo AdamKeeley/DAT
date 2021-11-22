@@ -938,21 +938,20 @@ namespace CMS
         }
 
         /// <summary>
-        /// 
+        /// On successful insert of ProjectKristal record, inserts new Kristal record if required
         /// </summary>
         /// <param name="pNumber"></param>
         /// <param name="GrantStageID"></param>
         /// <param name="KristalRef"></param>
-        /// <returns>TRUE on successful insert, FALSE on a fail</returns>
+        /// <returns>TRUE on successful insert of a tblProjectKrystal record, FALSE on a fail</returns>
         public bool insertProjectKristalReference(string pNumber, int GrantStageID, int KristalRef)
         {
-            bool success;
-
-            insertKristal(KristalRef, GrantStageID);
-
-            success = insertProjectKristal(pNumber, KristalRef);
-
-            return success;
+            if (insertProjectKristal(pNumber, KristalRef))
+            {
+                insertKristal(KristalRef, GrantStageID);
+                return true;
+            }
+            else return false;
         }
 
         /// <summary>
@@ -975,7 +974,7 @@ namespace CMS
                     qryCheckKristal.CommandText = $"select max([KristalID]) from [dbo].[tblKristal] where [KristalRef] = @KristalRef and ValidTo is null";
                     qryCheckKristal.Parameters.Add("@KristalRef", SqlDbType.Int).Value = KristalRef;
                     conn.Open();
-                    KristalID = (int)qryCheckKristal.ExecuteScalar();
+                    KristalID = qryCheckKristal.ExecuteScalar() as int?;
                 }
             }
             catch (Exception ex)
@@ -984,6 +983,42 @@ namespace CMS
             }
 
             if (KristalID == null)
+                return false;
+            else
+                return true;
+        }
+
+        /// <summary>
+        /// Takes a Project Number & Kristal Reference and queries [dbo].[tblProjectKristal] to see if relationship is already present.
+        /// </summary>
+        /// <param name="KristalRef"></param>
+        /// <returns>TRUE if present, FALSE if not</returns>
+        public bool checkProjectKristalExists(string pNumber, int KristalRef)
+        {
+            int? ProjectKristalID = null;
+            try
+            {
+                SqlConnection conn = new SqlConnection();
+                conn.ConnectionString = SQL_Stuff.conString;
+                conn.Credential = SQL_Stuff.credential;
+                using (conn)
+                {
+                    SqlCommand qryCheckProjectKristal = new SqlCommand();
+                    qryCheckProjectKristal.Connection = conn;
+                    qryCheckProjectKristal.CommandText = $"select max([ProjectKristalID]) from [dbo].[tblProjectKristal] where [ProjectNumber] = @projectNumber and " +
+                        "[KristalRef] = @KristalRef and ValidTo is null";
+                    qryCheckProjectKristal.Parameters.Add("@projectNumber", SqlDbType.VarChar,5).Value = pNumber;
+                    qryCheckProjectKristal.Parameters.Add("@KristalRef", SqlDbType.Int).Value = KristalRef;
+                    conn.Open();
+                    ProjectKristalID = qryCheckProjectKristal.ExecuteScalar() as int?;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to query database for Kristal ref " + Environment.NewLine + Environment.NewLine + ex.Message);
+            }
+
+            if (ProjectKristalID == null)
                 return false;
             else
                 return true;
@@ -1029,39 +1064,42 @@ namespace CMS
         }
 
         /// <summary>
-        /// Creates a relationship between Kristal Reference and Project Number on [dbo].[tblProjectKristal]
+        /// Creates a relationship between Kristal Reference and Project Number on [dbo].[tblProjectKristal] 
+        /// if not already present
         /// </summary>
         /// <param name="pNumber"></param>
         /// <param name="KristalRef"></param>
         /// <returns>TRUE on insert, FALSE on fail</returns>
         public bool insertProjectKristal(string pNumber, int KristalRef)
         {
-            try
+            if (checkProjectKristalExists(pNumber, KristalRef) == false)
             {
-                SqlConnection conn = new SqlConnection();
-                conn.ConnectionString = SQL_Stuff.conString;
-                conn.Credential = SQL_Stuff.credential;
-                using (conn)
+                try
                 {
-                    //create parameterised SQL query to insert a new record to tblProjectNotes
-                    SqlCommand qryInsertProjectKristalRef = new SqlCommand();
-                    qryInsertProjectKristalRef.Connection = conn;
-                    qryInsertProjectKristalRef.CommandText = $"insert into [dbo].[tblProjectKristal] " +
-                        "([ProjectNumber], [KristalRef]) values (@pNumber, @KristalRef)";
-                    qryInsertProjectKristalRef.Parameters.Add("@pNumber", SqlDbType.VarChar, 5).Value = pNumber;
-                    qryInsertProjectKristalRef.Parameters.Add("@KristalRef", SqlDbType.Int).Value = KristalRef;
-                    //open connection and execute insert
-                    conn.Open();
-                    qryInsertProjectKristalRef.ExecuteNonQuery();
+                    SqlConnection conn = new SqlConnection();
+                    conn.ConnectionString = SQL_Stuff.conString;
+                    conn.Credential = SQL_Stuff.credential;
+                    using (conn)
+                    {
+                        //create parameterised SQL query to insert a new record to tblProjectNotes
+                        SqlCommand qryInsertProjectKristalRef = new SqlCommand();
+                        qryInsertProjectKristalRef.Connection = conn;
+                        qryInsertProjectKristalRef.CommandText = $"insert into [dbo].[tblProjectKristal] " +
+                            "([ProjectNumber], [KristalRef]) values (@pNumber, @KristalRef)";
+                        qryInsertProjectKristalRef.Parameters.Add("@pNumber", SqlDbType.VarChar, 5).Value = pNumber;
+                        qryInsertProjectKristalRef.Parameters.Add("@KristalRef", SqlDbType.Int).Value = KristalRef;
+                        //open connection and execute insert
+                        conn.Open();
+                        qryInsertProjectKristalRef.ExecuteNonQuery();
+                    }
+                    return true;
                 }
-                return true;
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Failed to add Kristal Ref to Project" + Environment.NewLine + ex.Message);
+                }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Failed to add Kristal Ref to Project" + Environment.NewLine + ex.Message);
-                return false;
-            }
-
+            return false;
         }
     }
 }
