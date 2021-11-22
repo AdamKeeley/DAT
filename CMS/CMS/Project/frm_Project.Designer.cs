@@ -97,6 +97,7 @@ namespace CMS
             this.lbl_DatHoursSpent = new System.Windows.Forms.Label();
             this.nud_DatHoursSpent = new System.Windows.Forms.NumericUpDown();
             this.chkb_LIDA = new System.Windows.Forms.CheckBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_pNotes)).BeginInit();
             this.gb_Platform.SuspendLayout();
             this.gb_Governance.SuspendLayout();
@@ -206,7 +207,7 @@ namespace CMS
             this.dgv_pNotes.RowTemplate.Height = 24;
             this.dgv_pNotes.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dgv_pNotes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_pNotes.Size = new System.Drawing.Size(676, 150);
+            this.dgv_pNotes.Size = new System.Drawing.Size(876, 150);
             this.dgv_pNotes.TabIndex = 12;
             this.dgv_pNotes.TabStop = false;
             // 
@@ -239,12 +240,12 @@ namespace CMS
             this.tb_NewProjectNote.MaxLength = 8000;
             this.tb_NewProjectNote.Multiline = true;
             this.tb_NewProjectNote.Name = "tb_NewProjectNote";
-            this.tb_NewProjectNote.Size = new System.Drawing.Size(433, 40);
+            this.tb_NewProjectNote.Size = new System.Drawing.Size(632, 40);
             this.tb_NewProjectNote.TabIndex = 10;
             // 
             // btn_InsertProjectNote
             // 
-            this.btn_InsertProjectNote.Location = new System.Drawing.Point(442, 17);
+            this.btn_InsertProjectNote.Location = new System.Drawing.Point(641, 17);
             this.btn_InsertProjectNote.Margin = new System.Windows.Forms.Padding(2);
             this.btn_InsertProjectNote.Name = "btn_InsertProjectNote";
             this.btn_InsertProjectNote.Size = new System.Drawing.Size(55, 40);
@@ -591,14 +592,14 @@ namespace CMS
             this.gb_ProjectNotes.Controls.Add(this.btn_InsertProjectNote);
             this.gb_ProjectNotes.Location = new System.Drawing.Point(12, 293);
             this.gb_ProjectNotes.Name = "gb_ProjectNotes";
-            this.gb_ProjectNotes.Size = new System.Drawing.Size(696, 218);
+            this.gb_ProjectNotes.Size = new System.Drawing.Size(887, 218);
             this.gb_ProjectNotes.TabIndex = 46;
             this.gb_ProjectNotes.TabStop = false;
             this.gb_ProjectNotes.Text = "Notes";
             // 
             // tb_searchNotes
             // 
-            this.tb_searchNotes.Location = new System.Drawing.Point(502, 37);
+            this.tb_searchNotes.Location = new System.Drawing.Point(702, 37);
             this.tb_searchNotes.Name = "tb_searchNotes";
             this.tb_searchNotes.Size = new System.Drawing.Size(179, 20);
             this.tb_searchNotes.TabIndex = 14;
@@ -607,7 +608,7 @@ namespace CMS
             // lbl_searchNotes
             // 
             this.lbl_searchNotes.AutoSize = true;
-            this.lbl_searchNotes.Location = new System.Drawing.Point(501, 21);
+            this.lbl_searchNotes.Location = new System.Drawing.Point(701, 21);
             this.lbl_searchNotes.Name = "lbl_searchNotes";
             this.lbl_searchNotes.Size = new System.Drawing.Size(70, 13);
             this.lbl_searchNotes.TabIndex = 13;
@@ -722,7 +723,7 @@ namespace CMS
             this.gb_PlatformDetails.Controls.Add(this.btn_PlatformDetailsAdd);
             this.gb_PlatformDetails.Location = new System.Drawing.Point(523, 12);
             this.gb_PlatformDetails.Name = "gb_PlatformDetails";
-            this.gb_PlatformDetails.Size = new System.Drawing.Size(376, 124);
+            this.gb_PlatformDetails.Size = new System.Drawing.Size(567, 124);
             this.gb_PlatformDetails.TabIndex = 46;
             this.gb_PlatformDetails.TabStop = false;
             this.gb_PlatformDetails.Text = "Platform Details";
@@ -740,13 +741,13 @@ namespace CMS
             this.dgv_PlatformDetails.RowHeadersVisible = false;
             this.dgv_PlatformDetails.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dgv_PlatformDetails.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_PlatformDetails.Size = new System.Drawing.Size(355, 66);
+            this.dgv_PlatformDetails.Size = new System.Drawing.Size(546, 66);
             this.dgv_PlatformDetails.TabIndex = 41;
             this.dgv_PlatformDetails.TabStop = false;
             // 
             // btn_PlatformDetailsRemove
             // 
-            this.btn_PlatformDetailsRemove.Location = new System.Drawing.Point(295, 91);
+            this.btn_PlatformDetailsRemove.Location = new System.Drawing.Point(486, 91);
             this.btn_PlatformDetailsRemove.Name = "btn_PlatformDetailsRemove";
             this.btn_PlatformDetailsRemove.Size = new System.Drawing.Size(75, 23);
             this.btn_PlatformDetailsRemove.TabIndex = 43;
@@ -756,7 +757,7 @@ namespace CMS
             // 
             // btn_PlatformDetailsAdd
             // 
-            this.btn_PlatformDetailsAdd.Location = new System.Drawing.Point(215, 91);
+            this.btn_PlatformDetailsAdd.Location = new System.Drawing.Point(406, 91);
             this.btn_PlatformDetailsAdd.Name = "btn_PlatformDetailsAdd";
             this.btn_PlatformDetailsAdd.Size = new System.Drawing.Size(75, 23);
             this.btn_PlatformDetailsAdd.TabIndex = 42;
@@ -780,7 +781,7 @@ namespace CMS
             this.gb_DatTime.Controls.Add(this.btn_DatHoursAdd);
             this.gb_DatTime.Controls.Add(this.lbl_DatHoursSpent);
             this.gb_DatTime.Controls.Add(this.nud_DatHoursSpent);
-            this.gb_DatTime.Location = new System.Drawing.Point(714, 293);
+            this.gb_DatTime.Location = new System.Drawing.Point(905, 293);
             this.gb_DatTime.Name = "gb_DatTime";
             this.gb_DatTime.Size = new System.Drawing.Size(185, 218);
             this.gb_DatTime.TabIndex = 52;
@@ -843,12 +844,22 @@ namespace CMS
             this.chkb_LIDA.Text = "LIDA";
             this.chkb_LIDA.UseVisualStyleBackColor = true;
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Location = new System.Drawing.Point(905, 142);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(185, 145);
+            this.groupBox1.TabIndex = 54;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Kristal Reference";
+            // 
             // frm_Project
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btn_ProjectCancel;
-            this.ClientSize = new System.Drawing.Size(914, 561);
+            this.ClientSize = new System.Drawing.Size(1107, 561);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.chkb_LIDA);
             this.Controls.Add(this.gb_DatTime);
             this.Controls.Add(this.lbl_NewUser);
@@ -977,5 +988,6 @@ namespace CMS
         private System.Windows.Forms.DataGridView dgv_DatHours;
         private System.Windows.Forms.CheckBox chkb_LIDA;
         private System.Windows.Forms.Button btn_UserDocs;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }

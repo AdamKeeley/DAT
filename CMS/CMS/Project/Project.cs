@@ -91,7 +91,10 @@ namespace CMS
                         $"  , sum([DatHours]) as AllTime " +
                         $"from [dbo].[tblProjectDatTime] " +
                         $"group by ProjectNumber ");
-                   
+                    SQL_Stuff.getDataTable(conn, null, ds_prj, "tblProjectKristalRef",
+                        $"Select * from [dbo].[tblProjectKristalRef] " +
+                        $"where [ValidTo] is null");
+
                     // get the user tables needed to link to project details and merge with project dataset
                     DataSet ds_prj_usr = getUserDataSet();
                     ds_prj.Merge(ds_prj_usr);
@@ -115,6 +118,9 @@ namespace CMS
                 ds_prj.Relations.Add("ProjectDocument_Document"
                     , ds_prj.Tables["tlkDocuments"].Columns["DocumentID"]
                     , ds_prj.Tables["tblProjectDocument"].Columns["DocumentType"]);
+                ds_prj.Relations.Add("ProjectKristalRef_GrantStage"
+                    , ds_prj.Tables["tlkGrantStage"].Columns["GrantStageID"]
+                    , ds_prj.Tables["tblProjectKristalRef"].Columns["GrantStageID"]);
 
                 ds_prj = addProjectUserDataRelations(ds_prj);
             }
@@ -886,6 +892,78 @@ namespace CMS
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// Logically delete a record from [dbo].[tblProjectKristalRef] based on primary key
+        /// </summary>
+        /// <param name="ProjectKristalRefID"></param>
+        /// <returns>TRUE on successful deletion, FALSE on a fail</returns>
+        public bool deleteProjectKristalRef(int ProjectKristalRefID)
+        {
+            try
+            {
+                //update ValidTo field of current record (perform 'logical' delete)
+                SqlConnection conn = new SqlConnection();
+                conn.ConnectionString = SQL_Stuff.conString;
+                conn.Credential = SQL_Stuff.credential;
+                using (conn)
+                {
+                    SqlCommand qryRemoveProjectKristalRef = new SqlCommand();
+                    qryRemoveProjectKristalRef.Connection = conn;
+                    qryRemoveProjectKristalRef.CommandText = $"update [dbo].[tblProjectKristalRef] " +
+                        $"set[ValidTo] = getdate() " +
+                        $"where[ValidTo] is null " +
+                        $"and [ProjectKristalRefID] = @ProjectKristalRefID";
+                    qryRemoveProjectKristalRef.Parameters.Add("@ProjectKristalRefID", SqlDbType.Int).Value = ProjectKristalRefID;
+                    conn.Open();
+                    qryRemoveProjectKristalRef.ExecuteNonQuery();
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to delete record" + Environment.NewLine + Environment.NewLine + ex);
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Inserts a new record to [dbo].[tblProjectKristalRef]
+        /// </summary>
+        /// <param name="pNumber"></param>
+        /// <param name="GrantStageID"></param>
+        /// <param name="KristalRef"></param>
+        /// <returns>TRUE on successful insert, FALSE on a fail</returns>
+        public bool insertProjectKristalRef(string pNumber, int GrantStageID, int KristalRef)
+        {
+            try
+            {
+                SqlConnection conn = new SqlConnection();
+                conn.ConnectionString = SQL_Stuff.conString;
+                conn.Credential = SQL_Stuff.credential;
+                using (conn)
+                {
+                    //create parameterised SQL query to insert a new record to tblProjectNotes
+                    SqlCommand qryInsertProjectKristalRef = new SqlCommand();
+                    qryInsertProjectKristalRef.Connection = conn;
+                    qryInsertProjectKristalRef.CommandText = $"insert into [dbo].[tblProjectKristalRef] " +
+                        "([ProjectNumber], [GrantStageID], [KristalRef]) values (@pNumber, @GrantStageID, @KristalRef)";
+                    qryInsertProjectKristalRef.Parameters.Add("@pNumber", SqlDbType.VarChar, 5).Value = pNumber;
+                    qryInsertProjectKristalRef.Parameters.Add("@GrantStageID", SqlDbType.Int).Value = GrantStageID;
+                    qryInsertProjectKristalRef.Parameters.Add("@KristalRef", SqlDbType.Int).Value = KristalRef;
+
+                    //open connection and execute insert
+                    conn.Open();
+                    qryInsertProjectKristalRef.ExecuteNonQuery();
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to add new Kristal Ref information" + Environment.NewLine + ex.Message);
+                return false;
+            }
         }
 
     }
