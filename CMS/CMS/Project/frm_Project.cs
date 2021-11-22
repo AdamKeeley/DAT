@@ -61,6 +61,7 @@ namespace CMS
             setProjectUsers(pNumber);
             changeDocButtonColour(pNumber);
             setDatTime(pNumber);
+            setProjectKristalRef(pNumber);
         }
 
         /// <summary>
@@ -258,6 +259,35 @@ namespace CMS
             dgv_PlatformDetails.Sort(dgv_PlatformDetails.Columns["Item"], ListSortDirection.Descending);
             dgv_PlatformDetails.Columns["Item"].Width = 120;
             dgv_PlatformDetails.Columns["Info"].Width = 260;
+        }
+
+        private void setProjectKristalRef(string pNumber)
+        {
+            //populate DataGridView (dgv_KristalRef) from DataTable (ds_Project.Tables["tblProjectKristalRef"])
+            //create new DataTable (dt_dgv_KristalRef) that just contains columns of interest
+            DataTable dt_dgv_KristalRef = new DataTable();
+            dt_dgv_KristalRef.Columns.Add("ProjectKristalRefID");
+            dt_dgv_KristalRef.Columns.Add("Kristal Ref");
+            dt_dgv_KristalRef.Columns.Add("Stage");
+
+            //iterate through each record in source DataTable and add to newly created DataTable
+            DataRow row;
+            foreach (DataRow krRow in ds_Project.Tables["tblProjectKristalRef"].Select($"ProjectNumber = '{pNumber}'"))
+            {
+                row = dt_dgv_KristalRef.NewRow();
+                row["ProjectKristalRefID"] = (int)krRow["ProjectKristalRefID"];
+                row["Kristal Ref"] = (decimal)krRow["KristalRef"];
+                foreach (DataRow grantStageRow in krRow.GetParentRows("ProjectKristalRef_GrantStage"))
+                {
+                    row["Stage"] = (string)grantStageRow["GrantStageDescription"];
+                }
+                dt_dgv_KristalRef.Rows.Add(row);
+            }
+            dgv_KristalRef.DataSource = dt_dgv_KristalRef;
+            dgv_KristalRef.Columns["ProjectKristalRefID"].Visible = false;
+            dgv_KristalRef.Sort(dgv_KristalRef.Columns["Kristal Ref"], ListSortDirection.Descending);
+            dgv_KristalRef.Columns["Kristal Ref"].Width = 60;
+            dgv_KristalRef.Columns["Stage"].Width = 90;
         }
 
         /// <summary>

@@ -94,6 +94,8 @@ namespace CMS
                     SQL_Stuff.getDataTable(conn, null, ds_prj, "tblProjectKristalRef",
                         $"Select * from [dbo].[tblProjectKristalRef] " +
                         $"where [ValidTo] is null");
+                    SQL_Stuff.getDataTable(conn, null, ds_prj, "tlkGrantStage",
+                        $"select * from [dbo].[tlkGrantStage]");
 
                     // get the user tables needed to link to project details and merge with project dataset
                     DataSet ds_prj_usr = getUserDataSet();
