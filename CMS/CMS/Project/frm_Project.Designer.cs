@@ -113,8 +113,8 @@ namespace CMS
             this.nud_DatHoursSpent = new System.Windows.Forms.NumericUpDown();
             this.chkb_LIDA = new System.Windows.Forms.CheckBox();
             this.gb_KristalRef = new System.Windows.Forms.GroupBox();
-            this.btn_KristalAdd = new System.Windows.Forms.Button();
             this.dgv_KristalRef = new System.Windows.Forms.DataGridView();
+            this.btn_KristalAdd = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_pNotes)).BeginInit();
             this.gb_Platform.SuspendLayout();
             this.gb_Governance.SuspendLayout();
@@ -970,15 +970,6 @@ namespace CMS
             this.gb_KristalRef.TabStop = false;
             this.gb_KristalRef.Text = "Kristal Reference";
             // 
-            // btn_KristalAdd
-            // 
-            this.btn_KristalAdd.Location = new System.Drawing.Point(104, 116);
-            this.btn_KristalAdd.Name = "btn_KristalAdd";
-            this.btn_KristalAdd.Size = new System.Drawing.Size(75, 23);
-            this.btn_KristalAdd.TabIndex = 1;
-            this.btn_KristalAdd.Text = "Add";
-            this.btn_KristalAdd.UseVisualStyleBackColor = true;
-            // 
             // dgv_KristalRef
             // 
             this.dgv_KristalRef.AllowUserToAddRows = false;
@@ -1018,6 +1009,16 @@ namespace CMS
             this.dgv_KristalRef.Size = new System.Drawing.Size(170, 91);
             this.dgv_KristalRef.TabIndex = 42;
             this.dgv_KristalRef.TabStop = false;
+            // 
+            // btn_KristalAdd
+            // 
+            this.btn_KristalAdd.Location = new System.Drawing.Point(104, 116);
+            this.btn_KristalAdd.Name = "btn_KristalAdd";
+            this.btn_KristalAdd.Size = new System.Drawing.Size(75, 23);
+            this.btn_KristalAdd.TabIndex = 1;
+            this.btn_KristalAdd.Text = "Add";
+            this.btn_KristalAdd.UseVisualStyleBackColor = true;
+            this.btn_KristalAdd.Click += new System.EventHandler(this.btn_KristalAdd_Click);
             // 
             // frm_Project
             // 

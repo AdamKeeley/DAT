@@ -91,9 +91,16 @@ namespace CMS
                         $"  , sum([DatHours]) as AllTime " +
                         $"from [dbo].[tblProjectDatTime] " +
                         $"group by ProjectNumber ");
-                    SQL_Stuff.getDataTable(conn, null, ds_prj, "tblProjectKristalRef",
-                        $"Select * from [dbo].[tblProjectKristalRef] " +
-                        $"where [ValidTo] is null");
+                    SQL_Stuff.getDataTable(conn, null, ds_prj, "tblProjectKristal",
+                        $"select k.[KristalID] " +
+                        $"    , k.[KristalRef] " +
+                        $"    , k.[GrantStageID] " +
+                        $"    , pk.[ProjectKristalID] " +
+                        $"    , pk.[ProjectNumber] " +
+                        $"from[dbo].[tblKristal] k " +
+                        $"    inner join[dbo].[tblProjectKristal] pk " +
+                        $"        on k.[KristalRef] = pk.[KristalRef] " +
+                        $"where k.[ValidTo] is null and pk.[ValidTo] is null ");
                     SQL_Stuff.getDataTable(conn, null, ds_prj, "tlkGrantStage",
                         $"select * from [dbo].[tlkGrantStage]");
 
@@ -109,7 +116,7 @@ namespace CMS
                     , ds_prj.Tables["tlkClassification"].Columns["classificationID"]
                     , ds_prj.Tables["tblProjects"].Columns["Classification"]);
                 ds_prj.Relations.Add("Project_DATRAG"
-                    , ds_prj.Tables["tlkRAG"].Columns["ragID"]         
+                    , ds_prj.Tables["tlkRAG"].Columns["ragID"]
                     , ds_prj.Tables["tblProjects"].Columns["DATRAG"]);
                 ds_prj.Relations.Add("Project_Faculty"
                     , ds_prj.Tables["tlkFaculty"].Columns["facultyID"]
@@ -120,9 +127,9 @@ namespace CMS
                 ds_prj.Relations.Add("ProjectDocument_Document"
                     , ds_prj.Tables["tlkDocuments"].Columns["DocumentID"]
                     , ds_prj.Tables["tblProjectDocument"].Columns["DocumentType"]);
-                ds_prj.Relations.Add("ProjectKristalRef_GrantStage"
+                ds_prj.Relations.Add("ProjectKristal_GrantStage"
                     , ds_prj.Tables["tlkGrantStage"].Columns["GrantStageID"]
-                    , ds_prj.Tables["tblProjectKristalRef"].Columns["GrantStageID"]);
+                    , ds_prj.Tables["tblProjectKristal"].Columns["GrantStageID"]);
 
                 ds_prj = addProjectUserDataRelations(ds_prj);
             }
@@ -130,7 +137,7 @@ namespace CMS
             {
                 MessageBox.Show("Failed to populate ds_prj DataSet" + Environment.NewLine + Environment.NewLine + ex.Message);
             }
-            
+
             //return DataSet (ds_prj) as the output of this method
             return ds_prj;
         }
@@ -154,11 +161,11 @@ namespace CMS
 
             if (ds_prj.Tables.Contains("tlkLeadApplicant"))
             {
-                if (ds_prj.Relations.Contains("Project_LeadApplicant")) 
-                { 
+                if (ds_prj.Relations.Contains("Project_LeadApplicant"))
+                {
                     ds_prj.Relations.Remove("Project_LeadApplicant");
                     ds_prj.Tables["tblProjects"].Constraints.Remove("Project_LeadApplicant");
-                } 
+                }
                 ds_prj.Tables.Remove("tlkLeadApplicant");
             }
 
@@ -284,7 +291,7 @@ namespace CMS
         public mdl_Project getProject(string pNumber, DataSet ds_Project)
         {
             mdl_Project mdl_Project = new mdl_Project();
-            
+
             //if no records found, try will fail at "DataRow pRow = pRows[i];" and go to catch
             try
             {
@@ -303,7 +310,7 @@ namespace CMS
                 DataRow pRow = pRows[i];
 
                 //populate DataRow to output with values from pRow
-                mdl_Project.pID         = (int)pRow["pID"];
+                mdl_Project.pID = (int)pRow["pID"];
                 mdl_Project.ProjectNumber = pRow["ProjectNumber"].ToString();
                 mdl_Project.ProjectName = pRow["ProjectName"].ToString();
                 if (pRow["PortfolioNumber"].ToString().Length > 0)
@@ -339,7 +346,7 @@ namespace CMS
             {
                 MessageBox.Show("Failed to load project details" + Environment.NewLine + Environment.NewLine + ex.Message);
             }
-            
+
             return mdl_Project;
         }
 
@@ -383,7 +390,7 @@ namespace CMS
 
             if (current_pID == pID)
                 recordCurrent = true;
-            
+
             return recordCurrent;
         }
 
@@ -410,8 +417,8 @@ namespace CMS
                     qryDeleteProject.Parameters.Add("@pID", SqlDbType.Int).Value = pID;
                     conn.Open();
                     qryDeleteProject.ExecuteNonQuery();
-                    }
-                
+                }
+
             }
             catch (Exception ex)
             {
@@ -715,7 +722,7 @@ namespace CMS
                     SqlParameter param_Accepted = new SqlParameter("@Accepted", mdl_ProjectDoc.Accepted == null ? (object)DBNull.Value : mdl_ProjectDoc.Accepted);
                     qry_insertNewDoc.Parameters.Add(param_Accepted);
                     param_Accepted.IsNullable = true;
-                    
+
                     conn.Open();
                     qry_insertNewDoc.ExecuteNonQuery();
                 }
@@ -727,7 +734,7 @@ namespace CMS
                 return false;
             }
         }
-        
+
         public bool deleteProjectDocument(int pdID)
         {
             bool success = false;
@@ -749,7 +756,7 @@ namespace CMS
                     //open connection and execute insert
                     conn.Open();
                     qryUpdateProjectDoc.ExecuteNonQuery();
-                    
+
                     success = true;
                 }
             }
@@ -758,7 +765,7 @@ namespace CMS
                 MessageBox.Show("Failed to delete project document." + Environment.NewLine + ex.Message);
                 //throw;
             }
-            
+
             return success;
         }
 
@@ -897,11 +904,11 @@ namespace CMS
         }
 
         /// <summary>
-        /// Logically delete a record from [dbo].[tblProjectKristalRef] based on primary key
+        /// Logically delete a record from [dbo].[tblProjectKristal] based on primary key
         /// </summary>
         /// <param name="ProjectKristalRefID"></param>
         /// <returns>TRUE on successful deletion, FALSE on a fail</returns>
-        public bool deleteProjectKristalRef(int ProjectKristalRefID)
+        public bool deleteProjectKristal(int ProjectKristalID)
         {
             try
             {
@@ -911,15 +918,15 @@ namespace CMS
                 conn.Credential = SQL_Stuff.credential;
                 using (conn)
                 {
-                    SqlCommand qryRemoveProjectKristalRef = new SqlCommand();
-                    qryRemoveProjectKristalRef.Connection = conn;
-                    qryRemoveProjectKristalRef.CommandText = $"update [dbo].[tblProjectKristalRef] " +
+                    SqlCommand qryRemoveProjectKristal = new SqlCommand();
+                    qryRemoveProjectKristal.Connection = conn;
+                    qryRemoveProjectKristal.CommandText = $"update [dbo].[tblProjectKristal] " +
                         $"set[ValidTo] = getdate() " +
                         $"where[ValidTo] is null " +
-                        $"and [ProjectKristalRefID] = @ProjectKristalRefID";
-                    qryRemoveProjectKristalRef.Parameters.Add("@ProjectKristalRefID", SqlDbType.Int).Value = ProjectKristalRefID;
+                        $"and [ProjectKristalID] = @ProjectKristalID";
+                    qryRemoveProjectKristal.Parameters.Add("@ProjectKristalID", SqlDbType.Int).Value = ProjectKristalID;
                     conn.Open();
-                    qryRemoveProjectKristalRef.ExecuteNonQuery();
+                    qryRemoveProjectKristal.ExecuteNonQuery();
                 }
                 return true;
             }
@@ -931,13 +938,103 @@ namespace CMS
         }
 
         /// <summary>
-        /// Inserts a new record to [dbo].[tblProjectKristalRef]
+        /// 
         /// </summary>
         /// <param name="pNumber"></param>
         /// <param name="GrantStageID"></param>
         /// <param name="KristalRef"></param>
         /// <returns>TRUE on successful insert, FALSE on a fail</returns>
-        public bool insertProjectKristalRef(string pNumber, int GrantStageID, int KristalRef)
+        public bool insertProjectKristalReference(string pNumber, int GrantStageID, int KristalRef)
+        {
+            bool success;
+
+            insertKristal(KristalRef, GrantStageID);
+
+            success = insertProjectKristal(pNumber, KristalRef);
+
+            return success;
+        }
+
+        /// <summary>
+        /// Takes a Kristal reference and queries [dbo].[tblKristal] to see if it is already present.
+        /// </summary>
+        /// <param name="KristalRef"></param>
+        /// <returns>TRUE if present, FALSE if not</returns>
+        public bool checkKristalExists(int KristalRef)
+        {
+            int? KristalID = null;
+            try
+            {
+                SqlConnection conn = new SqlConnection();
+                conn.ConnectionString = SQL_Stuff.conString;
+                conn.Credential = SQL_Stuff.credential;
+                using (conn)
+                {
+                    SqlCommand qryCheckKristal = new SqlCommand();
+                    qryCheckKristal.Connection = conn;
+                    qryCheckKristal.CommandText = $"select max([KristalID]) from [dbo].[tblKristal] where [KristalRef] = @KristalRef and ValidTo is null";
+                    qryCheckKristal.Parameters.Add("@KristalRef", SqlDbType.Int).Value = KristalRef;
+                    conn.Open();
+                    KristalID = (int)qryCheckKristal.ExecuteScalar();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to query database for Kristal ref " + Environment.NewLine + Environment.NewLine + ex.Message);
+            }
+
+            if (KristalID == null)
+                return false;
+            else
+                return true;
+        }
+
+        /// <summary>
+        /// Inserts a new Kristal Reference to [dbo].[tblKristal] if not already present
+        /// </summary>
+        /// <param name="KristalRef"></param>
+        /// <param name="GrantStageID"></param>
+        /// <returns>TRUE on insert, FALSE on no insert</returns>
+        public bool insertKristal(int KristalRef, int GrantStageID)
+        {
+            if (checkKristalExists(KristalRef) == false)
+            {
+                try
+                {
+                    SqlConnection conn = new SqlConnection();
+                    conn.ConnectionString = SQL_Stuff.conString;
+                    conn.Credential = SQL_Stuff.credential;
+                    using (conn)
+                    {
+                        //create parameterised SQL query to insert a new record to tblProjectNotes
+                        SqlCommand qryInsertKristal = new SqlCommand();
+                        qryInsertKristal.Connection = conn;
+                        qryInsertKristal.CommandText = $"insert into [dbo].[tblKristal] " +
+                            "([KristalRef], GrantStageID) values (@KristalRef, @GrantStageID)";
+                        qryInsertKristal.Parameters.Add("@KristalRef", SqlDbType.Int).Value = KristalRef;
+                        qryInsertKristal.Parameters.Add("@GrantStageID", SqlDbType.Int).Value = GrantStageID;
+                        //open connection and execute insert
+                        conn.Open();
+                        qryInsertKristal.ExecuteNonQuery();
+                    }
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Failed to add new Kristal Ref to database" + Environment.NewLine + ex.Message);
+                    return false;
+                }
+            }
+            else return false;
+        }
+
+        /// <summary>
+        /// Creates a relationship between Kristal Reference and Project Number on [dbo].[tblProjectKristal]
+        /// </summary>
+        /// <param name="pNumber"></param>
+        /// <param name="KristalRef"></param>
+        /// <returns>TRUE on insert, FALSE on fail</returns>
+        public bool insertProjectKristal(string pNumber, int KristalRef)
         {
             try
             {
@@ -949,12 +1046,10 @@ namespace CMS
                     //create parameterised SQL query to insert a new record to tblProjectNotes
                     SqlCommand qryInsertProjectKristalRef = new SqlCommand();
                     qryInsertProjectKristalRef.Connection = conn;
-                    qryInsertProjectKristalRef.CommandText = $"insert into [dbo].[tblProjectKristalRef] " +
-                        "([ProjectNumber], [GrantStageID], [KristalRef]) values (@pNumber, @GrantStageID, @KristalRef)";
+                    qryInsertProjectKristalRef.CommandText = $"insert into [dbo].[tblProjectKristal] " +
+                        "([ProjectNumber], [KristalRef]) values (@pNumber, @KristalRef)";
                     qryInsertProjectKristalRef.Parameters.Add("@pNumber", SqlDbType.VarChar, 5).Value = pNumber;
-                    qryInsertProjectKristalRef.Parameters.Add("@GrantStageID", SqlDbType.Int).Value = GrantStageID;
                     qryInsertProjectKristalRef.Parameters.Add("@KristalRef", SqlDbType.Int).Value = KristalRef;
-
                     //open connection and execute insert
                     conn.Open();
                     qryInsertProjectKristalRef.ExecuteNonQuery();
@@ -963,10 +1058,10 @@ namespace CMS
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Failed to add new Kristal Ref information" + Environment.NewLine + ex.Message);
+                MessageBox.Show("Failed to add Kristal Ref to Project" + Environment.NewLine + ex.Message);
                 return false;
             }
-        }
 
+        }
     }
-}        
+}

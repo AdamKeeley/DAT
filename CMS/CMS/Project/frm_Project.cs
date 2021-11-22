@@ -266,25 +266,25 @@ namespace CMS
             //populate DataGridView (dgv_KristalRef) from DataTable (ds_Project.Tables["tblProjectKristalRef"])
             //create new DataTable (dt_dgv_KristalRef) that just contains columns of interest
             DataTable dt_dgv_KristalRef = new DataTable();
-            dt_dgv_KristalRef.Columns.Add("ProjectKristalRefID");
+            dt_dgv_KristalRef.Columns.Add("ProjectKristalID");
             dt_dgv_KristalRef.Columns.Add("Kristal Ref");
             dt_dgv_KristalRef.Columns.Add("Stage");
 
             //iterate through each record in source DataTable and add to newly created DataTable
             DataRow row;
-            foreach (DataRow krRow in ds_Project.Tables["tblProjectKristalRef"].Select($"ProjectNumber = '{pNumber}'"))
+            foreach (DataRow krRow in ds_Project.Tables["tblProjectKristal"].Select($"ProjectNumber = '{pNumber}'"))
             {
                 row = dt_dgv_KristalRef.NewRow();
-                row["ProjectKristalRefID"] = (int)krRow["ProjectKristalRefID"];
+                row["ProjectKristalID"] = (int)krRow["ProjectKristalID"];
                 row["Kristal Ref"] = (decimal)krRow["KristalRef"];
-                foreach (DataRow grantStageRow in krRow.GetParentRows("ProjectKristalRef_GrantStage"))
+                foreach (DataRow grantStageRow in krRow.GetParentRows("ProjectKristal_GrantStage"))
                 {
                     row["Stage"] = (string)grantStageRow["GrantStageDescription"];
                 }
                 dt_dgv_KristalRef.Rows.Add(row);
             }
             dgv_KristalRef.DataSource = dt_dgv_KristalRef;
-            dgv_KristalRef.Columns["ProjectKristalRefID"].Visible = false;
+            dgv_KristalRef.Columns["ProjectKristalID"].Visible = false;
             dgv_KristalRef.Sort(dgv_KristalRef.Columns["Kristal Ref"], ListSortDirection.Descending);
             dgv_KristalRef.Columns["Kristal Ref"].Width = 60;
             dgv_KristalRef.Columns["Stage"].Width = 90;
@@ -908,16 +908,19 @@ namespace CMS
             //Passing through DocumentID = 0; does not represent any DocType in SQL db will be treated as wildcard
             openProjectDocHistory(0);
         }
+
         private void btn_Proposal_Click(object sender, EventArgs e)
         {
             //Passing through DocumentID = 1; corresponds to Project Proposal in SQL db
             openProjectDocHistory(1);
         }
+
         private void btn_DMP_Click(object sender, EventArgs e)
         {
             //Passing through DocumentID = 2; corresponds to DMP in SQL db
             openProjectDocHistory(2);
         }
+
         private void btn_RA_Click(object sender, EventArgs e)
         {
             //Passing through DocumentID = 3; corresponds to Risk Assessment in SQL db
@@ -931,5 +934,34 @@ namespace CMS
                 frm_pud.ShowDialog();
             }
         }
+
+        private void btn_KristalAdd_Click(object sender, EventArgs e)
+        {
+            using (frm_ProjectKristalAdd ProjectKristalAdd = new frm_ProjectKristalAdd(mdl_CurrentProject.ProjectNumber, ds_Project))
+            {
+                ProjectKristalAdd.ShowDialog();
+                fillProjectsDataSet();
+                refreshProjectForm(mdl_CurrentProject.ProjectNumber);
+            }
+        }
+
+        //private void dgv_KristalRef_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        //{
+        //    int r = e.RowIndex;
+
+        //    if (r > -1)
+        //    {
+        //        try
+        //        {
+        //            int ProjectKri = Convert.ToInt32(dgv_ProjectUsers.Rows[r].Cells["User Number"].Value);
+        //            frm_User User = new frm_User(UserNumber);
+        //            User.Show();
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            MessageBox.Show("Please double click on a data row to see user details." + Environment.NewLine + ex.Message);
+        //        }
+        //    }
+        //}
     }
 }

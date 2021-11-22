@@ -12,7 +12,7 @@ namespace CMS
 {
     public partial class frm_ProjectKristalAdd : Form
     {
-        public frm_ProjectKristalAdd()
+        public frm_ProjectKristalAdd(string ProjectNumber, DataSet ds_Project)
         {
             InitializeComponent();
         }
