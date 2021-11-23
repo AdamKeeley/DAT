@@ -287,7 +287,9 @@ namespace CMS
                 }
                 dt_dgv_KristalRef.Rows.Add(row);
             }
-            dgv_KristalRef.DataSource = dt_dgv_KristalRef;
+            DataView dv_dgv_KristalRef = dt_dgv_KristalRef.DefaultView;
+            dv_dgv_KristalRef.Sort = "Kristal Ref";
+            dgv_KristalRef.DataSource = dv_dgv_KristalRef;
             dgv_KristalRef.Columns["ProjectKristalID"].Visible = false;
             dgv_KristalRef.Columns["KristalID"].Visible = false;
             dgv_KristalRef.Columns["KristalStageID"].Visible = false;

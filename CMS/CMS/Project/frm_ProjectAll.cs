@@ -217,6 +217,7 @@ namespace CMS
                 {
                     KristalRef.Add(kRow["KristalRef"].ToString());
                 }
+                KristalRef.Sort();
                 a_row["KristalRef"] = string.Join(";", KristalRef);
                 
                 a_row["ProjectNumber"] = pRow["ProjectNumber"];
