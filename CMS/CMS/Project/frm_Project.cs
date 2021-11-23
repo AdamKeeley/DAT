@@ -456,6 +456,10 @@ namespace CMS
             btn_RA.TabIndex = ++x;
             btn_AllDocs.TabIndex = ++x;
 
+            gb_KristalRef.TabIndex = ++x;
+            btn_KristalAdd.TabIndex = ++x;
+            btn_KristalRemove.TabIndex = ++x;
+
             gb_ProjectNotes.TabIndex = ++x;
             tb_NewProjectNote.TabIndex = ++x;
             btn_InsertProjectNote.TabIndex = ++x;

@@ -88,9 +88,6 @@ namespace CMS
 
             x = 0;
 
-            lbl_KristalRef.TabIndex = ++x;
-            lbl_KristalRefValue.TabIndex = ++x;
-            lbl_AppStage.TabIndex = ++x;
             cb_GrantStage.TabIndex = ++x;
             btn_KristalEdit_OK.TabIndex = ++x;
             btn_KristalEdit_Cancel.TabIndex = ++x;
