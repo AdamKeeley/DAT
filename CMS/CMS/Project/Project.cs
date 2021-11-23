@@ -903,7 +903,7 @@ namespace CMS
             return true;
         }
 
-        public bool deleteKristal (int KristalID)
+        public bool deleteKristal(int KristalID)
         {
             try
             {
@@ -931,7 +931,7 @@ namespace CMS
                 return false;
             }
         }
-        
+
         /// <summary>
         /// Logically delete a record from [dbo].[tblProjectKristal] based on primary key
         /// </summary>
@@ -988,9 +988,9 @@ namespace CMS
         /// </summary>
         /// <param name="KristalRef"></param>
         /// <returns>Returns the KristalID if preseant, null if not</returns>
-        public int? checkKristalExists(int KristalRef)
+        public int?[] checkKristalExists(int KristalRef)
         {
-            int? KristalID = null;
+            int?[] Kristal = new int?[2];
             try
             {
                 SqlConnection conn = new SqlConnection();
@@ -1000,10 +1000,18 @@ namespace CMS
                 {
                     SqlCommand qryCheckKristal = new SqlCommand();
                     qryCheckKristal.Connection = conn;
-                    qryCheckKristal.CommandText = $"select max([KristalID]) from [dbo].[tblKristal] where [KristalRef] = @KristalRef and ValidTo is null";
+                    qryCheckKristal.CommandText = $"select top 1 [KristalID], [GrantStageID] from [dbo].[tblKristal] where [KristalRef] = @KristalRef and ValidTo is null";
                     qryCheckKristal.Parameters.Add("@KristalRef", SqlDbType.Int).Value = KristalRef;
                     conn.Open();
-                    KristalID = qryCheckKristal.ExecuteScalar() as int?;
+
+                    SqlDataReader reader = qryCheckKristal.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Kristal[0] = Convert.ToInt32(reader["KristalID"].ToString());
+                        Kristal[1] = Convert.ToInt32(reader["GrantStageID"].ToString());
+                    }
+
+                    //KristalID = qryCheckKristal.ExecuteScalar() as int?;
                 }
             }
             catch (Exception ex)
@@ -1011,7 +1019,7 @@ namespace CMS
                 MessageBox.Show("Failed to query database for Kristal ref " + Environment.NewLine + Environment.NewLine + ex.Message);
             }
 
-            return KristalID;
+            return Kristal;
         }
 
         /// <summary>
@@ -1033,7 +1041,7 @@ namespace CMS
                     qryCheckProjectKristal.Connection = conn;
                     qryCheckProjectKristal.CommandText = $"select max([ProjectKristalID]) from [dbo].[tblProjectKristal] where [ProjectNumber] = @projectNumber and " +
                         "[KristalRef] = @KristalRef and ValidTo is null";
-                    qryCheckProjectKristal.Parameters.Add("@projectNumber", SqlDbType.VarChar,5).Value = pNumber;
+                    qryCheckProjectKristal.Parameters.Add("@projectNumber", SqlDbType.VarChar, 5).Value = pNumber;
                     qryCheckProjectKristal.Parameters.Add("@KristalRef", SqlDbType.Int).Value = KristalRef;
                     conn.Open();
                     ProjectKristalID = qryCheckProjectKristal.ExecuteScalar() as int?;
@@ -1059,12 +1067,22 @@ namespace CMS
         /// <param name="KristalRef"></param>
         /// <param name="GrantStageID"></param>
         /// <returns>TRUE on insert, FALSE on no insert</returns>
-        public bool insertKristal(int KristalRef, int GrantStageID)
+        public bool insertKristal(int KristalRef, int selectedGrantStageID)
         {
-            int? existingKristalID = checkKristalExists(KristalRef);
+            int?[] existingKristal = checkKristalExists(KristalRef);
+            int? existingKristalID = existingKristal[0];
+            int? existingKristalGrantStageID = existingKristal[1];
 
-            if (existingKristalID != null)
+            //if the kristal reference already exists and has the same stage as is selected do nothing.
+            if (existingKristalID != null & existingKristalGrantStageID == selectedGrantStageID)
+                return false;
+
+            //if the kristal reference exists with a different stage it needs updating
+            //  logical delete before insert
+            if (existingKristalID != null & existingKristalGrantStageID != selectedGrantStageID)
                 deleteKristal((int)existingKristalID);
+
+            //insert a kristal reference
             try
             {
                 SqlConnection conn = new SqlConnection();
@@ -1078,7 +1096,7 @@ namespace CMS
                     qryInsertKristal.CommandText = $"insert into [dbo].[tblKristal] " +
                         "([KristalRef], GrantStageID) values (@KristalRef, @GrantStageID)";
                     qryInsertKristal.Parameters.Add("@KristalRef", SqlDbType.Int).Value = KristalRef;
-                    qryInsertKristal.Parameters.Add("@GrantStageID", SqlDbType.Int).Value = GrantStageID;
+                    qryInsertKristal.Parameters.Add("@GrantStageID", SqlDbType.Int).Value = selectedGrantStageID;
                     //open connection and execute insert
                     conn.Open();
                     qryInsertKristal.ExecuteNonQuery();
@@ -1091,6 +1109,7 @@ namespace CMS
                 return false;
             }
         }
+
 
         /// <summary>
         /// Creates a relationship between Kristal Reference and Project Number on [dbo].[tblProjectKristal] 
