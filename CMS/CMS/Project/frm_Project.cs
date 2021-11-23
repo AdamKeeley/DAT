@@ -219,7 +219,7 @@ namespace CMS
             dgv_pNotes.DataSource = dt_dgv_pNotes;
 
             //format DataGridView (dgv_pNotes) column widths etc.
-            dgv_pNotes.Columns["Note"].Width = 511;
+            dgv_pNotes.Columns["Note"].Width = 711;
             dgv_pNotes.Columns["Created Date"].Width = 81;
             dgv_pNotes.Columns["Created By"].Width = 81;
             dgv_pNotes.Columns["Note"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
@@ -257,8 +257,8 @@ namespace CMS
             dgv_PlatformDetails.DataSource = dt_dgv_PlatformDetails;
             dgv_PlatformDetails.Columns["ProjectPlatformInfoID"].Visible = false;
             dgv_PlatformDetails.Sort(dgv_PlatformDetails.Columns["Item"], ListSortDirection.Descending);
-            dgv_PlatformDetails.Columns["Item"].Width = 120;
-            dgv_PlatformDetails.Columns["Info"].Width = 260;
+            dgv_PlatformDetails.Columns["Item"].Width = 150;
+            dgv_PlatformDetails.Columns["Info"].Width = 395;
         }
 
         private void setProjectKristalRef(string pNumber)
@@ -292,8 +292,8 @@ namespace CMS
             dgv_KristalRef.Columns["KristalID"].Visible = false;
             dgv_KristalRef.Columns["KristalStageID"].Visible = false;
             dgv_KristalRef.Sort(dgv_KristalRef.Columns["Kristal Ref"], ListSortDirection.Descending);
-            dgv_KristalRef.Columns["Kristal Ref"].Width = 60;
-            dgv_KristalRef.Columns["Stage"].Width = 90;
+            dgv_KristalRef.Columns["Kristal Ref"].Width = 70;
+            dgv_KristalRef.Columns["Stage"].Width = 100;
         }
 
         /// <summary>

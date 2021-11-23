@@ -251,7 +251,7 @@ namespace CMS
             this.dgv_pNotes.RowTemplate.Height = 24;
             this.dgv_pNotes.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dgv_pNotes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_pNotes.Size = new System.Drawing.Size(876, 150);
+            this.dgv_pNotes.Size = new System.Drawing.Size(875, 150);
             this.dgv_pNotes.TabIndex = 12;
             this.dgv_pNotes.TabStop = false;
             // 
@@ -284,12 +284,12 @@ namespace CMS
             this.tb_NewProjectNote.MaxLength = 8000;
             this.tb_NewProjectNote.Multiline = true;
             this.tb_NewProjectNote.Name = "tb_NewProjectNote";
-            this.tb_NewProjectNote.Size = new System.Drawing.Size(632, 40);
+            this.tb_NewProjectNote.Size = new System.Drawing.Size(630, 40);
             this.tb_NewProjectNote.TabIndex = 10;
             // 
             // btn_InsertProjectNote
             // 
-            this.btn_InsertProjectNote.Location = new System.Drawing.Point(641, 17);
+            this.btn_InsertProjectNote.Location = new System.Drawing.Point(639, 17);
             this.btn_InsertProjectNote.Margin = new System.Windows.Forms.Padding(2);
             this.btn_InsertProjectNote.Name = "btn_InsertProjectNote";
             this.btn_InsertProjectNote.Size = new System.Drawing.Size(55, 40);
@@ -312,7 +312,7 @@ namespace CMS
             // btn_ProjectCancel
             // 
             this.btn_ProjectCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btn_ProjectCancel.Location = new System.Drawing.Point(843, 526);
+            this.btn_ProjectCancel.Location = new System.Drawing.Point(1034, 526);
             this.btn_ProjectCancel.Margin = new System.Windows.Forms.Padding(2);
             this.btn_ProjectCancel.Name = "btn_ProjectCancel";
             this.btn_ProjectCancel.Size = new System.Drawing.Size(56, 24);
@@ -323,7 +323,7 @@ namespace CMS
             // 
             // btn_ProjectOK
             // 
-            this.btn_ProjectOK.Location = new System.Drawing.Point(783, 526);
+            this.btn_ProjectOK.Location = new System.Drawing.Point(974, 526);
             this.btn_ProjectOK.Margin = new System.Windows.Forms.Padding(2);
             this.btn_ProjectOK.Name = "btn_ProjectOK";
             this.btn_ProjectOK.Size = new System.Drawing.Size(56, 24);
@@ -334,7 +334,7 @@ namespace CMS
             // 
             // btn_ProjectApply
             // 
-            this.btn_ProjectApply.Location = new System.Drawing.Point(722, 526);
+            this.btn_ProjectApply.Location = new System.Drawing.Point(913, 526);
             this.btn_ProjectApply.Margin = new System.Windows.Forms.Padding(2);
             this.btn_ProjectApply.Name = "btn_ProjectApply";
             this.btn_ProjectApply.Size = new System.Drawing.Size(56, 24);
@@ -519,7 +519,7 @@ namespace CMS
             // 
             // btn_Refresh
             // 
-            this.btn_Refresh.Location = new System.Drawing.Point(642, 527);
+            this.btn_Refresh.Location = new System.Drawing.Point(833, 527);
             this.btn_Refresh.Name = "btn_Refresh";
             this.btn_Refresh.Size = new System.Drawing.Size(75, 23);
             this.btn_Refresh.TabIndex = 31;
@@ -667,9 +667,9 @@ namespace CMS
             // 
             // tb_searchNotes
             // 
-            this.tb_searchNotes.Location = new System.Drawing.Point(702, 37);
+            this.tb_searchNotes.Location = new System.Drawing.Point(699, 37);
             this.tb_searchNotes.Name = "tb_searchNotes";
-            this.tb_searchNotes.Size = new System.Drawing.Size(179, 20);
+            this.tb_searchNotes.Size = new System.Drawing.Size(180, 20);
             this.tb_searchNotes.TabIndex = 14;
             this.tb_searchNotes.TextChanged += new System.EventHandler(this.searchItemAddedNotes);
             // 
@@ -833,7 +833,7 @@ namespace CMS
             this.dgv_PlatformDetails.RowHeadersVisible = false;
             this.dgv_PlatformDetails.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dgv_PlatformDetails.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_PlatformDetails.Size = new System.Drawing.Size(546, 66);
+            this.dgv_PlatformDetails.Size = new System.Drawing.Size(545, 66);
             this.dgv_PlatformDetails.TabIndex = 41;
             this.dgv_PlatformDetails.TabStop = false;
             // 
