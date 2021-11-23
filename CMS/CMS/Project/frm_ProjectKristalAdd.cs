@@ -16,12 +16,12 @@ namespace CMS
         {
             InitializeComponent();
             setTabIndex();
-            setProjectPlatformInfoAdd(ProjectNumber, ds_Project);
+            setProjectKristalAdd(ProjectNumber, ds_Project);
         }
 
         string projectNumber;
 
-        private void setProjectPlatformInfoAdd(string pNumber, DataSet ds_prj)
+        private void setProjectKristalAdd(string pNumber, DataSet ds_prj)
         {
             try
             {
