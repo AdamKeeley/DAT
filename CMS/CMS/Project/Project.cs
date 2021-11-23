@@ -903,6 +903,35 @@ namespace CMS
             return true;
         }
 
+        public bool deleteKristal (int KristalID)
+        {
+            try
+            {
+                //update ValidTo field of current record (perform 'logical' delete)
+                SqlConnection conn = new SqlConnection();
+                conn.ConnectionString = SQL_Stuff.conString;
+                conn.Credential = SQL_Stuff.credential;
+                using (conn)
+                {
+                    SqlCommand qryRemoveKristal = new SqlCommand();
+                    qryRemoveKristal.Connection = conn;
+                    qryRemoveKristal.CommandText = $"update [dbo].[tblKristal] " +
+                        $"set[ValidTo] = getdate() " +
+                        $"where[ValidTo] is null " +
+                        $"and [KristalID] = @KristalID";
+                    qryRemoveKristal.Parameters.Add("@KristalID", SqlDbType.Int).Value = KristalID;
+                    conn.Open();
+                    qryRemoveKristal.ExecuteNonQuery();
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to delete record" + Environment.NewLine + Environment.NewLine + ex);
+                return false;
+            }
+        }
+        
         /// <summary>
         /// Logically delete a record from [dbo].[tblProjectKristal] based on primary key
         /// </summary>

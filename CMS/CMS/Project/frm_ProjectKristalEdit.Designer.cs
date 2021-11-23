@@ -82,15 +82,18 @@
             this.btn_KristalEdit_OK.TabIndex = 51;
             this.btn_KristalEdit_OK.Text = "OK";
             this.btn_KristalEdit_OK.UseVisualStyleBackColor = true;
+            this.btn_KristalEdit_OK.Click += new System.EventHandler(this.btn_KristalEdit_OK_Click);
             // 
             // btn_KristalEdit_Cancel
             // 
+            this.btn_KristalEdit_Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_KristalEdit_Cancel.Location = new System.Drawing.Point(199, 63);
             this.btn_KristalEdit_Cancel.Name = "btn_KristalEdit_Cancel";
             this.btn_KristalEdit_Cancel.Size = new System.Drawing.Size(75, 23);
             this.btn_KristalEdit_Cancel.TabIndex = 52;
             this.btn_KristalEdit_Cancel.Text = "Cancel";
             this.btn_KristalEdit_Cancel.UseVisualStyleBackColor = true;
+            this.btn_KristalEdit_Cancel.Click += new System.EventHandler(this.btn_KristalEdit_Cancel_Click);
             // 
             // frm_ProjectKristalEdit
             // 

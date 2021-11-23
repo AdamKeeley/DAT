@@ -267,6 +267,7 @@ namespace CMS
             //create new DataTable (dt_dgv_KristalRef) that just contains columns of interest
             DataTable dt_dgv_KristalRef = new DataTable();
             dt_dgv_KristalRef.Columns.Add("ProjectKristalID");
+            dt_dgv_KristalRef.Columns.Add("KristalID");
             dt_dgv_KristalRef.Columns.Add("Kristal Ref");
             dt_dgv_KristalRef.Columns.Add("KristalStageID");
             dt_dgv_KristalRef.Columns.Add("Stage");
@@ -277,6 +278,7 @@ namespace CMS
             {
                 row = dt_dgv_KristalRef.NewRow();
                 row["ProjectKristalID"] = (int)krRow["ProjectKristalID"];
+                row["KristalID"] = (int)krRow["KristalID"];
                 row["Kristal Ref"] = (decimal)krRow["KristalRef"];
                 row["KristalStageID"] = (int)krRow["GrantStageID"];
                 foreach (DataRow grantStageRow in krRow.GetParentRows("ProjectKristal_GrantStage"))
@@ -287,6 +289,7 @@ namespace CMS
             }
             dgv_KristalRef.DataSource = dt_dgv_KristalRef;
             dgv_KristalRef.Columns["ProjectKristalID"].Visible = false;
+            dgv_KristalRef.Columns["KristalID"].Visible = false;
             dgv_KristalRef.Columns["KristalStageID"].Visible = false;
             dgv_KristalRef.Sort(dgv_KristalRef.Columns["Kristal Ref"], ListSortDirection.Descending);
             dgv_KristalRef.Columns["Kristal Ref"].Width = 60;
@@ -989,11 +992,19 @@ namespace CMS
             {
                 try
                 {
+                    int KristalID = Convert.ToInt32(dgv_KristalRef.Rows[r].Cells["KristalID"].Value);
                     int KristalRef = Convert.ToInt32(dgv_KristalRef.Rows[r].Cells["Kristal Ref"].Value);
                     int GrantStage = Convert.ToInt32(dgv_KristalRef.Rows[r].Cells["KristalStageID"].Value);
                     DataTable tlkGrantStage = ds_Project.Tables["tlkGrantStage"];
-                    frm_ProjectKristalEdit KristalEdit = new frm_ProjectKristalEdit(KristalRef, GrantStage, tlkGrantStage);
-                    KristalEdit.Show();
+
+
+                    using (frm_ProjectKristalEdit KristalEdit = new frm_ProjectKristalEdit(KristalID, KristalRef, GrantStage, tlkGrantStage))
+                    {
+                        KristalEdit.ShowDialog();
+                        fillProjectsDataSet();
+                        setProjectKristalRef(mdl_CurrentProject.ProjectNumber);
+                    }
+                    
                 }
                 catch (Exception ex)
                 {

@@ -12,15 +12,23 @@ namespace CMS
 {
     public partial class frm_ProjectKristalEdit : Form
     {
-        public frm_ProjectKristalEdit(int KristalRef, int GrantStage, DataTable tlkGrantStage)
+        public frm_ProjectKristalEdit(int KristalID, int KristalRef, int GrantStage, DataTable tlkGrantStage)
         {
             InitializeComponent();
             setTabIndex();
-            setKristalEdit(KristalRef, GrantStage, tlkGrantStage);
+            setKristalEdit(KristalID, KristalRef, GrantStage, tlkGrantStage);
         }
 
-        public void setKristalEdit(int KristalRef, int GrantStage, DataTable tlkGrantStage)
+        int currentKristalID;
+        int currentKristalRef;
+        int currentGrantStageID;
+
+        public void setKristalEdit(int KristalID, int KristalRef, int GrantStageID, DataTable tlkGrantStage)
         {
+            currentKristalID = KristalID;
+            currentKristalRef = KristalRef;
+            currentGrantStageID = GrantStageID;
+
             try
             {
                 lbl_KristalRefValue.Text = (string)KristalRef.ToString();
@@ -31,13 +39,30 @@ namespace CMS
                 cb_GrantStage.DataSource = GrantStages;
                 cb_GrantStage.ValueMember = "GrantStageID";
                 cb_GrantStage.DisplayMember = "GrantStageDescription";
-                //cb_GrantStage.SelectedIndex = -1;
-                cb_GrantStage.SelectedValue = GrantStage;
+                cb_GrantStage.SelectedValue = GrantStageID;
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Method setKristalEdit of class frm_ProjectKristalEdit has failed" + Environment.NewLine + ex.Message);
             }
+        }
+
+        public bool updateKristalStage(int KristalRef, int currentGrantStageID)
+        {
+            int newGrantStageID = (int)cb_GrantStage.SelectedValue;
+            //if app stage changed 
+            if (newGrantStageID != currentGrantStageID)
+            {
+                Project project = new Project();
+                //logically delete current record from dbo.tblKristal
+                if (project.deleteKristal(currentKristalID))
+                {
+                    //insert new record to dbo.tblKristal
+                    project.insertKristal(KristalRef, newGrantStageID);
+                    return true;
+                }
+            }
+            return false;
         }
 
         /// <summary>
@@ -60,6 +85,18 @@ namespace CMS
             cb_GrantStage.TabIndex = ++x;
             btn_KristalEdit_OK.TabIndex = ++x;
             btn_KristalEdit_Cancel.TabIndex = ++x;
+        }
+
+        private void btn_KristalEdit_OK_Click(object sender, EventArgs e)
+        {
+
+            if (updateKristalStage(currentKristalRef, currentGrantStageID))
+                this.Close();
+        }
+
+        private void btn_KristalEdit_Cancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
