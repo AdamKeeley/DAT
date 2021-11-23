@@ -49,9 +49,18 @@ namespace CMS
 
         public bool updateKristalStage(int KristalRef, int currentGrantStageID)
         {
-            int newGrantStageID = (int)cb_GrantStage.SelectedValue;
+            int newGrantStageID = 0;
+            try
+            {
+                newGrantStageID = (int)cb_GrantStage.SelectedValue;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Please select a valid Application Stage");
+            }
+
             //if app stage changed 
-            if (newGrantStageID != currentGrantStageID)
+            if (newGrantStageID > 0 & newGrantStageID != currentGrantStageID)
             {
                 Project project = new Project();
                 //logically delete current record from dbo.tblKristal

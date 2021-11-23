@@ -50,11 +50,11 @@
             this.lbl_recordCount = new System.Windows.Forms.Label();
             this.lbl_PortfolioNo = new System.Windows.Forms.Label();
             this.cb_PortfolioNo = new System.Windows.Forms.ComboBox();
-            this.lbl_VreNumber = new System.Windows.Forms.Label();
-            this.cb_VreNumber = new System.Windows.Forms.ComboBox();
+            this.lbl_KristalRef = new System.Windows.Forms.Label();
             this.chkb_LIDA = new System.Windows.Forms.CheckBox();
             this.cb_pNumber = new System.Windows.Forms.ComboBox();
             this.lbl_pNumber = new System.Windows.Forms.Label();
+            this.tb_KristalRef = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ProjectList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -278,23 +278,14 @@
             this.cb_PortfolioNo.TabIndex = 7;
             this.cb_PortfolioNo.TextChanged += new System.EventHandler(this.searchItemAddedProjectAll);
             // 
-            // lbl_VreNumber
+            // lbl_KristalRef
             // 
-            this.lbl_VreNumber.AutoSize = true;
-            this.lbl_VreNumber.Location = new System.Drawing.Point(243, 9);
-            this.lbl_VreNumber.Name = "lbl_VreNumber";
-            this.lbl_VreNumber.Size = new System.Drawing.Size(90, 13);
-            this.lbl_VreNumber.TabIndex = 0;
-            this.lbl_VreNumber.Text = "IRC VRE Number";
-            // 
-            // cb_VreNumber
-            // 
-            this.cb_VreNumber.FormattingEnabled = true;
-            this.cb_VreNumber.Location = new System.Drawing.Point(339, 6);
-            this.cb_VreNumber.Name = "cb_VreNumber";
-            this.cb_VreNumber.Size = new System.Drawing.Size(124, 21);
-            this.cb_VreNumber.TabIndex = 1;
-            this.cb_VreNumber.TextChanged += new System.EventHandler(this.searchItemAddedProjectAll);
+            this.lbl_KristalRef.AutoSize = true;
+            this.lbl_KristalRef.Location = new System.Drawing.Point(245, 9);
+            this.lbl_KristalRef.Name = "lbl_KristalRef";
+            this.lbl_KristalRef.Size = new System.Drawing.Size(88, 13);
+            this.lbl_KristalRef.TabIndex = 0;
+            this.lbl_KristalRef.Text = "Kristal Reference";
             // 
             // chkb_LIDA
             // 
@@ -327,16 +318,24 @@
             this.lbl_pNumber.TabIndex = 74;
             this.lbl_pNumber.Text = "Project Number";
             // 
+            // tb_KristalRef
+            // 
+            this.tb_KristalRef.Location = new System.Drawing.Point(339, 6);
+            this.tb_KristalRef.Name = "tb_KristalRef";
+            this.tb_KristalRef.Size = new System.Drawing.Size(124, 20);
+            this.tb_KristalRef.TabIndex = 76;
+            this.tb_KristalRef.TextChanged += new System.EventHandler(this.searchItemAddedProjectAll);
+            // 
             // frm_ProjectAll
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1073, 593);
+            this.Controls.Add(this.tb_KristalRef);
             this.Controls.Add(this.cb_pNumber);
             this.Controls.Add(this.lbl_pNumber);
             this.Controls.Add(this.chkb_LIDA);
-            this.Controls.Add(this.cb_VreNumber);
-            this.Controls.Add(this.lbl_VreNumber);
+            this.Controls.Add(this.lbl_KristalRef);
             this.Controls.Add(this.cb_PortfolioNo);
             this.Controls.Add(this.lbl_PortfolioNo);
             this.Controls.Add(this.lbl_recordCount);
@@ -389,10 +388,10 @@
         private System.Windows.Forms.Label lbl_recordCount;
         private System.Windows.Forms.Label lbl_PortfolioNo;
         private System.Windows.Forms.ComboBox cb_PortfolioNo;
-        private System.Windows.Forms.Label lbl_VreNumber;
-        private System.Windows.Forms.ComboBox cb_VreNumber;
+        private System.Windows.Forms.Label lbl_KristalRef;
         private System.Windows.Forms.CheckBox chkb_LIDA;
         private System.Windows.Forms.ComboBox cb_pNumber;
         private System.Windows.Forms.Label lbl_pNumber;
+        private System.Windows.Forms.TextBox tb_KristalRef;
     }
 }

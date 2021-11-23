@@ -38,20 +38,6 @@ namespace CMS
                 //searchItemAdded method. This boolean flag prevents the method from running fillDataGridView 12 times
                 textChanged = false;
 
-                //Only display VRE numbers that are present in the PlatformInfoID column of the ProjectPlatformInfo table
-                DataTable dt_VreNumber = new DataTable();
-                dt_VreNumber.Columns.Add("ProjectNumber");
-                dt_VreNumber.Columns.Add("VRENumber");
-                dt_VreNumber.DefaultView.Sort = "VRENumber";
-                DataRow vreRow;
-                foreach (DataRow pRow in ds_Project.Tables["tblProjectPlatformInfo"].Select("[PlatformInfoID] = 1"))
-                {
-                    vreRow = dt_VreNumber.NewRow();
-                    vreRow["ProjectNumber"] = pRow["ProjectNumber"];
-                    vreRow["VRENumber"] = pRow["ProjectPlatformInfo"];
-                    dt_VreNumber.Rows.Add(vreRow);
-                }
-
                 //Only display portfolio numbers that are present in the PortfolioNumber column of the Project table
                 DataTable dt_PortfolioNo = new DataTable();
                 dt_PortfolioNo.Columns.Add("ProjectNumber");
@@ -125,10 +111,6 @@ namespace CMS
                 cb_pNumber.DisplayMember = "ProjectNumber";
                 cb_pNumber.SelectedIndex = -1;
 
-                cb_VreNumber.DataSource = dt_VreNumber.DefaultView.ToTable(true, "ProjectNumber", "VRENumber");
-                cb_VreNumber.ValueMember = "ProjectNumber";
-                cb_VreNumber.DisplayMember = "VRENumber";
-                cb_VreNumber.SelectedIndex = -1;              
                 cb_DATRAG.DataSource = ds_Project.Tables["tlkRAG"];
                 cb_DATRAG.ValueMember = "ragID";
                 cb_DATRAG.DisplayMember = "ragDescription";
@@ -172,7 +154,7 @@ namespace CMS
         private void fillDataGridView()
         {
             string filterProjectNumber      = $"ProjectNumber like '%{cb_pNumber.Text}%'";
-            string filterVreNumber          = $"VreNumber like '%{cb_VreNumber.Text}%'";
+            string filterKristalRef         = $"KristalRef like '%{tb_KristalRef.Text}%'";
             string filterProjectName        = $"ProjectName like '%{tb_pNameValue.Text}%'";
             string filterPortfolioNumber    = $"PortfolioNumber like '%{cb_PortfolioNo.Text}%'";
             string filterStage              = $"Stage = '{cb_pStage.Text}'";
@@ -188,8 +170,8 @@ namespace CMS
             List<string> filter = new List<string>();
             if (cb_pNumber.Text != "")
                 filter.Add(filterProjectNumber);
-            if (cb_VreNumber.Text != "")
-                filter.Add(filterVreNumber);
+            if (tb_KristalRef.Text != "")
+                filter.Add(filterKristalRef);
             if (tb_pNameValue.Text != "")
                 filter.Add(filterProjectName);
             if (cb_PortfolioNo.Text != "")
@@ -214,7 +196,7 @@ namespace CMS
             DataTable dt_ProjectList = new DataTable();
             dt_ProjectList.Columns.Add("ProjectNumber");
             dt_ProjectList.Columns.Add("ProjectName");
-            dt_ProjectList.Columns.Add("VreNumber");
+            dt_ProjectList.Columns.Add("KristalRef");
             dt_ProjectList.Columns.Add("PortfolioNumber");
             dt_ProjectList.Columns.Add("Stage");
             dt_ProjectList.Columns.Add("Classification");
@@ -229,13 +211,13 @@ namespace CMS
             {
                 a_row = dt_ProjectList.NewRow();
 
-                //concatenate VreNumbers into single string by creating a list and joining with seperator
-                List<string> vreNo = new List<string>();
-                foreach (DataRow vRow in ds_Project.Tables["tblProjectPlatformInfo"].Select($"[PlatformInfoID] = 1 and [ProjectNumber] = '{pRow["ProjectNumber"]}'"))
+                //concatenate Kristal Refs into single string by creating a list and joining with seperator
+                List<string> KristalRef = new List<string>();
+                foreach (DataRow kRow in ds_Project.Tables["tblProjectKristal"].Select($"[ProjectNumber] = '{pRow["ProjectNumber"]}'"))
                 {
-                    vreNo.Add(vRow["ProjectPlatformInfo"].ToString());
+                    KristalRef.Add(kRow["KristalRef"].ToString());
                 }
-                a_row["VreNumber"] = string.Join(";", vreNo);
+                a_row["KristalRef"] = string.Join(";", KristalRef);
                 
                 a_row["ProjectNumber"] = pRow["ProjectNumber"];
                 a_row["ProjectName"] = pRow["ProjectName"];
@@ -273,7 +255,7 @@ namespace CMS
             DataTable dt_dgv_ProjectList = new DataTable();
             dt_dgv_ProjectList.Columns.Add("Project Number");
             dt_dgv_ProjectList.Columns.Add("Project Name");
-            dt_dgv_ProjectList.Columns.Add("IRC VRE Number");
+            dt_dgv_ProjectList.Columns.Add("Kristal Ref");
             dt_dgv_ProjectList.Columns.Add("Portfolio Number"); 
             dt_dgv_ProjectList.Columns.Add("Stage");
             dt_dgv_ProjectList.Columns.Add("Classification");
@@ -289,7 +271,7 @@ namespace CMS
                 f_row = dt_dgv_ProjectList.NewRow();
                 f_row["Project Number"] = pRow["ProjectNumber"];
                 f_row["Project Name"] = pRow["ProjectName"];
-                f_row["IRC VRE Number"] = pRow["VreNumber"];
+                f_row["Kristal Ref"] = pRow["KristalRef"];
                 f_row["Portfolio Number"] = pRow["PortfolioNumber"];
                 f_row["Stage"] = pRow["Stage"];
                 f_row["Classification"] = pRow["Classification"];
@@ -307,7 +289,7 @@ namespace CMS
 
             dgv_ProjectList.Columns["Project Number"].Width = 50;
             dgv_ProjectList.Columns["Project Name"].Width = 250;
-            dgv_ProjectList.Columns["IRC VRE Number"].Width = 50;
+            dgv_ProjectList.Columns["Kristal Ref"].Width = 50;
             dgv_ProjectList.Columns["Portfolio Number"].Width = 50;
             dgv_ProjectList.Columns["Stage"].Width = 70;
             dgv_ProjectList.Columns["Classification"].Width = 90;
@@ -337,7 +319,7 @@ namespace CMS
 
             cb_pNumber.TabIndex = ++x;
 
-            cb_VreNumber.TabIndex = ++x;
+            tb_KristalRef.TabIndex = ++x;
             cb_DATRAG.TabIndex = ++x;
             tb_pNameValue.TabIndex = ++x;
 
@@ -385,8 +367,7 @@ namespace CMS
         {
             cb_pNumber.ResetText();
             cb_pNumber.SelectedIndex = -1;
-            cb_VreNumber.ResetText();
-            cb_VreNumber.SelectedIndex = -1;
+            tb_KristalRef.Clear();
             cb_DATRAG.SelectedIndex = -1;
             tb_pNameValue.Clear();
             cb_PortfolioNo.ResetText();
