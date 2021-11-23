@@ -68,6 +68,8 @@
             // 
             // cb_GrantStage
             // 
+            this.cb_GrantStage.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.cb_GrantStage.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cb_GrantStage.FormattingEnabled = true;
             this.cb_GrantStage.Location = new System.Drawing.Point(108, 38);
             this.cb_GrantStage.Name = "cb_GrantStage";

@@ -268,6 +268,7 @@ namespace CMS
             DataTable dt_dgv_KristalRef = new DataTable();
             dt_dgv_KristalRef.Columns.Add("ProjectKristalID");
             dt_dgv_KristalRef.Columns.Add("Kristal Ref");
+            dt_dgv_KristalRef.Columns.Add("KristalStageID");
             dt_dgv_KristalRef.Columns.Add("Stage");
 
             //iterate through each record in source DataTable and add to newly created DataTable
@@ -277,6 +278,7 @@ namespace CMS
                 row = dt_dgv_KristalRef.NewRow();
                 row["ProjectKristalID"] = (int)krRow["ProjectKristalID"];
                 row["Kristal Ref"] = (decimal)krRow["KristalRef"];
+                row["KristalStageID"] = (int)krRow["GrantStageID"];
                 foreach (DataRow grantStageRow in krRow.GetParentRows("ProjectKristal_GrantStage"))
                 {
                     row["Stage"] = (string)grantStageRow["GrantStageDescription"];
@@ -285,6 +287,7 @@ namespace CMS
             }
             dgv_KristalRef.DataSource = dt_dgv_KristalRef;
             dgv_KristalRef.Columns["ProjectKristalID"].Visible = false;
+            dgv_KristalRef.Columns["KristalStageID"].Visible = false;
             dgv_KristalRef.Sort(dgv_KristalRef.Columns["Kristal Ref"], ListSortDirection.Descending);
             dgv_KristalRef.Columns["Kristal Ref"].Width = 60;
             dgv_KristalRef.Columns["Stage"].Width = 90;
@@ -724,10 +727,10 @@ namespace CMS
                     int projectKristalID = Convert.ToInt32(dgv_KristalRef.Rows[rowIndex].Cells["ProjectKristalID"].Value);
                     string kristalRef = dgv_KristalRef.Rows[rowIndex].Cells["Kristal Ref"].Value.ToString();
 
-                    Project Projects = new Project();
                     DialogResult removeRef = MessageBox.Show($"Remove {kristalRef} from project record?", "", MessageBoxButtons.YesNo);
                     if (removeRef == DialogResult.Yes)
                     {
+                        Project Projects = new Project();
                         Projects.deleteProjectKristal(projectKristalID);
                         removedRefs.Add(rowIndex);
                     }
@@ -978,23 +981,25 @@ namespace CMS
             removeProjectKristal();
         }
 
-        //private void dgv_KristalRef_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        //{
-        //    int r = e.RowIndex;
+        private void dgv_KristalRef_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int r = e.RowIndex;
 
-        //    if (r > -1)
-        //    {
-        //        try
-        //        {
-        //            int ProjectKri = Convert.ToInt32(dgv_ProjectUsers.Rows[r].Cells["User Number"].Value);
-        //            frm_User User = new frm_User(UserNumber);
-        //            User.Show();
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            MessageBox.Show("Please double click on a data row to see user details." + Environment.NewLine + ex.Message);
-        //        }
-        //    }
-        //}
+            if (r > -1)
+            {
+                try
+                {
+                    int KristalRef = Convert.ToInt32(dgv_KristalRef.Rows[r].Cells["Kristal Ref"].Value);
+                    int GrantStage = Convert.ToInt32(dgv_KristalRef.Rows[r].Cells["KristalStageID"].Value);
+                    DataTable tlkGrantStage = ds_Project.Tables["tlkGrantStage"];
+                    frm_ProjectKristalEdit KristalEdit = new frm_ProjectKristalEdit(KristalRef, GrantStage, tlkGrantStage);
+                    KristalEdit.Show();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Please double click on a data row to see Kristal details." + Environment.NewLine + ex.Message);
+                }
+            }
+        }
     }
 }

@@ -113,9 +113,9 @@ namespace CMS
             this.nud_DatHoursSpent = new System.Windows.Forms.NumericUpDown();
             this.chkb_LIDA = new System.Windows.Forms.CheckBox();
             this.gb_KristalRef = new System.Windows.Forms.GroupBox();
+            this.btn_KristalRemove = new System.Windows.Forms.Button();
             this.dgv_KristalRef = new System.Windows.Forms.DataGridView();
             this.btn_KristalAdd = new System.Windows.Forms.Button();
-            this.btn_KristalRemove = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_pNotes)).BeginInit();
             this.gb_Platform.SuspendLayout();
             this.gb_Governance.SuspendLayout();
@@ -972,6 +972,16 @@ namespace CMS
             this.gb_KristalRef.TabStop = false;
             this.gb_KristalRef.Text = "Kristal Reference";
             // 
+            // btn_KristalRemove
+            // 
+            this.btn_KristalRemove.Location = new System.Drawing.Point(104, 116);
+            this.btn_KristalRemove.Name = "btn_KristalRemove";
+            this.btn_KristalRemove.Size = new System.Drawing.Size(75, 23);
+            this.btn_KristalRemove.TabIndex = 44;
+            this.btn_KristalRemove.Text = "Remove";
+            this.btn_KristalRemove.UseVisualStyleBackColor = true;
+            this.btn_KristalRemove.Click += new System.EventHandler(this.btn_KristalRemove_Click);
+            // 
             // dgv_KristalRef
             // 
             this.dgv_KristalRef.AllowUserToAddRows = false;
@@ -1011,6 +1021,7 @@ namespace CMS
             this.dgv_KristalRef.Size = new System.Drawing.Size(170, 91);
             this.dgv_KristalRef.TabIndex = 42;
             this.dgv_KristalRef.TabStop = false;
+            this.dgv_KristalRef.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_KristalRef_CellDoubleClick);
             // 
             // btn_KristalAdd
             // 
@@ -1021,16 +1032,6 @@ namespace CMS
             this.btn_KristalAdd.Text = "Add";
             this.btn_KristalAdd.UseVisualStyleBackColor = true;
             this.btn_KristalAdd.Click += new System.EventHandler(this.btn_KristalAdd_Click);
-            // 
-            // btn_KristalRemove
-            // 
-            this.btn_KristalRemove.Location = new System.Drawing.Point(104, 116);
-            this.btn_KristalRemove.Name = "btn_KristalRemove";
-            this.btn_KristalRemove.Size = new System.Drawing.Size(75, 23);
-            this.btn_KristalRemove.TabIndex = 44;
-            this.btn_KristalRemove.Text = "Remove";
-            this.btn_KristalRemove.UseVisualStyleBackColor = true;
-            this.btn_KristalRemove.Click += new System.EventHandler(this.btn_KristalRemove_Click);
             // 
             // frm_Project
             // 
