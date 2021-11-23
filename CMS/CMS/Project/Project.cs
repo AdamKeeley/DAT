@@ -987,8 +987,8 @@ namespace CMS
         /// Takes a Kristal reference and queries [dbo].[tblKristal] to see if it is already present.
         /// </summary>
         /// <param name="KristalRef"></param>
-        /// <returns>TRUE if present, FALSE if not</returns>
-        public bool checkKristalExists(int KristalRef)
+        /// <returns>Returns the KristalID if preseant, null if not</returns>
+        public int? checkKristalExists(int KristalRef)
         {
             int? KristalID = null;
             try
@@ -1011,10 +1011,7 @@ namespace CMS
                 MessageBox.Show("Failed to query database for Kristal ref " + Environment.NewLine + Environment.NewLine + ex.Message);
             }
 
-            if (KristalID == null)
-                return false;
-            else
-                return true;
+            return KristalID;
         }
 
         /// <summary>
@@ -1064,35 +1061,35 @@ namespace CMS
         /// <returns>TRUE on insert, FALSE on no insert</returns>
         public bool insertKristal(int KristalRef, int GrantStageID)
         {
-            if (checkKristalExists(KristalRef) == false)
+            int? existingKristalID = checkKristalExists(KristalRef);
+
+            if (existingKristalID != null)
+                deleteKristal((int)existingKristalID);
+            try
             {
-                try
+                SqlConnection conn = new SqlConnection();
+                conn.ConnectionString = SQL_Stuff.conString;
+                conn.Credential = SQL_Stuff.credential;
+                using (conn)
                 {
-                    SqlConnection conn = new SqlConnection();
-                    conn.ConnectionString = SQL_Stuff.conString;
-                    conn.Credential = SQL_Stuff.credential;
-                    using (conn)
-                    {
-                        //create parameterised SQL query to insert a new record to tblProjectNotes
-                        SqlCommand qryInsertKristal = new SqlCommand();
-                        qryInsertKristal.Connection = conn;
-                        qryInsertKristal.CommandText = $"insert into [dbo].[tblKristal] " +
-                            "([KristalRef], GrantStageID) values (@KristalRef, @GrantStageID)";
-                        qryInsertKristal.Parameters.Add("@KristalRef", SqlDbType.Int).Value = KristalRef;
-                        qryInsertKristal.Parameters.Add("@GrantStageID", SqlDbType.Int).Value = GrantStageID;
-                        //open connection and execute insert
-                        conn.Open();
-                        qryInsertKristal.ExecuteNonQuery();
-                    }
-                    return true;
+                    //create parameterised SQL query to insert a new record to tblProjectNotes
+                    SqlCommand qryInsertKristal = new SqlCommand();
+                    qryInsertKristal.Connection = conn;
+                    qryInsertKristal.CommandText = $"insert into [dbo].[tblKristal] " +
+                        "([KristalRef], GrantStageID) values (@KristalRef, @GrantStageID)";
+                    qryInsertKristal.Parameters.Add("@KristalRef", SqlDbType.Int).Value = KristalRef;
+                    qryInsertKristal.Parameters.Add("@GrantStageID", SqlDbType.Int).Value = GrantStageID;
+                    //open connection and execute insert
+                    conn.Open();
+                    qryInsertKristal.ExecuteNonQuery();
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Failed to add new Kristal Ref to database" + Environment.NewLine + ex.Message);
-                    return false;
-                }
+                return true;
             }
-            else return false;
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to add new Kristal Ref to database" + Environment.NewLine + ex.Message);
+                return false;
+            }
         }
 
         /// <summary>
