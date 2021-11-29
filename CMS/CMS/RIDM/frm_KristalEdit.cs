@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace CMS
 {
-    public partial class frm_ProjectKristalEdit : Form
+    public partial class frm_KristalEdit : Form
     {
-        public frm_ProjectKristalEdit(int KristalID, int KristalRef, int GrantStage, DataTable tlkGrantStage)
+        public frm_KristalEdit(int KristalID, int KristalRef, int GrantStage, DataTable tlkGrantStage)
         {
             InitializeComponent();
             setTabIndex();

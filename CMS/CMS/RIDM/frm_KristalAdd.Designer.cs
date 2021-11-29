@@ -1,6 +1,6 @@
 ﻿namespace CMS
 {
-    partial class frm_ProjectKristalAdd
+    partial class frm_KristalAdd
     {
         /// <summary>
         /// Required designer variable.

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Windows.Forms;
 using DataControlsLib;
 using DataControlsLib.DataModels;
+using CMS.RIDM;
 
 namespace CMS
 {
@@ -977,7 +978,7 @@ namespace CMS
 
         private void btn_KristalAdd_Click(object sender, EventArgs e)
         {
-            using (frm_ProjectKristalAdd ProjectKristalAdd = new frm_ProjectKristalAdd(mdl_CurrentProject.ProjectNumber, ds_Project))
+            using (frm_KristalAdd ProjectKristalAdd = new frm_KristalAdd(mdl_CurrentProject.ProjectNumber, ds_Project))
             {
                 ProjectKristalAdd.ShowDialog();
                 fillProjectsDataSet();
@@ -1004,7 +1005,7 @@ namespace CMS
                     DataTable tlkGrantStage = ds_Project.Tables["tlkGrantStage"];
 
 
-                    using (frm_ProjectKristalEdit KristalEdit = new frm_ProjectKristalEdit(KristalID, KristalRef, GrantStage, tlkGrantStage))
+                    using (frm_KristalEdit KristalEdit = new frm_KristalEdit(KristalID, KristalRef, GrantStage, tlkGrantStage))
                     {
                         KristalEdit.ShowDialog();
                         fillProjectsDataSet();
