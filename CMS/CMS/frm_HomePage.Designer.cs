@@ -44,20 +44,24 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lbl_TFTD = new System.Windows.Forms.Label();
             this.lbl_LoggedInAs = new System.Windows.Forms.Label();
+            this.gb_RIDM = new System.Windows.Forms.GroupBox();
+            this.btn_AddGrant = new System.Windows.Forms.Button();
+            this.btn_GoToGrants = new System.Windows.Forms.Button();
             this.gb_Projects.SuspendLayout();
             this.gb_DataTracking.SuspendLayout();
             this.gb_DSAs.SuspendLayout();
             this.gb_Users.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.gb_RIDM.SuspendLayout();
             this.SuspendLayout();
             // 
             // btn_GoToDataIO
             // 
             this.btn_GoToDataIO.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_GoToDataIO.Location = new System.Drawing.Point(29, 37);
-            this.btn_GoToDataIO.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn_GoToDataIO.Location = new System.Drawing.Point(22, 30);
+            this.btn_GoToDataIO.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn_GoToDataIO.Name = "btn_GoToDataIO";
-            this.btn_GoToDataIO.Size = new System.Drawing.Size(220, 34);
+            this.btn_GoToDataIO.Size = new System.Drawing.Size(165, 28);
             this.btn_GoToDataIO.TabIndex = 0;
             this.btn_GoToDataIO.Text = "View File Transfers";
             this.btn_GoToDataIO.UseVisualStyleBackColor = true;
@@ -66,10 +70,10 @@
             // btn_GoToProjects
             // 
             this.btn_GoToProjects.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_GoToProjects.Location = new System.Drawing.Point(29, 38);
-            this.btn_GoToProjects.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn_GoToProjects.Location = new System.Drawing.Point(22, 31);
+            this.btn_GoToProjects.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn_GoToProjects.Name = "btn_GoToProjects";
-            this.btn_GoToProjects.Size = new System.Drawing.Size(220, 34);
+            this.btn_GoToProjects.Size = new System.Drawing.Size(165, 28);
             this.btn_GoToProjects.TabIndex = 1;
             this.btn_GoToProjects.Text = "View Projects";
             this.btn_GoToProjects.UseVisualStyleBackColor = true;
@@ -78,10 +82,10 @@
             // btn_DSAs
             // 
             this.btn_DSAs.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_DSAs.Location = new System.Drawing.Point(29, 76);
-            this.btn_DSAs.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn_DSAs.Location = new System.Drawing.Point(22, 62);
+            this.btn_DSAs.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn_DSAs.Name = "btn_DSAs";
-            this.btn_DSAs.Size = new System.Drawing.Size(220, 34);
+            this.btn_DSAs.Size = new System.Drawing.Size(165, 28);
             this.btn_DSAs.TabIndex = 2;
             this.btn_DSAs.Text = "Add New DSA";
             this.btn_DSAs.UseVisualStyleBackColor = true;
@@ -92,11 +96,11 @@
             this.gb_Projects.Controls.Add(this.btn_AddProject);
             this.gb_Projects.Controls.Add(this.btn_GoToProjects);
             this.gb_Projects.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gb_Projects.Location = new System.Drawing.Point(15, 87);
-            this.gb_Projects.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.gb_Projects.Location = new System.Drawing.Point(11, 71);
+            this.gb_Projects.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gb_Projects.Name = "gb_Projects";
-            this.gb_Projects.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.gb_Projects.Size = new System.Drawing.Size(279, 140);
+            this.gb_Projects.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gb_Projects.Size = new System.Drawing.Size(209, 114);
             this.gb_Projects.TabIndex = 3;
             this.gb_Projects.TabStop = false;
             this.gb_Projects.Text = "Projects";
@@ -104,10 +108,10 @@
             // btn_AddProject
             // 
             this.btn_AddProject.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_AddProject.Location = new System.Drawing.Point(29, 79);
-            this.btn_AddProject.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn_AddProject.Location = new System.Drawing.Point(22, 64);
+            this.btn_AddProject.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn_AddProject.Name = "btn_AddProject";
-            this.btn_AddProject.Size = new System.Drawing.Size(220, 34);
+            this.btn_AddProject.Size = new System.Drawing.Size(165, 28);
             this.btn_AddProject.TabIndex = 2;
             this.btn_AddProject.Text = "Add New Project";
             this.btn_AddProject.UseVisualStyleBackColor = true;
@@ -118,11 +122,11 @@
             this.gb_DataTracking.Controls.Add(this.btn_AddTransfer);
             this.gb_DataTracking.Controls.Add(this.btn_GoToDataIO);
             this.gb_DataTracking.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gb_DataTracking.Location = new System.Drawing.Point(299, 233);
-            this.gb_DataTracking.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.gb_DataTracking.Location = new System.Drawing.Point(224, 189);
+            this.gb_DataTracking.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gb_DataTracking.Name = "gb_DataTracking";
-            this.gb_DataTracking.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.gb_DataTracking.Size = new System.Drawing.Size(279, 137);
+            this.gb_DataTracking.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gb_DataTracking.Size = new System.Drawing.Size(209, 111);
             this.gb_DataTracking.TabIndex = 4;
             this.gb_DataTracking.TabStop = false;
             this.gb_DataTracking.Text = "File Transfers";
@@ -130,10 +134,10 @@
             // btn_AddTransfer
             // 
             this.btn_AddTransfer.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_AddTransfer.Location = new System.Drawing.Point(29, 75);
-            this.btn_AddTransfer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn_AddTransfer.Location = new System.Drawing.Point(22, 61);
+            this.btn_AddTransfer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn_AddTransfer.Name = "btn_AddTransfer";
-            this.btn_AddTransfer.Size = new System.Drawing.Size(220, 34);
+            this.btn_AddTransfer.Size = new System.Drawing.Size(165, 28);
             this.btn_AddTransfer.TabIndex = 1;
             this.btn_AddTransfer.Text = "Add File Transfer";
             this.btn_AddTransfer.UseVisualStyleBackColor = true;
@@ -144,11 +148,11 @@
             this.gb_DSAs.Controls.Add(this.btn_DSAsView);
             this.gb_DSAs.Controls.Add(this.btn_DSAs);
             this.gb_DSAs.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gb_DSAs.Location = new System.Drawing.Point(15, 233);
-            this.gb_DSAs.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.gb_DSAs.Location = new System.Drawing.Point(11, 189);
+            this.gb_DSAs.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gb_DSAs.Name = "gb_DSAs";
-            this.gb_DSAs.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.gb_DSAs.Size = new System.Drawing.Size(279, 137);
+            this.gb_DSAs.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gb_DSAs.Size = new System.Drawing.Size(209, 111);
             this.gb_DSAs.TabIndex = 5;
             this.gb_DSAs.TabStop = false;
             this.gb_DSAs.Text = "DSAs";
@@ -156,10 +160,10 @@
             // btn_DSAsView
             // 
             this.btn_DSAsView.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_DSAsView.Location = new System.Drawing.Point(29, 37);
-            this.btn_DSAsView.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn_DSAsView.Location = new System.Drawing.Point(22, 30);
+            this.btn_DSAsView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn_DSAsView.Name = "btn_DSAsView";
-            this.btn_DSAsView.Size = new System.Drawing.Size(220, 34);
+            this.btn_DSAsView.Size = new System.Drawing.Size(165, 28);
             this.btn_DSAsView.TabIndex = 3;
             this.btn_DSAsView.Text = "View DSAs";
             this.btn_DSAsView.UseVisualStyleBackColor = true;
@@ -170,11 +174,11 @@
             this.gb_Users.Controls.Add(this.btn_GoToUsers);
             this.gb_Users.Controls.Add(this.btn_AddUser);
             this.gb_Users.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gb_Users.Location = new System.Drawing.Point(299, 87);
-            this.gb_Users.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.gb_Users.Location = new System.Drawing.Point(224, 71);
+            this.gb_Users.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gb_Users.Name = "gb_Users";
-            this.gb_Users.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.gb_Users.Size = new System.Drawing.Size(279, 140);
+            this.gb_Users.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gb_Users.Size = new System.Drawing.Size(209, 114);
             this.gb_Users.TabIndex = 6;
             this.gb_Users.TabStop = false;
             this.gb_Users.Text = "Users";
@@ -182,10 +186,10 @@
             // btn_GoToUsers
             // 
             this.btn_GoToUsers.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_GoToUsers.Location = new System.Drawing.Point(29, 38);
-            this.btn_GoToUsers.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn_GoToUsers.Location = new System.Drawing.Point(22, 31);
+            this.btn_GoToUsers.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn_GoToUsers.Name = "btn_GoToUsers";
-            this.btn_GoToUsers.Size = new System.Drawing.Size(220, 34);
+            this.btn_GoToUsers.Size = new System.Drawing.Size(165, 28);
             this.btn_GoToUsers.TabIndex = 4;
             this.btn_GoToUsers.Text = "View Users";
             this.btn_GoToUsers.UseVisualStyleBackColor = true;
@@ -194,10 +198,10 @@
             // btn_AddUser
             // 
             this.btn_AddUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_AddUser.Location = new System.Drawing.Point(29, 79);
-            this.btn_AddUser.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn_AddUser.Location = new System.Drawing.Point(22, 64);
+            this.btn_AddUser.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn_AddUser.Name = "btn_AddUser";
-            this.btn_AddUser.Size = new System.Drawing.Size(220, 34);
+            this.btn_AddUser.Size = new System.Drawing.Size(165, 28);
             this.btn_AddUser.TabIndex = 3;
             this.btn_AddUser.Text = "Add New User";
             this.btn_AddUser.UseVisualStyleBackColor = true;
@@ -206,37 +210,72 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(85, 15);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox1.Location = new System.Drawing.Point(64, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(421, 66);
+            this.pictureBox1.Size = new System.Drawing.Size(316, 54);
             this.pictureBox1.TabIndex = 7;
             this.pictureBox1.TabStop = false;
             // 
             // lbl_TFTD
             // 
-            this.lbl_TFTD.Location = new System.Drawing.Point(300, 335);
-            this.lbl_TFTD.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_TFTD.Location = new System.Drawing.Point(224, 304);
             this.lbl_TFTD.Name = "lbl_TFTD";
-            this.lbl_TFTD.Size = new System.Drawing.Size(277, 81);
+            this.lbl_TFTD.Size = new System.Drawing.Size(208, 114);
             this.lbl_TFTD.TabIndex = 8;
             this.lbl_TFTD.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lbl_LoggedInAs
             // 
-            this.lbl_LoggedInAs.Location = new System.Drawing.Point(299, 416);
-            this.lbl_LoggedInAs.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_LoggedInAs.Location = new System.Drawing.Point(223, 418);
             this.lbl_LoggedInAs.Name = "lbl_LoggedInAs";
-            this.lbl_LoggedInAs.Size = new System.Drawing.Size(279, 28);
+            this.lbl_LoggedInAs.Size = new System.Drawing.Size(209, 23);
             this.lbl_LoggedInAs.TabIndex = 9;
             this.lbl_LoggedInAs.Text = "UserName";
             this.lbl_LoggedInAs.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // gb_RIDM
+            // 
+            this.gb_RIDM.Controls.Add(this.btn_AddGrant);
+            this.gb_RIDM.Controls.Add(this.btn_GoToGrants);
+            this.gb_RIDM.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gb_RIDM.Location = new System.Drawing.Point(11, 304);
+            this.gb_RIDM.Margin = new System.Windows.Forms.Padding(2);
+            this.gb_RIDM.Name = "gb_RIDM";
+            this.gb_RIDM.Padding = new System.Windows.Forms.Padding(2);
+            this.gb_RIDM.Size = new System.Drawing.Size(209, 114);
+            this.gb_RIDM.TabIndex = 4;
+            this.gb_RIDM.TabStop = false;
+            this.gb_RIDM.Text = "RIDM";
+            // 
+            // btn_AddGrant
+            // 
+            this.btn_AddGrant.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_AddGrant.Location = new System.Drawing.Point(22, 64);
+            this.btn_AddGrant.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_AddGrant.Name = "btn_AddGrant";
+            this.btn_AddGrant.Size = new System.Drawing.Size(165, 28);
+            this.btn_AddGrant.TabIndex = 2;
+            this.btn_AddGrant.Text = "Add New Project";
+            this.btn_AddGrant.UseVisualStyleBackColor = true;
+            // 
+            // btn_GoToGrants
+            // 
+            this.btn_GoToGrants.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_GoToGrants.Location = new System.Drawing.Point(22, 31);
+            this.btn_GoToGrants.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_GoToGrants.Name = "btn_GoToGrants";
+            this.btn_GoToGrants.Size = new System.Drawing.Size(165, 28);
+            this.btn_GoToGrants.TabIndex = 1;
+            this.btn_GoToGrants.Text = "View Grants";
+            this.btn_GoToGrants.UseVisualStyleBackColor = true;
+            this.btn_GoToGrants.Click += new System.EventHandler(this.btn_GoToGrants_Click);
+            // 
             // frm_HomePage
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(592, 458);
+            this.ClientSize = new System.Drawing.Size(444, 452);
+            this.Controls.Add(this.gb_RIDM);
             this.Controls.Add(this.lbl_LoggedInAs);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.gb_Users);
@@ -245,7 +284,7 @@
             this.Controls.Add(this.gb_Projects);
             this.Controls.Add(this.lbl_TFTD);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "frm_HomePage";
             this.Text = "PRISM";
             this.gb_Projects.ResumeLayout(false);
@@ -253,6 +292,7 @@
             this.gb_DSAs.ResumeLayout(false);
             this.gb_Users.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.gb_RIDM.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -274,5 +314,8 @@
         private System.Windows.Forms.Label lbl_TFTD;
         private System.Windows.Forms.Label lbl_LoggedInAs;
         private System.Windows.Forms.Button btn_AddTransfer;
+        private System.Windows.Forms.GroupBox gb_RIDM;
+        private System.Windows.Forms.Button btn_AddGrant;
+        private System.Windows.Forms.Button btn_GoToGrants;
     }
 }

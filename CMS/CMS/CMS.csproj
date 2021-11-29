@@ -211,6 +211,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="RIDM\frm_KristalAll.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RIDM\frm_KristalAll.Designer.cs">
+      <DependentUpon>frm_KristalAll.cs</DependentUpon>
+    </Compile>
     <Compile Include="User\frm_UserAdd.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -325,6 +331,9 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RIDM\frm_KristalAll.resx">
+      <DependentUpon>frm_KristalAll.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="User\frm_UserAdd.resx">
       <DependentUpon>frm_UserAdd.cs</DependentUpon>

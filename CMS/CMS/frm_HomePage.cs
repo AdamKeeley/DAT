@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using CMS.FileTransfers;
 using CMS.DSAs;
 using CMS.Login;
+using CMS.RIDM;
 using DataControlsLib;
 
 namespace CMS
@@ -146,6 +147,10 @@ namespace CMS
             gb_DataTracking.TabIndex    = ++x;
             btn_GoToDataIO.TabIndex     = ++x;
             btn_AddTransfer.TabIndex    = ++x;
+
+            gb_RIDM.TabIndex = ++x;
+            btn_GoToGrants.TabIndex = ++x;
+            btn_AddGrant.TabIndex = ++x;
         }
 
         private void btn_GoToProjects_Click(object sender, EventArgs e)
@@ -200,6 +205,12 @@ namespace CMS
         {
             frm_DsasView DsaViewForm = new frm_DsasView();
             DsaViewForm.Show();
+        }
+
+        private void btn_GoToGrants_Click(object sender, EventArgs e)
+        {
+            frm_KristalAll KristalAllForm = new frm_KristalAll();
+            KristalAllForm.Show();
         }
     }
 }

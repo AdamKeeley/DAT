@@ -141,7 +141,7 @@ namespace CMS
                 cb_Faculty.ValueMember = "facultyID";
                 cb_Faculty.DisplayMember = "facultyDescription";
                 cb_Faculty.SelectedIndex = -1;
-                
+
                 textChanged = true;
             }
             catch (Exception ex)
@@ -196,14 +196,14 @@ namespace CMS
             DataTable dt_ProjectList = new DataTable();
             dt_ProjectList.Columns.Add("ProjectNumber");
             dt_ProjectList.Columns.Add("ProjectName");
-            dt_ProjectList.Columns.Add("KristalRef");
-            dt_ProjectList.Columns.Add("PortfolioNumber");
             dt_ProjectList.Columns.Add("Stage");
             dt_ProjectList.Columns.Add("Classification");
-            dt_ProjectList.Columns.Add("DATRAG");
+            dt_ProjectList.Columns.Add("KristalRef");
+            dt_ProjectList.Columns.Add("PortfolioNumber");
             dt_ProjectList.Columns.Add("LeadApplicant");
             dt_ProjectList.Columns.Add("PI");
             dt_ProjectList.Columns.Add("Faculty");
+            dt_ProjectList.Columns.Add("DATRAG");
             dt_ProjectList.Columns.Add("LIDA");
 
             DataRow a_row;
@@ -256,14 +256,14 @@ namespace CMS
             DataTable dt_dgv_ProjectList = new DataTable();
             dt_dgv_ProjectList.Columns.Add("Project Number");
             dt_dgv_ProjectList.Columns.Add("Project Name");
-            dt_dgv_ProjectList.Columns.Add("Kristal Ref");
-            dt_dgv_ProjectList.Columns.Add("Portfolio Number"); 
             dt_dgv_ProjectList.Columns.Add("Stage");
             dt_dgv_ProjectList.Columns.Add("Classification");
-            dt_dgv_ProjectList.Columns.Add("DATRAG");
+            dt_dgv_ProjectList.Columns.Add("Kristal Ref");
+            dt_dgv_ProjectList.Columns.Add("Portfolio Number");
             dt_dgv_ProjectList.Columns.Add("Lead Applicant");
             dt_dgv_ProjectList.Columns.Add("PI");
             dt_dgv_ProjectList.Columns.Add("Faculty");
+            dt_dgv_ProjectList.Columns.Add("DATRAG");
             dt_dgv_ProjectList.Columns.Add("LIDA");
 
             DataRow f_row;
@@ -320,18 +320,19 @@ namespace CMS
 
             cb_pNumber.TabIndex = ++x;
 
-            tb_KristalRef.TabIndex = ++x;
             cb_DATRAG.TabIndex = ++x;
             tb_pNameValue.TabIndex = ++x;
 
-            cb_PortfolioNo.TabIndex = ++x;
             cb_pStage.TabIndex = ++x;
             cb_pClassification.TabIndex = ++x;
+            chkb_LIDA.TabIndex = ++x;
             cb_LeadApplicant.TabIndex = ++x;
             cb_PI.TabIndex = ++x;
             cb_Faculty.TabIndex = ++x;
 
-            chkb_LIDA.TabIndex = ++x;
+            gb_RIDM.TabIndex = ++x;
+            tb_KristalRef.TabIndex = ++x;
+            cb_PortfolioNo.TabIndex = ++x;
 
             btn_Refresh.TabIndex = ++x;
             btn_ClearSearch.TabIndex = ++x;
@@ -404,6 +405,5 @@ namespace CMS
             setControlDataSource();
             fillDataGridView();
         }
-
     }
 }

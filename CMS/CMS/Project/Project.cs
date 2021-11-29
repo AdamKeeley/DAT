@@ -94,6 +94,7 @@ namespace CMS
                     SQL_Stuff.getDataTable(conn, null, ds_prj, "tblProjectKristal",
                         $"select k.[KristalID] " +
                         $"    , k.[KristalRef] " +
+                        $"    , k.[KristalName] " +
                         $"    , k.[GrantStageID] " +
                         $"    , pk.[ProjectKristalID] " +
                         $"    , pk.[ProjectNumber] " +

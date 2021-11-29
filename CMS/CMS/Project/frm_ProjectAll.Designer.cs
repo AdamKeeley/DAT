@@ -55,13 +55,15 @@
             this.cb_pNumber = new System.Windows.Forms.ComboBox();
             this.lbl_pNumber = new System.Windows.Forms.Label();
             this.tb_KristalRef = new System.Windows.Forms.TextBox();
+            this.gb_RIDM = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ProjectList)).BeginInit();
+            this.gb_RIDM.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbl_LeadApplicant
             // 
             this.lbl_LeadApplicant.AutoSize = true;
-            this.lbl_LeadApplicant.Location = new System.Drawing.Point(501, 60);
+            this.lbl_LeadApplicant.Location = new System.Drawing.Point(384, 60);
             this.lbl_LeadApplicant.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_LeadApplicant.Name = "lbl_LeadApplicant";
             this.lbl_LeadApplicant.Size = new System.Drawing.Size(78, 13);
@@ -83,7 +85,7 @@
             this.cb_Faculty.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cb_Faculty.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cb_Faculty.FormattingEnabled = true;
-            this.cb_Faculty.Location = new System.Drawing.Point(584, 111);
+            this.cb_Faculty.Location = new System.Drawing.Point(467, 111);
             this.cb_Faculty.Name = "cb_Faculty";
             this.cb_Faculty.Size = new System.Drawing.Size(173, 21);
             this.cb_Faculty.TabIndex = 17;
@@ -92,7 +94,7 @@
             // lbl_Faculty
             // 
             this.lbl_Faculty.AutoSize = true;
-            this.lbl_Faculty.Location = new System.Drawing.Point(537, 114);
+            this.lbl_Faculty.Location = new System.Drawing.Point(420, 114);
             this.lbl_Faculty.Name = "lbl_Faculty";
             this.lbl_Faculty.Size = new System.Drawing.Size(41, 13);
             this.lbl_Faculty.TabIndex = 16;
@@ -103,7 +105,7 @@
             this.cb_DATRAG.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cb_DATRAG.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cb_DATRAG.FormattingEnabled = true;
-            this.cb_DATRAG.Location = new System.Drawing.Point(681, 6);
+            this.cb_DATRAG.Location = new System.Drawing.Point(564, 6);
             this.cb_DATRAG.Name = "cb_DATRAG";
             this.cb_DATRAG.Size = new System.Drawing.Size(76, 21);
             this.cb_DATRAG.TabIndex = 3;
@@ -112,7 +114,7 @@
             // lbl_DATRAG
             // 
             this.lbl_DATRAG.AutoSize = true;
-            this.lbl_DATRAG.Location = new System.Drawing.Point(620, 9);
+            this.lbl_DATRAG.Location = new System.Drawing.Point(503, 9);
             this.lbl_DATRAG.Name = "lbl_DATRAG";
             this.lbl_DATRAG.Size = new System.Drawing.Size(55, 13);
             this.lbl_DATRAG.TabIndex = 2;
@@ -121,7 +123,7 @@
             // lbl_pClassification
             // 
             this.lbl_pClassification.AutoSize = true;
-            this.lbl_pClassification.Location = new System.Drawing.Point(265, 114);
+            this.lbl_pClassification.Location = new System.Drawing.Point(148, 87);
             this.lbl_pClassification.Name = "lbl_pClassification";
             this.lbl_pClassification.Size = new System.Drawing.Size(68, 13);
             this.lbl_pClassification.TabIndex = 10;
@@ -132,7 +134,7 @@
             this.cb_pClassification.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cb_pClassification.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cb_pClassification.FormattingEnabled = true;
-            this.cb_pClassification.Location = new System.Drawing.Point(339, 110);
+            this.cb_pClassification.Location = new System.Drawing.Point(222, 83);
             this.cb_pClassification.Name = "cb_pClassification";
             this.cb_pClassification.Size = new System.Drawing.Size(124, 21);
             this.cb_pClassification.TabIndex = 11;
@@ -169,7 +171,7 @@
             // lbl_pPI
             // 
             this.lbl_pPI.AutoSize = true;
-            this.lbl_pPI.Location = new System.Drawing.Point(474, 87);
+            this.lbl_pPI.Location = new System.Drawing.Point(357, 87);
             this.lbl_pPI.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_pPI.Name = "lbl_pPI";
             this.lbl_pPI.Size = new System.Drawing.Size(105, 13);
@@ -181,7 +183,7 @@
             this.cb_pStage.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cb_pStage.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cb_pStage.FormattingEnabled = true;
-            this.cb_pStage.Location = new System.Drawing.Point(339, 84);
+            this.cb_pStage.Location = new System.Drawing.Point(222, 57);
             this.cb_pStage.Margin = new System.Windows.Forms.Padding(2);
             this.cb_pStage.Name = "cb_pStage";
             this.cb_pStage.Size = new System.Drawing.Size(124, 21);
@@ -191,7 +193,7 @@
             // lbl_pStage
             // 
             this.lbl_pStage.AutoSize = true;
-            this.lbl_pStage.Location = new System.Drawing.Point(300, 87);
+            this.lbl_pStage.Location = new System.Drawing.Point(183, 60);
             this.lbl_pStage.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_pStage.Name = "lbl_pStage";
             this.lbl_pStage.Size = new System.Drawing.Size(35, 13);
@@ -200,7 +202,7 @@
             // 
             // tb_pNameValue
             // 
-            this.tb_pNameValue.Location = new System.Drawing.Point(339, 32);
+            this.tb_pNameValue.Location = new System.Drawing.Point(222, 32);
             this.tb_pNameValue.Margin = new System.Windows.Forms.Padding(2);
             this.tb_pNameValue.Name = "tb_pNameValue";
             this.tb_pNameValue.Size = new System.Drawing.Size(418, 20);
@@ -210,7 +212,7 @@
             // lbl_pName
             // 
             this.lbl_pName.AutoSize = true;
-            this.lbl_pName.Location = new System.Drawing.Point(272, 35);
+            this.lbl_pName.Location = new System.Drawing.Point(155, 35);
             this.lbl_pName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_pName.Name = "lbl_pName";
             this.lbl_pName.Size = new System.Drawing.Size(63, 13);
@@ -232,7 +234,7 @@
             this.cb_LeadApplicant.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cb_LeadApplicant.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cb_LeadApplicant.FormattingEnabled = true;
-            this.cb_LeadApplicant.Location = new System.Drawing.Point(584, 57);
+            this.cb_LeadApplicant.Location = new System.Drawing.Point(467, 57);
             this.cb_LeadApplicant.Name = "cb_LeadApplicant";
             this.cb_LeadApplicant.Size = new System.Drawing.Size(173, 21);
             this.cb_LeadApplicant.TabIndex = 13;
@@ -243,7 +245,7 @@
             this.cb_PI.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cb_PI.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cb_PI.FormattingEnabled = true;
-            this.cb_PI.Location = new System.Drawing.Point(584, 84);
+            this.cb_PI.Location = new System.Drawing.Point(467, 84);
             this.cb_PI.Name = "cb_PI";
             this.cb_PI.Size = new System.Drawing.Size(173, 21);
             this.cb_PI.TabIndex = 15;
@@ -261,7 +263,7 @@
             // lbl_PortfolioNo
             // 
             this.lbl_PortfolioNo.AutoSize = true;
-            this.lbl_PortfolioNo.Location = new System.Drawing.Point(271, 60);
+            this.lbl_PortfolioNo.Location = new System.Drawing.Point(35, 52);
             this.lbl_PortfolioNo.Name = "lbl_PortfolioNo";
             this.lbl_PortfolioNo.Size = new System.Drawing.Size(62, 13);
             this.lbl_PortfolioNo.TabIndex = 6;
@@ -272,7 +274,7 @@
             this.cb_PortfolioNo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cb_PortfolioNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cb_PortfolioNo.FormattingEnabled = true;
-            this.cb_PortfolioNo.Location = new System.Drawing.Point(339, 57);
+            this.cb_PortfolioNo.Location = new System.Drawing.Point(103, 49);
             this.cb_PortfolioNo.Name = "cb_PortfolioNo";
             this.cb_PortfolioNo.Size = new System.Drawing.Size(124, 21);
             this.cb_PortfolioNo.TabIndex = 7;
@@ -281,7 +283,7 @@
             // lbl_KristalRef
             // 
             this.lbl_KristalRef.AutoSize = true;
-            this.lbl_KristalRef.Location = new System.Drawing.Point(245, 9);
+            this.lbl_KristalRef.Location = new System.Drawing.Point(9, 26);
             this.lbl_KristalRef.Name = "lbl_KristalRef";
             this.lbl_KristalRef.Size = new System.Drawing.Size(88, 13);
             this.lbl_KristalRef.TabIndex = 0;
@@ -290,7 +292,7 @@
             // chkb_LIDA
             // 
             this.chkb_LIDA.AutoSize = true;
-            this.chkb_LIDA.Location = new System.Drawing.Point(12, 115);
+            this.chkb_LIDA.Location = new System.Drawing.Point(222, 113);
             this.chkb_LIDA.Name = "chkb_LIDA";
             this.chkb_LIDA.Size = new System.Drawing.Size(111, 17);
             this.chkb_LIDA.TabIndex = 73;
@@ -301,7 +303,7 @@
             // cb_pNumber
             // 
             this.cb_pNumber.FormattingEnabled = true;
-            this.cb_pNumber.Location = new System.Drawing.Point(117, 6);
+            this.cb_pNumber.Location = new System.Drawing.Point(222, 6);
             this.cb_pNumber.Margin = new System.Windows.Forms.Padding(2);
             this.cb_pNumber.Name = "cb_pNumber";
             this.cb_pNumber.Size = new System.Drawing.Size(92, 21);
@@ -311,7 +313,7 @@
             // lbl_pNumber
             // 
             this.lbl_pNumber.AutoSize = true;
-            this.lbl_pNumber.Location = new System.Drawing.Point(11, 9);
+            this.lbl_pNumber.Location = new System.Drawing.Point(136, 9);
             this.lbl_pNumber.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_pNumber.Name = "lbl_pNumber";
             this.lbl_pNumber.Size = new System.Drawing.Size(80, 13);
@@ -320,24 +322,34 @@
             // 
             // tb_KristalRef
             // 
-            this.tb_KristalRef.Location = new System.Drawing.Point(339, 6);
+            this.tb_KristalRef.Location = new System.Drawing.Point(103, 23);
             this.tb_KristalRef.Name = "tb_KristalRef";
             this.tb_KristalRef.Size = new System.Drawing.Size(124, 20);
             this.tb_KristalRef.TabIndex = 76;
             this.tb_KristalRef.TextChanged += new System.EventHandler(this.searchItemAddedProjectAll);
+            // 
+            // gb_RIDM
+            // 
+            this.gb_RIDM.Controls.Add(this.cb_PortfolioNo);
+            this.gb_RIDM.Controls.Add(this.lbl_KristalRef);
+            this.gb_RIDM.Controls.Add(this.lbl_PortfolioNo);
+            this.gb_RIDM.Controls.Add(this.tb_KristalRef);
+            this.gb_RIDM.Location = new System.Drawing.Point(659, 9);
+            this.gb_RIDM.Name = "gb_RIDM";
+            this.gb_RIDM.Size = new System.Drawing.Size(233, 79);
+            this.gb_RIDM.TabIndex = 77;
+            this.gb_RIDM.TabStop = false;
+            this.gb_RIDM.Text = "RIDM";
             // 
             // frm_ProjectAll
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1073, 593);
-            this.Controls.Add(this.tb_KristalRef);
+            this.Controls.Add(this.gb_RIDM);
             this.Controls.Add(this.cb_pNumber);
             this.Controls.Add(this.lbl_pNumber);
             this.Controls.Add(this.chkb_LIDA);
-            this.Controls.Add(this.lbl_KristalRef);
-            this.Controls.Add(this.cb_PortfolioNo);
-            this.Controls.Add(this.lbl_PortfolioNo);
             this.Controls.Add(this.lbl_recordCount);
             this.Controls.Add(this.cb_PI);
             this.Controls.Add(this.cb_LeadApplicant);
@@ -361,6 +373,8 @@
             this.Name = "frm_ProjectAll";
             this.Text = "LIDA Projects";
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ProjectList)).EndInit();
+            this.gb_RIDM.ResumeLayout(false);
+            this.gb_RIDM.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -393,5 +407,6 @@
         private System.Windows.Forms.ComboBox cb_pNumber;
         private System.Windows.Forms.Label lbl_pNumber;
         private System.Windows.Forms.TextBox tb_KristalRef;
+        private System.Windows.Forms.GroupBox gb_RIDM;
     }
 }
