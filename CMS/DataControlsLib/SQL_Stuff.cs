@@ -17,7 +17,7 @@ namespace DataControlsLib
         /// Define whether application connects to test or live database. 
         /// Aceptable values are "test" or "live".
         /// </summary>
-        public static string env = "live";
+        public static string env = "test";
 
         /// <summary>
         /// Static variable to store login credentials for CMS database. Used to populate Credential  
