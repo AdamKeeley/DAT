@@ -62,10 +62,15 @@
             // 
             // dgv_KristalList
             // 
+            this.dgv_KristalList.AllowUserToAddRows = false;
+            this.dgv_KristalList.AllowUserToDeleteRows = false;
+            this.dgv_KristalList.AllowUserToOrderColumns = true;
             this.dgv_KristalList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_KristalList.Location = new System.Drawing.Point(15, 58);
             this.dgv_KristalList.Name = "dgv_KristalList";
+            this.dgv_KristalList.ReadOnly = true;
             this.dgv_KristalList.RowHeadersVisible = false;
+            this.dgv_KristalList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_KristalList.Size = new System.Drawing.Size(450, 177);
             this.dgv_KristalList.TabIndex = 2;
             // 

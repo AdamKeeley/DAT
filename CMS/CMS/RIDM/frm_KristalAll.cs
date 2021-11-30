@@ -110,7 +110,7 @@ namespace CMS.RIDM
 
                 a_row["KristalRef"] = pRow["KristalRef"];
                 a_row["KristalName"] = pRow["KristalName"];
-                foreach (DataRow sRow in pRow.GetParentRows("ProjectKristal_GrantStage"))
+                foreach (DataRow sRow in pRow.GetParentRows("Kristal_GrantStage"))
                 {
                     a_row["GrantStage"] = sRow["GrantStageDescription"];
                 }
