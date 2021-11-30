@@ -59,7 +59,7 @@
             // 
             this.btn_GoToDataIO.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_GoToDataIO.Location = new System.Drawing.Point(22, 30);
-            this.btn_GoToDataIO.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_GoToDataIO.Margin = new System.Windows.Forms.Padding(2);
             this.btn_GoToDataIO.Name = "btn_GoToDataIO";
             this.btn_GoToDataIO.Size = new System.Drawing.Size(165, 28);
             this.btn_GoToDataIO.TabIndex = 0;
@@ -71,7 +71,7 @@
             // 
             this.btn_GoToProjects.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_GoToProjects.Location = new System.Drawing.Point(22, 31);
-            this.btn_GoToProjects.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_GoToProjects.Margin = new System.Windows.Forms.Padding(2);
             this.btn_GoToProjects.Name = "btn_GoToProjects";
             this.btn_GoToProjects.Size = new System.Drawing.Size(165, 28);
             this.btn_GoToProjects.TabIndex = 1;
@@ -83,7 +83,7 @@
             // 
             this.btn_DSAs.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_DSAs.Location = new System.Drawing.Point(22, 62);
-            this.btn_DSAs.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_DSAs.Margin = new System.Windows.Forms.Padding(2);
             this.btn_DSAs.Name = "btn_DSAs";
             this.btn_DSAs.Size = new System.Drawing.Size(165, 28);
             this.btn_DSAs.TabIndex = 2;
@@ -97,9 +97,9 @@
             this.gb_Projects.Controls.Add(this.btn_GoToProjects);
             this.gb_Projects.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gb_Projects.Location = new System.Drawing.Point(11, 71);
-            this.gb_Projects.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gb_Projects.Margin = new System.Windows.Forms.Padding(2);
             this.gb_Projects.Name = "gb_Projects";
-            this.gb_Projects.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gb_Projects.Padding = new System.Windows.Forms.Padding(2);
             this.gb_Projects.Size = new System.Drawing.Size(209, 114);
             this.gb_Projects.TabIndex = 3;
             this.gb_Projects.TabStop = false;
@@ -109,7 +109,7 @@
             // 
             this.btn_AddProject.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_AddProject.Location = new System.Drawing.Point(22, 64);
-            this.btn_AddProject.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_AddProject.Margin = new System.Windows.Forms.Padding(2);
             this.btn_AddProject.Name = "btn_AddProject";
             this.btn_AddProject.Size = new System.Drawing.Size(165, 28);
             this.btn_AddProject.TabIndex = 2;
@@ -123,9 +123,9 @@
             this.gb_DataTracking.Controls.Add(this.btn_GoToDataIO);
             this.gb_DataTracking.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gb_DataTracking.Location = new System.Drawing.Point(224, 189);
-            this.gb_DataTracking.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gb_DataTracking.Margin = new System.Windows.Forms.Padding(2);
             this.gb_DataTracking.Name = "gb_DataTracking";
-            this.gb_DataTracking.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gb_DataTracking.Padding = new System.Windows.Forms.Padding(2);
             this.gb_DataTracking.Size = new System.Drawing.Size(209, 111);
             this.gb_DataTracking.TabIndex = 4;
             this.gb_DataTracking.TabStop = false;
@@ -135,7 +135,7 @@
             // 
             this.btn_AddTransfer.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_AddTransfer.Location = new System.Drawing.Point(22, 61);
-            this.btn_AddTransfer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_AddTransfer.Margin = new System.Windows.Forms.Padding(2);
             this.btn_AddTransfer.Name = "btn_AddTransfer";
             this.btn_AddTransfer.Size = new System.Drawing.Size(165, 28);
             this.btn_AddTransfer.TabIndex = 1;
@@ -149,9 +149,9 @@
             this.gb_DSAs.Controls.Add(this.btn_DSAs);
             this.gb_DSAs.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gb_DSAs.Location = new System.Drawing.Point(11, 189);
-            this.gb_DSAs.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gb_DSAs.Margin = new System.Windows.Forms.Padding(2);
             this.gb_DSAs.Name = "gb_DSAs";
-            this.gb_DSAs.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gb_DSAs.Padding = new System.Windows.Forms.Padding(2);
             this.gb_DSAs.Size = new System.Drawing.Size(209, 111);
             this.gb_DSAs.TabIndex = 5;
             this.gb_DSAs.TabStop = false;
@@ -161,7 +161,7 @@
             // 
             this.btn_DSAsView.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_DSAsView.Location = new System.Drawing.Point(22, 30);
-            this.btn_DSAsView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_DSAsView.Margin = new System.Windows.Forms.Padding(2);
             this.btn_DSAsView.Name = "btn_DSAsView";
             this.btn_DSAsView.Size = new System.Drawing.Size(165, 28);
             this.btn_DSAsView.TabIndex = 3;
@@ -175,9 +175,9 @@
             this.gb_Users.Controls.Add(this.btn_AddUser);
             this.gb_Users.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gb_Users.Location = new System.Drawing.Point(224, 71);
-            this.gb_Users.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gb_Users.Margin = new System.Windows.Forms.Padding(2);
             this.gb_Users.Name = "gb_Users";
-            this.gb_Users.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gb_Users.Padding = new System.Windows.Forms.Padding(2);
             this.gb_Users.Size = new System.Drawing.Size(209, 114);
             this.gb_Users.TabIndex = 6;
             this.gb_Users.TabStop = false;
@@ -187,7 +187,7 @@
             // 
             this.btn_GoToUsers.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_GoToUsers.Location = new System.Drawing.Point(22, 31);
-            this.btn_GoToUsers.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_GoToUsers.Margin = new System.Windows.Forms.Padding(2);
             this.btn_GoToUsers.Name = "btn_GoToUsers";
             this.btn_GoToUsers.Size = new System.Drawing.Size(165, 28);
             this.btn_GoToUsers.TabIndex = 4;
@@ -199,7 +199,7 @@
             // 
             this.btn_AddUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_AddUser.Location = new System.Drawing.Point(22, 64);
-            this.btn_AddUser.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_AddUser.Margin = new System.Windows.Forms.Padding(2);
             this.btn_AddUser.Name = "btn_AddUser";
             this.btn_AddUser.Size = new System.Drawing.Size(165, 28);
             this.btn_AddUser.TabIndex = 3;
@@ -255,8 +255,9 @@
             this.btn_AddGrant.Name = "btn_AddGrant";
             this.btn_AddGrant.Size = new System.Drawing.Size(165, 28);
             this.btn_AddGrant.TabIndex = 2;
-            this.btn_AddGrant.Text = "Add New Project";
+            this.btn_AddGrant.Text = "Add New Grant";
             this.btn_AddGrant.UseVisualStyleBackColor = true;
+            this.btn_AddGrant.Click += new System.EventHandler(this.btn_AddGrant_Click);
             // 
             // btn_GoToGrants
             // 
@@ -284,7 +285,7 @@
             this.Controls.Add(this.gb_Projects);
             this.Controls.Add(this.lbl_TFTD);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frm_HomePage";
             this.Text = "PRISM";
             this.gb_Projects.ResumeLayout(false);

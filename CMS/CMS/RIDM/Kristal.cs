@@ -229,13 +229,13 @@ namespace CMS.RIDM
         {
             mdl_Kristal existingKristal = fetchCurrentKristal(insKristal.KristalRef);
 
-            //if the kristal reference already exists and has the same stage as is selected do nothing.
-            if (existingKristal.KristalID == insKristal.KristalID & existingKristal.GrantStageID == insKristal.GrantStageID)
+            //if the kristal record already exists and there is no difference.
+            if (existingKristal == insKristal)
                 return false;
 
-            //if the kristal reference exists with a different stage it needs updating
+            //if the kristal reference exists with different attributes it needs updating
             //  logical delete before insert
-            if (existingKristal.KristalID == insKristal.KristalID & existingKristal.GrantStageID != insKristal.GrantStageID)
+            if (existingKristal.KristalRef == insKristal.KristalRef & existingKristal != insKristal)
                 deleteKristal(existingKristal.KristalID);
 
             //insert a kristal reference if needs updating or if doesn't already exist
