@@ -999,12 +999,12 @@ namespace CMS
             {
                 try
                 {
+                    Kristal kristal = new Kristal();
                     mdl_Kristal mdl_Kristal = new mdl_Kristal();
-                    mdl_Kristal.KristalID = Convert.ToInt32(dgv_KristalRef.Rows[r].Cells["KristalID"].Value);
-                    mdl_Kristal.KristalRef = Convert.ToInt32(dgv_KristalRef.Rows[r].Cells["Kristal Ref"].Value);
-                    mdl_Kristal.GrantStageID = Convert.ToInt32(dgv_KristalRef.Rows[r].Cells["KristalStageID"].Value);
-                    DataTable tlkGrantStage = ds_Project.Tables["tlkGrantStage"];
+                    
+                    mdl_Kristal = kristal.fetchCurrentKristal(Convert.ToInt32(dgv_KristalRef.Rows[r].Cells["Kristal Ref"].Value));
 
+                    DataTable tlkGrantStage = ds_Project.Tables["tlkGrantStage"];
 
                     using (frm_Kristal Kristal = new frm_Kristal(mdl_Kristal, tlkGrantStage))
                     {

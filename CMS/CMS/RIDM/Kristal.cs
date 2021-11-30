@@ -166,6 +166,7 @@ namespace CMS.RIDM
                     while (reader.Read())
                     {
                         kristal.KristalID = Convert.ToInt32(reader["KristalID"].ToString());
+                        kristal.KristalRef = Convert.ToInt32(reader["KristalRef"].ToString());
                         kristal.KristalName = reader["KristalName"].ToString();
                         kristal.GrantStageID = Convert.ToInt32(reader["GrantStageID"].ToString());
                     }
