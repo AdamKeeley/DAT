@@ -14,6 +14,50 @@ namespace CMS.RIDM
     class Kristal
     {
         /// <summary>
+        /// Method to return a DataSet (ds_prj) with content of SQL table dbo.tblProjects, dbo.tblProjectNotes, 
+        /// dbo.tblUsers and other related lookup tables. 
+        /// Creates DataRelations so that dimension tables can be linked to values in the measures table.
+        /// </summary>
+        /// <returns>
+        /// Full DataSet containing tables of all currently valid project records and asociated user/lookup tables.
+        /// </returns>
+        public DataSet getKristalDataSet()
+        {
+            DataSet ds_krs = new DataSet("Kristal");
+
+            try
+            {
+                //use the central connection string from the SQL_Stuff class
+                SqlConnection conn = new SqlConnection();
+                conn.ConnectionString = SQL_Stuff.conString;
+                conn.Credential = SQL_Stuff.credential;
+                using (conn)
+                {
+                    SQL_Stuff.getDataTable(conn, null, ds_krs, "tblKristal",
+                        $"select * from [dbo].[tblKristal] " +
+                        $"where [ValidTo] is null " +
+                        $"order by [KristalRef], [KristalID]");
+                    SQL_Stuff.getDataTable(conn, null, ds_krs, "tlkGrantStage",
+                        $"select * from [dbo].[tlkGrantStage] order by StageNumber asc");
+                    SQL_Stuff.getDataTable(conn, null, ds_krs, "tblProjectKristal",
+                        $"select * from [dbo].[tblProjectKristal] " +
+                        $"where [ValidTo] is null " +
+                        $"order by [KristalRef], [ProjectNumber]");
+
+                    ds_krs.Relations.Add("Kristal_GrantStage"
+                        , ds_krs.Tables["tlkGrantStage"].Columns["GrantStageID"]
+                        , ds_krs.Tables["tblKristal"].Columns["GrantStageID"]);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to populate ds_krs DataSet" + Environment.NewLine + Environment.NewLine + ex.Message);
+            }
+
+            return ds_krs;
+        }
+
+        /// <summary>
         /// Logically delete a record from [dbo].[tblKristal] based on primary key
         /// </summary>
         /// <param name="KristalID"></param>
