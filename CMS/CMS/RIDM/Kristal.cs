@@ -251,7 +251,7 @@ namespace CMS.RIDM
                     qryInsertKristal.CommandText = $"insert into [dbo].[tblKristal] " +
                         "([KristalRef], [KristalName], [GrantStageID]) values (@KristalRef, @KristalName, @GrantStageID)";
                     qryInsertKristal.Parameters.Add("@KristalRef", SqlDbType.Int).Value = insKristal.KristalRef;
-                    qryInsertKristal.Parameters.Add("@KristalName", SqlDbType.VarChar,6).Value = insKristal.KristalName;
+                    qryInsertKristal.Parameters.Add("@KristalName", SqlDbType.VarChar,4000).Value = insKristal.KristalName;
                     qryInsertKristal.Parameters.Add("@GrantStageID", SqlDbType.Int).Value = insKristal.GrantStageID;
                     //open connection and execute insert
                     conn.Open();

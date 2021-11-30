@@ -45,27 +45,36 @@ namespace CMS
 
         }
 
-        public bool updateKristal(int KristalRef, int currentGrantStageID)
+        public bool updateKristal(mdl_Kristal currentKristal)
         {
-            int newGrantStageID = 0;
+            mdl_Kristal newKristal = new mdl_Kristal();
+
             try
             {
-                newGrantStageID = (int)cb_GrantStage.SelectedValue;
+                newKristal.KristalRef = currentKristal.KristalRef;
+                newKristal.GrantStageID = (int)cb_GrantStage.SelectedValue;
+                newKristal.KristalName = tb_KristalName.Text;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Please select a valid Application Stage");
+                MessageBox.Show("Please enter valid details." + Environment.NewLine + Environment.NewLine + ex.Message);
             }
 
-            //if app stage changed 
-            if (newGrantStageID > 0 & newGrantStageID != currentGrantStageID)
+            //if details remain same, do nothing
+            if (currentKristal == newKristal)
+            {
+                return true;
+            }
+
+            //if details changed, update
+            if (newKristal != currentKristal)
             {
                 Kristal kristal = new Kristal();
                 //logically delete current record from dbo.tblKristal
                 if (kristal.deleteKristal(current_Kristal.KristalID))
                 {
                     //insert new record to dbo.tblKristal
-                    kristal.insertKristal(KristalRef, newGrantStageID);
+                    kristal.insertKristal(newKristal);
                     return true;
                 }
             }
@@ -97,7 +106,7 @@ namespace CMS
         private void btn_Kristal_OK_Click(object sender, EventArgs e)
         {
 
-            if (updateKristal(current_Kristal.KristalRef, current_Kristal.GrantStageID))
+            if (updateKristal(current_Kristal))
                 this.Close();
         }
 

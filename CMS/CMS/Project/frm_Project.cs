@@ -29,7 +29,7 @@ namespace CMS
 
         /// <summary>
         /// The dataset that stores all project details and related tables.
-        /// Populated by fillProjectsDataSet() in this class, which calls method getProjectsDataSet() from Project class.
+        /// Populated by fillKristalDataSet() in this class, which calls method getProjectsDataSet() from Project class.
         /// Values obtained from SQL Server.
         /// </summary>
         DataSet ds_Project;
@@ -976,15 +976,15 @@ namespace CMS
             }
         }
 
-        private void btn_KristalAdd_Click(object sender, EventArgs e)
-        {
-            using (frm_KristalAdd ProjectKristalAdd = new frm_KristalAdd(mdl_CurrentProject.ProjectNumber, ds_Project))
-            {
-                ProjectKristalAdd.ShowDialog();
-                fillProjectsDataSet();
-                refreshProjectForm(mdl_CurrentProject.ProjectNumber);
-            }
-        }
+        //private void btn_KristalAdd_Click(object sender, EventArgs e)
+        //{
+        //    using (frm_KristalAdd ProjectKristalAdd = new frm_KristalAdd(mdl_CurrentProject.ProjectNumber, ds_Project))
+        //    {
+        //        ProjectKristalAdd.ShowDialog();
+        //        fillProjectsDataSet();
+        //        refreshProjectForm(mdl_CurrentProject.ProjectNumber);
+        //    }
+        //}
 
         private void btn_KristalRemove_Click(object sender, EventArgs e)
         {

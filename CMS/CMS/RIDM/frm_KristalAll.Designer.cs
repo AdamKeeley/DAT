@@ -141,6 +141,7 @@
             this.btn_NewGrant.TabIndex = 81;
             this.btn_NewGrant.Text = "Create Grant";
             this.btn_NewGrant.UseVisualStyleBackColor = true;
+            this.btn_NewGrant.Click += new System.EventHandler(this.open_frm_KristalAdd);
             // 
             // frm_KristalAll
             // 
@@ -159,7 +160,7 @@
             this.Controls.Add(this.lbl_GrantStage);
             this.Controls.Add(this.cb_GrantStage);
             this.Name = "frm_KristalAll";
-            this.Text = "frm_KristalAll";
+            this.Text = "Search for Grants";
             ((System.ComponentModel.ISupportInitialize)(this.dgv_KristalList)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

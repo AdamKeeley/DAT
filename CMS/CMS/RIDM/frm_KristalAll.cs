@@ -13,21 +13,22 @@ namespace CMS.RIDM
         {
             InitializeComponent();
             setTabIndex();
-            fillProjectsDataSet();
+            fillKristalDataSet();
             setControlDataSource();
             fillDataGridView();
         }
 
-        DataSet ds_Project;
+        DataSet ds_Kristal;
         bool textChanged = true;
 
         /// <summary>
         /// Creates a new class object from Project class and calls method getProjectsDataSet() to populate DataSet in this class (ds_Project).
         /// </summary>
-        private void fillProjectsDataSet()
+        private void fillKristalDataSet()
         {
-            var Projects = new Project();
-            ds_Project = Projects.getProjectsDataSet();
+            Kristal kristal = new Kristal();
+            //var kristal = new Kristal();
+            ds_Kristal = kristal.getKristalDataSet();
         }
 
 
@@ -47,11 +48,11 @@ namespace CMS.RIDM
                 dt_GrantStage.Columns.Add("StageNumber");
                 dt_GrantStage.DefaultView.Sort = "StageNumber";
                 DataRow grantStageRow;
-                foreach (DataRow gsRow in ds_Project.Tables["tblProjectKristal"].Select("[GrantStageID] is not null"))
+                foreach (DataRow gsRow in ds_Kristal.Tables["tblKristal"].Select("[GrantStageID] is not null"))
                 {
                     grantStageRow = dt_GrantStage.NewRow();
                     grantStageRow["GrantStageID"] = gsRow["GrantStageID"];
-                    foreach (DataRow r in gsRow.GetParentRows("ProjectKristal_GrantStage"))
+                    foreach (DataRow r in gsRow.GetParentRows("Kristal_GrantStage"))
                     {
                         grantStageRow["GrantStageDescription"] = r["GrantStageDescription"];
                         grantStageRow["StageNumber"] = r["StageNumber"];
@@ -103,7 +104,7 @@ namespace CMS.RIDM
             dt_KristalList.Columns.Add("ProjectNumber");
 
             DataRow a_row;
-            foreach (DataRow pRow in ds_Project.Tables["tblProjectKristal"].Rows)
+            foreach (DataRow pRow in ds_Kristal.Tables["tblKristal"].Rows)
             {
                 a_row = dt_KristalList.NewRow();
 
@@ -115,7 +116,7 @@ namespace CMS.RIDM
                 }
                 //concatenate Project numbers into single string by creating a list and joining with seperator
                 List<string> ProjectNumber = new List<string>();
-                foreach (DataRow kRow in ds_Project.Tables["tblProjectKristal"].Select($"[KristalRef] = '{pRow["KristalRef"]}'"))
+                foreach (DataRow kRow in ds_Kristal.Tables["tblProjectKristal"].Select($"[KristalRef] = '{pRow["KristalRef"]}'"))
                 {
                     ProjectNumber.Add(kRow["ProjectNumber"].ToString());
                 }
@@ -199,10 +200,23 @@ namespace CMS.RIDM
 
         private void refreshPage(object sender, EventArgs e)
         {
-            fillProjectsDataSet();
+            fillKristalDataSet();
             setControlDataSource();
             fillDataGridView();
         }
 
+        private void open_frm_KristalAdd(object sender, EventArgs e)
+        {
+            using (frm_KristalAdd kristalAdd = new frm_KristalAdd())
+            {
+                kristalAdd.ShowDialog();
+                int KristalRef = kristalAdd.newKristalRef;
+
+                if (KristalRef > 0)
+                {
+                    refreshPage(kristalAdd, e);
+                }
+            }
+        }
     }
 }

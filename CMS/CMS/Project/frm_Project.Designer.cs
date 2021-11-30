@@ -1031,7 +1031,6 @@ namespace CMS
             this.btn_KristalAdd.TabIndex = 1;
             this.btn_KristalAdd.Text = "Add";
             this.btn_KristalAdd.UseVisualStyleBackColor = true;
-            this.btn_KristalAdd.Click += new System.EventHandler(this.btn_KristalAdd_Click);
             // 
             // frm_Project
             // 

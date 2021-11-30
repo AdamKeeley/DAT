@@ -46,7 +46,7 @@
             this.btn_ProjectKristalAdd_Add.TabIndex = 49;
             this.btn_ProjectKristalAdd_Add.Text = "Add";
             this.btn_ProjectKristalAdd_Add.UseVisualStyleBackColor = true;
-            this.btn_ProjectKristalAdd_Add.Click += new System.EventHandler(this.btn_ProjectKristalAdd_Add_Click);
+            this.btn_ProjectKristalAdd_Add.Click += new System.EventHandler(this.btn_KristalAdd_Add_Click);
             // 
             // btn_ProjectKristalAdd_Cancel
             // 

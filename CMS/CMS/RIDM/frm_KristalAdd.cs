@@ -1,4 +1,5 @@
 ﻿using CMS.RIDM;
+using DataControlsLib.DataModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,24 +14,29 @@ namespace CMS
 {
     public partial class frm_KristalAdd : Form
     {
-        public frm_KristalAdd(string ProjectNumber, DataSet ds_Project)
+        public frm_KristalAdd()
         {
             InitializeComponent();
             setTabIndex();
-            setProjectKristalAdd(ProjectNumber, ds_Project);
+            fillKristalDataSet();
+            setProjectKristalAdd();
         }
 
-        string projectNumber;
+        public DataSet ds_kristal;
+        public int newKristalRef;
 
-        private void setProjectKristalAdd(string pNumber, DataSet ds_prj)
+        private void fillKristalDataSet()
+        {
+            Kristal kristal = new Kristal();
+            ds_kristal = kristal.getKristalDataSet();
+        }
+
+        private void setProjectKristalAdd()
         {
             try
             {
-                //set variables
-                projectNumber = pNumber;
-
                 //set controls values
-                DataView GrantStages = new DataView(ds_prj.Tables["tlkGrantStage"]);
+                DataView GrantStages = new DataView(ds_kristal.Tables["tlkGrantStage"]);
                 GrantStages.RowFilter = "[ValidTo] is null";
                 cb_GrantStage.DataSource = GrantStages;
                 cb_GrantStage.ValueMember = "GrantStageID";
@@ -43,21 +49,26 @@ namespace CMS
             }
         }
 
-        private bool addProjectKristal()
+        private bool addKristal()
         {
             if (cb_GrantStage.SelectedIndex > -1)
             {
-                int GrantStageID = (int)cb_GrantStage.SelectedValue;
-                int KristalRef;
+                mdl_Kristal newKristal = new mdl_Kristal();
+                newKristal.GrantStageID = (int)cb_GrantStage.SelectedValue;
+                newKristal.KristalName = tb_KristalName.Text;
 
-                if (int.TryParse(tb_KristalRef.Text, out KristalRef))
+                int testRef;
+
+                if (int.TryParse(tb_KristalRef.Text, out testRef))
                 {
-                    KristalRef = int.Parse(tb_KristalRef.Text);
-                    if (KristalRef > 0)
+                    newKristal.KristalRef = testRef;
+                    
+                    if (newKristal.KristalRef > 0)
                     { Kristal kristal = new Kristal();
-                        if (kristal.insertProjectKristalReference(projectNumber, GrantStageID, KristalRef) == true)
+                        if (kristal.insertKristal(newKristal) == true)
                         {
                             MessageBox.Show("Item added");
+                            newKristalRef = newKristal.KristalRef;
                             return true;
                         }
                     }
@@ -94,9 +105,9 @@ namespace CMS
             btn_ProjectKristalAdd_Cancel.TabIndex = ++x;
         }
 
-        private void btn_ProjectKristalAdd_Add_Click(object sender, EventArgs e)
+        private void btn_KristalAdd_Add_Click(object sender, EventArgs e)
         {
-            if (addProjectKristal() == true)
+            if (addKristal() == true)
                 this.Close();
         }
 
