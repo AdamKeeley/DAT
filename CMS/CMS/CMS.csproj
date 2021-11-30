@@ -182,11 +182,11 @@
     <Compile Include="RIDM\frm_KristalAdd.Designer.cs">
       <DependentUpon>frm_KristalAdd.cs</DependentUpon>
     </Compile>
-    <Compile Include="RIDM\frm_KristalEdit.cs">
+    <Compile Include="RIDM\frm_Kristal.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RIDM\frm_KristalEdit.Designer.cs">
-      <DependentUpon>frm_KristalEdit.cs</DependentUpon>
+    <Compile Include="RIDM\frm_Kristal.Designer.cs">
+      <DependentUpon>frm_Kristal.cs</DependentUpon>
     </Compile>
     <Compile Include="Project\frm_ProjectPlatformInfoAdd.cs">
       <SubType>Form</SubType>
@@ -217,6 +217,7 @@
     <Compile Include="RIDM\frm_KristalAll.Designer.cs">
       <DependentUpon>frm_KristalAll.cs</DependentUpon>
     </Compile>
+    <Compile Include="RIDM\Kristal.cs" />
     <Compile Include="User\frm_UserAdd.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -316,8 +317,8 @@
     <EmbeddedResource Include="RIDM\frm_KristalAdd.resx">
       <DependentUpon>frm_KristalAdd.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="RIDM\frm_KristalEdit.resx">
-      <DependentUpon>frm_KristalEdit.cs</DependentUpon>
+    <EmbeddedResource Include="RIDM\frm_Kristal.resx">
+      <DependentUpon>frm_Kristal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Project\frm_ProjectPlatformInfoAdd.resx">
       <DependentUpon>frm_ProjectPlatformInfoAdd.cs</DependentUpon>

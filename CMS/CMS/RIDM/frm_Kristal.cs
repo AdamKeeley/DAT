@@ -1,45 +1,38 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using CMS.RIDM;
+using DataControlsLib.DataModels;
 
 namespace CMS
 {
-    public partial class frm_KristalEdit : Form
+    public partial class frm_Kristal : Form
     {
-        public frm_KristalEdit(int KristalID, int KristalRef, int GrantStage, DataTable tlkGrantStage)
+        public frm_Kristal(mdl_Kristal mdl_Kristal, DataTable tlkGrantStage)
         {
             InitializeComponent();
             setTabIndex();
-            setKristalEdit(KristalID, KristalRef, GrantStage, tlkGrantStage);
+            setKristal(mdl_Kristal, tlkGrantStage);
         }
 
-        int currentKristalID;
-        int currentKristalRef;
-        int currentGrantStageID;
+        mdl_Kristal current_Kristal;
 
-        public void setKristalEdit(int KristalID, int KristalRef, int GrantStageID, DataTable tlkGrantStage)
+        public void setKristal(mdl_Kristal mdl_Kristal, DataTable tlkGrantStage)
         {
-            currentKristalID = KristalID;
-            currentKristalRef = KristalRef;
-            currentGrantStageID = GrantStageID;
-
             try
             {
-                lbl_KristalRefValue.Text = (string)KristalRef.ToString();
+                current_Kristal = mdl_Kristal;
 
-                //set controls values
+                lbl_KristalRefValue.Text = (string)current_Kristal.KristalRef.ToString();
+
                 DataView GrantStages = new DataView(tlkGrantStage);
                 GrantStages.RowFilter = "[ValidTo] is null";
                 cb_GrantStage.DataSource = GrantStages;
                 cb_GrantStage.ValueMember = "GrantStageID";
                 cb_GrantStage.DisplayMember = "GrantStageDescription";
-                cb_GrantStage.SelectedValue = GrantStageID;
+                cb_GrantStage.SelectedValue = current_Kristal.GrantStageID;
+
+                tb_KristalName.Text = current_Kristal.KristalName;
             }
             catch (Exception ex)
             {
@@ -47,7 +40,12 @@ namespace CMS
             }
         }
 
-        public bool updateKristalStage(int KristalRef, int currentGrantStageID)
+        public void setKristalDGV()
+        {
+
+        }
+
+        public bool updateKristal(int KristalRef, int currentGrantStageID)
         {
             int newGrantStageID = 0;
             try
@@ -62,12 +60,12 @@ namespace CMS
             //if app stage changed 
             if (newGrantStageID > 0 & newGrantStageID != currentGrantStageID)
             {
-                Project project = new Project();
+                Kristal kristal = new Kristal();
                 //logically delete current record from dbo.tblKristal
-                if (project.deleteKristal(currentKristalID))
+                if (kristal.deleteKristal(current_Kristal.KristalID))
                 {
                     //insert new record to dbo.tblKristal
-                    project.insertKristal(KristalRef, newGrantStageID);
+                    kristal.insertKristal(KristalRef, newGrantStageID);
                     return true;
                 }
             }
@@ -89,18 +87,21 @@ namespace CMS
             x = 0;
 
             cb_GrantStage.TabIndex = ++x;
-            btn_KristalEdit_OK.TabIndex = ++x;
-            btn_KristalEdit_Cancel.TabIndex = ++x;
+            tb_KristalName.TabIndex = ++x;
+            btn_Kristal_AddProject.TabIndex = ++x;
+            btn_Kristal_RemoveProject.TabIndex = ++x;
+            btn_Kristal_OK.TabIndex = ++x;
+            btn_Kristal_Cancel.TabIndex = ++x;
         }
 
-        private void btn_KristalEdit_OK_Click(object sender, EventArgs e)
+        private void btn_Kristal_OK_Click(object sender, EventArgs e)
         {
 
-            if (updateKristalStage(currentKristalRef, currentGrantStageID))
+            if (updateKristal(current_Kristal.KristalRef, current_Kristal.GrantStageID))
                 this.Close();
         }
 
-        private void btn_KristalEdit_Cancel_Click(object sender, EventArgs e)
+        private void btn_Kristal_Cancel_Click(object sender, EventArgs e)
         {
             this.Close();
         }

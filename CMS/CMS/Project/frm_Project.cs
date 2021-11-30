@@ -740,8 +740,8 @@ namespace CMS
                     DialogResult removeRef = MessageBox.Show($"Remove {kristalRef} from project record?", "", MessageBoxButtons.YesNo);
                     if (removeRef == DialogResult.Yes)
                     {
-                        Project Projects = new Project();
-                        Projects.deleteProjectKristal(projectKristalID);
+                        Kristal kristal = new Kristal();
+                        kristal.deleteProjectKristal(projectKristalID);
                         removedRefs.Add(rowIndex);
                     }
                 }
@@ -999,15 +999,16 @@ namespace CMS
             {
                 try
                 {
-                    int KristalID = Convert.ToInt32(dgv_KristalRef.Rows[r].Cells["KristalID"].Value);
-                    int KristalRef = Convert.ToInt32(dgv_KristalRef.Rows[r].Cells["Kristal Ref"].Value);
-                    int GrantStage = Convert.ToInt32(dgv_KristalRef.Rows[r].Cells["KristalStageID"].Value);
+                    mdl_Kristal mdl_Kristal = new mdl_Kristal();
+                    mdl_Kristal.KristalID = Convert.ToInt32(dgv_KristalRef.Rows[r].Cells["KristalID"].Value);
+                    mdl_Kristal.KristalRef = Convert.ToInt32(dgv_KristalRef.Rows[r].Cells["Kristal Ref"].Value);
+                    mdl_Kristal.GrantStageID = Convert.ToInt32(dgv_KristalRef.Rows[r].Cells["KristalStageID"].Value);
                     DataTable tlkGrantStage = ds_Project.Tables["tlkGrantStage"];
 
 
-                    using (frm_KristalEdit KristalEdit = new frm_KristalEdit(KristalID, KristalRef, GrantStage, tlkGrantStage))
+                    using (frm_Kristal Kristal = new frm_Kristal(mdl_Kristal, tlkGrantStage))
                     {
-                        KristalEdit.ShowDialog();
+                        Kristal.ShowDialog();
                         fillProjectsDataSet();
                         setProjectKristalRef(mdl_CurrentProject.ProjectNumber);
                     }

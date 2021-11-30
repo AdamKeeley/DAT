@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CMS.RIDM;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -53,8 +54,8 @@ namespace CMS
                 {
                     KristalRef = int.Parse(tb_KristalRef.Text);
                     if (KristalRef > 0)
-                    { Project Projects = new Project();
-                        if (Projects.insertProjectKristalReference(projectNumber, GrantStageID, KristalRef) == true)
+                    { Kristal kristal = new Kristal();
+                        if (kristal.insertProjectKristalReference(projectNumber, GrantStageID, KristalRef) == true)
                         {
                             MessageBox.Show("Item added");
                             return true;

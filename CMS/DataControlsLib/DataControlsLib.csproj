@@ -48,6 +48,7 @@
     <Compile Include="DataModels\mdl_DsaNotes.cs" />
     <Compile Include="DataModels\mdl_DsasProjects.cs" />
     <Compile Include="DataModels\mdl_FileTransferMethods.cs" />
+    <Compile Include="DataModels\mdl_Kristal.cs" />
     <Compile Include="DataModels\mdl_ProjectDoc.cs" />
     <Compile Include="DataModels\mdl_User.cs" />
     <Compile Include="Extension_Methods.cs" />
