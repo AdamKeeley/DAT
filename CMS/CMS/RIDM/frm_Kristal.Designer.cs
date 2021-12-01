@@ -119,9 +119,15 @@
             // 
             // dgv_KristalProjects
             // 
+            this.dgv_KristalProjects.AllowUserToAddRows = false;
+            this.dgv_KristalProjects.AllowUserToDeleteRows = false;
+            this.dgv_KristalProjects.AllowUserToOrderColumns = true;
             this.dgv_KristalProjects.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_KristalProjects.Location = new System.Drawing.Point(15, 59);
             this.dgv_KristalProjects.Name = "dgv_KristalProjects";
+            this.dgv_KristalProjects.ReadOnly = true;
+            this.dgv_KristalProjects.RowHeadersVisible = false;
+            this.dgv_KristalProjects.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_KristalProjects.Size = new System.Drawing.Size(430, 150);
             this.dgv_KristalProjects.TabIndex = 82;
             // 
@@ -144,6 +150,7 @@
             this.btn_Kristal_RemoveProject.TabIndex = 84;
             this.btn_Kristal_RemoveProject.Text = "Remove Project";
             this.btn_Kristal_RemoveProject.UseVisualStyleBackColor = true;
+            this.btn_Kristal_RemoveProject.Click += new System.EventHandler(this.btn_Kristal_RemoveProject_Click);
             // 
             // frm_Kristal
             // 

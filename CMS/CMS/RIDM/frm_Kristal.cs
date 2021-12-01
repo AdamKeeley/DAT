@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
@@ -52,6 +53,7 @@ namespace CMS
             //populate DataGridView (dgv_KristalProjects) from DataTable (ds_Kristal.Tables["tblProjectKristal"])
             //create new DataTable (dt_dgv_KristalProjects) that just contains columns of interest
             DataTable dt_dgv_KristalProjects = new DataTable();
+            dt_dgv_KristalProjects.Columns.Add("ProjectKristalID");
             dt_dgv_KristalProjects.Columns.Add("Project Number");
             dt_dgv_KristalProjects.Columns.Add("Project Name");
             dt_dgv_KristalProjects.Columns.Add("PI");
@@ -65,6 +67,7 @@ namespace CMS
             {
                 row = dt_dgv_KristalProjects.NewRow();
 
+                row["ProjectKristalID"] = kRow["ProjectKristalID"];
                 row["Project Number"] = kRow["ProjectNumber"];
                 foreach (DataRow kp in kRow.GetParentRows("Kristal_Project"))
                 {
@@ -78,12 +81,12 @@ namespace CMS
             }
             dgv_KristalProjects.DataSource = dt_dgv_KristalProjects;
             dgv_KristalProjects.Sort(dgv_KristalProjects.Columns["Project Number"], ListSortDirection.Ascending);
-            //dgv_KristalProjects.Columns["User Number"].Visible = false;
+            dgv_KristalProjects.Columns["ProjectKristalID"].Visible = false;
             dgv_KristalProjects.Columns["Project Number"].Width = 50;
-            dgv_KristalProjects.Columns["Project Name"].Width = 155;
-            dgv_KristalProjects.Columns["PI"].Width = 155;
-            dgv_KristalProjects.Columns["Lead Applicant"].Width = 155;
-            dgv_KristalProjects.Columns["Faculty"].Width = 75;
+            dgv_KristalProjects.Columns["Project Name"].Width = 250;
+            dgv_KristalProjects.Columns["PI"].Width = 120;
+            dgv_KristalProjects.Columns["Lead Applicant"].Width = 120;
+            dgv_KristalProjects.Columns["Faculty"].Width = 150;
             dgv_KristalProjects.Columns["Portfolio Number"].Width = 50;
         }
 
@@ -121,6 +124,34 @@ namespace CMS
                 }
             }
             return false;
+        }
+
+        private void removeProjectKristal()
+        {
+            int rowCount = dgv_KristalProjects.Rows.GetRowCount(DataGridViewElementStates.Selected);
+
+            if (rowCount > 0)
+            {
+                List<int> removedRefs = new List<int>();
+                for (int i = 0; i < rowCount; i++)
+                {
+                    int rowIndex = dgv_KristalProjects.SelectedRows[i].Index;
+                    int projectKristalID = Convert.ToInt32(dgv_KristalProjects.Rows[rowIndex].Cells["ProjectKristalID"].Value);
+                    string pNumber = dgv_KristalProjects.Rows[rowIndex].Cells["Project Number"].Value.ToString();
+
+                    DialogResult removeRef = MessageBox.Show($"Remove {pNumber} from grant record?", "", MessageBoxButtons.YesNo);
+                    if (removeRef == DialogResult.Yes)
+                    {
+                        Kristal kristal = new Kristal();
+                        kristal.deleteProjectKristal(projectKristalID);
+                        removedRefs.Add(rowIndex);
+                    }
+                }
+                foreach (int rowIndex in removedRefs)
+                {
+                    dgv_KristalProjects.Rows.RemoveAt(rowIndex);
+                }
+            }
         }
 
         /// <summary>
@@ -165,6 +196,11 @@ namespace CMS
                 setKristal(current_Kristal);
                 setKristalProjects();
             }
+        }
+
+        private void btn_Kristal_RemoveProject_Click(object sender, EventArgs e)
+        {
+            removeProjectKristal();
         }
     }
 }
