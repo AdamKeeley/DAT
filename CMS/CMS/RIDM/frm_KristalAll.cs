@@ -37,7 +37,6 @@ namespace CMS.RIDM
         {
             try
             {
-
                 //Setting DataSource and SelectedIndex triggers the TextChanged event, which is set to run 
                 //searchItemAdded method. This boolean flag prevents the method from running fillDataGridView 12 times
                 textChanged = false;
@@ -150,7 +149,7 @@ namespace CMS.RIDM
             dgv_KristalList.Sort(dgv_KristalList.Columns["Kristal Ref"], ListSortDirection.Descending);
 
             dgv_KristalList.Columns["Kristal Ref"].Width = 50;
-            dgv_KristalList.Columns["Kristal Name"].Width = 250;
+            dgv_KristalList.Columns["Kristal Name"].Width = 240;
             dgv_KristalList.Columns["Grant Stage"].Width = 75;
             dgv_KristalList.Columns["Project Number"].Width = 70;
 
@@ -233,16 +232,8 @@ namespace CMS.RIDM
 
                     mdl_Kristal = kristal.fetchCurrentKristal(Convert.ToInt32(dgv_KristalList.Rows[r].Cells["Kristal Ref"].Value));
 
-                    DataTable tlkGrantStage = ds_Kristal.Tables["tlkGrantStage"];
-
-                    using (frm_Kristal Kristal = new frm_Kristal(mdl_Kristal))
-                    {
-                        Kristal.ShowDialog();
-                        fillKristalDataSet();
-                        setControlDataSource();
-                        fillDataGridView();
-                    }
-
+                    frm_Kristal Kristal = new frm_Kristal(mdl_Kristal);
+                    Kristal.Show();
                 }
                 catch (Exception ex)
                 {

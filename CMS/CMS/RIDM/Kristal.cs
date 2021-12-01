@@ -46,6 +46,8 @@ namespace CMS.RIDM
                     SQL_Stuff.getDataTable(conn, null, ds_krs, "vw_AllProjects",
                         $"select * from [dbo].[vw_AllProjects]" +
                         $"order by [ProjectNumber]");
+                    SQL_Stuff.getDataTable(conn, null, ds_krs, "tblKristalNotes",
+                        $"select * from [dbo].[tblKristalNotes]");
 
                     ds_krs.Relations.Add("Kristal_GrantStage"
                         , ds_krs.Tables["tlkGrantStage"].Columns["GrantStageID"]
@@ -310,6 +312,42 @@ namespace CMS.RIDM
                 }
             }
             return false;
+        }
+
+        /// <summary>
+        /// Method to leave a kristal note.
+        /// Takes parameter kristalRef to link to grant and kristalNote as the note value.
+        /// Adds them both to the SQL query as parameters and executes an insert on dbo.tblKristalNotes.
+        /// </summary>
+        /// <param name="kristalRef"></param>
+        /// <param name="kristalNote"></param>
+        public void insertKristalNote(int kristalRef, string kristalNote)
+        {
+            try
+            {
+                SqlConnection conn = new SqlConnection();
+                conn.ConnectionString = SQL_Stuff.conString;
+                conn.Credential = SQL_Stuff.credential;
+                using (conn)
+                {
+                    //create parameterised SQL query to insert a new record to tblProjectNotes
+                    SqlCommand qryInsertKristalNote = new SqlCommand();
+                    qryInsertKristalNote.Connection = conn;
+                    qryInsertKristalNote.CommandText = "insert into [dbo].[tblKristalNotes] "
+                        + "([KristalRef],[KristalNote]) values (@KristalRef, @KristalNote)";
+                    qryInsertKristalNote.Parameters.Add("@KristalRef", SqlDbType.Int).Value = kristalRef;
+                    qryInsertKristalNote.Parameters.Add("@KristalNote", SqlDbType.VarChar, 8000).Value = kristalNote;
+
+                    //open connection and execute insert
+                    conn.Open();
+                    qryInsertKristalNote.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to add new note" + Environment.NewLine + ex.Message);
+                throw;
+            }
         }
     }
 }

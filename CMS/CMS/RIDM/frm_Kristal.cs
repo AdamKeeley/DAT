@@ -16,6 +16,7 @@ namespace CMS
             setTabIndex();
             setKristal(mdl_Kristal);
             setKristalProjects();
+            setKristalNotes();
         }
 
         mdl_Kristal current_Kristal;
@@ -120,6 +121,7 @@ namespace CMS
                 {
                     //insert new record to dbo.tblKristal
                     kristal.insertKristal(newKristal);
+                    current_Kristal = newKristal;
                     return true;
                 }
             }
@@ -155,6 +157,92 @@ namespace CMS
         }
 
         /// <summary>
+        /// Method to add a note to a project record.
+        /// If the textbox control tb_NewProjectNote is not empty the entered value is inserted into a table within 
+        /// the SQL Server database.
+        /// Assigns the contents of tb_NewProjectNote to a variable (newProjectNote), creates a new Project class 
+        /// object and passes the parameter pNumber and variable newProjectNote to a method it contains (insertProjectNote).
+        /// Refreshes class DataSet (ds_Project) and datagrid view before clearing the contents of the text box (tb_NewProjectNote).
+        /// </summary>
+        /// <param name="pNumber"></param>
+        private void addKristalNote(int kristalRef)
+        {
+            string newKristalNote;
+
+            if (tb_NewKristalNote.Text != "")
+            {
+                try
+                {
+                    //place the new note text into the string variable (newProjectNote)
+                    newKristalNote = tb_NewKristalNote.Text;
+                    //instantiate new Project type object that contains methods to update db
+                    Kristal kristal = new Kristal();
+                    //add the note to the SQL table
+                    kristal.insertKristalNote(kristalRef, newKristalNote);
+                    //refresh the DataSet (ds_Project)
+                    ds_Kristal = kristal.getKristalDataSet();
+                    //repopulate the DataGridView (dgv_pNotes)
+                    setKristalNotes();
+                    //clear the textbox control
+                    tb_NewKristalNote.Clear();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Failed to add new note" + Environment.NewLine + ex);
+                    throw;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Method to get grant notes from class DataSet (ds_Kristal) and assign to DataGridView on form (dgv_KristalNotes).
+        /// Creates a new DataTable (dt_dgv_KristalNotes), adds records to it row by row from DataSet using parameter kristalRef and then 
+        /// fills the DataGridView.
+        /// Sizes columns to fit expected data.
+        /// </summary>
+        private void setKristalNotes()
+        {
+            string filter = $"KristalRef = '{current_Kristal.KristalRef}'";
+
+            /*
+            //Used if enabling search function for notes
+            string filterNotes = $"KristalNote like '%{tb_searchNotes.Text}%'";
+            if (tb_searchNotes.Text != "")
+            {
+                filter += $" AND {filterNotes}";
+            }
+            */
+
+            //populate DataGridView (dgv_KristalNotes) from DataTable (ds_Kristal.Tables["tblKristalNotes"])
+            //create new DataTable (dt_dgv_KristalNotes) that just contains columns of interest
+            DataTable dt_dgv_KristalNotes = new DataTable();
+            dt_dgv_KristalNotes.Columns.Add("Note");
+            DataColumn CreatedDate = new DataColumn("Created Date");
+            CreatedDate.DataType = System.Type.GetType("System.DateTime");
+            dt_dgv_KristalNotes.Columns.Add(CreatedDate);
+            dt_dgv_KristalNotes.Columns.Add("Created By");
+            //iterate through each project note in source DataTable and add to newly created DataTable
+            DataRow row;
+            foreach (DataRow nRow in ds_Kristal.Tables["tblKristalNotes"].Select(filter))
+            {
+                row = dt_dgv_KristalNotes.NewRow();
+                row["Note"] = nRow["KristalNote"];
+                row["Created Date"] = nRow["Created"];
+                row["Created By"] = nRow["CreatedBy"];
+                dt_dgv_KristalNotes.Rows.Add(row);
+            }
+            dgv_KristalNotes.DataSource = dt_dgv_KristalNotes;
+
+            //format DataGridView (dgv_pNotes) column widths etc.
+            dgv_KristalNotes.Columns["Note"].Width = 300;
+            dgv_KristalNotes.Columns["Created Date"].Width = 80;
+            dgv_KristalNotes.Columns["Created By"].Width = 50;
+            dgv_KristalNotes.Columns["Note"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            dgv_KristalNotes.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dgv_KristalNotes.Sort(dgv_KristalNotes.Columns["Created Date"], ListSortDirection.Descending);
+        }
+
+        /// <summary>
         /// Each control on form assigned a tab index.
         /// If any controls are added/removed it's easier to change here than on actual form!
         /// </summary>
@@ -170,8 +258,16 @@ namespace CMS
 
             cb_GrantStage.TabIndex = ++x;
             tb_KristalName.TabIndex = ++x;
+            
             btn_Kristal_AddProject.TabIndex = ++x;
             btn_Kristal_RemoveProject.TabIndex = ++x;
+
+            tb_NewKristalNote.TabIndex = ++x;
+            btn_Kristal_InsertKristalNote.TabIndex = ++x;
+
+            btn_Kristal_Create.TabIndex = ++x;
+            btn_Kristal_Refresh.TabIndex = ++x;
+            btn_Kristal_Apply.TabIndex = ++x;
             btn_Kristal_OK.TabIndex = ++x;
             btn_Kristal_Cancel.TabIndex = ++x;
         }
@@ -195,9 +291,28 @@ namespace CMS
             }
         }
 
+        private void btn_Kristal_Create_Click(object sender, EventArgs e)
+        {
+            using (frm_KristalAdd kristalAdd = new frm_KristalAdd())
+            {
+                kristalAdd.ShowDialog();
+            }
+        }
+
+        private void btn_Kristal_Refresh_Click(object sender, EventArgs e)
+        {
+            setKristal(current_Kristal);
+            setKristalProjects();
+            setKristalNotes();
+        }
+
+        private void btn_Kristal_Apply_Click(object sender, EventArgs e)
+        {
+            updateKristal(current_Kristal);
+        }
+
         private void btn_Kristal_OK_Click(object sender, EventArgs e)
         {
-
             if (updateKristal(current_Kristal))
                 this.Close();
         }
@@ -220,6 +335,11 @@ namespace CMS
         private void btn_Kristal_RemoveProject_Click(object sender, EventArgs e)
         {
             removeProjectKristal();
+        }
+
+        private void btn_Kristal_InsertKristalNote_Click(object sender, EventArgs e)
+        {
+            addKristalNote(current_Kristal.KristalRef);
         }
     }
 }
