@@ -1006,7 +1006,7 @@ namespace CMS
 
                     DataTable tlkGrantStage = ds_Project.Tables["tlkGrantStage"];
 
-                    using (frm_Kristal Kristal = new frm_Kristal(mdl_Kristal, tlkGrantStage))
+                    using (frm_Kristal Kristal = new frm_Kristal(mdl_Kristal))
                     {
                         Kristal.ShowDialog();
                         fillProjectsDataSet();

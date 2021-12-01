@@ -43,10 +43,16 @@ namespace CMS.RIDM
                         $"select * from [dbo].[tblProjectKristal] " +
                         $"where [ValidTo] is null " +
                         $"order by [KristalRef], [ProjectNumber]");
+                    SQL_Stuff.getDataTable(conn, null, ds_krs, "vw_AllProjects",
+                        $"select * from [dbo].[vw_AllProjects]" +
+                        $"order by [ProjectNumber]");
 
                     ds_krs.Relations.Add("Kristal_GrantStage"
                         , ds_krs.Tables["tlkGrantStage"].Columns["GrantStageID"]
                         , ds_krs.Tables["tblKristal"].Columns["GrantStageID"]);
+                    ds_krs.Relations.Add("Kristal_Project"
+                        , ds_krs.Tables["vw_AllProjects"].Columns["ProjectNumber"]
+                        , ds_krs.Tables["tblProjectKristal"].Columns["ProjectNumber"]);
                 }
             }
             catch (Exception ex)
@@ -266,7 +272,6 @@ namespace CMS.RIDM
                 return false;
             }
         }
-
 
         /// <summary>
         /// Creates a relationship between Kristal Reference and Project Number on [dbo].[tblProjectKristal] 

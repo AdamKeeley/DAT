@@ -36,10 +36,10 @@
             this.btn_Kristal_Cancel = new System.Windows.Forms.Button();
             this.tb_KristalName = new System.Windows.Forms.TextBox();
             this.lbl_KristalName = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgv_KristalProjects = new System.Windows.Forms.DataGridView();
             this.btn_Kristal_AddProject = new System.Windows.Forms.Button();
             this.btn_Kristal_RemoveProject = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_KristalProjects)).BeginInit();
             this.SuspendLayout();
             // 
             // lbl_KristalRef
@@ -117,13 +117,13 @@
             this.lbl_KristalName.TabIndex = 80;
             this.lbl_KristalName.Text = "Kristal Name";
             // 
-            // dataGridView1
+            // dgv_KristalProjects
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(15, 59);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(430, 150);
-            this.dataGridView1.TabIndex = 82;
+            this.dgv_KristalProjects.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_KristalProjects.Location = new System.Drawing.Point(15, 59);
+            this.dgv_KristalProjects.Name = "dgv_KristalProjects";
+            this.dgv_KristalProjects.Size = new System.Drawing.Size(430, 150);
+            this.dgv_KristalProjects.TabIndex = 82;
             // 
             // btn_Kristal_AddProject
             // 
@@ -133,6 +133,7 @@
             this.btn_Kristal_AddProject.TabIndex = 83;
             this.btn_Kristal_AddProject.Text = "Add Project";
             this.btn_Kristal_AddProject.UseVisualStyleBackColor = true;
+            this.btn_Kristal_AddProject.Click += new System.EventHandler(this.btn_Kristal_AddProject_Click);
             // 
             // btn_Kristal_RemoveProject
             // 
@@ -152,7 +153,7 @@
             this.ClientSize = new System.Drawing.Size(457, 250);
             this.Controls.Add(this.btn_Kristal_RemoveProject);
             this.Controls.Add(this.btn_Kristal_AddProject);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgv_KristalProjects);
             this.Controls.Add(this.tb_KristalName);
             this.Controls.Add(this.lbl_KristalName);
             this.Controls.Add(this.btn_Kristal_Cancel);
@@ -163,7 +164,7 @@
             this.Controls.Add(this.lbl_AppStage);
             this.Name = "frm_Kristal";
             this.Text = "Grant details";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_KristalProjects)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -179,7 +180,7 @@
         private System.Windows.Forms.Button btn_Kristal_Cancel;
         private System.Windows.Forms.TextBox tb_KristalName;
         private System.Windows.Forms.Label lbl_KristalName;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgv_KristalProjects;
         private System.Windows.Forms.Button btn_Kristal_AddProject;
         private System.Windows.Forms.Button btn_Kristal_RemoveProject;
     }

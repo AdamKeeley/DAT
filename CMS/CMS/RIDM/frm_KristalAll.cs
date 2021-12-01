@@ -235,7 +235,7 @@ namespace CMS.RIDM
 
                     DataTable tlkGrantStage = ds_Kristal.Tables["tlkGrantStage"];
 
-                    using (frm_Kristal Kristal = new frm_Kristal(mdl_Kristal, tlkGrantStage))
+                    using (frm_Kristal Kristal = new frm_Kristal(mdl_Kristal))
                     {
                         Kristal.ShowDialog();
                         fillKristalDataSet();
