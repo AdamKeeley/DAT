@@ -215,7 +215,7 @@ namespace CMS
 
         private void btn_AddGrant_Click(object sender, EventArgs e)
         {
-            frm_ProjectKristalAdd KristalAdd = new frm_ProjectKristalAdd();
+            frm_KristalAdd KristalAdd = new frm_KristalAdd();
             KristalAdd.Show();
         }
     }

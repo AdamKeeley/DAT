@@ -176,6 +176,12 @@
     <Compile Include="Project\frm_ProjectDocHistory.Designer.cs">
       <DependentUpon>frm_ProjectDocHistory.cs</DependentUpon>
     </Compile>
+    <Compile Include="Project\frm_ProjectKristalAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Project\frm_ProjectKristalAdd.Designer.cs">
+      <DependentUpon>frm_ProjectKristalAdd.cs</DependentUpon>
+    </Compile>
     <Compile Include="RIDM\frm_KristalAdd.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -313,6 +319,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Project\frm_ProjectDocHistory.resx">
       <DependentUpon>frm_ProjectDocHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Project\frm_ProjectKristalAdd.resx">
+      <DependentUpon>frm_ProjectKristalAdd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RIDM\frm_KristalAdd.resx">
       <DependentUpon>frm_KristalAdd.cs</DependentUpon>

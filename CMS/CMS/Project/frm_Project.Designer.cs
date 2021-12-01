@@ -115,7 +115,7 @@ namespace CMS
             this.gb_KristalRef = new System.Windows.Forms.GroupBox();
             this.btn_KristalRemove = new System.Windows.Forms.Button();
             this.dgv_KristalRef = new System.Windows.Forms.DataGridView();
-            this.btn_KristalAdd = new System.Windows.Forms.Button();
+            this.btn_Project_ProjectKristal_Add = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_pNotes)).BeginInit();
             this.gb_Platform.SuspendLayout();
             this.gb_Governance.SuspendLayout();
@@ -964,7 +964,7 @@ namespace CMS
             // 
             this.gb_KristalRef.Controls.Add(this.btn_KristalRemove);
             this.gb_KristalRef.Controls.Add(this.dgv_KristalRef);
-            this.gb_KristalRef.Controls.Add(this.btn_KristalAdd);
+            this.gb_KristalRef.Controls.Add(this.btn_Project_ProjectKristal_Add);
             this.gb_KristalRef.Location = new System.Drawing.Point(905, 142);
             this.gb_KristalRef.Name = "gb_KristalRef";
             this.gb_KristalRef.Size = new System.Drawing.Size(185, 145);
@@ -1023,14 +1023,15 @@ namespace CMS
             this.dgv_KristalRef.TabStop = false;
             this.dgv_KristalRef.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_KristalRef_CellDoubleClick);
             // 
-            // btn_KristalAdd
+            // btn_Project_ProjectKristal_Add
             // 
-            this.btn_KristalAdd.Location = new System.Drawing.Point(23, 116);
-            this.btn_KristalAdd.Name = "btn_KristalAdd";
-            this.btn_KristalAdd.Size = new System.Drawing.Size(75, 23);
-            this.btn_KristalAdd.TabIndex = 1;
-            this.btn_KristalAdd.Text = "Add";
-            this.btn_KristalAdd.UseVisualStyleBackColor = true;
+            this.btn_Project_ProjectKristal_Add.Location = new System.Drawing.Point(23, 116);
+            this.btn_Project_ProjectKristal_Add.Name = "btn_Project_ProjectKristal_Add";
+            this.btn_Project_ProjectKristal_Add.Size = new System.Drawing.Size(75, 23);
+            this.btn_Project_ProjectKristal_Add.TabIndex = 1;
+            this.btn_Project_ProjectKristal_Add.Text = "Add";
+            this.btn_Project_ProjectKristal_Add.UseVisualStyleBackColor = true;
+            this.btn_Project_ProjectKristal_Add.Click += new System.EventHandler(this.btn_Project_ProjectKristal_Add_Click);
             // 
             // frm_Project
             // 
@@ -1170,7 +1171,7 @@ namespace CMS
         private System.Windows.Forms.CheckBox chkb_LIDA;
         private System.Windows.Forms.Button btn_UserDocs;
         private System.Windows.Forms.GroupBox gb_KristalRef;
-        private System.Windows.Forms.Button btn_KristalAdd;
+        private System.Windows.Forms.Button btn_Project_ProjectKristal_Add;
         private System.Windows.Forms.DataGridView dgv_KristalRef;
         private System.Windows.Forms.Button btn_KristalRemove;
     }

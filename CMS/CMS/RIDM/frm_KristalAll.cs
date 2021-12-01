@@ -208,7 +208,7 @@ namespace CMS.RIDM
 
         private void open_frm_KristalAdd(object sender, EventArgs e)
         {
-            using (frm_ProjectKristalAdd kristalAdd = new frm_ProjectKristalAdd())
+            using (frm_KristalAdd kristalAdd = new frm_KristalAdd())
             {
                 kristalAdd.ShowDialog();
                 int KristalRef = kristalAdd.newKristalRef;

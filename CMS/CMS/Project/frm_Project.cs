@@ -458,7 +458,7 @@ namespace CMS
             btn_AllDocs.TabIndex = ++x;
 
             gb_KristalRef.TabIndex = ++x;
-            btn_KristalAdd.TabIndex = ++x;
+            btn_Project_ProjectKristal_Add.TabIndex = ++x;
             btn_KristalRemove.TabIndex = ++x;
 
             gb_ProjectNotes.TabIndex = ++x;
@@ -976,15 +976,15 @@ namespace CMS
             }
         }
 
-        //private void btn_Project_KristalAdd_Click(object sender, EventArgs e)
-        //{
-        //    using (frm_ProjectKristalAdd ProjectKristalAdd = new frm_ProjectKristalAdd(mdl_CurrentProject.ProjectNumber, ds_Project))
-        //    {
-        //        ProjectKristalAdd.ShowDialog();
-        //        fillProjectsDataSet();
-        //        refreshProjectForm(mdl_CurrentProject.ProjectNumber);
-        //    }
-        //}
+        private void btn_Project_ProjectKristal_Add_Click(object sender, EventArgs e)
+        {
+            using (frm_ProjectKristalAdd ProjectKristalAdd = new frm_ProjectKristalAdd(mdl_CurrentProject.ProjectNumber))
+            {
+                ProjectKristalAdd.ShowDialog();
+                fillProjectsDataSet();
+                refreshProjectForm(mdl_CurrentProject.ProjectNumber);
+            }
+        }
 
         private void btn_KristalRemove_Click(object sender, EventArgs e)
         {
