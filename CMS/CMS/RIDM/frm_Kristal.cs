@@ -236,7 +236,7 @@ namespace CMS
             //format DataGridView (dgv_pNotes) column widths etc.
             dgv_KristalNotes.Columns["Note"].Width = 300;
             dgv_KristalNotes.Columns["Created Date"].Width = 80;
-            dgv_KristalNotes.Columns["Created By"].Width = 50;
+            dgv_KristalNotes.Columns["Created By"].Width = 80;
             dgv_KristalNotes.Columns["Note"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             dgv_KristalNotes.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dgv_KristalNotes.Sort(dgv_KristalNotes.Columns["Created Date"], ListSortDirection.Descending);
