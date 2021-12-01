@@ -110,22 +110,18 @@ namespace CMS
         {
             int testRef;
 
-            //all Kristal Refs are 6 digits long
-            if (tb_KristalRef.Text.Length == 6)
+            // if KristalRef is an integer
+            if (int.TryParse(tb_KristalRef.Text, out testRef))
             {
-                // if KristalRef is an integer
-                if (int.TryParse(tb_KristalRef.Text, out testRef))
+                if (ds_kristal.Tables["tblKristal"].Select($"KristalRef = {testRef}").Length > 0)
                 {
-                    if (ds_kristal.Tables["tblKristal"].Select($"KristalRef = {testRef}").Length > 0)
+                    foreach (DataRow kRow in ds_kristal.Tables["tblKristal"].Select($"KristalRef = {testRef}"))
                     {
-                        foreach (DataRow kRow in ds_kristal.Tables["tblKristal"].Select($"KristalRef = {testRef}"))
-                        {
-                            cb_GrantStage.SelectedValue = kRow["GrantStageID"];
-                            tb_KristalName.Text = kRow["KristalName"].ToString();
-                        }
+                        cb_GrantStage.SelectedValue = kRow["GrantStageID"];
+                        tb_KristalName.Text = kRow["KristalName"].ToString();
                     }
                 }
-            }                
+            }
         }
 
         private void btn_ProjectKristalAdd_Add_Click(object sender, EventArgs e)
