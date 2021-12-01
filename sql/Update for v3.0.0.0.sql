@@ -1,8 +1,27 @@
-/****** Object:  View [dbo].[vw_AllProjects]    Script Date: 01/12/2021 13:38:57 ******/
+/****** Object:  Table [dbo].[tblProjectNotes]    Script Date: 01/12/2021 15:41:15 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[tblKristalNotes](
+	[knID] [int] IDENTITY(1,1) NOT NULL,
+	[KristalRef] int NULL,
+	[KristalNote] [varchar](max) NULL,
+	[Created] [datetime] NULL,
+	[CreatedBy] [varchar](50) NULL,
+ CONSTRAINT [PK_KristalNotes] PRIMARY KEY NONCLUSTERED 
+(
+	[knID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[tblKristalNotes] ADD  DEFAULT (getdate()) FOR [Created]
+GO
+
+ALTER TABLE [dbo].[tblKristalNotes] ADD  DEFAULT (suser_sname()) FOR [CreatedBy]
 GO
 
 
@@ -45,3 +64,4 @@ where p.ValidTo is null
 	and userPI.ValidTo is null
 	and userLA.ValidTo is null
 GO
+
