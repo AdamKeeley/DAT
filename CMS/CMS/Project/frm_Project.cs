@@ -976,9 +976,9 @@ namespace CMS
             }
         }
 
-        //private void btn_KristalAdd_Click(object sender, EventArgs e)
+        //private void btn_Project_KristalAdd_Click(object sender, EventArgs e)
         //{
-        //    using (frm_KristalAdd ProjectKristalAdd = new frm_KristalAdd(mdl_CurrentProject.ProjectNumber, ds_Project))
+        //    using (frm_ProjectKristalAdd ProjectKristalAdd = new frm_ProjectKristalAdd(mdl_CurrentProject.ProjectNumber, ds_Project))
         //    {
         //        ProjectKristalAdd.ShowDialog();
         //        fillProjectsDataSet();

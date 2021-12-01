@@ -12,9 +12,9 @@ using System.Windows.Forms;
 
 namespace CMS
 {
-    public partial class frm_KristalAdd : Form
+    public partial class frm_ProjectKristalAdd : Form
     {
-        public frm_KristalAdd()
+        public frm_ProjectKristalAdd()
         {
             InitializeComponent();
             setTabIndex();

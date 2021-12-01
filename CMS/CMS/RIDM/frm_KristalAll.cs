@@ -1,4 +1,5 @@
 ﻿using DataControlsLib;
+using DataControlsLib.DataModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -207,7 +208,7 @@ namespace CMS.RIDM
 
         private void open_frm_KristalAdd(object sender, EventArgs e)
         {
-            using (frm_KristalAdd kristalAdd = new frm_KristalAdd())
+            using (frm_ProjectKristalAdd kristalAdd = new frm_ProjectKristalAdd())
             {
                 kristalAdd.ShowDialog();
                 int KristalRef = kristalAdd.newKristalRef;
@@ -215,6 +216,37 @@ namespace CMS.RIDM
                 if (KristalRef > 0)
                 {
                     refreshPage(kristalAdd, e);
+                }
+            }
+        }
+
+        private void dgv_KristalList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int r = e.RowIndex;
+
+            if (r > -1)
+            {
+                try
+                {
+                    Kristal kristal = new Kristal();
+                    mdl_Kristal mdl_Kristal = new mdl_Kristal();
+
+                    mdl_Kristal = kristal.fetchCurrentKristal(Convert.ToInt32(dgv_KristalList.Rows[r].Cells["Kristal Ref"].Value));
+
+                    DataTable tlkGrantStage = ds_Kristal.Tables["tlkGrantStage"];
+
+                    using (frm_Kristal Kristal = new frm_Kristal(mdl_Kristal, tlkGrantStage))
+                    {
+                        Kristal.ShowDialog();
+                        fillKristalDataSet();
+                        setControlDataSource();
+                        fillDataGridView();
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Please double click on a data row to see Kristal details." + Environment.NewLine + ex.Message);
                 }
             }
         }

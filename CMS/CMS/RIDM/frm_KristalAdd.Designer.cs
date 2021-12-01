@@ -1,6 +1,6 @@
 ﻿namespace CMS
 {
-    partial class frm_KristalAdd
+    partial class frm_ProjectKristalAdd
     {
         /// <summary>
         /// Required designer variable.
@@ -110,7 +110,7 @@
             this.lbl_KristalName.TabIndex = 78;
             this.lbl_KristalName.Text = "Kristal Name";
             // 
-            // frm_KristalAdd
+            // frm_ProjectKristalAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

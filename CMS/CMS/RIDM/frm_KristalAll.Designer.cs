@@ -73,6 +73,7 @@
             this.dgv_KristalList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_KristalList.Size = new System.Drawing.Size(450, 177);
             this.dgv_KristalList.TabIndex = 2;
+            this.dgv_KristalList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_KristalList_CellDoubleClick);
             // 
             // lbl_recordCount
             // 
