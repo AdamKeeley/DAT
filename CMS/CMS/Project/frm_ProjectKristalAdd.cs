@@ -122,6 +122,11 @@ namespace CMS
                         tb_KristalName.Text = kRow["KristalName"].ToString();
                     }
                 }
+                else
+                {
+                    cb_GrantStage.SelectedValue = -1;
+                    tb_KristalName.Clear();
+                }
             }
         }
 

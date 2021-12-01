@@ -93,6 +93,7 @@
             this.tb_KristalRef.Name = "tb_KristalRef";
             this.tb_KristalRef.Size = new System.Drawing.Size(89, 20);
             this.tb_KristalRef.TabIndex = 50;
+            this.tb_KristalRef.TextChanged += new System.EventHandler(this.prepopulateControlsIfRefExists);
             // 
             // tb_KristalName
             // 
@@ -110,7 +111,7 @@
             this.lbl_KristalName.TabIndex = 78;
             this.lbl_KristalName.Text = "Kristal Name";
             // 
-            // frm_ProjectKristalAdd
+            // frm_KristalAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -124,8 +125,8 @@
             this.Controls.Add(this.lbl_KristalRef);
             this.Controls.Add(this.cb_GrantStage);
             this.Controls.Add(this.lbl_AppStage);
-            this.Name = "frm_ProjectKristalAdd";
-            this.Text = "Add Kristal Ref to Project";
+            this.Name = "frm_KristalAdd";
+            this.Text = "Add Kristal Ref";
             this.ResumeLayout(false);
             this.PerformLayout();
 

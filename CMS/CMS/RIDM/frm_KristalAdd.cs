@@ -85,6 +85,29 @@ namespace CMS
             return false;
         }
 
+        private void prepopulateControlsIfRefExists(object sender, EventArgs e)
+        {
+            int testRef;
+
+            // if KristalRef is an integer
+            if (int.TryParse(tb_KristalRef.Text, out testRef))
+            {
+                if (ds_kristal.Tables["tblKristal"].Select($"KristalRef = {testRef}").Length > 0)
+                {
+                    foreach (DataRow kRow in ds_kristal.Tables["tblKristal"].Select($"KristalRef = {testRef}"))
+                    {
+                        cb_GrantStage.SelectedValue = kRow["GrantStageID"];
+                        tb_KristalName.Text = kRow["KristalName"].ToString();
+                    }
+                }
+                else
+                {
+                    cb_GrantStage.SelectedValue = -1;
+                    tb_KristalName.Clear();
+                }
+            }
+        }
+
         /// <summary>
         /// Each control on form assigned a tab index.
         /// If any controls are added/removed it's easier to change here than on actual form!
@@ -101,6 +124,7 @@ namespace CMS
 
             tb_KristalRef.TabIndex = ++x;
             cb_GrantStage.TabIndex = ++x;
+            tb_KristalName.TabIndex = ++x;
             btn_ProjectKristalAdd_Add.TabIndex = ++x;
             btn_ProjectKristalAdd_Cancel.TabIndex = ++x;
         }
