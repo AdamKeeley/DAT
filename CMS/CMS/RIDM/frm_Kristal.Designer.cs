@@ -130,6 +130,7 @@
             this.dgv_KristalProjects.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_KristalProjects.Size = new System.Drawing.Size(430, 150);
             this.dgv_KristalProjects.TabIndex = 82;
+            this.dgv_KristalProjects.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_KristalProjects_CellDoubleClick);
             // 
             // btn_Kristal_AddProject
             // 

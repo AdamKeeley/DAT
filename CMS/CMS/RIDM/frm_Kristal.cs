@@ -176,6 +176,25 @@ namespace CMS
             btn_Kristal_Cancel.TabIndex = ++x;
         }
 
+        private void dgv_KristalProjects_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int r = e.RowIndex;
+
+            if (r > -1)
+            {
+                try
+                {
+                    string pNumber = dgv_KristalProjects.Rows[r].Cells["Project Number"].Value.ToString();
+                    frm_Project Project = new frm_Project(pNumber);
+                    Project.Show();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Please double click on a data row to see project details." + Environment.NewLine + ex.Message);
+                }
+            }
+        }
+
         private void btn_Kristal_OK_Click(object sender, EventArgs e)
         {
 
