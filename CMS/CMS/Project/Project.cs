@@ -112,25 +112,25 @@ namespace CMS
 
                 ds_prj.Relations.Add("Project_Stage"
                     , ds_prj.Tables["tlkStage"].Columns["StageID"]      //parent
-                    , ds_prj.Tables["tblProjects"].Columns["Stage"]);   //child
+                    , ds_prj.Tables["tblProjects"].Columns["Stage"], false);   //child
                 ds_prj.Relations.Add("Project_Classification"
                     , ds_prj.Tables["tlkClassification"].Columns["classificationID"]
-                    , ds_prj.Tables["tblProjects"].Columns["Classification"]);
+                    , ds_prj.Tables["tblProjects"].Columns["Classification"], false);
                 ds_prj.Relations.Add("Project_DATRAG"
                     , ds_prj.Tables["tlkRAG"].Columns["ragID"]
-                    , ds_prj.Tables["tblProjects"].Columns["DATRAG"]);
+                    , ds_prj.Tables["tblProjects"].Columns["DATRAG"], false);
                 ds_prj.Relations.Add("Project_Faculty"
                     , ds_prj.Tables["tlkFaculty"].Columns["facultyID"]
-                    , ds_prj.Tables["tblProjects"].Columns["Faculty"]);
+                    , ds_prj.Tables["tblProjects"].Columns["Faculty"], false);
                 ds_prj.Relations.Add("ProjectPlatformInfo_PlatformInfo"
                     , ds_prj.Tables["tlkPlatformInfo"].Columns["PlatformInfoID"]
-                    , ds_prj.Tables["tblProjectPlatformInfo"].Columns["PlatformInfoID"]);
+                    , ds_prj.Tables["tblProjectPlatformInfo"].Columns["PlatformInfoID"], false);
                 ds_prj.Relations.Add("ProjectDocument_Document"
                     , ds_prj.Tables["tlkDocuments"].Columns["DocumentID"]
-                    , ds_prj.Tables["tblProjectDocument"].Columns["DocumentType"]);
+                    , ds_prj.Tables["tblProjectDocument"].Columns["DocumentType"], false);
                 ds_prj.Relations.Add("ProjectKristal_GrantStage"
                     , ds_prj.Tables["tlkGrantStage"].Columns["GrantStageID"]
-                    , ds_prj.Tables["tblProjectKristal"].Columns["GrantStageID"]);
+                    , ds_prj.Tables["tblProjectKristal"].Columns["GrantStageID"], false);
 
                 ds_prj = addProjectUserDataRelations(ds_prj);
             }
@@ -234,7 +234,7 @@ namespace CMS
                 {
                     ds_prj.Relations.Add("Project_LeadApplicant"
                         , ds_prj.Tables["tlkLeadApplicant"].Columns["UserNumber"]
-                        , ds_prj.Tables["tblProjects"].Columns["LeadApplicant"]);
+                        , ds_prj.Tables["tblProjects"].Columns["LeadApplicant"], false);
                 }
             }
             if (ds_prj.Tables.Contains("tlkPI") && ds_prj.Tables.Contains("tblProjects"))
@@ -243,7 +243,7 @@ namespace CMS
                 {
                     ds_prj.Relations.Add("Project_PI"
                         , ds_prj.Tables["tlkPI"].Columns["UserNumber"]
-                        , ds_prj.Tables["tblProjects"].Columns["PI"]);
+                        , ds_prj.Tables["tblProjects"].Columns["PI"], false);
                 }
             }
             if (ds_prj.Tables.Contains("tblUser") && ds_prj.Tables.Contains("tblUserProject"))
@@ -252,7 +252,7 @@ namespace CMS
                 {
                     ds_prj.Relations.Add("UserProject_User"
                         , ds_prj.Tables["tblUser"].Columns["UserNumber"]
-                        , ds_prj.Tables["tblUserProject"].Columns["UserNumber"]);
+                        , ds_prj.Tables["tblUserProject"].Columns["UserNumber"], false);
                 }
             }
 

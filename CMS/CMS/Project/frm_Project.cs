@@ -1002,7 +1002,7 @@ namespace CMS
                     Kristal kristal = new Kristal();
                     mdl_Kristal mdl_Kristal = new mdl_Kristal();
                     
-                    mdl_Kristal = kristal.fetchCurrentKristal(Convert.ToInt32(dgv_KristalRef.Rows[r].Cells["Kristal Ref"].Value));
+                    mdl_Kristal = kristal.fetchCurrentKristal(Convert.ToInt32(dgv_KristalRef.Rows[r].Cells["KristalID"].Value));
 
                     DataTable tlkGrantStage = ds_Project.Tables["tlkGrantStage"];
 

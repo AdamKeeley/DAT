@@ -115,12 +115,14 @@ namespace CMS
             //if details changed, update
             if (newKristal != currentKristal)
             {
+                //TO DO get latest KristalID!!
+
                 Kristal kristal = new Kristal();
                 //logically delete current record from dbo.tblKristal
                 if (kristal.deleteKristal(current_Kristal.KristalID))
                 {
                     //insert new record to dbo.tblKristal
-                    kristal.insertKristal(newKristal);
+                    newKristal.KristalID = kristal.insertKristal(newKristal);
                     current_Kristal = newKristal;
                     return true;
                 }
