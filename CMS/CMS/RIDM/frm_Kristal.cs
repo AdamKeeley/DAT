@@ -258,7 +258,10 @@ namespace CMS
 
             cb_GrantStage.TabIndex = ++x;
             tb_KristalName.TabIndex = ++x;
-            
+            cb_PI.TabIndex = ++x;
+            cb_Location.TabIndex = ++x;
+            cb_Faculty.TabIndex = ++x;
+
             btn_Kristal_AddProject.TabIndex = ++x;
             btn_Kristal_RemoveProject.TabIndex = ++x;
 
