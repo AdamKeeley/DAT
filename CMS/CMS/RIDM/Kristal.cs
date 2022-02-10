@@ -199,6 +199,9 @@ namespace CMS.RIDM
                         kristal.KristalRef = Convert.ToInt32(reader["KristalRef"].ToString());
                         kristal.KristalName = reader["KristalName"].ToString();
                         kristal.GrantStageID = Convert.ToInt32(reader["GrantStageID"].ToString());
+                        kristal.PI = Convert.ToInt32(reader["PI"].ToString());
+                        kristal.Location = Convert.ToInt32(reader["Location"].ToString());
+                        kristal.Faculty = Convert.ToInt32(reader["Faculty"].ToString());
                     }
                 }
             }
