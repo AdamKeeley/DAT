@@ -41,6 +41,27 @@ namespace CMS
 
                 tb_KristalName.Text = current_Kristal.KristalName;
 
+                cb_PI.DataSource = ds_Kristal.Tables["tblUser"];
+                cb_PI.ValueMember = "UserNumber";
+                cb_PI.DisplayMember = "FullName";
+                if (mdl_Kristal.PI == null)
+                    cb_PI.SelectedIndex = -1;
+                else cb_PI.SelectedValue = mdl_Kristal.PI;
+
+                cb_Location.DataSource = ds_Kristal.Tables["tlkLocation"];
+                cb_Location.ValueMember = "locationID";
+                cb_Location.DisplayMember = "locationDescription";
+                if (mdl_Kristal.Location == null)
+                    cb_Location.SelectedIndex = -1;
+                else cb_Location.SelectedValue = mdl_Kristal.Location;
+
+                cb_Faculty.DataSource = ds_Kristal.Tables["tlkFaculty"];
+                cb_Faculty.ValueMember = "facultyID";
+                cb_Faculty.DisplayMember = "facultyDescription";
+                if (mdl_Kristal.Faculty == null)
+                    cb_Faculty.SelectedIndex = -1;
+                else cb_Faculty.SelectedValue = mdl_Kristal.Faculty;
+
             }
             catch (Exception ex)
             {

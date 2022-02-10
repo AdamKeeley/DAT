@@ -16,9 +16,9 @@ namespace DataControlsLib.DataModels
         public int KristalRef { get; set; }
         public string KristalName { get; set; }
         public int GrantStageID { get; set; }
-        public int PI { get; set; }
-        public int Location { get; set; }
-        public int Faculty { get; set; }
+        public int? PI { get; set; }
+        public int? Location { get; set; }
+        public int? Faculty { get; set; }
 
         /// <summary>
         /// Equals override so that the values contained in two instances of this class 
