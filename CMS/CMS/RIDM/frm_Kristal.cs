@@ -115,8 +115,6 @@ namespace CMS
             //if details changed, update
             if (newKristal != currentKristal)
             {
-                //TO DO get latest KristalID!!
-
                 Kristal kristal = new Kristal();
                 //logically delete current record from dbo.tblKristal
                 if (kristal.deleteKristal(current_Kristal.KristalID))

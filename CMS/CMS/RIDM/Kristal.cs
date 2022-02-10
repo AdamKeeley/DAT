@@ -48,13 +48,35 @@ namespace CMS.RIDM
                         $"order by [ProjectNumber]");
                     SQL_Stuff.getDataTable(conn, null, ds_krs, "tblKristalNotes",
                         $"select * from [dbo].[tblKristalNotes]");
+                    SQL_Stuff.getDataTable(conn, null, ds_krs, "tblUser",
+                        $"select *, [LastName] + ', ' + [FirstName] as FullName " +
+                        $"from [dbo].[tblUser] " +
+                        $"where [ValidTo] is null " +
+                        $"order by [LastName], [FirstName], [UserID]");
+                    SQL_Stuff.getDataTable(conn, null, ds_krs, "tlkLocation",
+                        $"select * " +
+                        $"from [dbo].[tlkLocation] " +
+                        $"where [ValidTo] is null");
+                    SQL_Stuff.getDataTable(conn, null, ds_krs, "tlkFaculty",
+                        $"select * " +
+                        $"from [dbo].[tlkFaculty] " +
+                        $"where [ValidTo] is null");
 
                     ds_krs.Relations.Add("Kristal_GrantStage"
-                        , ds_krs.Tables["tlkGrantStage"].Columns["GrantStageID"]
-                        , ds_krs.Tables["tblKristal"].Columns["GrantStageID"], false);
+                        , ds_krs.Tables["tlkGrantStage"].Columns["GrantStageID"]                    //parent
+                        , ds_krs.Tables["tblKristal"].Columns["GrantStageID"], false);              //child
                     ds_krs.Relations.Add("Kristal_Project"
                         , ds_krs.Tables["vw_AllProjects"].Columns["ProjectNumber"]
                         , ds_krs.Tables["tblProjectKristal"].Columns["ProjectNumber"], false);
+                    ds_krs.Relations.Add("Grant_PI"
+                        , ds_krs.Tables["tblUser"].Columns["UserNumber"]
+                        , ds_krs.Tables["tblKristal"].Columns["PI"], false);
+                    ds_krs.Relations.Add("Kristal_Location"
+                        , ds_krs.Tables["tlkLocation"].Columns["locationID"]
+                        , ds_krs.Tables["tblKristal"].Columns["Location"], false);
+                    ds_krs.Relations.Add("Kristal_Faculty"
+                    , ds_krs.Tables["tlkFaculty"].Columns["facultyID"]
+                    , ds_krs.Tables["tblKristal"].Columns["Faculty"], false);
                 }
             }
             catch (Exception ex)
