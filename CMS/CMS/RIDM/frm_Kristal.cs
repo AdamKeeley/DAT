@@ -327,11 +327,18 @@ namespace CMS
 
         private void btn_Kristal_AddProject_Click(object sender, EventArgs e)
         {
-            using (frm_KristalProjectAdd kristalProjectAdd = new frm_KristalProjectAdd(current_Kristal.KristalRef))
+            if (current_Kristal.KristalRef == 999999)
             {
-                kristalProjectAdd.ShowDialog();
-                setKristal(current_Kristal);
-                setKristalProjects();
+                MessageBox.Show("Cannot add project to unknown Kristal Ref ('999999')");
+            }
+            else
+            {
+                using (frm_KristalProjectAdd kristalProjectAdd = new frm_KristalProjectAdd(current_Kristal.KristalRef))
+                {
+                    kristalProjectAdd.ShowDialog();
+                    setKristal(current_Kristal);
+                    setKristalProjects();
+                }
             }
         }
 
