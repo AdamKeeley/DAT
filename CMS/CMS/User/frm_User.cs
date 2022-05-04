@@ -15,7 +15,6 @@ namespace CMS
         {
             InitializeComponent();
             setTabIndex();
-            nud_TokenSerial.Controls.RemoveAt(0);
             fillUsersDataSet();
             fillCurrentUserVariables(UserNumber);
             setUserDetails(UserNumber);
@@ -90,14 +89,13 @@ namespace CMS
                 mtb_SEEDAgreement.Text = mdl_CurrentUser.SEEDAgreement.ToString();
                 mtb_IRCAgreement.Text = mdl_CurrentUser.IRCAgreement.ToString();
                 mtb_LASERAgreement.Text = mdl_CurrentUser.LASERAgreement.ToString();
+
+                mtb_DataProtection.Text = mdl_CurrentUser.DataProtection.ToString();
+                mtb_InformationSecurity.Text = mdl_CurrentUser.InformationSecurity.ToString();
+
                 mtb_ISET.Text = mdl_CurrentUser.ISET.ToString();
                 mtb_ISAT.Text = mdl_CurrentUser.ISAT.ToString();
                 mtb_SAFE.Text = mdl_CurrentUser.SAFE.ToString();
-                if(mdl_CurrentUser.TokenSerial > 0)
-                    nud_TokenSerial.Value = mdl_CurrentUser.TokenSerial.Value;
-                mtb_TokenIssued.Text = mdl_CurrentUser.TokenIssued.ToString();
-                mtb_TokenReturned.Text = mdl_CurrentUser.TokenReturned.ToString();
-
             }
             catch (Exception ex)
             {
@@ -233,14 +231,11 @@ namespace CMS
             mtb_LASERAgreement.TabIndex = ++x;
 
             gb_Training.TabIndex = ++x;
+            mtb_DataProtection.TabIndex = ++x;
+            mtb_InformationSecurity.TabIndex = ++x;
             mtb_ISET.TabIndex = ++x;
             mtb_ISAT.TabIndex = ++x;
             mtb_SAFE.TabIndex = ++x;
-
-            gb_MFA.TabIndex = ++x;
-            nud_TokenSerial.TabIndex = ++x;
-            mtb_TokenIssued.TabIndex = ++x;
-            mtb_TokenReturned.TabIndex = ++x;
         }
 
         /// <summary>
@@ -274,8 +269,6 @@ namespace CMS
             mdl_NewUser.Phone = tb_Phone.Text;
             mdl_NewUser.UserName = tb_UserName.Text;
             mdl_NewUser.Organisation = tb_Organisation.Text;
-            if (nud_TokenSerial.Value > 0)
-                mdl_NewUser.TokenSerial = (int)(nud_TokenSerial.Value);
 
             //dates are fuckey
             bool dateCheck = true;
@@ -339,6 +332,32 @@ namespace CMS
                     dateCheck = false;
                 }
             }
+
+            if (dateCheck == true & mtb_DataProtection.Text != "" & mtb_DataProtection.Text != "  /  /")
+            {
+                try
+                {
+                    mdl_NewUser.DataProtection = Convert.ToDateTime(mtb_DataProtection.Text);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Please enter valid DataProtection Date");
+                    dateCheck = false;
+                }
+            }
+            if (dateCheck == true & mtb_InformationSecurity.Text != "" & mtb_InformationSecurity.Text != "  /  /")
+            {
+                try
+                {
+                    mdl_NewUser.InformationSecurity = Convert.ToDateTime(mtb_InformationSecurity.Text);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Please enter valid InformationSecurity Date");
+                    dateCheck = false;
+                }
+            }
+
             if (dateCheck == true & mtb_ISET.Text != "" & mtb_ISET.Text != "  /  /")
             {
                 try
@@ -372,30 +391,6 @@ namespace CMS
                 catch (Exception)
                 {
                     MessageBox.Show("Please enter valid SAFE Date");
-                    dateCheck = false;
-                }
-            }
-            if (dateCheck == true & mtb_TokenIssued.Text != "" & mtb_TokenIssued.Text != "  /  /")
-            {
-                try
-                {
-                    mdl_NewUser.TokenIssued = Convert.ToDateTime(mtb_TokenIssued.Text);
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Please enter valid Token Issued Date");
-                    dateCheck = false;
-                }
-            }
-            if (dateCheck == true & mtb_TokenReturned.Text != "" & mtb_TokenReturned.Text != "  /  /")
-            {
-                try
-                {
-                    mdl_NewUser.TokenReturned = Convert.ToDateTime(mtb_TokenReturned.Text);
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Please enter valid Token Returned Date");
                     dateCheck = false;
                 }
             }

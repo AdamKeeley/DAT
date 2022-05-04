@@ -42,9 +42,11 @@ namespace CMS
 
             dt_dgv_ProjectUserDocs.Columns.Add("User Status");
             dt_dgv_ProjectUserDocs.Columns.Add("Name");
-            dt_dgv_ProjectUserDocs.Columns.Add("SEED Confidentiality Agreement");
-            dt_dgv_ProjectUserDocs.Columns.Add("IRC User Agreement");
             dt_dgv_ProjectUserDocs.Columns.Add("LASER User Agreement");
+
+            dt_dgv_ProjectUserDocs.Columns.Add("Data Protection");
+            dt_dgv_ProjectUserDocs.Columns.Add("Information Security");
+
             dt_dgv_ProjectUserDocs.Columns.Add("Information Security Essentials");
             dt_dgv_ProjectUserDocs.Columns.Add("Information Security Advanced");
             dt_dgv_ProjectUserDocs.Columns.Add("SAFE Researcher Training");
@@ -55,9 +57,11 @@ namespace CMS
                 row = dt_dgv_ProjectUserDocs.NewRow();
                 row["User Status"] = upRow["User Status"];
                 row["Name"] = upRow["Name"];
-                row["SEED Confidentiality Agreement"] = upRow["SEED Confidentiality Agreement"];
-                row["IRC User Agreement"] = upRow["IRC User Agreement"];
                 row["LASER User Agreement"] = upRow["LASER User Agreement"];
+
+                row["Data Protection"] = upRow["Data Protection"];
+                row["Information Security"] = upRow["Information Security"];
+
                 row["Information Security Essentials"] = upRow["Information Security Essentials"];
                 row["Information Security Advanced"] = upRow["Information Security Advanced"];
                 row["SAFE Researcher Training"] = upRow["SAFE Researcher Training"];
@@ -70,9 +74,11 @@ namespace CMS
 
             dgv_ProjectUserDocs.Columns["User Status"].Width = 50;
             dgv_ProjectUserDocs.Columns["Name"].Width = 150;
-            dgv_ProjectUserDocs.Columns["SEED Confidentiality Agreement"].Width = 100;
-            dgv_ProjectUserDocs.Columns["IRC User Agreement"].Width = 100;
             dgv_ProjectUserDocs.Columns["LASER User Agreement"].Width = 100;
+
+            dgv_ProjectUserDocs.Columns["Data Protection"].Width = 100;
+            dgv_ProjectUserDocs.Columns["Information Security"].Width = 100;
+
             dgv_ProjectUserDocs.Columns["Information Security Essentials"].Width = 100;
             dgv_ProjectUserDocs.Columns["Information Security Advanced"].Width = 100;
             dgv_ProjectUserDocs.Columns["SAFE Researcher Training"].Width = 100;
