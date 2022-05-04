@@ -57,11 +57,6 @@
             this.mtb_SAFE = new System.Windows.Forms.MaskedTextBox();
             this.lbl_SAFE = new System.Windows.Forms.Label();
             this.lbl_ISAT = new System.Windows.Forms.Label();
-            this.lbl_TokenSerial = new System.Windows.Forms.Label();
-            this.mtb_TokenIssued = new System.Windows.Forms.MaskedTextBox();
-            this.mtb_TokenReturned = new System.Windows.Forms.MaskedTextBox();
-            this.lbl_TokenReturned = new System.Windows.Forms.Label();
-            this.lbl_TokenIssued = new System.Windows.Forms.Label();
             this.btn_InsertUserNote = new System.Windows.Forms.Button();
             this.tb_NewUserNote = new System.Windows.Forms.TextBox();
             this.dgv_UserNotes = new System.Windows.Forms.DataGridView();
@@ -74,8 +69,6 @@
             this.btn_UserApply = new System.Windows.Forms.Button();
             this.btn_UserOK = new System.Windows.Forms.Button();
             this.btn_UserCancel = new System.Windows.Forms.Button();
-            this.gb_MFA = new System.Windows.Forms.GroupBox();
-            this.nud_TokenSerial = new System.Windows.Forms.NumericUpDown();
             this.gb_Training = new System.Windows.Forms.GroupBox();
             this.gb_UserDetail = new System.Windows.Forms.GroupBox();
             this.lbl_FullName = new System.Windows.Forms.Label();
@@ -87,11 +80,13 @@
             this.gb_Agreements = new System.Windows.Forms.GroupBox();
             this.mtb_SEEDAgreement = new System.Windows.Forms.MaskedTextBox();
             this.lbl_SEEDAgreement = new System.Windows.Forms.Label();
+            this.mtb_DataProtection = new System.Windows.Forms.MaskedTextBox();
+            this.lbl_DataProtection = new System.Windows.Forms.Label();
+            this.mtb_InformationSecurity = new System.Windows.Forms.MaskedTextBox();
+            this.lbl_InformationSecurity = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_UserNotes)).BeginInit();
             this.gb_UserProjects.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_UserProjects)).BeginInit();
-            this.gb_MFA.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nud_TokenSerial)).BeginInit();
             this.gb_Training.SuspendLayout();
             this.gb_UserDetail.SuspendLayout();
             this.gb_UserNotes.SuspendLayout();
@@ -307,7 +302,7 @@
             // 
             // mtb_ISET
             // 
-            this.mtb_ISET.Location = new System.Drawing.Point(102, 18);
+            this.mtb_ISET.Location = new System.Drawing.Point(102, 66);
             this.mtb_ISET.Margin = new System.Windows.Forms.Padding(2);
             this.mtb_ISET.Mask = "00/00/0000";
             this.mtb_ISET.Name = "mtb_ISET";
@@ -319,7 +314,7 @@
             // lbl_ISET
             // 
             this.lbl_ISET.AutoSize = true;
-            this.lbl_ISET.Location = new System.Drawing.Point(5, 21);
+            this.lbl_ISET.Location = new System.Drawing.Point(5, 69);
             this.lbl_ISET.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_ISET.Name = "lbl_ISET";
             this.lbl_ISET.Size = new System.Drawing.Size(31, 13);
@@ -338,7 +333,7 @@
             // 
             // mtb_ISAT
             // 
-            this.mtb_ISAT.Location = new System.Drawing.Point(102, 42);
+            this.mtb_ISAT.Location = new System.Drawing.Point(102, 90);
             this.mtb_ISAT.Margin = new System.Windows.Forms.Padding(2);
             this.mtb_ISAT.Mask = "00/00/0000";
             this.mtb_ISAT.Name = "mtb_ISAT";
@@ -349,7 +344,7 @@
             // 
             // mtb_SAFE
             // 
-            this.mtb_SAFE.Location = new System.Drawing.Point(102, 66);
+            this.mtb_SAFE.Location = new System.Drawing.Point(102, 114);
             this.mtb_SAFE.Margin = new System.Windows.Forms.Padding(2);
             this.mtb_SAFE.Mask = "00/00/0000";
             this.mtb_SAFE.Name = "mtb_SAFE";
@@ -361,7 +356,7 @@
             // lbl_SAFE
             // 
             this.lbl_SAFE.AutoSize = true;
-            this.lbl_SAFE.Location = new System.Drawing.Point(5, 69);
+            this.lbl_SAFE.Location = new System.Drawing.Point(5, 117);
             this.lbl_SAFE.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_SAFE.Name = "lbl_SAFE";
             this.lbl_SAFE.Size = new System.Drawing.Size(34, 13);
@@ -371,64 +366,12 @@
             // lbl_ISAT
             // 
             this.lbl_ISAT.AutoSize = true;
-            this.lbl_ISAT.Location = new System.Drawing.Point(5, 45);
+            this.lbl_ISAT.Location = new System.Drawing.Point(5, 93);
             this.lbl_ISAT.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_ISAT.Name = "lbl_ISAT";
             this.lbl_ISAT.Size = new System.Drawing.Size(31, 13);
             this.lbl_ISAT.TabIndex = 48;
             this.lbl_ISAT.Text = "ISAT";
-            // 
-            // lbl_TokenSerial
-            // 
-            this.lbl_TokenSerial.AutoSize = true;
-            this.lbl_TokenSerial.Location = new System.Drawing.Point(5, 21);
-            this.lbl_TokenSerial.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lbl_TokenSerial.Name = "lbl_TokenSerial";
-            this.lbl_TokenSerial.Size = new System.Drawing.Size(67, 13);
-            this.lbl_TokenSerial.TabIndex = 52;
-            this.lbl_TokenSerial.Text = "Token Serial";
-            // 
-            // mtb_TokenIssued
-            // 
-            this.mtb_TokenIssued.Location = new System.Drawing.Point(103, 42);
-            this.mtb_TokenIssued.Margin = new System.Windows.Forms.Padding(2);
-            this.mtb_TokenIssued.Mask = "00/00/0000";
-            this.mtb_TokenIssued.Name = "mtb_TokenIssued";
-            this.mtb_TokenIssued.Size = new System.Drawing.Size(76, 20);
-            this.mtb_TokenIssued.TabIndex = 55;
-            this.mtb_TokenIssued.ValidatingType = typeof(System.DateTime);
-            this.mtb_TokenIssued.Click += new System.EventHandler(this.enter_MaskedTextBox);
-            // 
-            // mtb_TokenReturned
-            // 
-            this.mtb_TokenReturned.Location = new System.Drawing.Point(103, 66);
-            this.mtb_TokenReturned.Margin = new System.Windows.Forms.Padding(2);
-            this.mtb_TokenReturned.Mask = "00/00/0000";
-            this.mtb_TokenReturned.Name = "mtb_TokenReturned";
-            this.mtb_TokenReturned.Size = new System.Drawing.Size(76, 20);
-            this.mtb_TokenReturned.TabIndex = 57;
-            this.mtb_TokenReturned.ValidatingType = typeof(System.DateTime);
-            this.mtb_TokenReturned.Click += new System.EventHandler(this.enter_MaskedTextBox);
-            // 
-            // lbl_TokenReturned
-            // 
-            this.lbl_TokenReturned.AutoSize = true;
-            this.lbl_TokenReturned.Location = new System.Drawing.Point(5, 69);
-            this.lbl_TokenReturned.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lbl_TokenReturned.Name = "lbl_TokenReturned";
-            this.lbl_TokenReturned.Size = new System.Drawing.Size(85, 13);
-            this.lbl_TokenReturned.TabIndex = 56;
-            this.lbl_TokenReturned.Text = "Token Returned";
-            // 
-            // lbl_TokenIssued
-            // 
-            this.lbl_TokenIssued.AutoSize = true;
-            this.lbl_TokenIssued.Location = new System.Drawing.Point(5, 45);
-            this.lbl_TokenIssued.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lbl_TokenIssued.Name = "lbl_TokenIssued";
-            this.lbl_TokenIssued.Size = new System.Drawing.Size(72, 13);
-            this.lbl_TokenIssued.TabIndex = 54;
-            this.lbl_TokenIssued.Text = "Token Issued";
             // 
             // btn_InsertUserNote
             // 
@@ -568,36 +511,12 @@
             this.btn_UserCancel.UseVisualStyleBackColor = true;
             this.btn_UserCancel.Click += new System.EventHandler(this.btn_UserCancel_Click);
             // 
-            // gb_MFA
-            // 
-            this.gb_MFA.Controls.Add(this.nud_TokenSerial);
-            this.gb_MFA.Controls.Add(this.lbl_TokenSerial);
-            this.gb_MFA.Controls.Add(this.lbl_TokenIssued);
-            this.gb_MFA.Controls.Add(this.lbl_TokenReturned);
-            this.gb_MFA.Controls.Add(this.mtb_TokenIssued);
-            this.gb_MFA.Controls.Add(this.mtb_TokenReturned);
-            this.gb_MFA.Location = new System.Drawing.Point(12, 404);
-            this.gb_MFA.Name = "gb_MFA";
-            this.gb_MFA.Size = new System.Drawing.Size(183, 100);
-            this.gb_MFA.TabIndex = 0;
-            this.gb_MFA.TabStop = false;
-            this.gb_MFA.Text = "MFA Token";
-            // 
-            // nud_TokenSerial
-            // 
-            this.nud_TokenSerial.InterceptArrowKeys = false;
-            this.nud_TokenSerial.Location = new System.Drawing.Point(102, 19);
-            this.nud_TokenSerial.Maximum = new decimal(new int[] {
-            -1,
-            2147483647,
-            0,
-            0});
-            this.nud_TokenSerial.Name = "nud_TokenSerial";
-            this.nud_TokenSerial.Size = new System.Drawing.Size(77, 20);
-            this.nud_TokenSerial.TabIndex = 67;
-            // 
             // gb_Training
             // 
+            this.gb_Training.Controls.Add(this.mtb_InformationSecurity);
+            this.gb_Training.Controls.Add(this.lbl_InformationSecurity);
+            this.gb_Training.Controls.Add(this.mtb_DataProtection);
+            this.gb_Training.Controls.Add(this.lbl_DataProtection);
             this.gb_Training.Controls.Add(this.mtb_ISET);
             this.gb_Training.Controls.Add(this.lbl_ISET);
             this.gb_Training.Controls.Add(this.mtb_ISAT);
@@ -606,7 +525,7 @@
             this.gb_Training.Controls.Add(this.lbl_SAFE);
             this.gb_Training.Location = new System.Drawing.Point(12, 298);
             this.gb_Training.Name = "gb_Training";
-            this.gb_Training.Size = new System.Drawing.Size(183, 100);
+            this.gb_Training.Size = new System.Drawing.Size(183, 143);
             this.gb_Training.TabIndex = 0;
             this.gb_Training.TabStop = false;
             this.gb_Training.Text = "Training";
@@ -740,6 +659,48 @@
             this.lbl_SEEDAgreement.TabIndex = 54;
             this.lbl_SEEDAgreement.Text = "SEED Agreement";
             // 
+            // mtb_DataProtection
+            // 
+            this.mtb_DataProtection.Location = new System.Drawing.Point(102, 18);
+            this.mtb_DataProtection.Margin = new System.Windows.Forms.Padding(2);
+            this.mtb_DataProtection.Mask = "00/00/0000";
+            this.mtb_DataProtection.Name = "mtb_DataProtection";
+            this.mtb_DataProtection.Size = new System.Drawing.Size(76, 20);
+            this.mtb_DataProtection.TabIndex = 53;
+            this.mtb_DataProtection.ValidatingType = typeof(System.DateTime);
+            this.mtb_DataProtection.Click += new System.EventHandler(this.enter_MaskedTextBox);
+            // 
+            // lbl_DataProtection
+            // 
+            this.lbl_DataProtection.AutoSize = true;
+            this.lbl_DataProtection.Location = new System.Drawing.Point(5, 21);
+            this.lbl_DataProtection.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_DataProtection.Name = "lbl_DataProtection";
+            this.lbl_DataProtection.Size = new System.Drawing.Size(81, 13);
+            this.lbl_DataProtection.TabIndex = 52;
+            this.lbl_DataProtection.Text = "Data Protection";
+            // 
+            // mtb_InformationSecurity
+            // 
+            this.mtb_InformationSecurity.Location = new System.Drawing.Point(102, 42);
+            this.mtb_InformationSecurity.Margin = new System.Windows.Forms.Padding(2);
+            this.mtb_InformationSecurity.Mask = "00/00/0000";
+            this.mtb_InformationSecurity.Name = "mtb_InformationSecurity";
+            this.mtb_InformationSecurity.Size = new System.Drawing.Size(76, 20);
+            this.mtb_InformationSecurity.TabIndex = 55;
+            this.mtb_InformationSecurity.ValidatingType = typeof(System.DateTime);
+            this.mtb_InformationSecurity.Click += new System.EventHandler(this.enter_MaskedTextBox);
+            // 
+            // lbl_InformationSecurity
+            // 
+            this.lbl_InformationSecurity.AutoSize = true;
+            this.lbl_InformationSecurity.Location = new System.Drawing.Point(5, 45);
+            this.lbl_InformationSecurity.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_InformationSecurity.Name = "lbl_InformationSecurity";
+            this.lbl_InformationSecurity.Size = new System.Drawing.Size(100, 13);
+            this.lbl_InformationSecurity.TabIndex = 54;
+            this.lbl_InformationSecurity.Text = "Information Security";
+            // 
             // frm_User
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -750,7 +711,6 @@
             this.Controls.Add(this.gb_UserNotes);
             this.Controls.Add(this.gb_UserDetail);
             this.Controls.Add(this.gb_Training);
-            this.Controls.Add(this.gb_MFA);
             this.Controls.Add(this.btn_UserRefresh);
             this.Controls.Add(this.btn_NewUser);
             this.Controls.Add(this.btn_UserApply);
@@ -764,9 +724,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgv_UserNotes)).EndInit();
             this.gb_UserProjects.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_UserProjects)).EndInit();
-            this.gb_MFA.ResumeLayout(false);
-            this.gb_MFA.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nud_TokenSerial)).EndInit();
             this.gb_Training.ResumeLayout(false);
             this.gb_Training.PerformLayout();
             this.gb_UserDetail.ResumeLayout(false);
@@ -809,11 +766,6 @@
         private System.Windows.Forms.MaskedTextBox mtb_SAFE;
         private System.Windows.Forms.Label lbl_SAFE;
         private System.Windows.Forms.Label lbl_ISAT;
-        private System.Windows.Forms.Label lbl_TokenSerial;
-        private System.Windows.Forms.MaskedTextBox mtb_TokenIssued;
-        private System.Windows.Forms.MaskedTextBox mtb_TokenReturned;
-        private System.Windows.Forms.Label lbl_TokenReturned;
-        private System.Windows.Forms.Label lbl_TokenIssued;
         private System.Windows.Forms.Button btn_InsertUserNote;
         private System.Windows.Forms.TextBox tb_NewUserNote;
         private System.Windows.Forms.DataGridView dgv_UserNotes;
@@ -826,12 +778,10 @@
         private System.Windows.Forms.Button btn_UserApply;
         private System.Windows.Forms.Button btn_UserOK;
         private System.Windows.Forms.Button btn_UserCancel;
-        private System.Windows.Forms.GroupBox gb_MFA;
         private System.Windows.Forms.GroupBox gb_Training;
         private System.Windows.Forms.GroupBox gb_UserDetail;
         private System.Windows.Forms.Label lbl_FullName;
         private System.Windows.Forms.GroupBox gb_UserNotes;
-        private System.Windows.Forms.NumericUpDown nud_TokenSerial;
         private System.Windows.Forms.TextBox tb_searchNotes;
         private System.Windows.Forms.Label lbl_searchNotes;
         private System.Windows.Forms.Label lbl_LASERAgreement;
@@ -839,5 +789,9 @@
         private System.Windows.Forms.GroupBox gb_Agreements;
         private System.Windows.Forms.MaskedTextBox mtb_SEEDAgreement;
         private System.Windows.Forms.Label lbl_SEEDAgreement;
+        private System.Windows.Forms.MaskedTextBox mtb_InformationSecurity;
+        private System.Windows.Forms.Label lbl_InformationSecurity;
+        private System.Windows.Forms.MaskedTextBox mtb_DataProtection;
+        private System.Windows.Forms.Label lbl_DataProtection;
     }
 }

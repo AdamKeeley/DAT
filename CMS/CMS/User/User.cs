@@ -128,6 +128,10 @@ namespace CMS
                     mdl_User.IRCAgreement = (DateTime?)uRow["IRCAgreement"];
                 if (uRow["LASERAgreement"].ToString().Length > 0)
                     mdl_User.LASERAgreement = (DateTime?)uRow["LASERAgreement"];
+                if (uRow["DataProtection"].ToString().Length > 0)
+                    mdl_User.DataProtection = (DateTime?)uRow["DataProtection"];
+                if (uRow["InformationSecurity"].ToString().Length > 0)
+                    mdl_User.InformationSecurity = (DateTime?)uRow["InformationSecurity"];
                 if (uRow["ISET"].ToString().Length > 0)
                     mdl_User.ISET = (DateTime?)uRow["ISET"];
                 if (uRow["ISAT"].ToString().Length > 0)
@@ -285,11 +289,11 @@ namespace CMS
                     qryInsertUser.CommandText = "insert into [dbo].[tblUser] "
                         + "([UserNumber], [Status], [Title], [FirstName], [LastName], [Email], [Phone], [UserName]"
                         + ", [Organisation], [StartDate], [EndDate], [SEEDAgreement], [IRCAgreement], [LASERAgreement]" 
-                        + ", [ISET], [ISAT], [SAFE], [TokenSerial], [TokenIssued], [TokenReturned]) "
+                        + ", [DataProtection] ,[InformationSecurity], [ISET], [ISAT], [SAFE], [TokenSerial], [TokenIssued], [TokenReturned]) "
                         + "values "
                         + "(@UserNumber, @Status, @Title, @FirstName, @LastName, @Email, @Phone, @UserName"
                         + ", @Organisation, @StartDate, @EndDate, @SEEDAgreement, @IRCAgreement, @LASERAgreement" 
-                        + ", @ISET, @ISAT, @SAFE, @TokenSerial, @TokenIssued, @TokenReturned)";
+                        + ", @DataProtection ,@InformationSecurity, @ISET, @ISAT, @SAFE, @TokenSerial, @TokenIssued, @TokenReturned)";
 
                     //assign the parameter values
                     qryInsertUser.Parameters.Add("@UserNumber", SqlDbType.Int).Value = mdl_User.UserNumber;
@@ -320,6 +324,14 @@ namespace CMS
                     SqlParameter param_LASERAgreement = new SqlParameter("@LASERAgreement", mdl_User.LASERAgreement == null ? (object)DBNull.Value : mdl_User.LASERAgreement);
                     param_LASERAgreement.IsNullable = true;
                     qryInsertUser.Parameters.Add(param_LASERAgreement);
+
+                    SqlParameter param_DataProtection = new SqlParameter("@DataProtection", mdl_User.DataProtection == null ? (object)DBNull.Value : mdl_User.DataProtection);
+                    param_DataProtection.IsNullable = true;
+                    qryInsertUser.Parameters.Add(param_DataProtection);
+                    SqlParameter param_InformationSecurity = new SqlParameter("@InformationSecurity", mdl_User.InformationSecurity == null ? (object)DBNull.Value : mdl_User.InformationSecurity);
+                    param_InformationSecurity.IsNullable = true;
+                    qryInsertUser.Parameters.Add(param_InformationSecurity);
+
                     SqlParameter param_ISET = new SqlParameter("@ISET", mdl_User.ISET == null ? (object)DBNull.Value : mdl_User.ISET);
                     param_ISET.IsNullable = true;
                     qryInsertUser.Parameters.Add(param_ISET);
