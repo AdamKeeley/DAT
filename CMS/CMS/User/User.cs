@@ -138,12 +138,6 @@ namespace CMS
                     mdl_User.ISAT = (DateTime?)uRow["ISAT"];
                 if (uRow["SAFE"].ToString().Length > 0)
                     mdl_User.SAFE = (DateTime?)uRow["SAFE"];
-                if (uRow["TokenSerial"].ToString().Length > 0)
-                    mdl_User.TokenSerial = (long?)uRow["TokenSerial"];
-                if (uRow["TokenIssued"].ToString().Length > 0)
-                    mdl_User.TokenIssued = (DateTime?)uRow["TokenIssued"];
-                if (uRow["TokenReturned"].ToString().Length > 0)
-                    mdl_User.TokenReturned = (DateTime?)uRow["TokenReturned"];
             }
             catch (Exception ex)
             {
@@ -289,11 +283,11 @@ namespace CMS
                     qryInsertUser.CommandText = "insert into [dbo].[tblUser] "
                         + "([UserNumber], [Status], [Title], [FirstName], [LastName], [Email], [Phone], [UserName]"
                         + ", [Organisation], [StartDate], [EndDate], [SEEDAgreement], [IRCAgreement], [LASERAgreement]" 
-                        + ", [DataProtection] ,[InformationSecurity], [ISET], [ISAT], [SAFE], [TokenSerial], [TokenIssued], [TokenReturned]) "
+                        + ", [DataProtection] ,[InformationSecurity], [ISET], [ISAT], [SAFE]) "
                         + "values "
                         + "(@UserNumber, @Status, @Title, @FirstName, @LastName, @Email, @Phone, @UserName"
                         + ", @Organisation, @StartDate, @EndDate, @SEEDAgreement, @IRCAgreement, @LASERAgreement" 
-                        + ", @DataProtection ,@InformationSecurity, @ISET, @ISAT, @SAFE, @TokenSerial, @TokenIssued, @TokenReturned)";
+                        + ", @DataProtection ,@InformationSecurity, @ISET, @ISAT, @SAFE)";
 
                     //assign the parameter values
                     qryInsertUser.Parameters.Add("@UserNumber", SqlDbType.Int).Value = mdl_User.UserNumber;
@@ -341,15 +335,6 @@ namespace CMS
                     SqlParameter param_SAFE = new SqlParameter("@SAFE", mdl_User.SAFE == null ? (object)DBNull.Value : mdl_User.SAFE);
                     param_SAFE.IsNullable = true;
                     qryInsertUser.Parameters.Add(param_SAFE);
-                    SqlParameter param_TokenSerial = new SqlParameter("@TokenSerial", mdl_User.TokenSerial == null ? (object)DBNull.Value : mdl_User.TokenSerial);
-                    param_TokenSerial.IsNullable = true;
-                    qryInsertUser.Parameters.Add(param_TokenSerial);
-                    SqlParameter param_TokenIssued = new SqlParameter("@TokenIssued", mdl_User.TokenIssued == null ? (object)DBNull.Value : mdl_User.TokenIssued);
-                    param_TokenIssued.IsNullable = true;
-                    qryInsertUser.Parameters.Add(param_TokenIssued);
-                    SqlParameter param_TokenReturned = new SqlParameter("@TokenReturned", mdl_User.TokenReturned == null ? (object)DBNull.Value : mdl_User.TokenReturned);
-                    param_TokenReturned.IsNullable = true;
-                    qryInsertUser.Parameters.Add(param_TokenReturned);
 
                     //open connection to database, run query and close connection
                     conn.Open();
