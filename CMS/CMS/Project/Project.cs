@@ -136,7 +136,7 @@ namespace CMS
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Failed to populate ds_prj DataSet" + Environment.NewLine + Environment.NewLine + ex.Message);
+                MessageBox.Show("Failed to populate ds_prj DataSet" + Environment.NewLine + Environment.NewLine + ex);
             }
 
             //return DataSet (ds_prj) as the output of this method

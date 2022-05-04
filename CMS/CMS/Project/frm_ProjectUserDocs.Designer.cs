@@ -40,7 +40,7 @@
             this.lbl_ProjectName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_ProjectName.Location = new System.Drawing.Point(93, 9);
             this.lbl_ProjectName.Name = "lbl_ProjectName";
-            this.lbl_ProjectName.Size = new System.Drawing.Size(211, 55);
+            this.lbl_ProjectName.Size = new System.Drawing.Size(779, 55);
             this.lbl_ProjectName.TabIndex = 7;
             this.lbl_ProjectName.Text = "Project Name";
             // 
