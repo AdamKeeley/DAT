@@ -116,6 +116,7 @@ namespace CMS
             this.btn_KristalRemove = new System.Windows.Forms.Button();
             this.dgv_KristalRef = new System.Windows.Forms.DataGridView();
             this.btn_Project_ProjectKristal_Add = new System.Windows.Forms.Button();
+            this.chkb_Internship = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_pNotes)).BeginInit();
             this.gb_Platform.SuspendLayout();
             this.gb_Governance.SuspendLayout();
@@ -959,6 +960,7 @@ namespace CMS
             this.chkb_LIDA.TabIndex = 53;
             this.chkb_LIDA.Text = "LIDA";
             this.chkb_LIDA.UseVisualStyleBackColor = true;
+            this.chkb_LIDA.CheckedChanged += new System.EventHandler(this.chkb_LIDA_CheckedChanged);
             // 
             // gb_KristalRef
             // 
@@ -1033,12 +1035,24 @@ namespace CMS
             this.btn_Project_ProjectKristal_Add.UseVisualStyleBackColor = true;
             this.btn_Project_ProjectKristal_Add.Click += new System.EventHandler(this.btn_Project_ProjectKristal_Add_Click);
             // 
+            // chkb_Internship
+            // 
+            this.chkb_Internship.AutoSize = true;
+            this.chkb_Internship.Location = new System.Drawing.Point(16, 171);
+            this.chkb_Internship.Name = "chkb_Internship";
+            this.chkb_Internship.Size = new System.Drawing.Size(72, 17);
+            this.chkb_Internship.TabIndex = 55;
+            this.chkb_Internship.Text = "Internship";
+            this.chkb_Internship.UseVisualStyleBackColor = true;
+            this.chkb_Internship.CheckedChanged += new System.EventHandler(this.chkb_Internship_CheckedChanged);
+            // 
             // frm_Project
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btn_ProjectCancel;
             this.ClientSize = new System.Drawing.Size(1107, 561);
+            this.Controls.Add(this.chkb_Internship);
             this.Controls.Add(this.gb_KristalRef);
             this.Controls.Add(this.chkb_LIDA);
             this.Controls.Add(this.gb_DatTime);
@@ -1174,5 +1188,6 @@ namespace CMS
         private System.Windows.Forms.Button btn_Project_ProjectKristal_Add;
         private System.Windows.Forms.DataGridView dgv_KristalRef;
         private System.Windows.Forms.Button btn_KristalRemove;
+        private System.Windows.Forms.CheckBox chkb_Internship;
     }
 }

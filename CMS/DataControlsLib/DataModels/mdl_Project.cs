@@ -33,6 +33,7 @@ namespace DataControlsLib.DataModels
         public int?         Faculty             { get; set; }
         public string       Faculty_Desc        { get; set; }
         public bool         LIDA                { get; set; } = true;
+        public bool         Internship          { get; set; }
         public bool         DSPT                { get; set; }
         public bool         ISO27001            { get; set; }
         public bool         LASER               { get; set; }
@@ -66,6 +67,7 @@ namespace DataControlsLib.DataModels
                 || LeadApplicant != other.LeadApplicant
                 || Faculty != other.Faculty
                 || LIDA != other.LIDA
+                || Internship != other.Internship
                 || DSPT != other.DSPT
                 || ISO27001 != other.ISO27001
                 || LASER != other.LASER

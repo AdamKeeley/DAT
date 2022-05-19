@@ -39,6 +39,8 @@ namespace CMS
         /// </summary>
         mdl_Project mdl_CurrentProject;
 
+        bool disableHandler = false;
+
         /// <summary>
         /// Creates a new class object from Project class and calls method getProjectsDataSet() to populate DataSet in this class (ds_Project).
         /// </summary>
@@ -97,6 +99,8 @@ namespace CMS
         {
             try
             {
+                disableHandler = true;
+                
                 //set controls values
                 cb_pNumberValue.DataSource              = ds_Project.Tables["tblProjects"];
                 cb_pNumberValue.ValueMember             = "pID";
@@ -147,9 +151,12 @@ namespace CMS
                 chkb_ISO27001.Checked                   = mdl_CurrentProject.ISO27001;
                 chkb_DSPT.Checked                       = mdl_CurrentProject.DSPT;
                 chkb_LIDA.Checked                       = mdl_CurrentProject.LIDA;
+                chkb_Internship.Checked                 = mdl_CurrentProject.Internship;
                 chkb_LASER.Checked                      = mdl_CurrentProject.LASER;
                 chkb_IRC.Checked                        = mdl_CurrentProject.IRC;
                 chkb_SEED.Checked                       = mdl_CurrentProject.SEED;
+
+                disableHandler = false;
             }
             catch (Exception ex)
             {
@@ -1018,6 +1025,22 @@ namespace CMS
                 {
                     MessageBox.Show("Please double click on a data row to see Kristal details." + Environment.NewLine + ex.Message);
                 }
+            }
+        }
+
+        private void chkb_LIDA_CheckedChanged(object sender, EventArgs e)
+        {
+            if (disableHandler == false & !chkb_LIDA.Checked)
+            {
+                chkb_Internship.Checked = false;
+            }
+        }
+
+        private void chkb_Internship_CheckedChanged(object sender, EventArgs e)
+        {
+            if (disableHandler == false & chkb_Internship.Checked)
+            {
+                chkb_LIDA.Checked = true;
             }
         }
     }
