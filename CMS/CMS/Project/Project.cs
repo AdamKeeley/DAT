@@ -337,6 +337,7 @@ namespace CMS
                 if (pRow["Faculty"].ToString().Length > 0)
                     mdl_Project.Faculty = (int?)pRow["Faculty"];
                 mdl_Project.LIDA = (bool)pRow["LIDA"];
+                mdl_Project.Internship = (bool)pRow["Internship"];
                 mdl_Project.DSPT = (bool)pRow["DSPT"];
                 mdl_Project.ISO27001 = (bool)pRow["ISO27001"];
                 mdl_Project.LASER = (bool)pRow["LASER"];
@@ -453,11 +454,11 @@ namespace CMS
                     qryInsertProject.CommandText = "insert into [dbo].[tblProject] "
                         + "(ProjectNumber, ProjectName, PortfolioNumber, Stage, Classification, DATRAG, ProjectedStartDate" +
                         ", ProjectedEndDate, StartDate, EndDate, [PI], LeadApplicant, Faculty, DSPT " +
-                        ", ISO27001, LIDA, LASER, IRC, SEED) "
+                        ", ISO27001, LIDA, Internship, LASER, IRC, SEED) "
                         + "values "
                         + "(@ProjectNumber, @ProjectName, @PortfolioNumber, @Stage, @Classification, @DATRAG, @ProjectedStartDate "
                         + ", @ProjectedEndDate, @StartDate, @EndDate, @PI, @LeadApplicant, @Faculty, @DSPT "
-                        + ", @ISO27001, @LIDA, @LASER, @IRC, @SEED) ";
+                        + ", @ISO27001, @LIDA, @Internship, @LASER, @IRC, @SEED) ";
 
                     //assign the parameter values
                     qryInsertProject.Parameters.Add("@ProjectNumber", SqlDbType.VarChar, 5).Value = mdl_Project.ProjectNumber;
@@ -498,6 +499,7 @@ namespace CMS
                     qryInsertProject.Parameters.Add("@DSPT", SqlDbType.Bit).Value = mdl_Project.DSPT;
                     qryInsertProject.Parameters.Add("@ISO27001", SqlDbType.Bit).Value = mdl_Project.ISO27001;
                     qryInsertProject.Parameters.Add("@LIDA", SqlDbType.Bit).Value = mdl_Project.LIDA;
+                    qryInsertProject.Parameters.Add("@Internship", SqlDbType.Bit).Value = mdl_Project.Internship;
                     qryInsertProject.Parameters.Add("@LASER", SqlDbType.Bit).Value = mdl_Project.LASER;
                     qryInsertProject.Parameters.Add("@IRC", SqlDbType.Bit).Value = mdl_Project.IRC;
                     qryInsertProject.Parameters.Add("@SEED", SqlDbType.Bit).Value = mdl_Project.SEED;

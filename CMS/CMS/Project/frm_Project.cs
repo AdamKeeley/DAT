@@ -39,6 +39,9 @@ namespace CMS
         /// </summary>
         mdl_Project mdl_CurrentProject;
 
+        /// <summary>
+        /// Simple flag to stop CheckedChanged event handlers from triggering when form loads/refreshes
+        /// </summary>
         bool disableHandler = false;
 
         /// <summary>
@@ -527,6 +530,7 @@ namespace CMS
             mdl_NewProject.DSPT                 = chkb_DSPT.Checked;
             mdl_NewProject.ISO27001             = chkb_ISO27001.Checked;
             mdl_NewProject.LIDA                 = chkb_LIDA.Checked;
+            mdl_NewProject.Internship           = chkb_Internship.Checked;
             mdl_NewProject.LASER                = chkb_LASER.Checked;
             mdl_NewProject.IRC                  = chkb_IRC.Checked;
             mdl_NewProject.SEED                 = chkb_SEED.Checked;
