@@ -434,6 +434,7 @@ namespace CMS
             chkb_DSPT.TabIndex = ++x;
 
             chkb_LIDA.TabIndex = ++x;
+            chkb_Internship.TabIndex = ++x;
 
             gb_KeyDates.TabIndex = ++x;
             mtb_ProjectedStartDateValue.TabIndex = ++x;
