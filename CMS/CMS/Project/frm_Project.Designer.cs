@@ -63,7 +63,7 @@ namespace CMS
             this.btn_ProjectCancel = new System.Windows.Forms.Button();
             this.btn_ProjectOK = new System.Windows.Forms.Button();
             this.btn_ProjectApply = new System.Windows.Forms.Button();
-            this.btn_NewProject = new System.Windows.Forms.Button();
+            this.btn_DatAllocation = new System.Windows.Forms.Button();
             this.chkb_IRC = new System.Windows.Forms.CheckBox();
             this.chkb_SEED = new System.Windows.Forms.CheckBox();
             this.gb_Platform = new System.Windows.Forms.GroupBox();
@@ -344,16 +344,16 @@ namespace CMS
             this.btn_ProjectApply.UseVisualStyleBackColor = true;
             this.btn_ProjectApply.Click += new System.EventHandler(this.btn_ProjectApply_Click);
             // 
-            // btn_NewProject
+            // btn_DatAllocation
             // 
-            this.btn_NewProject.Location = new System.Drawing.Point(19, 526);
-            this.btn_NewProject.Margin = new System.Windows.Forms.Padding(2);
-            this.btn_NewProject.Name = "btn_NewProject";
-            this.btn_NewProject.Size = new System.Drawing.Size(90, 24);
-            this.btn_NewProject.TabIndex = 16;
-            this.btn_NewProject.Text = "Create Project";
-            this.btn_NewProject.UseVisualStyleBackColor = true;
-            this.btn_NewProject.Click += new System.EventHandler(this.btn_NewProject_Click);
+            this.btn_DatAllocation.Location = new System.Drawing.Point(19, 526);
+            this.btn_DatAllocation.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_DatAllocation.Name = "btn_DatAllocation";
+            this.btn_DatAllocation.Size = new System.Drawing.Size(90, 24);
+            this.btn_DatAllocation.TabIndex = 16;
+            this.btn_DatAllocation.Text = "DAT Allocation";
+            this.btn_DatAllocation.UseVisualStyleBackColor = true;
+            this.btn_DatAllocation.Click += new System.EventHandler(this.btn_DatAllocation_Click);
             // 
             // chkb_IRC
             // 
@@ -1076,7 +1076,7 @@ namespace CMS
             this.Controls.Add(this.lbl_pClassification);
             this.Controls.Add(this.cb_pClassification);
             this.Controls.Add(this.gb_Platform);
-            this.Controls.Add(this.btn_NewProject);
+            this.Controls.Add(this.btn_DatAllocation);
             this.Controls.Add(this.btn_ProjectApply);
             this.Controls.Add(this.btn_ProjectOK);
             this.Controls.Add(this.btn_ProjectCancel);
@@ -1135,7 +1135,7 @@ namespace CMS
         private System.Windows.Forms.Button btn_ProjectCancel;
         private System.Windows.Forms.Button btn_ProjectOK;
         private System.Windows.Forms.Button btn_ProjectApply;
-        private System.Windows.Forms.Button btn_NewProject;
+        private System.Windows.Forms.Button btn_DatAllocation;
         private System.Windows.Forms.CheckBox chkb_IRC;
         private System.Windows.Forms.CheckBox chkb_SEED;
         private System.Windows.Forms.GroupBox gb_Platform;

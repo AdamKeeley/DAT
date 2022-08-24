@@ -480,7 +480,7 @@ namespace CMS
             nud_DatHoursSpent.TabIndex = ++x;
             btn_DatHoursAdd.TabIndex = ++x;
 
-            btn_NewProject.TabIndex = ++x;
+            btn_DatAllocation.TabIndex = ++x;
             btn_Refresh.TabIndex = ++x;
             btn_ProjectApply.TabIndex = ++x;
             btn_ProjectOK.TabIndex = ++x;
@@ -878,19 +878,13 @@ namespace CMS
                 this.Close();
         }
 
-        private void btn_NewProject_Click(object sender, EventArgs e)
+        private void btn_DatAllocation_Click(object sender, EventArgs e)
         {
-            using (frm_ProjectAdd ProjectAdd = new frm_ProjectAdd())
+            using (frm_ProjectDatAllocation ProjectDatAllocation = new frm_ProjectDatAllocation(mdl_CurrentProject.ProjectNumber, ds_Project))
             {
-                ProjectAdd.ShowDialog();
-                string ProjectNumber = ProjectAdd.pNumber;
-
-                // Refreshes this form if new project number is generated (at project creation)
-                if (string.IsNullOrWhiteSpace(ProjectNumber) == false)
-                {
-                    fillProjectsDataSet();
-                    refreshProjectForm(ProjectNumber);
-                }
+                ProjectDatAllocation.ShowDialog();
+                fillProjectsDataSet();
+                refreshProjectForm(mdl_CurrentProject.ProjectNumber);
             }
         }
 

@@ -165,6 +165,12 @@
     <Compile Include="Project\frm_ProjectAll.Designer.cs">
       <DependentUpon>frm_ProjectAll.cs</DependentUpon>
     </Compile>
+    <Compile Include="Project\frm_ProjectDatAllocation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Project\frm_ProjectDatAllocation.Designer.cs">
+      <DependentUpon>frm_ProjectDatAllocation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Project\frm_ProjectDocAdd.cs">
       <SubType>Form</SubType>
     </Compile>
