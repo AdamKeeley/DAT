@@ -104,6 +104,10 @@ namespace CMS
                         $"where k.[ValidTo] is null and pk.[ValidTo] is null ");
                     SQL_Stuff.getDataTable(conn, null, ds_prj, "tlkGrantStage",
                         $"select * from [dbo].[tlkGrantStage]");
+                    SQL_Stuff.getDataTable(conn, null, ds_prj, "tblProjectDatAllocation",
+                        $"select * from [dbo].[tblProjectDatAllocation] " +
+                        $"where ValidTo is null " +
+                        $"order by [ProjectNumber], [FromDate] desc");
 
                     // get the user tables needed to link to project details and merge with project dataset
                     DataSet ds_prj_usr = getUserDataSet();
