@@ -327,6 +327,9 @@
     <EmbeddedResource Include="Project\frm_ProjectAll.resx">
       <DependentUpon>frm_ProjectAll.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Project\frm_ProjectDatAllocation.resx">
+      <DependentUpon>frm_ProjectDatAllocation.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Project\frm_ProjectDocAdd.resx">
       <DependentUpon>frm_ProjectDocAdd.cs</DependentUpon>
     </EmbeddedResource>
