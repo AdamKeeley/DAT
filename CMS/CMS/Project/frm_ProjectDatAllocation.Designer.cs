@@ -173,6 +173,7 @@
             this.btn_Project_ProjectDatAllocation_Remove.TabIndex = 46;
             this.btn_Project_ProjectDatAllocation_Remove.Text = "Remove";
             this.btn_Project_ProjectDatAllocation_Remove.UseVisualStyleBackColor = true;
+            this.btn_Project_ProjectDatAllocation_Remove.Click += new System.EventHandler(this.btn_Project_ProjectDatAllocation_Remove_Click);
             // 
             // btn_Project_ProjectDatAllocation_Add
             // 

@@ -756,8 +756,8 @@ namespace CMS
                     SqlCommand qryUpdateProjectDoc = new SqlCommand();
                     qryUpdateProjectDoc.Connection = conn;
                     qryUpdateProjectDoc.CommandText = $"update [dbo].[tblProjectDocument] " +
-                        $"set[ValidTo] = getdate() " +
-                        $"where[pdID] = @pdID";
+                        $"set [ValidTo] = getdate() " +
+                        $"where [pdID] = @pdID";
                     qryUpdateProjectDoc.Parameters.Add("@pdID", SqlDbType.Int).Value = pdID;
 
                     //open connection and execute insert
@@ -842,12 +842,28 @@ namespace CMS
             }
         }
 
-        public bool deleteDatAllocation()
+        public bool deleteDatAllocation(int current_PDAId)
         {
             try
             {
-                
-                return true;
+                SqlConnection conn = new SqlConnection();
+                conn.ConnectionString = SQL_Stuff.conString;
+                conn.Credential = SQL_Stuff.credential;
+                using (conn)
+                {
+                    //create parameterised SQL query to insert a new record to tblProjectNotes
+                    SqlCommand qryUpdateProjectDoc = new SqlCommand();
+                    qryUpdateProjectDoc.Connection = conn;
+                    qryUpdateProjectDoc.CommandText = $"update [dbo].[tblProjectDatAllocation] " +
+                        $"set [ValidTo] = getdate() " +
+                        $"where [ProjectDatAllocationId] = @PDAId";
+                    qryUpdateProjectDoc.Parameters.Add("@PDAId", SqlDbType.Int).Value = current_PDAId;
+
+                    //open connection and execute insert
+                    conn.Open();
+                    qryUpdateProjectDoc.ExecuteNonQuery();
+                    return true;
+                }
             }
             catch (Exception ex)
             {

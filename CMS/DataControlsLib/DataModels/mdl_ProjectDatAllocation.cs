@@ -12,10 +12,10 @@ namespace DataControlsLib.DataModels
     /// </summary>
     public class mdl_ProjectDatAllocation
     {
-        public string ProjectNumber { get; set; }
-        public DateTime FromDate { get; set; }
-        public DateTime ToDate { get; set; }
-        public decimal FTE { get; set; }
+        public string       ProjectNumber   { get; set; }
+        public DateTime     FromDate        { get; set; }
+        public DateTime     ToDate          { get; set; }
+        public decimal      FTE             { get; set; }
 
         /// <summary>
         /// Equals override so that the values contained in two instances of this class 

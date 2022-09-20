@@ -36,7 +36,8 @@ namespace CMS
             //populate DataGridView (dgv_projectDatAllocation) from DataTable (ds_Project.Tables["tblProjectDatAllocation"])
             //create new DataTable (dt_dgv_projectDatAllocation) that just contains columns and records of interest
             DataTable dt_dgv_projectDatAllocation = new DataTable();
-            
+
+            dt_dgv_projectDatAllocation.Columns.Add("PDAId");
             DataColumn FromDate = new DataColumn("From Date");
             FromDate.DataType = System.Type.GetType("System.DateTime");
             dt_dgv_projectDatAllocation.Columns.Add(FromDate);
@@ -50,6 +51,7 @@ namespace CMS
             foreach (DataRow nRow in ds_Project.Tables["tblProjectDatAllocation"].Select(filter))
             {
                 row = dt_dgv_projectDatAllocation.NewRow();
+                row["PDAId"] = nRow["ProjectDatAllocationId"];
                 row["From Date"] = nRow["FromDate"];
                 row["To Date"] = nRow["ToDate"];
                 row["FTE"] = nRow["FTE"];
@@ -58,6 +60,7 @@ namespace CMS
             dgv_projectDatAllocation.DataSource = dt_dgv_projectDatAllocation;
 
             //format DataGridView (dgv_pNotes) column widths etc.
+            dgv_projectDatAllocation.Columns["PDAId"].Visible = false;
             dgv_projectDatAllocation.Columns["From Date"].Width = 81;
             dgv_projectDatAllocation.Columns["To Date"].Width = 81;
             dgv_projectDatAllocation.Columns["FTE"].Width = 81;
@@ -110,6 +113,13 @@ namespace CMS
                     return false;
                 }
             }
+
+            if (mdl_PDA.FromDate >= mdl_PDA.ToDate)
+            {
+                MessageBox.Show("From Date must be before To Date");
+                return false;
+            }
+
             return true;
         }
 
@@ -132,7 +142,30 @@ namespace CMS
 
         private void removeDatAllocation()
         {
+            if (dgv_projectDatAllocation.Rows.Count > 0 & dgv_projectDatAllocation.SelectedRows.Count > 0)
+            {
+                foreach (DataGridViewRow r in dgv_projectDatAllocation.SelectedRows)
+                {
+                    mdl_ProjectDatAllocation mdl_PDA = new mdl_ProjectDatAllocation();
 
+                    int current_PDAId = int.Parse(r.Cells["PDAId"].Value.ToString());
+                    mdl_PDA.FromDate = Convert.ToDateTime(r.Cells["From Date"].Value);
+                    mdl_PDA.ToDate = Convert.ToDateTime(r.Cells["To Date"].Value);
+                    
+                    DialogResult acceptProjectDoc = MessageBox.Show($"Delete DAT Allocation for period {mdl_PDA.FromDate.ToShortDateString()} to {mdl_PDA.ToDate.ToShortDateString()}?", "", MessageBoxButtons.YesNo);
+                    if (acceptProjectDoc == DialogResult.Yes)
+                    {
+                        Project projects = new Project();
+                        // update valid to of current record
+                        if (projects.deleteDatAllocation(current_PDAId) == true)
+                            dgv_projectDatAllocation.Rows.RemoveAt(r.Index);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a document record.");
+            }
         }
 
         private void setTabIndex()
@@ -175,6 +208,11 @@ namespace CMS
         private void btn_Project_ProjectDatAllocation_Add_Click(object sender, EventArgs e)
         {
             insertNewDatAllocation();
+        }
+
+        private void btn_Project_ProjectDatAllocation_Remove_Click(object sender, EventArgs e)
+        {
+            removeDatAllocation();
         }
     }
 }
