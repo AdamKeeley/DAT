@@ -804,6 +804,58 @@ namespace CMS
             }
         }
 
+        public bool insertDatAllocation(mdl_ProjectDatAllocation mdl_ProjectDatAllocation)
+        {
+            try
+            {
+                SqlConnection conn = new SqlConnection();
+                conn.ConnectionString = SQL_Stuff.conString;
+                conn.Credential = SQL_Stuff.credential;
+                using (conn)
+                {
+                    SqlCommand qryInsertDatAllocation = new SqlCommand();
+                    qryInsertDatAllocation.Connection = conn;
+                    qryInsertDatAllocation.CommandText = $"insert into[dbo].[tblProjectDatAllocation] ([ProjectNumber], [FromDate], [ToDate], [FTE]) " +
+                        $"values (@ProjectNumber, @FromDate, @ToDate, @FTE)";
+                    
+                    qryInsertDatAllocation.Parameters.Add("@ProjectNumber", SqlDbType.VarChar).Value = mdl_ProjectDatAllocation.ProjectNumber;
+                    
+                    SqlParameter param_FromDate = new SqlParameter("@FromDate", mdl_ProjectDatAllocation.FromDate == null ? (object)DBNull.Value : mdl_ProjectDatAllocation.FromDate);
+                    qryInsertDatAllocation.Parameters.Add(param_FromDate);
+                    param_FromDate.IsNullable = true;
+                    
+                    SqlParameter param_ToDate = new SqlParameter("@ToDate", mdl_ProjectDatAllocation.ToDate == null ? (object)DBNull.Value : mdl_ProjectDatAllocation.ToDate);
+                    qryInsertDatAllocation.Parameters.Add(param_ToDate);
+                    param_ToDate.IsNullable = true;
+
+                    qryInsertDatAllocation.Parameters.Add("@FTE", SqlDbType.Decimal).Value = mdl_ProjectDatAllocation.FTE;
+
+                    conn.Open();
+                    qryInsertDatAllocation.ExecuteNonQuery();
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to add DAT Allocation to project." + Environment.NewLine + Environment.NewLine + ex.Message);
+                return false;
+            }
+        }
+
+        public bool deleteDatAllocation()
+        {
+            try
+            {
+                
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to delete DAT Allocation from project." + Environment.NewLine + Environment.NewLine + ex.Message);
+                return false;
+            }
+        }
+
         /// <summary>
         /// Method to get largest pNumber from current pNumbers.
         /// Runs a SQL query to select largest number used in current project numbers and return it as an int type.

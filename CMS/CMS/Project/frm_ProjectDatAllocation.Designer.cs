@@ -34,8 +34,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_ProjectDatAllocation));
             this.lbl_FromDate = new System.Windows.Forms.Label();
             this.lbl_ToDate = new System.Windows.Forms.Label();
-            this.mtb_pEndDateValue = new System.Windows.Forms.MaskedTextBox();
-            this.mtb_pStartDateValue = new System.Windows.Forms.MaskedTextBox();
+            this.mtb_ToDate = new System.Windows.Forms.MaskedTextBox();
+            this.mtb_FromDate = new System.Windows.Forms.MaskedTextBox();
             this.lbl_DatAllocation = new System.Windows.Forms.Label();
             this.nud_DatAllocation = new System.Windows.Forms.NumericUpDown();
             this.dgv_projectDatAllocation = new System.Windows.Forms.DataGridView();
@@ -69,25 +69,28 @@
             this.lbl_ToDate.TabIndex = 12;
             this.lbl_ToDate.Text = "To Date";
             // 
-            // mtb_pEndDateValue
+            // mtb_ToDate
             // 
-            this.mtb_pEndDateValue.Location = new System.Drawing.Point(79, 46);
-            this.mtb_pEndDateValue.Margin = new System.Windows.Forms.Padding(2);
-            this.mtb_pEndDateValue.Mask = "00/00/0000";
-            this.mtb_pEndDateValue.Name = "mtb_pEndDateValue";
-            this.mtb_pEndDateValue.Size = new System.Drawing.Size(76, 20);
-            this.mtb_pEndDateValue.TabIndex = 13;
-            this.mtb_pEndDateValue.ValidatingType = typeof(System.DateTime);
+            this.mtb_ToDate.Location = new System.Drawing.Point(79, 46);
+            this.mtb_ToDate.Margin = new System.Windows.Forms.Padding(2);
+            this.mtb_ToDate.Mask = "00/00/0000";
+            this.mtb_ToDate.Name = "mtb_ToDate";
+            this.mtb_ToDate.Size = new System.Drawing.Size(76, 20);
+            this.mtb_ToDate.TabIndex = 13;
+            this.mtb_ToDate.ValidatingType = typeof(System.DateTime);
+            this.mtb_ToDate.Click += new System.EventHandler(this.enter_MaskedTextBox);
+            this.mtb_ToDate.Enter += new System.EventHandler(this.enter_MaskedTextBox);
             // 
-            // mtb_pStartDateValue
+            // mtb_FromDate
             // 
-            this.mtb_pStartDateValue.Location = new System.Drawing.Point(79, 18);
-            this.mtb_pStartDateValue.Margin = new System.Windows.Forms.Padding(2);
-            this.mtb_pStartDateValue.Mask = "00/00/0000";
-            this.mtb_pStartDateValue.Name = "mtb_pStartDateValue";
-            this.mtb_pStartDateValue.Size = new System.Drawing.Size(76, 20);
-            this.mtb_pStartDateValue.TabIndex = 11;
-            this.mtb_pStartDateValue.ValidatingType = typeof(System.DateTime);
+            this.mtb_FromDate.Location = new System.Drawing.Point(79, 18);
+            this.mtb_FromDate.Margin = new System.Windows.Forms.Padding(2);
+            this.mtb_FromDate.Mask = "00/00/0000";
+            this.mtb_FromDate.Name = "mtb_FromDate";
+            this.mtb_FromDate.Size = new System.Drawing.Size(76, 20);
+            this.mtb_FromDate.TabIndex = 11;
+            this.mtb_FromDate.ValidatingType = typeof(System.DateTime);
+            this.mtb_FromDate.Click += new System.EventHandler(this.enter_MaskedTextBox);
             // 
             // lbl_DatAllocation
             // 
@@ -179,6 +182,7 @@
             this.btn_Project_ProjectDatAllocation_Add.TabIndex = 45;
             this.btn_Project_ProjectDatAllocation_Add.Text = "Add";
             this.btn_Project_ProjectDatAllocation_Add.UseVisualStyleBackColor = true;
+            this.btn_Project_ProjectDatAllocation_Add.Click += new System.EventHandler(this.btn_Project_ProjectDatAllocation_Add_Click);
             // 
             // lbl_pNumber
             // 
@@ -194,8 +198,8 @@
             // gb_NewDatAllocation
             // 
             this.gb_NewDatAllocation.Controls.Add(this.lbl_FromDate);
-            this.gb_NewDatAllocation.Controls.Add(this.mtb_pStartDateValue);
-            this.gb_NewDatAllocation.Controls.Add(this.mtb_pEndDateValue);
+            this.gb_NewDatAllocation.Controls.Add(this.mtb_FromDate);
+            this.gb_NewDatAllocation.Controls.Add(this.mtb_ToDate);
             this.gb_NewDatAllocation.Controls.Add(this.lbl_ToDate);
             this.gb_NewDatAllocation.Controls.Add(this.btn_Project_ProjectDatAllocation_Add);
             this.gb_NewDatAllocation.Controls.Add(this.lbl_DatAllocation);
@@ -243,8 +247,8 @@
 
         private System.Windows.Forms.Label lbl_FromDate;
         private System.Windows.Forms.Label lbl_ToDate;
-        private System.Windows.Forms.MaskedTextBox mtb_pEndDateValue;
-        private System.Windows.Forms.MaskedTextBox mtb_pStartDateValue;
+        private System.Windows.Forms.MaskedTextBox mtb_ToDate;
+        private System.Windows.Forms.MaskedTextBox mtb_FromDate;
         private System.Windows.Forms.Label lbl_DatAllocation;
         private System.Windows.Forms.NumericUpDown nud_DatAllocation;
         private System.Windows.Forms.DataGridView dgv_projectDatAllocation;
