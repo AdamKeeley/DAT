@@ -51,11 +51,12 @@
             this.lbl_PortfolioNo = new System.Windows.Forms.Label();
             this.cb_PortfolioNo = new System.Windows.Forms.ComboBox();
             this.lbl_KristalRef = new System.Windows.Forms.Label();
-            this.chkb_LIDA = new System.Windows.Forms.CheckBox();
+            this.chkb_LASER = new System.Windows.Forms.CheckBox();
             this.cb_pNumber = new System.Windows.Forms.ComboBox();
             this.lbl_pNumber = new System.Windows.Forms.Label();
             this.tb_KristalRef = new System.Windows.Forms.TextBox();
             this.gb_RIDM = new System.Windows.Forms.GroupBox();
+            this.chkb_DSDP = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ProjectList)).BeginInit();
             this.gb_RIDM.SuspendLayout();
             this.SuspendLayout();
@@ -289,16 +290,16 @@
             this.lbl_KristalRef.TabIndex = 0;
             this.lbl_KristalRef.Text = "Kristal Reference";
             // 
-            // chkb_LIDA
+            // chkb_LASER
             // 
-            this.chkb_LIDA.AutoSize = true;
-            this.chkb_LIDA.Location = new System.Drawing.Point(222, 113);
-            this.chkb_LIDA.Name = "chkb_LIDA";
-            this.chkb_LIDA.Size = new System.Drawing.Size(111, 17);
-            this.chkb_LIDA.TabIndex = 73;
-            this.chkb_LIDA.Text = "Only include LIDA";
-            this.chkb_LIDA.UseVisualStyleBackColor = true;
-            this.chkb_LIDA.CheckedChanged += new System.EventHandler(this.searchItemAddedProjectAll);
+            this.chkb_LASER.AutoSize = true;
+            this.chkb_LASER.Location = new System.Drawing.Point(222, 113);
+            this.chkb_LASER.Name = "chkb_LASER";
+            this.chkb_LASER.Size = new System.Drawing.Size(61, 17);
+            this.chkb_LASER.TabIndex = 73;
+            this.chkb_LASER.Text = "LASER";
+            this.chkb_LASER.UseVisualStyleBackColor = true;
+            this.chkb_LASER.CheckedChanged += new System.EventHandler(this.searchItemAddedProjectAll);
             // 
             // cb_pNumber
             // 
@@ -341,15 +342,27 @@
             this.gb_RIDM.TabStop = false;
             this.gb_RIDM.Text = "RIDM";
             // 
+            // chkb_DSDP
+            // 
+            this.chkb_DSDP.AutoSize = true;
+            this.chkb_DSDP.Location = new System.Drawing.Point(289, 113);
+            this.chkb_DSDP.Name = "chkb_DSDP";
+            this.chkb_DSDP.Size = new System.Drawing.Size(56, 17);
+            this.chkb_DSDP.TabIndex = 78;
+            this.chkb_DSDP.Text = "DSDP";
+            this.chkb_DSDP.UseVisualStyleBackColor = true;
+            this.chkb_DSDP.CheckedChanged += new System.EventHandler(this.searchItemAddedProjectAll);
+            // 
             // frm_ProjectAll
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1073, 593);
+            this.Controls.Add(this.chkb_DSDP);
             this.Controls.Add(this.gb_RIDM);
             this.Controls.Add(this.cb_pNumber);
             this.Controls.Add(this.lbl_pNumber);
-            this.Controls.Add(this.chkb_LIDA);
+            this.Controls.Add(this.chkb_LASER);
             this.Controls.Add(this.lbl_recordCount);
             this.Controls.Add(this.cb_PI);
             this.Controls.Add(this.cb_LeadApplicant);
@@ -403,10 +416,11 @@
         private System.Windows.Forms.Label lbl_PortfolioNo;
         private System.Windows.Forms.ComboBox cb_PortfolioNo;
         private System.Windows.Forms.Label lbl_KristalRef;
-        private System.Windows.Forms.CheckBox chkb_LIDA;
+        private System.Windows.Forms.CheckBox chkb_LASER;
         private System.Windows.Forms.ComboBox cb_pNumber;
         private System.Windows.Forms.Label lbl_pNumber;
         private System.Windows.Forms.TextBox tb_KristalRef;
         private System.Windows.Forms.GroupBox gb_RIDM;
+        private System.Windows.Forms.CheckBox chkb_DSDP;
     }
 }

@@ -41,6 +41,27 @@ namespace CMS
 
                 tb_KristalName.Text = current_Kristal.KristalName;
 
+                cb_PI.DataSource = ds_Kristal.Tables["tblUser"];
+                cb_PI.ValueMember = "UserNumber";
+                cb_PI.DisplayMember = "FullName";
+                if (mdl_Kristal.PI == null)
+                    cb_PI.SelectedIndex = -1;
+                else cb_PI.SelectedValue = mdl_Kristal.PI;
+
+                cb_Location.DataSource = ds_Kristal.Tables["tlkLocation"];
+                cb_Location.ValueMember = "locationID";
+                cb_Location.DisplayMember = "locationDescription";
+                if (mdl_Kristal.Location == null)
+                    cb_Location.SelectedIndex = -1;
+                else cb_Location.SelectedValue = mdl_Kristal.Location;
+
+                cb_Faculty.DataSource = ds_Kristal.Tables["tlkFaculty"];
+                cb_Faculty.ValueMember = "facultyID";
+                cb_Faculty.DisplayMember = "facultyDescription";
+                if (mdl_Kristal.Faculty == null)
+                    cb_Faculty.SelectedIndex = -1;
+                else cb_Faculty.SelectedValue = mdl_Kristal.Faculty;
+
             }
             catch (Exception ex)
             {
@@ -120,7 +141,7 @@ namespace CMS
                 if (kristal.deleteKristal(current_Kristal.KristalID))
                 {
                     //insert new record to dbo.tblKristal
-                    kristal.insertKristal(newKristal);
+                    newKristal.KristalID = kristal.insertKristal(newKristal);
                     current_Kristal = newKristal;
                     return true;
                 }
@@ -258,7 +279,10 @@ namespace CMS
 
             cb_GrantStage.TabIndex = ++x;
             tb_KristalName.TabIndex = ++x;
-            
+            cb_PI.TabIndex = ++x;
+            cb_Location.TabIndex = ++x;
+            cb_Faculty.TabIndex = ++x;
+
             btn_Kristal_AddProject.TabIndex = ++x;
             btn_Kristal_RemoveProject.TabIndex = ++x;
 
@@ -324,11 +348,18 @@ namespace CMS
 
         private void btn_Kristal_AddProject_Click(object sender, EventArgs e)
         {
-            using (frm_KristalProjectAdd kristalProjectAdd = new frm_KristalProjectAdd(current_Kristal.KristalRef))
+            if (current_Kristal.KristalRef == 999999)
             {
-                kristalProjectAdd.ShowDialog();
-                setKristal(current_Kristal);
-                setKristalProjects();
+                MessageBox.Show("Cannot add project to unknown Kristal Ref ('999999')");
+            }
+            else
+            {
+                using (frm_KristalProjectAdd kristalProjectAdd = new frm_KristalProjectAdd(current_Kristal.KristalRef))
+                {
+                    kristalProjectAdd.ShowDialog();
+                    setKristal(current_Kristal);
+                    setKristalProjects();
+                }
             }
         }
 

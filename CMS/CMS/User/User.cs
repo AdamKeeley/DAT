@@ -282,11 +282,11 @@ namespace CMS
                     qryInsertUser.Connection = conn;
                     qryInsertUser.CommandText = "insert into [dbo].[tblUser] "
                         + "([UserNumber], [Status], [Title], [FirstName], [LastName], [Email], [Phone], [UserName]"
-                        + ", [Organisation], [StartDate], [EndDate], [SEEDAgreement], [IRCAgreement], [LASERAgreement]" 
+                        + ", [Organisation], [StartDate], [EndDate], [Priviledged], [SEEDAgreement], [IRCAgreement], [LASERAgreement]"
                         + ", [DataProtection] ,[InformationSecurity], [ISET], [ISAT], [SAFE]) "
                         + "values "
                         + "(@UserNumber, @Status, @Title, @FirstName, @LastName, @Email, @Phone, @UserName"
-                        + ", @Organisation, @StartDate, @EndDate, @SEEDAgreement, @IRCAgreement, @LASERAgreement" 
+                        + ", @Organisation, @StartDate, @EndDate, @Priviledged, @SEEDAgreement, @IRCAgreement, @LASERAgreement"
                         + ", @DataProtection ,@InformationSecurity, @ISET, @ISAT, @SAFE)";
 
                     //assign the parameter values
@@ -309,6 +309,9 @@ namespace CMS
                     SqlParameter param_EndDate = new SqlParameter("@EndDate", mdl_User.EndDate == null ? (object)DBNull.Value : mdl_User.EndDate);
                     param_EndDate.IsNullable = true;
                     qryInsertUser.Parameters.Add(param_EndDate);
+
+                    qryInsertUser.Parameters.Add("@Priviledged", SqlDbType.Bit).Value = mdl_User.Priviledged;
+
                     SqlParameter param_SEEDAgreement = new SqlParameter("@SEEDAgreement", mdl_User.SEEDAgreement == null ? (object)DBNull.Value : mdl_User.SEEDAgreement);
                     param_SEEDAgreement.IsNullable = true;
                     qryInsertUser.Parameters.Add(param_SEEDAgreement);

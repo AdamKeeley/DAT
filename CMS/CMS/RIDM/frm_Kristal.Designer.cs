@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lbl_KristalRef = new System.Windows.Forms.Label();
             this.cb_GrantStage = new System.Windows.Forms.ComboBox();
             this.lbl_AppStage = new System.Windows.Forms.Label();
@@ -48,6 +48,12 @@
             this.btn_Kristal_Create = new System.Windows.Forms.Button();
             this.btn_Kristal_Refresh = new System.Windows.Forms.Button();
             this.btn_Kristal_Apply = new System.Windows.Forms.Button();
+            this.cb_Faculty = new System.Windows.Forms.ComboBox();
+            this.lbl_Faculty = new System.Windows.Forms.Label();
+            this.cb_PI = new System.Windows.Forms.ComboBox();
+            this.lbl_pPI = new System.Windows.Forms.Label();
+            this.cb_Location = new System.Windows.Forms.ComboBox();
+            this.lbl_Location = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_KristalProjects)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_KristalNotes)).BeginInit();
             this.SuspendLayout();
@@ -92,7 +98,7 @@
             // 
             // btn_Kristal_OK
             // 
-            this.btn_Kristal_OK.Location = new System.Drawing.Point(289, 402);
+            this.btn_Kristal_OK.Location = new System.Drawing.Point(289, 456);
             this.btn_Kristal_OK.Name = "btn_Kristal_OK";
             this.btn_Kristal_OK.Size = new System.Drawing.Size(75, 23);
             this.btn_Kristal_OK.TabIndex = 51;
@@ -103,7 +109,7 @@
             // btn_Kristal_Cancel
             // 
             this.btn_Kristal_Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btn_Kristal_Cancel.Location = new System.Drawing.Point(370, 402);
+            this.btn_Kristal_Cancel.Location = new System.Drawing.Point(370, 456);
             this.btn_Kristal_Cancel.Name = "btn_Kristal_Cancel";
             this.btn_Kristal_Cancel.Size = new System.Drawing.Size(75, 23);
             this.btn_Kristal_Cancel.TabIndex = 52;
@@ -133,7 +139,7 @@
             this.dgv_KristalProjects.AllowUserToDeleteRows = false;
             this.dgv_KristalProjects.AllowUserToOrderColumns = true;
             this.dgv_KristalProjects.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_KristalProjects.Location = new System.Drawing.Point(15, 59);
+            this.dgv_KristalProjects.Location = new System.Drawing.Point(15, 113);
             this.dgv_KristalProjects.Name = "dgv_KristalProjects";
             this.dgv_KristalProjects.ReadOnly = true;
             this.dgv_KristalProjects.RowHeadersVisible = false;
@@ -145,7 +151,7 @@
             // 
             // btn_Kristal_AddProject
             // 
-            this.btn_Kristal_AddProject.Location = new System.Drawing.Point(289, 185);
+            this.btn_Kristal_AddProject.Location = new System.Drawing.Point(289, 239);
             this.btn_Kristal_AddProject.Name = "btn_Kristal_AddProject";
             this.btn_Kristal_AddProject.Size = new System.Drawing.Size(75, 23);
             this.btn_Kristal_AddProject.TabIndex = 83;
@@ -156,7 +162,7 @@
             // btn_Kristal_RemoveProject
             // 
             this.btn_Kristal_RemoveProject.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Kristal_RemoveProject.Location = new System.Drawing.Point(370, 185);
+            this.btn_Kristal_RemoveProject.Location = new System.Drawing.Point(370, 239);
             this.btn_Kristal_RemoveProject.Name = "btn_Kristal_RemoveProject";
             this.btn_Kristal_RemoveProject.Size = new System.Drawing.Size(75, 23);
             this.btn_Kristal_RemoveProject.TabIndex = 84;
@@ -166,7 +172,7 @@
             // 
             // tb_NewKristalNote
             // 
-            this.tb_NewKristalNote.Location = new System.Drawing.Point(15, 213);
+            this.tb_NewKristalNote.Location = new System.Drawing.Point(15, 267);
             this.tb_NewKristalNote.Margin = new System.Windows.Forms.Padding(2);
             this.tb_NewKristalNote.MaxLength = 8000;
             this.tb_NewKristalNote.Multiline = true;
@@ -178,35 +184,35 @@
             // 
             this.dgv_KristalNotes.AllowUserToAddRows = false;
             this.dgv_KristalNotes.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_KristalNotes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_KristalNotes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgv_KristalNotes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv_KristalNotes.DefaultCellStyle = dataGridViewCellStyle14;
-            this.dgv_KristalNotes.Location = new System.Drawing.Point(15, 257);
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv_KristalNotes.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgv_KristalNotes.Location = new System.Drawing.Point(15, 311);
             this.dgv_KristalNotes.Margin = new System.Windows.Forms.Padding(2);
             this.dgv_KristalNotes.Name = "dgv_KristalNotes";
             this.dgv_KristalNotes.ReadOnly = true;
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_KristalNotes.RowHeadersDefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_KristalNotes.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgv_KristalNotes.RowHeadersVisible = false;
             this.dgv_KristalNotes.RowTemplate.Height = 24;
             this.dgv_KristalNotes.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -217,7 +223,7 @@
             // 
             // btn_Kristal_InsertKristalNote
             // 
-            this.btn_Kristal_InsertKristalNote.Location = new System.Drawing.Point(390, 213);
+            this.btn_Kristal_InsertKristalNote.Location = new System.Drawing.Point(390, 267);
             this.btn_Kristal_InsertKristalNote.Margin = new System.Windows.Forms.Padding(2);
             this.btn_Kristal_InsertKristalNote.Name = "btn_Kristal_InsertKristalNote";
             this.btn_Kristal_InsertKristalNote.Size = new System.Drawing.Size(55, 40);
@@ -228,7 +234,7 @@
             // 
             // btn_Kristal_Create
             // 
-            this.btn_Kristal_Create.Location = new System.Drawing.Point(15, 402);
+            this.btn_Kristal_Create.Location = new System.Drawing.Point(15, 456);
             this.btn_Kristal_Create.Name = "btn_Kristal_Create";
             this.btn_Kristal_Create.Size = new System.Drawing.Size(75, 23);
             this.btn_Kristal_Create.TabIndex = 90;
@@ -238,7 +244,7 @@
             // 
             // btn_Kristal_Refresh
             // 
-            this.btn_Kristal_Refresh.Location = new System.Drawing.Point(127, 402);
+            this.btn_Kristal_Refresh.Location = new System.Drawing.Point(127, 456);
             this.btn_Kristal_Refresh.Name = "btn_Kristal_Refresh";
             this.btn_Kristal_Refresh.Size = new System.Drawing.Size(75, 23);
             this.btn_Kristal_Refresh.TabIndex = 91;
@@ -248,7 +254,7 @@
             // 
             // btn_Kristal_Apply
             // 
-            this.btn_Kristal_Apply.Location = new System.Drawing.Point(208, 402);
+            this.btn_Kristal_Apply.Location = new System.Drawing.Point(208, 456);
             this.btn_Kristal_Apply.Name = "btn_Kristal_Apply";
             this.btn_Kristal_Apply.Size = new System.Drawing.Size(75, 23);
             this.btn_Kristal_Apply.TabIndex = 92;
@@ -256,12 +262,76 @@
             this.btn_Kristal_Apply.UseVisualStyleBackColor = true;
             this.btn_Kristal_Apply.Click += new System.EventHandler(this.btn_Kristal_Apply_Click);
             // 
+            // cb_Faculty
+            // 
+            this.cb_Faculty.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.cb_Faculty.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cb_Faculty.FormattingEnabled = true;
+            this.cb_Faculty.Location = new System.Drawing.Point(272, 86);
+            this.cb_Faculty.Name = "cb_Faculty";
+            this.cb_Faculty.Size = new System.Drawing.Size(173, 21);
+            this.cb_Faculty.TabIndex = 94;
+            // 
+            // lbl_Faculty
+            // 
+            this.lbl_Faculty.AutoSize = true;
+            this.lbl_Faculty.Location = new System.Drawing.Point(225, 89);
+            this.lbl_Faculty.Name = "lbl_Faculty";
+            this.lbl_Faculty.Size = new System.Drawing.Size(41, 13);
+            this.lbl_Faculty.TabIndex = 93;
+            this.lbl_Faculty.Text = "Faculty";
+            // 
+            // cb_PI
+            // 
+            this.cb_PI.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.cb_PI.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cb_PI.FormattingEnabled = true;
+            this.cb_PI.Location = new System.Drawing.Point(34, 59);
+            this.cb_PI.Name = "cb_PI";
+            this.cb_PI.Size = new System.Drawing.Size(173, 21);
+            this.cb_PI.TabIndex = 96;
+            // 
+            // lbl_pPI
+            // 
+            this.lbl_pPI.AutoSize = true;
+            this.lbl_pPI.Location = new System.Drawing.Point(12, 62);
+            this.lbl_pPI.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_pPI.Name = "lbl_pPI";
+            this.lbl_pPI.Size = new System.Drawing.Size(17, 13);
+            this.lbl_pPI.TabIndex = 95;
+            this.lbl_pPI.Text = "PI";
+            // 
+            // cb_Location
+            // 
+            this.cb_Location.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.cb_Location.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cb_Location.FormattingEnabled = true;
+            this.cb_Location.Location = new System.Drawing.Point(272, 59);
+            this.cb_Location.Name = "cb_Location";
+            this.cb_Location.Size = new System.Drawing.Size(173, 21);
+            this.cb_Location.TabIndex = 98;
+            // 
+            // lbl_Location
+            // 
+            this.lbl_Location.AutoSize = true;
+            this.lbl_Location.Location = new System.Drawing.Point(218, 62);
+            this.lbl_Location.Name = "lbl_Location";
+            this.lbl_Location.Size = new System.Drawing.Size(48, 13);
+            this.lbl_Location.TabIndex = 97;
+            this.lbl_Location.Text = "Location";
+            // 
             // frm_Kristal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btn_Kristal_Cancel;
-            this.ClientSize = new System.Drawing.Size(454, 432);
+            this.ClientSize = new System.Drawing.Size(458, 485);
+            this.Controls.Add(this.cb_Location);
+            this.Controls.Add(this.lbl_Location);
+            this.Controls.Add(this.cb_PI);
+            this.Controls.Add(this.lbl_pPI);
+            this.Controls.Add(this.cb_Faculty);
+            this.Controls.Add(this.lbl_Faculty);
             this.Controls.Add(this.btn_Kristal_Apply);
             this.Controls.Add(this.btn_Kristal_Refresh);
             this.Controls.Add(this.btn_Kristal_Create);
@@ -307,5 +377,11 @@
         private System.Windows.Forms.Button btn_Kristal_Create;
         private System.Windows.Forms.Button btn_Kristal_Refresh;
         private System.Windows.Forms.Button btn_Kristal_Apply;
+        private System.Windows.Forms.ComboBox cb_Faculty;
+        private System.Windows.Forms.Label lbl_Faculty;
+        private System.Windows.Forms.ComboBox cb_PI;
+        private System.Windows.Forms.Label lbl_pPI;
+        private System.Windows.Forms.ComboBox cb_Location;
+        private System.Windows.Forms.Label lbl_Location;
     }
 }

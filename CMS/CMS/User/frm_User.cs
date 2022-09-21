@@ -270,6 +270,9 @@ namespace CMS
             mdl_NewUser.UserName = tb_UserName.Text;
             mdl_NewUser.Organisation = tb_Organisation.Text;
 
+            //Maintain 'Priviledged' status; reserved for DAT members. Any changes made directly on back end database
+            mdl_NewUser.Priviledged = mdl_CurrentUser.Priviledged;
+
             //dates are fuckey
             bool dateCheck = true;
             if (dateCheck == true & mtb_UserStartDate.Text != "" & mtb_UserStartDate.Text != "  /  /")

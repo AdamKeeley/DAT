@@ -65,7 +65,7 @@ namespace CMS
                     
                     if (newKristal.KristalRef > 0)
                     { Kristal kristal = new Kristal();
-                        if (kristal.insertKristal(newKristal) == true)
+                        if (kristal.insertKristal(newKristal) > 0)
                         {
                             MessageBox.Show("Item added");
                             newKristalRef = newKristal.KristalRef;

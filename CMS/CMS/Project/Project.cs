@@ -104,6 +104,10 @@ namespace CMS
                         $"where k.[ValidTo] is null and pk.[ValidTo] is null ");
                     SQL_Stuff.getDataTable(conn, null, ds_prj, "tlkGrantStage",
                         $"select * from [dbo].[tlkGrantStage]");
+                    SQL_Stuff.getDataTable(conn, null, ds_prj, "tblProjectDatAllocation",
+                        $"select * from [dbo].[tblProjectDatAllocation] " +
+                        $"where ValidTo is null " +
+                        $"order by [ProjectNumber], [FromDate] desc");
 
                     // get the user tables needed to link to project details and merge with project dataset
                     DataSet ds_prj_usr = getUserDataSet();
@@ -112,25 +116,25 @@ namespace CMS
 
                 ds_prj.Relations.Add("Project_Stage"
                     , ds_prj.Tables["tlkStage"].Columns["StageID"]      //parent
-                    , ds_prj.Tables["tblProjects"].Columns["Stage"]);   //child
+                    , ds_prj.Tables["tblProjects"].Columns["Stage"], false);   //child
                 ds_prj.Relations.Add("Project_Classification"
                     , ds_prj.Tables["tlkClassification"].Columns["classificationID"]
-                    , ds_prj.Tables["tblProjects"].Columns["Classification"]);
+                    , ds_prj.Tables["tblProjects"].Columns["Classification"], false);
                 ds_prj.Relations.Add("Project_DATRAG"
                     , ds_prj.Tables["tlkRAG"].Columns["ragID"]
-                    , ds_prj.Tables["tblProjects"].Columns["DATRAG"]);
+                    , ds_prj.Tables["tblProjects"].Columns["DATRAG"], false);
                 ds_prj.Relations.Add("Project_Faculty"
                     , ds_prj.Tables["tlkFaculty"].Columns["facultyID"]
-                    , ds_prj.Tables["tblProjects"].Columns["Faculty"]);
+                    , ds_prj.Tables["tblProjects"].Columns["Faculty"], false);
                 ds_prj.Relations.Add("ProjectPlatformInfo_PlatformInfo"
                     , ds_prj.Tables["tlkPlatformInfo"].Columns["PlatformInfoID"]
-                    , ds_prj.Tables["tblProjectPlatformInfo"].Columns["PlatformInfoID"]);
+                    , ds_prj.Tables["tblProjectPlatformInfo"].Columns["PlatformInfoID"], false);
                 ds_prj.Relations.Add("ProjectDocument_Document"
                     , ds_prj.Tables["tlkDocuments"].Columns["DocumentID"]
-                    , ds_prj.Tables["tblProjectDocument"].Columns["DocumentType"]);
+                    , ds_prj.Tables["tblProjectDocument"].Columns["DocumentType"], false);
                 ds_prj.Relations.Add("ProjectKristal_GrantStage"
                     , ds_prj.Tables["tlkGrantStage"].Columns["GrantStageID"]
-                    , ds_prj.Tables["tblProjectKristal"].Columns["GrantStageID"]);
+                    , ds_prj.Tables["tblProjectKristal"].Columns["GrantStageID"], false);
 
                 ds_prj = addProjectUserDataRelations(ds_prj);
             }
@@ -234,7 +238,7 @@ namespace CMS
                 {
                     ds_prj.Relations.Add("Project_LeadApplicant"
                         , ds_prj.Tables["tlkLeadApplicant"].Columns["UserNumber"]
-                        , ds_prj.Tables["tblProjects"].Columns["LeadApplicant"]);
+                        , ds_prj.Tables["tblProjects"].Columns["LeadApplicant"], false);
                 }
             }
             if (ds_prj.Tables.Contains("tlkPI") && ds_prj.Tables.Contains("tblProjects"))
@@ -243,7 +247,7 @@ namespace CMS
                 {
                     ds_prj.Relations.Add("Project_PI"
                         , ds_prj.Tables["tlkPI"].Columns["UserNumber"]
-                        , ds_prj.Tables["tblProjects"].Columns["PI"]);
+                        , ds_prj.Tables["tblProjects"].Columns["PI"], false);
                 }
             }
             if (ds_prj.Tables.Contains("tblUser") && ds_prj.Tables.Contains("tblUserProject"))
@@ -252,7 +256,7 @@ namespace CMS
                 {
                     ds_prj.Relations.Add("UserProject_User"
                         , ds_prj.Tables["tblUser"].Columns["UserNumber"]
-                        , ds_prj.Tables["tblUserProject"].Columns["UserNumber"]);
+                        , ds_prj.Tables["tblUserProject"].Columns["UserNumber"], false);
                 }
             }
 
@@ -752,8 +756,8 @@ namespace CMS
                     SqlCommand qryUpdateProjectDoc = new SqlCommand();
                     qryUpdateProjectDoc.Connection = conn;
                     qryUpdateProjectDoc.CommandText = $"update [dbo].[tblProjectDocument] " +
-                        $"set[ValidTo] = getdate() " +
-                        $"where[pdID] = @pdID";
+                        $"set [ValidTo] = getdate() " +
+                        $"where [pdID] = @pdID";
                     qryUpdateProjectDoc.Parameters.Add("@pdID", SqlDbType.Int).Value = pdID;
 
                     //open connection and execute insert
@@ -796,6 +800,74 @@ namespace CMS
             catch (Exception ex)
             {
                 MessageBox.Show("Failed to add worked hours to project." + Environment.NewLine + Environment.NewLine + ex.Message);
+                return false;
+            }
+        }
+
+        public bool insertDatAllocation(mdl_ProjectDatAllocation mdl_ProjectDatAllocation)
+        {
+            try
+            {
+                SqlConnection conn = new SqlConnection();
+                conn.ConnectionString = SQL_Stuff.conString;
+                conn.Credential = SQL_Stuff.credential;
+                using (conn)
+                {
+                    SqlCommand qryInsertDatAllocation = new SqlCommand();
+                    qryInsertDatAllocation.Connection = conn;
+                    qryInsertDatAllocation.CommandText = $"insert into[dbo].[tblProjectDatAllocation] ([ProjectNumber], [FromDate], [ToDate], [FTE]) " +
+                        $"values (@ProjectNumber, @FromDate, @ToDate, @FTE)";
+                    
+                    qryInsertDatAllocation.Parameters.Add("@ProjectNumber", SqlDbType.VarChar).Value = mdl_ProjectDatAllocation.ProjectNumber;
+                    
+                    SqlParameter param_FromDate = new SqlParameter("@FromDate", mdl_ProjectDatAllocation.FromDate == null ? (object)DBNull.Value : mdl_ProjectDatAllocation.FromDate);
+                    qryInsertDatAllocation.Parameters.Add(param_FromDate);
+                    param_FromDate.IsNullable = true;
+                    
+                    SqlParameter param_ToDate = new SqlParameter("@ToDate", mdl_ProjectDatAllocation.ToDate == null ? (object)DBNull.Value : mdl_ProjectDatAllocation.ToDate);
+                    qryInsertDatAllocation.Parameters.Add(param_ToDate);
+                    param_ToDate.IsNullable = true;
+
+                    qryInsertDatAllocation.Parameters.Add("@FTE", SqlDbType.Decimal).Value = mdl_ProjectDatAllocation.FTE;
+
+                    conn.Open();
+                    qryInsertDatAllocation.ExecuteNonQuery();
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to add DAT Allocation to project." + Environment.NewLine + Environment.NewLine + ex.Message);
+                return false;
+            }
+        }
+
+        public bool deleteDatAllocation(int current_PDAId)
+        {
+            try
+            {
+                SqlConnection conn = new SqlConnection();
+                conn.ConnectionString = SQL_Stuff.conString;
+                conn.Credential = SQL_Stuff.credential;
+                using (conn)
+                {
+                    //create parameterised SQL query to insert a new record to tblProjectNotes
+                    SqlCommand qryUpdateProjectDoc = new SqlCommand();
+                    qryUpdateProjectDoc.Connection = conn;
+                    qryUpdateProjectDoc.CommandText = $"update [dbo].[tblProjectDatAllocation] " +
+                        $"set [ValidTo] = getdate() " +
+                        $"where [ProjectDatAllocationId] = @PDAId";
+                    qryUpdateProjectDoc.Parameters.Add("@PDAId", SqlDbType.Int).Value = current_PDAId;
+
+                    //open connection and execute insert
+                    conn.Open();
+                    qryUpdateProjectDoc.ExecuteNonQuery();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to delete DAT Allocation from project." + Environment.NewLine + Environment.NewLine + ex.Message);
                 return false;
             }
         }

@@ -7,18 +7,15 @@ using System.Threading.Tasks;
 namespace DataControlsLib.DataModels
 {
     /// <summary>
-    /// Data model containing class variables that describe a single Kristal reference. Includes Equals (and operator) 
+    /// Data model containing class variables that describe a single project dat allocation record. Includes Equals (and operator) 
     /// override to compare values of class variables in two instances of this class.
     /// </summary>
-    public class mdl_Kristal
+    public class mdl_ProjectDatAllocation
     {
-        public int KristalID { get; set; }
-        public int KristalRef { get; set; }
-        public string KristalName { get; set; }
-        public int GrantStageID { get; set; }
-        public int? PI { get; set; }
-        public int? Location { get; set; }
-        public int? Faculty { get; set; }
+        public string       ProjectNumber   { get; set; }
+        public DateTime     FromDate        { get; set; }
+        public DateTime     ToDate          { get; set; }
+        public decimal      FTE             { get; set; }
 
         /// <summary>
         /// Equals override so that the values contained in two instances of this class 
@@ -28,18 +25,15 @@ namespace DataControlsLib.DataModels
         /// <returns></returns>
         public override bool Equals(object obj)
         {
-            if (!(obj is mdl_Kristal))
+            if (!(obj is mdl_ProjectDatAllocation))
                 return false;
 
-            var other = obj as mdl_Kristal;
+            var other = obj as mdl_ProjectDatAllocation;
 
-            if (KristalRef != other.KristalRef
-                || KristalName != other.KristalName
-                || GrantStageID != other.GrantStageID
-                || PI != other.PI
-                || Location != other.Location
-                || Faculty != other.Faculty
-                )
+            if (ProjectNumber != other.ProjectNumber
+                || FromDate != other.FromDate
+                || ToDate != other.ToDate
+                || FTE != other.FTE)
                 return false;
 
             return true;
@@ -52,19 +46,19 @@ namespace DataControlsLib.DataModels
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns></returns>
-        public static bool operator ==(mdl_Kristal x, mdl_Kristal y)
+        public static bool operator ==(mdl_ProjectDatAllocation x, mdl_ProjectDatAllocation y)
         {
             return x.Equals(y);
         }
 
         /// <summary>
-        ///Operator override for != that calls Equals override for this class so that the values contained 
+        /// Operator override for != that calls Equals override for this class so that the values contained 
         /// in two instances of this class can be compared all at once.
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns></returns>
-        public static bool operator !=(mdl_Kristal x, mdl_Kristal y)
+        public static bool operator !=(mdl_ProjectDatAllocation x, mdl_ProjectDatAllocation y)
         {
             return !(x == y);
         }
