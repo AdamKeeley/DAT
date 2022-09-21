@@ -25,12 +25,14 @@ namespace CMS
         
         private void refreshDatAllocationForm(string pNumber, DataSet ds_Project)
         {
+            lbl_pNumber.Text = pNumber;
             // Clear controls
             mtb_FromDate.Clear();
             mtb_ToDate.Clear();
             nud_DatAllocation.Value = decimal.Parse(nud_DatAllocation.Minimum.ToString());
 
             ProjectNumber = pNumber;
+
             string filter = $"ProjectNumber = '{pNumber}'";
 
             //populate DataGridView (dgv_projectDatAllocation) from DataTable (ds_Project.Tables["tblProjectDatAllocation"])
@@ -82,7 +84,7 @@ namespace CMS
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Please enter valid From Date");
+                    //MessageBox.Show("Please enter valid From Date");
                 }
             }
             if (mtb_ToDate.Text != "" & mtb_ToDate.Text != "  /  /")
@@ -93,7 +95,7 @@ namespace CMS
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Please enter valid To Date");
+                    //MessageBox.Show("Please enter valid To Date");
                 }
             }
 
@@ -108,13 +110,13 @@ namespace CMS
             if (mdl_PDA.FromDate == default(DateTime))
             {
                 MessageBox.Show("Please enter valid From Date");
-                if (mdl_PDA.ToDate == default(DateTime))
-                {
-                    MessageBox.Show("Please enter valid To Date");
-                    return false;
-                }
+                return false;
             }
-
+            if (mdl_PDA.ToDate == default(DateTime))
+            {
+                MessageBox.Show("Please enter valid To Date");
+                return false;
+            }
             // Check chronology
             if (mdl_PDA.FromDate >= mdl_PDA.ToDate)
             {
@@ -153,7 +155,6 @@ namespace CMS
                 {
                     refreshDatAllocationForm(ProjectNumber, Project.getProjectsDataSet());
                 }
-
             }
         }
 

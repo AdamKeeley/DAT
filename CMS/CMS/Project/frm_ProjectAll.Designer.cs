@@ -56,6 +56,7 @@
             this.lbl_pNumber = new System.Windows.Forms.Label();
             this.tb_KristalRef = new System.Windows.Forms.TextBox();
             this.gb_RIDM = new System.Windows.Forms.GroupBox();
+            this.chkb_DSDP = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ProjectList)).BeginInit();
             this.gb_RIDM.SuspendLayout();
             this.SuspendLayout();
@@ -294,9 +295,9 @@
             this.chkb_LASER.AutoSize = true;
             this.chkb_LASER.Location = new System.Drawing.Point(222, 113);
             this.chkb_LASER.Name = "chkb_LASER";
-            this.chkb_LASER.Size = new System.Drawing.Size(122, 17);
+            this.chkb_LASER.Size = new System.Drawing.Size(61, 17);
             this.chkb_LASER.TabIndex = 73;
-            this.chkb_LASER.Text = "Only include LASER";
+            this.chkb_LASER.Text = "LASER";
             this.chkb_LASER.UseVisualStyleBackColor = true;
             this.chkb_LASER.CheckedChanged += new System.EventHandler(this.searchItemAddedProjectAll);
             // 
@@ -341,11 +342,23 @@
             this.gb_RIDM.TabStop = false;
             this.gb_RIDM.Text = "RIDM";
             // 
+            // chkb_DSDP
+            // 
+            this.chkb_DSDP.AutoSize = true;
+            this.chkb_DSDP.Location = new System.Drawing.Point(289, 113);
+            this.chkb_DSDP.Name = "chkb_DSDP";
+            this.chkb_DSDP.Size = new System.Drawing.Size(56, 17);
+            this.chkb_DSDP.TabIndex = 78;
+            this.chkb_DSDP.Text = "DSDP";
+            this.chkb_DSDP.UseVisualStyleBackColor = true;
+            this.chkb_DSDP.CheckedChanged += new System.EventHandler(this.searchItemAddedProjectAll);
+            // 
             // frm_ProjectAll
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1073, 593);
+            this.Controls.Add(this.chkb_DSDP);
             this.Controls.Add(this.gb_RIDM);
             this.Controls.Add(this.cb_pNumber);
             this.Controls.Add(this.lbl_pNumber);
@@ -408,5 +421,6 @@
         private System.Windows.Forms.Label lbl_pNumber;
         private System.Windows.Forms.TextBox tb_KristalRef;
         private System.Windows.Forms.GroupBox gb_RIDM;
+        private System.Windows.Forms.CheckBox chkb_DSDP;
     }
 }

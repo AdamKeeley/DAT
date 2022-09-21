@@ -164,6 +164,7 @@ namespace CMS
             string filterPI                 = $"PI like '%{cb_PI.Text}%'";
             string filterFaculty            = $"Faculty = '{cb_Faculty.Text}'";
             string filterLASER              = $"LASER = {chkb_LASER.Checked}";
+            string filterDSDP               = $"DSDP = {chkb_DSDP.Checked}";
 
             // Create list and add above filter clauses if appropriate, 
             // before concatenating to single string seperated with " AND "
@@ -190,6 +191,8 @@ namespace CMS
                 filter.Add(filterFaculty);
             if (chkb_LASER.Checked == true)
                 filter.Add(filterLASER);
+            if (chkb_DSDP.Checked == true)
+                filter.Add(filterDSDP);
             string filterAll = string.Join(" AND ", filter);
 
             //DataTable to fill with de-normalised text values of all projects
@@ -205,6 +208,7 @@ namespace CMS
             dt_ProjectList.Columns.Add("Faculty");
             dt_ProjectList.Columns.Add("DATRAG");
             dt_ProjectList.Columns.Add("LASER");
+            dt_ProjectList.Columns.Add("DSDP");
 
             DataRow a_row;
             foreach (DataRow pRow in ds_Project.Tables["tblProjects"].Rows)
@@ -248,6 +252,7 @@ namespace CMS
                     a_row["Faculty"] = fRow["facultyDescription"];
                 }
                 a_row["LASER"] = pRow["LASER"];
+                a_row["DSDP"] = pRow["Internship"];
 
                 dt_ProjectList.Rows.Add(a_row);
             }
@@ -265,6 +270,7 @@ namespace CMS
             dt_dgv_ProjectList.Columns.Add("Faculty");
             dt_dgv_ProjectList.Columns.Add("DATRAG");
             dt_dgv_ProjectList.Columns.Add("LASER");
+            dt_dgv_ProjectList.Columns.Add("DSDP");
 
             DataRow f_row;
             foreach (DataRow pRow in dt_ProjectList.Select(filterAll))
@@ -281,6 +287,7 @@ namespace CMS
                 f_row["PI"] = pRow["PI"];
                 f_row["Faculty"] = pRow["Faculty"];
                 f_row["LASER"] = pRow["LASER"];
+                f_row["DSDP"] = pRow["DSDP"];
 
                 dt_dgv_ProjectList.Rows.Add(f_row);
             }
