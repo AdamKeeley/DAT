@@ -122,11 +122,13 @@ namespace CMS
                 return false;
             }
 
-            // TODO
             // Check overlapping allocations
             foreach (DataGridViewRow row in dgv_projectDatAllocation.Rows)
             {
-                if (1!=1) //need some logic to check if FromDate or ToDate sits within any existing periods
+                if ( (mdl_PDA.FromDate >= Convert.ToDateTime(row.Cells["From Date"].Value.ToString()) 
+                    && mdl_PDA.FromDate <= Convert.ToDateTime(row.Cells["To Date"].Value.ToString()) )
+                    | ( mdl_PDA.ToDate <= Convert.ToDateTime(row.Cells["To Date"].Value.ToString()) 
+                    && mdl_PDA.ToDate >= Convert.ToDateTime(row.Cells["From Date"].Value.ToString()) ) )
                 {
                     MessageBox.Show("Entered period of DAT support coincides with existing period");
                     return false;
