@@ -104,6 +104,7 @@ namespace CMS
 
         private bool checkRequiredFields(mdl_ProjectDatAllocation mdl_PDA)
         {
+            // Check dates are present
             if (mdl_PDA.FromDate == default(DateTime))
             {
                 MessageBox.Show("Please enter valid From Date");
@@ -114,11 +115,25 @@ namespace CMS
                 }
             }
 
+            // Check chronology
             if (mdl_PDA.FromDate >= mdl_PDA.ToDate)
             {
                 MessageBox.Show("From Date must be before To Date");
                 return false;
             }
+
+            // TODO
+            // Check overlapping allocations
+            foreach (DataGridViewRow row in dgv_projectDatAllocation.Rows)
+            {
+                if (1!=1) //need some logic to check if FromDate or ToDate sits within any existing periods
+                {
+                    MessageBox.Show("Entered period of DAT support coincides with existing period");
+                    return false;
+                }
+            }
+            
+
 
             return true;
         }
