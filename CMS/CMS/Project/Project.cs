@@ -104,6 +104,10 @@ namespace CMS
                         $"where k.[ValidTo] is null and pk.[ValidTo] is null ");
                     SQL_Stuff.getDataTable(conn, null, ds_prj, "tlkGrantStage",
                         $"select * from [dbo].[tlkGrantStage]");
+                    SQL_Stuff.getDataTable(conn, null, ds_prj, "tblProjectDatAllocation",
+                        $"select * from [dbo].[tblProjectDatAllocation] " +
+                        $"where ValidTo is null " +
+                        $"order by [ProjectNumber], [FromDate] desc");
 
                     // get the user tables needed to link to project details and merge with project dataset
                     DataSet ds_prj_usr = getUserDataSet();
@@ -136,7 +140,7 @@ namespace CMS
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Failed to populate ds_prj DataSet" + Environment.NewLine + Environment.NewLine + ex.Message);
+                MessageBox.Show("Failed to populate ds_prj DataSet" + Environment.NewLine + Environment.NewLine + ex);
             }
 
             //return DataSet (ds_prj) as the output of this method
@@ -337,6 +341,7 @@ namespace CMS
                 if (pRow["Faculty"].ToString().Length > 0)
                     mdl_Project.Faculty = (int?)pRow["Faculty"];
                 mdl_Project.LIDA = (bool)pRow["LIDA"];
+                mdl_Project.Internship = (bool)pRow["Internship"];
                 mdl_Project.DSPT = (bool)pRow["DSPT"];
                 mdl_Project.ISO27001 = (bool)pRow["ISO27001"];
                 mdl_Project.LASER = (bool)pRow["LASER"];
@@ -453,11 +458,11 @@ namespace CMS
                     qryInsertProject.CommandText = "insert into [dbo].[tblProject] "
                         + "(ProjectNumber, ProjectName, PortfolioNumber, Stage, Classification, DATRAG, ProjectedStartDate" +
                         ", ProjectedEndDate, StartDate, EndDate, [PI], LeadApplicant, Faculty, DSPT " +
-                        ", ISO27001, LIDA, LASER, IRC, SEED) "
+                        ", ISO27001, LIDA, Internship, LASER, IRC, SEED) "
                         + "values "
                         + "(@ProjectNumber, @ProjectName, @PortfolioNumber, @Stage, @Classification, @DATRAG, @ProjectedStartDate "
                         + ", @ProjectedEndDate, @StartDate, @EndDate, @PI, @LeadApplicant, @Faculty, @DSPT "
-                        + ", @ISO27001, @LIDA, @LASER, @IRC, @SEED) ";
+                        + ", @ISO27001, @LIDA, @Internship, @LASER, @IRC, @SEED) ";
 
                     //assign the parameter values
                     qryInsertProject.Parameters.Add("@ProjectNumber", SqlDbType.VarChar, 5).Value = mdl_Project.ProjectNumber;
@@ -498,6 +503,7 @@ namespace CMS
                     qryInsertProject.Parameters.Add("@DSPT", SqlDbType.Bit).Value = mdl_Project.DSPT;
                     qryInsertProject.Parameters.Add("@ISO27001", SqlDbType.Bit).Value = mdl_Project.ISO27001;
                     qryInsertProject.Parameters.Add("@LIDA", SqlDbType.Bit).Value = mdl_Project.LIDA;
+                    qryInsertProject.Parameters.Add("@Internship", SqlDbType.Bit).Value = mdl_Project.Internship;
                     qryInsertProject.Parameters.Add("@LASER", SqlDbType.Bit).Value = mdl_Project.LASER;
                     qryInsertProject.Parameters.Add("@IRC", SqlDbType.Bit).Value = mdl_Project.IRC;
                     qryInsertProject.Parameters.Add("@SEED", SqlDbType.Bit).Value = mdl_Project.SEED;
@@ -750,8 +756,8 @@ namespace CMS
                     SqlCommand qryUpdateProjectDoc = new SqlCommand();
                     qryUpdateProjectDoc.Connection = conn;
                     qryUpdateProjectDoc.CommandText = $"update [dbo].[tblProjectDocument] " +
-                        $"set[ValidTo] = getdate() " +
-                        $"where[pdID] = @pdID";
+                        $"set [ValidTo] = getdate() " +
+                        $"where [pdID] = @pdID";
                     qryUpdateProjectDoc.Parameters.Add("@pdID", SqlDbType.Int).Value = pdID;
 
                     //open connection and execute insert
@@ -794,6 +800,74 @@ namespace CMS
             catch (Exception ex)
             {
                 MessageBox.Show("Failed to add worked hours to project." + Environment.NewLine + Environment.NewLine + ex.Message);
+                return false;
+            }
+        }
+
+        public bool insertDatAllocation(mdl_ProjectDatAllocation mdl_ProjectDatAllocation)
+        {
+            try
+            {
+                SqlConnection conn = new SqlConnection();
+                conn.ConnectionString = SQL_Stuff.conString;
+                conn.Credential = SQL_Stuff.credential;
+                using (conn)
+                {
+                    SqlCommand qryInsertDatAllocation = new SqlCommand();
+                    qryInsertDatAllocation.Connection = conn;
+                    qryInsertDatAllocation.CommandText = $"insert into[dbo].[tblProjectDatAllocation] ([ProjectNumber], [FromDate], [ToDate], [FTE]) " +
+                        $"values (@ProjectNumber, @FromDate, @ToDate, @FTE)";
+                    
+                    qryInsertDatAllocation.Parameters.Add("@ProjectNumber", SqlDbType.VarChar).Value = mdl_ProjectDatAllocation.ProjectNumber;
+                    
+                    SqlParameter param_FromDate = new SqlParameter("@FromDate", mdl_ProjectDatAllocation.FromDate == null ? (object)DBNull.Value : mdl_ProjectDatAllocation.FromDate);
+                    qryInsertDatAllocation.Parameters.Add(param_FromDate);
+                    param_FromDate.IsNullable = true;
+                    
+                    SqlParameter param_ToDate = new SqlParameter("@ToDate", mdl_ProjectDatAllocation.ToDate == null ? (object)DBNull.Value : mdl_ProjectDatAllocation.ToDate);
+                    qryInsertDatAllocation.Parameters.Add(param_ToDate);
+                    param_ToDate.IsNullable = true;
+
+                    qryInsertDatAllocation.Parameters.Add("@FTE", SqlDbType.Decimal).Value = mdl_ProjectDatAllocation.FTE;
+
+                    conn.Open();
+                    qryInsertDatAllocation.ExecuteNonQuery();
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to add DAT Allocation to project." + Environment.NewLine + Environment.NewLine + ex.Message);
+                return false;
+            }
+        }
+
+        public bool deleteDatAllocation(int current_PDAId)
+        {
+            try
+            {
+                SqlConnection conn = new SqlConnection();
+                conn.ConnectionString = SQL_Stuff.conString;
+                conn.Credential = SQL_Stuff.credential;
+                using (conn)
+                {
+                    //create parameterised SQL query to insert a new record to tblProjectNotes
+                    SqlCommand qryUpdateProjectDoc = new SqlCommand();
+                    qryUpdateProjectDoc.Connection = conn;
+                    qryUpdateProjectDoc.CommandText = $"update [dbo].[tblProjectDatAllocation] " +
+                        $"set [ValidTo] = getdate() " +
+                        $"where [ProjectDatAllocationId] = @PDAId";
+                    qryUpdateProjectDoc.Parameters.Add("@PDAId", SqlDbType.Int).Value = current_PDAId;
+
+                    //open connection and execute insert
+                    conn.Open();
+                    qryUpdateProjectDoc.ExecuteNonQuery();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to delete DAT Allocation from project." + Environment.NewLine + Environment.NewLine + ex.Message);
                 return false;
             }
         }

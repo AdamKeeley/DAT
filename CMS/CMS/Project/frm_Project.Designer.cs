@@ -63,7 +63,7 @@ namespace CMS
             this.btn_ProjectCancel = new System.Windows.Forms.Button();
             this.btn_ProjectOK = new System.Windows.Forms.Button();
             this.btn_ProjectApply = new System.Windows.Forms.Button();
-            this.btn_NewProject = new System.Windows.Forms.Button();
+            this.btn_DatAllocation = new System.Windows.Forms.Button();
             this.chkb_IRC = new System.Windows.Forms.CheckBox();
             this.chkb_SEED = new System.Windows.Forms.CheckBox();
             this.gb_Platform = new System.Windows.Forms.GroupBox();
@@ -116,6 +116,7 @@ namespace CMS
             this.btn_KristalRemove = new System.Windows.Forms.Button();
             this.dgv_KristalRef = new System.Windows.Forms.DataGridView();
             this.btn_Project_ProjectKristal_Add = new System.Windows.Forms.Button();
+            this.chkb_Internship = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_pNotes)).BeginInit();
             this.gb_Platform.SuspendLayout();
             this.gb_Governance.SuspendLayout();
@@ -343,16 +344,16 @@ namespace CMS
             this.btn_ProjectApply.UseVisualStyleBackColor = true;
             this.btn_ProjectApply.Click += new System.EventHandler(this.btn_ProjectApply_Click);
             // 
-            // btn_NewProject
+            // btn_DatAllocation
             // 
-            this.btn_NewProject.Location = new System.Drawing.Point(19, 526);
-            this.btn_NewProject.Margin = new System.Windows.Forms.Padding(2);
-            this.btn_NewProject.Name = "btn_NewProject";
-            this.btn_NewProject.Size = new System.Drawing.Size(90, 24);
-            this.btn_NewProject.TabIndex = 16;
-            this.btn_NewProject.Text = "Create Project";
-            this.btn_NewProject.UseVisualStyleBackColor = true;
-            this.btn_NewProject.Click += new System.EventHandler(this.btn_NewProject_Click);
+            this.btn_DatAllocation.Location = new System.Drawing.Point(19, 526);
+            this.btn_DatAllocation.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_DatAllocation.Name = "btn_DatAllocation";
+            this.btn_DatAllocation.Size = new System.Drawing.Size(90, 24);
+            this.btn_DatAllocation.TabIndex = 16;
+            this.btn_DatAllocation.Text = "DAT Allocation";
+            this.btn_DatAllocation.UseVisualStyleBackColor = true;
+            this.btn_DatAllocation.Click += new System.EventHandler(this.btn_DatAllocation_Click);
             // 
             // chkb_IRC
             // 
@@ -959,6 +960,7 @@ namespace CMS
             this.chkb_LIDA.TabIndex = 53;
             this.chkb_LIDA.Text = "LIDA";
             this.chkb_LIDA.UseVisualStyleBackColor = true;
+            this.chkb_LIDA.CheckedChanged += new System.EventHandler(this.chkb_LIDA_CheckedChanged);
             // 
             // gb_KristalRef
             // 
@@ -1033,12 +1035,24 @@ namespace CMS
             this.btn_Project_ProjectKristal_Add.UseVisualStyleBackColor = true;
             this.btn_Project_ProjectKristal_Add.Click += new System.EventHandler(this.btn_Project_ProjectKristal_Add_Click);
             // 
+            // chkb_Internship
+            // 
+            this.chkb_Internship.AutoSize = true;
+            this.chkb_Internship.Location = new System.Drawing.Point(16, 171);
+            this.chkb_Internship.Name = "chkb_Internship";
+            this.chkb_Internship.Size = new System.Drawing.Size(72, 17);
+            this.chkb_Internship.TabIndex = 55;
+            this.chkb_Internship.Text = "Internship";
+            this.chkb_Internship.UseVisualStyleBackColor = true;
+            this.chkb_Internship.CheckedChanged += new System.EventHandler(this.chkb_Internship_CheckedChanged);
+            // 
             // frm_Project
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btn_ProjectCancel;
             this.ClientSize = new System.Drawing.Size(1107, 561);
+            this.Controls.Add(this.chkb_Internship);
             this.Controls.Add(this.gb_KristalRef);
             this.Controls.Add(this.chkb_LIDA);
             this.Controls.Add(this.gb_DatTime);
@@ -1062,7 +1076,7 @@ namespace CMS
             this.Controls.Add(this.lbl_pClassification);
             this.Controls.Add(this.cb_pClassification);
             this.Controls.Add(this.gb_Platform);
-            this.Controls.Add(this.btn_NewProject);
+            this.Controls.Add(this.btn_DatAllocation);
             this.Controls.Add(this.btn_ProjectApply);
             this.Controls.Add(this.btn_ProjectOK);
             this.Controls.Add(this.btn_ProjectCancel);
@@ -1121,7 +1135,7 @@ namespace CMS
         private System.Windows.Forms.Button btn_ProjectCancel;
         private System.Windows.Forms.Button btn_ProjectOK;
         private System.Windows.Forms.Button btn_ProjectApply;
-        private System.Windows.Forms.Button btn_NewProject;
+        private System.Windows.Forms.Button btn_DatAllocation;
         private System.Windows.Forms.CheckBox chkb_IRC;
         private System.Windows.Forms.CheckBox chkb_SEED;
         private System.Windows.Forms.GroupBox gb_Platform;
@@ -1174,5 +1188,6 @@ namespace CMS
         private System.Windows.Forms.Button btn_Project_ProjectKristal_Add;
         private System.Windows.Forms.DataGridView dgv_KristalRef;
         private System.Windows.Forms.Button btn_KristalRemove;
+        private System.Windows.Forms.CheckBox chkb_Internship;
     }
 }

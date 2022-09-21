@@ -13,7 +13,6 @@ namespace CMS
         {
             InitializeComponent();
             setTabIndex();
-            nud_TokenSerial.Controls.RemoveAt(0);
             fillUserDataSet();
             setUserAdd();
         }
@@ -51,7 +50,6 @@ namespace CMS
                 cb_UserTitle.ValueMember = "TitleID";
                 cb_UserTitle.DisplayMember = "TitleDescription";
                 cb_UserTitle.SelectedIndex = -1;
-                nud_TokenSerial.Text = "";
             }
             catch (Exception ex)
             {
@@ -87,8 +85,6 @@ namespace CMS
             mdl_User.Phone          = tb_Phone.Text;
             mdl_User.UserName       = tb_UserName.Text;
             mdl_User.Organisation   = tb_Organisation.Text;
-            if (nud_TokenSerial.Value > 0)
-                mdl_User.TokenSerial    = (long)nud_TokenSerial.Value;
             
             // Dates are fuckey
             bool dateCheck = true;
@@ -117,11 +113,11 @@ namespace CMS
                     dateCheck = false;
                 }
             }
-            if (dateCheck == true & mtb_IRCAgreement.Text != "" & mtb_IRCAgreement.Text != "  /  /")
+            if (dateCheck == true & mtb_LASERAgreement.Text != "" & mtb_LASERAgreement.Text != "  /  /")
             {
                 try
                 {
-                    mdl_User.IRCAgreement = Convert.ToDateTime(mtb_IRCAgreement.Text);
+                    mdl_User.LASERAgreement = Convert.ToDateTime(mtb_LASERAgreement.Text);
                 }
                 catch (Exception)
                 {
@@ -129,6 +125,32 @@ namespace CMS
                     dateCheck = false;
                 }
             }
+
+            if (dateCheck == true & mtb_DataProtection.Text != "" & mtb_DataProtection.Text != "  /  /")
+            {
+                try
+                {
+                    mdl_User.DataProtection = Convert.ToDateTime(mtb_DataProtection.Text);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Please enter valid DataProtection Date.");
+                    dateCheck = false;
+                }
+            }
+            if (dateCheck == true & mtb_InformationSecurity.Text != "" & mtb_InformationSecurity.Text != "  /  /")
+            {
+                try
+                {
+                    mdl_User.InformationSecurity = Convert.ToDateTime(mtb_InformationSecurity.Text);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Please enter valid InformationSecurity Date.");
+                    dateCheck = false;
+                }
+            }
+
             if (dateCheck == true & mtb_ISET.Text != "" & mtb_ISET.Text != "  /  /")
             {
                 try
@@ -162,30 +184,6 @@ namespace CMS
                 catch (Exception)
                 {
                     MessageBox.Show("Please enter valid SAFE Date.");
-                    dateCheck = false;
-                }
-            }
-            if (dateCheck == true & mtb_TokenIssued.Text != "" & mtb_TokenIssued.Text != "  /  /")
-            {
-                try
-                {
-                    mdl_User.TokenIssued = Convert.ToDateTime(mtb_TokenIssued.Text);
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Please enter valid Token Issued Date.");
-                    dateCheck = false;
-                }
-            }
-            if (dateCheck == true & mtb_TokenReturned.Text != "" & mtb_TokenReturned.Text != "  /  /")
-            {
-                try
-                {
-                    mdl_User.TokenReturned = Convert.ToDateTime(mtb_TokenReturned.Text);
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Please enter valid Token Returned Date.");
                     dateCheck = false;
                 }
             }
@@ -235,13 +233,14 @@ namespace CMS
             reviewUserDetails += $"Organisation:\t{mdl_User.Organisation}" + Environment.NewLine + Environment.NewLine;
             reviewUserDetails += $"StartDate:\t\t{mdl_User.StartDate}" + Environment.NewLine;
             reviewUserDetails += $"EndDate:\t\t{mdl_User.EndDate}" + Environment.NewLine + Environment.NewLine;
-            reviewUserDetails += $"IRCAgreement:\t{mdl_User.IRCAgreement}" + Environment.NewLine;
+            reviewUserDetails += $"LASERAgreement:\t{mdl_User.LASERAgreement}" + Environment.NewLine;
+
+            reviewUserDetails += $"DataProtection:\t{mdl_User.DataProtection}" + Environment.NewLine;
+            reviewUserDetails += $"InformationSecurity:\t{mdl_User.InformationSecurity}" + Environment.NewLine;
+
             reviewUserDetails += $"ISET:\t\t{mdl_User.ISET}" + Environment.NewLine;
             reviewUserDetails += $"ISAT:\t\t{mdl_User.ISAT}" + Environment.NewLine;
             reviewUserDetails += $"SAFE:\t\t{mdl_User.SAFE}" + Environment.NewLine + Environment.NewLine;
-            reviewUserDetails += $"TokenSerial:\t{mdl_User.TokenSerial}" + Environment.NewLine;
-            reviewUserDetails += $"TokenIssued:\t{mdl_User.TokenIssued}" + Environment.NewLine;
-            reviewUserDetails += $"TokenReturned:\t{mdl_User.TokenReturned}" + Environment.NewLine;
 
             DialogResult confirm = MessageBox.Show(
                 text: reviewUserDetails
@@ -276,15 +275,12 @@ namespace CMS
             tb_Organisation.TabIndex = ++x;
 
             gb_Training.TabIndex = ++x;
-            mtb_IRCAgreement.TabIndex = ++x;
+            mtb_LASERAgreement.TabIndex = ++x;
+            mtb_DataProtection.TabIndex = ++x;
+            mtb_InformationSecurity.TabIndex = ++x;
             mtb_ISET.TabIndex = ++x;
             mtb_ISAT.TabIndex = ++x;
             mtb_SAFE.TabIndex = ++x;
-
-            gb_MFA.TabIndex = ++x;
-            nud_TokenSerial.TabIndex = ++x;
-            mtb_TokenIssued.TabIndex = ++x;
-            mtb_TokenReturned.TabIndex = ++x;
 
             btn_UserOK.TabIndex = ++x;
             btn_UserCancel.TabIndex = ++x;

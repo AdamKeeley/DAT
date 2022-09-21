@@ -40,6 +40,11 @@ namespace CMS
         mdl_Project mdl_CurrentProject;
 
         /// <summary>
+        /// Simple flag to stop CheckedChanged event handlers from triggering when form loads/refreshes
+        /// </summary>
+        bool disableHandler = false;
+
+        /// <summary>
         /// Creates a new class object from Project class and calls method getProjectsDataSet() to populate DataSet in this class (ds_Project).
         /// </summary>
         private void fillProjectsDataSet()
@@ -97,6 +102,8 @@ namespace CMS
         {
             try
             {
+                disableHandler = true;
+                
                 //set controls values
                 cb_pNumberValue.DataSource              = ds_Project.Tables["tblProjects"];
                 cb_pNumberValue.ValueMember             = "pID";
@@ -147,9 +154,12 @@ namespace CMS
                 chkb_ISO27001.Checked                   = mdl_CurrentProject.ISO27001;
                 chkb_DSPT.Checked                       = mdl_CurrentProject.DSPT;
                 chkb_LIDA.Checked                       = mdl_CurrentProject.LIDA;
+                chkb_Internship.Checked                 = mdl_CurrentProject.Internship;
                 chkb_LASER.Checked                      = mdl_CurrentProject.LASER;
                 chkb_IRC.Checked                        = mdl_CurrentProject.IRC;
                 chkb_SEED.Checked                       = mdl_CurrentProject.SEED;
+
+                disableHandler = false;
             }
             catch (Exception ex)
             {
@@ -470,7 +480,7 @@ namespace CMS
             nud_DatHoursSpent.TabIndex = ++x;
             btn_DatHoursAdd.TabIndex = ++x;
 
-            btn_NewProject.TabIndex = ++x;
+            btn_DatAllocation.TabIndex = ++x;
             btn_Refresh.TabIndex = ++x;
             btn_ProjectApply.TabIndex = ++x;
             btn_ProjectOK.TabIndex = ++x;
@@ -520,6 +530,7 @@ namespace CMS
             mdl_NewProject.DSPT                 = chkb_DSPT.Checked;
             mdl_NewProject.ISO27001             = chkb_ISO27001.Checked;
             mdl_NewProject.LIDA                 = chkb_LIDA.Checked;
+            mdl_NewProject.Internship           = chkb_Internship.Checked;
             mdl_NewProject.LASER                = chkb_LASER.Checked;
             mdl_NewProject.IRC                  = chkb_IRC.Checked;
             mdl_NewProject.SEED                 = chkb_SEED.Checked;
@@ -867,19 +878,13 @@ namespace CMS
                 this.Close();
         }
 
-        private void btn_NewProject_Click(object sender, EventArgs e)
+        private void btn_DatAllocation_Click(object sender, EventArgs e)
         {
-            using (frm_ProjectAdd ProjectAdd = new frm_ProjectAdd())
+            using (frm_ProjectDatAllocation ProjectDatAllocation = new frm_ProjectDatAllocation(mdl_CurrentProject.ProjectNumber, ds_Project))
             {
-                ProjectAdd.ShowDialog();
-                string ProjectNumber = ProjectAdd.pNumber;
-
-                // Refreshes this form if new project number is generated (at project creation)
-                if (string.IsNullOrWhiteSpace(ProjectNumber) == false)
-                {
-                    fillProjectsDataSet();
-                    refreshProjectForm(ProjectNumber);
-                }
+                ProjectDatAllocation.ShowDialog();
+                fillProjectsDataSet();
+                refreshProjectForm(mdl_CurrentProject.ProjectNumber);
             }
         }
 
@@ -1018,6 +1023,22 @@ namespace CMS
                 {
                     MessageBox.Show("Please double click on a data row to see Kristal details." + Environment.NewLine + ex.Message);
                 }
+            }
+        }
+
+        private void chkb_LIDA_CheckedChanged(object sender, EventArgs e)
+        {
+            if (disableHandler == false & !chkb_LIDA.Checked)
+            {
+                chkb_Internship.Checked = false;
+            }
+        }
+
+        private void chkb_Internship_CheckedChanged(object sender, EventArgs e)
+        {
+            if (disableHandler == false & chkb_Internship.Checked)
+            {
+                chkb_LIDA.Checked = true;
             }
         }
     }

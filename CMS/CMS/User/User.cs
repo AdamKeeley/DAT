@@ -128,18 +128,16 @@ namespace CMS
                     mdl_User.IRCAgreement = (DateTime?)uRow["IRCAgreement"];
                 if (uRow["LASERAgreement"].ToString().Length > 0)
                     mdl_User.LASERAgreement = (DateTime?)uRow["LASERAgreement"];
+                if (uRow["DataProtection"].ToString().Length > 0)
+                    mdl_User.DataProtection = (DateTime?)uRow["DataProtection"];
+                if (uRow["InformationSecurity"].ToString().Length > 0)
+                    mdl_User.InformationSecurity = (DateTime?)uRow["InformationSecurity"];
                 if (uRow["ISET"].ToString().Length > 0)
                     mdl_User.ISET = (DateTime?)uRow["ISET"];
                 if (uRow["ISAT"].ToString().Length > 0)
                     mdl_User.ISAT = (DateTime?)uRow["ISAT"];
                 if (uRow["SAFE"].ToString().Length > 0)
                     mdl_User.SAFE = (DateTime?)uRow["SAFE"];
-                if (uRow["TokenSerial"].ToString().Length > 0)
-                    mdl_User.TokenSerial = (long?)uRow["TokenSerial"];
-                if (uRow["TokenIssued"].ToString().Length > 0)
-                    mdl_User.TokenIssued = (DateTime?)uRow["TokenIssued"];
-                if (uRow["TokenReturned"].ToString().Length > 0)
-                    mdl_User.TokenReturned = (DateTime?)uRow["TokenReturned"];
             }
             catch (Exception ex)
             {
@@ -284,12 +282,12 @@ namespace CMS
                     qryInsertUser.Connection = conn;
                     qryInsertUser.CommandText = "insert into [dbo].[tblUser] "
                         + "([UserNumber], [Status], [Title], [FirstName], [LastName], [Email], [Phone], [UserName]"
-                        + ", [Organisation], [StartDate], [EndDate], [SEEDAgreement], [IRCAgreement], [LASERAgreement]" 
-                        + ", [ISET], [ISAT], [SAFE], [TokenSerial], [TokenIssued], [TokenReturned]) "
+                        + ", [Organisation], [StartDate], [EndDate], [Priviledged], [SEEDAgreement], [IRCAgreement], [LASERAgreement]"
+                        + ", [DataProtection] ,[InformationSecurity], [ISET], [ISAT], [SAFE]) "
                         + "values "
                         + "(@UserNumber, @Status, @Title, @FirstName, @LastName, @Email, @Phone, @UserName"
-                        + ", @Organisation, @StartDate, @EndDate, @SEEDAgreement, @IRCAgreement, @LASERAgreement" 
-                        + ", @ISET, @ISAT, @SAFE, @TokenSerial, @TokenIssued, @TokenReturned)";
+                        + ", @Organisation, @StartDate, @EndDate, @Priviledged, @SEEDAgreement, @IRCAgreement, @LASERAgreement"
+                        + ", @DataProtection ,@InformationSecurity, @ISET, @ISAT, @SAFE)";
 
                     //assign the parameter values
                     qryInsertUser.Parameters.Add("@UserNumber", SqlDbType.Int).Value = mdl_User.UserNumber;
@@ -311,6 +309,9 @@ namespace CMS
                     SqlParameter param_EndDate = new SqlParameter("@EndDate", mdl_User.EndDate == null ? (object)DBNull.Value : mdl_User.EndDate);
                     param_EndDate.IsNullable = true;
                     qryInsertUser.Parameters.Add(param_EndDate);
+
+                    qryInsertUser.Parameters.Add("@Priviledged", SqlDbType.Bit).Value = mdl_User.Priviledged;
+
                     SqlParameter param_SEEDAgreement = new SqlParameter("@SEEDAgreement", mdl_User.SEEDAgreement == null ? (object)DBNull.Value : mdl_User.SEEDAgreement);
                     param_SEEDAgreement.IsNullable = true;
                     qryInsertUser.Parameters.Add(param_SEEDAgreement);
@@ -320,6 +321,14 @@ namespace CMS
                     SqlParameter param_LASERAgreement = new SqlParameter("@LASERAgreement", mdl_User.LASERAgreement == null ? (object)DBNull.Value : mdl_User.LASERAgreement);
                     param_LASERAgreement.IsNullable = true;
                     qryInsertUser.Parameters.Add(param_LASERAgreement);
+
+                    SqlParameter param_DataProtection = new SqlParameter("@DataProtection", mdl_User.DataProtection == null ? (object)DBNull.Value : mdl_User.DataProtection);
+                    param_DataProtection.IsNullable = true;
+                    qryInsertUser.Parameters.Add(param_DataProtection);
+                    SqlParameter param_InformationSecurity = new SqlParameter("@InformationSecurity", mdl_User.InformationSecurity == null ? (object)DBNull.Value : mdl_User.InformationSecurity);
+                    param_InformationSecurity.IsNullable = true;
+                    qryInsertUser.Parameters.Add(param_InformationSecurity);
+
                     SqlParameter param_ISET = new SqlParameter("@ISET", mdl_User.ISET == null ? (object)DBNull.Value : mdl_User.ISET);
                     param_ISET.IsNullable = true;
                     qryInsertUser.Parameters.Add(param_ISET);
@@ -329,15 +338,6 @@ namespace CMS
                     SqlParameter param_SAFE = new SqlParameter("@SAFE", mdl_User.SAFE == null ? (object)DBNull.Value : mdl_User.SAFE);
                     param_SAFE.IsNullable = true;
                     qryInsertUser.Parameters.Add(param_SAFE);
-                    SqlParameter param_TokenSerial = new SqlParameter("@TokenSerial", mdl_User.TokenSerial == null ? (object)DBNull.Value : mdl_User.TokenSerial);
-                    param_TokenSerial.IsNullable = true;
-                    qryInsertUser.Parameters.Add(param_TokenSerial);
-                    SqlParameter param_TokenIssued = new SqlParameter("@TokenIssued", mdl_User.TokenIssued == null ? (object)DBNull.Value : mdl_User.TokenIssued);
-                    param_TokenIssued.IsNullable = true;
-                    qryInsertUser.Parameters.Add(param_TokenIssued);
-                    SqlParameter param_TokenReturned = new SqlParameter("@TokenReturned", mdl_User.TokenReturned == null ? (object)DBNull.Value : mdl_User.TokenReturned);
-                    param_TokenReturned.IsNullable = true;
-                    qryInsertUser.Parameters.Add(param_TokenReturned);
 
                     //open connection to database, run query and close connection
                     conn.Open();

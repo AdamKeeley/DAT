@@ -65,3 +65,60 @@ where p.ValidTo is null
 	and userLA.ValidTo is null
 GO
 
+
+
+
+select [KristalRef]	
+	, [GrantStageID]
+	, [ValidFrom]	
+	, [ValidTo]		
+	, [CreatedBy]
+into #t
+from [dbo].[tblKristal]
+
+drop TABLE [dbo].[tblKristal]
+
+CREATE TABLE [dbo].[tblKristal](
+	[KristalID] [int] IDENTITY(1,1) NOT NULL,
+	[KristalRef] [decimal](6, 0) NULL,
+	[KristalName] [varchar](max) NULL,
+	[GrantStageID] [int] NULL,
+	[ValidFrom] [datetime] NULL,
+	[ValidTo] [datetime] NULL,
+	[CreatedBy] [varchar](50) NULL,
+ CONSTRAINT [PK_Kristal] PRIMARY KEY NONCLUSTERED 
+(
+	[KristalID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[tblKristal] ADD  DEFAULT (getdate()) FOR [ValidFrom]
+GO
+
+ALTER TABLE [dbo].[tblKristal] ADD  DEFAULT (suser_sname()) FOR [CreatedBy]
+GO
+
+ALTER TABLE [dbo].[tblKristal]  WITH CHECK ADD  CONSTRAINT [FK_Kristal_GrantStage] FOREIGN KEY([GrantStageID])
+REFERENCES [dbo].[tlkGrantStage] ([GrantStageID])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+
+ALTER TABLE [dbo].[tblKristal] CHECK CONSTRAINT [FK_Kristal_GrantStage]
+GO
+
+insert into [dbo].[tblKristal] (
+	[KristalRef]	
+	, [GrantStageID]
+	, [ValidFrom]	
+	, [ValidTo]		
+	, [CreatedBy]) 
+select [KristalRef]	
+	, [GrantStageID]
+	, [ValidFrom]	
+	, [ValidTo]		
+	, [CreatedBy]
+from #t
+go
+

@@ -12,30 +12,32 @@ namespace DataControlsLib.DataModels
     /// </summary>
     public class mdl_User
     {
-        public int          UserID          { get; set; }
-        public int          UserNumber      { get; set; }
-        public int?         Status          { get; set; }
-        public string       Status_Desc     { get; set; }
-        public int?         Title           { get; set; }
-        public string       Title_Desc      { get; set; }
-        public string       FirstName       { get; set; }
-        public string       LastName        { get; set; }
-        public string       Email           { get; set; }
-        public string       Phone           { get; set; }
-        public string       UserName        { get; set; }
-        public string       Organisation    { get; set; }
-        public DateTime?    StartDate       { get; set; }
-        public DateTime?    EndDate         { get; set; }
-        public bool         Priviledged     { get; set; }
-        public DateTime?    SEEDAgreement   { get; set; }
-        public DateTime?    IRCAgreement    { get; set; }
-        public DateTime?    LASERAgreement  { get; set; }
-        public DateTime?    ISET            { get; set; }
-        public DateTime?    ISAT            { get; set; }
-        public DateTime?    SAFE            { get; set; }
-        public long?        TokenSerial     { get; set; }
-        public DateTime?    TokenIssued     { get; set; }
-        public DateTime?    TokenReturned   { get; set; }
+        public int          UserID              { get; set; }
+        public int          UserNumber          { get; set; }
+        public int?         Status              { get; set; }
+        public string       Status_Desc         { get; set; }
+        public int?         Title               { get; set; }
+        public string       Title_Desc          { get; set; }
+        public string       FirstName           { get; set; }
+        public string       LastName            { get; set; }
+        public string       Email               { get; set; }
+        public string       Phone               { get; set; }
+        public string       UserName            { get; set; }
+        public string       Organisation        { get; set; }
+        public DateTime?    StartDate           { get; set; }
+        public DateTime?    EndDate             { get; set; }
+        public bool         Priviledged         { get; set; }
+        public DateTime?    SEEDAgreement       { get; set; }
+        public DateTime?    IRCAgreement        { get; set; }
+        public DateTime?    LASERAgreement      { get; set; }
+        public DateTime?    DataProtection      { get; set; }
+        public DateTime?    InformationSecurity { get; set; }
+        public DateTime?    ISET                { get; set; }
+        public DateTime?    ISAT                { get; set; }
+        public DateTime?    SAFE                { get; set; }
+        public long?        TokenSerial         { get; set; }
+        public DateTime?    TokenIssued         { get; set; }
+        public DateTime?    TokenReturned       { get; set; }
 
         /// <summary>
         /// Equals override so that the values contained in two instances of this class 
@@ -50,27 +52,29 @@ namespace DataControlsLib.DataModels
 
             var other = obj as mdl_User;
 
-            if (UserNumber          != other.UserNumber       
-                || Status           != other.Status       
-                || Title            != other.Title        
-                || FirstName        != other.FirstName    
-                || LastName         != other.LastName     
-                || Email            != other.Email        
-                || Phone            != other.Phone        
-                || UserName         != other.UserName     
-                || Organisation     != other.Organisation 
-                || StartDate        != other.StartDate    
-                || EndDate          != other.EndDate      
-                || Priviledged      != other.Priviledged  
-                || SEEDAgreement    != other.SEEDAgreement
-                || IRCAgreement     != other.IRCAgreement
-                || LASERAgreement   != other.LASERAgreement
-                || ISET             != other.ISET         
-                || ISAT             != other.ISAT         
-                || SAFE             != other.SAFE         
-                || TokenSerial      != other.TokenSerial  
-                || TokenIssued      != other.TokenIssued  
-                || TokenReturned    != other.TokenReturned
+            if (UserNumber              != other.UserNumber       
+                || Status               != other.Status       
+                || Title                != other.Title        
+                || FirstName            != other.FirstName    
+                || LastName             != other.LastName     
+                || Email                != other.Email        
+                || Phone                != other.Phone        
+                || UserName             != other.UserName     
+                || Organisation         != other.Organisation 
+                || StartDate            != other.StartDate    
+                || EndDate              != other.EndDate      
+                || Priviledged          != other.Priviledged  
+                || SEEDAgreement        != other.SEEDAgreement
+                || IRCAgreement         != other.IRCAgreement
+                || LASERAgreement       != other.LASERAgreement
+                || DataProtection       != other.DataProtection
+                || InformationSecurity  != other.InformationSecurity
+                || ISET                 != other.ISET         
+                || ISAT                 != other.ISAT         
+                || SAFE                 != other.SAFE         
+                || TokenSerial          != other.TokenSerial  
+                || TokenIssued          != other.TokenIssued  
+                || TokenReturned        != other.TokenReturned
                 )
                 return false;
 
