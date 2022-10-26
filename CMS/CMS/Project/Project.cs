@@ -108,6 +108,12 @@ namespace CMS
                         $"select * from [dbo].[tblProjectDatAllocation] " +
                         $"where ValidTo is null " +
                         $"order by [ProjectNumber], [FromDate] desc");
+                    SQL_Stuff.getDataTable(conn, null, ds_prj, "tblProjectCostings",
+                        $"select * from [dbo].[tblProjectCostings] " +
+                        $"where ValidTo is null " +
+                        $"order by [ProjectNumber], [FromDate]");
+                    SQL_Stuff.getDataTable(conn, null, ds_prj, "tlkCostingType",
+                        $"select * from dbo.tlkCostingType");
 
                     // get the user tables needed to link to project details and merge with project dataset
                     DataSet ds_prj_usr = getUserDataSet();
@@ -135,6 +141,9 @@ namespace CMS
                 ds_prj.Relations.Add("ProjectKristal_GrantStage"
                     , ds_prj.Tables["tlkGrantStage"].Columns["GrantStageID"]
                     , ds_prj.Tables["tblProjectKristal"].Columns["GrantStageID"], false);
+                ds_prj.Relations.Add("ProjectCostings_CostingType"
+                    , ds_prj.Tables["tlkCostingType"].Columns["CostingTypeId"]
+                    , ds_prj.Tables["tblProjectCostings"].Columns["CostingTypeId"], false);
 
                 ds_prj = addProjectUserDataRelations(ds_prj);
             }

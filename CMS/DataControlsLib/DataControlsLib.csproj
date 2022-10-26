@@ -50,6 +50,7 @@
     <Compile Include="DataModels\mdl_DsasProjects.cs" />
     <Compile Include="DataModels\mdl_FileTransferMethods.cs" />
     <Compile Include="DataModels\mdl_Kristal.cs" />
+    <Compile Include="DataModels\mdl_ProjectCosting.cs" />
     <Compile Include="DataModels\mdl_ProjectDatAllocation.cs" />
     <Compile Include="DataModels\mdl_ProjectDoc.cs" />
     <Compile Include="DataModels\mdl_User.cs" />
