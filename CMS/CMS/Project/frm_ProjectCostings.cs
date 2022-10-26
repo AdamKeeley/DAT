@@ -5,25 +5,27 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CMS
 {
-    public partial class frm_ProjectDatAllocation : Form
+    public partial class frm_ProjectCostings : Form
     {
-        public frm_ProjectDatAllocation(string pNumber, DataSet ds_prj)
+        public frm_ProjectCostings(string pNumber, DataSet ds_prj)
         {
             InitializeComponent();
             setTabIndex();
-            refreshDatAllocationForm(pNumber, ds_prj);
+            refreshProjectCostingsForm(pNumber, ds_prj);
         }
 
         string ProjectNumber;
         
-        private void refreshDatAllocationForm(string pNumber, DataSet ds_Project)
+        private void refreshProjectCostingsForm(string pNumber, DataSet ds_Project)
         {
             lbl_pNumber.Text = pNumber;
             // Clear controls
@@ -153,7 +155,7 @@ namespace CMS
                 //Add record to SQL db, close form on success
                 if (Project.insertDatAllocation(mdl_PDA) == true)
                 {
-                    refreshDatAllocationForm(ProjectNumber, Project.getProjectsDataSet());
+                    refreshProjectCostingsForm(ProjectNumber, Project.getProjectsDataSet());
                 }
             }
         }
@@ -196,13 +198,25 @@ namespace CMS
 
             x = 0;
 
+            gb_LaserCosts.TabIndex = ++x;
+            cb_CostingType.TabIndex = ++x;
+            mtb_DateCosted.TabIndex = ++x;
+            mtb_CostedFromDate.TabIndex = ++x;
+            mtb_CostedToDate.TabIndex = ++x;
+            tb_ComputeAmount.TabIndex = ++x;
+            tb_ItsSupportAmount.TabIndex = ++x;
+            tb_FixedInfraAmount.TabIndex = ++x;
+            btn_LaserCosting_Add.TabIndex = ++x;
+            btn_LaserCosting_Remove.TabIndex = ++x;
+
+            gb_DatSupport.TabIndex = ++x;
             gb_NewDatAllocation.TabIndex = ++x;
             mtb_FromDate.TabIndex = ++x;
             mtb_ToDate.TabIndex = ++x;
             nud_DatAllocation.TabIndex = ++x;
             btn_Project_ProjectDatAllocation_Add.TabIndex = ++x;
-
             btn_Project_ProjectDatAllocation_Remove.TabIndex = ++x;
+
             btn_Project_ProjectDatAllocation_Close.TabIndex = ++x;
         }
 
@@ -220,6 +234,38 @@ namespace CMS
             {
                 MaskedTextBox maskedtextBox_Target = (MaskedTextBox)Controls.Find(((Control)sender).Name, true).First();
                 Static_Helper.enter_MaskedTextBox(maskedtextBox_Target);
+            }
+        }
+
+        /// <summary>
+        /// Prevent the cursor from being positioned in the middle of an empty textbox when 
+        /// the user clicks in it. Get's a reference to target control and passes it through to method in 
+        /// static helper class.
+        /// To be called by the OnClick event of the control.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void enter_TextBox(object sender, EventArgs e)
+        {
+            if (sender is TextBox)
+            {
+                TextBox textBox_Target = (TextBox)Controls.Find(((Control)sender).Name, true).First();
+                Static_Helper.enter_TextBox(textBox_Target);
+            }
+        }
+
+        /// <summary>
+        /// Get's a reference to target control and passes it through to method in static helper class.
+        /// To be called by the TextChanged event of the control.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textChanged_TextBox_Currency(object sender, EventArgs e)
+        {
+            if (sender is TextBox)
+            {
+                TextBox textBox_Target = (TextBox)Controls.Find(((Control)sender).Name, true).First();
+                Static_Helper.textChanged_TextBox_Currency(textBox_Target);
             }
         }
 

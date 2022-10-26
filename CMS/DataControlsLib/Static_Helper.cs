@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -59,5 +60,37 @@ namespace DataControlsLib
                 combobox_Target.SelectedIndex = -1;
             }
         }
+
+
+        public static void enter_TextBox(TextBox textbox_Target)
+        {
+            if (textbox_Target.Text == "£0.00")
+                textbox_Target.Select(textbox_Target.Text.Length, 0);
+        }
+
+        /// <summary>
+        /// Formats text as a currency and pushes entered numbers left from right of decimal, if last position is selected.
+        /// </summary>
+        /// <param name="textbox_Target"></param>
+        public static void textChanged_TextBox_Currency(TextBox textbox_Target)
+        {
+            if (textbox_Target.SelectionStart == textbox_Target.Text.Length)
+            {
+                //Remove previous formatting, or the decimal check will fail including leading zeros
+                string value = textbox_Target.Text.Replace(",", "")
+                    .Replace("£", "").Replace(".", "").TrimStart('0');
+                decimal ul;
+                //Check we are indeed handling a number
+                if (decimal.TryParse(value, out ul))
+                {
+                    //Format the text as currency
+                    ul /= 100;
+                    textbox_Target.Text = string.Format(CultureInfo.CreateSpecificCulture("en-GB"), "{0:C2}", ul);
+                    textbox_Target.Select(textbox_Target.Text.Length, 0);
+                }
+            }
+
+        }
+
     }
 }
