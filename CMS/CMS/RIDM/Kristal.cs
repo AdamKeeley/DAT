@@ -176,7 +176,7 @@ namespace CMS.RIDM
         /// </summary>
         /// <param name="KristalRef"></param>
         /// <returns>Returns populated mdl_Kristal if preseant, empty if not</returns>
-        public mdl_Kristal fetchCurrentKristal(int KristalID)
+        public mdl_Kristal fetchCurrentKristal(int KristalRef)
         {
             mdl_Kristal kristal = new mdl_Kristal();
             try
@@ -188,8 +188,8 @@ namespace CMS.RIDM
                 {
                     SqlCommand qryCheckKristal = new SqlCommand();
                     qryCheckKristal.Connection = conn;
-                    qryCheckKristal.CommandText = $"select * from [dbo].[tblKristal] where [KristalID] = @KristalID and ValidTo is null";
-                    qryCheckKristal.Parameters.Add("@KristalID", SqlDbType.Int).Value = KristalID;
+                    qryCheckKristal.CommandText = $"select * from [dbo].[tblKristal] where [KristalRef] = @KristalRef and ValidTo is null";
+                    qryCheckKristal.Parameters.Add("@KristalRef", SqlDbType.Int).Value = Convert.ToInt32(KristalRef);
                     conn.Open();
 
                     SqlDataReader reader = qryCheckKristal.ExecuteReader();

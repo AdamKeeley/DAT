@@ -480,7 +480,7 @@ namespace CMS
             nud_DatHoursSpent.TabIndex = ++x;
             btn_DatHoursAdd.TabIndex = ++x;
 
-            btn_DatAllocation.TabIndex = ++x;
+            btn_ProjectCostings.TabIndex = ++x;
             btn_Refresh.TabIndex = ++x;
             btn_ProjectApply.TabIndex = ++x;
             btn_ProjectOK.TabIndex = ++x;

@@ -27,8 +27,20 @@ namespace CMS
         
         private void refreshProjectCostingsForm(string pNumber, DataSet ds_Project)
         {
+            //set controls
             lbl_pNumber.Text = pNumber;
+            cb_CostingType.DataSource = ds_Project.Tables["tlkCostingType"];
+            cb_CostingType.ValueMember = "CostingTypeId";
+            cb_CostingType.DisplayMember = "CostingTypeDescription";
+
             // Clear controls
+            cb_CostingType.SelectedIndex = -1;
+            mtb_DateCosted.Clear();
+            mtb_FromDate.Clear();
+            mtb_ToDate.Clear();
+            tb_ComputeAmount.Text = "£0.00";
+            tb_ItsSupportAmount.Text = "£0.00";
+            tb_FixedInfraAmount.Text = "£0.00";
             mtb_FromDate.Clear();
             mtb_ToDate.Clear();
             nud_DatAllocation.Value = decimal.Parse(nud_DatAllocation.Minimum.ToString());

@@ -148,6 +148,8 @@
             // 
             // cb_CostingType
             // 
+            this.cb_CostingType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cb_CostingType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cb_CostingType.FormattingEnabled = true;
             this.cb_CostingType.Location = new System.Drawing.Point(77, 23);
             this.cb_CostingType.Name = "cb_CostingType";
