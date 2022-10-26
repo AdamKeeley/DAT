@@ -47,6 +47,12 @@ namespace CMS
 
             ProjectNumber = pNumber;
 
+            populateDatAllocationDGV(pNumber, ds_Project);
+            populateProjectCostingsDGV(pNumber, ds_Project);
+        }
+
+        private void populateDatAllocationDGV (string pNumber, DataSet ds_Project)
+        {
             string filter = $"ProjectNumber = '{pNumber}'";
 
             //populate DataGridView (dgv_projectDatAllocation) from DataTable (ds_Project.Tables["tblProjectDatAllocation"])
@@ -82,6 +88,60 @@ namespace CMS
             dgv_projectDatAllocation.Columns["FTE"].Width = 81;
             dgv_projectDatAllocation.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dgv_projectDatAllocation.Sort(dgv_projectDatAllocation.Columns["From Date"], ListSortDirection.Descending);
+        }
+
+        private void populateProjectCostingsDGV(string pNumber, DataSet ds_Project)
+        {
+            string filter = $"ProjectNumber = '{pNumber}'";
+
+            //populate DataGridView (dgv_ProjectCostings) from DataTable (ds_Project.Tables["tblProjectCostings"])
+            //create new DataTable (dt_dgv_ProjectCostings) that just contains columns and records of interest
+            DataTable dt_dgv_ProjectCostings = new DataTable();
+
+            dt_dgv_ProjectCostings.Columns.Add("ProjectCostingsId");
+            dt_dgv_ProjectCostings.Columns.Add("Costing Type");
+            DataColumn FromDate = new DataColumn("From Date");
+            FromDate.DataType = Type.GetType("System.DateTime");
+            dt_dgv_ProjectCostings.Columns.Add(FromDate);
+            DataColumn ToDate = new DataColumn("To Date");
+            ToDate.DataType = Type.GetType("System.DateTime");
+            dt_dgv_ProjectCostings.Columns.Add(ToDate);
+            dt_dgv_ProjectCostings.Columns.Add("Laser Compute");
+            dt_dgv_ProjectCostings.Columns.Add("ITS Support");
+            dt_dgv_ProjectCostings.Columns.Add("Fixed Infrastructure");
+
+            //iterate through each entry in source DataTable and add to newly created DataTable
+            DataRow row;
+            foreach (DataRow nRow in ds_Project.Tables["tblProjectCostings"].Select(filter))
+            {
+                row = dt_dgv_ProjectCostings.NewRow();
+                row["ProjectCostingsId"] = nRow["ProjectCostingsId"];
+
+                foreach (DataRow c in nRow.GetParentRows("ProjectCostings_CostingType"))
+                {
+                    row["Costing Type"] = c["CostingTypeDescription"];
+                }
+                
+
+                row["From Date"] = nRow["FromDate"];
+                row["To Date"] = nRow["ToDate"];
+                row["Laser Compute"] = nRow["LaserCompute"];
+                row["ITS Support"] = nRow["ItsSupport"];
+                row["Fixed Infrastructure"] = nRow["FixedInfra"];
+                dt_dgv_ProjectCostings.Rows.Add(row);
+            }
+            dgv_ProjectCostings.DataSource = dt_dgv_ProjectCostings;
+
+            //format DataGridView (dgv_pNotes) column widths etc.
+            dgv_ProjectCostings.Columns["ProjectCostingsId"].Visible = false;
+            dgv_ProjectCostings.Columns["Costing Type"].Width = 81;
+            dgv_ProjectCostings.Columns["From Date"].Width = 81;
+            dgv_ProjectCostings.Columns["To Date"].Width = 81;
+            dgv_ProjectCostings.Columns["Laser Compute"].Width = 81;
+            dgv_ProjectCostings.Columns["ITS Support"].Width = 81;
+            dgv_ProjectCostings.Columns["Fixed Infrastructure"].Width = 81;
+            dgv_ProjectCostings.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dgv_ProjectCostings.Sort(dgv_projectDatAllocation.Columns["From Date"], ListSortDirection.Descending);
         }
 
         private mdl_ProjectDatAllocation fillProjectDatAllocationModel()
