@@ -15,6 +15,7 @@ namespace DataControlsLib.DataModels
         public  int         ProjectCostingsId   { get; set; }
         public  string      ProjectNumber       { get; set; }
         public  int         CostingType         { get; set; }
+        public  DateTime    DateCosted          { get; set; }
         public  DateTime    FromDate            { get; set; }
         public  DateTime    ToDate              { get; set; }
         public  decimal     LaserCompute        { get; set; }
@@ -35,13 +36,14 @@ namespace DataControlsLib.DataModels
             var other = obj as mdl_ProjectCosting;
 
             if (ProjectCostingsId   != other.ProjectCostingsId
-                || ProjectNumber != other.ProjectNumber        
-                || CostingType   != other.CostingType          
-                || FromDate      != other.FromDate             
-                || ToDate        != other.ToDate              
-                || LaserCompute  != other.LaserCompute        
-                || ItsSupport    != other.ItsSupport          
-                || FixedInfra    != other.FixedInfra)
+                || ProjectNumber    != other.ProjectNumber        
+                || CostingType      != other.CostingType          
+                || DateCosted       != other.DateCosted
+                || FromDate         != other.FromDate             
+                || ToDate           != other.ToDate              
+                || LaserCompute     != other.LaserCompute        
+                || ItsSupport       != other.ItsSupport          
+                || FixedInfra       != other.FixedInfra)
                 return false;
 
             return true;

@@ -881,6 +881,85 @@ namespace CMS
             }
         }
 
+
+        public bool insertProjectCosting(mdl_ProjectCosting mdl_ProjectCosting)
+        {
+            try
+            {
+                SqlConnection conn = new SqlConnection();
+                conn.ConnectionString = SQL_Stuff.conString;
+                conn.Credential = SQL_Stuff.credential;
+                using (conn)
+                {
+                    SqlCommand qryInsertProjectCosting = new SqlCommand();
+                    qryInsertProjectCosting.Connection = conn;
+                    qryInsertProjectCosting.CommandText = $"insert into dbo.tblProjectcostings (ProjectNumber, CostingTypeId, DateCosted, FromDate" + 
+                        $", ToDate, LaserCompute, ItsSupport, FixedInfra) values (@ProjectNumber, @CostingTypeId, @DateCosted, @FromDate, @ToDate" +
+                        $", @LaserCompute, @ItsSupport, @FixedInfra)";
+
+                    qryInsertProjectCosting.Parameters.Add("@ProjectNumber", SqlDbType.VarChar).Value = mdl_ProjectCosting.ProjectNumber;
+
+                    qryInsertProjectCosting.Parameters.Add("@CostingTypeId", SqlDbType.Int).Value = mdl_ProjectCosting.CostingType;
+
+                    SqlParameter param_Datecosted = new SqlParameter("@DateCosted", mdl_ProjectCosting.DateCosted == null ? (object)DBNull.Value : mdl_ProjectCosting.DateCosted);
+                    qryInsertProjectCosting.Parameters.Add(param_Datecosted);
+                    param_Datecosted.IsNullable = true;
+
+                    SqlParameter param_FromDate = new SqlParameter("@FromDate", mdl_ProjectCosting.FromDate == null ? (object)DBNull.Value : mdl_ProjectCosting.FromDate);
+                    qryInsertProjectCosting.Parameters.Add(param_FromDate);
+                    param_FromDate.IsNullable = true;
+
+                    SqlParameter param_ToDate = new SqlParameter("@ToDate", mdl_ProjectCosting.ToDate == null ? (object)DBNull.Value : mdl_ProjectCosting.ToDate);
+                    qryInsertProjectCosting.Parameters.Add(param_ToDate);
+                    param_ToDate.IsNullable = true;
+
+                    qryInsertProjectCosting.Parameters.Add("@LaserCompute", SqlDbType.Decimal).Value = mdl_ProjectCosting.LaserCompute;
+                    qryInsertProjectCosting.Parameters.Add("@ItsSupport", SqlDbType.Decimal).Value = mdl_ProjectCosting.ItsSupport;
+                    qryInsertProjectCosting.Parameters.Add("@FixedInfra", SqlDbType.Decimal).Value = mdl_ProjectCosting.FixedInfra;
+
+                    conn.Open();
+                    qryInsertProjectCosting.ExecuteNonQuery();
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to add costing to project." + Environment.NewLine + Environment.NewLine + ex.Message);
+                return false;
+            }
+        }
+
+        public bool deleteProjectCosting(int current_ProjectCostingsId)
+        {
+            try
+            {
+                SqlConnection conn = new SqlConnection();
+                conn.ConnectionString = SQL_Stuff.conString;
+                conn.Credential = SQL_Stuff.credential;
+                using (conn)
+                {
+                    //create parameterised SQL query to update record in tblProjectCosting
+                    SqlCommand qryUpdateProjectCosting = new SqlCommand();
+                    qryUpdateProjectCosting.Connection = conn;
+                    qryUpdateProjectCosting.CommandText = $"update [dbo].[tblProjectcostings] " +
+                        $"set [ValidTo] = getdate() " +
+                        $"where [ProjectCostingsId] = @ProjectCostingsId";
+                    qryUpdateProjectCosting.Parameters.Add("@ProjectCostingsId", SqlDbType.Int).Value = current_ProjectCostingsId;
+
+                    //open connection and execute insert
+                    conn.Open();
+                    qryUpdateProjectCosting.ExecuteNonQuery();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to delete cost from project." + Environment.NewLine + Environment.NewLine + ex.Message);
+                return false;
+            }
+        }
+
+
         /// <summary>
         /// Method to get largest pNumber from current pNumbers.
         /// Runs a SQL query to select largest number used in current project numbers and return it as an int type.

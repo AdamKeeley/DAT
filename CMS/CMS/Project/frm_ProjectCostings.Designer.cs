@@ -277,6 +277,7 @@
             this.btn_LaserCosting_Remove.TabIndex = 57;
             this.btn_LaserCosting_Remove.Text = "Remove";
             this.btn_LaserCosting_Remove.UseVisualStyleBackColor = true;
+            this.btn_LaserCosting_Remove.Click += new System.EventHandler(this.btn_LaserCosting_Remove_Click);
             // 
             // lbl_ComputeAmount
             // 
@@ -311,7 +312,6 @@
             this.tb_ComputeAmount.Name = "tb_ComputeAmount";
             this.tb_ComputeAmount.Size = new System.Drawing.Size(100, 20);
             this.tb_ComputeAmount.TabIndex = 65;
-            this.tb_ComputeAmount.Text = "£0.00";
             this.tb_ComputeAmount.Click += new System.EventHandler(this.enter_TextBox);
             this.tb_ComputeAmount.TextChanged += new System.EventHandler(this.textChanged_TextBox_Currency);
             // 
@@ -321,7 +321,6 @@
             this.tb_ItsSupportAmount.Name = "tb_ItsSupportAmount";
             this.tb_ItsSupportAmount.Size = new System.Drawing.Size(100, 20);
             this.tb_ItsSupportAmount.TabIndex = 66;
-            this.tb_ItsSupportAmount.Text = "£0.00";
             this.tb_ItsSupportAmount.Click += new System.EventHandler(this.enter_TextBox);
             this.tb_ItsSupportAmount.TextChanged += new System.EventHandler(this.textChanged_TextBox_Currency);
             // 
@@ -331,7 +330,6 @@
             this.tb_FixedInfraAmount.Name = "tb_FixedInfraAmount";
             this.tb_FixedInfraAmount.Size = new System.Drawing.Size(100, 20);
             this.tb_FixedInfraAmount.TabIndex = 67;
-            this.tb_FixedInfraAmount.Text = "£0.00";
             this.tb_FixedInfraAmount.Click += new System.EventHandler(this.enter_TextBox);
             this.tb_FixedInfraAmount.TextChanged += new System.EventHandler(this.textChanged_TextBox_Currency);
             // 
@@ -343,6 +341,7 @@
             this.btn_LaserCosting_Add.TabIndex = 46;
             this.btn_LaserCosting_Add.Text = "Add";
             this.btn_LaserCosting_Add.UseVisualStyleBackColor = true;
+            this.btn_LaserCosting_Add.Click += new System.EventHandler(this.btn_LaserCosting_Add_Click);
             // 
             // gb_LaserCosts
             // 

@@ -36,8 +36,8 @@ namespace CMS
             // Clear controls
             cb_CostingType.SelectedIndex = -1;
             mtb_DateCosted.Clear();
-            mtb_FromDate.Clear();
-            mtb_ToDate.Clear();
+            mtb_CostedFromDate.Clear();
+            mtb_CostedToDate.Clear();
             tb_ComputeAmount.Text = "£0.00";
             tb_ItsSupportAmount.Text = "£0.00";
             tb_FixedInfraAmount.Text = "£0.00";
@@ -144,6 +144,7 @@ namespace CMS
             dgv_ProjectCostings.Sort(dgv_ProjectCostings.Columns["From Date"], ListSortDirection.Descending);
         }
 
+
         private mdl_ProjectDatAllocation fillProjectDatAllocationModel()
         {
             mdl_ProjectDatAllocation mdl_PDA = new mdl_ProjectDatAllocation();
@@ -158,7 +159,7 @@ namespace CMS
                 }
                 catch (Exception)
                 {
-                    //MessageBox.Show("Please enter valid From Date");
+                    MessageBox.Show("Please enter valid DAT Allocation From Date");
                 }
             }
             if (mtb_ToDate.Text != "" & mtb_ToDate.Text != "  /  /")
@@ -169,7 +170,7 @@ namespace CMS
                 }
                 catch (Exception)
                 {
-                    //MessageBox.Show("Please enter valid To Date");
+                    MessageBox.Show("Please enter valid DAT Allocation To Date");
                 }
             }
 
@@ -178,7 +179,7 @@ namespace CMS
             return mdl_PDA;
         }
 
-        private bool checkRequiredFields(mdl_ProjectDatAllocation mdl_PDA)
+        private bool checkRequiredFields_DatAllocation(mdl_ProjectDatAllocation mdl_PDA)
         {
             // Check dates are present
             if (mdl_PDA.FromDate == default(DateTime))
@@ -210,8 +211,6 @@ namespace CMS
                     return false;
                 }
             }
-            
-
 
             return true;
         }
@@ -221,8 +220,8 @@ namespace CMS
             Project Project = new Project();
             mdl_ProjectDatAllocation mdl_PDA = fillProjectDatAllocationModel();
 
-            //Check fields have valid entries and fill project document model
-            if (checkRequiredFields(mdl_PDA) == true)
+            //Check fields have valid entries and fill DAT Allocation model
+            if (checkRequiredFields_DatAllocation(mdl_PDA) == true)
             {
                 //Add record to SQL db, close form on success
                 if (Project.insertDatAllocation(mdl_PDA) == true)
@@ -256,9 +255,181 @@ namespace CMS
             }
             else
             {
-                MessageBox.Show("Please select a document record.");
+                MessageBox.Show("Please select a DAT Allocation record.");
             }
         }
+
+
+        private mdl_ProjectCosting fillProjectCostingModel()
+        {
+            mdl_ProjectCosting mdl_PC = new mdl_ProjectCosting();
+
+            mdl_PC.ProjectNumber = ProjectNumber;
+            try
+            {
+                mdl_PC.CostingType = Convert.ToInt32(cb_CostingType.SelectedValue.ToString());
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Please enter valid Costing Type");
+            }
+            if (mtb_DateCosted.Text != "" & mtb_DateCosted.Text != "  /  /")
+            {
+                try
+                {
+                    mdl_PC.DateCosted = Convert.ToDateTime(mtb_DateCosted.Text);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Please enter valid Date Costed");
+                }
+            }
+            if (mtb_CostedFromDate .Text != "" & mtb_CostedFromDate.Text != "  /  /")
+            {
+                try
+                {
+                    mdl_PC.FromDate = Convert.ToDateTime(mtb_CostedFromDate.Text);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Please enter valid Costed From Date");
+                }
+            }
+            if (mtb_CostedToDate.Text != "" & mtb_CostedToDate.Text != "  /  /")
+            {
+                try
+                {
+                    mdl_PC.ToDate = Convert.ToDateTime(mtb_CostedToDate.Text);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Please enter valid Costed To Date");
+                }
+            }
+            try
+            {
+                mdl_PC.LaserCompute = Convert.ToDecimal(tb_ComputeAmount.Text.Replace(",", "").Replace("£", "").TrimStart('0'));
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Please enter valid LASER Compute Cost");
+            }
+            try
+            {
+                mdl_PC.ItsSupport = Convert.ToDecimal(tb_ItsSupportAmount.Text.Replace(",", "").Replace("£", "").TrimStart('0'));
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Please enter valid LASER Compute Cost");
+            }
+            try
+            {
+                mdl_PC.FixedInfra = Convert.ToDecimal(tb_FixedInfraAmount.Text.Replace(",", "").Replace("£", "").TrimStart('0'));
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Please enter valid LASER Compute Cost");
+            }
+
+            return mdl_PC;
+        }
+
+        private bool checkRequiredFields_Costing(mdl_ProjectCosting mdl_PC)
+        {
+            if (!(mdl_PC.CostingType.ToString().Length > 0))
+            {
+                MessageBox.Show("Please enter valid Costing Type");
+                return false;
+            }
+
+            // Check dates are present
+            if (mdl_PC.DateCosted == default(DateTime))
+            {
+                MessageBox.Show("Please enter valid Date Costed");
+                return false;
+            }
+            if (mdl_PC.FromDate == default(DateTime))
+            {
+                MessageBox.Show("Please enter valid Cost From Date");
+                return false;
+            }
+            if (mdl_PC.ToDate == default(DateTime))
+            {
+                MessageBox.Show("Please enter valid Cost To Date");
+                return false;
+            }
+
+            // Check chronology
+            if (mdl_PC.FromDate >= mdl_PC.ToDate)
+            {
+                MessageBox.Show("Cost From Date must be before cost To Date");
+                return false;
+            }
+
+            // Check cost values are present
+            if (!(mdl_PC.LaserCompute > 0))
+            {
+                MessageBox.Show("Must enter an amount for LASER Compute costs");
+                return false;
+            }
+            if (!(mdl_PC.ItsSupport > 0))
+            {
+                MessageBox.Show("Must enter an amount for IT Services Support costs");
+                return false;
+            }
+            if (!(mdl_PC.FixedInfra > 0))
+            {
+                MessageBox.Show("Must enter an amount for LASER Compute costs");
+                return false;
+            }
+
+            return true;
+        }
+
+        private void insertNewCosting()
+        {
+            Project Project = new Project();
+            mdl_ProjectCosting mdl_PC = fillProjectCostingModel();
+
+            //Check fields have valid entries and fill project costing model
+            if (checkRequiredFields_Costing(mdl_PC) == true)
+            {
+                //Add record to SQL db, close form on success
+                if (Project.insertProjectCosting(mdl_PC) == true)
+                {
+                    refreshProjectCostingsForm(ProjectNumber, Project.getProjectsDataSet());
+                }
+            }
+        }
+
+        private void removeCosting()
+        {
+            if (dgv_ProjectCostings.Rows.Count > 0 & dgv_ProjectCostings.SelectedRows.Count > 0)
+            {
+                foreach (DataGridViewRow r in dgv_ProjectCostings.SelectedRows)
+                {
+                    mdl_ProjectCosting mdl_PC = new mdl_ProjectCosting();
+
+                    int current_ProjectCostingsId = int.Parse(r.Cells["ProjectCostingsId"].Value.ToString());
+                    mdl_PC.FromDate = Convert.ToDateTime(r.Cells["From Date"].Value);
+                    mdl_PC.ToDate = Convert.ToDateTime(r.Cells["To Date"].Value);
+
+                    DialogResult acceptProjectCosting = MessageBox.Show($"Delete Project Costing for period {mdl_PC.FromDate.ToShortDateString()} to {mdl_PC.ToDate.ToShortDateString()}?", "", MessageBoxButtons.YesNo);
+                    if (acceptProjectCosting == DialogResult.Yes)
+                    {
+                        Project projects = new Project();
+                        // update valid to of current record
+                        if (projects.deleteProjectCosting(current_ProjectCostingsId) == true)
+                            dgv_ProjectCostings.Rows.RemoveAt(r.Index);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a DAT Allocation record.");
+            }
+        }
+
 
         private void setTabIndex()
         {
@@ -349,6 +520,16 @@ namespace CMS
         private void btn_Project_ProjectDatAllocation_Remove_Click(object sender, EventArgs e)
         {
             removeDatAllocation();
+        }
+
+        private void btn_LaserCosting_Add_Click(object sender, EventArgs e)
+        {
+            insertNewCosting();
+        }
+
+        private void btn_LaserCosting_Remove_Click(object sender, EventArgs e)
+        {
+            removeCosting();
         }
     }
 }
