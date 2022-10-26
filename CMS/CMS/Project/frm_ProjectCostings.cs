@@ -134,14 +134,14 @@ namespace CMS
 
             //format DataGridView (dgv_pNotes) column widths etc.
             dgv_ProjectCostings.Columns["ProjectCostingsId"].Visible = false;
-            dgv_ProjectCostings.Columns["Costing Type"].Width = 81;
+            dgv_ProjectCostings.Columns["Costing Type"].Width = 100;
             dgv_ProjectCostings.Columns["From Date"].Width = 81;
             dgv_ProjectCostings.Columns["To Date"].Width = 81;
             dgv_ProjectCostings.Columns["Laser Compute"].Width = 81;
             dgv_ProjectCostings.Columns["ITS Support"].Width = 81;
             dgv_ProjectCostings.Columns["Fixed Infrastructure"].Width = 81;
             dgv_ProjectCostings.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-            dgv_ProjectCostings.Sort(dgv_projectDatAllocation.Columns["From Date"], ListSortDirection.Descending);
+            dgv_ProjectCostings.Sort(dgv_ProjectCostings.Columns["From Date"], ListSortDirection.Descending);
         }
 
         private mdl_ProjectDatAllocation fillProjectDatAllocationModel()
