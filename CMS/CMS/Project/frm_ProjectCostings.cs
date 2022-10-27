@@ -107,6 +107,7 @@ namespace CMS
             DataColumn ToDate = new DataColumn("To Date");
             ToDate.DataType = Type.GetType("System.DateTime");
             dt_dgv_ProjectCostings.Columns.Add(ToDate);
+            dt_dgv_ProjectCostings.Columns.Add("Duration (months)");
             dt_dgv_ProjectCostings.Columns.Add("Laser Compute");
             dt_dgv_ProjectCostings.Columns.Add("ITS Support");
             dt_dgv_ProjectCostings.Columns.Add("Fixed Infrastructure");
@@ -123,6 +124,7 @@ namespace CMS
                 }
                 row["From Date"] = nRow["FromDate"];
                 row["To Date"] = nRow["ToDate"];
+                row["Duration (months)"] = nRow["DurationComputed"];
                 row["Laser Compute"] = nRow["LaserCompute"];
                 row["ITS Support"] = nRow["ItsSupport"];
                 row["Fixed Infrastructure"] = nRow["FixedInfra"];
@@ -132,12 +134,13 @@ namespace CMS
 
             //format DataGridView (dgv_pNotes) column widths etc.
             dgv_ProjectCostings.Columns["ProjectCostingsId"].Visible = false;
-            dgv_ProjectCostings.Columns["Costing Type"].Width = 110;
-            dgv_ProjectCostings.Columns["From Date"].Width = 81;
-            dgv_ProjectCostings.Columns["To Date"].Width = 81;
-            dgv_ProjectCostings.Columns["Laser Compute"].Width = 81;
-            dgv_ProjectCostings.Columns["ITS Support"].Width = 81;
-            dgv_ProjectCostings.Columns["Fixed Infrastructure"].Width = 81;
+            dgv_ProjectCostings.Columns["Costing Type"].Width = 105;
+            dgv_ProjectCostings.Columns["From Date"].Width = 71;
+            dgv_ProjectCostings.Columns["To Date"].Width = 71;
+            dgv_ProjectCostings.Columns["Duration (months)"].Width = 60;
+            dgv_ProjectCostings.Columns["Laser Compute"].Width = 60;
+            dgv_ProjectCostings.Columns["ITS Support"].Width = 60;
+            dgv_ProjectCostings.Columns["Fixed Infrastructure"].Width = 75;
             dgv_ProjectCostings.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dgv_ProjectCostings.Sort(dgv_ProjectCostings.Columns["From Date"], ListSortDirection.Descending);
             dgv_ProjectCostings.Columns["Laser Compute"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
