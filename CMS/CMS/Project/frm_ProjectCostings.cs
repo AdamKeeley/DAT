@@ -273,6 +273,16 @@ namespace CMS
             {
                 //MessageBox.Show("Please enter valid Costing Type");
             }
+
+            try
+            {
+                mdl_PC.CostingTypeDesc = cb_CostingType.SelectedText.ToString();
+            }
+            catch (Exception)
+            {
+
+            }
+
             if (mtb_DateCosted.Text != "" & mtb_DateCosted.Text != "  /  /")
             {
                 try
@@ -379,7 +389,7 @@ namespace CMS
             }
             if (!(mdl_PC.FixedInfra > 0))
             {
-                MessageBox.Show("Must enter an amount for LASER Compute costs");
+                MessageBox.Show("Must enter an amount for Fixed Infrastructure costs");
                 return false;
             }
 
@@ -413,8 +423,9 @@ namespace CMS
                     int current_ProjectCostingsId = int.Parse(r.Cells["ProjectCostingsId"].Value.ToString());
                     mdl_PC.FromDate = Convert.ToDateTime(r.Cells["From Date"].Value);
                     mdl_PC.ToDate = Convert.ToDateTime(r.Cells["To Date"].Value);
+                    mdl_PC.CostingTypeDesc = Convert.ToString(r.Cells["Costing Type"].Value);
 
-                    DialogResult acceptProjectCosting = MessageBox.Show($"Delete Project Costing for period {mdl_PC.FromDate.ToShortDateString()} to {mdl_PC.ToDate.ToShortDateString()}?", "", MessageBoxButtons.YesNo);
+                    DialogResult acceptProjectCosting = MessageBox.Show($"Delete Project Costing for: {Environment.NewLine} {mdl_PC.CostingTypeDesc} {Environment.NewLine} {mdl_PC.FromDate.ToShortDateString()} to {mdl_PC.ToDate.ToShortDateString()}?", "", MessageBoxButtons.YesNo);
                     if (acceptProjectCosting == DialogResult.Yes)
                     {
                         Project projects = new Project();

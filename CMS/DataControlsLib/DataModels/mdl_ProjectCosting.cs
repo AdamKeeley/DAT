@@ -15,6 +15,7 @@ namespace DataControlsLib.DataModels
         public  int         ProjectCostingsId   { get; set; }
         public  string      ProjectNumber       { get; set; }
         public  int         CostingType         { get; set; }
+        public  string      CostingTypeDesc     { get; set; }
         public  DateTime    DateCosted          { get; set; }
         public  DateTime    FromDate            { get; set; }
         public  DateTime    ToDate              { get; set; }
@@ -38,6 +39,7 @@ namespace DataControlsLib.DataModels
             if (ProjectCostingsId   != other.ProjectCostingsId
                 || ProjectNumber    != other.ProjectNumber        
                 || CostingType      != other.CostingType          
+                || CostingTypeDesc  != other.CostingTypeDesc
                 || DateCosted       != other.DateCosted
                 || FromDate         != other.FromDate             
                 || ToDate           != other.ToDate              
