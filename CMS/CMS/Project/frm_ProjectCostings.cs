@@ -159,7 +159,7 @@ namespace CMS
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Please enter valid DAT Allocation From Date");
+                    //MessageBox.Show("Please enter valid DAT Allocation From Date");
                 }
             }
             if (mtb_ToDate.Text != "" & mtb_ToDate.Text != "  /  /")
@@ -170,7 +170,7 @@ namespace CMS
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Please enter valid DAT Allocation To Date");
+                    //MessageBox.Show("Please enter valid DAT Allocation To Date");
                 }
             }
 
@@ -271,7 +271,7 @@ namespace CMS
             }
             catch (Exception)
             {
-                MessageBox.Show("Please enter valid Costing Type");
+                //MessageBox.Show("Please enter valid Costing Type");
             }
             if (mtb_DateCosted.Text != "" & mtb_DateCosted.Text != "  /  /")
             {
@@ -281,7 +281,7 @@ namespace CMS
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Please enter valid Date Costed");
+                    //MessageBox.Show("Please enter valid Date Costed");
                 }
             }
             if (mtb_CostedFromDate .Text != "" & mtb_CostedFromDate.Text != "  /  /")
@@ -292,7 +292,7 @@ namespace CMS
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Please enter valid Costed From Date");
+                    //MessageBox.Show("Please enter valid Costed From Date");
                 }
             }
             if (mtb_CostedToDate.Text != "" & mtb_CostedToDate.Text != "  /  /")
@@ -303,7 +303,7 @@ namespace CMS
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Please enter valid Costed To Date");
+                    //MessageBox.Show("Please enter valid Costed To Date");
                 }
             }
             try
@@ -320,7 +320,7 @@ namespace CMS
             }
             catch (Exception)
             {
-                MessageBox.Show("Please enter valid LASER Compute Cost");
+                MessageBox.Show("Please enter valid IT Services Support Cost");
             }
             try
             {
@@ -328,7 +328,7 @@ namespace CMS
             }
             catch (Exception)
             {
-                MessageBox.Show("Please enter valid LASER Compute Cost");
+                MessageBox.Show("Please enter valid Fixed Infrastructure Cost");
             }
 
             return mdl_PC;
