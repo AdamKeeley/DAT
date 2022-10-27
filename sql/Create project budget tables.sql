@@ -1,3 +1,29 @@
+CREATE TABLE [dbo].[tblProjectDatAllocation](
+	[ProjectDatAllocationId] [int] IDENTITY(1,1) NOT NULL,
+	[ProjectNumber] [varchar](5) NULL,
+	[FromDate] [datetime] NULL,
+	[ToDate] [datetime] NULL
+	, Duration			decimal(4,1)
+	, DurationComputed	as case when FromDate is null or ToDate is null then [Duration] else cast(ROUND(datediff(d, [FromDate], [ToDate]) / (365.25/12), 1) as decimal(4,1))  end
+	,[FTE] [decimal](4, 1) NULL,
+	[ValidFrom] [datetime] NULL,
+	[ValidTo] [datetime] NULL,
+	[CreatedBy] [varchar](12) NULL,
+ CONSTRAINT [PK_ProjectDatAllocation] PRIMARY KEY CLUSTERED 
+(
+	[ProjectDatAllocationId] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[tblProjectDatAllocation] ADD  DEFAULT (getdate()) FOR [ValidFrom]
+GO
+
+ALTER TABLE [dbo].[tblProjectDatAllocation] ADD  DEFAULT (suser_sname()) FOR [CreatedBy]
+GO
+
+
+
 create table dbo.tlkCostingType (
 	CostingTypeId int identity(1,1)
 	, CostingTypeDescription varchar(25)
