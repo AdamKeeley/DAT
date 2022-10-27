@@ -165,11 +165,11 @@
     <Compile Include="Project\frm_ProjectAll.Designer.cs">
       <DependentUpon>frm_ProjectAll.cs</DependentUpon>
     </Compile>
-    <Compile Include="Project\frm_ProjectDatAllocation.cs">
+    <Compile Include="Project\frm_ProjectCostings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Project\frm_ProjectDatAllocation.Designer.cs">
-      <DependentUpon>frm_ProjectDatAllocation.cs</DependentUpon>
+    <Compile Include="Project\frm_ProjectCostings.Designer.cs">
+      <DependentUpon>frm_ProjectCostings.cs</DependentUpon>
     </Compile>
     <Compile Include="Project\frm_ProjectDocAdd.cs">
       <SubType>Form</SubType>
@@ -327,8 +327,8 @@
     <EmbeddedResource Include="Project\frm_ProjectAll.resx">
       <DependentUpon>frm_ProjectAll.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Project\frm_ProjectDatAllocation.resx">
-      <DependentUpon>frm_ProjectDatAllocation.cs</DependentUpon>
+    <EmbeddedResource Include="Project\frm_ProjectCostings.resx">
+      <DependentUpon>frm_ProjectCostings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Project\frm_ProjectDocAdd.resx">
       <DependentUpon>frm_ProjectDocAdd.cs</DependentUpon>

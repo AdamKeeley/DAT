@@ -71,6 +71,10 @@ namespace CMS
                             newKristalRef = newKristal.KristalRef;
                             return true;
                         }
+                        else
+                        {
+                            MessageBox.Show("Item already exists");
+                        }
                     }
                 }
                 else

@@ -481,7 +481,7 @@ namespace CMS
             nud_DatHoursSpent.TabIndex = ++x;
             btn_DatHoursAdd.TabIndex = ++x;
 
-            btn_DatAllocation.TabIndex = ++x;
+            btn_ProjectCostings.TabIndex = ++x;
             btn_Refresh.TabIndex = ++x;
             btn_ProjectApply.TabIndex = ++x;
             btn_ProjectOK.TabIndex = ++x;
@@ -881,7 +881,7 @@ namespace CMS
 
         private void btn_DatAllocation_Click(object sender, EventArgs e)
         {
-            using (frm_ProjectDatAllocation ProjectDatAllocation = new frm_ProjectDatAllocation(mdl_CurrentProject.ProjectNumber, ds_Project))
+            using (frm_ProjectCostings ProjectDatAllocation = new frm_ProjectCostings(mdl_CurrentProject.ProjectNumber, ds_Project))
             {
                 ProjectDatAllocation.ShowDialog();
                 fillProjectsDataSet();
