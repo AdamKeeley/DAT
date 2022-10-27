@@ -66,6 +66,7 @@
             this.btn_Project_ProjectDatAllocation_Add = new System.Windows.Forms.Button();
             this.lbl_DatAllocation = new System.Windows.Forms.Label();
             this.nud_DatAllocation = new System.Windows.Forms.NumericUpDown();
+            this.lbl_Vat = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_projectDatAllocation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ProjectCostings)).BeginInit();
             this.gb_LaserCosts.SuspendLayout();
@@ -139,7 +140,7 @@
             // btn_Project_ProjectDatAllocation_Close
             // 
             this.btn_Project_ProjectDatAllocation_Close.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btn_Project_ProjectDatAllocation_Close.Location = new System.Drawing.Point(731, 296);
+            this.btn_Project_ProjectDatAllocation_Close.Location = new System.Drawing.Point(733, 305);
             this.btn_Project_ProjectDatAllocation_Close.Name = "btn_Project_ProjectDatAllocation_Close";
             this.btn_Project_ProjectDatAllocation_Close.Size = new System.Drawing.Size(75, 23);
             this.btn_Project_ProjectDatAllocation_Close.TabIndex = 51;
@@ -345,6 +346,7 @@
             // 
             // gb_LaserCosts
             // 
+            this.gb_LaserCosts.Controls.Add(this.lbl_Vat);
             this.gb_LaserCosts.Controls.Add(this.cb_CostingType);
             this.gb_LaserCosts.Controls.Add(this.btn_LaserCosting_Add);
             this.gb_LaserCosts.Controls.Add(this.lbl_CostingType);
@@ -362,7 +364,7 @@
             this.gb_LaserCosts.Controls.Add(this.lbl_DateCosted);
             this.gb_LaserCosts.Controls.Add(this.btn_LaserCosting_Remove);
             this.gb_LaserCosts.Controls.Add(this.mtb_DateCosted);
-            this.gb_LaserCosts.Location = new System.Drawing.Point(12, 30);
+            this.gb_LaserCosts.Location = new System.Drawing.Point(14, 39);
             this.gb_LaserCosts.Name = "gb_LaserCosts";
             this.gb_LaserCosts.Size = new System.Drawing.Size(529, 260);
             this.gb_LaserCosts.TabIndex = 68;
@@ -374,7 +376,7 @@
             this.gb_DatSupport.Controls.Add(this.gb_NewDatAllocation);
             this.gb_DatSupport.Controls.Add(this.dgv_projectDatAllocation);
             this.gb_DatSupport.Controls.Add(this.btn_Project_ProjectDatAllocation_Remove);
-            this.gb_DatSupport.Location = new System.Drawing.Point(547, 30);
+            this.gb_DatSupport.Location = new System.Drawing.Point(549, 39);
             this.gb_DatSupport.Name = "gb_DatSupport";
             this.gb_DatSupport.Size = new System.Drawing.Size(259, 260);
             this.gb_DatSupport.TabIndex = 69;
@@ -481,12 +483,21 @@
             0,
             65536});
             // 
+            // lbl_Vat
+            // 
+            this.lbl_Vat.AutoSize = true;
+            this.lbl_Vat.Location = new System.Drawing.Point(310, 234);
+            this.lbl_Vat.Name = "lbl_Vat";
+            this.lbl_Vat.Size = new System.Drawing.Size(213, 13);
+            this.lbl_Vat.TabIndex = 70;
+            this.lbl_Vat.Text = "Please ensure all costs are inclusive of VAT";
+            // 
             // frm_ProjectCostings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btn_Project_ProjectDatAllocation_Close;
-            this.ClientSize = new System.Drawing.Size(814, 327);
+            this.ClientSize = new System.Drawing.Size(814, 335);
             this.Controls.Add(this.gb_DatSupport);
             this.Controls.Add(this.gb_LaserCosts);
             this.Controls.Add(this.btn_Project_ProjectDatAllocation_Close);
@@ -539,5 +550,6 @@
         private System.Windows.Forms.Button btn_Project_ProjectDatAllocation_Add;
         private System.Windows.Forms.Label lbl_DatAllocation;
         private System.Windows.Forms.NumericUpDown nud_DatAllocation;
+        private System.Windows.Forms.Label lbl_Vat;
     }
 }

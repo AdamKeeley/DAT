@@ -9,21 +9,23 @@ create table dbo.tlkCostingType (
 	)
 
 insert into dbo.tlkCostingType (CostingTypeDescription) values
-	('Full VRE - Tier 3')
-	, ('Full VRE - Tier 4')
-	, ('Enhancment')
-	, ('Full VRE - Extension')
+('Full VRE')
+, ('Archive')
+, ('Additional resource')
+, ('Extension')
 
-create table dbo.tblProjectcostings (
+create table dbo.tblProjectCostings (
 	ProjectCostingsId integer identity(1,1)
 	, ProjectNumber		varchar(5)
 	, CostingTypeId		int
 	, DateCosted		datetime
 	, FromDate			datetime
 	, ToDate			datetime
-	, LaserCompute		decimal(19,4)
-	, ItsSupport		decimal(19,4)
-	, FixedInfra		decimal(19,4)
+	, Duration			decimal(4,1)
+	, DurationComputed	as case when FromDate is null or ToDate is null then [Duration] else cast(ROUND(datediff(d, [FromDate], [ToDate]) / (365.25/12), 1) as decimal(4,1))  end
+	, LaserCompute		decimal(19,2)
+	, ItsSupport		decimal(19,2)
+	, FixedInfra		decimal(19,2)
 
 	, ValidFrom datetime default getdate()
 	, ValidTo datetime

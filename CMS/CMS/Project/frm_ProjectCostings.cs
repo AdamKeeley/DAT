@@ -28,7 +28,8 @@ namespace CMS
         private void refreshProjectCostingsForm(string pNumber, DataSet ds_Project)
         {
             //set controls
-            lbl_pNumber.Text = pNumber;
+            string pName = ds_Project.Tables["tblProjects"].Select($"ProjectNumber = '{pNumber}'")[0]["ProjectName"].ToString();
+            lbl_pNumber.Text = $"{pNumber} - {pName}";
             cb_CostingType.DataSource = ds_Project.Tables["tlkCostingType"];
             cb_CostingType.ValueMember = "CostingTypeId";
             cb_CostingType.DisplayMember = "CostingTypeDescription";
@@ -116,13 +117,10 @@ namespace CMS
             {
                 row = dt_dgv_ProjectCostings.NewRow();
                 row["ProjectCostingsId"] = nRow["ProjectCostingsId"];
-
                 foreach (DataRow c in nRow.GetParentRows("ProjectCostings_CostingType"))
                 {
                     row["Costing Type"] = c["CostingTypeDescription"];
                 }
-                
-
                 row["From Date"] = nRow["FromDate"];
                 row["To Date"] = nRow["ToDate"];
                 row["Laser Compute"] = nRow["LaserCompute"];
@@ -134,7 +132,7 @@ namespace CMS
 
             //format DataGridView (dgv_pNotes) column widths etc.
             dgv_ProjectCostings.Columns["ProjectCostingsId"].Visible = false;
-            dgv_ProjectCostings.Columns["Costing Type"].Width = 100;
+            dgv_ProjectCostings.Columns["Costing Type"].Width = 110;
             dgv_ProjectCostings.Columns["From Date"].Width = 81;
             dgv_ProjectCostings.Columns["To Date"].Width = 81;
             dgv_ProjectCostings.Columns["Laser Compute"].Width = 81;
@@ -142,6 +140,9 @@ namespace CMS
             dgv_ProjectCostings.Columns["Fixed Infrastructure"].Width = 81;
             dgv_ProjectCostings.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dgv_ProjectCostings.Sort(dgv_ProjectCostings.Columns["From Date"], ListSortDirection.Descending);
+            dgv_ProjectCostings.Columns["Laser Compute"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgv_ProjectCostings.Columns["ITS Support"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgv_ProjectCostings.Columns["Fixed Infrastructure"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
         }
 
 
