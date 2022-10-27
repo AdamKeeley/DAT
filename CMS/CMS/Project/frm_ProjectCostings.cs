@@ -62,11 +62,12 @@ namespace CMS
 
             dt_dgv_projectDatAllocation.Columns.Add("PDAId");
             DataColumn FromDate = new DataColumn("From Date");
-            FromDate.DataType = System.Type.GetType("System.DateTime");
+            FromDate.DataType = Type.GetType("System.DateTime");
             dt_dgv_projectDatAllocation.Columns.Add(FromDate);
             DataColumn ToDate = new DataColumn("To Date");
-            ToDate.DataType = System.Type.GetType("System.DateTime");
+            ToDate.DataType = Type.GetType("System.DateTime");
             dt_dgv_projectDatAllocation.Columns.Add(ToDate);
+            dt_dgv_projectDatAllocation.Columns.Add("Duration (months)");
             dt_dgv_projectDatAllocation.Columns.Add("FTE");
 
             //iterate through each entry in source DataTable and add to newly created DataTable
@@ -77,6 +78,7 @@ namespace CMS
                 row["PDAId"] = nRow["ProjectDatAllocationId"];
                 row["From Date"] = nRow["FromDate"];
                 row["To Date"] = nRow["ToDate"];
+                row["Duration (months)"] = nRow["DurationComputed"];
                 row["FTE"] = nRow["FTE"];
                 dt_dgv_projectDatAllocation.Rows.Add(row);
             }
@@ -84,9 +86,10 @@ namespace CMS
 
             //format DataGridView (dgv_pNotes) column widths etc.
             dgv_projectDatAllocation.Columns["PDAId"].Visible = false;
-            dgv_projectDatAllocation.Columns["From Date"].Width = 81;
-            dgv_projectDatAllocation.Columns["To Date"].Width = 81;
-            dgv_projectDatAllocation.Columns["FTE"].Width = 81;
+            dgv_projectDatAllocation.Columns["From Date"].Width = 70;
+            dgv_projectDatAllocation.Columns["To Date"].Width = 70;
+            dgv_projectDatAllocation.Columns["Duration (months)"].Width = 55;
+            dgv_projectDatAllocation.Columns["FTE"].Width = 50;
             dgv_projectDatAllocation.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dgv_projectDatAllocation.Sort(dgv_projectDatAllocation.Columns["From Date"], ListSortDirection.Descending);
         }
@@ -206,14 +209,18 @@ namespace CMS
             // Check overlapping allocations
             foreach (DataGridViewRow row in dgv_projectDatAllocation.Rows)
             {
-                if ( (mdl_PDA.FromDate >= Convert.ToDateTime(row.Cells["From Date"].Value.ToString()) 
-                    && mdl_PDA.FromDate <= Convert.ToDateTime(row.Cells["To Date"].Value.ToString()) )
-                    | ( mdl_PDA.ToDate <= Convert.ToDateTime(row.Cells["To Date"].Value.ToString()) 
-                    && mdl_PDA.ToDate >= Convert.ToDateTime(row.Cells["From Date"].Value.ToString()) ) )
+                if (row.Cells["From Date"].Value.ToString() != "" & row.Cells["To Date"].Value.ToString() != "")
                 {
-                    MessageBox.Show("Entered period of DAT support coincides with existing period");
-                    return false;
+                    if ( (mdl_PDA.FromDate >= Convert.ToDateTime(row.Cells["From Date"].Value.ToString()) 
+                        && mdl_PDA.FromDate <= Convert.ToDateTime(row.Cells["To Date"].Value.ToString()) )
+                        | ( mdl_PDA.ToDate <= Convert.ToDateTime(row.Cells["To Date"].Value.ToString()) 
+                        && mdl_PDA.ToDate >= Convert.ToDateTime(row.Cells["From Date"].Value.ToString()) ) )
+                    {
+                        MessageBox.Show("Entered period of DAT support coincides with existing period");
+                        return false;
+                    }
                 }
+
             }
 
             return true;
@@ -244,8 +251,13 @@ namespace CMS
                     mdl_ProjectDatAllocation mdl_PDA = new mdl_ProjectDatAllocation();
 
                     int current_PDAId = int.Parse(r.Cells["PDAId"].Value.ToString());
-                    mdl_PDA.FromDate = Convert.ToDateTime(r.Cells["From Date"].Value);
-                    mdl_PDA.ToDate = Convert.ToDateTime(r.Cells["To Date"].Value);
+
+                    DateTime FromDate;
+                    DateTime ToDate;
+                    DateTime.TryParse(r.Cells["From Date"].Value.ToString(), out FromDate);
+                    mdl_PDA.FromDate = FromDate;
+                    DateTime.TryParse(r.Cells["To Date"].Value.ToString(), out ToDate);
+                    mdl_PDA.ToDate = ToDate;
                     
                     DialogResult acceptProjectDoc = MessageBox.Show($"Delete DAT Allocation for period: {Environment.NewLine} {mdl_PDA.FromDate.ToShortDateString()} to {mdl_PDA.ToDate.ToShortDateString()}?", "", MessageBoxButtons.YesNo);
                     if (acceptProjectDoc == DialogResult.Yes)
@@ -425,8 +437,14 @@ namespace CMS
                     mdl_ProjectCosting mdl_PC = new mdl_ProjectCosting();
 
                     int current_ProjectCostingsId = int.Parse(r.Cells["ProjectCostingsId"].Value.ToString());
-                    mdl_PC.FromDate = Convert.ToDateTime(r.Cells["From Date"].Value);
-                    mdl_PC.ToDate = Convert.ToDateTime(r.Cells["To Date"].Value);
+
+                    DateTime FromDate;
+                    DateTime ToDate;
+                    DateTime.TryParse(r.Cells["From Date"].Value.ToString(), out FromDate);
+                    mdl_PC.FromDate = FromDate;
+                    DateTime.TryParse(r.Cells["To Date"].Value.ToString(), out ToDate);
+                    mdl_PC.ToDate = ToDate;
+
                     mdl_PC.CostingTypeDesc = Convert.ToString(r.Cells["Costing Type"].Value);
 
                     DialogResult acceptProjectCosting = MessageBox.Show($"Delete Project Costing for: {Environment.NewLine} {mdl_PC.CostingTypeDesc} {Environment.NewLine} {mdl_PC.FromDate.ToShortDateString()} to {mdl_PC.ToDate.ToShortDateString()}?", "", MessageBoxButtons.YesNo);
