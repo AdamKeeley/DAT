@@ -243,7 +243,7 @@ namespace CMS
                     mdl_PDA.FromDate = Convert.ToDateTime(r.Cells["From Date"].Value);
                     mdl_PDA.ToDate = Convert.ToDateTime(r.Cells["To Date"].Value);
                     
-                    DialogResult acceptProjectDoc = MessageBox.Show($"Delete DAT Allocation for period {mdl_PDA.FromDate.ToShortDateString()} to {mdl_PDA.ToDate.ToShortDateString()}?", "", MessageBoxButtons.YesNo);
+                    DialogResult acceptProjectDoc = MessageBox.Show($"Delete DAT Allocation for period: {Environment.NewLine} {mdl_PDA.FromDate.ToShortDateString()} to {mdl_PDA.ToDate.ToShortDateString()}?", "", MessageBoxButtons.YesNo);
                     if (acceptProjectDoc == DialogResult.Yes)
                     {
                         Project projects = new Project();
