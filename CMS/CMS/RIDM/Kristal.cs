@@ -36,13 +36,13 @@ namespace CMS.RIDM
                     SQL_Stuff.getDataTable(conn, null, ds_krs, "tblKristal",
                         $"select * from [dbo].[tblKristal] " +
                         $"where [ValidTo] is null " +
-                        $"order by [KristalRef], [KristalID]");
+                        $"order by [KristalRef], [KristalNumber]");
                     SQL_Stuff.getDataTable(conn, null, ds_krs, "tlkGrantStage",
                         $"select * from [dbo].[tlkGrantStage] order by StageNumber asc");
                     SQL_Stuff.getDataTable(conn, null, ds_krs, "tblProjectKristal",
                         $"select * from [dbo].[tblProjectKristal] " +
                         $"where [ValidTo] is null " +
-                        $"order by [KristalRef], [ProjectNumber]");
+                        $"order by [KristalNumber], [ProjectNumber]");
                     SQL_Stuff.getDataTable(conn, null, ds_krs, "vw_AllProjects",
                         $"select * from [dbo].[vw_AllProjects]" +
                         $"order by [ProjectNumber]");
@@ -163,7 +163,7 @@ namespace CMS.RIDM
         /// <returns>TRUE on successful insert of a tblProjectKrystal record, FALSE on a fail</returns>
         public bool insertProjectKristalReference(string pNumber, mdl_Kristal insKristal)
         {
-            if (insertProjectKristal(pNumber, insKristal.KristalRef))
+            if (insertProjectKristal(pNumber, insKristal.KristalNumber))
             {
                 insertKristal(insKristal);
                 return true;
@@ -172,11 +172,11 @@ namespace CMS.RIDM
         }
 
         /// <summary>
-        /// Takes a Kristal reference and queries [dbo].[tblKristal] for current values.
+        /// Takes a Kristal reference and queries [dbo].[tblKristal] for current values using the Kristal Number.
         /// </summary>
-        /// <param name="KristalRef"></param>
+        /// <param name="KristalNumber"></param>
         /// <returns>Returns populated mdl_Kristal if preseant, empty if not</returns>
-        public mdl_Kristal fetchCurrentKristal(int KristalRef)
+        public mdl_Kristal fetchCurrentKristalByNumber(int KristalNumber)
         {
             mdl_Kristal kristal = new mdl_Kristal();
             try
@@ -188,40 +188,137 @@ namespace CMS.RIDM
                 {
                     SqlCommand qryCheckKristal = new SqlCommand();
                     qryCheckKristal.Connection = conn;
-                    qryCheckKristal.CommandText = $"select * from [dbo].[tblKristal] where [KristalRef] = @KristalRef and ValidTo is null";
-                    qryCheckKristal.Parameters.Add("@KristalRef", SqlDbType.Int).Value = Convert.ToInt32(KristalRef);
+                    qryCheckKristal.CommandText = $"select * from [dbo].[tblKristal] where [KristalNumber] = @KristalNumber and ValidTo is null";
+                    qryCheckKristal.Parameters.Add("@KristalNumber", SqlDbType.Int).Value = Convert.ToInt32(KristalNumber);
                     conn.Open();
 
                     SqlDataReader reader = qryCheckKristal.ExecuteReader();
                     while (reader.Read())
                     {
                         kristal.KristalID = Convert.ToInt32(reader["KristalID"].ToString());
+                        kristal.KristalNumber = Convert.ToInt32(reader["KristalNumber"].ToString());
                         kristal.KristalRef = Convert.ToInt32(reader["KristalRef"].ToString());
                         kristal.KristalName = reader["KristalName"].ToString();
                         kristal.GrantStageID = Convert.ToInt32(reader["GrantStageID"].ToString());
-                        if (kristal.PI != null)
-                            kristal.PI = Convert.ToInt32(reader["PI"].ToString());
-                        if (kristal.Location != null)
-                            kristal.Location = Convert.ToInt32(reader["Location"].ToString());
-                        if (kristal.Faculty != null)
-                            kristal.Faculty = Convert.ToInt32(reader["Faculty"].ToString());
+                        int pi;
+                        int.TryParse(reader["PI"].ToString(), out pi);
+                        if (pi > 0)
+                            kristal.PI = pi;
+                        int location;
+                        int.TryParse(reader["Location"].ToString(), out location);
+                        if (location > 0)
+                            kristal.Location = location;
+                        int faculty;
+                        int.TryParse(reader["Faculty"].ToString(), out faculty);
+                        if (faculty > 0)
+                            kristal.Faculty = faculty;
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Failed to query database for Kristal ID " + Environment.NewLine + Environment.NewLine + ex.Message);
+                MessageBox.Show("Failed to query database for Kristal Number " + Environment.NewLine + Environment.NewLine + ex.Message);
             }
 
             return kristal;
         }
 
+        ///// <summary>
+        ///// Takes a Kristal reference and queries [dbo].[tblKristal] for current values using the Kristal Ref.
+        ///// </summary>
+        ///// <param name="KristalRef"></param>
+        ///// <returns>Returns populated mdl_Kristal if present, empty if not</returns>
+        //public mdl_Kristal fetchCurrentKristalByRef(int KristalRef)
+        //{
+        //    mdl_Kristal kristal = new mdl_Kristal();
+        //    try
+        //    {
+        //        SqlConnection conn = new SqlConnection();
+        //        conn.ConnectionString = SQL_Stuff.conString;
+        //        conn.Credential = SQL_Stuff.credential;
+        //        using (conn)
+        //        {
+        //            SqlCommand qryCheckKristal = new SqlCommand();
+        //            qryCheckKristal.Connection = conn;
+        //            qryCheckKristal.CommandText = $"select * from [dbo].[tblKristal] where [KristalRef] = @KristalRef and ValidTo is null";
+        //            qryCheckKristal.Parameters.Add("@KristalRef", SqlDbType.Int).Value = Convert.ToInt32(KristalRef);
+        //            conn.Open();
+
+        //            SqlDataReader reader = qryCheckKristal.ExecuteReader();
+        //            while (reader.Read())
+        //            {
+        //                kristal.KristalID = Convert.ToInt32(reader["KristalID"].ToString());
+        //                kristal.KristalRef = Convert.ToInt32(reader["KristalRef"].ToString());
+        //                kristal.KristalName = reader["KristalName"].ToString();
+        //                kristal.GrantStageID = Convert.ToInt32(reader["GrantStageID"].ToString());
+        //                if (kristal.PI != null)
+        //                    kristal.PI = Convert.ToInt32(reader["PI"].ToString());
+        //                if (kristal.Location != null)
+        //                    kristal.Location = Convert.ToInt32(reader["Location"].ToString());
+        //                if (kristal.Faculty != null)
+        //                    kristal.Faculty = Convert.ToInt32(reader["Faculty"].ToString());
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show("Failed to query database for Kristal Ref " + Environment.NewLine + Environment.NewLine + ex.Message);
+        //    }
+
+        //    return kristal;
+        //}
+
+        ///// <summary>
+        ///// Takes a Kristal reference and queries [dbo].[tblKristal] for current values using the Kristal ID.
+        ///// </summary>
+        ///// <param name="KristalID"></param>
+        ///// <returns>Returns populated mdl_Kristal if present, empty if not</returns>
+        //public mdl_Kristal fetchCurrentKristalByID(int KristalID)
+        //{
+        //    mdl_Kristal kristal = new mdl_Kristal();
+        //    try
+        //    {
+        //        SqlConnection conn = new SqlConnection();
+        //        conn.ConnectionString = SQL_Stuff.conString;
+        //        conn.Credential = SQL_Stuff.credential;
+        //        using (conn)
+        //        {
+        //            SqlCommand qryCheckKristal = new SqlCommand();
+        //            qryCheckKristal.Connection = conn;
+        //            qryCheckKristal.CommandText = $"select * from [dbo].[tblKristal] where [KristalID] = @KristalID and ValidTo is null";
+        //            qryCheckKristal.Parameters.Add("@KristalID", SqlDbType.Int).Value = Convert.ToInt32(KristalID);
+        //            conn.Open();
+
+        //            SqlDataReader reader = qryCheckKristal.ExecuteReader();
+        //            while (reader.Read())
+        //            {
+        //                kristal.KristalID = Convert.ToInt32(reader["KristalID"].ToString());
+        //                kristal.KristalRef = Convert.ToInt32(reader["KristalRef"].ToString());
+        //                kristal.KristalName = reader["KristalName"].ToString();
+        //                kristal.GrantStageID = Convert.ToInt32(reader["GrantStageID"].ToString());
+        //                if (kristal.PI != null)
+        //                    kristal.PI = Convert.ToInt32(reader["PI"].ToString());
+        //                if (kristal.Location != null)
+        //                    kristal.Location = Convert.ToInt32(reader["Location"].ToString());
+        //                if (kristal.Faculty != null)
+        //                    kristal.Faculty = Convert.ToInt32(reader["Faculty"].ToString());
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show("Failed to query database for Kristal ID " + Environment.NewLine + Environment.NewLine + ex.Message);
+        //    }
+
+        //    return kristal;
+        //}
+
         /// <summary>
-        /// Takes a Project Number & Kristal Reference and queries [dbo].[tblProjectKristal] to see if relationship is already present.
+        /// Takes a Project Number & Kristal Number and queries [dbo].[tblProjectKristal] to see if relationship is already present.
         /// </summary>
         /// <param name="KristalRef"></param>
         /// <returns>TRUE if present, FALSE if not</returns>
-        public bool checkProjectKristalExists(string pNumber, int KristalRef)
+        public bool checkProjectKristalExists(string pNumber, int KristalNumber)
         {
             int? ProjectKristalID = null;
             try
@@ -233,17 +330,17 @@ namespace CMS.RIDM
                 {
                     SqlCommand qryCheckProjectKristal = new SqlCommand();
                     qryCheckProjectKristal.Connection = conn;
-                    qryCheckProjectKristal.CommandText = $"select max([ProjectKristalID]) from [dbo].[tblProjectKristal] where [ProjectNumber] = @projectNumber and " +
-                        "[KristalRef] = @KristalRef and ValidTo is null";
+                    qryCheckProjectKristal.CommandText = $"select [ProjectKristalID] from [dbo].[tblProjectKristal] where [ProjectNumber] = @projectNumber and " +
+                        "[KristalNumber] = @KristalNumber and ValidTo is null";
                     qryCheckProjectKristal.Parameters.Add("@projectNumber", SqlDbType.VarChar, 5).Value = pNumber;
-                    qryCheckProjectKristal.Parameters.Add("@KristalRef", SqlDbType.Int).Value = KristalRef;
+                    qryCheckProjectKristal.Parameters.Add("@KristalNumber", SqlDbType.Int).Value = KristalNumber;
                     conn.Open();
                     ProjectKristalID = qryCheckProjectKristal.ExecuteScalar() as int?;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Failed to query database for Kristal ref " + Environment.NewLine + Environment.NewLine + ex.Message);
+                MessageBox.Show("Failed to query database for Kristal Number " + Environment.NewLine + Environment.NewLine + ex.Message);
             }
 
             if (ProjectKristalID == null)
@@ -263,7 +360,7 @@ namespace CMS.RIDM
         /// <returns>TRUE on insert, FALSE on no insert</returns>
         public int insertKristal(mdl_Kristal insKristal)
         {
-            mdl_Kristal existingKristal = fetchCurrentKristal(insKristal.KristalRef);
+            mdl_Kristal existingKristal = fetchCurrentKristalByNumber(insKristal.KristalNumber);
             int newKristalID = 0;
 
             //if the kristal record already exists and there is no difference.
@@ -272,7 +369,7 @@ namespace CMS.RIDM
 
             //if the kristal reference exists with different attributes it needs updating
             //  logical delete before insert
-            if (existingKristal.KristalRef == insKristal.KristalRef & existingKristal != insKristal)
+            if (existingKristal.KristalNumber == insKristal.KristalNumber & existingKristal != insKristal)
                 deleteKristal(existingKristal.KristalID);
 
             //insert a kristal reference if needs updating or if doesn't already exist
@@ -287,12 +384,23 @@ namespace CMS.RIDM
                     SqlCommand qryInsertKristal = new SqlCommand();
                     qryInsertKristal.Connection = conn;
                     qryInsertKristal.CommandText = $"insert into [dbo].[tblKristal] " +
-                        "([KristalRef], [KristalName], [GrantStageID]) " +
+                        "([KristalNumber], [KristalRef], [KristalName], [GrantStageID], [PI], [Location], [Faculty]) " +
                         "output inserted.KristalID values " +
-                        "(@KristalRef, @KristalName, @GrantStageID)";
+                        "(@KristalNumber, @KristalRef, @KristalName, @GrantStageID, @PI, @Location, @Faculty)";
+                    qryInsertKristal.Parameters.Add("@KristalNumber", SqlDbType.Int).Value = insKristal.KristalNumber;
                     qryInsertKristal.Parameters.Add("@KristalRef", SqlDbType.Int).Value = insKristal.KristalRef;
                     qryInsertKristal.Parameters.Add("@KristalName", SqlDbType.VarChar,4000).Value = insKristal.KristalName;
                     qryInsertKristal.Parameters.Add("@GrantStageID", SqlDbType.Int).Value = insKristal.GrantStageID;
+                    SqlParameter param_PI = new SqlParameter("@PI", insKristal.PI == null ? (object)DBNull.Value : insKristal.PI);
+                    param_PI.IsNullable = true;
+                    qryInsertKristal.Parameters.Add(param_PI);
+                    SqlParameter param_Location = new SqlParameter("@Location", insKristal.Location == null ? (object)DBNull.Value : insKristal.Location);
+                    param_Location.IsNullable = true;
+                    qryInsertKristal.Parameters.Add(param_Location);
+                    SqlParameter param_Faculty = new SqlParameter("@Faculty", insKristal.Faculty == null ? (object)DBNull.Value : insKristal.Faculty);
+                    param_Faculty.IsNullable = true;
+                    qryInsertKristal.Parameters.Add(param_Faculty);
+
                     //open connection and execute insert
                     conn.Open();
                     newKristalID = (int)qryInsertKristal.ExecuteScalar();
@@ -313,9 +421,9 @@ namespace CMS.RIDM
         /// <param name="pNumber"></param>
         /// <param name="KristalRef"></param>
         /// <returns>TRUE on insert, FALSE on fail</returns>
-        public bool insertProjectKristal(string pNumber, int KristalRef)
+        public bool insertProjectKristal(string pNumber, int KristalNumber)
         {
-            if (checkProjectKristalExists(pNumber, KristalRef) == false)
+            if (checkProjectKristalExists(pNumber, KristalNumber) == false)
             {
                 try
                 {
@@ -328,9 +436,9 @@ namespace CMS.RIDM
                         SqlCommand qryInsertProjectKristalRef = new SqlCommand();
                         qryInsertProjectKristalRef.Connection = conn;
                         qryInsertProjectKristalRef.CommandText = $"insert into [dbo].[tblProjectKristal] " +
-                            "([ProjectNumber], [KristalRef]) values (@pNumber, @KristalRef)";
+                            "([ProjectNumber], [KristalNumber]) values (@pNumber, @KristalNumber)";
                         qryInsertProjectKristalRef.Parameters.Add("@pNumber", SqlDbType.VarChar, 5).Value = pNumber;
-                        qryInsertProjectKristalRef.Parameters.Add("@KristalRef", SqlDbType.Int).Value = KristalRef;
+                        qryInsertProjectKristalRef.Parameters.Add("@Kristalnumber", SqlDbType.Int).Value = KristalNumber;
                         //open connection and execute insert
                         conn.Open();
                         qryInsertProjectKristalRef.ExecuteNonQuery();
@@ -352,7 +460,7 @@ namespace CMS.RIDM
         /// </summary>
         /// <param name="kristalRef"></param>
         /// <param name="kristalNote"></param>
-        public void insertKristalNote(int kristalRef, string kristalNote)
+        public void insertKristalNote(int kristalNumber, string kristalNote)
         {
             try
             {
@@ -365,8 +473,8 @@ namespace CMS.RIDM
                     SqlCommand qryInsertKristalNote = new SqlCommand();
                     qryInsertKristalNote.Connection = conn;
                     qryInsertKristalNote.CommandText = "insert into [dbo].[tblKristalNotes] "
-                        + "([KristalRef],[KristalNote]) values (@KristalRef, @KristalNote)";
-                    qryInsertKristalNote.Parameters.Add("@KristalRef", SqlDbType.Int).Value = kristalRef;
+                        + "([KristalNumber],[KristalNote]) values (@KristalNumber, @KristalNote)";
+                    qryInsertKristalNote.Parameters.Add("@KristalNumber", SqlDbType.Int).Value = kristalNumber;
                     qryInsertKristalNote.Parameters.Add("@KristalNote", SqlDbType.VarChar, 8000).Value = kristalNote;
 
                     //open connection and execute insert
@@ -379,6 +487,42 @@ namespace CMS.RIDM
                 MessageBox.Show("Failed to add new note" + Environment.NewLine + ex.Message);
                 throw;
             }
+        }
+
+        /// <summary>
+        /// Queries SQL database tblUser table for largest KristalNumber value. 
+        /// </summary>
+        /// <returns></returns>
+        public int getLastKristalNumber()
+        {
+            int KristalNumber;
+
+            try
+            {
+                SqlConnection conn = new SqlConnection();
+                conn.ConnectionString = SQL_Stuff.conString;
+                conn.Credential = SQL_Stuff.credential;
+                using (conn)
+                {
+                    //create new SQL query
+                    SqlCommand qryGetLastKristalNumber = new SqlCommand();
+                    qryGetLastKristalNumber.Connection = conn;
+                    qryGetLastKristalNumber.CommandText =
+                        $"select max([KristalNumber]) " +
+                        $"from [dbo].[tblKristal]";
+                    //open connection and execute query, returing result in variable pNumInt
+                    conn.Open();
+                    KristalNumber = (int)qryGetLastKristalNumber.ExecuteScalar();
+                }
+            }
+            catch (Exception ex)
+            {
+                //if no project numbers start at zero.
+                KristalNumber = 0;
+                MessageBox.Show("Failed to fetch largest Kristal Number, starting from zero" + Environment.NewLine + Environment.NewLine + ex.Message);
+            }
+
+            return KristalNumber;
         }
     }
 }

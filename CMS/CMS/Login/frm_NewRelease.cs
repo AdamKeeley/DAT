@@ -58,7 +58,8 @@ namespace CMS.Login
 
         private void btn_frm_NewReleaseClose_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Environment.Exit(0);
+            //this.Close();
         }
 
     }

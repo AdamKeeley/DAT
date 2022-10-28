@@ -85,7 +85,7 @@ namespace CMS
 
             //iterate through each user in source DataTable and add to newly created DataTable
             DataRow row;
-            foreach (DataRow kRow in ds_Kristal.Tables["tblProjectKristal"].Select($"KristalRef = '{current_Kristal.KristalRef}'"))
+            foreach (DataRow kRow in ds_Kristal.Tables["tblProjectKristal"].Select($"KristalNumber = '{current_Kristal.KristalNumber}'"))
             {
                 row = dt_dgv_KristalProjects.NewRow();
 
@@ -119,8 +119,15 @@ namespace CMS
             try
             {
                 newKristal.KristalRef = currentKristal.KristalRef;
+                newKristal.KristalNumber = currentKristal.KristalNumber;
                 newKristal.GrantStageID = (int)cb_GrantStage.SelectedValue;
                 newKristal.KristalName = tb_KristalName.Text;
+                if((int?)cb_PI.SelectedValue > -1)
+                    newKristal.PI = (int)cb_PI.SelectedValue;
+                if((int?)cb_Location.SelectedValue > -1)
+                    newKristal.Location = (int)cb_Location.SelectedValue;
+                if((int?)cb_Faculty.SelectedValue > -1)
+                    newKristal.Faculty = (int)cb_Faculty.SelectedValue;
             }
             catch (Exception ex)
             {
@@ -186,7 +193,7 @@ namespace CMS
         /// Refreshes class DataSet (ds_Project) and datagrid view before clearing the contents of the text box (tb_NewProjectNote).
         /// </summary>
         /// <param name="pNumber"></param>
-        private void addKristalNote(int kristalRef)
+        private void addKristalNote(int kristalNumber)
         {
             string newKristalNote;
 
@@ -199,7 +206,7 @@ namespace CMS
                     //instantiate new Project type object that contains methods to update db
                     Kristal kristal = new Kristal();
                     //add the note to the SQL table
-                    kristal.insertKristalNote(kristalRef, newKristalNote);
+                    kristal.insertKristalNote(kristalNumber, newKristalNote);
                     //refresh the DataSet (ds_Project)
                     ds_Kristal = kristal.getKristalDataSet();
                     //repopulate the DataGridView (dgv_pNotes)
@@ -223,7 +230,7 @@ namespace CMS
         /// </summary>
         private void setKristalNotes()
         {
-            string filter = $"KristalRef = '{current_Kristal.KristalRef}'";
+            string filter = $"KristalNumber = '{current_Kristal.KristalNumber}'";
 
             /*
             //Used if enabling search function for notes
@@ -348,19 +355,19 @@ namespace CMS
 
         private void btn_Kristal_AddProject_Click(object sender, EventArgs e)
         {
-            if (current_Kristal.KristalRef == 999999)
-            {
-                MessageBox.Show("Cannot add project to unknown Kristal Ref ('999999')");
-            }
-            else
-            {
-                using (frm_KristalProjectAdd kristalProjectAdd = new frm_KristalProjectAdd(current_Kristal.KristalRef))
+            //if (current_Kristal.KristalRef == 999999)
+            //{
+            //    MessageBox.Show("Cannot add project to unknown Kristal Ref ('999999')");
+            //}
+            //else
+            //{
+                using (frm_KristalProjectAdd kristalProjectAdd = new frm_KristalProjectAdd(current_Kristal.KristalNumber))
                 {
                     kristalProjectAdd.ShowDialog();
                     setKristal(current_Kristal);
                     setKristalProjects();
                 }
-            }
+            //}
         }
 
         private void btn_Kristal_RemoveProject_Click(object sender, EventArgs e)
@@ -370,7 +377,7 @@ namespace CMS
 
         private void btn_Kristal_InsertKristalNote_Click(object sender, EventArgs e)
         {
-            addKristalNote(current_Kristal.KristalRef);
+            addKristalNote(current_Kristal.KristalNumber);
         }
     }
 }

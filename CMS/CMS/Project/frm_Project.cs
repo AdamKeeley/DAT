@@ -279,6 +279,7 @@ namespace CMS
             DataTable dt_dgv_KristalRef = new DataTable();
             dt_dgv_KristalRef.Columns.Add("ProjectKristalID");
             dt_dgv_KristalRef.Columns.Add("KristalID");
+            dt_dgv_KristalRef.Columns.Add("KristalNumber");
             dt_dgv_KristalRef.Columns.Add("Kristal Ref");
             dt_dgv_KristalRef.Columns.Add("KristalStageID");
             dt_dgv_KristalRef.Columns.Add("Stage");
@@ -290,6 +291,7 @@ namespace CMS
                 row = dt_dgv_KristalRef.NewRow();
                 row["ProjectKristalID"] = (int)krRow["ProjectKristalID"];
                 row["KristalID"] = (int)krRow["KristalID"];
+                row["KristalNumber"] = (int)krRow["KristalNumber"];
                 row["Kristal Ref"] = (decimal)krRow["KristalRef"];
                 row["KristalStageID"] = (int)krRow["GrantStageID"];
                 foreach (DataRow grantStageRow in krRow.GetParentRows("ProjectKristal_GrantStage"))
@@ -303,6 +305,7 @@ namespace CMS
             dgv_KristalRef.DataSource = dv_dgv_KristalRef;
             dgv_KristalRef.Columns["ProjectKristalID"].Visible = false;
             dgv_KristalRef.Columns["KristalID"].Visible = false;
+            dgv_KristalRef.Columns["KristalNumber"].Visible = false;
             dgv_KristalRef.Columns["KristalStageID"].Visible = false;
             dgv_KristalRef.Sort(dgv_KristalRef.Columns["Kristal Ref"], ListSortDirection.Descending);
             dgv_KristalRef.Columns["Kristal Ref"].Width = 70;
@@ -1008,7 +1011,7 @@ namespace CMS
                     Kristal kristal = new Kristal();
                     mdl_Kristal mdl_Kristal = new mdl_Kristal();
                     
-                    mdl_Kristal = kristal.fetchCurrentKristal(Convert.ToInt32(dgv_KristalRef.Rows[r].Cells["KristalID"].Value));
+                    mdl_Kristal = kristal.fetchCurrentKristalByNumber(Convert.ToInt32(dgv_KristalRef.Rows[r].Cells["KristalNumber"].Value));
 
                     DataTable tlkGrantStage = ds_Project.Tables["tlkGrantStage"];
 

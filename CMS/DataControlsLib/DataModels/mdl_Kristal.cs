@@ -13,6 +13,7 @@ namespace DataControlsLib.DataModels
     public class mdl_Kristal
     {
         public int KristalID { get; set; }
+        public int KristalNumber { get; set; }
         public int KristalRef { get; set; }
         public string KristalName { get; set; }
         public int GrantStageID { get; set; }
@@ -34,6 +35,7 @@ namespace DataControlsLib.DataModels
             var other = obj as mdl_Kristal;
 
             if (KristalRef != other.KristalRef
+                || KristalNumber != other.KristalNumber
                 || KristalName != other.KristalName
                 || GrantStageID != other.GrantStageID
                 || PI != other.PI
