@@ -238,7 +238,7 @@ namespace CMS.RIDM
                     Kristal kristal = new Kristal();
                     mdl_Kristal mdl_Kristal = new mdl_Kristal();
 
-                    mdl_Kristal = kristal.fetchCurrentKristal(Convert.ToInt32(dgv_KristalList.Rows[r].Cells["Kristal ID"].Value));
+                    mdl_Kristal = kristal.fetchCurrentKristalByID(Convert.ToInt32(dgv_KristalList.Rows[r].Cells["Kristal ID"].Value));
 
                     frm_Kristal Kristal = new frm_Kristal(mdl_Kristal);
                     Kristal.Show();
