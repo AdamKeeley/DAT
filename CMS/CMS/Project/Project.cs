@@ -93,6 +93,7 @@ namespace CMS
                         $"group by ProjectNumber ");
                     SQL_Stuff.getDataTable(conn, null, ds_prj, "tblProjectKristal",
                         $"select k.[KristalID] " +
+                        $"    , k.[KristalNumber] " +
                         $"    , k.[KristalRef] " +
                         $"    , k.[KristalName] " +
                         $"    , k.[GrantStageID] " +
@@ -100,7 +101,7 @@ namespace CMS
                         $"    , pk.[ProjectNumber] " +
                         $"from[dbo].[tblKristal] k " +
                         $"    inner join[dbo].[tblProjectKristal] pk " +
-                        $"        on k.[KristalRef] = pk.[KristalRef] " +
+                        $"        on k.[KristalNumber] = pk.[KristalNumber] " +
                         $"where k.[ValidTo] is null and pk.[ValidTo] is null ");
                     SQL_Stuff.getDataTable(conn, null, ds_prj, "tlkGrantStage",
                         $"select * from [dbo].[tlkGrantStage]");

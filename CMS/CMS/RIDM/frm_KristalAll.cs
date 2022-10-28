@@ -28,7 +28,6 @@ namespace CMS.RIDM
         private void fillKristalDataSet()
         {
             Kristal kristal = new Kristal();
-            //var kristal = new Kristal();
             ds_Kristal = kristal.getKristalDataSet();
         }
 
@@ -99,6 +98,7 @@ namespace CMS.RIDM
             //DataTable to fill with de-normalised text values of all projects
             DataTable dt_KristalList = new DataTable();
             dt_KristalList.Columns.Add("KristalID");
+            dt_KristalList.Columns.Add("KristalNumber");
             dt_KristalList.Columns.Add("KristalRef");
             dt_KristalList.Columns.Add("KristalName");
             dt_KristalList.Columns.Add("GrantStage");
@@ -110,6 +110,7 @@ namespace CMS.RIDM
                 a_row = dt_KristalList.NewRow();
 
                 a_row["KristalID"] = pRow["KristalID"];
+                a_row["KristalNumber"] = pRow["KristalNumber"];
                 a_row["KristalRef"] = pRow["KristalRef"];
                 a_row["KristalName"] = pRow["KristalName"];
                 foreach (DataRow sRow in pRow.GetParentRows("Kristal_GrantStage"))
@@ -118,9 +119,9 @@ namespace CMS.RIDM
                 }
                 //concatenate Project numbers into single string by creating a list and joining with seperator
                 List<string> ProjectNumber = new List<string>();
-                if (string.IsNullOrEmpty(pRow["KristalRef"].ToString()) == false)
+                if (string.IsNullOrEmpty(pRow["KristalNumber"].ToString()) == false)
                 {
-                    foreach (DataRow kRow in ds_Kristal.Tables["tblProjectKristal"].Select($"[KristalRef] = '{pRow["KristalRef"]}'"))
+                    foreach (DataRow kRow in ds_Kristal.Tables["tblProjectKristal"].Select($"[KristalNumber] = '{pRow["KristalNumber"]}'"))
                     {
                         ProjectNumber.Add(kRow["ProjectNumber"].ToString());
                     }
@@ -134,16 +135,18 @@ namespace CMS.RIDM
             //DataTable to fill with filtered project list and display in DataGridView
             DataTable dt_dgv_KristalList = new DataTable();
             dt_dgv_KristalList.Columns.Add("Kristal ID");
+            dt_dgv_KristalList.Columns.Add("Kristal Number");
             dt_dgv_KristalList.Columns.Add("Kristal Ref");
             dt_dgv_KristalList.Columns.Add("Kristal Name");
             dt_dgv_KristalList.Columns.Add("Grant Stage");
             dt_dgv_KristalList.Columns.Add("Project Number");
 
             DataRow f_row;
-            foreach (DataRow kRow in dt_KristalList.DefaultView.ToTable(true, "KristalID", "KristalRef", "KristalName", "GrantStage", "ProjectNumber").Select(filterAll))
+            foreach (DataRow kRow in dt_KristalList.DefaultView.ToTable(true, "KristalID", "KristalNumber", "KristalRef", "KristalName", "GrantStage", "ProjectNumber").Select(filterAll))
             {
                 f_row = dt_dgv_KristalList.NewRow();
                 f_row["Kristal ID"] = kRow["KristalID"];
+                f_row["Kristal Number"] = kRow["KristalNumber"];
                 f_row["Kristal Ref"] = kRow["KristalRef"];
                 f_row["Kristal Name"] = kRow["KristalName"];
                 f_row["Grant Stage"] = kRow["GrantStage"];
@@ -156,6 +159,7 @@ namespace CMS.RIDM
             dgv_KristalList.Sort(dgv_KristalList.Columns["Kristal Ref"], ListSortDirection.Descending);
 
             dgv_KristalList.Columns["Kristal ID"].Visible = false;
+            dgv_KristalList.Columns["Kristal Number"].Visible = false;
             dgv_KristalList.Columns["Kristal Ref"].Width = 50;
             dgv_KristalList.Columns["Kristal Name"].Width = 240;
             dgv_KristalList.Columns["Grant Stage"].Width = 75;
@@ -218,7 +222,7 @@ namespace CMS.RIDM
             using (frm_KristalAdd kristalAdd = new frm_KristalAdd())
             {
                 kristalAdd.ShowDialog();
-                int KristalRef = kristalAdd.newKristalRef;
+                int KristalRef = kristalAdd.newKristalNumber;
 
                 if (KristalRef > 0)
                 {
@@ -238,7 +242,7 @@ namespace CMS.RIDM
                     Kristal kristal = new Kristal();
                     mdl_Kristal mdl_Kristal = new mdl_Kristal();
 
-                    mdl_Kristal = kristal.fetchCurrentKristalByID(Convert.ToInt32(dgv_KristalList.Rows[r].Cells["Kristal ID"].Value));
+                    mdl_Kristal = kristal.fetchCurrentKristalByNumber(Convert.ToInt32(dgv_KristalList.Rows[r].Cells["Kristal Number"].Value));
 
                     frm_Kristal Kristal = new frm_Kristal(mdl_Kristal);
                     Kristal.Show();

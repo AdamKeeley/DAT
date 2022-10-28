@@ -23,7 +23,8 @@ namespace CMS
         }
 
         public DataSet ds_kristal;
-        public int newKristalRef;
+        //public int newKristalRef;
+        public int newKristalNumber;
 
         private void fillKristalDataSet()
         {
@@ -62,13 +63,25 @@ namespace CMS
                 if (int.TryParse(tb_KristalRef.Text, out testRef))
                 {
                     newKristal.KristalRef = testRef;
-                    
+
                     if (newKristal.KristalRef > 0)
-                    { Kristal kristal = new Kristal();
+                    {
+                        Kristal kristal = new Kristal();
+
+                        // fetch existing KristalNumber (from already prepopulated values) or assign new
+                        if (newKristalNumber > 0)
+                        {
+                            newKristal.KristalNumber = newKristalNumber;
+                        }
+                        else
+                        {
+                            newKristal.KristalNumber = kristal.getLastKristalNumber() + 1;
+                        }
+
                         if (kristal.insertKristal(newKristal) > 0)
                         {
                             MessageBox.Show("Item added");
-                            newKristalRef = newKristal.KristalRef;
+                            newKristalNumber = newKristal.KristalNumber;
                             return true;
                         }
                         else
@@ -92,24 +105,30 @@ namespace CMS
         private void prepopulateControlsIfRefExists(object sender, EventArgs e)
         {
             int testRef;
-
-            // if KristalRef is an integer
-            if (int.TryParse(tb_KristalRef.Text, out testRef))
+            
+            // Don't search for or prepopulate 'unknown' Kristal Refs (999999)
+            if (tb_KristalRef.Text != "999999")
             {
-                if (ds_kristal.Tables["tblKristal"].Select($"KristalRef = {testRef}").Length > 0)
+                // if KristalRef is an integer
+                if (int.TryParse(tb_KristalRef.Text, out testRef))
                 {
-                    foreach (DataRow kRow in ds_kristal.Tables["tblKristal"].Select($"KristalRef = {testRef}"))
+                    if (ds_kristal.Tables["tblKristal"].Select($"KristalRef = {testRef}").Length > 0)
                     {
-                        cb_GrantStage.SelectedValue = kRow["GrantStageID"];
-                        tb_KristalName.Text = kRow["KristalName"].ToString();
+                        foreach (DataRow kRow in ds_kristal.Tables["tblKristal"].Select($"KristalRef = {testRef}"))
+                        {
+                            cb_GrantStage.SelectedValue = kRow["GrantStageID"];
+                            tb_KristalName.Text = kRow["KristalName"].ToString();
+                            newKristalNumber = Convert.ToInt32(kRow["KristalNumber"].ToString());
+                        }
+                    }
+                    else
+                    {
+                        cb_GrantStage.SelectedValue = -1;
+                        tb_KristalName.Clear();
                     }
                 }
-                else
-                {
-                    cb_GrantStage.SelectedValue = -1;
-                    tb_KristalName.Clear();
-                }
             }
+
         }
 
         /// <summary>

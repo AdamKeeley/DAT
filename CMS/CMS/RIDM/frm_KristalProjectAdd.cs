@@ -12,25 +12,25 @@ namespace CMS.RIDM
 {
     public partial class frm_KristalProjectAdd : Form
     {
-        public frm_KristalProjectAdd(int KristalRef)
+        public frm_KristalProjectAdd(int KristalNumber)
         {
             InitializeComponent();
             setTabIndex();
-            setVariablesAndControl(KristalRef);
+            setVariablesAndControl(KristalNumber);
         }
 
-        int kristalRef;
+        int kristalNumber;
         DataSet ds_prj;
 
-        private void setVariablesAndControl(int KristalRef)
+        private void setVariablesAndControl(int KristalNumber)
         {
             try
             {
                 //set variables
                 Project project = new Project();
                 ds_prj = project.getProjectsDataSet();
-                
-                kristalRef = KristalRef;
+
+                kristalNumber = KristalNumber;
 
                 //set controls values
                 cb_pNumberValue.DataSource = ds_prj.Tables["tblProjects"];
@@ -59,7 +59,7 @@ namespace CMS.RIDM
             string ProjectNumber = cb_pNumberValue.Text;
 
             Kristal kristal = new Kristal();
-            return kristal.insertProjectKristal(ProjectNumber, kristalRef);
+            return kristal.insertProjectKristal(ProjectNumber, kristalNumber);
         }
 
         /// <summary>

@@ -1,0 +1,66 @@
+Create new column KristalNumber (int) in tblKristal
+
+Update tblKristal, assigning each KristalRef <> 999999 a unique KristalNumber 
+	DECLARE @KristalRef int
+		, @KristalNumber int = 1
+
+	DECLARE MY_CURSOR CURSOR 
+	  LOCAL STATIC READ_ONLY FORWARD_ONLY
+	FOR 
+	SELECT DISTINCT KristalRef 
+	FROM [dbo].[tblKristal]
+
+	OPEN MY_CURSOR
+	FETCH NEXT FROM MY_CURSOR INTO @KristalRef
+	WHILE @@FETCH_STATUS = 0
+	BEGIN 
+		update [dbo].[tblKristal] set KristalNumber = @KristalNumber where KristalRef = @KristalRef and KristalRef <> 999999
+		set @KristalNumber = @KristalNumber + 1
+		FETCH NEXT FROM MY_CURSOR INTO @KristalRef
+	END
+	CLOSE MY_CURSOR
+	DEALLOCATE MY_CURSOR
+
+Repeat for KristalRef = 999999
+	DECLARE @KristalName varchar(max)
+		, @KristalNumber int = (select max(KristalNumber) from [dbo].[tblKristal] where KristalNumber is not null) +1
+
+	DECLARE MY_CURSOR CURSOR 
+	  LOCAL STATIC READ_ONLY FORWARD_ONLY
+	FOR 
+	SELECT DISTINCT KristalName 
+	FROM [dbo].[tblKristal]
+	where KristalRef = 999999
+
+	OPEN MY_CURSOR
+	FETCH NEXT FROM MY_CURSOR INTO @KristalName
+	WHILE @@FETCH_STATUS = 0
+	BEGIN 
+		update [dbo].[tblKristal] set KristalNumber = @KristalNumber where KristalName = @KristalName
+		set @KristalNumber = @KristalNumber + 1
+		FETCH NEXT FROM MY_CURSOR INTO @KristalName
+	END
+	CLOSE MY_CURSOR
+	DEALLOCATE MY_CURSOR
+
+Rename KristalRef to KristalNumber (int) in 
+- tblProjectKristal
+- tblKristalNotes
+
+Update previously KristalRef fields to KristalNumbers in 
+- tblProjectKristal
+- tblKristalNotes
+No need to account for 999999 as not present
+
+	update [dbo].[tblProjectKristal] 
+	set [tblProjectKristal].[KristalNumber] = k.[KristalNumber]
+	from [dbo].[tblProjectKristal] pk
+		inner join [dbo].[tblKristal] k
+			on pk.[KristalNumber] = k.KristalRef
+
+	update [dbo].[tblKristalNotes] 
+	set [tblKristalNotes].[KristalNumber] = k.[KristalNumber]
+	from [dbo].[tblKristalNotes] kn
+		inner join [dbo].[tblKristal] k
+			on kn.[KristalNumber] = k.KristalRef
+			
