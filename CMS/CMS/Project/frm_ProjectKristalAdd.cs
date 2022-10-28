@@ -45,6 +45,21 @@ namespace CMS
                 cb_GrantStage.ValueMember = "GrantStageID";
                 cb_GrantStage.DisplayMember = "GrantStageDescription";
                 cb_GrantStage.SelectedIndex = -1;
+
+                cb_PI.DataSource = ds_kristal.Tables["tblUser"];
+                cb_PI.ValueMember = "UserNumber";
+                cb_PI.DisplayMember = "FullName";
+                cb_PI.SelectedIndex = -1;
+
+                cb_Location.DataSource = ds_kristal.Tables["tlkLocation"];
+                cb_Location.ValueMember = "locationID";
+                cb_Location.DisplayMember = "locationDescription";
+                cb_Location.SelectedIndex = -1;
+
+                cb_Faculty.DataSource = ds_kristal.Tables["tlkFaculty"];
+                cb_Faculty.ValueMember = "facultyID";
+                cb_Faculty.DisplayMember = "facultyDescription";
+                cb_Faculty.SelectedIndex = -1;
             }
             catch (Exception ex)
             {
@@ -81,6 +96,9 @@ namespace CMS
                 mdl_Kristal newKristal = new mdl_Kristal();
                 newKristal.GrantStageID = (int)cb_GrantStage.SelectedValue;
                 newKristal.KristalName = tb_KristalName.Text;
+                newKristal.PI = (int?)cb_PI.SelectedValue;
+                newKristal.Location = (int?)cb_Location.SelectedValue;
+                newKristal.Faculty = (int?)cb_Faculty.SelectedValue;
 
                 int testRef;
 
@@ -136,12 +154,18 @@ namespace CMS
                             cb_GrantStage.SelectedValue = kRow["GrantStageID"];
                             tb_KristalName.Text = kRow["KristalName"].ToString();
                             newKristalNumber = Convert.ToInt32(kRow["KristalNumber"].ToString());
+                            cb_PI.SelectedValue = kRow["PI"];
+                            cb_Location.SelectedValue = kRow["Location"];
+                            cb_Faculty.SelectedValue = kRow["Faculty"];
                         }
                     }
                     else
                     {
                         cb_GrantStage.SelectedValue = -1;
                         tb_KristalName.Clear();
+                        cb_PI.SelectedValue = -1;
+                        cb_Location.SelectedValue = -1;
+                        cb_Faculty.SelectedValue = -1;
                     }
                 }
             }
