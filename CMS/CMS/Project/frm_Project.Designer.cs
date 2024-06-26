@@ -93,6 +93,7 @@ namespace CMS
             this.tb_searchNotes = new System.Windows.Forms.TextBox();
             this.lbl_searchNotes = new System.Windows.Forms.Label();
             this.gb_KeyDates = new System.Windows.Forms.GroupBox();
+            this.chkb_EndDateConfirmed = new System.Windows.Forms.CheckBox();
             this.gb_ProjectDocuments = new System.Windows.Forms.GroupBox();
             this.btn_UserDocs = new System.Windows.Forms.Button();
             this.btn_AllDocs = new System.Windows.Forms.Button();
@@ -137,39 +138,35 @@ namespace CMS
             // lbl_pNumber
             // 
             this.lbl_pNumber.AutoSize = true;
-            this.lbl_pNumber.Location = new System.Drawing.Point(14, 10);
-            this.lbl_pNumber.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_pNumber.Location = new System.Drawing.Point(21, 15);
             this.lbl_pNumber.Name = "lbl_pNumber";
-            this.lbl_pNumber.Size = new System.Drawing.Size(80, 13);
+            this.lbl_pNumber.Size = new System.Drawing.Size(118, 20);
             this.lbl_pNumber.TabIndex = 0;
             this.lbl_pNumber.Text = "Project Number";
             // 
             // lbl_pName
             // 
             this.lbl_pName.AutoSize = true;
-            this.lbl_pName.Location = new System.Drawing.Point(14, 34);
-            this.lbl_pName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_pName.Location = new System.Drawing.Point(21, 52);
             this.lbl_pName.Name = "lbl_pName";
-            this.lbl_pName.Size = new System.Drawing.Size(63, 13);
+            this.lbl_pName.Size = new System.Drawing.Size(91, 20);
             this.lbl_pName.TabIndex = 2;
             this.lbl_pName.Text = "Project Title";
             // 
             // tb_pNameValue
             // 
-            this.tb_pNameValue.Location = new System.Drawing.Point(120, 31);
-            this.tb_pNameValue.Margin = new System.Windows.Forms.Padding(2);
+            this.tb_pNameValue.Location = new System.Drawing.Point(180, 48);
             this.tb_pNameValue.MaxLength = 100;
             this.tb_pNameValue.Name = "tb_pNameValue";
-            this.tb_pNameValue.Size = new System.Drawing.Size(387, 20);
+            this.tb_pNameValue.Size = new System.Drawing.Size(578, 26);
             this.tb_pNameValue.TabIndex = 3;
             // 
             // lbl_pStage
             // 
             this.lbl_pStage.AutoSize = true;
-            this.lbl_pStage.Location = new System.Drawing.Point(48, 226);
-            this.lbl_pStage.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_pStage.Location = new System.Drawing.Point(72, 348);
             this.lbl_pStage.Name = "lbl_pStage";
-            this.lbl_pStage.Size = new System.Drawing.Size(35, 13);
+            this.lbl_pStage.Size = new System.Drawing.Size(52, 20);
             this.lbl_pStage.TabIndex = 4;
             this.lbl_pStage.Text = "Stage";
             // 
@@ -178,40 +175,36 @@ namespace CMS
             this.cb_pStage.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cb_pStage.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cb_pStage.FormattingEnabled = true;
-            this.cb_pStage.Location = new System.Drawing.Point(89, 223);
-            this.cb_pStage.Margin = new System.Windows.Forms.Padding(2);
+            this.cb_pStage.Location = new System.Drawing.Point(134, 343);
             this.cb_pStage.Name = "cb_pStage";
-            this.cb_pStage.Size = new System.Drawing.Size(124, 21);
+            this.cb_pStage.Size = new System.Drawing.Size(184, 28);
             this.cb_pStage.TabIndex = 5;
             this.cb_pStage.Enter += new System.EventHandler(this.combobox_RemoveLegacyItems);
             // 
             // lbl_pPI
             // 
             this.lbl_pPI.AutoSize = true;
-            this.lbl_pPI.Location = new System.Drawing.Point(225, 227);
-            this.lbl_pPI.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_pPI.Location = new System.Drawing.Point(338, 349);
             this.lbl_pPI.Name = "lbl_pPI";
-            this.lbl_pPI.Size = new System.Drawing.Size(105, 13);
+            this.lbl_pPI.Size = new System.Drawing.Size(155, 20);
             this.lbl_pPI.TabIndex = 4;
             this.lbl_pPI.Text = "Principal Investigator";
             // 
             // lbl_pStartDate
             // 
             this.lbl_pStartDate.AutoSize = true;
-            this.lbl_pStartDate.Location = new System.Drawing.Point(145, 21);
-            this.lbl_pStartDate.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_pStartDate.Location = new System.Drawing.Point(218, 32);
             this.lbl_pStartDate.Name = "lbl_pStartDate";
-            this.lbl_pStartDate.Size = new System.Drawing.Size(55, 13);
+            this.lbl_pStartDate.Size = new System.Drawing.Size(83, 20);
             this.lbl_pStartDate.TabIndex = 6;
             this.lbl_pStartDate.Text = "Start Date";
             // 
             // lbl_pEndDate
             // 
             this.lbl_pEndDate.AutoSize = true;
-            this.lbl_pEndDate.Location = new System.Drawing.Point(148, 49);
-            this.lbl_pEndDate.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_pEndDate.Location = new System.Drawing.Point(222, 75);
             this.lbl_pEndDate.Name = "lbl_pEndDate";
-            this.lbl_pEndDate.Size = new System.Drawing.Size(52, 13);
+            this.lbl_pEndDate.Size = new System.Drawing.Size(77, 20);
             this.lbl_pEndDate.TabIndex = 8;
             this.lbl_pEndDate.Text = "End Date";
             // 
@@ -236,8 +229,7 @@ namespace CMS
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_pNotes.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgv_pNotes.Location = new System.Drawing.Point(5, 62);
-            this.dgv_pNotes.Margin = new System.Windows.Forms.Padding(2);
+            this.dgv_pNotes.Location = new System.Drawing.Point(8, 95);
             this.dgv_pNotes.Name = "dgv_pNotes";
             this.dgv_pNotes.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -249,51 +241,48 @@ namespace CMS
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgv_pNotes.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgv_pNotes.RowHeadersVisible = false;
+            this.dgv_pNotes.RowHeadersWidth = 62;
             this.dgv_pNotes.RowTemplate.Height = 24;
             this.dgv_pNotes.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dgv_pNotes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_pNotes.Size = new System.Drawing.Size(875, 150);
+            this.dgv_pNotes.Size = new System.Drawing.Size(1312, 231);
             this.dgv_pNotes.TabIndex = 12;
             this.dgv_pNotes.TabStop = false;
             // 
             // mtb_pEndDateValue
             // 
-            this.mtb_pEndDateValue.Location = new System.Drawing.Point(204, 46);
-            this.mtb_pEndDateValue.Margin = new System.Windows.Forms.Padding(2);
+            this.mtb_pEndDateValue.Location = new System.Drawing.Point(306, 71);
             this.mtb_pEndDateValue.Mask = "00/00/0000";
             this.mtb_pEndDateValue.Name = "mtb_pEndDateValue";
-            this.mtb_pEndDateValue.Size = new System.Drawing.Size(76, 20);
+            this.mtb_pEndDateValue.Size = new System.Drawing.Size(112, 26);
             this.mtb_pEndDateValue.TabIndex = 9;
             this.mtb_pEndDateValue.ValidatingType = typeof(System.DateTime);
             this.mtb_pEndDateValue.Click += new System.EventHandler(this.enter_MaskedTextBox);
             // 
             // mtb_pStartDateValue
             // 
-            this.mtb_pStartDateValue.Location = new System.Drawing.Point(204, 18);
-            this.mtb_pStartDateValue.Margin = new System.Windows.Forms.Padding(2);
+            this.mtb_pStartDateValue.Location = new System.Drawing.Point(306, 28);
             this.mtb_pStartDateValue.Mask = "00/00/0000";
             this.mtb_pStartDateValue.Name = "mtb_pStartDateValue";
-            this.mtb_pStartDateValue.Size = new System.Drawing.Size(76, 20);
+            this.mtb_pStartDateValue.Size = new System.Drawing.Size(112, 26);
             this.mtb_pStartDateValue.TabIndex = 7;
             this.mtb_pStartDateValue.ValidatingType = typeof(System.DateTime);
             this.mtb_pStartDateValue.Click += new System.EventHandler(this.enter_MaskedTextBox);
             // 
             // tb_NewProjectNote
             // 
-            this.tb_NewProjectNote.Location = new System.Drawing.Point(5, 18);
-            this.tb_NewProjectNote.Margin = new System.Windows.Forms.Padding(2);
+            this.tb_NewProjectNote.Location = new System.Drawing.Point(8, 28);
             this.tb_NewProjectNote.MaxLength = 8000;
             this.tb_NewProjectNote.Multiline = true;
             this.tb_NewProjectNote.Name = "tb_NewProjectNote";
-            this.tb_NewProjectNote.Size = new System.Drawing.Size(630, 40);
+            this.tb_NewProjectNote.Size = new System.Drawing.Size(943, 59);
             this.tb_NewProjectNote.TabIndex = 10;
             // 
             // btn_InsertProjectNote
             // 
-            this.btn_InsertProjectNote.Location = new System.Drawing.Point(639, 17);
-            this.btn_InsertProjectNote.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_InsertProjectNote.Location = new System.Drawing.Point(958, 26);
             this.btn_InsertProjectNote.Name = "btn_InsertProjectNote";
-            this.btn_InsertProjectNote.Size = new System.Drawing.Size(55, 40);
+            this.btn_InsertProjectNote.Size = new System.Drawing.Size(82, 62);
             this.btn_InsertProjectNote.TabIndex = 11;
             this.btn_InsertProjectNote.Text = "Add Note";
             this.btn_InsertProjectNote.UseVisualStyleBackColor = true;
@@ -303,20 +292,18 @@ namespace CMS
             // 
             this.cb_pNumberValue.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cb_pNumberValue.FormattingEnabled = true;
-            this.cb_pNumberValue.Location = new System.Drawing.Point(120, 7);
-            this.cb_pNumberValue.Margin = new System.Windows.Forms.Padding(2);
+            this.cb_pNumberValue.Location = new System.Drawing.Point(180, 11);
             this.cb_pNumberValue.Name = "cb_pNumberValue";
-            this.cb_pNumberValue.Size = new System.Drawing.Size(92, 21);
+            this.cb_pNumberValue.Size = new System.Drawing.Size(136, 28);
             this.cb_pNumberValue.TabIndex = 1;
             this.cb_pNumberValue.SelectionChangeCommitted += new System.EventHandler(this.cb_pNumberValue_SelectionChanged);
             // 
             // btn_ProjectCancel
             // 
             this.btn_ProjectCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btn_ProjectCancel.Location = new System.Drawing.Point(1034, 526);
-            this.btn_ProjectCancel.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_ProjectCancel.Location = new System.Drawing.Point(1551, 809);
             this.btn_ProjectCancel.Name = "btn_ProjectCancel";
-            this.btn_ProjectCancel.Size = new System.Drawing.Size(56, 24);
+            this.btn_ProjectCancel.Size = new System.Drawing.Size(84, 37);
             this.btn_ProjectCancel.TabIndex = 15;
             this.btn_ProjectCancel.Text = "Cancel";
             this.btn_ProjectCancel.UseVisualStyleBackColor = true;
@@ -324,10 +311,9 @@ namespace CMS
             // 
             // btn_ProjectOK
             // 
-            this.btn_ProjectOK.Location = new System.Drawing.Point(974, 526);
-            this.btn_ProjectOK.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_ProjectOK.Location = new System.Drawing.Point(1461, 809);
             this.btn_ProjectOK.Name = "btn_ProjectOK";
-            this.btn_ProjectOK.Size = new System.Drawing.Size(56, 24);
+            this.btn_ProjectOK.Size = new System.Drawing.Size(84, 37);
             this.btn_ProjectOK.TabIndex = 14;
             this.btn_ProjectOK.Text = "OK";
             this.btn_ProjectOK.UseVisualStyleBackColor = true;
@@ -335,10 +321,9 @@ namespace CMS
             // 
             // btn_ProjectApply
             // 
-            this.btn_ProjectApply.Location = new System.Drawing.Point(913, 526);
-            this.btn_ProjectApply.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_ProjectApply.Location = new System.Drawing.Point(1370, 809);
             this.btn_ProjectApply.Name = "btn_ProjectApply";
-            this.btn_ProjectApply.Size = new System.Drawing.Size(56, 24);
+            this.btn_ProjectApply.Size = new System.Drawing.Size(84, 37);
             this.btn_ProjectApply.TabIndex = 13;
             this.btn_ProjectApply.Text = "Apply";
             this.btn_ProjectApply.UseVisualStyleBackColor = true;
@@ -346,10 +331,9 @@ namespace CMS
             // 
             // btn_ProjectCostings
             // 
-            this.btn_ProjectCostings.Location = new System.Drawing.Point(19, 526);
-            this.btn_ProjectCostings.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_ProjectCostings.Location = new System.Drawing.Point(28, 809);
             this.btn_ProjectCostings.Name = "btn_ProjectCostings";
-            this.btn_ProjectCostings.Size = new System.Drawing.Size(90, 24);
+            this.btn_ProjectCostings.Size = new System.Drawing.Size(135, 37);
             this.btn_ProjectCostings.TabIndex = 16;
             this.btn_ProjectCostings.Text = "Costings";
             this.btn_ProjectCostings.UseVisualStyleBackColor = true;
@@ -358,10 +342,9 @@ namespace CMS
             // chkb_IRC
             // 
             this.chkb_IRC.AutoSize = true;
-            this.chkb_IRC.Location = new System.Drawing.Point(4, 38);
-            this.chkb_IRC.Margin = new System.Windows.Forms.Padding(2);
+            this.chkb_IRC.Location = new System.Drawing.Point(6, 58);
             this.chkb_IRC.Name = "chkb_IRC";
-            this.chkb_IRC.Size = new System.Drawing.Size(44, 17);
+            this.chkb_IRC.Size = new System.Drawing.Size(63, 24);
             this.chkb_IRC.TabIndex = 17;
             this.chkb_IRC.Text = "IRC";
             this.chkb_IRC.UseVisualStyleBackColor = true;
@@ -369,10 +352,9 @@ namespace CMS
             // chkb_SEED
             // 
             this.chkb_SEED.AutoSize = true;
-            this.chkb_SEED.Location = new System.Drawing.Point(4, 59);
-            this.chkb_SEED.Margin = new System.Windows.Forms.Padding(2);
+            this.chkb_SEED.Location = new System.Drawing.Point(6, 91);
             this.chkb_SEED.Name = "chkb_SEED";
-            this.chkb_SEED.Size = new System.Drawing.Size(55, 17);
+            this.chkb_SEED.Size = new System.Drawing.Size(80, 24);
             this.chkb_SEED.TabIndex = 18;
             this.chkb_SEED.Text = "SEED";
             this.chkb_SEED.UseVisualStyleBackColor = true;
@@ -382,11 +364,9 @@ namespace CMS
             this.gb_Platform.Controls.Add(this.chkb_LASER);
             this.gb_Platform.Controls.Add(this.chkb_IRC);
             this.gb_Platform.Controls.Add(this.chkb_SEED);
-            this.gb_Platform.Location = new System.Drawing.Point(426, 81);
-            this.gb_Platform.Margin = new System.Windows.Forms.Padding(2);
+            this.gb_Platform.Location = new System.Drawing.Point(639, 125);
             this.gb_Platform.Name = "gb_Platform";
-            this.gb_Platform.Padding = new System.Windows.Forms.Padding(2);
-            this.gb_Platform.Size = new System.Drawing.Size(81, 85);
+            this.gb_Platform.Size = new System.Drawing.Size(122, 131);
             this.gb_Platform.TabIndex = 19;
             this.gb_Platform.TabStop = false;
             this.gb_Platform.Text = "Platform";
@@ -394,10 +374,9 @@ namespace CMS
             // chkb_LASER
             // 
             this.chkb_LASER.AutoSize = true;
-            this.chkb_LASER.Location = new System.Drawing.Point(4, 17);
-            this.chkb_LASER.Margin = new System.Windows.Forms.Padding(2);
+            this.chkb_LASER.Location = new System.Drawing.Point(6, 26);
             this.chkb_LASER.Name = "chkb_LASER";
-            this.chkb_LASER.Size = new System.Drawing.Size(61, 17);
+            this.chkb_LASER.Size = new System.Drawing.Size(89, 24);
             this.chkb_LASER.TabIndex = 19;
             this.chkb_LASER.Text = "LASER";
             this.chkb_LASER.UseVisualStyleBackColor = true;
@@ -407,27 +386,30 @@ namespace CMS
             this.cb_pClassification.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cb_pClassification.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cb_pClassification.FormattingEnabled = true;
-            this.cb_pClassification.Location = new System.Drawing.Point(89, 249);
+            this.cb_pClassification.Location = new System.Drawing.Point(134, 383);
+            this.cb_pClassification.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cb_pClassification.Name = "cb_pClassification";
-            this.cb_pClassification.Size = new System.Drawing.Size(124, 21);
+            this.cb_pClassification.Size = new System.Drawing.Size(184, 28);
             this.cb_pClassification.TabIndex = 20;
             this.cb_pClassification.Enter += new System.EventHandler(this.combobox_RemoveLegacyItems);
             // 
             // lbl_pClassification
             // 
             this.lbl_pClassification.AutoSize = true;
-            this.lbl_pClassification.Location = new System.Drawing.Point(15, 252);
+            this.lbl_pClassification.Location = new System.Drawing.Point(22, 388);
+            this.lbl_pClassification.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_pClassification.Name = "lbl_pClassification";
-            this.lbl_pClassification.Size = new System.Drawing.Size(68, 13);
+            this.lbl_pClassification.Size = new System.Drawing.Size(102, 20);
             this.lbl_pClassification.TabIndex = 21;
             this.lbl_pClassification.Text = "Classification";
             // 
             // lbl_DATRAG
             // 
             this.lbl_DATRAG.AutoSize = true;
-            this.lbl_DATRAG.Location = new System.Drawing.Point(370, 8);
+            this.lbl_DATRAG.Location = new System.Drawing.Point(555, 12);
+            this.lbl_DATRAG.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_DATRAG.Name = "lbl_DATRAG";
-            this.lbl_DATRAG.Size = new System.Drawing.Size(55, 13);
+            this.lbl_DATRAG.Size = new System.Drawing.Size(81, 20);
             this.lbl_DATRAG.TabIndex = 22;
             this.lbl_DATRAG.Text = "DAT RAG";
             // 
@@ -436,19 +418,19 @@ namespace CMS
             this.cb_DATRAG.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cb_DATRAG.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cb_DATRAG.FormattingEnabled = true;
-            this.cb_DATRAG.Location = new System.Drawing.Point(431, 5);
+            this.cb_DATRAG.Location = new System.Drawing.Point(646, 8);
+            this.cb_DATRAG.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cb_DATRAG.Name = "cb_DATRAG";
-            this.cb_DATRAG.Size = new System.Drawing.Size(76, 21);
+            this.cb_DATRAG.Size = new System.Drawing.Size(112, 28);
             this.cb_DATRAG.TabIndex = 23;
             this.cb_DATRAG.Enter += new System.EventHandler(this.combobox_RemoveLegacyItems);
             // 
             // mtb_ProjectedEndDateValue
             // 
-            this.mtb_ProjectedEndDateValue.Location = new System.Drawing.Point(63, 46);
-            this.mtb_ProjectedEndDateValue.Margin = new System.Windows.Forms.Padding(2);
+            this.mtb_ProjectedEndDateValue.Location = new System.Drawing.Point(94, 71);
             this.mtb_ProjectedEndDateValue.Mask = "00/00/0000";
             this.mtb_ProjectedEndDateValue.Name = "mtb_ProjectedEndDateValue";
-            this.mtb_ProjectedEndDateValue.Size = new System.Drawing.Size(76, 20);
+            this.mtb_ProjectedEndDateValue.Size = new System.Drawing.Size(112, 26);
             this.mtb_ProjectedEndDateValue.TabIndex = 25;
             this.mtb_ProjectedEndDateValue.ValidatingType = typeof(System.DateTime);
             this.mtb_ProjectedEndDateValue.Click += new System.EventHandler(this.enter_MaskedTextBox);
@@ -456,10 +438,9 @@ namespace CMS
             // lbl_ProjectedEndDate
             // 
             this.lbl_ProjectedEndDate.AutoSize = true;
-            this.lbl_ProjectedEndDate.Location = new System.Drawing.Point(4, 43);
-            this.lbl_ProjectedEndDate.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_ProjectedEndDate.Location = new System.Drawing.Point(6, 66);
             this.lbl_ProjectedEndDate.Name = "lbl_ProjectedEndDate";
-            this.lbl_ProjectedEndDate.Size = new System.Drawing.Size(55, 26);
+            this.lbl_ProjectedEndDate.Size = new System.Drawing.Size(80, 40);
             this.lbl_ProjectedEndDate.TabIndex = 24;
             this.lbl_ProjectedEndDate.Text = "Projected \r\nEnd Date";
             // 
@@ -468,18 +449,20 @@ namespace CMS
             this.cb_Faculty.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cb_Faculty.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cb_Faculty.FormattingEnabled = true;
-            this.cb_Faculty.Location = new System.Drawing.Point(334, 249);
+            this.cb_Faculty.Location = new System.Drawing.Point(501, 383);
+            this.cb_Faculty.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cb_Faculty.Name = "cb_Faculty";
-            this.cb_Faculty.Size = new System.Drawing.Size(173, 21);
+            this.cb_Faculty.Size = new System.Drawing.Size(258, 28);
             this.cb_Faculty.TabIndex = 27;
             this.cb_Faculty.Enter += new System.EventHandler(this.combobox_RemoveLegacyItems);
             // 
             // lbl_Faculty
             // 
             this.lbl_Faculty.AutoSize = true;
-            this.lbl_Faculty.Location = new System.Drawing.Point(289, 252);
+            this.lbl_Faculty.Location = new System.Drawing.Point(434, 388);
+            this.lbl_Faculty.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_Faculty.Name = "lbl_Faculty";
-            this.lbl_Faculty.Size = new System.Drawing.Size(41, 13);
+            this.lbl_Faculty.Size = new System.Drawing.Size(60, 20);
             this.lbl_Faculty.TabIndex = 26;
             this.lbl_Faculty.Text = "Faculty";
             // 
@@ -487,11 +470,9 @@ namespace CMS
             // 
             this.gb_Governance.Controls.Add(this.chkb_ISO27001);
             this.gb_Governance.Controls.Add(this.chkb_DSPT);
-            this.gb_Governance.Location = new System.Drawing.Point(12, 81);
-            this.gb_Governance.Margin = new System.Windows.Forms.Padding(2);
+            this.gb_Governance.Location = new System.Drawing.Point(18, 125);
             this.gb_Governance.Name = "gb_Governance";
-            this.gb_Governance.Padding = new System.Windows.Forms.Padding(2);
-            this.gb_Governance.Size = new System.Drawing.Size(92, 62);
+            this.gb_Governance.Size = new System.Drawing.Size(138, 95);
             this.gb_Governance.TabIndex = 20;
             this.gb_Governance.TabStop = false;
             this.gb_Governance.Text = "Governance";
@@ -499,30 +480,31 @@ namespace CMS
             // chkb_ISO27001
             // 
             this.chkb_ISO27001.AutoSize = true;
-            this.chkb_ISO27001.Location = new System.Drawing.Point(4, 17);
-            this.chkb_ISO27001.Margin = new System.Windows.Forms.Padding(2);
+            this.chkb_ISO27001.Location = new System.Drawing.Point(6, 26);
             this.chkb_ISO27001.Name = "chkb_ISO27001";
-            this.chkb_ISO27001.Size = new System.Drawing.Size(74, 17);
+            this.chkb_ISO27001.Size = new System.Drawing.Size(108, 24);
             this.chkb_ISO27001.TabIndex = 17;
             this.chkb_ISO27001.Text = "ISO27001";
             this.chkb_ISO27001.UseVisualStyleBackColor = true;
+            this.chkb_ISO27001.CheckedChanged += new System.EventHandler(this.chkb_ISO27001_CheckedChanged);
             // 
             // chkb_DSPT
             // 
             this.chkb_DSPT.AutoSize = true;
-            this.chkb_DSPT.Location = new System.Drawing.Point(4, 38);
-            this.chkb_DSPT.Margin = new System.Windows.Forms.Padding(2);
+            this.chkb_DSPT.Location = new System.Drawing.Point(6, 58);
             this.chkb_DSPT.Name = "chkb_DSPT";
-            this.chkb_DSPT.Size = new System.Drawing.Size(81, 17);
+            this.chkb_DSPT.Size = new System.Drawing.Size(115, 24);
             this.chkb_DSPT.TabIndex = 18;
             this.chkb_DSPT.Text = "NHS DSPT";
             this.chkb_DSPT.UseVisualStyleBackColor = true;
+            this.chkb_DSPT.CheckedChanged += new System.EventHandler(this.chkb_DSPT_CheckedChanged);
             // 
             // btn_Refresh
             // 
-            this.btn_Refresh.Location = new System.Drawing.Point(833, 527);
+            this.btn_Refresh.Location = new System.Drawing.Point(1250, 811);
+            this.btn_Refresh.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btn_Refresh.Name = "btn_Refresh";
-            this.btn_Refresh.Size = new System.Drawing.Size(75, 23);
+            this.btn_Refresh.Size = new System.Drawing.Size(112, 35);
             this.btn_Refresh.TabIndex = 31;
             this.btn_Refresh.Text = "Refresh";
             this.btn_Refresh.UseVisualStyleBackColor = true;
@@ -531,20 +513,18 @@ namespace CMS
             // lbl_LeadApplicant
             // 
             this.lbl_LeadApplicant.AutoSize = true;
-            this.lbl_LeadApplicant.Location = new System.Drawing.Point(252, 203);
-            this.lbl_LeadApplicant.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_LeadApplicant.Location = new System.Drawing.Point(378, 312);
             this.lbl_LeadApplicant.Name = "lbl_LeadApplicant";
-            this.lbl_LeadApplicant.Size = new System.Drawing.Size(78, 13);
+            this.lbl_LeadApplicant.Size = new System.Drawing.Size(115, 20);
             this.lbl_LeadApplicant.TabIndex = 33;
             this.lbl_LeadApplicant.Text = "Lead Applicant";
             // 
             // mtb_ProjectedStartDateValue
             // 
-            this.mtb_ProjectedStartDateValue.Location = new System.Drawing.Point(63, 18);
-            this.mtb_ProjectedStartDateValue.Margin = new System.Windows.Forms.Padding(2);
+            this.mtb_ProjectedStartDateValue.Location = new System.Drawing.Point(94, 28);
             this.mtb_ProjectedStartDateValue.Mask = "00/00/0000";
             this.mtb_ProjectedStartDateValue.Name = "mtb_ProjectedStartDateValue";
-            this.mtb_ProjectedStartDateValue.Size = new System.Drawing.Size(76, 20);
+            this.mtb_ProjectedStartDateValue.Size = new System.Drawing.Size(112, 26);
             this.mtb_ProjectedStartDateValue.TabIndex = 36;
             this.mtb_ProjectedStartDateValue.ValidatingType = typeof(System.DateTime);
             this.mtb_ProjectedStartDateValue.Click += new System.EventHandler(this.enter_MaskedTextBox);
@@ -552,10 +532,9 @@ namespace CMS
             // lbl_ProjectedStartDate
             // 
             this.lbl_ProjectedStartDate.AutoSize = true;
-            this.lbl_ProjectedStartDate.Location = new System.Drawing.Point(4, 15);
-            this.lbl_ProjectedStartDate.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_ProjectedStartDate.Location = new System.Drawing.Point(6, 23);
             this.lbl_ProjectedStartDate.Name = "lbl_ProjectedStartDate";
-            this.lbl_ProjectedStartDate.Size = new System.Drawing.Size(55, 26);
+            this.lbl_ProjectedStartDate.Size = new System.Drawing.Size(83, 40);
             this.lbl_ProjectedStartDate.TabIndex = 35;
             this.lbl_ProjectedStartDate.Text = "Projected \r\nStart Date";
             // 
@@ -564,9 +543,10 @@ namespace CMS
             this.cb_LeadApplicant.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cb_LeadApplicant.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cb_LeadApplicant.FormattingEnabled = true;
-            this.cb_LeadApplicant.Location = new System.Drawing.Point(334, 200);
+            this.cb_LeadApplicant.Location = new System.Drawing.Point(501, 308);
+            this.cb_LeadApplicant.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cb_LeadApplicant.Name = "cb_LeadApplicant";
-            this.cb_LeadApplicant.Size = new System.Drawing.Size(173, 21);
+            this.cb_LeadApplicant.Size = new System.Drawing.Size(258, 28);
             this.cb_LeadApplicant.TabIndex = 37;
             // 
             // cb_PI
@@ -574,9 +554,10 @@ namespace CMS
             this.cb_PI.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cb_PI.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cb_PI.FormattingEnabled = true;
-            this.cb_PI.Location = new System.Drawing.Point(334, 224);
+            this.cb_PI.Location = new System.Drawing.Point(501, 345);
+            this.cb_PI.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cb_PI.Name = "cb_PI";
-            this.cb_PI.Size = new System.Drawing.Size(173, 21);
+            this.cb_PI.Size = new System.Drawing.Size(258, 28);
             this.cb_PI.TabIndex = 39;
             // 
             // dgv_ProjectUsers
@@ -601,7 +582,8 @@ namespace CMS
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_ProjectUsers.DefaultCellStyle = dataGridViewCellStyle5;
-            this.dgv_ProjectUsers.Location = new System.Drawing.Point(15, 19);
+            this.dgv_ProjectUsers.Location = new System.Drawing.Point(22, 29);
+            this.dgv_ProjectUsers.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dgv_ProjectUsers.Name = "dgv_ProjectUsers";
             this.dgv_ProjectUsers.ReadOnly = true;
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -613,18 +595,20 @@ namespace CMS
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgv_ProjectUsers.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dgv_ProjectUsers.RowHeadersVisible = false;
+            this.dgv_ProjectUsers.RowHeadersWidth = 62;
             this.dgv_ProjectUsers.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dgv_ProjectUsers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_ProjectUsers.Size = new System.Drawing.Size(155, 91);
+            this.dgv_ProjectUsers.Size = new System.Drawing.Size(232, 140);
             this.dgv_ProjectUsers.TabIndex = 41;
             this.dgv_ProjectUsers.TabStop = false;
             this.dgv_ProjectUsers.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_ProjectUsers_CellDoubleClick);
             // 
             // btn_ProjectUserAdd
             // 
-            this.btn_ProjectUserAdd.Location = new System.Drawing.Point(15, 116);
+            this.btn_ProjectUserAdd.Location = new System.Drawing.Point(22, 178);
+            this.btn_ProjectUserAdd.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btn_ProjectUserAdd.Name = "btn_ProjectUserAdd";
-            this.btn_ProjectUserAdd.Size = new System.Drawing.Size(75, 23);
+            this.btn_ProjectUserAdd.Size = new System.Drawing.Size(112, 35);
             this.btn_ProjectUserAdd.TabIndex = 42;
             this.btn_ProjectUserAdd.Text = "Add";
             this.btn_ProjectUserAdd.UseVisualStyleBackColor = true;
@@ -632,9 +616,10 @@ namespace CMS
             // 
             // btn_ProjectUserRemove
             // 
-            this.btn_ProjectUserRemove.Location = new System.Drawing.Point(95, 116);
+            this.btn_ProjectUserRemove.Location = new System.Drawing.Point(142, 178);
+            this.btn_ProjectUserRemove.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btn_ProjectUserRemove.Name = "btn_ProjectUserRemove";
-            this.btn_ProjectUserRemove.Size = new System.Drawing.Size(75, 23);
+            this.btn_ProjectUserRemove.Size = new System.Drawing.Size(112, 35);
             this.btn_ProjectUserRemove.TabIndex = 43;
             this.btn_ProjectUserRemove.Text = "Remove";
             this.btn_ProjectUserRemove.UseVisualStyleBackColor = true;
@@ -645,9 +630,11 @@ namespace CMS
             this.gb_ProjectUsers.Controls.Add(this.dgv_ProjectUsers);
             this.gb_ProjectUsers.Controls.Add(this.btn_ProjectUserRemove);
             this.gb_ProjectUsers.Controls.Add(this.btn_ProjectUserAdd);
-            this.gb_ProjectUsers.Location = new System.Drawing.Point(523, 142);
+            this.gb_ProjectUsers.Location = new System.Drawing.Point(784, 218);
+            this.gb_ProjectUsers.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gb_ProjectUsers.Name = "gb_ProjectUsers";
-            this.gb_ProjectUsers.Size = new System.Drawing.Size(185, 145);
+            this.gb_ProjectUsers.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.gb_ProjectUsers.Size = new System.Drawing.Size(278, 223);
             this.gb_ProjectUsers.TabIndex = 45;
             this.gb_ProjectUsers.TabStop = false;
             this.gb_ProjectUsers.Text = "Research Team";
@@ -659,32 +646,37 @@ namespace CMS
             this.gb_ProjectNotes.Controls.Add(this.tb_NewProjectNote);
             this.gb_ProjectNotes.Controls.Add(this.dgv_pNotes);
             this.gb_ProjectNotes.Controls.Add(this.btn_InsertProjectNote);
-            this.gb_ProjectNotes.Location = new System.Drawing.Point(12, 293);
+            this.gb_ProjectNotes.Location = new System.Drawing.Point(18, 451);
+            this.gb_ProjectNotes.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gb_ProjectNotes.Name = "gb_ProjectNotes";
-            this.gb_ProjectNotes.Size = new System.Drawing.Size(887, 218);
+            this.gb_ProjectNotes.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.gb_ProjectNotes.Size = new System.Drawing.Size(1330, 335);
             this.gb_ProjectNotes.TabIndex = 46;
             this.gb_ProjectNotes.TabStop = false;
             this.gb_ProjectNotes.Text = "Notes";
             // 
             // tb_searchNotes
             // 
-            this.tb_searchNotes.Location = new System.Drawing.Point(699, 37);
+            this.tb_searchNotes.Location = new System.Drawing.Point(1048, 57);
+            this.tb_searchNotes.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tb_searchNotes.Name = "tb_searchNotes";
-            this.tb_searchNotes.Size = new System.Drawing.Size(180, 20);
+            this.tb_searchNotes.Size = new System.Drawing.Size(268, 26);
             this.tb_searchNotes.TabIndex = 14;
             this.tb_searchNotes.TextChanged += new System.EventHandler(this.searchItemAddedNotes);
             // 
             // lbl_searchNotes
             // 
             this.lbl_searchNotes.AutoSize = true;
-            this.lbl_searchNotes.Location = new System.Drawing.Point(701, 21);
+            this.lbl_searchNotes.Location = new System.Drawing.Point(1052, 32);
+            this.lbl_searchNotes.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_searchNotes.Name = "lbl_searchNotes";
-            this.lbl_searchNotes.Size = new System.Drawing.Size(70, 13);
+            this.lbl_searchNotes.Size = new System.Drawing.Size(104, 20);
             this.lbl_searchNotes.TabIndex = 13;
             this.lbl_searchNotes.Text = "Search notes";
             // 
             // gb_KeyDates
             // 
+            this.gb_KeyDates.Controls.Add(this.chkb_EndDateConfirmed);
             this.gb_KeyDates.Controls.Add(this.lbl_ProjectedStartDate);
             this.gb_KeyDates.Controls.Add(this.lbl_pStartDate);
             this.gb_KeyDates.Controls.Add(this.lbl_pEndDate);
@@ -693,12 +685,25 @@ namespace CMS
             this.gb_KeyDates.Controls.Add(this.lbl_ProjectedEndDate);
             this.gb_KeyDates.Controls.Add(this.mtb_ProjectedEndDateValue);
             this.gb_KeyDates.Controls.Add(this.mtb_ProjectedStartDateValue);
-            this.gb_KeyDates.Location = new System.Drawing.Point(120, 81);
+            this.gb_KeyDates.Location = new System.Drawing.Point(180, 125);
+            this.gb_KeyDates.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gb_KeyDates.Name = "gb_KeyDates";
-            this.gb_KeyDates.Size = new System.Drawing.Size(291, 73);
+            this.gb_KeyDates.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.gb_KeyDates.Size = new System.Drawing.Size(436, 148);
             this.gb_KeyDates.TabIndex = 47;
             this.gb_KeyDates.TabStop = false;
             this.gb_KeyDates.Text = "Key Dates";
+            // 
+            // chkb_EndDateConfirmed
+            // 
+            this.chkb_EndDateConfirmed.AutoSize = true;
+            this.chkb_EndDateConfirmed.Location = new System.Drawing.Point(10, 115);
+            this.chkb_EndDateConfirmed.Name = "chkb_EndDateConfirmed";
+            this.chkb_EndDateConfirmed.Size = new System.Drawing.Size(180, 24);
+            this.chkb_EndDateConfirmed.TabIndex = 38;
+            this.chkb_EndDateConfirmed.Text = "End Date Confirmed";
+            this.chkb_EndDateConfirmed.UseVisualStyleBackColor = true;
+            this.chkb_EndDateConfirmed.CheckedChanged += new System.EventHandler(this.chkb_EndDateConfirmed_CheckedChanged);
             // 
             // gb_ProjectDocuments
             // 
@@ -709,18 +714,21 @@ namespace CMS
             this.gb_ProjectDocuments.Controls.Add(this.btn_DMP);
             this.gb_ProjectDocuments.Controls.Add(this.btn_Proposal);
             this.gb_ProjectDocuments.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.gb_ProjectDocuments.Location = new System.Drawing.Point(714, 142);
+            this.gb_ProjectDocuments.Location = new System.Drawing.Point(1071, 218);
+            this.gb_ProjectDocuments.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gb_ProjectDocuments.Name = "gb_ProjectDocuments";
-            this.gb_ProjectDocuments.Size = new System.Drawing.Size(185, 145);
+            this.gb_ProjectDocuments.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.gb_ProjectDocuments.Size = new System.Drawing.Size(278, 223);
             this.gb_ProjectDocuments.TabIndex = 48;
             this.gb_ProjectDocuments.TabStop = false;
             this.gb_ProjectDocuments.Text = "Project Documents";
             // 
             // btn_UserDocs
             // 
-            this.btn_UserDocs.Location = new System.Drawing.Point(9, 116);
+            this.btn_UserDocs.Location = new System.Drawing.Point(14, 178);
+            this.btn_UserDocs.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btn_UserDocs.Name = "btn_UserDocs";
-            this.btn_UserDocs.Size = new System.Drawing.Size(75, 23);
+            this.btn_UserDocs.Size = new System.Drawing.Size(112, 35);
             this.btn_UserDocs.TabIndex = 54;
             this.btn_UserDocs.Text = "User Docs";
             this.btn_UserDocs.UseVisualStyleBackColor = true;
@@ -728,9 +736,10 @@ namespace CMS
             // 
             // btn_AllDocs
             // 
-            this.btn_AllDocs.Location = new System.Drawing.Point(90, 116);
+            this.btn_AllDocs.Location = new System.Drawing.Point(135, 178);
+            this.btn_AllDocs.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btn_AllDocs.Name = "btn_AllDocs";
-            this.btn_AllDocs.Size = new System.Drawing.Size(89, 23);
+            this.btn_AllDocs.Size = new System.Drawing.Size(134, 35);
             this.btn_AllDocs.TabIndex = 49;
             this.btn_AllDocs.Text = "Project Docs";
             this.btn_AllDocs.UseVisualStyleBackColor = true;
@@ -739,9 +748,10 @@ namespace CMS
             // btn_RA
             // 
             this.btn_RA.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.btn_RA.Location = new System.Drawing.Point(6, 77);
+            this.btn_RA.Location = new System.Drawing.Point(9, 118);
+            this.btn_RA.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btn_RA.Name = "btn_RA";
-            this.btn_RA.Size = new System.Drawing.Size(173, 23);
+            this.btn_RA.Size = new System.Drawing.Size(260, 35);
             this.btn_RA.TabIndex = 2;
             this.btn_RA.Text = "Risk Assessment";
             this.btn_RA.UseVisualStyleBackColor = false;
@@ -750,9 +760,10 @@ namespace CMS
             // btn_DMP
             // 
             this.btn_DMP.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.btn_DMP.Location = new System.Drawing.Point(6, 48);
+            this.btn_DMP.Location = new System.Drawing.Point(9, 74);
+            this.btn_DMP.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btn_DMP.Name = "btn_DMP";
-            this.btn_DMP.Size = new System.Drawing.Size(173, 23);
+            this.btn_DMP.Size = new System.Drawing.Size(260, 35);
             this.btn_DMP.TabIndex = 1;
             this.btn_DMP.Text = "DMP";
             this.btn_DMP.UseVisualStyleBackColor = false;
@@ -761,9 +772,10 @@ namespace CMS
             // btn_Proposal
             // 
             this.btn_Proposal.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.btn_Proposal.Location = new System.Drawing.Point(6, 19);
+            this.btn_Proposal.Location = new System.Drawing.Point(9, 29);
+            this.btn_Proposal.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btn_Proposal.Name = "btn_Proposal";
-            this.btn_Proposal.Size = new System.Drawing.Size(173, 23);
+            this.btn_Proposal.Size = new System.Drawing.Size(260, 35);
             this.btn_Proposal.TabIndex = 0;
             this.btn_Proposal.Text = "IRC Proposal";
             this.btn_Proposal.UseVisualStyleBackColor = false;
@@ -772,17 +784,19 @@ namespace CMS
             // lbl_PortfolioNo
             // 
             this.lbl_PortfolioNo.AutoSize = true;
-            this.lbl_PortfolioNo.Location = new System.Drawing.Point(21, 203);
+            this.lbl_PortfolioNo.Location = new System.Drawing.Point(32, 312);
+            this.lbl_PortfolioNo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_PortfolioNo.Name = "lbl_PortfolioNo";
-            this.lbl_PortfolioNo.Size = new System.Drawing.Size(62, 13);
+            this.lbl_PortfolioNo.Size = new System.Drawing.Size(91, 20);
             this.lbl_PortfolioNo.TabIndex = 50;
             this.lbl_PortfolioNo.Text = "Portfolio No";
             // 
             // tb_PortfolioNo
             // 
-            this.tb_PortfolioNo.Location = new System.Drawing.Point(89, 200);
+            this.tb_PortfolioNo.Location = new System.Drawing.Point(134, 308);
+            this.tb_PortfolioNo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tb_PortfolioNo.Name = "tb_PortfolioNo";
-            this.tb_PortfolioNo.Size = new System.Drawing.Size(124, 20);
+            this.tb_PortfolioNo.Size = new System.Drawing.Size(184, 26);
             this.tb_PortfolioNo.TabIndex = 50;
             // 
             // gb_PlatformDetails
@@ -790,9 +804,11 @@ namespace CMS
             this.gb_PlatformDetails.Controls.Add(this.dgv_PlatformDetails);
             this.gb_PlatformDetails.Controls.Add(this.btn_PlatformDetailsRemove);
             this.gb_PlatformDetails.Controls.Add(this.btn_PlatformDetailsAdd);
-            this.gb_PlatformDetails.Location = new System.Drawing.Point(523, 12);
+            this.gb_PlatformDetails.Location = new System.Drawing.Point(784, 18);
+            this.gb_PlatformDetails.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gb_PlatformDetails.Name = "gb_PlatformDetails";
-            this.gb_PlatformDetails.Size = new System.Drawing.Size(567, 124);
+            this.gb_PlatformDetails.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.gb_PlatformDetails.Size = new System.Drawing.Size(850, 191);
             this.gb_PlatformDetails.TabIndex = 46;
             this.gb_PlatformDetails.TabStop = false;
             this.gb_PlatformDetails.Text = "Platform Details";
@@ -820,7 +836,8 @@ namespace CMS
             dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_PlatformDetails.DefaultCellStyle = dataGridViewCellStyle8;
-            this.dgv_PlatformDetails.Location = new System.Drawing.Point(15, 19);
+            this.dgv_PlatformDetails.Location = new System.Drawing.Point(22, 29);
+            this.dgv_PlatformDetails.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dgv_PlatformDetails.Name = "dgv_PlatformDetails";
             this.dgv_PlatformDetails.ReadOnly = true;
             dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -832,17 +849,19 @@ namespace CMS
             dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgv_PlatformDetails.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.dgv_PlatformDetails.RowHeadersVisible = false;
+            this.dgv_PlatformDetails.RowHeadersWidth = 62;
             this.dgv_PlatformDetails.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dgv_PlatformDetails.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_PlatformDetails.Size = new System.Drawing.Size(545, 66);
+            this.dgv_PlatformDetails.Size = new System.Drawing.Size(818, 102);
             this.dgv_PlatformDetails.TabIndex = 41;
             this.dgv_PlatformDetails.TabStop = false;
             // 
             // btn_PlatformDetailsRemove
             // 
-            this.btn_PlatformDetailsRemove.Location = new System.Drawing.Point(486, 91);
+            this.btn_PlatformDetailsRemove.Location = new System.Drawing.Point(729, 140);
+            this.btn_PlatformDetailsRemove.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btn_PlatformDetailsRemove.Name = "btn_PlatformDetailsRemove";
-            this.btn_PlatformDetailsRemove.Size = new System.Drawing.Size(75, 23);
+            this.btn_PlatformDetailsRemove.Size = new System.Drawing.Size(112, 35);
             this.btn_PlatformDetailsRemove.TabIndex = 43;
             this.btn_PlatformDetailsRemove.Text = "Remove";
             this.btn_PlatformDetailsRemove.UseVisualStyleBackColor = true;
@@ -850,9 +869,10 @@ namespace CMS
             // 
             // btn_PlatformDetailsAdd
             // 
-            this.btn_PlatformDetailsAdd.Location = new System.Drawing.Point(406, 91);
+            this.btn_PlatformDetailsAdd.Location = new System.Drawing.Point(609, 140);
+            this.btn_PlatformDetailsAdd.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btn_PlatformDetailsAdd.Name = "btn_PlatformDetailsAdd";
-            this.btn_PlatformDetailsAdd.Size = new System.Drawing.Size(75, 23);
+            this.btn_PlatformDetailsAdd.Size = new System.Drawing.Size(112, 35);
             this.btn_PlatformDetailsAdd.TabIndex = 42;
             this.btn_PlatformDetailsAdd.Text = "Add";
             this.btn_PlatformDetailsAdd.UseVisualStyleBackColor = true;
@@ -861,9 +881,10 @@ namespace CMS
             // lbl_NewUser
             // 
             this.lbl_NewUser.AutoSize = true;
-            this.lbl_NewUser.Location = new System.Drawing.Point(448, 184);
+            this.lbl_NewUser.Location = new System.Drawing.Point(672, 283);
+            this.lbl_NewUser.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_NewUser.Name = "lbl_NewUser";
-            this.lbl_NewUser.Size = new System.Drawing.Size(59, 13);
+            this.lbl_NewUser.Size = new System.Drawing.Size(85, 20);
             this.lbl_NewUser.TabIndex = 51;
             this.lbl_NewUser.Text = "new user...";
             this.lbl_NewUser.Click += new System.EventHandler(this.lbl_NewUser_Click);
@@ -874,9 +895,11 @@ namespace CMS
             this.gb_DatTime.Controls.Add(this.btn_DatHoursAdd);
             this.gb_DatTime.Controls.Add(this.lbl_DatHoursSpent);
             this.gb_DatTime.Controls.Add(this.nud_DatHoursSpent);
-            this.gb_DatTime.Location = new System.Drawing.Point(905, 293);
+            this.gb_DatTime.Location = new System.Drawing.Point(1358, 451);
+            this.gb_DatTime.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gb_DatTime.Name = "gb_DatTime";
-            this.gb_DatTime.Size = new System.Drawing.Size(185, 218);
+            this.gb_DatTime.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.gb_DatTime.Size = new System.Drawing.Size(278, 335);
             this.gb_DatTime.TabIndex = 52;
             this.gb_DatTime.TabStop = false;
             this.gb_DatTime.Text = "DAT Hours";
@@ -904,8 +927,7 @@ namespace CMS
             dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_DatHours.DefaultCellStyle = dataGridViewCellStyle11;
-            this.dgv_DatHours.Location = new System.Drawing.Point(9, 73);
-            this.dgv_DatHours.Margin = new System.Windows.Forms.Padding(2);
+            this.dgv_DatHours.Location = new System.Drawing.Point(14, 112);
             this.dgv_DatHours.Name = "dgv_DatHours";
             this.dgv_DatHours.ReadOnly = true;
             dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -917,19 +939,21 @@ namespace CMS
             dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgv_DatHours.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
             this.dgv_DatHours.RowHeadersVisible = false;
+            this.dgv_DatHours.RowHeadersWidth = 62;
             this.dgv_DatHours.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgv_DatHours.RowTemplate.Height = 24;
             this.dgv_DatHours.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.dgv_DatHours.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_DatHours.Size = new System.Drawing.Size(170, 118);
+            this.dgv_DatHours.Size = new System.Drawing.Size(255, 182);
             this.dgv_DatHours.TabIndex = 15;
             this.dgv_DatHours.TabStop = false;
             // 
             // btn_DatHoursAdd
             // 
-            this.btn_DatHoursAdd.Location = new System.Drawing.Point(104, 45);
+            this.btn_DatHoursAdd.Location = new System.Drawing.Point(156, 69);
+            this.btn_DatHoursAdd.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btn_DatHoursAdd.Name = "btn_DatHoursAdd";
-            this.btn_DatHoursAdd.Size = new System.Drawing.Size(75, 23);
+            this.btn_DatHoursAdd.Size = new System.Drawing.Size(112, 35);
             this.btn_DatHoursAdd.TabIndex = 2;
             this.btn_DatHoursAdd.Text = "Add time";
             this.btn_DatHoursAdd.UseVisualStyleBackColor = true;
@@ -938,25 +962,28 @@ namespace CMS
             // lbl_DatHoursSpent
             // 
             this.lbl_DatHoursSpent.AutoSize = true;
-            this.lbl_DatHoursSpent.Location = new System.Drawing.Point(6, 21);
+            this.lbl_DatHoursSpent.Location = new System.Drawing.Point(9, 32);
+            this.lbl_DatHoursSpent.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_DatHoursSpent.Name = "lbl_DatHoursSpent";
-            this.lbl_DatHoursSpent.Size = new System.Drawing.Size(76, 13);
+            this.lbl_DatHoursSpent.Size = new System.Drawing.Size(111, 20);
             this.lbl_DatHoursSpent.TabIndex = 1;
             this.lbl_DatHoursSpent.Text = "Hours Worked";
             // 
             // nud_DatHoursSpent
             // 
-            this.nud_DatHoursSpent.Location = new System.Drawing.Point(88, 19);
+            this.nud_DatHoursSpent.Location = new System.Drawing.Point(132, 29);
+            this.nud_DatHoursSpent.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.nud_DatHoursSpent.Name = "nud_DatHoursSpent";
-            this.nud_DatHoursSpent.Size = new System.Drawing.Size(91, 20);
+            this.nud_DatHoursSpent.Size = new System.Drawing.Size(136, 26);
             this.nud_DatHoursSpent.TabIndex = 0;
             // 
             // chkb_LIDA
             // 
             this.chkb_LIDA.AutoSize = true;
-            this.chkb_LIDA.Location = new System.Drawing.Point(16, 148);
+            this.chkb_LIDA.Location = new System.Drawing.Point(24, 228);
+            this.chkb_LIDA.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.chkb_LIDA.Name = "chkb_LIDA";
-            this.chkb_LIDA.Size = new System.Drawing.Size(50, 17);
+            this.chkb_LIDA.Size = new System.Drawing.Size(72, 24);
             this.chkb_LIDA.TabIndex = 53;
             this.chkb_LIDA.Text = "LIDA";
             this.chkb_LIDA.UseVisualStyleBackColor = true;
@@ -967,18 +994,21 @@ namespace CMS
             this.gb_KristalRef.Controls.Add(this.btn_KristalRemove);
             this.gb_KristalRef.Controls.Add(this.dgv_KristalRef);
             this.gb_KristalRef.Controls.Add(this.btn_Project_ProjectKristal_Add);
-            this.gb_KristalRef.Location = new System.Drawing.Point(905, 142);
+            this.gb_KristalRef.Location = new System.Drawing.Point(1358, 218);
+            this.gb_KristalRef.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gb_KristalRef.Name = "gb_KristalRef";
-            this.gb_KristalRef.Size = new System.Drawing.Size(185, 145);
+            this.gb_KristalRef.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.gb_KristalRef.Size = new System.Drawing.Size(278, 223);
             this.gb_KristalRef.TabIndex = 54;
             this.gb_KristalRef.TabStop = false;
             this.gb_KristalRef.Text = "Kristal Reference";
             // 
             // btn_KristalRemove
             // 
-            this.btn_KristalRemove.Location = new System.Drawing.Point(104, 116);
+            this.btn_KristalRemove.Location = new System.Drawing.Point(156, 178);
+            this.btn_KristalRemove.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btn_KristalRemove.Name = "btn_KristalRemove";
-            this.btn_KristalRemove.Size = new System.Drawing.Size(75, 23);
+            this.btn_KristalRemove.Size = new System.Drawing.Size(112, 35);
             this.btn_KristalRemove.TabIndex = 44;
             this.btn_KristalRemove.Text = "Remove";
             this.btn_KristalRemove.UseVisualStyleBackColor = true;
@@ -1006,7 +1036,8 @@ namespace CMS
             dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_KristalRef.DefaultCellStyle = dataGridViewCellStyle14;
-            this.dgv_KristalRef.Location = new System.Drawing.Point(9, 19);
+            this.dgv_KristalRef.Location = new System.Drawing.Point(14, 29);
+            this.dgv_KristalRef.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dgv_KristalRef.Name = "dgv_KristalRef";
             this.dgv_KristalRef.ReadOnly = true;
             dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -1018,18 +1049,20 @@ namespace CMS
             dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgv_KristalRef.RowHeadersDefaultCellStyle = dataGridViewCellStyle15;
             this.dgv_KristalRef.RowHeadersVisible = false;
+            this.dgv_KristalRef.RowHeadersWidth = 62;
             this.dgv_KristalRef.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dgv_KristalRef.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_KristalRef.Size = new System.Drawing.Size(170, 91);
+            this.dgv_KristalRef.Size = new System.Drawing.Size(255, 140);
             this.dgv_KristalRef.TabIndex = 42;
             this.dgv_KristalRef.TabStop = false;
             this.dgv_KristalRef.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_KristalRef_CellDoubleClick);
             // 
             // btn_Project_ProjectKristal_Add
             // 
-            this.btn_Project_ProjectKristal_Add.Location = new System.Drawing.Point(23, 116);
+            this.btn_Project_ProjectKristal_Add.Location = new System.Drawing.Point(34, 178);
+            this.btn_Project_ProjectKristal_Add.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btn_Project_ProjectKristal_Add.Name = "btn_Project_ProjectKristal_Add";
-            this.btn_Project_ProjectKristal_Add.Size = new System.Drawing.Size(75, 23);
+            this.btn_Project_ProjectKristal_Add.Size = new System.Drawing.Size(112, 35);
             this.btn_Project_ProjectKristal_Add.TabIndex = 1;
             this.btn_Project_ProjectKristal_Add.Text = "Add";
             this.btn_Project_ProjectKristal_Add.UseVisualStyleBackColor = true;
@@ -1038,9 +1071,10 @@ namespace CMS
             // chkb_Internship
             // 
             this.chkb_Internship.AutoSize = true;
-            this.chkb_Internship.Location = new System.Drawing.Point(16, 171);
+            this.chkb_Internship.Location = new System.Drawing.Point(24, 263);
+            this.chkb_Internship.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.chkb_Internship.Name = "chkb_Internship";
-            this.chkb_Internship.Size = new System.Drawing.Size(72, 17);
+            this.chkb_Internship.Size = new System.Drawing.Size(106, 24);
             this.chkb_Internship.TabIndex = 55;
             this.chkb_Internship.Text = "Internship";
             this.chkb_Internship.UseVisualStyleBackColor = true;
@@ -1048,10 +1082,10 @@ namespace CMS
             // 
             // frm_Project
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btn_ProjectCancel;
-            this.ClientSize = new System.Drawing.Size(1107, 561);
+            this.ClientSize = new System.Drawing.Size(1660, 863);
             this.Controls.Add(this.chkb_Internship);
             this.Controls.Add(this.gb_KristalRef);
             this.Controls.Add(this.chkb_LIDA);
@@ -1088,7 +1122,6 @@ namespace CMS
             this.Controls.Add(this.lbl_pName);
             this.Controls.Add(this.lbl_pNumber);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frm_Project";
             this.Text = "Project Details";
             ((System.ComponentModel.ISupportInitialize)(this.dgv_pNotes)).EndInit();
@@ -1189,5 +1222,6 @@ namespace CMS
         private System.Windows.Forms.DataGridView dgv_KristalRef;
         private System.Windows.Forms.Button btn_KristalRemove;
         private System.Windows.Forms.CheckBox chkb_Internship;
+        private System.Windows.Forms.CheckBox chkb_EndDateConfirmed;
     }
 }

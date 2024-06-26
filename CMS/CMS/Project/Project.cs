@@ -357,6 +357,7 @@ namespace CMS
                 mdl_Project.LASER = (bool)pRow["LASER"];
                 mdl_Project.IRC = (bool)pRow["IRC"];
                 mdl_Project.SEED = (bool)pRow["SEED"];
+                mdl_Project.EndDateConfirmed = (bool)pRow["EndDateConfirmed"];
             }
             catch (Exception ex)
             {
@@ -468,11 +469,11 @@ namespace CMS
                     qryInsertProject.CommandText = "insert into [dbo].[tblProject] "
                         + "(ProjectNumber, ProjectName, PortfolioNumber, Stage, Classification, DATRAG, ProjectedStartDate" +
                         ", ProjectedEndDate, StartDate, EndDate, [PI], LeadApplicant, Faculty, DSPT " +
-                        ", ISO27001, LIDA, Internship, LASER, IRC, SEED) "
+                        ", ISO27001, LIDA, Internship, LASER, IRC, SEED, EndDateConfirmed) "
                         + "values "
                         + "(@ProjectNumber, @ProjectName, @PortfolioNumber, @Stage, @Classification, @DATRAG, @ProjectedStartDate "
                         + ", @ProjectedEndDate, @StartDate, @EndDate, @PI, @LeadApplicant, @Faculty, @DSPT "
-                        + ", @ISO27001, @LIDA, @Internship, @LASER, @IRC, @SEED) ";
+                        + ", @ISO27001, @LIDA, @Internship, @LASER, @IRC, @SEED, @EndDateConfirmed) ";
 
                     //assign the parameter values
                     qryInsertProject.Parameters.Add("@ProjectNumber", SqlDbType.VarChar, 5).Value = mdl_Project.ProjectNumber;
@@ -517,6 +518,7 @@ namespace CMS
                     qryInsertProject.Parameters.Add("@LASER", SqlDbType.Bit).Value = mdl_Project.LASER;
                     qryInsertProject.Parameters.Add("@IRC", SqlDbType.Bit).Value = mdl_Project.IRC;
                     qryInsertProject.Parameters.Add("@SEED", SqlDbType.Bit).Value = mdl_Project.SEED;
+                    qryInsertProject.Parameters.Add("@EndDateConfirmed", SqlDbType.Bit).Value = mdl_Project.EndDateConfirmed;
 
                     //open connection to database, run query and close connection
                     conn.Open();

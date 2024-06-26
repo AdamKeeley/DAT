@@ -39,6 +39,7 @@ namespace DataControlsLib.DataModels
         public bool         LASER               { get; set; }
         public bool         IRC                 { get; set; }
         public bool         SEED                { get; set; }
+        public bool         EndDateConfirmed    { get; set; }
 
         /// <summary>
         /// Equals override so that the values contained in two instances of this class 
@@ -72,7 +73,9 @@ namespace DataControlsLib.DataModels
                 || ISO27001 != other.ISO27001
                 || LASER != other.LASER
                 || IRC != other.IRC
-                || SEED != other.SEED)
+                || SEED != other.SEED
+                || EndDateConfirmed != other.EndDateConfirmed)
+           
                 return false;
 
             return true;

@@ -158,7 +158,8 @@ namespace CMS
                 chkb_LASER.Checked                      = mdl_CurrentProject.LASER;
                 chkb_IRC.Checked                        = mdl_CurrentProject.IRC;
                 chkb_SEED.Checked                       = mdl_CurrentProject.SEED;
-
+                chkb_EndDateConfirmed.Checked           = mdl_CurrentProject.EndDateConfirmed;
+                
                 disableHandler = false;
             }
             catch (Exception ex)
@@ -444,6 +445,7 @@ namespace CMS
             mtb_ProjectedEndDateValue.TabIndex = ++x;
             mtb_pStartDateValue.TabIndex = ++x;
             mtb_pEndDateValue.TabIndex = ++x;
+            chkb_EndDateConfirmed.TabIndex = ++x;
 
             gb_Platform.TabIndex = ++x;
             chkb_LASER.TabIndex = ++x;
@@ -538,6 +540,7 @@ namespace CMS
             mdl_NewProject.LASER                = chkb_LASER.Checked;
             mdl_NewProject.IRC                  = chkb_IRC.Checked;
             mdl_NewProject.SEED                 = chkb_SEED.Checked;
+            mdl_NewProject.EndDateConfirmed     = chkb_EndDateConfirmed.Checked;
 
             if (cb_pStage.SelectedIndex > -1)
                 mdl_NewProject.Stage            = int.Parse(cb_pStage.SelectedValue.ToString());
@@ -1044,6 +1047,26 @@ namespace CMS
             {
                 chkb_LIDA.Checked = true;
             }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void chkb_DSPT_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void chkb_EndDateConfirmed_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void chkb_ISO27001_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
